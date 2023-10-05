@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.427">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>State view – cost-efficiency4-tz</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<link href="./images/prb_logo_smaller.png" rel="icon" type="image/png">
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+<script src="site_libs/react-17.0.0/react.min.js"></script>
+<script src="site_libs/react-17.0.0/react-dom.min.js"></script>
+<script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
+<script src="site_libs/reactable-binding-0.4.4/reactable.js"></script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/prb_logo.png" alt="" class="navbar-logo">
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://ses-eu.github.io/prb-monitoring/" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://ses-eu.github.io/prb-monitoring/dashboard.html" rel="" target="">
+ <span class="menu-text">Interactive dashboard</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-state-view" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">State view</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-state-view">    
+        <li>
+    <a class="dropdown-item" href="./index.html" rel="" target="">
+ <span class="dropdown-text">Switzerland</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./index.html" rel="" target="">
+ <span class="dropdown-text">Cyprus</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://ses-eu.github.io/prb-monitoring/about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://transport.ec.europa.eu/transport-modes/air/single-european-sky/ses-performance-and-charging/publications_en" rel="" target="_blank">
+ <span class="menu-text">Publications <i class="fa-solid fa-external-link-alt" aria-label="external-link-alt"></i></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cost-efficiency.html">4 Cost-efficiency</a></li><li class="breadcrumb-item"><a href="./cost-efficiency4-tz.html">4.4 Terminal charging zone</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./safety.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 Safety</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">2 Environment</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./environment_kea.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2.1 Horizontal flight efficiency</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./environment_apt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2.2 Airports</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./environment_mil.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2.3 Military dimension</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">3 Capacity</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./capacity_er.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3.1 En route</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./capacity_trm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3.2 Airports</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">4 Cost-efficiency</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4.1 En route charging zone</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4.2 En route main ANSP (Skyguide)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4.3 Other en route ANSPs/METSPs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency4-tz.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">4.4 Terminal charging zone</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency5-tz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4.5 Terminal main ANSP (Skyguide)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency6-tz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4.6 Other terminal ANSPs/METSPs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency7-g2g.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4.7 Gate-to-gate</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content column-page-right" id="quarto-document-content">
+
+
+
+<section id="terminal-charging-zone" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="terminal-charging-zone">4.4 Terminal charging zone</h2>
+<section id="contextual-economic-information-terminal-air-navigation-services" class="level3">
+<h3 class="anchored" data-anchor-id="contextual-economic-information-terminal-air-navigation-services">Contextual economic information: terminal air navigation services</h3>
+<div class="cell" data-file="R/table_ceff_tz_0.R">
+<div class="cell-output-display">
+
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-ec4b0c8fb51cccce9233" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ec4b0c8fb51cccce9233">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["·   Switzerland TCZ represents 7.0% of the SES terminal ANS actual costs in 2022"]},"columns":[{"id":"a","name":"a","type":"character","minWidth":100,"align":"left","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"color":"white","fontSize":"0rem","style":{"white-space":"wrap"}}}],"pagination":false,"highlight":true,"compact":true,"className":"hidden-column-headers","dataKey":"94ee7b96a8c0b20c4b9865640106097d"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-6ce1397c584712b9278a" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-6ce1397c584712b9278a">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["·   Number of airports in charging zone in 2022:",""],"x5":["2",""],"x6":["of which:",""],"x8":["·   Airports with more than 80,000 IFR mvmts:","·   Airports with fewer than 80,000 IFR mvmts:"],"x11":["2","0"]},"columns":[{"id":"a","name":"","type":"character","align":"left","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"color":"white","fontSize":"0rem","style":{"white-space":"wrap"}},"minWidth":38},{"id":"x5","name":"","type":"character","align":"left","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"color":"white","fontSize":"0rem","style":{"white-space":"wrap"}},"minWidth":5},{"id":"x6","name":"","type":"character","align":"left","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"color":"white","fontSize":"0rem","style":{"white-space":"wrap"}},"minWidth":15},{"id":"x8","name":"","type":"character","align":"left","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"color":"white","fontSize":"0rem","style":{"white-space":"wrap"}},"minWidth":37},{"id":"x11","name":"","type":"character","align":"left","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"color":"white","fontSize":"0rem","style":{"white-space":"wrap"}},"minWidth":5}],"pagination":false,"highlight":true,"borderless":true,"compact":true,"className":"hidden-column-headers","dataKey":"9579aad83c755111210634983cded331"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-3e5ef40a97222c92aecb" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-3e5ef40a97222c92aecb">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["·   National currency:"],"x3":["CHF"],"x4":["Exchange rates (1 EUR=)"],"x6":["2017:"],"x7":["1.11124 CHF"],"x8":["2022:"],"x9":["1.00492 CHF"]},"columns":[{"id":"a","name":"","type":"character","align":"left","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"color":"white","fontSize":"0rem","style":{"white-space":"wrap"}},"minWidth":20},{"id":"x3","name":"","type":"character","align":"left","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"color":"white","fontSize":"0rem","style":{"white-space":"wrap"}},"minWidth":5},{"id":"x4","name":"","type":"character","align":"left","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"color":"white","fontSize":"0rem","style":{"white-space":"wrap"}},"minWidth":20},{"id":"x6","name":"","type":"character","align":"left","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"color":"white","fontSize":"0rem","style":{"white-space":"wrap"}},"minWidth":5},{"id":"x7","name":"","type":"character","align":"left","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"color":"white","fontSize":"0rem","style":{"white-space":"wrap"}},"minWidth":15},{"id":"x8","name":"","type":"character","align":"left","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"color":"white","fontSize":"0rem","style":{"white-space":"wrap"}},"minWidth":5},{"id":"x9","name":"","type":"character","align":"left","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"color":"white","fontSize":"0rem","style":{"white-space":"wrap"}},"minWidth":15}],"pagination":false,"highlight":true,"compact":true,"className":"hidden-column-headers","dataKey":"7b10d6ec66bbadf4a38ba2f30ff1c751"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-92edf8d533da70114e4b" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-92edf8d533da70114e4b">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["·   Performance Plan:"],"x3":["See item 1 for the en route charging zone(s)."]},"columns":[{"id":"a","name":"","type":"character","align":"left","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"color":"white","fontSize":"0rem","style":{"white-space":"wrap"}},"minWidth":20},{"id":"x3","name":"","type":"character","align":"left","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"color":"white","fontSize":"0rem","style":{"white-space":"wrap"}},"minWidth":80}],"pagination":false,"highlight":true,"borderless":true,"compact":true,"className":"hidden-column-headers","dataKey":"23ecd285e03f2e1d6a793edec60305dd"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="monitoring-of-the-terminal-determined-unit-cost-duc-at-charging-zone-level" class="level3">
+<h3 class="anchored" data-anchor-id="monitoring-of-the-terminal-determined-unit-cost-duc-at-charging-zone-level">Monitoring of the terminal determined unit cost (DUC) at charging zone level</h3>
+<p>The Determined Unit Cost (DUC) is the cost per service unit, at which the service is planned to be provided during the year. The Actual Unit Cost (AUC) reflects the cost per service unit, at which the service has actually been provided during the year.</p>
+<p>The monitoring of the DUC / AUC is carried out in national currency in real terms, at 2017 prices.</p>
+</section>
+<section id="terminal-actual-unit-cost-auc-vs.-terminal-determined-unit-cost-duc" class="level3">
+<h3 class="anchored" data-anchor-id="terminal-actual-unit-cost-auc-vs.-terminal-determined-unit-cost-duc">Terminal actual unit cost (AUC) vs.&nbsp;terminal determined unit cost (DUC)</h3>
+<div class="cell" data-file="R/table_ceff_tz_3_1.R">
+<div class="cell-output-display">
+
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-74ddce6d2f3d20cbf618" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-74ddce6d2f3d20cbf618">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Terminal costs (nominal CHF)","Inflation %","Inflation index (100 in 2017)","Real terminal costs (CHF2017)","Total terminal service units","Real terminal DUC per service unit (CHF2017)","Real terminal DUC per service unit (€2017)"],"V4":["         "," ","   ","         ","     ","    ","    "],"V5":[" 99,524,185","0.0%","101.3"," 98,540,501","111,807","881.34","793.11"],"V6":["109,930,021","0.1%","101.4","108,730,912","128,000","849.46","764.43"],"V7":["209,454,206"," ","   ","207,271,413","239,807","864.32","777.80"],"V8":["105,207,116","0.3%","101.7","103,867,436","245,791","422.59","380.28"],"V9":["104,121,837","0.8%","102.5","102,170,228","267,772","381.56","343.36"],"V10":["105,326,817","0.9%","103.4","102,622,408","279,762","366.82","330.10"]},"columns":[{"id":"a","name":"Switzerland: Data from RP3 Performance Plan","type":"character","align":"left","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":39},{"id":"V4","name":"","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":0},{"id":"V5","name":"2020D","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"V6","name":"2021D","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"V7","name":"2020-2021D","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":11},{"id":"V8","name":"2022D","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"V9","name":"2023D","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"V10","name":"2024D","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":10}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"cff46dea96ab983cffdf47a31c442191"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell" data-file="R/table_ceff_tz_3_2.R">
+<div class="cell-output-display">
+
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-07937619f856a36ac391" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-07937619f856a36ac391">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Terminal costs (nominal CHF)","Inflation %","Inflation index (100 in 2017)","Real terminal costs (CHF2017)","Total terminal service units","Real terminal AUC per service unit (CHF2017)","Real terminal AUC per service unit (€2017)"],"V4":["         "," ","   ","         ","     ","    ","    "],"V5":[" 99,524,185","0.0%","101.3"," 98,540,501","111,807","881.34","793.11"],"V6":["101,058,818","0.5%","101.8"," 99,651,423","128,412","776.03","698.35"],"V7":["200,583,003"," ","   ","198,191,924","240,219","825.05","742.45"],"V8":[" 98,227,665","2.7%","104.6"," 94,932,284","229,487","413.67","372.26"],"V9":["         "," ","   ","         ","     ","    ","    "],"V10":["         "," ","   ","         ","     ","    ","    "]},"columns":[{"id":"a","name":"Switzerland: Actual data from Reporting Tables","type":"character","align":"left","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":39},{"id":"V4","name":"","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":0},{"id":"V5","name":"2020D","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"V6","name":"2021D","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"V7","name":"2020-2021D","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":11},{"id":"V8","name":"2022D","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"V9","name":"2023D","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"V10","name":"2024D","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":10}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"3bb6cc3ff0b1b7219d579484313aaaa2"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell" data-file="R/table_ceff_tz_3_3.R">
+<div class="cell-output-display">
+
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a8b8f1cbbd50c02b3d23" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a8b8f1cbbd50c02b3d23">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Terminal costs (nominal CHF)",null,"Inflation %","Inflation index (100 in 2017)","Real terminal costs (CHF2017)",null,"Total terminal service units",null,"Real terminal unit cost per service unit (CHF2017)",null,"Real terminal unit cost per service unit (€2017)",null],"b":["in value","in %","in p.p.","in p.p.","in value","in %","in value","in %","in value","in %","in value","in %"],"V4":["         0","+ 0.0%","0.0 p.p.","0.0 p.p.","         0","+ 0.0%","      0","+ 0.0%","  0.0","+ 0.0%","  0.0","+ 0.0%"],"V5":["-8,871,203","-8.1%","0.4 p.p.","0.4 p.p.","-9,079,489","-8.4%","    412","+ 0.3%","-73.4","-8.6%","-66.1","-8.6%"],"V6":["-8,871,203","-4.2%"," "," ","-9,079,489","-4.4%","    412","+ 0.2%","-39.3","-4.5%","-35.3","-4.5%"],"V7":["-6,979,451","-6.6%","2.4 p.p.","2.9 p.p.","-8,935,152","-8.6%","-16,304","-6.6%"," -8.9","-2.1%"," -8.0","-2.1%"],"V8":["        ","  "," "," ","        ","  ","     ","  ","   ","  ","   ","  "],"V9":["        ","  "," "," ","        ","  ","     ","  ","   ","  ","   ","  "]},"columns":[{"id":"a","name":"Difference between Actuals and Planned","type":"character","align":"left","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":31},{"id":"b","name":"","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":8},{"id":"V4","name":"2020D","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"V5","name":"2021D","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"V6","name":"2020-2021D","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":11},{"id":"V7","name":"2022D","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"V8","name":"2023D","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"V9","name":"2024D","type":"character","align":"right","style":{"font-size":"0.72rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.72rem","style":{"white-space":"wrap"}},"minWidth":10}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"fd6f5c91079bdf9d2746734ee421c967"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="focus-on-terminal-duc-monitoring-at-charging-zone-level" class="level3">
+<h3 class="anchored" data-anchor-id="focus-on-terminal-duc-monitoring-at-charging-zone-level">Focus on terminal DUC monitoring at charging zone level</h3>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p style="margin-bottom: 0rem;">
+<strong>AUC vs.&nbsp;DUC</strong>
+</p>
+<p>In 2022, the terminal AUC was -2.1% (or -8.91 CHF2017, -8.02 €2017) lower than the planned DUC. This results from the combination of significantly lower than planned terminal costs in real terms (-8.6%, or -8.9 MCHF2017, -8.0 M€2017) and significantly lower than planned TNSUs (-6.6%). It should be noted that actual inflation index in 2022 was +2.9 p.p. higher than planned.</p>
+<p style="margin-bottom: 0rem;">
+<strong>Terminal service units</strong>
+</p>
+<p>The difference between actual and planned TNSUs (-6.6%) falls outside the ±2% dead band, but does not exceed the ±10% threshold foreseen in the traffic risk sharing mechanism. The resulting loss of terminal revenues is therefore shared between the ANSP and the airspace users, with the ANSP (Skyguide) bearing a loss of -2.9 M€2017.</p>
+<p style="margin-bottom: 0rem;">
+<strong>Terminal costs by entity</strong>
+</p>
+<p>Actual real terminal costs are -8.6% (-8.0 M€2017) lower than planned. This is the result of lower costs for the main ANSP, Skyguide (-8.1%, or -7.2 M€2017) and the MET service provider (-20.2%, or -0.9 M€2017).</p>
+<p style="margin-bottom: 0rem;">
+<strong>Terminal costs for the main ANSP (Skyguide) at charging zone level</strong>
+</p>
+<p>Actual terminal costs in real terms are lower than planned for Skyguide in 2022 (-8.1%, or -7.2 M€2017). However, the differences by nature of costs are distorted by the presentation of the additional costs caused by the change in the capitalisation rule in 2022 (+7.4 M€2017). Indeed, in order for these amounts not to be billed to airspace users, they have also been reported as negative exceptional items in the determined costs, but not in the actual costs (-100% of negative exceptional costs, or +7.4 M€2017).</p>
+<ul>
+<li>the significant difference in staff costs (which is overall of -14.7 M€2017 or -26.4%), can be mainly explained by the evolution of the FTEs and salary assumptions, but it is also due to a reimbursement from the pension fund, although partially offset by the provision for ATCO retirement age transition costs.</li>
+</ul>
+</div><div class="column" style="width:45%;">
+<p><img src="images/2022/Switzerland/ceff_4_4_1.png" class="img-fluid"></p>
+<p><img src="images/2022/Switzerland/ceff_4_4_2.png" class="img-fluid"></p>
+<p><img src="images/2022/Switzerland/ceff_4_4_3.png" class="img-fluid"></p>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="monitoring-of-the-terminal-actual-unit-cost-for-users-aucu-at-charging-zone-level" class="level3">
+<h3 class="anchored" data-anchor-id="monitoring-of-the-terminal-actual-unit-cost-for-users-aucu-at-charging-zone-level">Monitoring of the terminal actual unit cost for users (AUCU) at charging zone level</h3>
+<p>The <strong>Actual Unit Cost for Users(AUCU)</strong> reflects the price per service units that is charged <em>in fine</em> to users for the services provided in the year. It corresponds to the sum of the DUC for the year and of the different adjustments stemming from that year. The monitoring of the AUCU is carried out in national currency in nominal terms.</p>
+</section>
+<section id="terminal-actual-unit-cost-for-users-aucu-at-charging-zone-level" class="level3">
+<h3 class="anchored" data-anchor-id="terminal-actual-unit-cost-for-users-aucu-at-charging-zone-level">Terminal actual unit cost for users (AUCU) at charging zone level</h3>
+<div class="columns">
+<div class="column" style="width:61%;">
+<p><img src="images/2022/Switzerland/ceff_4_6_1.png" class="img-fluid"></p>
+<p><small>* The traffic adjustment on adjustments is not considered to avoid double counting, as the related adjustments have already been taken into account in full in the AUCU for the current year or previous years.</small><br><small>** The difference in revenue due to the application of the temporary unit rates in 2022, if applicable, is already reflected in the DUC (part to be charged retroactively) and is therefore not considered in the total adjustments, in order to avoid double counting.</small></p>
+</div><div class="column" style="width:1%;">
+
+</div><div class="column" style="width:38%;">
+<div class="cell" data-file="R/table_ceff_tz_6.R">
+<div class="cell-output-display">
+
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-48608be3bb5885b260ff" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-48608be3bb5885b260ff">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"components_of_the_aucu":["Initial DUC charged","DUC to be charged retroactively","DUC","Inflation adjustment","Cost exempt from cost-sharing","Traffic risk sharing adjustment","Traffic adj. (costs not TRS)","Traffic adj. (adjustments)*","Financial incentives","Modulation of charges","Temporary UR**","Cross-financing","Other revenues","Application of lower unit rate","Total adjustments","AUCU","AUCU vs. DUC"],"nat_su_f":["428.04","  0.00","428.04"," 10.04"," -5.73"," 14.12","  1.54","    ","  0.00","  0.00","    ","  0.00","  0.00","-15.23","  4.73","432.77","+    1.1%"],"su_f":["425.94","  0.00","425.94","  9.99"," -5.70"," 14.05","  1.53","    ","  0.00","  0.00","    ","  0.00","  0.00","-15.16","  4.71","430.65","+    1.1%"]},"columns":[{"id":"components_of_the_aucu","name":"Components of the AUCU","type":"character","align":"left","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":60},{"id":"nat_su_f","name":"CHF/SU","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":20},{"id":"su_f","name":"€/SU","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":20}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"2a27d329a653b85a3804093e5069c72d"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="terminal-costs-exempt-from-cost-sharing" class="level3">
+<h3 class="anchored" data-anchor-id="terminal-costs-exempt-from-cost-sharing">Terminal costs exempt from cost sharing</h3>
+<div class="cell" data-file="R/table_ceff_tz_7.R">
+<div class="cell-output-display">
+
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5b809fa2cafdb1fca8f1" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-5b809fa2cafdb1fca8f1">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"x1":["New and existing investments","Competent authorities and qualified entities costs","Eurocontrol costs","Pension costs","Interest on loans","Changes in law","Total costs exempt from cost sharing"],"second":[-1314,0,0,0,0,0,-1314],"third":[-1308,0,0,0,0,0,-1308],"fourth":[-5.73,0,0,0,0,0,-5.73],"fifth":[-5.7,0,0,0,0,0,-5.7]},"columns":[{"id":"x1","name":"by item","type":"character","align":"left","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":60},{"id":"second","name":"CHF '000","type":"numeric","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":11},{"id":"third","name":"€ '000","type":"numeric","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":11},{"id":"fourth","name":"CHF/SU","type":"numeric","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"format":{"cell":{"digits":2},"aggregated":{"digits":2}},"minWidth":9},{"id":"fifth","name":"CHF/SU","type":"numeric","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"format":{"cell":{"digits":2},"aggregated":{"digits":2}},"minWidth":9}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"8f982b20bacda6a07161830735fc78eb"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Source: These data are taken from the June 2023 terminal Reporting Tables (for Eurocontrol costs and costs of competent authorities and qualified entities) and from the “NSA Report on the verification of cost risk sharing for the year 2022” submitted in accordance with Article 28 (7) of Regulation (EU) 2019/317 (for ANSPs costs).</p>
+</section>
+<section id="terminal-regulatory-result-at-charging-zone-level" class="level3">
+<h3 class="anchored" data-anchor-id="terminal-regulatory-result-at-charging-zone-level">Terminal regulatory result at charging zone level</h3>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><img src="images/2022/Switzerland/ceff_4_8_1.png" class="img-fluid"></p>
+</div><div class="column" style="width:55%;">
+<div class="cell" data-file="R/table_ceff_tz_8.R">
+<div class="cell-output-display">
+
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-340f3179a093ebf48a1e" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-340f3179a093ebf48a1e">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"ansp_s":["Skyguide"],"second":[6564],"third":[6532],"fourth":[28.6],"fifth":[28.46]},"columns":[{"id":"ansp_s","name":"ANSP(s)","type":"character","align":"left","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":40},{"id":"second","name":"CHF '000","type":"numeric","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"format":{"cell":{"separators":true},"aggregated":{"separators":true}},"minWidth":16},{"id":"third","name":"€ '000","type":"numeric","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"format":{"cell":{"separators":true},"aggregated":{"separators":true}},"minWidth":15},{"id":"fourth","name":"CHF/SU","type":"numeric","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"format":{"cell":{"digits":2},"aggregated":{"digits":2}},"minWidth":15},{"id":"fifth","name":"€/SU","type":"numeric","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"format":{"cell":{"digits":2},"aggregated":{"digits":2}},"minWidth":14}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"fcd9eff5bf772f06331c5a38032318f1"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5f295ec3199e790a7bf6" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-5f295ec3199e790a7bf6">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"metsp_s":["Switzerland-MET","Total charging zone","Actual cost for users***","Regulatory result (% AUCU)"],"second":[975,7539,99314,0],"third":[970,7502,98828,0],"fourth":[4.25,32.85,432.77,0.08],"fifth":[4.23,32.69,430.65,0.08]},"columns":[{"id":"metsp_s","name":"METSP(s)","type":"character","align":"left","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":40},{"id":"second","name":"CHF '000","type":"numeric","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"format":{"cell":{"separators":true},"aggregated":{"separators":true}},"minWidth":16},{"id":"third","name":"€ '000","type":"numeric","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"format":{"cell":{"separators":true},"aggregated":{"separators":true}},"minWidth":15},{"id":"fourth","name":"CHF/SU","type":"numeric","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"format":{"cell":{"digits":2},"aggregated":{"digits":2}},"minWidth":15},{"id":"fifth","name":"€/SU","type":"numeric","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"format":{"cell":{"digits":2},"aggregated":{"digits":2}},"minWidth":14}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"a456b9806ae6b1bff1b61325027d1998"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p><small>*** before deduction of other revenues, as is the case for the regulatory results (see items 10 to 14)</small></p>
+</div>
+</div>
+</section>
+<section id="focus-on-terminal-aucu-monitoring-at-charging-zone-level" class="level3">
+<h3 class="anchored" data-anchor-id="focus-on-terminal-aucu-monitoring-at-charging-zone-level">Focus on terminal AUCU monitoring at charging zone level</h3>
+<p>The actual terminal unit cost incurred by airspace users (AUCU) in respect of activities performed in 2022 (432.77 CHF or 430.65 €) is +1.1% higher than the nominal DUC (428.04 CHF or 425.94 €). The difference between these two figures (+4.73 CHF/SU or +4.71 €/SU) is due to:</p>
+<ul>
+<li><p>the positive inflation adjustment resulting from higher than planned inflation (+10.04 CHF/SU or +9.99 €/SU);</p></li>
+<li><p>the impact of adjustments resulting from the costs exempted from cost-sharing mechanism (-5.73 CHF/SU or -5.70 €/SU);</p></li>
+<li><p>the addition of the traffic risk sharing adjustments (+14.12 CHF/SU or +14.05 €/SU);</p></li>
+<li><p>the addition of the traffic adjustment (+1.54 CHF/SU or +1.53 €/SU) for the costs not subject to traffic risk sharing; and</p></li>
+<li><p>application of a lower unit rate as foreseen in Art. 29(6) in year 2022 (-15.23 CHF/SU or -15.16 €/SU).</p></li>
+</ul>
+<p>The share of the regulatory result (see items 10 to 14) in the AUCU (before the deduction of other revenues) is 7.6%.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
