@@ -1,0 +1,69 @@
+#libraries
+library(dplyr)
+library(readxl)
+library(openxlsx)
+library(data.table)
+library(tidyr)
+library(stringr)
+
+## parameters
+source("R/parameters.R")
+
+# define ranges and import data
+sheet <- country
+
+range <- "A10:M18"
+env_kea_3_r <- read_range(env_kea_file, sheet, range)  %>% 
+  mutate_all(~ str_replace_all(., "\r\n\r\n", "\r\n"))
+
+#---------------- sections definition
+  # section cap_er 1.1
+env_kea_1 <- paste0('Environment (simulated heading)
+
+## 2.1 Horizontal flight efficiency 
+### KEA
+
+```{r}
+#| file: R/table_env_kea_1.R
+#| out.width: "100%"
+```
+<br>
+![](images/2022/', country, '/env_kea_1.png)
+
+')                
+
+# section cap_er 1.2
+env_kea_2 <- paste0('\n### End of month indicators evolution in', year_report,'												
+
+```{r}
+#| file: R/table_env_kea_2.R
+#| out.width: "100%"
+```
+<br>
+
+:::: {.columns}
+  
+::: {.column width="50%"}
+
+![](images/2022/', country, '/env_kea_2.png)
+
+:::
+
+::: {.column width="50%"}
+
+![](images/2022/', country, '/env_kea_3.png)
+
+:::
+::::
+                      
+', env_kea_3_r[7,1]                  
+)
+
+
+# assemble all and create .qmd
+cat(paste0(
+  env_kea_1,
+  env_kea_2
+),
+    file = "environment_kea.qmd")
+

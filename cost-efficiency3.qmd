@@ -1,0 +1,11 @@
+## 4.3 Other en route ANSPs/METSPs {.unnumbered}
+### Other ANSP(s) / METSP(s) regulatory results for en route activity
+
+```{r}
+#| file: R/table_ceff_14.R
+#| out.width: "100%"
+```
+<br>
+
+<p style = "margin-bottom: 0px;">**Total other ANSP overall regulatory result (RR) for the en route activity**</p>
+Ex-post, the overall RR for the other ANSP in the en route charging zone for Switzerland (Switzerland MET) corresponds to -2.6% of the en route revenues. The RoE cannot be calculated for Switzerland MET, as it does not report equity. See also Note 1 in item 10.
