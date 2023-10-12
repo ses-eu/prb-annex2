@@ -1,4 +1,6 @@
-## 4.1 En route charging zone {.unnumbered}
+[4 Cost-efficiency]{class="fakeh1"}
+
+## 4.1 En route charging zone
 ### Contextual economic information: en route air navigation services
 
 ```{r}
@@ -78,7 +80,7 @@ The monitoring of the AUCU is carried out in national currency in nominal terms.
   
 :::: {.columns}
   
-::: {.column width="65%"}
+::: {.column width="61%"}
 
 ![](images/2022/Switzerland/ceff_1_6_1.png)
 
@@ -86,7 +88,10 @@ The monitoring of the AUCU is carried out in national currency in nominal terms.
 
 :::
 
-::: {.column width="35%"}
+::: {.column width="1%"}
+:::
+
+::: {.column width="38%"}
 
 ```{r}
 #| file: R/table_ceff_6.R
@@ -115,8 +120,6 @@ Source: These data are taken from the June 2023 en route Reporting Tables (for E
 
 ![](images/2022/Switzerland/ceff_1_8_1.png)
 
-<small>*** before deduction of other revenues, as is the case for the regulatory results (see items 10 to 14)</small>
-
 :::
 
 ::: {.column width="55%"}
@@ -125,6 +128,8 @@ Source: These data are taken from the June 2023 en route Reporting Tables (for E
 #| file: R/table_ceff_8.R
 #| out.width: "100%"
 ```
+
+<small>*** before deduction of other revenues, as is the case for the regulatory results (see items 10 to 14)</small>
 :::
 
 ::::

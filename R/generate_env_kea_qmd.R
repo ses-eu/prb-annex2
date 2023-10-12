@@ -1,10 +1,3 @@
-#libraries
-library(dplyr)
-library(readxl)
-library(openxlsx)
-library(data.table)
-library(tidyr)
-library(stringr)
 
 ## parameters
 source("R/parameters.R")
@@ -18,7 +11,7 @@ env_kea_3_r <- read_range(env_kea_file, sheet, range)  %>%
 
 #---------------- sections definition
   # section cap_er 1.1
-env_kea_1 <- paste0('Environment (simulated heading)
+env_kea_1 <- paste0('[2 Environment]{class="fakeh1"}
 
 ## 2.1 Horizontal flight efficiency 
 ### KEA

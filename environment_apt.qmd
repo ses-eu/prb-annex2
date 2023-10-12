@@ -1,4 +1,4 @@
-## 2.2 Airports {.unnumbered}
+## 2.2 Airports
 ### Overview
 
 Switzerland identifies its two main airports Zurich (LSZH) and Geneva (LSGG) as subject to RP3 monitoring. Both airports have a fully implemented data flow that allows the proper monitoring of environmental indicators. 

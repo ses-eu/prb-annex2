@@ -1,4 +1,4 @@
-## 2.3 Military dimension {.unnumbered}
+## 2.3 Military dimension
 ### Update on Military dimension of the plan
 
 For obvious flight safety reasons, military activities must be segregated from civil flows which has an impact on both horizontal (HFE) and vertical flight efficiency (VFE). 

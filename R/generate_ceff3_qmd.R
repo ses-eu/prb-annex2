@@ -1,10 +1,3 @@
-#libraries
-library(dplyr)
-library(readxl)
-library(openxlsx)
-library(data.table)
-library(tidyr)
-library(stringr)
 
 ## parameters
 source("R/parameters.R")
@@ -17,7 +10,7 @@ ert_2_14_e  <- read_range(file, sheet, range)
 
 #---------------- sections definition
   # section 2.14[i]
-ceff_2_14_1 <- paste0('## 4.3 Other en route ANSPs/METSPs {.unnumbered}
+ceff_2_14_1 <- paste0('## 4.3 Other en route ANSPs/METSPs
 ### Other ANSP(s) / METSP(s) regulatory results for en route activity
 
 ```{r}

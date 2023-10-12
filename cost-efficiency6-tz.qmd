@@ -1,8 +1,8 @@
-## 4.6 Other terminal ANSPs/METSPs {.unnumbered}
+## 4.6 Other terminal ANSPs/METSPs
 ### Other ANSP(s) / METSP(s) regulatory results for terminal activity
 
 ```{r}
-#| file: R/table_ceff_14.R
+#| file: R/table_ceff_tz_14.R
 #| out.width: "100%"
 ```
 <br>

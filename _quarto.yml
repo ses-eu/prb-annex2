@@ -1,10 +1,12 @@
 project:
   type: website
-
+  execute-dir: project
+  
 website:
   title: "State view"
   search: false 
   favicon: "images/prb_logo_smaller.png"
+  page-navigation: true
   navbar:
     title: false
     background: "#f8f9fa"
@@ -17,7 +19,7 @@ website:
       - text: "State view"
         menu:
           - text: "Switzerland"
-            href: index.qmd
+            href: 2022/Switzerland/index.html
             # ---
           - text: "Cyprus"
             href: index.qmd
@@ -27,19 +29,26 @@ website:
         text: Publications {{< fa external-link-alt >}}
         target: "_blank"
 
-  sidebar:
+  sidebar: 
     contents:
-      - safety.qmd
-      - section: "2 Environment"
+      - section: '<b style= "font-size: 1.2rem">{{< var doc.country29 >}}</b>'
+      - text: "<b>1 Safety</b>"
+        href: safety.html
+      - text: "---"
+      - section: "<b>2 Environment</b>"
         contents:
+          # - text: "2.1 Horizontal flight efficiency"
+          #   href: environment_kea.html
           - environment_kea.qmd
           - environment_apt.qmd
           - environment_mil.qmd
-      - section: "3 Capacity"
+      - text: "---"
+      - section: "<b>3 Capacity</b>"
         contents:
           - capacity_er.qmd
           - capacity_trm.qmd
-      - section: "4 Cost-efficiency"
+      - text: "---"
+      - section: "<b>4 Cost-efficiency</b>"
         contents:
           - cost-efficiency.qmd
           - cost-efficiency2.qmd
@@ -65,12 +74,18 @@ website:
 format:
   html:
     theme: cosmo
-    toc: false
+    toc: true
+    toc-depth: 3
+    number-sections: false
+    number-depth: 2
     page-layout: full
     css: styles.css
     link-external-newwindow: true
     link-external-icon: true
     # link-external-filter: '^(?:http:|https:)\/\/ansperformance\.eu\/|^(?:http:|https:)\/\/.*ace-handbook\.netlify\.app\/'
+    grid:
+      sidebar-width: 200px
+      margin-width: 200px
     
 execute:
   echo: false

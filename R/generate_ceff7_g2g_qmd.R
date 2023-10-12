@@ -1,10 +1,3 @@
-#libraries
-library(dplyr)
-library(readxl)
-library(openxlsx)
-library(data.table)
-library(tidyr)
-library(stringr)
 
 ## parameters
 source("R/parameters.R")
@@ -22,7 +15,7 @@ g2g_3  <- read_range(file, sheet, range)
 
 #---------------- sections definition
   # section 
-ceff_7_1 <- paste0('## 4.7 Gate-to-gate {.unnumbered}
+ceff_7_1 <- paste0('## 4.7 Gate-to-gate
 ### Monitoring of gate-to-gate ANS costs
 
 ```{r}

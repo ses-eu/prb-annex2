@@ -1,10 +1,3 @@
-#libraries
-library(dplyr)
-library(readxl)
-library(openxlsx)
-library(data.table)
-library(tidyr)
-library(stringr)
 
 ## parameters
 source("R/parameters.R")
@@ -38,7 +31,9 @@ cap_er_1_7_r <- read_range(cap_file, sheet, range)  %>%
 
 #---------------- sections definition
   # section cap_er 1.1
-cap_er_1_1 <- paste0('## 3.1 En route {.unnumbered}
+cap_er_1_1 <- paste0('[3 Capacity]{class="fakeh1"}
+
+## 3.1 En route
 ### Minutes of ATFM en-route delay
 
 :::: {.columns}

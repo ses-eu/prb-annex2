@@ -1,0 +1,8 @@
+# State view 
+
+```{r}
+#| panel: sidebar
+
+1+1
+
+```

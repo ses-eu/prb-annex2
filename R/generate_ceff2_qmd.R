@@ -1,10 +1,3 @@
-#libraries
-library(dplyr)
-library(readxl)
-library(openxlsx)
-library(data.table)
-library(tidyr)
-library(stringr)
 
 ## parameters
 source("R/parameters.R")
@@ -21,7 +14,7 @@ ert_2_13  <- read_range(file, sheet, range)
 #---------------- sections definition
   # section 2.10
 ceff_2_10 <- paste0('## 4.2 En route main ANSP (',
-main_ansp,') {.unnumbered}
+main_ansp,') 
 ### Monitoring of the en route ANSPs regulatory results (RR)
 ', ert_2_10[1,1]
 )                

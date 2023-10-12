@@ -1,10 +1,3 @@
-#libraries
-library(dplyr)
-library(readxl)
-library(openxlsx)
-library(data.table)
-library(tidyr)
-library(stringr)
 
 ## parameters
 source("R/parameters.R")
@@ -18,7 +11,7 @@ saf_2_r <- read_range(saf_eosm_file, sheet, range)
 
 #---------------- sections definition
 # section 1
-saf_1 <- paste0('# 1 Safety {.unnumbered}
+saf_1 <- paste0('# 1 Safety
 ### Effectiveness of Safety Management
 
 ```{r}

@@ -1,10 +1,3 @@
-#libraries
-library(dplyr)
-library(readxl)
-library(openxlsx)
-library(data.table)
-library(tidyr)
-library(stringr)
 
 ## parameters
 source("R/parameters.R")
@@ -34,7 +27,9 @@ ert_1_9  <- read_range(file, sheet, range)
 
 #---------------- sections definition
   # section 1.1
-ceff_1_1 <- paste0('## 4.1 En route charging zone {.unnumbered}
+ceff_1_1 <- paste0('[4 Cost-efficiency]{class="fakeh1"}
+
+## 4.1 En route charging zone
 ### Contextual economic information: en route air navigation services
 
 ```{r}

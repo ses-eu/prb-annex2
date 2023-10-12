@@ -1,6 +1,10 @@
+#libraries
+library(dplyr)
 library(readxl)
 library(openxlsx)
-library(dplyr)
+library(data.table)
+library(tidyr)
+library(stringr)
 
 # parameters
 

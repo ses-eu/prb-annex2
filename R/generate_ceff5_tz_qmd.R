@@ -1,10 +1,3 @@
-#libraries
-library(dplyr)
-library(readxl)
-library(openxlsx)
-library(data.table)
-library(tidyr)
-library(stringr)
 
 ## parameters
 source("R/parameters.R")
@@ -21,7 +14,7 @@ trm_2_13  <- read_range(file, sheet, range)
 #---------------- sections definition
   # section 2.10
 ceff_5_10 <- paste0('## 4.5 Terminal main ANSP (',
-main_ansp,') {.unnumbered}
+main_ansp,') 
 ### Monitoring of the terminal ANSPs regulatory results (RR)
 ', trm_2_10[1,1]
 )                

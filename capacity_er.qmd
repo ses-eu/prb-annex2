@@ -1,4 +1,6 @@
-## 3.1 En route {.unnumbered}
+[3 Capacity]{class="fakeh1"}
+
+## 3.1 En route
 ### Minutes of ATFM en-route delay
 
 :::: {.columns}

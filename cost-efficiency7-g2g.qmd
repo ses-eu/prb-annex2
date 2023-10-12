@@ -1,4 +1,4 @@
-## 4.7 Gate-to-gate {.unnumbered}
+## 4.7 Gate-to-gate
 ### Monitoring of gate-to-gate ANS costs
 
 ```{r}

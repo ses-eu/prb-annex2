@@ -1,10 +1,3 @@
-#libraries
-library(dplyr)
-library(readxl)
-library(openxlsx)
-library(data.table)
-library(tidyr)
-library(stringr)
 
 ## parameters
 source("R/parameters.R")
@@ -31,7 +24,7 @@ trm_1_9  <- read_range(file, sheet, range)
 
 #---------------- sections definition
   # section 1.1
-ceff_4_1 <- paste0('## 4.4 Terminal charging zone {.unnumbered}
+ceff_4_1 <- paste0('## 4.4 Terminal charging zone
 ### Contextual economic information: terminal air navigation services
 
 ```{r}

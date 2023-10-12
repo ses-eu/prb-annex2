@@ -1,11 +1,3 @@
-#libraries
-library(dplyr)
-library(readxl)
-library(openxlsx)
-library(data.table)
-library(tidyr)
-library(stringr)
-
 ## parameters
 source("R/parameters.R")
 
@@ -30,7 +22,7 @@ env_mil_11_r <- read_range(env_mil_file, sheet, range)
 
 #---------------- sections definition
   # section 1
-env_mil_1 <- paste0('## 2.3 Military dimension {.unnumbered}
+env_mil_1 <- paste0('## 2.3 Military dimension
 ### Update on Military dimension of the plan
 
 ', env_mil_1_r[1,1]

@@ -1,4 +1,4 @@
-## 4.4 Terminal charging zone {.unnumbered}
+## 4.4 Terminal charging zone
 ### Contextual economic information: terminal air navigation services
 
 ```{r}

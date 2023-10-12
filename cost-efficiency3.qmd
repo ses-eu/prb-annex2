@@ -1,4 +1,4 @@
-## 4.3 Other en route ANSPs/METSPs {.unnumbered}
+## 4.3 Other en route ANSPs/METSPs
 ### Other ANSP(s) / METSP(s) regulatory results for en route activity
 
 ```{r}

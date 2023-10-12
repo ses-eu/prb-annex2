@@ -1,4 +1,4 @@
-# 1 Safety {.unnumbered}
+# 1 Safety
 ### Effectiveness of Safety Management
 
 ```{r}
