@@ -25,6 +25,7 @@ ul.task-list li input[type="checkbox"] {
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
+<link href="./cost-efficiency4-tz.html" rel="next">
 <link href="./cost-efficiency2.html" rel="prev">
 <link href="./images/prb_logo_smaller.png" rel="icon" type="image/png">
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -138,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text"><b style="font-size: 1.2rem">Cyprus</b></span></span>
+ <span class="menu-text"><b style="font-size: 1.2rem">Finland</b></span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
@@ -160,6 +161,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./environment_kea.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2.1 Horizontal flight efficiency</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./environment_apt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2.2 Airports</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -186,6 +193,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">3.1 En route</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./capacity_trm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3.2 Airports</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -207,13 +220,37 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cost-efficiency2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4.2 En route main ANSP (DCAC Cyprus)</span></a>
+ <span class="menu-text">4.2 En route main ANSP (Fintraffic ANS)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cost-efficiency3.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">4.3 Other en route ANSPs/METSPs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency4-tz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4.4 Terminal charging zone</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency5-tz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4.5 Terminal main ANSP (Fintraffic ANS)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency6-tz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4.6 Other terminal ANSPs/METSPs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency7-g2g.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4.7 Gate-to-gate</span></a>
   </div>
 </li>
       </ul>
@@ -247,20 +284,20 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell" data-file="R/table_ceff_14.R">
 <div class="cell-output-display">
 
-<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-3406fe904c66258b5d7a" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-3406fe904c66258b5d7a">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Ex-ante regulatory result (+/-) for the en route charging zone","Revenue for the en route charging zone","Ex-ante regulatory result (+/-) in percent of revenues","Ex-ante RoE pre-tax rate (in %)"],"V1":[" 39","3,512","1.1%","4.7%"],"V2":["112","4,609","2.4%","4.8%"],"V3":["151","8,121","1.9%","4.8%"],"V4":["121","4,120","2.9%","5.0%"],"V5":["181","4,484","4.0%","5.3%"],"V6":["183","4,383","4.2%","5.7%"]},"columns":[{"id":"a","name":"Cost sharing (€ '000)","type":"character","align":"left","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":43},{"id":"V1","name":"2020D","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9},{"id":"V2","name":"2021D","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9},{"id":"V3","name":"2020-2021D","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"V4","name":"2022D","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9},{"id":"V5","name":"2023D","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9},{"id":"V6","name":"2024D","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"4daedf9fde0b6add9e823160dc9a12c3"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-9befaf57751532ef838d" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-9befaf57751532ef838d">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Ex-ante regulatory result (+/-) for the en route charging zone","Revenue for the en route charging zone","Ex-ante regulatory result (+/-) in percent of revenues","Ex-post RoE pre-tax rate (in %)"],"V1":["0","2,201","0%","N/A"],"V2":["0","2,358","0%","N/A"],"V3":["0","4,559","0%","N/A"],"V4":["0","2,569","0%","N/A"],"V5":["0","2,572","0%","N/A"],"V6":["0","2,528","0%","N/A"]},"columns":[{"id":"a","name":"Cost sharing (€ '000)","type":"character","align":"left","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":43},{"id":"V1","name":"2020D","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9},{"id":"V2","name":"2021D","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9},{"id":"V3","name":"2020-2021D","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"V4","name":"2022D","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9},{"id":"V5","name":"2023D","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9},{"id":"V6","name":"2024D","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"b29709f5e2ce01f6dbdde4528a1fed27"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
 
-<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-8c25cdeeff05611ff64f" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-8c25cdeeff05611ff64f">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Ex-post regulatory result (+/-) for the en route charging zone","Revenue for the en route charging zone","Ex-post regulatory result (+/-) in percent of revenues","Ex-post RoE pre-tax rate (in %)"],"V1":["   39","3,512"," 1.1%"," 4.7%"],"V2":["1,195","4,688","25.5%","88.5%"],"V3":["1,233","8,200","15.0%","56.7%"],"V4":["  690","4,181","16.5%","45.4%"],"V5":["   ","   ","  ","  "],"V6":["   ","   ","  ","  "]},"columns":[{"id":"a","name":"Cost sharing (€ '000)","type":"character","align":"left","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":43},{"id":"V1","name":"2020A","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9},{"id":"V2","name":"2021A","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9},{"id":"V3","name":"2020-2021A","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"V4","name":"2022A","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9},{"id":"V5","name":"2023A","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9},{"id":"V6","name":"2024A","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"2d797f42d92390e0250c395350b92b20"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c5e1a76b60c0b7690519" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c5e1a76b60c0b7690519">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Ex-post regulatory result (+/-) for the en route charging zone","Revenue for the en route charging zone","Ex-post regulatory result (+/-) in percent of revenues","Ex-post RoE pre-tax rate (in %)"],"V1":["  0","2,201","0.0%","N/A"],"V2":["215","2,386","9.0%","N/A"],"V3":["215","4,587","4.7%","N/A"],"V4":["257","2,740","9.4%","N/A"],"V5":[" ","   "," ",""],"V6":[" ","   "," ",""]},"columns":[{"id":"a","name":"Cost sharing (€ '000)","type":"character","align":"left","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":43},{"id":"V1","name":"2020A","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9},{"id":"V2","name":"2021A","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9},{"id":"V3","name":"2020-2021A","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"V4","name":"2022A","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9},{"id":"V5","name":"2023A","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9},{"id":"V6","name":"2024A","type":"character","align":"right","style":{"font-size":"0.75rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.75rem","style":{"white-space":"wrap"}},"minWidth":9}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"dd6eec8d590d918e7e23a18c3da59231"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><br></p>
 <p style="margin-bottom: 0px;">
 <strong> Total other ANSP overall regulatory result (RR) for the en route activity</strong>
 </p>
-<p>Ex-post, the overall RR for the other ANSP in the en route charging zone for Cyprus (Cyprus MET) corresponds to 16.5% of the en route revenues. The ex-post RoE 45.4% is much higher than planned 5.0%.</p>
+<p>Ex-post, the overall RR for the other ANSP in the en route charging zone for Finland (Finland MET) corresponds to 9.4% of the en route revenues. It should be noted that Finland MET does not charge cost of capital.</p>
 
 
 </section>
@@ -519,10 +556,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="./cost-efficiency2.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">4.2 En route main ANSP (DCAC Cyprus)</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">4.2 En route main ANSP (Fintraffic ANS)</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./cost-efficiency4-tz.html" class="pagination-link">
+        <span class="nav-page-text">4.4 Terminal charging zone</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -1,0 +1,11 @@
+## 4.6 Other terminal ANSPs/METSPs
+### Other ANSP(s) / METSP(s) regulatory results for terminal activity
+
+```{r}
+#| file: R/table_ceff_tz_14.R
+#| out.width: "100%"
+```
+<br>
+
+<p style = "margin-bottom: 0px;">**Total other ANSP overall regulatory result (RR) for the terminal activity**</p>
+Ex-post, the overall RR for the other ANSP in the terminal charging zone for Finland (Finland-MET) corresponds to 9.5% of the terminal revenues. It should be noted that Finland MET does not charge cost of capital.

@@ -8,7 +8,7 @@
 #| out.width: "100%"
 ```
 <br>
-![](images/2022/Cyprus/env_kea_1.png)
+![](images/2022/Finland/env_kea_3.png)
 
 
 ### End of month indicators evolution in2022												
@@ -23,13 +23,13 @@
   
 ::: {.column width="50%"}
 
-![](images/2022/Cyprus/env_kea_2.png)
+![](images/2022/Finland/env_kea_2.png)
 
 :::
 
 ::: {.column width="50%"}
 
-![](images/2022/Cyprus/env_kea_3.png)
+![](images/2022/Finland/env_kea_4.png)
 
 :::
 ::::

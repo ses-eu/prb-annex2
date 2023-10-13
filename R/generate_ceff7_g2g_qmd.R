@@ -48,7 +48,7 @@ ceff_7_2 <- paste0(
 :::: {.columns}
   
 ::: {.column width="50%"}
-![](images/2022/', country, '/ceff_g2g_1.png)
+![](images/2022/', country, '/9_G2G_1.png)
 :::
 
 ::: {.column width="2%"}
@@ -75,7 +75,7 @@ ceff_7_3 <- paste0(
 :::: {.columns}
   
 ::: {.column width="50%"}
-![](images/2022/', country, '/ceff_g2g_2.png)
+![](images/2022/', country, '/9_G2G_2.png)
 :::
 
 ::: {.column width="2%"}

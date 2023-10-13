@@ -51,13 +51,13 @@ ceff_2_13 <- paste0(
   
 ::: {.column width="50%"}
 
-![](images/2022/', country, '/ceff_1_13_1.png)
+![](images/2022/', country, '/3_ATSP_1.png)
 
 :::
 
 ::: {.column width="50%"}
 
-![](images/2022/', country, '/ceff_1_13_2.png)
+![](images/2022/', country, '/3_ATSP_2.png)
 
 :::
 

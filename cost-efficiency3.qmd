@@ -8,4 +8,4 @@
 <br>
 
 <p style = "margin-bottom: 0px;">**Total other ANSP overall regulatory result (RR) for the en route activity**</p>
-Ex-post, the overall RR for the other ANSP in the en route charging zone for Cyprus (Cyprus MET) corresponds to 16.5% of the en route revenues. The ex-post RoE 45.4% is much higher than planned 5.0%.
+Ex-post, the overall RR for the other ANSP in the en route charging zone for Finland (Finland MET) corresponds to 9.4% of the en route revenues. It should be noted that Finland MET does not charge cost of capital.

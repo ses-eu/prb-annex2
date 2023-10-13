@@ -1,0 +1,64 @@
+## 3.2 Airports
+### Overview
+Finland identifies only Helsinki airport as subject to RP3 monitoring. 
+The Airport Operator Data Flow is fully established and the monitoring of all capacity indicators can be performed. Nevertheless, the quality of the reporting does not allow for the calculation of the ATC pre-departure delay, with more than 60% of the reported delay not allocated to any cause.
+Traffic at this airport in 2022 is still 32% lower with respect to 2019, but 84% above 2021 levels.
+Average arrival ATFM delays in 2022 were 0.06 min/arr, compared to 0.1 min/arr in 2021.
+ATFM slot adherence has slightly improved (2022: 95.6%; 2021: 93.1%).
+
+
+### Arrival ATFM Delay
+:::: {.columns}
+  
+::: {.column width="48%" }
+![](images/2022/Finland/cap_trm_3_1.png)
+:::
+
+::: {.column width="2%" }
+:::
+
+::: {.column width="50%" }
+Arrival ATFM delays at Helsinki in 2022 averaged 0,06 min/arr. (-0,22 below the target), and there were all attributed to weather reasons, mostly in the winter months. 
+Finland reports that there was no impact of the Russian's war  on terminal capacity. 
+:::
+::::
+
+
+### Arrival ATFM Delay – National Target
+:::: {.columns}
+  
+::: {.column width="48%"}
+![](images/2022/Finland/cap_trm_1_1.png)
+:::
+
+::: {.column width="2%" }
+:::
+
+::: {.column width="50%"}
+The national target on arrival ATFM delay in 2022 was met. 
+:::
+::::
+
+
+### ATFM Slot Adherence
+:::: {.columns}
+  
+::: {.column width="48%"}
+![](images/2022/Finland/cap_trm_2_1.png)
+:::
+
+::: {.column width="2%" }
+:::
+
+::: {.column width="50%"}
+Helsinki's ATFM slot compliance was 95.6 %. With regard to the 4.4% of flights that did not adhere, 0.8% was early and 3.6% was late. 
+:::
+::::
+
+
+### ATC Pre-departure Delay
+ATC pre-departure delay at Helsinki (EFHK: 2022: 0.21 min/dep) is still below the pre-pandemic value (0.39 min/dep)
+
+
+### All Causes Pre-departure Delay
+The total (all causes) delay in the actual off block time at Helsinki increased slightly in 2022 (EFHK: 2020: 7.76 min/dep.; 2021: 11.07 min/dep.; 2022: 11.46 min/dep.). The highest delays per flight were observed in January and December.

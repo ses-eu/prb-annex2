@@ -21,7 +21,7 @@ env_kea_1 <- paste0('[2 Environment]{class="fakeh1"}
 #| out.width: "100%"
 ```
 <br>
-![](images/2022/', country, '/env_kea_1.png)
+![](images/2022/', country, '/env_kea_3.png)
 
 ')                
 
@@ -44,7 +44,7 @@ env_kea_2 <- paste0('\n### End of month indicators evolution in', year_report,'
 
 ::: {.column width="50%"}
 
-![](images/2022/', country, '/env_kea_3.png)
+![](images/2022/', country, '/env_kea_4.png)
 
 :::
 ::::

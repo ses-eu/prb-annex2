@@ -25,16 +25,16 @@ NA
 
 
 ### NSA's assessment of capacity performance
-Cyprus is in a turbulent region of the world, where geopolitical changes are frequent and, often, dramatic. For this reason, air traffic volatility is very high and traffic demand estimates (hence, ATM performance) can vary as a result of external factors.  These factors are beyond the control of the ANSP and the State in general.
-Furthermore, geopolitical changes can significantly alter the air traffic flows, creating new hotspots and signigificant capacity constraints. As an example, the Russia - Ukraine conflict has removed a significant traffic flow (and associated revenue) to and from Cyprus. As another example, the categorisation, by EASA, of the Syrian airspace as "conflict zone" has eliminated traffic flows in the north-eastern part of Nicosia FIR. These flows were diverted to the south, saturating the west and south sectors of Nicosia ACC.
-Capacity performance improved significantly in 2022. However, air traffic demand in 2022 was still lower than the 2019 levels. In this respect, the 2022 results cannot be considered as an accurate indication of future trends.
+In the beginning of 2022 traffic was just recovering from Covid-19 until the end of February when the traffic almost ceased in Finland. The war in Ukraine; the closure of Russian airspace; and banning Russian airlines from flying in Finnish airspace, had a huge impact in traffic. 
+As a result of the sanctions, all European airlines stopped flying to Asia completely over Finland. In general, overflying traffic was around 60 % of the level of 2019. Finnair, the biggest customer to Fintraffic ANS, was forced to change its strategy after the end of Russian overflights to Asia. Traffic to Kaliningrad increased over the international waters between Estonia and Finland. This traffic increase can be noticed in the number of operations but its impact in terms of service units is less. 
+Finland reached the capacity targets in both KPIs, en-route and terminal. En-route delays have been zero in many years, and the capacity provided for this is due to user demand for as few delays as possible.
+The en-route overflying traffic between Europe and Asia has dropped dramatically due to the war and the related airspace closure, and has resulted to continuation of some of the temporary staff lay-offs.
 
 ### Monitoring process for capacity performance
-The NSA has in place the "NSA procedure for the monitoring of ANS Performance". According to this procedure, the NSA monitors at quarterly intervals the average minutes of enroute ATFM (Air Traffic Flow Management) delay per flight. Based on this, the NSA analyzes the trends and takes the necessary measures, if needed.
+Review of the actual values from the NM dashboard.
 
 ### Capacity Planning
-Capacity planning is done with the Network Manager and is consistent with the required performance.
-The transfer to the new ACC, which is delayed and planned in late 2023 to mid 2024, is expected to be the source of air traffic delays, which however will be of temporary nature.  As the transfer will be done during a low traffic period the effect on the European Network is not expected to be significant. Efforts will be made so that any operation related to the transfer i.e. shadowing operations will be kept to the absolute minimum level so not to absorb HR from the actual ops at the new ACC.
+En-route ATFM delay will remain low as the capacity is delivered due to user demand.
 
 ### ATCO in OPS (FTE)
 
@@ -48,7 +48,10 @@ htmltools::tagList(t)
 
 
 ### Application of Corrective Measures for Capacity (if applicable)
-Nil
+There are changes in traffic flows/patterns: airspace closures have shifted the traffic flows from Russia to Kaliningrad, and these flights have to use the narrow international airspace corridor between Finland and Estonia, and can not use the direct routing that has been used before the war. There is an average of 350 flights per week.
+Also the flights from Europe to Asia are not overflying Finnish airspace anymore because of the airspace closure.
+Another change is in the flights between Finland (Helsinki) and Japan, where our main operator Finnair flies daily. These flights can't fly the most direct route anymore because of the airspace closure, and have to fly via northern route above the North Pole. 
+These changes do not affect the en route capacity performance, but still need to be taken into account when assessing the overall performance of the ANSP.
 
 ### Summary of capacity performance
-Cyprus experienced an increase in traffic from 252k flights in 2021, to 344k flights in 2022, with practically zero ATFM delay. However, traffic levels were still substantially below the 411k flights in 2019.
+Finland experienced an increase in traffic from 123k flights in 2021, to 205k flights in 2022; again, with zero ATFM delay. However, traffic levels were still substantially below the 285k flights in 2019.

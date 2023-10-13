@@ -25,7 +25,7 @@ ul.task-list li input[type="checkbox"] {
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
-<link href="./environment_mil.html" rel="next">
+<link href="./environment_apt.html" rel="next">
 <link href="./images/prb_logo_smaller.png" rel="icon" type="image/png">
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -138,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text"><b style="font-size: 1.2rem">Cyprus</b></span></span>
+ <span class="menu-text"><b style="font-size: 1.2rem">Finland</b></span></span>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
@@ -160,6 +160,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./environment_kea.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">2.1 Horizontal flight efficiency</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./environment_apt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2.2 Airports</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -186,6 +192,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">3.1 En route</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./capacity_trm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3.2 Airports</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -207,13 +219,37 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cost-efficiency2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4.2 En route main ANSP (DCAC Cyprus)</span></a>
+ <span class="menu-text">4.2 En route main ANSP (Fintraffic ANS)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cost-efficiency3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">4.3 Other en route ANSPs/METSPs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency4-tz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4.4 Terminal charging zone</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency5-tz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4.5 Terminal main ANSP (Fintraffic ANS)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency6-tz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4.6 Other terminal ANSPs/METSPs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency7-g2g.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4.7 Gate-to-gate</span></a>
   </div>
 </li>
       </ul>
@@ -249,27 +285,27 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell" data-file="R/table_env_kea_1.R">
 <div class="cell-output-display">
 
-<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-3f2900c4605362cb0fba" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-3f2900c4605362cb0fba">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Target","Actual performance"],"x2020":["4.10%","3.89%"],"x2021":["3.84%","4.49%"],"x2022":["3.84%","4.21%"],"x2023":["3.84%","  "],"x2024":["3.84%","  "]},"columns":[{"id":"a","name":"","type":"character","align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":40},{"id":"x2020","name":"2020","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2021","name":"2021","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2022","name":"2022","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2023","name":"2023","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2024","name":"2024","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"161eab46529b5da80834ca325f4ff0ef"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-585cd0bb147b781769a3" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-585cd0bb147b781769a3">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Target","Actual performance"],"x2020":["0.97%","0.88%"],"x2021":["0.88%","0.77%"],"x2022":["0.88%","3.28%"],"x2023":["0.88%","  "],"x2024":["0.88%","  "]},"columns":[{"id":"a","name":"","type":"character","align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":40},{"id":"x2020","name":"2020","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2021","name":"2021","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2022","name":"2022","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2023","name":"2023","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2024","name":"2024","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"af765932b75b173676d726472acb4783"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-<p><br> <img src="images/2022/Cyprus/env_kea_1.png" class="img-fluid"></p>
+<p><br> <img src="images/2022/Finland/env_kea_3.png" class="img-fluid"></p>
 </section>
 <section id="end-of-month-indicators-evolution-in2022" class="level3">
 <h3 class="anchored" data-anchor-id="end-of-month-indicators-evolution-in2022">End of month indicators evolution in2022</h3>
 <div class="cell" data-file="R/table_env_kea_2.R">
 <div class="cell-output-display">
 
-<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-0485381c7cc5a9bcc0b7" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-0485381c7cc5a9bcc0b7">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["KEA","KEP","KES"],"JAN":["4.43%","7.42%","6.73%"],"FEB":["4.39%","7.40%","6.73%"],"MAR":["4.40%","7.37%","6.68%"],"APR":["4.37%","7.26%","6.61%"],"MAY":["4.33%","7.12%","6.52%"],"JUN":["4.28%","6.96%","6.41%"],"JUL":["4.25%","6.82%","6.33%"],"AUG":["4.23%","6.69%","6.27%"],"SEP":["4.20%","6.60%","6.23%"],"OCT":["4.18%","6.50%","6.16%"],"NOV":["4.20%","6.38%","6.04%"],"DEC":["4.21%","6.24%","5.93%"]},"columns":[{"id":"a","name":"","type":"character","minWidth":16,"align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"JAN","name":"JAN","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"FEB","name":"FEB","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"MAR","name":"MAR","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"APR","name":"APR","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"MAY","name":"MAY","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"JUN","name":"JUN","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"JUL","name":"JUL","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"AUG","name":"AUG","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"SEP","name":"SEP","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"OCT","name":"OCT","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"NOV","name":"NOV","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"DEC","name":"DEC","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"7faf5fe75fa2a77249bf52b917f16cf9"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-3302ef055845a0b48a16" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-3302ef055845a0b48a16">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["KEA","KEP","KES"],"JAN":["0.81%","1.05%","1.00%"],"FEB":["0.85%","1.07%","1.03%"],"MAR":["1.03%","1.26%","1.23%"],"APR":["1.22%","1.45%","1.43%"],"MAY":["1.45%","1.69%","1.68%"],"JUN":["1.71%","1.98%","1.99%"],"JUL":["2.04%","2.33%","2.36%"],"AUG":["2.39%","2.69%","2.74%"],"SEP":["2.69%","2.99%","3.03%"],"OCT":["2.90%","3.20%","3.27%"],"NOV":["3.09%","3.39%","3.46%"],"DEC":["3.28%","3.59%","3.67%"]},"columns":[{"id":"a","name":"","type":"character","minWidth":16,"align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"JAN","name":"JAN","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"FEB","name":"FEB","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"MAR","name":"MAR","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"APR","name":"APR","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"MAY","name":"MAY","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"JUN","name":"JUN","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"JUL","name":"JUL","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"AUG","name":"AUG","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"SEP","name":"SEP","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"OCT","name":"OCT","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"NOV","name":"NOV","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"DEC","name":"DEC","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"f54a98478d744f74b373f181f7260ccc"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><br></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><img src="images/2022/Cyprus/env_kea_2.png" class="img-fluid"></p>
+<p><img src="images/2022/Finland/env_kea_2.png" class="img-fluid"></p>
 </div><div class="column" style="width:50%;">
-<p><img src="images/2022/Cyprus/env_kea_3.png" class="img-fluid"></p>
+<p><img src="images/2022/Finland/env_kea_4.png" class="img-fluid"></p>
 </div>
 </div>
 <p>The indicators are the ratio of flown distance and achieved distance over all (portions of) trajectories over a one year rolling window, excluding the ten best and ten worst days. The rolling window stops at the last day of the month.</p>
@@ -532,8 +568,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./environment_mil.html" class="pagination-link">
-        <span class="nav-page-text">2.3 Military dimension</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./environment_apt.html" class="pagination-link">
+        <span class="nav-page-text">2.2 Airports</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

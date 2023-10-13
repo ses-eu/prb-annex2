@@ -1,0 +1,82 @@
+## 2.2 Airports
+### Overview
+
+Finland identifies only Helsinki airport as subject to RP3 monitoring. 
+The Airport Operator Data Flow is fully established and the monitoring of all environmental indicators can be performed.
+Traffic at this airport in 2022 is still 32% lower with respect to 2019, but 84% above 2021 levels.  Both additional time indicators have increased in 2022.
+The share of CDO flights is in the higher range of all observed values in 2022.
+
+### Additional Taxi-Out Time															
+
+:::: {.columns}
+  
+::: {.column width="48%"}
+<br>
+![](images/2022/Finland/env_apt_1.png)
+
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="50%"}
+<br>
+Additional taxi-out times at Helsinki (EFHK; 2019: 3.04 min/dep.; 2020: 1.96 min/dep.;  2021: 2.15 min/dep.; 2022: 2.81 min/dep.) are very influenced by the winter operations (winter maintenance and de-icing procedures), reaching almost 9 min/dep in January 2022. Additional taxi out times between May and October average 0.65 min/dep. 
+According to Finland's monitoring report: No new initiatives or planned initiatives for additional taxi-out time PI. Additional taxi-out time is following the same pattern as in previous years. Additional taxi-out time is rather low from April to October and higher in the winter months due to winter maintenance and de-icing procedures.   
+
+:::
+::::
+                      
+
+### Additional ASMA Time															
+
+:::: {.columns}
+  
+::: {.column width="48%"}
+<br>
+![](images/2022/Finland/env_apt_2.png)
+
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="50%"}
+<br>
+The additional times in the terminal airspace remained low in 2022 (EFHK; 2019: 1.19 min/arr.; 2020: 1 min/arr.; 2021: 0.6 min/arr; 2022: 0.68 min/arr). 
+According to Finland's monitoring report: No implemented or planned initiatives for additional time in terminal airspace PI.   
+
+:::
+::::
+                      
+
+
+### Share of arrivals applying CDO
+
+:::: {.columns}
+  
+::: {.column width="48%"}
+<br>
+![](images/2022/Finland/env_apt_3.png)
+
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="50%"}
+<br>
+The share of CDO flights at Helsinki (EFHK) has decreased slightly to 63.3% which is well above the overall RP3 value in 2022 (29.0%) and in the higher range of all observed values in 2022.
+While the values were just above 50% in January and February, the values stayed above 60% for the rest of the year.   
+
+:::
+::::
+                      
+
+### Appendix
+
+n/a:  airport operator data flow not established, or more than two months of missing / non-validated data
+   
+
+![](images/2022/Finland/env_apt_4.png)
+

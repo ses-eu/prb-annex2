@@ -6,17 +6,8 @@ library(dplyr)
 library(stringr)
 library(here)
 
-# get state type
-wb <- loadWorkbook(paste0(data_folder, "Lists.xlsx"))
-tables <- getTables(wb, sheet = "Lists")
-# get the range
-table_range <- names(tables[tables == "Table_States"])
-# get main ANSP
-state_parameters <- read_range(paste0(data_folder, "Lists.xlsx"), "Lists", table_range) %>% 
-  filter(State == country)
-
-state_type <- state_parameters %>% select(dashboard_case) %>% pull()
-
+## parameters
+source("R/parameters.R")
 
 # get all R scripts
 rscripts <- list.files(here('R'))
@@ -65,4 +56,5 @@ for (i in 1:length(genscripts)) {
 
 
 quarto::quarto_render()
-  
+
+

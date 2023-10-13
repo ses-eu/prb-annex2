@@ -45,7 +45,7 @@ cap_trm_1_2 <- paste0('\n\n### Arrival ATFM Delay
 :::: {.columns}
   
 ::: {.column width="48%" }
-![](images/2022/', country, '/cap_trm_2_1.png)
+![](images/2022/', country, '/cap_trm_3_1.png)
 :::
 
 ::: {.column width="2%" }
@@ -63,7 +63,7 @@ cap_trm_1_3 <- paste0('\n\n### Arrival ATFM Delay – National Target
 :::: {.columns}
   
 ::: {.column width="48%"}
-![](images/2022/', country, '/cap_trm_3_1.png)
+![](images/2022/', country, '/cap_trm_1_1.png)
 :::
 
 ::: {.column width="2%" }
@@ -81,7 +81,7 @@ cap_trm_1_4 <- paste0('\n\n### ATFM Slot Adherence
 :::: {.columns}
   
 ::: {.column width="48%"}
-![](images/2022/', country, '/cap_trm_4_1.png)
+![](images/2022/', country, '/cap_trm_2_1.png)
 :::
 
 ::: {.column width="2%" }
@@ -122,8 +122,8 @@ cat(paste0(
   cap_trm_1_3,
   cap_trm_1_4,
   cap_trm_1_5,
-  cap_trm_1_6,
-  cap_trm_1_7
+  cap_trm_1_6
+  # , cap_trm_1_7
 ),
     file = "capacity_trm.qmd")
 

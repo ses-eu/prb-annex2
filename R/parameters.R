@@ -9,7 +9,7 @@ library(stringr)
 # parameters
 
 data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/PBI files/'
-country <- 'Cyprus'
+country <- 'Finland'
 year_report <- 2022
 
 data_folder_a2 <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/Annex 2/data/'
@@ -45,6 +45,7 @@ state_parameters <- read_range(paste0(data_folder, "Lists.xlsx"), "Lists", table
 
 main_ansp <- state_parameters %>% select(Main_ANSP) %>% pull()
 nat_curr <- state_parameters %>% select(Currency) %>% pull()
+state_type <- state_parameters %>% select(dashboard_case) %>% pull()
 
 # get er cap file
 cap_files <- list.files(paste0(data_folder_a2, 'cap/'))

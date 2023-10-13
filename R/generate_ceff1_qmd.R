@@ -83,12 +83,12 @@ ceff_1_4 <- paste0(
 '\n\n:::
   
 ::: {.column width="45%"}
-![](images/2022/', country, '/ceff_1_4_1.png)
+![](images/2022/', country, '/1_ERT_3.png)
 
-![](images/2022/', country, '/ceff_1_4_2.png)
+![](images/2022/', country, '/1_ERT_1.png)
 
 
-![](images/2022/', country, '/ceff_1_4_3.png)
+![](images/2022/', country, '/1_ERT_2.png)
 :::
   
 ::::
@@ -111,7 +111,7 @@ ceff_1_6 <- paste0(
   
 ::: {.column width="61%"}
 
-![](images/2022/', country, '/ceff_1_6_1.png)
+![](images/2022/', country, '/2_ERT_1.png)
 
 <small>* The traffic adjustment on adjustments is not considered to avoid double counting, as the related adjustments have already been taken into account in full in the AUCU for the current year or previous years.</small><br><small>** The difference in revenue due to the application of the temporary unit rates in 2022, if applicable, is already reflected in the DUC (part to be charged retroactively) and is therefore not considered in the total adjustments, in order to avoid double counting.</small>
 
@@ -153,7 +153,7 @@ ceff_1_8 <- paste0(
   
 ::: {.column width="45%"}
 
-![](images/2022/', country, '/ceff_1_8_1.png)
+![](images/2022/', country, '/2_ERT_2.png)
 
 :::
 
