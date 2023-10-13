@@ -19,8 +19,17 @@ mycolnames <- colnames(df)
 data_for_table <- df %>% 
   select(1, 4, 6, 8, 10, 12)  %>% 
   rename(a = 1) %>% 
-  filter(is.na(a) == FALSE) %>% 
-  mutate(across(c(2:6), ~paste0(format(round(.*100,0)), "%"))) %>%  
+  filter(is.na(a) == FALSE) 
+
+# check if there is any non-numeric column
+for (i in 2:ncol(data_for_table)) {
+  if (class(data_for_table[[i]]) == "numeric") {
+    data_for_table <- data_for_table %>%
+      mutate(across(c(i), ~paste0(format(round(.*100,0)), "%")))   
+  } 
+}
+
+data_for_table <- data_for_table %>% 
   mutate_all(~ str_replace(., "NA%", "")) 
 
 ## plot table

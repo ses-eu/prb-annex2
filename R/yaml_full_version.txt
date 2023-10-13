@@ -40,17 +40,23 @@ website:
           # - text: "2.1 Horizontal flight efficiency"
           #   href: environment_kea.html
           - environment_kea.qmd
+          - environment_apt.qmd
           - environment_mil.qmd
       - text: "---"
       - section: "<b>3 Capacity</b>"
         contents:
           - capacity_er.qmd
+          - capacity_trm.qmd
       - text: "---"
       - section: "<b>4 Cost-efficiency</b>"
         contents:
           - cost-efficiency.qmd
           - cost-efficiency2.qmd
           - cost-efficiency3.qmd
+          - cost-efficiency4-tz.qmd
+          - cost-efficiency5-tz.qmd
+          - cost-efficiency6-tz.qmd
+          - cost-efficiency7-g2g.qmd
   # 
   # site-url: "https://eurocontrol.int/"
 

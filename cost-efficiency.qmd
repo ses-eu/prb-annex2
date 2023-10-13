@@ -39,32 +39,34 @@ The monitoring of the DUC / AUC is carried out in national currency in real term
   
 <p style="margin-bottom: 0rem;">**AUC vs. DUC**</p>
 
-In 2022, the en route AUC was +2.1% (or +2.36 CHF2017, +2.12 €2017) higher than the planned  DUC. This results from the combination of lower than planned TSUs (-3.1%) and lower than planned en route costs in real terms (-1.1%, or -2.0 MCHF2017, -1.8 M€2017). It should be noted that actual inflation index in 2022 was +2.9 p.p. higher than planned.
+In 2022, the en route AUC was -3.1% (or -0.95 €2017) lower than the planned DUC. This results from the combination of significantly lower than planned en route costs in real terms (-5.7%, or -3.2 M€2017) and lower than planned TSUs (-2.7%). It should be noted that actual inflation index in 2022 was +2.9 p.p. higher than planned.
 
 <p style="margin-bottom: 0rem;">**En route service units**</p>
 
-The difference between actual and planned TSUs (-3.1%) falls outside the ±2% dead band, but does not exceed the ±10% threshold foreseen in the traffic risk sharing mechanism. The resulting loss of en route revenues is therefore shared between the ANSP and the airspace users, with the ANSP (Skyguide) bearing a loss of -3.3 M€2017.
+The difference between actual and planned TSUs (-2.7%) falls outside the ±2% dead band, but does not exceed the ±10% threshold foreseen in the traffic risk sharing mechanism. The resulting loss of en route revenues is therefore shared between the ANSP and the airspace users, with the ANSP (DCAC Cyprus) bearing a loss of -0.8 M€2017).
 
 <p style="margin-bottom: 0rem;">**En route costs by entity**</p>
 
-Actual real en route costs are -1.1% (-1.8 M€2017) lower than planned. This is the result of lower costs for the main ANSP, Skyguide (-1.9%, or -2.8 M€2017) and higher costs for the MET service provider (+2.7%, or +0.2 M€2017), and the NSA/EUROCONTROL (+6.8%, or +0.8 M€2017).
+Actual real en route costs are -5.7% (-3.2 M€2017) lower than planned. This is the result of lower costs for the main ANSP, DCAC Cyprus (-6.5%, or -2.5 M€2017), the MET service provider (-15.5%, or -0.6 M€2017) and the NSA/EUROCONTROL (-1.0%, or -0.2 M€2017).
 
-<p style="margin-bottom: 0rem;">**En route costs for the main ANSP (Skyguide) at charging zone level**</p>
+<p style="margin-bottom: 0rem;">**En route costs for the main ANSP (DCAC Cyprus) at charging zone level**</p>
 
-Actual en route costs in real terms are lower than planned for Skyguide in 2022 (-1.9%, or -2.8 M€2017). However, the differences by nature of costs are distorted by two factors:
-a) The overall reported costs in each cost item are netted by the financing of the services provided by Skyguide outside the Swiss FIR;
-b) Skyguide's costs include significant amounts linked to the additional costs caused by the change in the capitalisation rule in 2022 (+14.9 M€2017). However, in order for this amount not to be billed to airspace users, it has also been reported as negative exceptional item in the determined costs, but not in the actual costs (-100% of negative exceptional costs, or +14.9 M€2017). 
-- the significant difference in staff costs (which is overall of -€17.5 M€2017 or -14.7%), can be mainly explained by the evolution of the FTEs and salary assumptions, but it is also due to a reimbursement from the pension fund, although partially offset by the provision for ATCO retirement age transition costs.
+Significantly lower than planned en route costs in real terms for DCAC Cyprus in 2022 (-6.5%, or -2.5 M€2017) result from:
+- Lower staff costs (-2.6%) although in nominal terms there is no difference,
+- Significantly lower other operating costs (-9.5%) due to a delay in the operation of the new ACC building in Kokkinotrimithia,
+- Lower depreciation (-2.5%) resulting from lower than foreseen actual cost of two investments,
+- Significantly lower cost of capital (-23.1%) due to the postponement of pre-payments for investments planned to be implemented later than originally foreseen in the Performance Plan.
+
 
 :::
   
 ::: {.column width="45%"}
-![](images/2022/Switzerland/ceff_1_4_1.png)
+![](images/2022/Cyprus/ceff_1_4_1.png)
 
-![](images/2022/Switzerland/ceff_1_4_2.png)
+![](images/2022/Cyprus/ceff_1_4_2.png)
 
 
-![](images/2022/Switzerland/ceff_1_4_3.png)
+![](images/2022/Cyprus/ceff_1_4_3.png)
 :::
   
 ::::
@@ -82,7 +84,7 @@ The monitoring of the AUCU is carried out in national currency in nominal terms.
   
 ::: {.column width="61%"}
 
-![](images/2022/Switzerland/ceff_1_6_1.png)
+![](images/2022/Cyprus/ceff_1_6_1.png)
 
 <small>* The traffic adjustment on adjustments is not considered to avoid double counting, as the related adjustments have already been taken into account in full in the AUCU for the current year or previous years.</small><br><small>** The difference in revenue due to the application of the temporary unit rates in 2022, if applicable, is already reflected in the DUC (part to be charged retroactively) and is therefore not considered in the total adjustments, in order to avoid double counting.</small>
 
@@ -118,7 +120,7 @@ Source: These data are taken from the June 2023 en route Reporting Tables (for E
   
 ::: {.column width="45%"}
 
-![](images/2022/Switzerland/ceff_1_8_1.png)
+![](images/2022/Cyprus/ceff_1_8_1.png)
 
 :::
 
@@ -136,10 +138,9 @@ Source: These data are taken from the June 2023 en route Reporting Tables (for E
 
 
 ### Focus on en route AUCU monitoring at charging zone level
-The actual en route unit cost incurred by airspace users (AUCU) in respect of activities performed in 2022 (108.42 CHF or 107.89 €) is -6.6% lower than the nominal DUC (116.08 CHF or 115.51 €). The difference between these two figures (-7.66 CHF/SU or -7.62 €/SU) is due to:
-- the positive inflation adjustment resulting from higher than planned inflation (+2.66 CHF/SU or +2.65 €/SU);
-- the impact of adjustments resulting from the costs exempted from cost-sharing mechanism (-1.42 CHF/SU or -1.41 €/SU);
-- the addition of the traffic risk sharing adjustments (+0.81 CHF/SU or +0.80 €/SU);
-- the addition of the traffic adjustment (+0.44 CHF/SU or +0.43 €/SU) for the costs not subject to traffic risk sharing; and
-- application of a lower unit rate as foreseen in Art. 29(6) in year 2022 (-10.15 CHF/SU or -10.10 €/SU).
-The share of the regulatory result (see items 10 to 14) in the AUCU (before the deduction of other revenues) is -0.7%.
+The actual en route unit cost incurred by airspace users (AUCU) in respect of activities performed in 2022 (33.36 €) is +1.8% higher than the nominal DUC (32.76 €). The difference between these two figures (+0.60 €/SU) is due to:
+- the positive inflation adjustment resulting from higher than planned inflation (+0.60 €/SU);
+- the impact of adjustments resulting from the costs exempted from cost-sharing mechanism (-0.40 €/SU);
+- the addition of the traffic risk sharing adjustments (+0.11 €/SU); and
+- the addition of the traffic adjustment (+0.28 €/SU) for the costs not subject to traffic risk sharing to be charged in future years.
+The share of the regulatory result (see items 10 to 14) in the AUCU (before the deduction of other revenues) is 5.9%.
