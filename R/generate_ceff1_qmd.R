@@ -5,9 +5,6 @@ source("R/parameters.R")
 # define range
 sheet <- "1_ERT"
 
-range <- "C11:M15"
-ert_1_1  <- read_range(file, sheet, range)
-
 range <- "C16:M17"
 ert_1_2  <- read_range(file, sheet, range)
 
@@ -189,5 +186,5 @@ cat(paste0(
   ceff_1_8,
   ceff_1_9
 ),
-    file = "cost-efficiency.qmd")
+    file = "cost-efficiency-er1-1.qmd")
 

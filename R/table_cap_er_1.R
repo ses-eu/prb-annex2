@@ -15,6 +15,7 @@ sheet <- country
 
 ## prepare data
 data_for_table <- df %>% 
+  mutate_at(c(-1), ~ as.numeric(.)) %>% 
   select(1, 5:9) %>% 
   mutate_all(~ as.character(.)) %>% 
   mutate_all(~ str_replace(., "NA", "")) %>% 

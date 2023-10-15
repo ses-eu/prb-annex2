@@ -10,6 +10,4 @@ Note: EoSM questionnaire has been updated in RP3 using CANSO Standard of Excelle
 
 
 ### Observations															
-Four out of five EoSM components of the ANSP meet the RP3 target level. No improvements were observed over 2022, but only "Safety Risk Management" component is below RP3 target level with three questions to improve during RP3 to achieve RP3 target.
-
-IMPORTANT: EASA/European Commission did not receive the verified questionnaire from the NSA on time. This is an important step to receive confirmation that the self-evaluated questionnaire by the ANSP has been actually verified. It should be sent in due time to allow proper and timely drafting of the Monitoring Report.
+Four out of five EoSM components of the ANSP meet or exceed already the RP3 EoSM target levels. Only one question in "Safety Risk Management" component is below the RP3 EoSM target level.

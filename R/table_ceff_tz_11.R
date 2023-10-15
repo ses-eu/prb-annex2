@@ -24,18 +24,21 @@ trm_2_10_3  <- read_range(file, sheet, range)
 data_for_table1 <- trm_2_10_1 %>% 
   select(!c(2:7)) %>% 
   clean_names() %>% 
+  mutate_at(c(-1), ~ as.numeric(.)) %>% 
   mutate(across(c(2:5), round, 0)) %>% 
   rename(first = 1)
 
 data_for_table2 <- trm_2_10_2 %>% 
   select(!c(2:7)) %>% 
   clean_names() %>% 
+  mutate_at(c(-1), ~ as.numeric(.)) %>% 
   mutate(across(c(2:5), round, 0)) %>% 
   rename(first = 1)
 
 data_for_table3 <- trm_2_10_3 %>% 
   select(!c(2:7)) %>% 
   clean_names() %>% 
+  mutate_at(c(-1), ~ as.numeric(.)) %>% 
   mutate(across(c(2:5), round, 0)) %>% 
   rename(first = 1)
 

@@ -20,6 +20,7 @@ if (nat_curr == 'EUR') {
 
 ert_1_3_2_s <- ert_1_3_2[,-1] 
 ert_1_3_2_t <- transpose(ert_1_3_2_s) %>% 
+  mutate_all(~ as.numeric(.)) %>% 
   mutate(across(c(1,4,5), ~format(round(.,0), big.mark = ",", scientific = F))) %>% 
   mutate(across(c(2), ~paste0(format(round(.*100,1)), "%"))) %>%
   # mutate(across(c(2), ~format(round(.*100,1)))) %>%

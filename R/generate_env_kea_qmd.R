@@ -6,8 +6,7 @@ source("R/parameters.R")
 sheet <- country
 
 range <- "A10:M18"
-env_kea_3_r <- read_range(env_kea_file, sheet, range)  %>% 
-  mutate_all(~ str_replace_all(., "\r\n\r\n", "\r\n"))
+env_kea_3_r <- read_range(env_kea_file, sheet, range)  
 
 #---------------- sections definition
   # section cap_er 1.1

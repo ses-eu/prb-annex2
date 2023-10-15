@@ -6,31 +6,25 @@ source("R/parameters.R")
 sheet <- country
 
 range <- "A3:U4"
-cap_trm_1_1_r <- read_range(cap_trm_file, sheet, range)  %>% 
-  mutate_all(~ str_replace_all(., "\r\n\r\n", "\r\n"))
+cap_trm_1_1_r <- read_range(cap_trm_file, sheet, range) 
 
 range <- "A5:U6"
 cap_trm_1_2_r <- read_range(cap_trm_file, sheet, range) 
 
 range <- "A8:U9"
-cap_trm_1_3_r <- read_range(cap_trm_file, sheet, range)  %>% 
-  mutate_all(~ str_replace_all(., "\r\n\r\n", "\r\n"))
+cap_trm_1_3_r <- read_range(cap_trm_file, sheet, range)  
 
 range <- "A11:U12"
-cap_trm_1_4_r <- read_range(cap_trm_file, sheet, range)  %>% 
-  mutate_all(~ str_replace_all(., "\r\n\r\n", "\r\n"))
+cap_trm_1_4_r <- read_range(cap_trm_file, sheet, range) 
 
 range <- "A14:U15"
-cap_trm_1_5_r <- read_range(cap_trm_file, sheet, range)  %>% 
-  mutate_all(~ str_replace_all(., "\r\n\r\n", "\r\n"))
+cap_trm_1_5_r <- read_range(cap_trm_file, sheet, range)  
 
 range <- "A16:U17"
-cap_trm_1_6_r <- read_range(cap_trm_file, sheet, range)  %>% 
-  mutate_all(~ str_replace_all(., "\r\n\r\n", "\r\n"))
+cap_trm_1_6_r <- read_range(cap_trm_file, sheet, range)  
 
 range <- "A18:U19"
-cap_trm_1_7_r <- read_range(cap_trm_file, sheet, range)  %>% 
-  mutate_all(~ str_replace_all(., "\r\n\r\n", "\r\n"))
+cap_trm_1_7_r <- read_range(cap_trm_file, sheet, range)  
 
 #---------------- sections definition
   # section cap_trm 1.1
@@ -109,7 +103,7 @@ cap_trm_1_6 <- paste0('\n\n### All Causes Pre-departure Delay
 # section cap_trm 7.1
 cap_trm_1_7 <- paste0('\n\n### Appendix
 ', cap_trm_1_7_r[1,1], '
-![](images/2022/', country, '/cap_trm_7_1.png)
+![](images/2022/', country, '/cap_trm_4.png)
 
 '
 ) 
@@ -123,7 +117,7 @@ cat(paste0(
   cap_trm_1_4,
   cap_trm_1_5,
   cap_trm_1_6
-  # , cap_trm_1_7
+  , cap_trm_1_7
 ),
     file = "capacity_trm.qmd")
 

@@ -16,7 +16,9 @@ ert_1_6  <- read_range(file, sheet, range)
 ## prepare data
 ert_1_6_c <- ert_1_6 %>% 
   clean_names() %>% 
-  rename(nat_su = 3) 
+  rename(nat_su = 3) %>% 
+  mutate_at(c(2:4), ~ as.numeric(.))
+  
 
 if (nat_curr == 'EUR'){  
   data_for_table <- ert_1_6_c %>% 

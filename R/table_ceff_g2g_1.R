@@ -20,6 +20,7 @@ mycolnames <- colnames(g2g_1_1)
 g2g_1_1_s <- g2g_1_1 %>% 
   select(6:11)
 g2g_1_1_t <- transpose(g2g_1_1_s) %>% 
+  mutate_all(~ as.numeric(.)) %>% 
   mutate(across(c(1:3), ~format(round(.,0), big.mark = ",", scientific = F))) %>% 
   mutate(across(c(4), ~paste0(format(round(.*100,1)), "%"))) %>%   
   mutate_all(~ str_replace(., "NA%", "NA")) %>% 

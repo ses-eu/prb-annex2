@@ -24,6 +24,7 @@ mycolnames1 <- colnames(trm_2_11_1)
 
 trm_2_11_1_s <- trm_2_11_1 %>% select(!c(1:5)) 
 trm_2_11_1_t <- transpose(trm_2_11_1_s) %>% 
+  mutate_all(~ as.numeric(.)) %>% 
   mutate(across(c(1,4,5,6), ~format(round(.,0), big.mark = ",", scientific = F))) %>%
   mutate(across(c(2), ~paste0(format(round(.*100,0)), "%"))) %>% 
   mutate(across(c(3,7,8), ~paste0(format(round(.*100,1)), "%")))
@@ -43,6 +44,7 @@ mycolnames2 <- colnames(trm_2_11_2)
 
 trm_2_11_2_s <- trm_2_11_2 %>% select(!c(1:5)) 
 trm_2_11_2_t <- transpose(trm_2_11_2_s) %>% 
+  mutate_all(~ as.numeric(.)) %>% 
   mutate(across(c(1,4,5,6,7), ~format(round(.,0), big.mark = ",", scientific = F))) %>%
   mutate(across(c(2), ~paste0(format(round(.*100,0)), "%"))) %>% 
   mutate(across(c(3,8,9), ~paste0(format(round(.*100,1)), "%"))) %>% 

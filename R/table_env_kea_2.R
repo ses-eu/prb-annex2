@@ -15,6 +15,7 @@ sheet <- country
 
 ## prepare data
 data_for_table <- df %>% 
+  mutate_at(c(-1), ~ as.numeric(.)) %>% 
   mutate(across(c(2:13), ~paste0(format(round(.*100,2)), "%"))) %>%  
   mutate_all(~ str_replace(., "NA%", "")) %>% 
   rename(a = 1)

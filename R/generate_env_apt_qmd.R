@@ -6,8 +6,7 @@ source("R/parameters.R")
 sheet <- country
 
 range <- "A3:P4"
-env_apt_1_r <- read_range(env_apt_file, sheet, range)  %>% 
-  mutate_all(~ str_replace_all(., "\r\n\r\n", "\r\n"))
+env_apt_1_r <- read_range(env_apt_file, sheet, range)  
 
 range <- "A5:P7"
 env_apt_2_r <- read_range(env_apt_file, sheet, range) 
@@ -78,7 +77,15 @@ env_apt_3 <- paste0('\n### Additional ASMA Time
 )
 
 # section 4
-env_apt_4 <- paste0('\n\n### Share of arrivals applying CDO
+env_apt_4 <- if_else(is.na(env_apt_4_r[1,8]) == TRUE, 
+              paste0('\n\n### Share of arrivals applying CDO
+<br>
+![](images/2022/', country, '/env_apt_3.png)
+', env_apt_4_r[2,1], ' 
+                      
+' 
+),
+paste0('\n\n### Share of arrivals applying CDO
 
 :::: {.columns}
   
@@ -94,13 +101,14 @@ env_apt_4 <- paste0('\n\n### Share of arrivals applying CDO
 ::: {.column width="50%"}
 <br>
 ', env_apt_4_r[1,8], '   
-
 :::
 ::::
+
+', if_else(is.na(env_apt_4_r[2,1]) == TRUE, "", pull(env_apt_4_r[2,1])), ' 
                       
 ' 
 )
-
+)
 # section 5
 env_apt_5 <- paste0('\n### Appendix
 

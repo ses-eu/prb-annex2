@@ -22,6 +22,7 @@ if (nat_curr == 'EUR') {
 
 trm_1_3_3_s <- trm_1_3_3[,c(-1,-5)]  
 trm_1_3_3_t <- transpose(trm_1_3_3_s) %>% 
+  mutate_all(~ as.numeric(.)) %>% 
   mutate(across(c(1,5,7), ~format(round(.,0), big.mark = ",", scientific = F))) %>%
   mutate(across(c(2,6,8), ~paste0(if_else(.>=0,"+",""),
     format(round(.*100,1)), "%"))) %>% 

@@ -17,6 +17,7 @@ mycolnames <- colnames(df)
 
 ## prepare data
 data_for_table <- df %>% 
+  mutate_at(c(-1), ~ as.numeric(.)) %>% 
   select(1, 4, 6, 8, 10, 12)  %>% 
   rename(a = 1) %>% 
   filter(is.na(a) == FALSE) 

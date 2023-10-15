@@ -18,6 +18,7 @@ mycolnames <- colnames(g2g_1_3)
 
 g2g_1_3_s <- g2g_1_3[,c(-1,-5)]  
 g2g_1_3_t <- transpose(g2g_1_3_s) %>% 
+  mutate_all(~ as.numeric(.)) %>% 
   mutate(across(c(1), ~format(round(.,0), big.mark = ",", scientific = F))) %>%
   mutate(across(c(2), ~paste0(format(round(.*100,1)), "%"))) %>% 
   mutate(across(c(3), ~paste0(format(round(.,1)), " p.p."))) 

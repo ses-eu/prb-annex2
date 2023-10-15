@@ -20,6 +20,7 @@ trm_1_8_2  <- read_range(file, sheet, range)
 data_for_table1 <- trm_1_8_1 %>% 
   select(!c(2)) %>% 
   clean_names() %>% 
+  mutate_at(c(-1), ~ as.numeric(.)) %>% 
   mutate(across(c(2:3), round, 0)) %>% 
   mutate(across(c(4:5), round, 2)) %>%
   rename(second = 2, third = 3, fourth = 4, fifth = 5) %>% 
@@ -28,6 +29,7 @@ data_for_table1 <- trm_1_8_1 %>%
 data_for_table2 <- trm_1_8_2 %>% 
   select(!c(2)) %>% 
   clean_names() %>% 
+  mutate_at(c(-1), ~ as.numeric(.)) %>% 
   mutate(across(c(2:3), round, 0)) %>% 
   mutate(across(c(4:5), round, 2)) %>%   
   rename(second = 2, third = 3, fourth = 4, fifth = 5) %>% 

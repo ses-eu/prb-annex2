@@ -17,6 +17,7 @@ ert_1_7  <- read_range(file, sheet, range)
 ert_1_7_c <- ert_1_7 %>% 
   select(!c(2:6)) %>% 
   clean_names() %>% 
+  mutate_at(c(-1), ~ as.numeric(.)) %>% 
   mutate(across(c(2:3), round, 0)) %>% 
   mutate(across(c(4:5), round, 2))  
 

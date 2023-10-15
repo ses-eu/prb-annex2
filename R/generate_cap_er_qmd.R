@@ -6,28 +6,22 @@ source("R/parameters.R")
 sheet <- country
 
 range <- "J4:J6"
-cap_er_1_1_r <- read_range(cap_file, sheet, range)  %>% 
-  mutate_all(~ str_replace_all(., "\r\n\r\n", "\r\n"))
+cap_er_1_1_r <- read_range(cap_file, sheet, range)  
 
 range <- "A9:O13"
-cap_er_1_2_r <- read_range(cap_file, sheet, range)  %>% 
-  mutate_all(~ str_replace_all(., "\r\n\r\n", "\r\n"))
+cap_er_1_2_r <- read_range(cap_file, sheet, range)  
 
 range <- "A14:O18"
-cap_er_1_3_r <- read_range(cap_file, sheet, range)  %>% 
-  mutate_all(~ str_replace_all(., "\r\n\r\n", "\r\n"))
+cap_er_1_3_r <- read_range(cap_file, sheet, range)  
 
 range <- "A19:O23"
-cap_er_1_4_r <- read_range(cap_file, sheet, range)  %>% 
-  mutate_all(~ str_replace_all(., "\r\n\r\n", "\r\n"))
+cap_er_1_4_r <- read_range(cap_file, sheet, range)  
 
 range <- "A49:O53"
-cap_er_1_6_r <- read_range(cap_file, sheet, range)  %>% 
-  mutate_all(~ str_replace_all(., "\r\n\r\n", "\r\n"))
+cap_er_1_6_r <- read_range(cap_file, sheet, range)  
 
 range <- "A54:O58"
-cap_er_1_7_r <- read_range(cap_file, sheet, range)  %>% 
-  mutate_all(~ str_replace_all(., "\r\n\r\n", "\r\n"))
+cap_er_1_7_r <- read_range(cap_file, sheet, range)  
 
 #---------------- sections definition
   # section cap_er 1.1

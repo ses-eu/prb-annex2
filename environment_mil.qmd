@@ -1,7 +1,7 @@
-## 2.3 Military dimension
+## 2.2 Military dimension
 ### Update on Military dimension of the plan
 
-NA
+The number of military aircraft increased since the outbreak of the war between Russia and Ukraine
 
 ### Military - related measures implemented or planned to improve capacity
 
@@ -26,10 +26,7 @@ NA
 
 ### Initiatives implemented or planned to improve PI#6
 
-LARA/PRISMIL implemented, automated reporting, that differs from manual calculation that was used earlier in 2020, 2021 and RP2.
-The figures for 2020 and 2021 should be as follows: 
-2020 number of hours allocated & notified: 38340; used: 34296 (ratio 89,45%)
-2021 number of hours allocated & notified: 37346; used: 33978 (ratio 90,98%)
+NA
 
 ### PI#7 Rate of planning via available airspace structures - national level
 
@@ -50,10 +47,7 @@ The figures for 2020 and 2021 should be as follows:
 
 ### Initiatives implemented or planned to improve PI#7
 
-LARA/PRISMIL implemented, automated reporting, that differs from manual calculation that was used earlier in 2020, 2021 and RP2.
-Figures for 2020 and 2021 should be as follows:
-2020 number of aircraft filing via reserved or segregated airspace and CDRs: 1676883; could have planned: 1779163 (ratio 94,25%)
-2021 number of aircraft filing via reserved or segregated airspace and CDRs: 1908679; could have planned: 1982855 (ratio 96,26%)
+NA
 
 ### PI#8 Rate of using available airspace structures - national level
 
@@ -74,7 +68,4 @@ Figures for 2020 and 2021 should be as follows:
 
 ### Initiatives implemented or planned to improve PI#8
 
-LARA/PRISMIL implemented, automated reporting, that differs from manual calculation that was used earlier in 2020, 2021 and RP2.
-Figures for 2020 and 2021 should be as follows:
-2020 number of aircraft flying via reserved or segregated airspace and CDRs: 1512596; could have planned: 1779163 (ratio 85,02%)
-2021 number of aircraft flying via reserved or segregated airspace and CDRs: 1721982; could have planned: 1982855 (ratio 86,84%)
+NA

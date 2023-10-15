@@ -97,5 +97,5 @@ cat(paste0(
   ceff_7_2,
   ceff_7_3
 ),
-    file = "cost-efficiency7-g2g.qmd")
+    file = "cost-efficiency-g2g.qmd")
 

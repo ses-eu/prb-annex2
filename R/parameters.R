@@ -9,7 +9,7 @@ library(stringr)
 # parameters
 
 data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/PBI files/'
-country <- 'Finland'
+country <- 'Bulgaria'
 year_report <- 2022
 
 data_folder_a2 <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/Annex 2/data/'
@@ -19,8 +19,12 @@ read_range <- function(file, sheet, range){
   read_excel(
     file,
     sheet = sheet,
-    range = range)   
+    range = range) %>% 
+      mutate_all(~ str_replace_all(., "\r\n\r\n", "\r\n")) %>% 
+      mutate_all(~ str_replace_all(., "<br><br><br><br>", "<br><br>"))   
 }
+
+
 
 # get ceff file
 ceff_files <- list.files(paste0(data_folder_a2, 'ceff/'))
@@ -100,7 +104,7 @@ env_mil_file <-  paste0(data_folder_a2, "env/", env_mil_file)
 saf_files <- list.files(paste0(data_folder_a2, 'saf/'))
 
 for (i in 1:length(env_files)) {
-  if (grepl('Annex II for RP3_2022_Safety', saf_files[i], fixed = TRUE) == TRUE) {
+  if (grepl('_Safety', saf_files[i], fixed = TRUE) == TRUE) {
     saf_eosm_file <- saf_files[i]
   }
 }

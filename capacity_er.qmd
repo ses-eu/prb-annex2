@@ -25,16 +25,13 @@ NA
 
 
 ### NSA's assessment of capacity performance
-In the beginning of 2022 traffic was just recovering from Covid-19 until the end of February when the traffic almost ceased in Finland. The war in Ukraine; the closure of Russian airspace; and banning Russian airlines from flying in Finnish airspace, had a huge impact in traffic. 
-As a result of the sanctions, all European airlines stopped flying to Asia completely over Finland. In general, overflying traffic was around 60 % of the level of 2019. Finnair, the biggest customer to Fintraffic ANS, was forced to change its strategy after the end of Russian overflights to Asia. Traffic to Kaliningrad increased over the international waters between Estonia and Finland. This traffic increase can be noticed in the number of operations but its impact in terms of service units is less. 
-Finland reached the capacity targets in both KPIs, en-route and terminal. En-route delays have been zero in many years, and the capacity provided for this is due to user demand for as few delays as possible.
-The en-route overflying traffic between Europe and Asia has dropped dramatically due to the war and the related airspace closure, and has resulted to continuation of some of the temporary staff lay-offs.
+During 2022 the number of serviced aircraft gradually increased, approaching 2019 levels. As a follow-up to the events in Ukraine, reciprocal bans have been imposed on the use of EU airspace by Russian aircraft and on the use of Russian Federation airspace by European aircraft. These actions led to a significant extension of the flight time for some destinations (mainly from/to the Far East and the aggregate flow from/to Other ICAO regions in Asia) and to the shift of non-traditional traffic to the Bulgarian airspace. BULATSA carried out the necessary preparations in a timely manner and successfully dealt with the increased air traffic over Bulgaria by developing sector configurations to handle the traffic and providing the necessary number of air traffic controllers.  The number of serviced aircraft was 832,923, which is a increase of 58% compared to the previous year but was still below (~ 6.5%) the pre-pandemic 2019.<br/><br/>The reported delay figure for Bulgaria in 2022 is 0.00.
 
 ### Monitoring process for capacity performance
-Review of the actual values from the NM dashboard.
+Monitoring of capacity performance is effected through regular monitoring of the minutes of delay generated, based on the information provided by NM. Monitoring is done on a monthly basis.
 
 ### Capacity Planning
-En-route ATFM delay will remain low as the capacity is delivered due to user demand.
+Capacity planning is done on a network level as part of the capacity planning processes established by NM. Additionally, BULATSA has established internal capacity planning which is based on the traffic forecast produced by STATFOR, but also based on the internally produced traffic forecasts, which take into account local specifics. The capacity planning process includes:<br/> <br/>•	HR availability and rostering, both in long term ( new ATCO hiring and training) , but also in the medium ( seasonal) and short term (monthly). HR requirements are assessed and measures are taken to re-prioritize available resources during the busy periods.<br/>•	Medium and long term planning of capacity availability based on technological improvements, introduction of SESAR innovations, system upgrades<br/>•	Airspace changes, sectorization and development of interfaces with adjacent FIRs.<br/> <br/>The issues and plans are regularly reviewed and reassess in relation to current operational environment and forecasts. A Capacity Management Board is established internally that convenes once a month in order to discuss the latest information and trends. The Capacity Board includes a broad range of experts ( technical, operational, financial and legal) in order to ensure that multidisciplinary approach to capacity is undertaken.<br/><br/>War in Ukraine <br/>As a response to the situation, BULATSA introduced the utilization of new airspace configurations ( now the lateral split of Sofia east sectors is actively used). A new organization of the interfaces with Turkey were agreed and will be implemented for Summer 2023. Cross training between sector cluster was initiated and successfully completed to allow for more flexibility in the human resources re-allocation. Meetings were carried out with major airspace users ( Turkish Airlines) to review flight planning practices and agree on some traffic flow initiatives. Administrative staff with operational competence was reallocated for the peak traffic periods. At the same time, BULATSA has continued the work on key technological projects (rostering system, complexity management system, ATM system) in order to ensure that capacity will be improved in the medium and long term.
 
 ### ATCO in OPS (FTE)
 
@@ -48,10 +45,7 @@ htmltools::tagList(t)
 
 
 ### Application of Corrective Measures for Capacity (if applicable)
-There are changes in traffic flows/patterns: airspace closures have shifted the traffic flows from Russia to Kaliningrad, and these flights have to use the narrow international airspace corridor between Finland and Estonia, and can not use the direct routing that has been used before the war. There is an average of 350 flights per week.
-Also the flights from Europe to Asia are not overflying Finnish airspace anymore because of the airspace closure.
-Another change is in the flights between Finland (Helsinki) and Japan, where our main operator Finnair flies daily. These flights can't fly the most direct route anymore because of the airspace closure, and have to fly via northern route above the North Pole. 
-These changes do not affect the en route capacity performance, but still need to be taken into account when assessing the overall performance of the ANSP.
+Nil
 
 ### Summary of capacity performance
-Finland experienced an increase in traffic from 123k flights in 2021, to 205k flights in 2022; again, with zero ATFM delay. However, traffic levels were still substantially below the 285k flights in 2019.
+Bulgaria experienced an increase in traffic from 516k flights in 2021 to 822k flights in 2022, with zero ATFM delay. However, traffic levels were still substantially below the 879k flights in 2019. Although traffic levels were still below 2019 on an annual basis, over the second half of 2022 the number of flights were quite close to 2019, and in some cases exceeded the 2019 summer peaks.

@@ -32,6 +32,7 @@ ert_2_14_1_s <- ert_2_14_1_s %>%
 }
 
 ert_2_14_1_t <- transpose(ert_2_14_1_s) %>% 
+  mutate_all(~ as.numeric(.)) %>% 
   mutate(across(c(1,2), ~format(round(.,0), big.mark = ",", scientific = F))) %>%
   mutate(across(c(3,4), ~paste0(format(round(.*100,1)), "%")))
 
@@ -63,6 +64,7 @@ if (nacheck == 1) {
 }
 
 ert_2_14_2_t <- transpose(ert_2_14_2_s) %>% 
+  mutate_all(~ as.numeric(.)) %>% 
   mutate(across(c(1,2), ~format(round(.,0), big.mark = ",", scientific = F))) %>%
   mutate(across(c(3,4), ~paste0(format(round(.*100,1)), "%"))) %>% 
   as_tibble() %>% 

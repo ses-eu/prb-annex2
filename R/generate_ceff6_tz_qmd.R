@@ -17,7 +17,7 @@ ceff_6_14_1 <- paste0('## 4.6 Other terminal ANSPs/METSPs
 #| file: R/table_ceff_tz_14.R
 #| out.width: "100%"
 ```
-<br>
+
 '
 )                
 
@@ -36,5 +36,5 @@ cat(paste0(
 
   
 ),
-    file = "cost-efficiency6-tz.qmd")
+    file = "cost-efficiency-tz1-3.qmd")
 

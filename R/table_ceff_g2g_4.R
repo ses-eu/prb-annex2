@@ -26,6 +26,7 @@ data_for_table1 <- g2g_3_1 %>%
   select(1, 4:6, 8:10) %>% 
   rename(a = 1) %>% 
   filter(is.na(a) == FALSE) %>% 
+  mutate_at(c(-1), ~ as.numeric(.)) %>% 
   mutate(across(c(2:3, 5:6), ~format(round(.,0), big.mark = ",", scientific = F))) %>% 
   mutate(across(c(4,7), ~paste0(format(round(.*100,1)), "%"))) %>% 
   clean_names()
@@ -35,6 +36,7 @@ data_for_table2 <- g2g_3_2 %>%
   select(1, 4:6, 8:10) %>% 
   rename(a = 1) %>% 
   filter(is.na(a) == FALSE) %>% 
+  mutate_at(c(-1), ~ as.numeric(.)) %>% 
   mutate(across(c(2:3, 5:6), ~format(round(.,0), big.mark = ",", scientific = F))) %>% 
   mutate(across(c(4,7), ~paste0(format(round(.*100,1)), "%"))) %>% 
   clean_names()
