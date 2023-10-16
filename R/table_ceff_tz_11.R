@@ -8,16 +8,19 @@ library(stringr)
 ## parameters
 source("R/parameters.R")
 
+if (tz != 1 & tz !=2) {tz = 1}
+
 ## import data
-sheet <- "7_TRM_ATSP"
+sheet <- c("7_TRM_ATSP", "7_TRM_ATSP (2)")
+
 range <- range <- "C24:M28" 
-trm_2_10_1  <- read_range(file, sheet, range)
+trm_2_10_1  <- read_range(file, sheet[tz], range)
 
 range <- range <- "C29:M32" 
-trm_2_10_2  <- read_range(file, sheet, range)
+trm_2_10_2  <- read_range(file, sheet[tz], range)
 
 range <- range <- if_else(nat_curr == 'EUR', "C33:M35", "C33:M36") 
-trm_2_10_3  <- read_range(file, sheet, range)
+trm_2_10_3  <- read_range(file, sheet[tz], range)
 
 
 ## prepare data

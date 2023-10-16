@@ -22,7 +22,9 @@ env_mil_11_r <- read_range(env_mil_file, sheet, range)
 
 #---------------- sections definition
   # section 1
-env_mil_1 <- paste0('## ', if_else(state_type == 0, '2.2', '2.3'), ' Military dimension
+env_mil_1 <- paste0('## ',
+# if_else(state_type == 0, '2.2', '2.3'),
+' Military dimension
 ### Update on Military dimension of the plan
 
 ', env_mil_1_r[1,1]

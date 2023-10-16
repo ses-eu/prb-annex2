@@ -2,32 +2,45 @@
 ## parameters
 source("R/parameters.R")
 
-# define range
-sheet <- "5_TRM"
+if (state_type == 3) {state_type = 1}
 
-range <- "C16:M17"
-trm_1_2  <- read_range(file, sheet, range)
+# define sheet
+sheet <- c("5_TRM", "5_TRM (2)")
 
-## range 1.4
-range <- "C50:M71"
-trm_1_4  <- read_range(file, sheet, range)
 
-## range 1.6
-sheet <- "6_TRM"
-range <- "J16:M33"
-trm_1_6  <- read_range(file, sheet, range)
-
-## range 1.9
-sheet <- "6_TRM"
-range <- "C63:M70"
-trm_1_9  <- read_range(file, sheet, range)
+for (tz in 1:state_type) {
 
 #---------------- sections definition
-  # section 1.1
-ceff_4_1 <- paste0('## 4.4 Terminal charging zone
-### Contextual economic information: terminal air navigation services
+  # define ranges
+  range <- "C8:C9"
+  trm_1_1  <- read_range(file, sheet[tz], range)
+  
+  range <- "C16:M17"
+  trm_1_2  <- read_range(file, sheet[tz], range)
+  
+  ## range 1.4
+  range <- "C50:M71"
+  trm_1_4  <- read_range(file, sheet[tz], range)
+  
+  ## range 1.6
+  sheet <- c("6_TRM", "6_TRM (2)")
+  range <- "J16:M33"
+  trm_1_6  <- read_range(file, sheet[tz], range)
+  
+  range <- "C63:M70"
+  trm_1_9  <- read_range(file, sheet[tz], range)  
+  
+  
+    # section 1.1
+ceff_4_1 <- paste0('## Terminal charging zone ', 
+if_else(state_type == 2, tz, NA),'
+### 1 Contextual economic information: terminal air navigation services
 
 ```{r}
+tz = ', tz, '
+```
+
+```{r, tz}
 #| file: R/table_ceff_tz_0.R
 #| out.width: "100%"
 ```  
@@ -36,13 +49,13 @@ ceff_4_1 <- paste0('## 4.4 Terminal charging zone
 
   # section 1.2
 ceff_4_2 <- paste0(
-  '\n\n### Monitoring of the terminal determined unit cost (DUC) at charging zone level
+  '\n\n### 2 Monitoring of the terminal determined unit cost (DUC) at charging zone level
   ', trm_1_2[1,1]
   )
 
   # section 1.3.1
 ceff_4_3 <- paste0(
-'\n\n### Terminal actual unit cost (AUC) vs. terminal determined unit cost (DUC)
+'\n\n### 3 Terminal actual unit cost (AUC) vs. terminal determined unit cost (DUC)
 
 ```{r}
 #| file: R/table_ceff_tz_3_1.R
@@ -61,7 +74,7 @@ ceff_4_3 <- paste0(
 
 # section 1.4
 ceff_4_4 <- paste0(
-  '\n\n### Focus on terminal DUC monitoring at charging zone level
+  '\n\n### 4 Focus on terminal DUC monitoring at charging zone level
   
 :::: {.columns}
   
@@ -88,19 +101,19 @@ ceff_4_4 <- paste0(
   
 ::::
 
-{{< pagebreak >}}'
+'
 )
 
 # section 1.5
 ceff_4_5 <- paste0(
-  '\n\n### Monitoring of the terminal actual unit cost for users (AUCU) at charging zone level
+  '\n\n### 5 Monitoring of the terminal actual unit cost for users (AUCU) at charging zone level
 The **Actual Unit Cost for Users(AUCU)** reflects the price per service units that is charged *in fine* to users for the services provided in the year. It corresponds to the sum of the DUC for the year and of the different adjustments stemming from that year.
 The monitoring of the AUCU is carried out in national currency in nominal terms.
 ')
 
 # section 1.6
 ceff_4_6 <- paste0(
-  '\n\n### Terminal actual unit cost for users (AUCU) at charging zone level
+  '\n\n### 6 Terminal actual unit cost for users (AUCU) at charging zone level
   
 :::: {.columns}
   
@@ -129,7 +142,7 @@ ceff_4_6 <- paste0(
 
 # section 1.7
 ceff_4_7 <- paste0(
-  '\n\n### Terminal costs exempt from cost sharing
+  '\n\n### 7 Terminal costs exempt from cost sharing
 
 ```{r}
 #| file: R/table_ceff_tz_7.R
@@ -142,7 +155,7 @@ Source: These data are taken from the June 2023 terminal Reporting Tables (for E
 
 # section 1.7
 ceff_4_8 <- paste0(
-  '\n\n### Terminal regulatory result at charging zone level
+  '\n\n### T8 erminal regulatory result at charging zone level
 
 :::: {.columns}
   
@@ -168,7 +181,7 @@ ceff_4_8 <- paste0(
 
 # section 1.7
 ceff_4_9 <- paste0(
-  '\n\n### Focus on terminal AUCU monitoring at charging zone level
+  '\n\n### 9 Focus on terminal AUCU monitoring at charging zone level
 ', trm_1_9[1,1]
 )
 
@@ -184,5 +197,7 @@ cat(paste0(
   ceff_4_8,
   ceff_4_9
 ),
-    file = "cost-efficiency-tz1-1.qmd")
+  file = paste0("cost-efficiency-tz", tz, "-1.qmd")
+)
 
+}

@@ -106,7 +106,7 @@ website:
         contents:
           - cost-efficiency-er1-1.qmd
           - cost-efficiency-er1-2.qmd
-            # - cost-efficiency-er1-3.qmd
+          - cost-efficiency-er1-3.qmd
             # - cost-efficiency-tz1-1.qmd
             # - cost-efficiency-tz1-2.qmd
             # - cost-efficiency-tz1-3.qmd

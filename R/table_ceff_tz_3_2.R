@@ -9,10 +9,13 @@ library(stringr)
 ## parameters
 source("R/parameters.R")
 
+if (tz != 1 & tz !=2) {tz = 1}
+
 ## import data
-sheet <- "5_TRM"
+sheet <- c("5_TRM", "5_TRM (2)")
 range <- if_else(nat_curr == 'EUR', "C29:M35", "C29:M36")
-trm_1_3_2  <- read_range(file, sheet, range)
+trm_1_3_2  <- read_range(file, sheet[tz], range)
+
 myrownames <- trm_1_3_2[1]
 mycolnames <- colnames(trm_1_3_2)
 if (nat_curr == 'EUR') {

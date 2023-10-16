@@ -5,6 +5,9 @@ source("R/parameters.R")
 # define range
 sheet <- "1_ERT"
 
+range <- "C8:M9"
+ert_1_1  <- read_range(file, sheet, range)
+
 range <- "C16:M17"
 ert_1_2  <- read_range(file, sheet, range)
 
@@ -26,8 +29,8 @@ ert_1_9  <- read_range(file, sheet, range)
   # section 1.1
 ceff_1_1 <- paste0('[4 Cost-efficiency]{class="fakeh1"}
 
-## 4.1 En route charging zone
-### Contextual economic information: en route air navigation services
+## En route charging zone
+### 1 Contextual economic information: en route air navigation services
 
 ```{r}
 #| file: R/table_ceff_er_0.R
@@ -38,13 +41,13 @@ ceff_1_1 <- paste0('[4 Cost-efficiency]{class="fakeh1"}
 
   # section 1.2
 ceff_1_2 <- paste0(
-  '\n\n### Monitoring of the en route determined unit cost (DUC) at charging zone level
+  '\n\n### 2 Monitoring of the en route determined unit cost (DUC) at charging zone level
   ', ert_1_2[1,1]
   )
 
   # section 1.3.1
 ceff_1_3 <- paste0(
-'\n\n### En route actual unit cost (AUC) vs. en route determined unit cost (DUC)
+'\n\n### 3 En route actual unit cost (AUC) vs. en route determined unit cost (DUC)
 
 ```{r}
 #| file: R/table_ceff_3_1.R
@@ -63,7 +66,7 @@ ceff_1_3 <- paste0(
 
 # section 1.4
 ceff_1_4 <- paste0(
-  '\n\n### Focus on en route DUC monitoring at charging zone level
+  '\n\n### 4 Focus on en route DUC monitoring at charging zone level
   
 :::: {.columns}
   
@@ -95,14 +98,14 @@ ceff_1_4 <- paste0(
 
 # section 1.5
 ceff_1_5 <- paste0(
-  '\n\n### Monitoring of the en route actual unit cost for users (AUCU) at charging zone level
+  '\n\n### 5 Monitoring of the en route actual unit cost for users (AUCU) at charging zone level
 The **Actual Unit Cost for Users(AUCU)** reflects the price per service units that is charged *in fine* to users for the services provided in the year. It corresponds to the sum of the DUC for the year and of the different adjustments stemming from that year.
 The monitoring of the AUCU is carried out in national currency in nominal terms.
 ')
 
 # section 1.6
 ceff_1_6 <- paste0(
-  '\n\n### En route actual unit cost for users (AUCU) at charging zone level
+  '\n\n### 6 En route actual unit cost for users (AUCU) at charging zone level
   
 :::: {.columns}
   
@@ -131,7 +134,7 @@ ceff_1_6 <- paste0(
 
 # section 1.7
 ceff_1_7 <- paste0(
-  '\n\n### En route costs exempt from cost sharing
+  '\n\n### 7 En route costs exempt from cost sharing
 
 ```{r}
 #| file: R/table_ceff_7.R
@@ -144,7 +147,7 @@ Source: These data are taken from the June 2023 en route Reporting Tables (for E
 
 # section 1.7
 ceff_1_8 <- paste0(
-  '\n\n### En route regulatory result at charging zone level
+  '\n\n### 8 En route regulatory result at charging zone level
 
 :::: {.columns}
   
@@ -168,9 +171,9 @@ ceff_1_8 <- paste0(
 '
 )
 
-# section 1.7
+# section 1.9
 ceff_1_9 <- paste0(
-  '\n\n### Focus on en route AUCU monitoring at charging zone level
+  '\n\n### 9 Focus on en route AUCU monitoring at charging zone level
 ', ert_1_9[1,1]
 )
 

@@ -10,4 +10,4 @@ Note: EoSM questionnaire has been updated in RP3 using CANSO Standard of Excelle
 
 
 ### Observations															
-Four out of five EoSM components of the ANSP meet or exceed already the RP3 EoSM target levels. Only one question in "Safety Risk Management" component is below the RP3 EoSM target level.
+Maturity levels have been maintained compared with 2021. Four out of five EoSM components of the ANSP meet the RP3 target level. Only the component "Safety Risk Management" is below 2024 target level, at level C. Improvements in "Safety Risk Management” are still expected during RP3 to achieve RP3 targets.

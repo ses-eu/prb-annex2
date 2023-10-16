@@ -28,7 +28,7 @@ cap_trm_1_7_r <- read_range(cap_trm_file, sheet, range)
 
 #---------------- sections definition
   # section cap_trm 1.1
-cap_trm_1_1 <- paste0('## 3.2 Airports
+cap_trm_1_1 <- paste0('## Airports
 ### Overview
 ', cap_trm_1_1_r[1,1], '
 '

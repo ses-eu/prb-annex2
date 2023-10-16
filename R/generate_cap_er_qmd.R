@@ -27,7 +27,7 @@ cap_er_1_7_r <- read_range(cap_file, sheet, range)
   # section cap_er 1.1
 cap_er_1_1 <- paste0('[3 Capacity]{class="fakeh1"}
 
-## 3.1 En route
+## En route
 ### Minutes of ATFM en-route delay
 
 :::: {.columns}

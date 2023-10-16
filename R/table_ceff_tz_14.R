@@ -11,12 +11,14 @@ library(stringr)
 source("R/parameters.R")
 
 ## import data
-sheet <- "8_TRM_ATSP"
+sheet <- c("8_TRM_ATSP", "8_TRM_ATSP (2)")
+if (tz != 1 & tz !=2) {tz = 1}
+
 range <- range <- "C13:M17" 
-trm_2_14_1  <- read_range(file, sheet, range) 
+trm_2_14_1  <- read_range(file, sheet[tz], range) 
 
 range <- range <- "C18:M22" 
-trm_2_14_2  <- read_range(file, sheet, range)
+trm_2_14_2  <- read_range(file, sheet[tz], range)
 
 # data prep 1
 myrownames <- trm_2_14_1[1]
@@ -110,9 +112,7 @@ t1 <- reactable(
                          
   ),
   columns = list(
-    a = colDef(name=paste0("Cost sharing (",
-                                          if_else(nat_curr == 'EUR', "€", nat_curr),
-                                          " '000)"), 
+    a = colDef(name = mycolnames[1], 
                                     minWidth = 43, 
                                     align = "left"
                                       
@@ -153,9 +153,7 @@ t2 <- reactable(
   
   ),
   columns = list(
-    a = colDef(name=paste0("Cost sharing (",
-                           if_else(nat_curr == 'EUR', "€", nat_curr),
-                           " '000)"), 
+    a = colDef(name = str_replace(mycolnames[1], "planned", "actual"), 
                minWidth = 43, 
                align = "left"
                

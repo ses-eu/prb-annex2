@@ -7,14 +7,15 @@ library(stringr)
 
 ## parameters
 source("R/parameters.R")
+if (tz != 1 & tz !=2) {tz = 1}
 
 ## import data
-sheet <- "6_TRM"
+sheet <- c("6_TRM", "6_TRM (2)")
 range <- range <- "H49:M53" 
-trm_1_8_1  <- read_range(file, sheet, range)
+trm_1_8_1  <- read_range(file, sheet[tz], range)
 
 range <- range <- "H54:M61" 
-trm_1_8_2  <- read_range(file, sheet, range)
+trm_1_8_2  <- read_range(file, sheet[tz], range)
 
 ## prepare data
 data_for_table1 <- trm_1_8_1 %>% 

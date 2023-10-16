@@ -37,7 +37,7 @@ ert_1_3_1_tt <- transpose(ert_1_3_1_t) %>% as_tibble() %>%
 ## prepare data
 data_for_table <- ert_1_3_1_tt %>% 
   select(!c(2:4)) %>% 
-  mutate_all(~ str_replace(., "NA", ""))
+  mutate_all(~ str_replace(., "NA", NA_character_))
 
 ## plot table
 t <- reactable(
@@ -47,12 +47,14 @@ t <- reactable(
   striped = FALSE,
   compact = TRUE,
   highlight = TRUE,
-  defaultColDef = colDef(style = list(
-                          "font-size" = "0.72rem",
-                          "white-space"= "wrap"
-                          ),
-                         align = "right",
-                         headerStyle = list(
+  defaultColDef = colDef( style = function(value) {
+    color <- if (is.na(value)) {'#F2F2F2'} 
+    list(background = color,
+         "font-size" = "0.72rem",
+         "white-space"= "wrap")
+  } ,
+  align = "right",
+  headerStyle = list(
                            background = "#D9D9D9", 
                            # color = "white", 
                            fontSize = "0.72rem",
@@ -63,7 +65,10 @@ t <- reactable(
   columns = list(
     a = colDef(name=mycolnames[1], 
                                     minWidth = 39, 
-                                    align = "left"
+                                    align = "left",
+                            style = list(background = 'white',
+                            "font-size" = "0.72rem",
+                            "white-space"= "wrap")
                          ), 
     V4 = colDef(name = "", minWidth = 0),
     V5 = colDef(name = "2020D", minWidth = 10),
@@ -72,7 +77,13 @@ t <- reactable(
     V8 = colDef(name = "2022D", minWidth = 10),
     V9 = colDef(name = "2023D", minWidth = 10),
     V10 = colDef(name = "2024D", minWidth = 10)
-  )
+  ),
+  borderless = TRUE,
+  rowStyle = 
+    function(index) {
+      if (index == nrow(data_for_table)) list(fontWeight = "bold",
+                                              borderTop = "1px solid rgba(0, 0, 0, 0.1)")
+    }
 )
 
 t

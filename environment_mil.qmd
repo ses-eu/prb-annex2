@@ -1,11 +1,11 @@
-## 2.2 Military dimension
+##  Military dimension
 ### Update on Military dimension of the plan
 
-The number of military aircraft increased since the outbreak of the war between Russia and Ukraine
+Environment: No impact on environment.<br/><br/>Capacity: No impact on capacity.<br/><br/>**Additional information related to Russia’s war of aggression against Ukraine<br/><br/>**No specific changes in activity. Segregated airspace was established for the needs of overflights by aircraft of allied countries that do not fly according to the rules that apply to general air traffic in the controlled airspace of the Republic of Slovenia, which is activated when necessary. <br/><br/>Temporary Segregated Area above FL 510 (FL510)  - activation on demand
 
 ### Military - related measures implemented or planned to improve capacity
 
-NA
+Environment: N/A<br/><br/>Capacity: N/A
 
 ### PI#6 Effective use of reserved or segregated airspace - national level
 
@@ -26,7 +26,7 @@ NA
 
 ### Initiatives implemented or planned to improve PI#6
 
-NA
+Slovenia AMC started sharing AUP/UUP with NM on 1.1.2023, but without any restrictions being imposed on the users flight planning during activation.
 
 ### PI#7 Rate of planning via available airspace structures - national level
 
@@ -47,7 +47,7 @@ NA
 
 ### Initiatives implemented or planned to improve PI#7
 
-NA
+Slovenia AMC started sharing AUP/UUP with NM on 1.1.2023, but without any restrictions being imposed on the users flight planning during activation.
 
 ### PI#8 Rate of using available airspace structures - national level
 
@@ -68,4 +68,4 @@ NA
 
 ### Initiatives implemented or planned to improve PI#8
 
-NA
+Slovenia AMC started sharing AUP/UUP with NM on 1.1.2023, but without any restrictions being imposed on the users flight planning during activation.

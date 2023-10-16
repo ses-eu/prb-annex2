@@ -1,7 +1,7 @@
 [4 Cost-efficiency]{class="fakeh1"}
 
-## 4.1 En route charging zone
-### Contextual economic information: en route air navigation services
+## En route charging zone
+### 1 Contextual economic information: en route air navigation services
 
 ```{r}
 #| file: R/table_ceff_er_0.R
@@ -9,10 +9,10 @@
 ```  
 
 
-### Monitoring of the en route determined unit cost (DUC) at charging zone level
+### 2 Monitoring of the en route determined unit cost (DUC) at charging zone level
   The **Determined Unit Cost (DUC)** is the cost per service unit, at which the service is planned to be provided during the year. The **Actual Unit Cost (AUC)** reflects the cost per service unit, at which the service has actually been provided during the year.<br/><br/>The monitoring of the DUC / AUC is carried out in national currency in real terms, at 2017 prices.
 
-### En route actual unit cost (AUC) vs. en route determined unit cost (DUC)
+### 3 En route actual unit cost (AUC) vs. en route determined unit cost (DUC)
 
 ```{r}
 #| file: R/table_ceff_3_1.R
@@ -29,7 +29,7 @@
 
 
 
-### Focus on en route DUC monitoring at charging zone level
+### 4 Focus on en route DUC monitoring at charging zone level
   
 :::: {.columns}
   
@@ -37,47 +37,47 @@
   
 <p style="margin-bottom: 0rem;">**AUC vs. DUC**</p>
 
-In 2022, the en route AUC was -25.1% (or -16.99 BGN2017, -8.69 €2017) lower than the planned DUC. This results from the combination of significantly higher than planned TSUs (+24.5%) and significantly lower than planned en route costs in real terms (-6.8%, or -14.3 MBGN2017, -7.3 M€2017). It should be noted that actual inflation index in 2022 was +14.1 p.p. higher than planned.
+In 2022, the en route AUC was -15.3% (or -9.47 €2017) lower than the planned DUC. This results from the combination of significantly higher than planned TSUs (+11.1%) and significantly lower than planned en route costs in real terms (-5.9%, or -1.9 M€2017). It should be noted that the actual inflation index in 2022 was +9.5 p.p. higher than planned (115.5 vs. 106.0).
 
 <p style="margin-bottom: 0rem;">**En route service units**</p>
 
-The difference between actual and planned TSUs (+24.5%) falls outside the ±10% threshold foreseen in the traffic risk sharing mechanism. The resulting gain of additional en route revenues is therefore shared between the ANSP and the airspace users, with the ANSP (BULATSA) retaining an amount of +3.6 M€2017.
+The difference between actual and planned TSUs (+11.1%) falls outside the ±10% threshold foreseen in the traffic risk sharing mechanism. The resulting gain of additional en route revenues is therefore shared between the ANSP and the airspace users, with the ANSP (Slovenia Control) retaining an amount of +1.2 M€2017.
 
 <p style="margin-bottom: 0rem;">**En route costs by entity**</p>
 
-Actual real en route costs are -6.8% (-7.3 M€2017) lower than planned. This is the result higher than planned inflation with a significant impact on costs for the main ANSP, BULATSA (-6.5%, or -6.4 M€2017) and the NSA/EUROCONTROL (-10.8%, or -0.9 M€2017).
+Actual real en route costs are -5.9% (-1.9 M€2017) lower than planned. This is the result of lower than planned costs for the main ANSP, Slovenia Control (-5.8%, or -1.7 M€2017) and the NSA/EUROCONTROL (-12.0%, or -0.3 M€2017) and higher than planned costs for the MET service provider (+4.8%, or +0.1 M€2017).
 
-<p style="margin-bottom: 0rem;">**En route costs for the main ANSP (BULATSA) at charging zone level**</p>
+<p style="margin-bottom: 0rem;">**En route costs for the main ANSP (Slovenia Control) at charging zone level**</p>
 
-Significantly lower than planned en route costs in real terms for BULATSA in 2022 (-6.5%, or -6.4 M€2017) result mainly from a higher than planned inflation:<br/>- Significantly lower than planned staff costs (-8.6%) in real terms but higher in nominal terms (+3.1%), reported to be due to *"BULATSA normalising levels of payment in line with traffic levels increase and in response to high inflation in Bulgaria over 2022 (>15% on a monthly roll-over basis)*";<br/>- Significantly lower than planned other operating costs (-19.4%), reported to be mainly due to "*lower than expected impairment of receivables, lower mission and training costs, etc*";<br/>- Significantly higher than planned depreciation costs (+11.7%), reported to be due to "*BULATSA  continued fulfilment of all critically important investments and  commissioned assets*";<br/>- Higher cost of capital (+1.2%).
+Significantly lower than planned en route costs in real terms for Slovenia Control in 2022 (-5.8%, or -1.7 M€2017) resulting from:<br/>- Significantly lower than planned staff costs (-5.5%) in real terms, due to inflation index impact (+9.5 p.p.) since in nominal terms staff costs are higher than planned (+3.0%) due to "*negotiations with the social partners reached for Q4 of 2021, when some obligations were pushed from 2021 to 2022*" ,<br/>- Significantly lower than planned other operating costs (-11.8%) in real terms, reported to be due to *"optimised contracts*",<br/>- Higher than planned depreciation (+2.4%),<br/>- Significantly lower than planned cost of capital (-11.8%), reported to be due to *"lower asset value".*<br/>
 
 :::
   
 ::: {.column width="45%"}
-![](images/2022/Bulgaria/1_ERT_3.png)
+![](images/2022/Slovenia/1_ERT_3.png)
 
-![](images/2022/Bulgaria/1_ERT_1.png)
+![](images/2022/Slovenia/1_ERT_1.png)
 
 
-![](images/2022/Bulgaria/1_ERT_2.png)
+![](images/2022/Slovenia/1_ERT_2.png)
 :::
   
 ::::
 
 {{< pagebreak >}}
 
-### Monitoring of the en route actual unit cost for users (AUCU) at charging zone level
+### 5 Monitoring of the en route actual unit cost for users (AUCU) at charging zone level
 The **Actual Unit Cost for Users(AUCU)** reflects the price per service units that is charged *in fine* to users for the services provided in the year. It corresponds to the sum of the DUC for the year and of the different adjustments stemming from that year.
 The monitoring of the AUCU is carried out in national currency in nominal terms.
 
 
-### En route actual unit cost for users (AUCU) at charging zone level
+### 6 En route actual unit cost for users (AUCU) at charging zone level
   
 :::: {.columns}
   
 ::: {.column width="61%"}
 
-![](images/2022/Bulgaria/2_ERT_1.png)
+![](images/2022/Slovenia/2_ERT_1.png)
 
 <small>* The traffic adjustment on adjustments is not considered to avoid double counting, as the related adjustments have already been taken into account in full in the AUCU for the current year or previous years.</small><br><small>** The difference in revenue due to the application of the temporary unit rates in 2022, if applicable, is already reflected in the DUC (part to be charged retroactively) and is therefore not considered in the total adjustments, in order to avoid double counting.</small>
 
@@ -97,7 +97,7 @@ The monitoring of the AUCU is carried out in national currency in nominal terms.
 ::::
 
 
-### En route costs exempt from cost sharing
+### 7 En route costs exempt from cost sharing
 
 ```{r}
 #| file: R/table_ceff_7.R
@@ -107,13 +107,13 @@ Source: These data are taken from the June 2023 en route Reporting Tables (for E
 
 
 
-### En route regulatory result at charging zone level
+### 8 En route regulatory result at charging zone level
 
 :::: {.columns}
   
 ::: {.column width="45%"}
 
-![](images/2022/Bulgaria/2_ERT_2.png)
+![](images/2022/Slovenia/2_ERT_2.png)
 
 :::
 
@@ -130,5 +130,5 @@ Source: These data are taken from the June 2023 en route Reporting Tables (for E
 ::::
 
 
-### Focus on en route AUCU monitoring at charging zone level
-The actual en route unit cost incurred by airspace users (AUCU) in respect of activities performed in 2022 (64.73 BGN or 33.11 €) is -10.3% lower than the nominal DUC (72.16 BGN or 36.90 €). The difference between these two figures (-7.42 BGN/SU or -3.80 €/SU) is due to:<br/>- the positive inflation adjustment resulting from higher than planned inflation (+5.41 BGN/SU or +2.77 €/SU);<br/>- the impact of adjustments resulting from the costs exempted from cost-sharing mechanism (-0.07 BGN/SU or -0.04 €/SU);<br/>- the deduction of the traffic risk sharing adjustments (-10.28 BGN/SU or -5.26 €/SU);<br/>- the deduction of the traffic adjustment (-1.66 BGN/SU or -0.85 €/SU) for the costs not subject to traffic risk sharing; and<br/>- the deduction of the other revenues (-0.82 BGN/SU or -0.42 €/SU).<br/>The share of the regulatory result (see items 10 to 14) in the AUCU (before the deduction of other revenues) is 20.0%.<br/>
+### 9 Focus on en route AUCU monitoring at charging zone level
+The actual en route unit cost incurred by airspace users (AUCU) in respect of activities performed in 2022 (64.31 €) is -1.1% lower than the nominal DUC (65.05 €). The difference between these two figures (-0.74 €/SU) is due to:<br/>- the positive inflation adjustment resulting from higher than planned inflation (+4.19 €/SU);<br/>- the impact of adjustments resulting from the costs exempted from cost-sharing mechanism (-0.70 €/SU);<br/>- the deduction of the traffic risk sharing adjustments (-3.46 €/SU); and<br/>- the deduction of the traffic adjustment (-0.76 €/SU) for the costs not subject to traffic risk sharing.<br/>The share of the regulatory result (see items 10 to 14) in the AUCU (before the deduction of other revenues) is 10.2%.

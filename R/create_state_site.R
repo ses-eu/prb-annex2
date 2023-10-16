@@ -23,7 +23,7 @@ for (i in 1:length(rscripts)) {
   }
 }
 
-# remove to be regenerated later
+# remove and regenerate variables
 file.remove('_variables.yml')
 newvariables <- paste0("doc:
   year_report: ", year_report, "
@@ -33,8 +33,9 @@ newvariables <- paste0("doc:
 
 cat(newvariables, file = "_variables.yml")
 
-# remove to be regenerated later
+# remove quarto to be regenerated later
 file.remove('_quarto.yml')
+file.copy('R/yaml_full_version.txt', '_quarto.yml')
 
 # no terminal case
 if (state_type == 0) {
@@ -43,11 +44,10 @@ if (state_type == 0) {
                      'generate_env_kea_qmd.R',
                      'generate_env_mil_qmd.R',
                      'generate_cap_er_qmd.R',
-                     'generate_ceff1_qmd.R',
-                     'generate_ceff2_qmd.R',
-                     'generate_ceff3_qmd.R')
+                     'generate_ceff_er1_qmd.R',
+                     'generate_ceff_er2_qmd.R',
+                     'generate_ceff_er3_qmd.R')
   
-  file.copy('R/yaml_full_version.txt', '_quarto.yml')
   tx  <- readLines("_quarto.yml")
   tx  <- gsub(pattern = "- capacity_trm.qmd", replace = "  # - capacity_trm.qmd", x = tx)
   tx  <- gsub(pattern = "- cost-efficiency-tz1-1.qmd", replace = "  # - cost-efficiency-tz1-1.qmd", x = tx)
@@ -62,12 +62,12 @@ if (state_type == 0) {
   writeLines(tx, con="_quarto.yml")
 
 } else if (state_type == 1) {
-  file.copy('R/yaml_full_version.txt', '_quarto.yml')
   tx  <- readLines("_quarto.yml")
   tx  <- gsub(pattern = "- cost-efficiency-tz2-1.qmd", replace = "  # - cost-efficiency-tz2-1.qmd", x = tx)
   tx  <- gsub(pattern = "- cost-efficiency-tz2-2.qmd", replace = "  # - cost-efficiency-tz2-2.qmd", x = tx)
   tx  <- gsub(pattern = "- cost-efficiency-tz2-3.qmd", replace = "  # - cost-efficiency-tz2-3.qmd", x = tx)
-
+  writeLines(tx, con="_quarto.yml")
+  
     # check if there are other term ATSPs
   sheet <- "8_TRM_ATSP"
   range <- "C13:M17" 

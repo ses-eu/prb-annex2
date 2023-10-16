@@ -12,7 +12,7 @@ env_kea_3_r <- read_range(env_kea_file, sheet, range)
   # section cap_er 1.1
 env_kea_1 <- paste0('[2 Environment]{class="fakeh1"}
 
-## 2.1 Horizontal flight efficiency 
+## Horizontal flight efficiency 
 ### KEA
 
 ```{r}

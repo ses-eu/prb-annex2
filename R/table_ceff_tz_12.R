@@ -10,13 +10,16 @@ library(stringr)
 ## parameters
 source("R/parameters.R")
 
+if (tz != 1 & tz !=2) {tz = 1}
+
 ## import data
-sheet <- "7_TRM_ATSP"
+sheet <- c("7_TRM_ATSP", "7_TRM_ATSP (2)")
+
 range <- range <- "C38:M46" 
-trm_2_11_1  <- read_range(file, sheet, range)
+trm_2_11_1  <- read_range(file, sheet[tz], range)
 
 range <- range <- "C47:M56" 
-trm_2_11_2  <- read_range(file, sheet, range)
+trm_2_11_2  <- read_range(file, sheet[tz], range)
 
 # data prep 1
 myrownames1 <- trm_2_11_1[1]

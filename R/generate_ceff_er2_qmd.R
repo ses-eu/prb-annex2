@@ -5,6 +5,9 @@ source("R/parameters.R")
 # define range
 sheet <- "3_ATSP"
 
+range <- "C8:M9"
+ert_2_1  <- read_range(file, sheet, range)
+
 range <- "C11:M22"
 ert_2_10  <- read_range(file, sheet, range)
 
@@ -13,15 +16,14 @@ ert_2_13  <- read_range(file, sheet, range)
 
 #---------------- sections definition
   # section 2.10
-ceff_2_10 <- paste0('## 4.2 En route main ANSP (',
-main_ansp,') 
-### Monitoring of the en route ANSPs regulatory results (RR)
+ceff_2_10 <- paste0('## En route main ANSP(', main_ansp, ')
+### 10 Monitoring of the en route ANSPs regulatory results (RR)
 ', ert_2_10[1,1]
 )                
 
 # section 2.11
 ceff_2_11 <- paste0(
-  '\n\n### Net gain/loss for the main ANSP for the en route activity at charging zone level
+  '\n\n### 11 Net gain/loss for the main ANSP for the en route activity at charging zone level
 
 ```{r}
 #| file: R/table_ceff_11.R
@@ -33,7 +35,7 @@ ceff_2_11 <- paste0(
 
 # section 2.12
 ceff_2_12 <- paste0(
-  '\n\n### Regulatory result (RR) for the main ANSP at charging zone level
+  '\n\n### 12 Regulatory result (RR) for the main ANSP at charging zone level
 
 ```{r}
 #| file: R/table_ceff_12.R
@@ -45,7 +47,7 @@ ceff_2_12 <- paste0(
 
 # section 2.13
 ceff_2_13 <- paste0(
-  '\n\n### Focus on the main ANSP regulatory result on en route activity
+  '\n\n### 13 Focus on the main ANSP regulatory result on en route activity
 
 :::: {.columns}
   

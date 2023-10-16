@@ -1,0 +1,12 @@
+## 4.6 Other terminal ANSPs/METSPs
+### Other ANSP(s) / METSP(s) regulatory results for terminal activity
+
+```{r}
+sheet <- sheet[tz]
+#| file: R/table_ceff_tz_14.R
+#| out.width: "100%"
+```
+
+
+<p style = "margin-bottom: 0px;">**<br/>Total other ANSP overall regulatory results (RR) for the terminal charging zone 1 activity**</p>
+NA 1 -3.qmd

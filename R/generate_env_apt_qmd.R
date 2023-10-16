@@ -22,7 +22,7 @@ env_apt_5_r <- read_range(env_apt_file, sheet, range)
 
 #---------------- sections definition
   # section 1
-env_apt_1 <- paste0('## 2.2 Airports
+env_apt_1 <- paste0('## Airports
 ### Overview
 
 ', env_apt_1_r[1,1]   

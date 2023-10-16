@@ -5,13 +5,16 @@ source("R/parameters.R")
 # define range
 sheet <- "4_ATSP"
 
+range <- "C8:M9"
+ert_2_0  <- read_range(file, sheet, range)
+
 range <- "C66:M71"
 ert_2_14_e  <- read_range(file, sheet, range)
 
 #---------------- sections definition
   # section 2.14[i]
-ceff_2_14_1 <- paste0('## 4.3 Other en route ANSPs/METSPs
-### Other ANSP(s) / METSP(s) regulatory results for en route activity
+ceff_2_14_1 <- paste0('## Other en route ANSPs/METSPs
+### 14 Other ANSP(s) / METSP(s) regulatory results for en route activity
 
 ```{r}
 #| file: R/table_ceff_14.R

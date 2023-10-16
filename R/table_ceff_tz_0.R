@@ -8,10 +8,12 @@ library(stringr)
 ## parameters
 source("R/parameters.R")
 
+if (tz != 1 & tz !=2) {tz = 1}
+
 #import data
-sheet <- "5_TRM"
+sheet <- c("5_TRM", "5_TRM (2)")
   range <- "C11:M15"
-  df <- read_range(ceff_file, sheet, range)  
+  df <- read_range(ceff_file, sheet[tz], range)  
 
 ## prepare data
 data_for_table1 <- df %>% 
