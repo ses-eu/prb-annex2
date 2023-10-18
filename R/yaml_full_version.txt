@@ -85,7 +85,8 @@ website:
 
   sidebar: 
     contents:
-      - section: '<b style= "font-size: 1.2rem">{{< var doc.country >}}</b>'
+      - text: '<b style= "font-size: 1.2rem">{{< var doc.country >}}</b>'
+        href: index.html
       - text: "<b>1 Safety</b>"
         href: safety.html
       - text: "---"
@@ -107,12 +108,15 @@ website:
           - cost-efficiency-er1-1.qmd
           - cost-efficiency-er1-2.qmd
           - cost-efficiency-er1-3.qmd
+          - text: '----'
           - cost-efficiency-tz1-1.qmd
           - cost-efficiency-tz1-2.qmd
           - cost-efficiency-tz1-3.qmd
+          - text: '-----'
           - cost-efficiency-tz2-1.qmd
           - cost-efficiency-tz2-2.qmd
           - cost-efficiency-tz2-3.qmd
+          - text: '----'
           - cost-efficiency-g2g.qmd
   # 
   # site-url: "https://eurocontrol.int/"

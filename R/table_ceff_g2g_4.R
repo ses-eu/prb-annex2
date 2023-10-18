@@ -86,7 +86,8 @@ t1 <- reactable(
     colGroup(name = "Ex-post", columns = c("rr_8", "revenues_9", "rr_percent_revenues_10"),
              headerStyle = myheaderstyle
     )
-  )
+  ),
+ borderless = TRUE
 )
 
 t2 <- reactable(
@@ -114,7 +115,8 @@ t2 <- reactable(
     rr_8 = colDef(name = 'RR', minWidth = 12),
     revenues_9 = colDef(name = 'Revenues', minWidth = 13),
     rr_percent_revenues_10 = colDef(name = 'RR % revenues', minWidth = 14)
-  )
+  ),
+  borderless = TRUE
 )
 
 

@@ -62,7 +62,13 @@ t <- reactable(
                     format = colFormat(digits = 2)
                   )
     
-  )
+  ),
+  borderless = TRUE,
+  rowStyle = 
+    function(index) {
+      if (index == nrow(data_for_table)) list(fontWeight = "bold",
+                                              borderTop = "1px solid rgba(0, 0, 0, 0.1)")
+    }
 )
 } else{
   data_for_table <- ert_1_7_c %>% 
@@ -108,9 +114,14 @@ t <- reactable(
       fifth = colDef(name = if_else(nat_curr == 'EUR', "€/SU", paste0(nat_curr, "/SU" )), 
                       minWidth = 9,
                       format = colFormat(digits = 2)
-      
-    )
-  )
+      )
+    ),
+    borderless = TRUE,
+    rowStyle = 
+      function(index) {
+        if (index == nrow(data_for_table)) list(fontWeight = "bold",
+                                                borderTop = "1px solid rgba(0, 0, 0, 0.1)")
+      }
 )
 }
 

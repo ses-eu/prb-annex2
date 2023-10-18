@@ -60,7 +60,16 @@ t <- reactable(
     nat_su_f = colDef(name = if_else(nat_curr == 'EUR', '€/SU', paste0(nat_curr, '/SU' )), 
                 align = "right", 
                 minWidth = 40)
-  )
+  ),
+  borderless = TRUE,
+  rowStyle = 
+    function(index) {
+      if (index == nrow(data_for_table)) list(fontWeight = "bold")
+      else if (index == nrow(data_for_table)-1) list(fontWeight = "bold")
+      else if (index == 3) list(fontWeight = "bold")
+      else if (index == 8) list(background = "#F2F2F2")
+      else if (index == 11) list(background = "#F2F2F2")
+    }
 )
 } else{
   data_for_table <- ert_1_6_c %>% 
@@ -75,7 +84,7 @@ t <- reactable(
     )    
   ) %>% 
     select(!c(2, 3, 4)) %>% 
-    mutate_all(~ str_replace(., "NA", ""))
+    mutate_all(~ str_replace(., "NA", NA_character_))
   
   ## plot table
   t <- reactable(
@@ -100,17 +109,26 @@ t <- reactable(
     ),
     columns = list(
       components_of_the_aucu = colDef(name="Components of the AUCU", 
-                                      minWidth = 60, 
+                                      minWidth = 58, 
                                       align = "left" 
 
       ),
       nat_su_f = colDef(name = if_else(nat_curr == 'EUR', '€/SU', paste0(nat_curr, '/SU' )), 
                     align = "right", 
-                    minWidth = 20),
+                    minWidth = 21),
       su_f = colDef(name = '€/SU', 
                     align = "right", 
-                    minWidth = 20)
-    )
+                    minWidth = 21)
+    ),
+    borderless = TRUE,
+    rowStyle = 
+      function(index) {
+        if (index == nrow(data_for_table)) list(fontWeight = "bold")
+        else if (index == nrow(data_for_table)-1) list(fontWeight = "bold")
+        else if (index == 3) list(fontWeight = "bold")
+        else if (index == 8) list(background = "#F2F2F2")
+        else if (index == 11) list(background = "#F2F2F2")
+      }
   )
   
   

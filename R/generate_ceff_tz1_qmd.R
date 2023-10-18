@@ -33,7 +33,7 @@ for (tz in 1:state_type) {
   
     # section 1.1
 ceff_4_1 <- paste0('## Terminal charging zone ', 
-if_else(state_type == 2, tz, NA),'
+if_else(state_type == 2, as.character(tz), ""),'
 ### 1 Contextual economic information: terminal air navigation services
 
 ```{r}
@@ -155,7 +155,7 @@ Source: These data are taken from the June 2023 terminal Reporting Tables (for E
 
 # section 1.7
 ceff_4_8 <- paste0(
-  '\n\n### T8 erminal regulatory result at charging zone level
+  '\n\n### 8 Terminal regulatory result at charging zone level
 
 :::: {.columns}
   

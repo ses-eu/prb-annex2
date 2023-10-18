@@ -8,7 +8,7 @@ library(stringr)
 ## parameters
 source("R/parameters.R")
 
-if (tz != 1 & tz !=2) {tz = 1}
+if (exists("tz") == FALSE) {tz = 1}
 
 ## import data
 sheet <- c("7_TRM_ATSP", "7_TRM_ATSP (2)")
@@ -54,18 +54,19 @@ t1 <- reactable(
   striped = FALSE,
   compact = TRUE,
   highlight = TRUE,
-  defaultColDef = colDef(style = list(
-                          "font-size" = "0.75rem",
-                          "white-space"= "wrap"
-                          ),
-                         align = "right",
-                         headerStyle = list(
-                           background = "#D9D9D9", 
-                           # color = "white", 
-                           fontSize = "0.75rem",
-                           style=list("white-space"= "wrap")
-                           )
-                         
+  defaultColDef = colDef( style = function(value) {
+    color <- if (is.na(value)) {'#F2F2F2'} 
+    list(background = color,
+         "font-size" = "0.72rem",
+         "white-space"= "wrap")
+  } ,
+    align = "right",
+    headerStyle = list(
+      background = "#D9D9D9", 
+      # color = "white", 
+      fontSize = "0.75rem",
+      style=list("white-space"= "wrap")
+    )
   ),
   columns = list(
     first = colDef(name=paste0("Cost sharing (",
@@ -91,7 +92,12 @@ t1 <- reactable(
                    minWidth = 12,
                    format = colFormat(separators = TRUE)
     )
-)
+  ),
+  borderless = TRUE,
+  rowStyle = function(index) {
+    if (index == nrow(data_for_table1)) list(fontWeight = "bold",
+                                             borderTop = "1px solid rgba(0, 0, 0, 0.1)")
+  }
 )
 
 t2 <- reactable(
@@ -101,10 +107,12 @@ t2 <- reactable(
   striped = FALSE,
   compact = TRUE,
   highlight = TRUE,
-  defaultColDef = colDef(style = list(
-    "font-size" = "0.75rem",
-    "white-space"= "wrap"
-  ),
+  defaultColDef = colDef( style = function(value) {
+    color <- if (is.na(value)) {'#F2F2F2'} 
+    list(background = color,
+         "font-size" = "0.72rem",
+         "white-space"= "wrap")
+  } ,
   align = "right",
   headerStyle = list(
     background = "#D9D9D9", 
@@ -138,7 +146,12 @@ t2 <- reactable(
                    minWidth = 12,
                    format = colFormat(separators = TRUE)
     )
-  )
+  ),
+  borderless = TRUE,
+  rowStyle = function(index) {
+    if (index == nrow(data_for_table2)) list(fontWeight = "bold",
+                                             borderTop = "1px solid rgba(0, 0, 0, 0.1)")
+  }
 )
 
 t3 <- reactable(
@@ -148,10 +161,12 @@ t3 <- reactable(
   striped = FALSE,
   compact = TRUE,
   highlight = TRUE,
-  defaultColDef = colDef(style = list(
-    "font-size" = "0.75rem",
-    "white-space"= "wrap"
-  ),
+  defaultColDef = colDef( style = function(value) {
+    color <- if (is.na(value)) {'#F2F2F2'} 
+    list(background = color,
+         "font-size" = "0.72rem",
+         "white-space"= "wrap")
+  } ,
   align = "right",
   headerStyle = list(
     background = "#D9D9D9", 
@@ -185,7 +200,17 @@ t3 <- reactable(
                    minWidth = 12,
                    format = colFormat(separators = TRUE)
     )
-  )
+  ),
+  borderless = TRUE,
+  rowStyle = function(index) {
+    if (index == nrow(data_for_table3)) list(fontWeight = "bold",
+                                             borderTop = "1px solid rgba(0, 0, 0, 0.1)",
+                                             background = "#D9D9D9")
+    else if (index == nrow(data_for_table3)-1 & index >1) list(fontWeight = "bold",
+                                                               borderTop = "1px solid rgba(0, 0, 0, 0.1)",
+                                                               background = "#D9D9D9")
+    
+  }
 )
 
 t1

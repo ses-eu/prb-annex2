@@ -8,7 +8,7 @@ library(stringr)
 ## parameters
 source("R/parameters.R")
 
-if (tz != 1 & tz !=2) {tz = 1}
+if (exists("tz") == FALSE) {tz = 1}
 
 #import data
 sheet <- c("5_TRM", "5_TRM (2)")

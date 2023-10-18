@@ -23,6 +23,7 @@ myrownames1 <- ert_2_11_1[1]
 mycolnames1 <- colnames(ert_2_11_1)
 
 ert_2_11_1_s <- ert_2_11_1 %>% select(!c(1:5)) 
+
 ert_2_11_1_t <- transpose(ert_2_11_1_s) %>% 
   mutate_all(~ as.numeric(.)) %>% 
   mutate(across(c(1,4,5,6), ~format(round(.,0), big.mark = ",", scientific = F))) %>%
@@ -36,7 +37,7 @@ ert_2_11_1_tt <- transpose(ert_2_11_1_t) %>% as_tibble() %>%
          .before = V1) 
 
 data_for_table1 <- ert_2_11_1_tt %>% 
-  mutate_all(~ str_replace(., "NA", ""))
+  mutate_all(~ str_replace(., "NA", NA_character_))
 
 # data prep 2
 myrownames2 <- ert_2_11_2[1]
@@ -49,8 +50,8 @@ ert_2_11_2_t <- transpose(ert_2_11_2_s) %>%
   mutate(across(c(2), ~paste0(format(round(.*100,0)), "%"))) %>% 
   mutate(across(c(3,8,9), ~paste0(format(round(.*100,1)), "%"))) %>% 
   as_tibble() %>% 
-  mutate_all(~ str_replace(., "NA%", "")) %>% 
-  mutate_all(~ str_replace(., "NA", ""))
+  mutate_all(~ str_replace(., "NA%", NA_character_)) %>% 
+  mutate_all(~ str_replace(., "NA", NA_character_))
 
 colnames(myrownames2) <- "a"
 
@@ -59,7 +60,7 @@ ert_2_11_2_tt <- transpose(ert_2_11_2_t)  %>%
          .before = V1) 
 
 data_for_table2 <- ert_2_11_2_tt %>% 
-  mutate_all(~ str_replace(., "NA", "")) 
+  mutate_all(~ str_replace(., "NA", NA_character_)) 
 
 ## plot table
 t1 <- reactable(
@@ -79,15 +80,22 @@ t1 <- reactable(
                            # color = "white", 
                            fontSize = "0.75rem",
                            style=list("white-space"= "wrap")
-                           )
+                           ),
+                         footerStyle = list(
+                           fontSize = "0.1rem",
+                           background = "white",
+                           borderTop = "1px solid rgba(0, 0, 0, 0.1)",
+                           borderRight = "1px solid rgba(255, 255, 255, 1)",
+                           borderLeft = "1px solid rgba(255, 255, 255, 1)"
+                         )
                          
   ),
   columns = list(
     a = colDef(name = mycolnames1[1], 
                                     minWidth = 43, 
-                                    align = "left"
-                                      
-                         ), # to preserve whitespace,
+                                    align = "left",
+                                    footer = ""  
+                         ),
     V1 = colDef(name = "2020D", 
                 minWidth = 9),
     V2 = colDef(name = "2021D", 
@@ -100,7 +108,20 @@ t1 <- reactable(
                 minWidth = 9),
     V6 = colDef(name = "2024D", 
                 minWidth = 9)
-    )
+    ),
+  borderless = TRUE,
+  rowStyle = function(index) {
+    if (index == nrow(data_for_table1)) list(fontWeight = "bold",
+                                              background = "#D9D9D9")
+    else if (index == nrow(data_for_table1)-1) list(fontWeight = "bold",
+                                                    background = "#D9D9D9")
+    else if (index == nrow(data_for_table1)-2) list(fontWeight = "bold",
+                                                    background = "#D9D9D9")
+    else if (index == nrow(data_for_table1)-3) list(fontWeight = "bold",
+                                                    borderTop = "1px solid rgba(0, 0, 0, 0.1)",
+                                                    background = "#D9D9D9")
+    
+  }
 )
 
 t2 <- reactable(
@@ -110,10 +131,12 @@ t2 <- reactable(
   striped = FALSE,
   compact = TRUE,
   highlight = TRUE,
-  defaultColDef = colDef(style = list(
-    "font-size" = "0.75rem",
-    "white-space"= "wrap"
-  ),
+  defaultColDef = colDef( style = function(value) {
+    color <- if (is.na(value)) {'#F2F2F2'} 
+    list(background = color,
+         "font-size" = "0.72rem",
+         "white-space"= "wrap")
+  } ,
   align = "right",
   headerStyle = list(
     background = "#D9D9D9", 
@@ -141,7 +164,20 @@ t2 <- reactable(
                 minWidth = 9),
     V6 = colDef(name = "2024A", 
                 minWidth = 9)
-  )
+  ),
+  borderless = TRUE,
+  rowStyle = function(index) {
+    if (index == nrow(data_for_table2)) list(fontWeight = "bold",
+                                             background = "#D9D9D9")
+    else if (index == nrow(data_for_table2)-1) list(fontWeight = "bold",
+                                                    background = "#D9D9D9")
+    else if (index == nrow(data_for_table2)-2) list(fontWeight = "bold",
+                                                    background = "#D9D9D9")
+    else if (index == nrow(data_for_table2)-3) list(fontWeight = "bold",
+                                                    borderTop = "1px solid rgba(0, 0, 0, 0.1)",
+                                                    background = "#D9D9D9")
+    
+  }
 )
 
 t1

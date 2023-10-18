@@ -58,6 +58,8 @@ if (state_type == 0) {
   tx  <- gsub(pattern = "- cost-efficiency-tz2-3.qmd", replace = "  # - cost-efficiency-tz2-3.qmd", x = tx)
   tx  <- gsub(pattern = "- cost-efficiency-g2g.qmd", replace = "  # - cost-efficiency-g2g.qmd", x = tx)
   tx  <- gsub(pattern = "- environment_apt.qmd", replace = "  # - environment_apt.qmd", x = tx)
+  tx  <- gsub(pattern = "- text: '----'", replace = "  # - text: '----'", x = tx)
+  tx  <- gsub(pattern = "- text: '-----'", replace = "  # - text: '-----'", x = tx)
   
   writeLines(tx, con="_quarto.yml")
 
@@ -66,6 +68,7 @@ if (state_type == 0) {
   tx  <- gsub(pattern = "- cost-efficiency-tz2-1.qmd", replace = "  # - cost-efficiency-tz2-1.qmd", x = tx)
   tx  <- gsub(pattern = "- cost-efficiency-tz2-2.qmd", replace = "  # - cost-efficiency-tz2-2.qmd", x = tx)
   tx  <- gsub(pattern = "- cost-efficiency-tz2-3.qmd", replace = "  # - cost-efficiency-tz2-3.qmd", x = tx)
+  tx  <- gsub(pattern = "- text: '-----'", replace = "  # - text: '-----'", x = tx)
   writeLines(tx, con="_quarto.yml")
   
     # check if there are other term ATSPs
@@ -92,10 +95,10 @@ ert_2_14_1  <- read_range(file, sheet, range) %>% select(c(6:11))
 atspcheck <- sum(is.na(ert_2_14_1) == TRUE)
 
 if (atspcheck == 24) {
-  genscripts <- genscripts[genscripts != "generate_ceff3_qmd.R"]
+  genscripts <- genscripts[genscripts != "generate_ceff_er3_qmd.R"]
   tx  <- readLines("_quarto.yml")
-  tx2  <- gsub(pattern = "- cost-efficiency-er1-3.qmd", replace = "  # - cost-efficiency-er1-3.qmd", x = tx)
-  writeLines(tx2, con="_quarto.yml")
+  tx  <- gsub(pattern = "- cost-efficiency-er1-3.qmd", replace = "  # - cost-efficiency-er1-3.qmd", x = tx)
+  writeLines(tx, con="_quarto.yml")
 } 
 
 
@@ -112,10 +115,8 @@ for (i in 1:length(genscripts)) {
   source(here("R", genscripts[i]))
 }
 
-
-quarto::quarto_render()
-
-stop()
+#render
+quarto::quarto_render(as_job = FALSE)
 
 # copy site to test folder
 site_dir <- here("_site")

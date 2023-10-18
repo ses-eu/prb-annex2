@@ -22,7 +22,7 @@ for (tz in 1:state_type) {
 #---------------- sections definition
   # section 2.10
 ceff_5_10 <- paste0('## Terminal charging zone ', 
-if_else(state_type == 2, tz, NA),' - main ANSP (', main_ansp, ')
+if_else(state_type == 2, as.character(tz), ""),' - main ANSP (', main_ansp, ')
 ### 10 Monitoring of the terminal ANSPs regulatory results (RR)
 ', trm_2_10[1,1]
 )                

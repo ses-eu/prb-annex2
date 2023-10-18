@@ -73,7 +73,8 @@ t <- reactable(
     V7 = colDef(name = "2022", minWidth = 11),
     V8 = colDef(name = "2023", minWidth = 11),
     V9 = colDef(name = "2024", minWidth = 11)
-  )
+  ),
+  borderless = TRUE
 )
 
 t

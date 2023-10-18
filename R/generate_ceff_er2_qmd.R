@@ -16,7 +16,7 @@ ert_2_13  <- read_range(file, sheet, range)
 
 #---------------- sections definition
   # section 2.10
-ceff_2_10 <- paste0('## En route main ANSP(', main_ansp, ')
+ceff_2_10 <- paste0('## En route main ANSP (', main_ansp, ')
 ### 10 Monitoring of the en route ANSPs regulatory results (RR)
 ', ert_2_10[1,1]
 )                

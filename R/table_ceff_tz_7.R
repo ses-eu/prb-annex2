@@ -8,7 +8,7 @@ library(stringr)
 ## parameters
 source("R/parameters.R")
 
-if (tz != 1 & tz !=2) {tz = 1}
+if (exists("tz") == FALSE) {tz = 1}
 
 ## import data
 sheet <- c("6_TRM", "6_TRM (2)")
@@ -64,7 +64,13 @@ t <- reactable(
                     format = colFormat(digits = 2)
                   )
     
-  )
+    ),
+  borderless = TRUE,
+  rowStyle = 
+    function(index) {
+      if (index == nrow(data_for_table)) list(fontWeight = "bold",
+                                              borderTop = "1px solid rgba(0, 0, 0, 0.1)")
+    }
 )
 } else{
   data_for_table <- trm_1_7_c %>% 
@@ -110,9 +116,14 @@ t <- reactable(
       fifth = colDef(name = if_else(nat_curr == 'EUR', "€/SU", paste0(nat_curr, "/SU" )), 
                       minWidth = 9,
                       format = colFormat(digits = 2)
-      
-    )
-  )
+     )
+    ),
+    borderless = TRUE,
+    rowStyle = 
+      function(index) {
+        if (index == nrow(data_for_table)) list(fontWeight = "bold",
+                                                borderTop = "1px solid rgba(0, 0, 0, 0.1)")
+      }
 )
 }
 

@@ -17,17 +17,19 @@ for (tz in 1:state_type) {
 
 #---------------- sections definition
   # section 2.14[i]
-ceff_6_14_1 <- paste0('## 14 Terminal charging zone', 
-if_else(state_type == 2, tz, NA),' - Other terminal ANSPs/METSPs
-### Other ANSP(s) / METSP(s) regulatory results for terminal activity
+ceff_6_14_1 <- paste0('## Terminal charging zone ', 
+if_else(state_type == 2, as.character(tz), ""),' - Other terminal ANSPs/METSPs
+### 14 Other ANSP(s) / METSP(s) regulatory results for terminal activity
 
 ```{r}
 tz = ', tz, '
 ```
 
-```{r, tz}
+```{r}
 #| file: R/table_ceff_tz_14.R
-#| out.width: "100%"
+```
+```{r}
+htmltools::tagList(t)
 ```
 
 '

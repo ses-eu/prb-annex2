@@ -13,11 +13,12 @@ sheet <- country
 range <- "A24:A48"
 countacc_r  <- read_range(cap_file, sheet, range)
 
-no_acc = 0
-for (i in 1:nrow(countacc_r)) {
-  no_acc <- ifelse(countacc_r[i,1] != 'Planned (Perf Plan)' & 
-                   countacc_r[i,1] != 'Actual' & is.na(countacc_r[i,1]) == FALSE,
-                   no_acc + 1, no_acc) 
+no_acc <- c(0)
+for (i in 1:as.integer(nrow(countacc_r) / 4)) {
+  no_acc[1] <- ifelse(countacc_r[i*4 -3, 1] != '' & 
+                   countacc_r[i*4 -3, 1] != ' ' & 
+                     is.na(countacc_r[i *4 -3, 1]) == FALSE,
+                   no_acc[1] + 1, no_acc[1]) 
 } 
 
 no_acc <- no_acc[1] 

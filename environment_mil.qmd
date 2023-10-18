@@ -1,11 +1,11 @@
 ##  Military dimension
 ### Update on Military dimension of the plan
 
-Environment: No impact on environment.<br/><br/>Capacity: No impact on capacity.<br/><br/>**Additional information related to Russia’s war of aggression against Ukraine<br/><br/>**No specific changes in activity. Segregated airspace was established for the needs of overflights by aircraft of allied countries that do not fly according to the rules that apply to general air traffic in the controlled airspace of the Republic of Slovenia, which is activated when necessary. <br/><br/>Temporary Segregated Area above FL 510 (FL510)  - activation on demand
+The analysis can not be provided due to reason that all required data for ENV PI #6, PI #7 and PI #8 are not yet available on the NM/PRU dashboards nor delivered by NM upon request. <br/><br/>During the preparation of the EUROCONTROL CAPAN study in 2022, it was recognized that military traffic has no significant impact on the sector capacities of the LDZO ACC.
 
 ### Military - related measures implemented or planned to improve capacity
 
-Environment: N/A<br/><br/>Capacity: N/A
+FUA restrictions and CDRs have been implemented which are managed by AMC on ASM Level 2 and notified to NM but were sparsely used or required due to significant decrease of military activities and air traffic affected by COVID-19 crisis.<br/><br/>No remedial measures identified.
 
 ### PI#6 Effective use of reserved or segregated airspace - national level
 
@@ -26,7 +26,7 @@ Environment: N/A<br/><br/>Capacity: N/A
 
 ### Initiatives implemented or planned to improve PI#6
 
-Slovenia AMC started sharing AUP/UUP with NM on 1.1.2023, but without any restrictions being imposed on the users flight planning during activation.
+The Network Manager shall provide on a monthly basis the data required for the monitoring of this indicator for monitoring referred to Regulation (EU) 2019/317 point 6 of Annex VI.<br/><br/>The data regarding ratio of using available airspace structures has been received from NM upon request but the data regarding number of aircraft flying via reserved or segregated airspace and CDRs and number of aircraft that could have planned through those airspace structures have not been delivered by NM upon request nor such data are available on the NM/PRU dashboards.
 
 ### PI#7 Rate of planning via available airspace structures - national level
 
@@ -47,7 +47,7 @@ Slovenia AMC started sharing AUP/UUP with NM on 1.1.2023, but without any restri
 
 ### Initiatives implemented or planned to improve PI#7
 
-Slovenia AMC started sharing AUP/UUP with NM on 1.1.2023, but without any restrictions being imposed on the users flight planning during activation.
+The Network Manager shall provide on a monthly basis the data required for the monitoring of this indicator for monitoring referred to Regulation (EU) 2019/317 point 6 of Annex VI.<br/><br/>The data regarding ratio of using available airspace structures has been received from NM upon request but the data regarding number of aircraft flying via reserved or segregated airspace and CDRs and number of aircraft that could have planned through those airspace structures have not been delivered by NM upon request nor such data are available on the NM/PRU dashboards.
 
 ### PI#8 Rate of using available airspace structures - national level
 
@@ -68,4 +68,4 @@ Slovenia AMC started sharing AUP/UUP with NM on 1.1.2023, but without any restri
 
 ### Initiatives implemented or planned to improve PI#8
 
-Slovenia AMC started sharing AUP/UUP with NM on 1.1.2023, but without any restrictions being imposed on the users flight planning during activation.
+The Network Manager shall provide on a monthly basis the data required for the monitoring of this indicator for monitoring referred to Regulation (EU) 2019/317 point 6 of Annex VI.<br/><br/>The data regarding ratio of using available airspace structures has been received from NM upon request but the data regarding number of aircraft flying via reserved or segregated airspace and CDRs and number of aircraft that could have planned through those airspace structures have not been delivered by NM upon request nor such data are available on the NM/PRU dashboards.
