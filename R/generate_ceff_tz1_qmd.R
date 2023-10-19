@@ -36,11 +36,7 @@ ceff_4_1 <- paste0('## Terminal charging zone ',
 if_else(state_type == 2, as.character(tz), ""),'
 ### 1 Contextual economic information: terminal air navigation services
 
-```{r}
-tz = ', tz, '
-```
-
-```{r, tz}
+```{r, options=(tz = ', tz, ')}
 #| file: R/table_ceff_tz_0.R
 #| out.width: "100%"
 ```  
@@ -57,15 +53,15 @@ ceff_4_2 <- paste0(
 ceff_4_3 <- paste0(
 '\n\n### 3 Terminal actual unit cost (AUC) vs. terminal determined unit cost (DUC)
 
-```{r}
+```{r, options=(tz = ', tz, ')}
 #| file: R/table_ceff_tz_3_1.R
 #| out.width: "100%"
 ```  
-```{r}
+```{r, options=(tz = ', tz, ')}
 #| file: R/table_ceff_tz_3_2.R
 #| out.width: "100%"
 ```
-```{r}
+```{r, options=(tz = ', tz, ')}
 #| file: R/table_ceff_tz_3_3.R
 #| out.width: "100%"
 ```  
@@ -130,7 +126,7 @@ ceff_4_6 <- paste0(
 
 ::: {.column width="38%"}
 
-```{r}
+```{r, options=(tz = ', tz, ')}
 #| file: R/table_ceff_tz_6.R
 #| out.width: "100%"
 ```  
@@ -144,7 +140,7 @@ ceff_4_6 <- paste0(
 ceff_4_7 <- paste0(
   '\n\n### 7 Terminal costs exempt from cost sharing
 
-```{r}
+```{r, options=(tz = ', tz, ')}
 #| file: R/table_ceff_tz_7.R
 #| out.width: "100%"
 ```  
@@ -167,7 +163,7 @@ ceff_4_8 <- paste0(
 
 ::: {.column width="55%"}
 
-```{r}
+```{r, options=(tz = ', tz, ')}
 #| file: R/table_ceff_tz_8.R
 #| out.width: "100%"
 ```

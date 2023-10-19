@@ -1,0 +1,28 @@
+## Terminal charging zone 
+### 1 Contextual economic information: terminal air navigation services
+
+```{r, options=(tz = 1)}
+#| file: R/table_ceff_tz_0.R
+#| out.width: "100%"
+```  
+
+
+### 2 Monitoring of the terminal determined unit cost (DUC) at charging zone level
+  The **Determined Unit Cost (DUC)** is the cost per service unit, at which the service is planned to be provided during the year. The **Actual Unit Cost (AUC)** reflects the cost per service unit, at which the service has actually been provided during the year.<br/><br/>The monitoring of the DUC / AUC is carried out in national currency in real terms, at 2017 prices.
+
+### 3 Terminal actual unit cost (AUC) vs. terminal determined unit cost (DUC)
+
+```{r, options=(tz = 1)}
+#| file: R/table_ceff_tz_3_1.R
+#| out.width: "100%"
+```  
+```{r, options=(tz = 1)}
+#| file: R/table_ceff_tz_3_2.R
+#| out.width: "100%"
+```
+```{r, options=(tz = 1)}
+#| file: R/table_ceff_tz_3_3.R
+#| out.width: "100%"
+```  
+
+

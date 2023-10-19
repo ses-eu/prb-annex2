@@ -21,14 +21,11 @@ ceff_6_14_1 <- paste0('## Terminal charging zone ',
 if_else(state_type == 2, as.character(tz), ""),' - Other terminal ANSPs/METSPs
 ### 14 Other ANSP(s) / METSP(s) regulatory results for terminal activity
 
-```{r}
-tz = ', tz, '
-```
 
-```{r}
+```{r, options=(tz = ', tz, ')}
 #| file: R/table_ceff_tz_14.R
 ```
-```{r}
+```{r, options=(tz = ', tz, ')}
 htmltools::tagList(t)
 ```
 

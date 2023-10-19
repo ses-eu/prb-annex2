@@ -36,10 +36,12 @@ for (i in 1:no_acc) {
 ## prepare data
 data_for_table <- atcos[[i]] %>% 
   select(1, 5:10) %>% 
-  mutate_all(~ as.character(.)) %>% 
-  mutate_all(~ str_replace(., "NA", "")) %>% 
   clean_names() %>% 
-  rename(a = 1)
+  rename(a = 1) %>% 
+  mutate_at(c(-1), ~ str_replace_all(., "-", "1000000")) %>% 
+  mutate_at(c(-1), ~ paste0(format(round(as.numeric(.),0), scientific = FALSE))) %>% 
+  mutate_all(~ str_replace(., "1000000", "-")) %>% 
+  mutate_all(~ str_replace(., "NA", NA_character_)) 
 
 mycolnames <- colnames(atcos[[i]])
 

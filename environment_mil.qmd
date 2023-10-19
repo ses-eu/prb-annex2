@@ -1,16 +1,16 @@
 ##  Military dimension
 ### Update on Military dimension of the plan
 
-The analysis can not be provided due to reason that all required data for ENV PI #6, PI #7 and PI #8 are not yet available on the NM/PRU dashboards nor delivered by NM upon request. <br/><br/>During the preparation of the EUROCONTROL CAPAN study in 2022, it was recognized that military traffic has no significant impact on the sector capacities of the LDZO ACC.
+No impact of military on capacity has been identified. Current decrease in air traffic due to sanctions on Russia and Belorussia and flexible arrangements between the LGS and the National Armed Forces allow for environmentally friendly flight trajectories and it reduces the impact to capacity. <br/><br/>**Additional information related to Russia's war of aggression against Ukraine**<br/>In general, military training activities have increased over the past years. At the same time, civmil airspace design and airspace use flexibility provisions between the NAF and LGS ensure that there's no impact on scheduled air traffic.<br/>New large military FUA areas over Eastern part of the Riga FIR, next to Russian Federation and Belorussia, have been established.
 
 ### Military - related measures implemented or planned to improve capacity
 
-FUA restrictions and CDRs have been implemented which are managed by AMC on ASM Level 2 and notified to NM but were sparsely used or required due to significant decrease of military activities and air traffic affected by COVID-19 crisis.<br/><br/>No remedial measures identified.
+Each new long term or short term area for military purposes undergoes airspace design analysis with respect to impact on major air traffic flows as to not to disrupt them or to change their vertical dimensions dynamically, if necessary.<br/><br/>Close cooperation between Latvian ANSP and the Latvian military.
 
 ### PI#6 Effective use of reserved or segregated airspace - national level
 
-```{r}
-#| file: R/table_env_mil_1.R
+```{r,  options=(range = "B15:N17")}
+#| file: R/table_env_mil.R
 #| out.width: "100%"
 ```
 
@@ -18,20 +18,20 @@ FUA restrictions and CDRs have been implemented which are managed by AMC on ASM 
 
 ### PI#6 Effective use of reserved or segregated airspace (per ACC)
 
-```{r}
-#| file: R/table_env_mil_2.R
+```{r,  options=(range = "B20:N29")}
+#| file: R/table_env_mil.R
 #| out.width: "100%"
 ```
 
 
 ### Initiatives implemented or planned to improve PI#6
 
-The Network Manager shall provide on a monthly basis the data required for the monitoring of this indicator for monitoring referred to Regulation (EU) 2019/317 point 6 of Annex VI.<br/><br/>The data regarding ratio of using available airspace structures has been received from NM upon request but the data regarding number of aircraft flying via reserved or segregated airspace and CDRs and number of aircraft that could have planned through those airspace structures have not been delivered by NM upon request nor such data are available on the NM/PRU dashboards.
+Existing  LGS and NAF airspace booking and airspace use procedures are continuously being updated.  This data includes all FUA areas, including those being active for 24/7 for longer periods of time, but not on continuous basis. Due to involvement of military units from different countries, individual airspace planning and airspace use capabilities are not the same each year and do not ensure the same consistent performance in airspace use, even if planned through the Latvian NAF.  <br/>The results of the assessment are also shared with the Military Aviation Administration for further review.
 
 ### PI#7 Rate of planning via available airspace structures - national level
 
-```{r}
-#| file: R/table_env_mil_3.R
+```{r,  options=(range = "B37:N39")}
+#| file: R/table_env_mil.R
 #| out.width: "100%"
 ```
 
@@ -39,20 +39,20 @@ The Network Manager shall provide on a monthly basis the data required for the m
 
 ### PI#7 Rate of planning via available airspace structures (per ACC)
 
-```{r}
-#| file: R/table_env_mil_4.R
+```{r,  options=(range = "B42:N51")}
+#| file: R/table_env_mil.R
 #| out.width: "100%"
 ```
 
 
 ### Initiatives implemented or planned to improve PI#7
 
-The Network Manager shall provide on a monthly basis the data required for the monitoring of this indicator for monitoring referred to Regulation (EU) 2019/317 point 6 of Annex VI.<br/><br/>The data regarding ratio of using available airspace structures has been received from NM upon request but the data regarding number of aircraft flying via reserved or segregated airspace and CDRs and number of aircraft that could have planned through those airspace structures have not been delivered by NM upon request nor such data are available on the NM/PRU dashboards.
+FRA has been implemented in 2015.
 
 ### PI#8 Rate of using available airspace structures - national level
 
-```{r}
-#| file: R/table_env_mil_5.R
+```{r,  options=(range = "B59:N61")}
+#| file: R/table_env_mil.R
 #| out.width: "100%"
 ```
 
@@ -60,12 +60,12 @@ The Network Manager shall provide on a monthly basis the data required for the m
 
 ### PI#8 Rate of using available airspace structures (per ACC)
 
-```{r}
-#| file: R/table_env_mil_6.R
+```{r,  options=(range = "B64:N73")}
+#| file: R/table_env_mil.R
 #| out.width: "100%"
 ```
 
 
 ### Initiatives implemented or planned to improve PI#8
 
-The Network Manager shall provide on a monthly basis the data required for the monitoring of this indicator for monitoring referred to Regulation (EU) 2019/317 point 6 of Annex VI.<br/><br/>The data regarding ratio of using available airspace structures has been received from NM upon request but the data regarding number of aircraft flying via reserved or segregated airspace and CDRs and number of aircraft that could have planned through those airspace structures have not been delivered by NM upon request nor such data are available on the NM/PRU dashboards.
+FRA in Riga FIR was implemented in 2015.

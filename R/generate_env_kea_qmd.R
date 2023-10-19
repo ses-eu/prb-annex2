@@ -25,7 +25,7 @@ env_kea_1 <- paste0('[2 Environment]{class="fakeh1"}
 ')                
 
 # section cap_er 1.2
-env_kea_2 <- paste0('\n### End of month indicators evolution in', year_report,'												
+env_kea_2 <- paste0('\n### End of month indicators evolution in ', year_report,'												
 
 ```{r}
 #| file: R/table_env_kea_2.R

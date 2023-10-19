@@ -1,0 +1,40 @@
+## Airports
+### Overview
+
+Latvia identified 3 airports as subject to RP3 monitoring. In accordance with IR (EU) 2019/317 and the traffic figures at these 3 airports, additional taxi-out and ASMA times are not monitored and the environmental performance focuses only on the share of arrivals applying CDO.<br/>The shares of CDO flights increased at all airports. The shares of CDO flights at Riga and Ventstpils were well above the overall RP3 value in 2022.
+
+### Additional Taxi-Out Time
+This indicator is not monitored for airports below 80 000 IFR movements average during the 2016-2018 period, so it is not monitored for any airport in this state.
+
+
+### Additional ASMA Time
+This indicator is not monitored for airports below 80 000 IFR movements average during the 2016-2018 period, so it is not monitored for any airport in this state.
+
+
+### Share of arrivals applying CDO
+
+:::: {.columns}
+  
+::: {.column width="48%"}
+<br>
+![](images/2022/Latvia/env_apt_1.png)
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="50%"}
+<br>
+The shares of CDO flights have increased at all airports in Latvia.<br/>Ventstpils had only 1 detected flight in 2022. This flight was considered a CDO flight so Ventstpils has a share of 100% CDO.<br/>Riga and Ventstpils have values well above the overall RP3 value in 2022 (29.0%).   
+:::
+::::
+
+According to the Latvian monitoring report: Continuous Decent operations have been implemented at Riga airport in 2021. Monitoring is performed by Riga Airport and data is shared in Environment work group of Riga Airport, in which the CAA also participates.<br/>EVLA airport is served by AFIS only and during certain working hours while EVVA airport has no ATS, they do not have CDOs. 
+                      
+
+### Appendix
+
+n/a:  airport operator data flow not established, or more than two months of missing / non-validated data<br/>   
+
+![](images/2022/Latvia/env_apt_4.png)
+

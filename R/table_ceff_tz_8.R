@@ -72,7 +72,7 @@ t1 <- reactable(
                          ),
     second = colDef(name = if_else(nat_curr == 'EUR', "€ '000", paste0(nat_curr, " '000" )), 
                 minWidth = 25,
-                format = colFormat(separators = TRUE)
+                format = colFormat(separators = TRUE, digits = 0)
                 ),
     fourth = colDef(name = if_else(nat_curr == 'EUR', "€/SU", paste0(nat_curr, "/SU" )), 
                      minWidth = 25,
@@ -115,7 +115,19 @@ t2 <- reactable(
                    minWidth = 25
                   # format = colFormat(digits = 2)
     )
-  )
+  ),
+  borderless = TRUE,
+  rowStyle = function(index) {
+    if (index == nrow(data_for_table2)) list(fontWeight = "bold",
+                                             borderTop = "1px solid rgba(0, 0, 0, 0.1)",
+                                             background = "#D9D9D9")
+    else if (index == nrow(data_for_table2)-1) list(fontWeight = "bold",
+                                                    borderTop = "1px solid rgba(0, 0, 0, 0.1)",
+                                                    background = "#D9D9D9")
+    else if (index == nrow(data_for_table2)-2) list(fontWeight = "bold",
+                                                    borderTop = "1px solid rgba(0, 0, 0, 0.1)",
+                                                    background = "#D9D9D9")
+  }
 )
 } else {
   ## plot table
@@ -146,11 +158,11 @@ t2 <- reactable(
       ), 
       second = colDef(name = if_else(nat_curr == 'EUR', "€ '000", paste0(nat_curr, " '000" )), 
                       minWidth = 16,
-                      format = colFormat(separators = TRUE)
+                      format = colFormat(separators = TRUE, digits = 0)
       ),
       third = colDef(name = "€ '000", 
                       minWidth = 15,
-                      format = colFormat(separators = TRUE)
+                      format = colFormat(separators = TRUE, digits = 0)
       ),
       fourth = colDef(name = if_else(nat_curr == 'EUR', "€/SU", paste0(nat_curr, "/SU" )), 
                       minWidth = 15,

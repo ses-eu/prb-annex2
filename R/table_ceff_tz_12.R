@@ -82,14 +82,21 @@ t1 <- reactable(
         # color = "white", 
         fontSize = "0.75rem",
         style=list("white-space"= "wrap")
-        )
+        ),
+      footerStyle = list(
+        fontSize = "0.1rem",
+        background = "white",
+        borderTop = "1px solid rgba(0, 0, 0, 0.1)",
+        borderRight = "1px solid rgba(255, 255, 255, 1)",
+        borderLeft = "1px solid rgba(255, 255, 255, 1)"
+      )
   ),
   columns = list(
     a = colDef(name = mycolnames1[1], 
                                     minWidth = 43, 
-                                    align = "left"
-                                      
-                         ), # to preserve whitespace,
+                                    align = "left",
+                                    footer = ""  
+                         ), 
     V1 = colDef(name = "2020D", 
                 minWidth = 9),
     V2 = colDef(name = "2021D", 

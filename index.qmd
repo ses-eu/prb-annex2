@@ -3,4 +3,4 @@
 
 [Local level view]{class="fakeh1" style="font-weight: normal"}
 
-[Croatia]{class="fakeh1" style="font-weight: normal"}
+[Latvia]{class="fakeh1" style="font-weight: normal"}

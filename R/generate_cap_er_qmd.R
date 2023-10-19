@@ -86,7 +86,9 @@ cap_er_1_6 <- paste0("\n\n### Application of Corrective Measures for Capacity (i
 
 # section cap_er 1.7
 cap_er_1_7 <- paste0("\n\n### Summary of capacity performance
-", cap_er_1_7_r[1,1]
+", if_else(is.na(cap_er_1_7_r[1,1]) == TRUE, 
+           paste0('![](images/2022/', country, '/cap_er_1.png)'), 
+           pull(cap_er_1_7_r[1,1]))
 )
                    
 # assemble all and create .qmd

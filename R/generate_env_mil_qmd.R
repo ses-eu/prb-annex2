@@ -39,8 +39,8 @@ env_mil_2 <- paste0('\n\n### Military - related measures implemented or planned 
 # section 3
 env_mil_3 <- paste0('\n\n### PI#6 Effective use of reserved or segregated airspace - national level
 
-```{r}
-#| file: R/table_env_mil_1.R
+```{r,  options=(range = "B15:N17")}
+#| file: R/table_env_mil.R
 #| out.width: "100%"
 ```
 
@@ -50,8 +50,8 @@ env_mil_3 <- paste0('\n\n### PI#6 Effective use of reserved or segregated airspa
 # section 4
 env_mil_4 <- paste0('\n\n### PI#6 Effective use of reserved or segregated airspace (per ACC)
 
-```{r}
-#| file: R/table_env_mil_2.R
+```{r,  options=(range = "B20:N29")}
+#| file: R/table_env_mil.R
 #| out.width: "100%"
 ```
 
@@ -67,8 +67,8 @@ env_mil_5 <- paste0('\n### Initiatives implemented or planned to improve PI#6
 # section 6
 env_mil_6 <- paste0('\n\n### PI#7 Rate of planning via available airspace structures - national level
 
-```{r}
-#| file: R/table_env_mil_3.R
+```{r,  options=(range = "B37:N39")}
+#| file: R/table_env_mil.R
 #| out.width: "100%"
 ```
 
@@ -78,8 +78,8 @@ env_mil_6 <- paste0('\n\n### PI#7 Rate of planning via available airspace struct
 # section 7
 env_mil_7 <- paste0('\n\n### PI#7 Rate of planning via available airspace structures (per ACC)
 
-```{r}
-#| file: R/table_env_mil_4.R
+```{r,  options=(range = "B42:N51")}
+#| file: R/table_env_mil.R
 #| out.width: "100%"
 ```
 
@@ -95,8 +95,8 @@ env_mil_8 <- paste0('\n### Initiatives implemented or planned to improve PI#7
 # section 9
 env_mil_9 <- paste0('\n\n### PI#8 Rate of using available airspace structures - national level
 
-```{r}
-#| file: R/table_env_mil_5.R
+```{r,  options=(range = "B59:N61")}
+#| file: R/table_env_mil.R
 #| out.width: "100%"
 ```
 
@@ -106,8 +106,8 @@ env_mil_9 <- paste0('\n\n### PI#8 Rate of using available airspace structures - 
 # section 10
 env_mil_10 <- paste0('\n\n### PI#8 Rate of using available airspace structures (per ACC)
 
-```{r}
-#| file: R/table_env_mil_6.R
+```{r,  options=(range = "B64:N73")}
+#| file: R/table_env_mil.R
 #| out.width: "100%"
 ```
 

@@ -10,28 +10,27 @@ source("R/parameters.R")
 
 #import data
 sheet <- country
-  range <- "B59:N61"
-  df <- read_range(env_mil_file, sheet, range)  
+
+if (exists("range") == FALSE) {range <- "B42:N51"} # so it can be executed independently
+# the range is passed from the generate files
+df <- read_range(env_mil_file, sheet, range)  
 
 mycolnames <- colnames(df)
 
 ## prepare data
 data_for_table <- df %>% 
-  mutate_at(c(-1), ~ as.numeric(.)) %>% 
   select(1, 4, 6, 8, 10, 12)  %>% 
+  mutate_at(c(-1), ~ case_when (
+    suppressWarnings(is.na(as.numeric(.))) == TRUE  ~ ., 
+    .default = suppressWarnings(paste0(format(round(as.numeric(.)*100, 0)), "%")))
+    ) %>% 
   rename(a = 1) %>% 
-  filter(is.na(a) == FALSE) 
+  filter(is.na(a) == FALSE)
 
-# check if there is any non-numeric column
-for (i in 2:ncol(data_for_table)) {
-  if (class(data_for_table[[i]]) == "numeric") {
-    data_for_table <- data_for_table %>%
-      mutate(across(c(i), ~paste0(format(round(.*100,0)), "%")))   
-  } 
-}
+# 
+# data_for_table <- data_for_table %>% 
+#   mutate_all(~ str_replace(., "NA%", "")) 
 
-data_for_table <- data_for_table %>% 
-  mutate_all(~ str_replace(., "NA%", "")) 
 
 ## plot table
 t <- reactable(
@@ -54,18 +53,18 @@ t <- reactable(
                            style=list("white-space"= "wrap")
                            )
                          
-  ),
+                  ),
   columns = list(
     a = colDef(name=mycolnames[1], 
-                                    minWidth = 25, 
-                                    align = "left", 
-                                    style = list(whiteSpace = "pre",
-                                                 "font-size" = "0.8rem"
-                                      # , "font-weight" = "bold"
-                                      )
-                         )
+                minWidth = 25, 
+                align = "left", 
+                style = list(whiteSpace = "pre",
+                             "font-size" = "0.8rem"
+                  # , "font-weight" = "bold"
+                            )
+                )
     
-  )
+            )
 )
 
 t

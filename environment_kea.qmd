@@ -8,10 +8,10 @@
 #| out.width: "100%"
 ```
 <br>
-![](images/2022/Croatia/env_kea_3.png)
+![](images/2022/Latvia/env_kea_3.png)
 
 
-### End of month indicators evolution in2022												
+### End of month indicators evolution in 2022												
 
 ```{r}
 #| file: R/table_env_kea_2.R
@@ -23,13 +23,13 @@
   
 ::: {.column width="50%"}
 
-![](images/2022/Croatia/env_kea_2.png)
+![](images/2022/Latvia/env_kea_2.png)
 
 :::
 
 ::: {.column width="50%"}
 
-![](images/2022/Croatia/env_kea_4.png)
+![](images/2022/Latvia/env_kea_4.png)
 
 :::
 ::::

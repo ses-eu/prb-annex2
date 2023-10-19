@@ -70,7 +70,7 @@ t1 <- reactable(
                          ),
     second = colDef(name = if_else(nat_curr == 'EUR', "€ '000", paste0(nat_curr, " '000" )), 
                 minWidth = 25,
-                format = colFormat(separators = TRUE)
+                format = colFormat(separators = TRUE, digits = 0)
                 ),
     fourth = colDef(name = if_else(nat_curr == 'EUR', "€/SU", paste0(nat_curr, "/SU" )), 
                      minWidth = 25,
@@ -157,11 +157,11 @@ t2 <- reactable(
       ), 
       second = colDef(name = if_else(nat_curr == 'EUR', "€ '000", paste0(nat_curr, " '000" )), 
                       minWidth = 16,
-                      format = colFormat(separators = TRUE)
+                      format = colFormat(separators = TRUE, digits = 0)
       ),
       third = colDef(name = "€ '000", 
                       minWidth = 15,
-                      format = colFormat(separators = TRUE)
+                      format = colFormat(separators = TRUE, digits = 0)
       ),
       fourth = colDef(name = if_else(nat_curr == 'EUR', "€/SU", paste0(nat_curr, "/SU" )), 
                       minWidth = 15,

@@ -1,0 +1,67 @@
+## Airports
+### Overview
+Latvia identified 4 airports as subject to RP3 monitoring. In accordance with IR (EU) 2019/317 and the traffic figures at these 4 airports, pre-departure delays are not monitored and the capacity performance monitoring focuses on arrival ATFM delay and slot adherence.<br/>Traffic at these Latvian airports in 2022 was still 36% lower than in 2019, regardless of a 43% increase with respect to 2021.<br/><br/>Average arrival ATFM delays in 2022 was 0.00 min/arr, compared to 0.02 min/arr in 2021.<br/>ATFM slot adherence has improved (2022: 99.6%; 2021: 98.8%).
+
+
+### Arrival ATFM Delay
+:::: {.columns}
+  
+::: {.column width="48%" }
+![](images/2022/Latvia/cap_trm_3_1.png)
+:::
+
+::: {.column width="2%" }
+:::
+
+::: {.column width="50%" }
+Average arrival ATFM delays in 2022 were zero at all three Latvian airports. 
+:::
+::::
+
+
+### Arrival ATFM Delay – National Target
+:::: {.columns}
+  
+::: {.column width="48%"}
+![](images/2022/Latvia/cap_trm_2_1.png)
+:::
+
+::: {.column width="2%" }
+:::
+
+::: {.column width="50%"}
+The national target on arrival ATFM delay in 2022 was met. 
+:::
+::::
+
+
+### ATFM Slot Adherence
+:::: {.columns}
+  
+::: {.column width="48%"}
+![](images/2022/Latvia/cap_trm_1_1.png)
+:::
+
+::: {.column width="2%" }
+:::
+
+::: {.column width="50%"}
+Riga's ATFM slot compliance was  99.6%, a further improvement with respect to the already good value in 2021 (98.8%). With regard to the 0.4% of flights that did not adhere, 0.3% was early and 0.1% was late.
+EVVA did not have any regulated departures and EVLA had only 4, with a 100% slot adherence.
+According to the Latvian monitoring report: LGS provides to the CAA monthly summary of the ATFM slot adherence data. In comparison to previous years, ATFM slot adherence has remained very high.,
+:::
+::::
+
+
+### ATC Pre-departure Delay
+This indicator is not monitored for airports below 80 000 IFR movements annual average during the 2016-2018 period, so it is not monitored for any airport in Latvia.
+
+
+### All Causes Pre-departure Delay
+This indicator is not monitored for airports below 80 000 IFR movements annual average during the 2016-2018 period, so it is not monitored for any airport in Latvia.
+
+
+### Appendix
+n/a:  airport operator data flow not established, or more than two months of missing / non-validated data<br/>
+![](images/2022/Latvia/cap_trm_4.png)
+

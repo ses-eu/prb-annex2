@@ -31,11 +31,7 @@ if_else(state_type == 2, as.character(tz), ""),' - main ANSP (', main_ansp, ')
 ceff_5_11 <- paste0(
   '\n\n### 11 Net gain/loss for the main ANSP for the terminal activity at charging zone level
 
-```{r}
-tz = ', tz, '
-```
-
-```{r, tz}
+```{r, options=(tz = ', tz, ')}
 #| file: R/table_ceff_tz_11.R
 #| out.width: "100%"
 ```
@@ -47,7 +43,7 @@ tz = ', tz, '
 ceff_5_12 <- paste0(
   '\n\n### 12 Regulatory result (RR) for the main ANSP at charging zone level
 
-```{r}
+```{r, options=(tz = ', tz, ')}
 #| file: R/table_ceff_tz_12.R
 #| out.width: "100%"
 ```

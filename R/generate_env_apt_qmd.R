@@ -29,7 +29,13 @@ env_apt_1 <- paste0('## Airports
 )                
 
 # section 2
-env_apt_2 <- paste0('\n\n### Additional Taxi-Out Time															
+env_apt_2 <- if_else(is.na(env_apt_2_r[1,1]) == FALSE,
+
+paste0('\n\n### Additional Taxi-Out Time
+', env_apt_2_r[1,1], '
+'),
+
+paste0('\n\n### Additional Taxi-Out Time															
 
 :::: {.columns}
   
@@ -49,11 +55,18 @@ env_apt_2 <- paste0('\n\n### Additional Taxi-Out Time
 :::
 ::::
                       
-'                  
+'
+)
 )
 
 # section 3
-env_apt_3 <- paste0('\n### Additional ASMA Time															
+env_apt_3 <- if_else(is.na(env_apt_3_r[1,1]) == FALSE,
+                     
+paste0('\n\n### Additional ASMA Time
+', env_apt_3_r[1,1], '
+'),
+
+paste0('\n### Additional ASMA Time															
 
 :::: {.columns}
   
@@ -75,13 +88,16 @@ env_apt_3 <- paste0('\n### Additional ASMA Time
                       
 ' 
 )
+)
 
 # section 4
 env_apt_4 <- if_else(is.na(env_apt_4_r[1,8]) == TRUE, 
               paste0('\n\n### Share of arrivals applying CDO
 <br>
-![](images/2022/', country, '/env_apt_3.png)
-', env_apt_4_r[2,1], ' 
+![](images/2022/', country, if_else(is.na(env_apt_3_r[1,1]) == FALSE, 
+                                    '/env_apt_1.png)', 
+                                    '/env_apt_3.png)')
+, env_apt_4_r[2,1], ' 
                       
 ' 
 ),
@@ -91,8 +107,11 @@ paste0('\n\n### Share of arrivals applying CDO
   
 ::: {.column width="48%"}
 <br>
-![](images/2022/', country, '/env_apt_3.png)
-
+![](images/2022/', country, if_else(is.na(env_apt_3_r[1,1]) == FALSE, 
+                                    '/env_apt_1.png)', 
+                                    '/env_apt_3.png)')
+,
+'
 :::
 
 ::: {.column width="2%"}

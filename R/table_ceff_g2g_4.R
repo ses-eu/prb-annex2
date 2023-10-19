@@ -105,7 +105,7 @@ t2 <- reactable(
   headerStyle = myheaderstyle
   ),
   columns = list(
-    a = colDef(name=mycolnames[1], 
+    a = colDef(name=mycolnames2[1], 
                minWidth = 22, 
                align = "left"
     ), 

@@ -1,0 +1,14 @@
+## Other en route ANSPs/METSPs
+### 14 Other ANSP(s) / METSP(s) regulatory results for en route activity
+
+```{r}
+#| file: R/table_ceff_14.R
+```
+```{r}
+htmltools::tagList(t)
+```
+
+
+
+<p style = "margin-bottom: 0px;">**<br/>Total other ANSP overall regulatory result (RR) for the en route activity**</p>
+Ex-post, the overall RR for the other ANSP in the en route charging zone for Latvia (LVĢMC) corresponds to 4.0% of the en route revenues. It should be noted that LVĢMC does not charge cost of capital.

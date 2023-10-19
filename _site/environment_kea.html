@@ -25,7 +25,7 @@ ul.task-list li input[type="checkbox"] {
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
-<link href="./environment_mil.html" rel="next">
+<link href="./environment_apt.html" rel="next">
 <link href="./images/prb_logo_smaller.png" rel="icon" type="image/png">
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -247,7 +247,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><b style="font-size: 1.2rem">Croatia</b></span></a>
+ <span class="menu-text"><b style="font-size: 1.2rem">Latvia</b></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -274,6 +274,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./environment_apt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Airports</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./environment_mil.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Military dimension</span></a>
   </div>
@@ -294,6 +300,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./capacity_er.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">En route</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./capacity_trm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Airports</span></a>
   </div>
 </li>
       </ul>
@@ -317,7 +329,39 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cost-efficiency-er1-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">En route main ANSP (Croatia Control)</span></a>
+ <span class="menu-text">En route main ANSP (LGS)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency-er1-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Other en route ANSPs/METSPs</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency-tz1-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Terminal charging zone</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency-tz1-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Terminal charging zone - main ANSP (LGS)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency-tz1-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Terminal charging zone - Other terminal ANSPs/METSPs</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cost-efficiency-g2g.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gate-to-gate</span></a>
   </div>
 </li>
       </ul>
@@ -335,7 +379,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#horizontal-flight-efficiency" id="toc-horizontal-flight-efficiency" class="nav-link active" data-scroll-target="#horizontal-flight-efficiency">Horizontal flight efficiency</a>
   <ul class="collapse">
   <li><a href="#kea" id="toc-kea" class="nav-link" data-scroll-target="#kea">KEA</a></li>
-  <li><a href="#end-of-month-indicators-evolution-in2022" id="toc-end-of-month-indicators-evolution-in2022" class="nav-link" data-scroll-target="#end-of-month-indicators-evolution-in2022">End of month indicators evolution in2022</a></li>
+  <li><a href="#end-of-month-indicators-evolution-in-2022" id="toc-end-of-month-indicators-evolution-in-2022" class="nav-link" data-scroll-target="#end-of-month-indicators-evolution-in-2022">End of month indicators evolution in 2022</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -353,27 +397,27 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell" data-file="R/table_env_kea_1.R">
 <div class="cell-output-display">
 
-<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-cfac3b95462c55e94ee7" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-cfac3b95462c55e94ee7">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Target","Actual performance"],"x2020":["1.49%","1.47%"],"x2021":["1.46%","1.32%"],"x2022":["1.46%","1.49%"],"x2023":["1.46%","  "],"x2024":["1.46%","  "]},"columns":[{"id":"a","name":"","type":"character","align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":40},{"id":"x2020","name":"2020","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2021","name":"2021","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2022","name":"2022","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2023","name":"2023","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2024","name":"2024","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"f2b326d1db73681919944f827b24efbc"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-9e1c86f59508e592c3ee" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-9e1c86f59508e592c3ee">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Target","Actual performance"],"x2020":["1.30%","1.24%"],"x2021":["1.25%","1.62%"],"x2022":["1.25%","6.26%"],"x2023":["1.25%","  "],"x2024":["1.25%","  "]},"columns":[{"id":"a","name":"","type":"character","align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":40},{"id":"x2020","name":"2020","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2021","name":"2021","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2022","name":"2022","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2023","name":"2023","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2024","name":"2024","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"aece4c0f0f61493dad6b7d178f1fc0b4"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-<p><br> <img src="images/2022/Croatia/env_kea_3.png" class="img-fluid"></p>
+<p><br> <img src="images/2022/Latvia/env_kea_3.png" class="img-fluid"></p>
 </section>
-<section id="end-of-month-indicators-evolution-in2022" class="level3">
-<h3 class="anchored" data-anchor-id="end-of-month-indicators-evolution-in2022">End of month indicators evolution in2022</h3>
+<section id="end-of-month-indicators-evolution-in-2022" class="level3">
+<h3 class="anchored" data-anchor-id="end-of-month-indicators-evolution-in-2022">End of month indicators evolution in 2022</h3>
 <div class="cell" data-file="R/table_env_kea_2.R">
 <div class="cell-output-display">
 
-<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-98b5dce2a4f42208f51f" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-98b5dce2a4f42208f51f">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["KEA","KEP","KES"],"JAN":["1.32%","1.66%","1.51%"],"FEB":["1.32%","1.66%","1.51%"],"MAR":["1.33%","1.67%","1.52%"],"APR":["1.34%","1.68%","1.53%"],"MAY":["1.36%","1.68%","1.54%"],"JUN":["1.40%","1.70%","1.56%"],"JUL":["1.42%","1.72%","1.58%"],"AUG":["1.46%","1.74%","1.61%"],"SEP":["1.49%","1.76%","1.62%"],"OCT":["1.49%","1.76%","1.63%"],"NOV":["1.49%","1.76%","1.63%"],"DEC":["1.49%","1.76%","1.63%"]},"columns":[{"id":"a","name":"","type":"character","minWidth":16,"align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"JAN","name":"JAN","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"FEB","name":"FEB","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"MAR","name":"MAR","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"APR","name":"APR","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"MAY","name":"MAY","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"JUN","name":"JUN","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"JUL","name":"JUL","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"AUG","name":"AUG","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"SEP","name":"SEP","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"OCT","name":"OCT","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"NOV","name":"NOV","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"DEC","name":"DEC","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"06d30c4dbe07a1003b30f03a0fd14554"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-858477ebd1832b2a8cc4" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-858477ebd1832b2a8cc4">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["KEA","KEP","KES"],"JAN":["1.63%","1.97%","1.64%"],"FEB":["1.65%","2.01%","1.68%"],"MAR":["1.89%","2.26%","1.92%"],"APR":["2.19%","2.57%","2.24%"],"MAY":["2.56%","2.95%","2.63%"],"JUN":["2.95%","3.32%","3.03%"],"JUL":["3.40%","3.77%","3.51%"],"AUG":["3.91%","4.28%","4.04%"],"SEP":["4.46%","4.82%","4.59%"],"OCT":["5.01%","5.37%","5.13%"],"NOV":["5.57%","5.94%","5.69%"],"DEC":["6.26%","6.61%","6.34%"]},"columns":[{"id":"a","name":"","type":"character","minWidth":16,"align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"JAN","name":"JAN","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"FEB","name":"FEB","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"MAR","name":"MAR","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"APR","name":"APR","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"MAY","name":"MAY","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"JUN","name":"JUN","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"JUL","name":"JUL","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"AUG","name":"AUG","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"SEP","name":"SEP","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"OCT","name":"OCT","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"NOV","name":"NOV","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"DEC","name":"DEC","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"2b7488f48a7d0f174de34f5cd17b0b3e"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><br></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><img src="images/2022/Croatia/env_kea_2.png" class="img-fluid"></p>
+<p><img src="images/2022/Latvia/env_kea_2.png" class="img-fluid"></p>
 </div><div class="column" style="width:50%;">
-<p><img src="images/2022/Croatia/env_kea_4.png" class="img-fluid"></p>
+<p><img src="images/2022/Latvia/env_kea_4.png" class="img-fluid"></p>
 </div>
 </div>
 <p>The indicators are the ratio of flown distance and achieved distance over all (portions of) trajectories over a one year rolling window, excluding the ten best and ten worst days. The rolling window stops at the last day of the month.</p>
@@ -636,8 +680,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./environment_mil.html" class="pagination-link">
-        <span class="nav-page-text">Military dimension</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./environment_apt.html" class="pagination-link">
+        <span class="nav-page-text">Airports</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
