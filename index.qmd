@@ -1,6 +1,29 @@
-<br>
-[Annual Montiroring Report 2022]{class="fakeh1"}
+[Annual Montiroring Report {{< var doc.year_report >}} - {{< var doc.country >}}]{class="fakeh1"}
 
-[Local level view]{class="fakeh1" style="font-weight: normal"}
+## Traffic (En route traffic zone)
+Something
 
-[Latvia]{class="fakeh1" style="font-weight: normal"}
+## Safety (Main ANSP)
+Something
+
+## Environment (Member State)
+::: {.columns}
+  
+:::: {.column width="50%"}
+KEA - {{< var doc.country >}}
+```{r}
+#| file: R/chart_kea.R
+#| out.width: "100%"
+```
+::::
+
+:::: {.column width="50%"}
+Some explanation
+::::
+:::
+
+## Capacity (Member State)
+Something
+
+## Cost-efficiency (En route/Terminal charging zone(s))
+Something

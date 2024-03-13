@@ -5,8 +5,10 @@ library(openxlsx)
 library(data.table)
 library(tidyr)
 library(stringr)
+# don't forget to setup your environment as described herehttps://github.com/euctrl-pru/howto/wiki/Tools-Installation-and-Setup-%28For-R%29#using-plotly-in-r
+library(reticulate)
 
-# parameters
+# parameters ----
 
 data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/PBI files/'
 country <- 'Germany'
@@ -14,14 +16,14 @@ year_report <- 2022
 
 data_folder_a2 <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/Annex 2/data/'
 
-# read range function
+# read range function ----
 read_range <- function(file, sheet, range){
   read_excel(
     file,
     sheet = sheet,
     range = range) %>% 
-      mutate_all(~ str_replace_all(., "\r\n\r\n", "\r\n")) %>% 
-      mutate_all(~ str_replace_all(., "<br><br><br><br>", "<br><br>"))   
+    mutate_all(~ str_replace_all(., "\r\n\r\n", "\r\n")) %>% 
+    mutate_all(~ str_replace_all(., "<br><br><br><br>", "<br><br>"))   
 }
 
 

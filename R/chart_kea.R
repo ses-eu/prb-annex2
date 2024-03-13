@@ -5,6 +5,7 @@ library(readxl)
 library(plotly)
 library(stringr)
 library(janitor)
+library(reticulate)
 
 ## parameters
 source("R/parameters.R")
@@ -55,22 +56,36 @@ data_for_chart <-  merge(x = data_prep_target, y = data_prep_actual, by="year", 
 c <-   data_for_chart %>% 
   plot_ly(
   x = ~ year,
-  y = ~ hfe_kpi,
+  y = ~ kea_target,
   yaxis = "y1",
-  marker = list(color =('#FFC000')),
-  text = ~ paste0(hfe_kpi,'%'),
-  # text = ~ as.character(format(round(VALUE,0), big.mark = " ")),
-  # textangle = -90,
-  textposition = "inside", 
   cliponaxis = FALSE,
-  insidetextanchor =  "middle",
-  name = "KEA",
-  textfont = list(color = 'black'),
-  type = "bar",
+  name = "",
+  textfont = list(color = 'transparent'),
+  type = 'scatter',  mode = 'lines',
+  line = list(color = 'transparent', width = 0),
+  hovertemplate = paste('%{x}:<extra></extra>'),
   # hoverinfo = "none",
-  # domain = list(x = c(0, 1), y = c(0, 1)),
-  showlegend = T
+  showlegend = F
 ) %>% 
+  add_trace(
+    inherit = FALSE,
+    x = ~ year,
+    y = ~ hfe_kpi,
+    yaxis = "y1",
+    marker = list(color =('#FFC000')),
+    text = ~ paste0(hfe_kpi,'%'),
+    # text = ~ as.character(format(round(VALUE,0), big.mark = " ")),
+    # textangle = -90,
+    textposition = "inside", 
+    cliponaxis = FALSE,
+    insidetextanchor =  "middle",
+    name = "KEA",
+    textfont = list(color = 'black'),
+    type = "bar",
+    hovertemplate = paste('KEA: %{y:.2f}%<extra></extra>'),
+    # hoverinfo = "none",
+    showlegend = T
+  ) %>%
   add_trace(
     inherit = FALSE,
     x = ~ year,
@@ -81,6 +96,7 @@ c <-   data_for_chart %>%
     marker = list(color = '#FF0000'),
     name = "Target",
     opacity = 1,
+    hovertemplate = paste('Target: %{y:.2f}%<extra></extra>'),
     # hoverinfo = "none",
     showlegend = T
   ) %>%
@@ -93,6 +109,7 @@ c <-   data_for_chart %>%
     text = ~ paste0('<b>', kea_target,'%', '</b>'),
     textposition = "top", cliponaxis = FALSE,
     textfont = list(color = '#FF0000'),
+    # hovertemplate = paste('<extra></extra>'),
     hoverinfo = "none",
     showlegend = F
   ) %>%
@@ -103,8 +120,14 @@ c <-   data_for_chart %>%
   ) %>% 
   layout(
     font = list(family = "Roboto"),
+    title = list(text=paste0("KEA - ", country),
+                 y = 1, 
+                 x = 0, 
+                 xanchor = 'left', 
+                 yanchor =  'top'),
     bargap = 0.25,
     hovermode = "x unified",
+    hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
     xaxis = list(title = "",
                  gridcolor = 'rgb(255,255,255)',
                  showgrid = FALSE,
@@ -137,4 +160,12 @@ c <-   data_for_chart %>%
   )
 
 c
-
+# 
+# fig <- plot_ly(midwest, x = ~percollege, color = ~state, type = "box")
+# 
+# # Simulate a conda environment to use Kaleido
+# reticulate::use_condaenv('r-reticulate')
+# 
+# save_image(fig, file="image.png", height=500, width=700)
+# # Save the figure
+# save_image(c,file="image.png", height=500, width=700)
