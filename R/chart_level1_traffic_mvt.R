@@ -10,6 +10,13 @@ data_raw  <-  read_xlsx(
   as_tibble() %>% 
   clean_names() 
 
+data_raw_planned  <-  read_xlsx(
+  paste0(data_folder, "targets.xlsx"),
+  sheet = "IFR_MVTS",
+  range = cell_limits(c(3, 1), c(NA, NA))) %>%
+  as_tibble() %>% 
+  clean_names() 
+
 # prepare data ----
 max_actual_year <- as.numeric(substrRight(forecast, 4))-1
 
@@ -45,6 +52,12 @@ data_prep_actual <-  data_prep %>%
     )
     )
 
+data_prep_planned <- data_raw_planned %>% 
+  filter(x121_ecz_name == country) %>% 
+  select(state, year, x121_ecz_ifr_mvt)  %>%
+  rename(mvts = x121_ecz_ifr_mvt) %>% 
+  mutate(rank = 'Planned')
+
 # plot chart ----
 mycolors <-  c('#1969B4','#044598', '#229FDD')
 
@@ -68,6 +81,38 @@ myc <- function (mywidth, myheight, myfont) {
   # hoverinfo = "none",
   showlegend = T
 ) %>% 
+  add_trace(
+    data = data_prep_actual,
+   inherit = FALSE,
+   x = ~ yr,
+   y = ~ round(mvts/1000,0),
+   yaxis = "y1",
+   cliponaxis = FALSE,
+   yaxis = "y1",
+   type = 'scatter',  mode = 'lines+markers',
+   line = list(width = 3, dash = 'solid', color = '#FFC000'),
+   marker = list(size = 9, color = '#FFC000'),
+   color = ~ rank,
+   opacity = 1,
+   # hovertemplate = paste('Target: %{y:.2f}%<extra></extra>'),
+   # hoverinfo = "none",
+   showlegend = T
+  ) %>% 
+    add_trace(
+      data = data_prep_planned,
+      inherit = FALSE,
+      x = ~ year,
+      y = ~ round(mvts,0),
+      yaxis = "y1",
+      cliponaxis = FALSE,
+      yaxis = "y1",
+      type = 'scatter',  mode = 'lines+markers',
+      line = list(width = 3, dash = 'solid', color = '#5B9BD5'),
+      marker = list(size = 9, color = '#5B9BD5'),
+      color = ~ rank,
+      opacity = 1,
+      showlegend = T
+    ) %>%
   add_trace(
     data = data_prep_actual,
    inherit = FALSE,
