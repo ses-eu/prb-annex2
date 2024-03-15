@@ -33,6 +33,10 @@ h3 {
   font-size: calc(1.1rem + 0.1vw);
 }
 
+.text-right {
+  text-align: right;
+}
+
 .navbar-logo{
  max-height: 35px;
 

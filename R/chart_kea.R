@@ -1,16 +1,17 @@
-## libraries
+# libraries ----
 library(tidyr)
 library(dplyr)
 library(readxl)
 library(plotly)
 library(stringr)
 library(janitor)
-library(reticulate)
+library(webshot)
+library(magick)
 
-## parameters
+# parameters ----
 source("R/parameters.R")
 
-## import data
+# import data  ----
 data_raw_target  <-  read_xlsx(
   paste0(data_folder, "targets.xlsx"),
   # here("data","hlsr2021_data.xlsx"),
@@ -27,8 +28,7 @@ data_raw_actual  <-  read_xlsx(
   as_tibble() %>% 
   clean_names() 
 
-
-## prepare data
+# prepare data ----
 data_prep_target <- data_raw_target %>% 
   filter(
     state == country,
@@ -52,7 +52,7 @@ data_prep_actual <- data_raw_actual %>%
 
 data_for_chart <-  merge(x = data_prep_target, y = data_prep_actual, by="year", all.x = TRUE) 
 
-## plot chart
+# plot chart ----
 c <-   data_for_chart %>% 
   plot_ly(
   x = ~ year,
@@ -133,6 +133,7 @@ c <-   data_for_chart %>%
                  showgrid = FALSE,
                  showline = FALSE,
                  showticklabels = TRUE,
+                 dtick = 1,
                  # tickcolor = 'rgb(127,127,127)',
                  # ticks = 'outside',
                  zeroline = TRUE
@@ -160,12 +161,6 @@ c <-   data_for_chart %>%
   )
 
 c
-# 
-# fig <- plot_ly(midwest, x = ~percollege, color = ~state, type = "box")
-# 
-# # Simulate a conda environment to use Kaleido
-# reticulate::use_condaenv('r-reticulate')
-# 
-# save_image(fig, file="image.png", height=500, width=700)
-# # Save the figure
-# save_image(c,file="image.png", height=500, width=700)
+
+# export to image ----
+export_fig(c, "env_kea_main.png")

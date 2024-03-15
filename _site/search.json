@@ -4,7 +4,11 @@
     "href": "safety.html",
     "title": "1 Safety",
     "section": "",
-    "text": "1 Safety\n\nEffectiveness of Safety Management\n\n\n\n\n\n\n\nNote: EoSM questionnaire has been updated in RP3 using CANSO Standard of Excellence as the basis, maturity levels of study areas and calculation of the score have been updated too. A direct comparison with maturity levels and scoring of EoSM used RP2 is not advisable.\n\n\nObservations\nThree out of five EoSM components of the ANSP meet the RP3 target level. One question need to improve to reach RP3 target for “Safety Risk Management”. Compared with 2021, in 2022 degradation was observed in maturity level for “Safety Policy and Objectives” for one question, reducing the achieved level from C to B and consequently not achieving the target for this component."
+    "text": "1 Safety\n\nEffectiveness of Safety Management\n\n\n\n\n\n\nNote: EoSM questionnaire has been updated in RP3 using CANSO Standard of Excellence as the basis, maturity levels of study areas and calculation of the score have been updated too. A direct comparison with maturity levels and scoring of EoSM used RP2 is not advisable.\n\n\nObservations\nThree out of five EoSM components of the ANSP meet the RP3 target level. One question need to improve to reach RP3 target for “Safety Risk Management”. Compared with 2021, in 2022 degradation was observed in maturity level for “Safety Policy and Objectives” for one question, reducing the achieved level from C to B and consequently not achieving the target for this component.",
+    "crumbs": [
+      "Home",
+      "<b>1 Safety</b>"
+    ]
   },
   {
     "objectID": "environment_mil.html",
@@ -179,6 +183,87 @@
     "href": "index.html",
     "title": "State view",
     "section": "",
-    "text": "Annual Montiroring Report 2022\nLocal level view\nLatvia"
+    "text": "Annual Montiroring Report 2022 - Latvia",
+    "crumbs": [
+      "Home",
+      "<b style= \"font-size: 1.2rem\">{{< var doc.country >}}</b>"
+    ]
+  },
+  {
+    "objectID": "index.html#traffic",
+    "href": "index.html#traffic",
+    "title": "State view",
+    "section": "Traffic",
+    "text": "Traffic\nSomething",
+    "crumbs": [
+      "Home",
+      "<b style= \"font-size: 1.2rem\">{{< var doc.country >}}</b>"
+    ]
+  },
+  {
+    "objectID": "index.html#safety",
+    "href": "index.html#safety",
+    "title": "State view",
+    "section": "Safety",
+    "text": "Safety\nSomething",
+    "crumbs": [
+      "Home",
+      "<b style= \"font-size: 1.2rem\">{{< var doc.country >}}</b>"
+    ]
+  },
+  {
+    "objectID": "index.html#environment-member-state",
+    "href": "index.html#environment-member-state",
+    "title": "State view",
+    "section": "Environment (Member State)",
+    "text": "Environment (Member State)\n\n\nKEA - Latvia\n\n\n\n\n\n\n\nSome explanation",
+    "crumbs": [
+      "Home",
+      "<b style= \"font-size: 1.2rem\">{{< var doc.country >}}</b>"
+    ]
+  },
+  {
+    "objectID": "index.html#capacity-member-state",
+    "href": "index.html#capacity-member-state",
+    "title": "State view",
+    "section": "Capacity (Member State)",
+    "text": "Capacity (Member State)\nSomething",
+    "crumbs": [
+      "Home",
+      "<b style= \"font-size: 1.2rem\">{{< var doc.country >}}</b>"
+    ]
+  },
+  {
+    "objectID": "index.html#cost-efficiency-en-routeterminal-charging-zones",
+    "href": "index.html#cost-efficiency-en-routeterminal-charging-zones",
+    "title": "State view",
+    "section": "Cost-efficiency (En route/Terminal charging zone(s))",
+    "text": "Cost-efficiency (En route/Terminal charging zone(s))\nSomething",
+    "crumbs": [
+      "Home",
+      "<b style= \"font-size: 1.2rem\">{{< var doc.country >}}</b>"
+    ]
+  },
+  {
+    "objectID": "index.html#traffic-en-route-traffic-zone",
+    "href": "index.html#traffic-en-route-traffic-zone",
+    "title": "State view",
+    "section": "Traffic (En route traffic zone)",
+    "text": "Traffic (En route traffic zone)\nSomething",
+    "crumbs": [
+      "Home",
+      "<b style= \"font-size: 1.2rem\">{{< var doc.country >}}</b>"
+    ]
+  },
+  {
+    "objectID": "index.html#safety-main-ansp",
+    "href": "index.html#safety-main-ansp",
+    "title": "State view",
+    "section": "Safety (Main ANSP)",
+    "text": "Safety (Main ANSP)\nSomething",
+    "crumbs": [
+      "Home",
+      "<b style= \"font-size: 1.2rem\">{{< var doc.country >}}</b>"
+    ]
   }
 ]
