@@ -1,12 +1,3 @@
-# libraries ----
-library(tidyr)
-library(dplyr)
-library(readxl)
-library(plotly)
-library(stringr)
-library(janitor)
-library(webshot)
-library(magick)
 
 # parameters ----
 source("R/parameters.R")
@@ -53,7 +44,7 @@ data_prep_actual <- data_raw_actual %>%
 data_for_chart <-  merge(x = data_prep_target, y = data_prep_actual, by="year", all.x = TRUE) 
 
 # plot chart ----
-c <-  function(mywidth, myheight, myfont) {
+myc <-  function(mywidth, myheight, myfont) {
   data_for_chart %>% 
   plot_ly(
     width = mywidth,
@@ -169,10 +160,10 @@ c <-  function(mywidth, myheight, myfont) {
   )
 }
   
-c(NA, NA, 14)
+myc(NA, NA, 14)
 
 # export to image ----
 w = 1200
 h = 600
-export_fig(c(w, h, 14 * w/900),"env_kea_main.png", w, h)
+export_fig(myc(w, h, 14 * w/900),"env_kea_main.png", w, h)
 

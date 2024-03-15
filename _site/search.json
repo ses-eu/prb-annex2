@@ -216,7 +216,7 @@
     "href": "index.html#environment-member-state",
     "title": "State view",
     "section": "Environment (Member State)",
-    "text": "Environment (Member State)\n\n\nKEA - Latvia\n\n\n\n\n\n\n\nSome explanation",
+    "text": "Environment (Member State)\n\n\n\n\n\n\n\n\n\nSome explanation",
     "crumbs": [
       "Home",
       "<b style= \"font-size: 1.2rem\">{{< var doc.country >}}</b>"
@@ -249,7 +249,7 @@
     "href": "index.html#traffic-en-route-traffic-zone",
     "title": "State view",
     "section": "Traffic (En route traffic zone)",
-    "text": "Traffic (En route traffic zone)\nSomething",
+    "text": "Traffic (En route traffic zone)\n\n\n\n\n\n\n\n\n\nSome explanation\n\n\n\n\n\n\n\n\n\n\n\nSome explanation",
     "crumbs": [
       "Home",
       "<b style= \"font-size: 1.2rem\">{{< var doc.country >}}</b>"

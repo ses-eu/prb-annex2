@@ -1,7 +1,35 @@
 [Annual Montiroring Report {{< var doc.year_report >}} - {{< var doc.country >}}]{class="fakeh1"}
 
 ## Traffic (En route traffic zone)
-Something
+::: {.columns}
+  
+:::: {.column width="60%"}
+```{r}
+#| file: R/chart_level1_traffic_mvt.R
+#| out.height: "300px"
+#| out.width: "100%"
+```
+::::
+
+:::: {.column width="40%"}
+Some explanation
+::::
+:::
+
+::: {.columns}
+  
+:::: {.column width="60%"}
+```{r}
+#| file: R/chart_level1_traffic_su.R
+#| out.height: "300px"
+#| out.width: "100%"
+```
+::::
+
+:::: {.column width="40%"}
+Some explanation
+::::
+:::
 
 ## Safety (Main ANSP)
 Something
@@ -9,15 +37,15 @@ Something
 ## Environment (Member State)
 ::: {.columns}
   
-:::: {.column width="50%"}
-KEA - {{< var doc.country >}}
+:::: {.column width="60%"}
 ```{r}
-#| file: R/chart_kea.R
+#| file: R/chart_level1_kea.R
+#| out.height: "220px"
 #| out.width: "100%"
 ```
 ::::
 
-:::: {.column width="50%"}
+:::: {.column width="40%"}
 Some explanation
 ::::
 :::

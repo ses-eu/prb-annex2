@@ -1,11 +1,3 @@
-# libraries ----
-library(tidyr)
-library(dplyr)
-library(readxl)
-library(plotly)
-library(stringr)
-library(janitor)
-
 
 # parameters ----
 source("R/parameters.R")
@@ -80,7 +72,7 @@ data_prep_planned <- data_raw_planned %>%
 mycolors <-  c('#1969B4','#044598', '#229FDD')
 
 # plot chart ----
-c <- function (mywidth, myheight, myfont) {
+myc <- function (mywidth, myheight, myfont) {
   plot_ly(
     width = mywidth,
     height = myheight,
@@ -179,9 +171,9 @@ c <- function (mywidth, myheight, myfont) {
   )
 }
 
-c(NA, NA, 14)
+myc(NA, NA, 14)
 
 # export to image ----
 w = 1200
 h = 600
-export_fig(c(w, h, 14 * w/900),"traffic_su_main.png", w, h)
+export_fig(myc(w, h, 14 * w/900),"traffic_su_main.png", w, h)

@@ -1,11 +1,13 @@
 #libraries
-library(dplyr)
-library(readxl)
-library(openxlsx)
-library(data.table)
 library(tidyr)
+library(dplyr)
+library(openxlsx)
+library(readxl)
+library(plotly)
 library(stringr)
+library(janitor)
 library(webshot)
+library(data.table)
 library(magick)
 
 # parameters ----
