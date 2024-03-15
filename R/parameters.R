@@ -5,8 +5,8 @@ library(openxlsx)
 library(data.table)
 library(tidyr)
 library(stringr)
-# don't forget to setup your environment as described herehttps://github.com/euctrl-pru/howto/wiki/Tools-Installation-and-Setup-%28For-R%29#using-plotly-in-r
-library(reticulate)
+library(webshot)
+library(magick)
 
 # parameters ----
 
@@ -35,9 +35,12 @@ data_folder_a2 <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/Annex 2/data/'
 ## export figure function ----
   # the export function needs webshot and PhantomJS. Install PhantomJS with 'webshot::install_phantomjs()' and then cut the folder from wherever is installed and paste it in C:\Users\[username]\dev\r\win-library\4.2\webshot\PhantomJS
 
-  export_fig <- function (fig, fig_name) {
+  export_fig <- function (fig, fig_name, width, height) {
     fig_dir <- paste0('images/', year_report, '/', country,'/')
-    export(fig, paste0(fig_dir, fig_name))
+    invisible(export(fig, paste0(fig_dir, fig_name)))
+    invisible(figure <- image_read(paste0(fig_dir,fig_name)))
+    invisible(cropped <- image_crop(figure, paste0(width, "x", height)))
+    invisible(image_write(cropped, paste0(fig_dir, fig_name)))
   }
 
 # get main state parameters  ----

@@ -53,8 +53,11 @@ data_prep_actual <- data_raw_actual %>%
 data_for_chart <-  merge(x = data_prep_target, y = data_prep_actual, by="year", all.x = TRUE) 
 
 # plot chart ----
-c <-   data_for_chart %>% 
+c <-  function(mywidth, myheight, myfont) {
+  data_for_chart %>% 
   plot_ly(
+    width = mywidth,
+    height = myheight,
   x = ~ year,
   y = ~ kea_target,
   yaxis = "y1",
@@ -80,7 +83,7 @@ c <-   data_for_chart %>%
     cliponaxis = FALSE,
     insidetextanchor =  "middle",
     name = "KEA",
-    textfont = list(color = 'black'),
+    textfont = list(color = 'black', size = myfont),
     type = "bar",
     hovertemplate = paste('KEA: %{y:.2f}%<extra></extra>'),
     # hoverinfo = "none",
@@ -92,8 +95,8 @@ c <-   data_for_chart %>%
     y = ~ kea_target,
     yaxis = "y1",
     type = 'scatter',  mode = 'lines+markers',
-    line = list(color = '#FF0000', width = 2),
-    marker = list(color = '#FF0000'),
+    line = list(color = '#FF0000', width = 3),
+    marker = list(size = 9, color = '#FF0000'),
     name = "Target",
     opacity = 1,
     hovertemplate = paste('Target: %{y:.2f}%<extra></extra>'),
@@ -108,7 +111,7 @@ c <-   data_for_chart %>%
     mode = 'text',
     text = ~ paste0('<b>', kea_target,'%', '</b>'),
     textposition = "top", cliponaxis = FALSE,
-    textfont = list(color = '#FF0000'),
+    textfont = list(color = '#FF0000', size = myfont),
     # hovertemplate = paste('<extra></extra>'),
     hoverinfo = "none",
     showlegend = F
@@ -124,7 +127,9 @@ c <-   data_for_chart %>%
                  y = 1, 
                  x = 0, 
                  xanchor = 'left', 
-                 yanchor =  'top'),
+                 yanchor =  'top',
+                 font = list(size = myfont * 20/14)
+            ),
     bargap = 0.25,
     hovermode = "x unified",
     hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
@@ -136,7 +141,8 @@ c <-   data_for_chart %>%
                  dtick = 1,
                  # tickcolor = 'rgb(127,127,127)',
                  # ticks = 'outside',
-                 zeroline = TRUE
+                 zeroline = TRUE,
+                 tickfont = list(size = myfont)
                  ),
     yaxis = list(title = "KEA (%)",
                  # gridcolor = 'rgb(255,255,255)',
@@ -148,19 +154,25 @@ c <-   data_for_chart %>%
                  # tickcolor = 'rgb(127,127,127)',
                  # ticks = 'outside',
                  zeroline = TRUE,
-                 zerolinecolor = 'rgb(255,255,255)'
+                 zerolinecolor = 'rgb(255,255,255)',
+                 titlefont = list(size = myfont), tickfont = list(size = myfont)
                  ),
     # showlegend = FALSE
     legend = list(
       orientation = 'h', 
       xanchor = "center",
       x = 0.5, 
-      y =-0.1
+      y =-0.1,
+      font = list(size = myfont)
       )
     
   )
-
-c
+}
+  
+c(NA, NA, 14)
 
 # export to image ----
-export_fig(c, "env_kea_main.png")
+w = 1200
+h = 600
+export_fig(c(w, h, 14 * w/900),"env_kea_main.png", w, h)
+

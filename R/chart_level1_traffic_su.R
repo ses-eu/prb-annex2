@@ -5,8 +5,7 @@ library(readxl)
 library(plotly)
 library(stringr)
 library(janitor)
-library(webshot)
-library(magick)
+
 
 # parameters ----
 source("R/parameters.R")
@@ -78,9 +77,14 @@ data_prep_planned <- data_raw_planned %>%
   group_by(year) %>% summarise (tsu = sum(x121_ecz_su, na.rm=TRUE)) %>% 
   mutate(rank = 'Determined')
 
+mycolors <-  c('#1969B4','#044598', '#229FDD')
+
 # plot chart ----
-c <-   data_prep_forecast %>% 
+c <- function (mywidth, myheight, myfont) {
   plot_ly(
+    width = mywidth,
+    height = myheight,
+    data = data_prep_forecast,
   x = ~ year,
   y = ~ round(tsu/1000,0),
   yaxis = "y1",
@@ -90,10 +94,8 @@ c <-   data_prep_forecast %>%
   line = list(width = 3, dash = 'dash'),
   marker = list(size = 9),
   color = ~ rank,
-  colors = c('#1969B4','#044598', '#229FDD'),
+  colors = mycolors,
   opacity = 1,
-  # hovertemplate = paste('Target: %{y:.2f}%<extra></extra>'),
-  # hoverinfo = "none",
   showlegend = T
 ) %>% 
   add_trace(
@@ -109,8 +111,6 @@ c <-   data_prep_forecast %>%
     marker = list(size = 9, color = '#5B9BD5'),
     color = ~ rank,
     opacity = 1,
-    # hovertemplate = paste('Target: %{y:.2f}%<extra></extra>'),
-    # hoverinfo = "none",
     showlegend = T
   ) %>%
   add_trace(
@@ -126,10 +126,8 @@ c <-   data_prep_forecast %>%
    marker = list(size = 9, color = '#FFC000'),
    color = ~ rank,
    opacity = 1,
-   # hovertemplate = paste('Target: %{y:.2f}%<extra></extra>'),
-   # hoverinfo = "none",
    showlegend = T
-  ) %>% 
+  ) %>%
   config( responsive = TRUE,
           displaylogo = FALSE,
           displayModeBar = F
@@ -141,7 +139,9 @@ c <-   data_prep_forecast %>%
                  y = 1, 
                  x = 0, 
                  xanchor = 'left', 
-                 yanchor =  'top'),
+                 yanchor =  'top',
+                 font = list(size = myfont * 20/14)
+                 ),
     hovermode = "x unified",
     hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
     xaxis = list(title = "",
@@ -152,7 +152,8 @@ c <-   data_prep_forecast %>%
                  dtick = 1,
                  # tickcolor = 'rgb(127,127,127)',
                  # ticks = 'outside',
-                 zeroline = TRUE
+                 zeroline = TRUE,
+                 tickfont = list(size = myfont)
                  ),
     yaxis = list(title = "En route service units ('000)",
                  # gridcolor = 'rgb(255,255,255)',
@@ -163,19 +164,24 @@ c <-   data_prep_forecast %>%
                  # tickcolor = 'rgb(127,127,127)',
                  # ticks = 'outside',
                  zeroline = TRUE,
-                 zerolinecolor = 'rgb(255,255,255)'
+                 zerolinecolor = 'rgb(255,255,255)',
+                 titlefont = list(size = myfont), tickfont = list(size = myfont)
                  ),
     # showlegend = FALSE
     legend = list(
       orientation = 'h', 
       xanchor = "center",
       x = 0.5, 
-      y =-0.1
+      y =-0.1,
+      font = list(size = myfont)
       )
     
   )
+}
 
-c
+c(NA, NA, 14)
 
 # export to image ----
-export_fig(c,"traffic_su_main.png")
+w = 1200
+h = 600
+export_fig(c(w, h, 14 * w/900),"traffic_su_main.png", w, h)
