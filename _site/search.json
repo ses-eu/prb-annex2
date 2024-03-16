@@ -227,7 +227,7 @@
     "href": "index.html#capacity-member-state",
     "title": "State view",
     "section": "Capacity (Member State)",
-    "text": "Capacity (Member State)\nSomething",
+    "text": "Capacity (Member State)\n\n\n\n\n\n\n\n\n\nSome explanation\n\n\n\n\n\n\n\n\n\n\n\nSome explanation",
     "crumbs": [
       "Home",
       "<b style= \"font-size: 1.2rem\">{{< var doc.country >}}</b>"
@@ -238,7 +238,7 @@
     "href": "index.html#cost-efficiency-en-routeterminal-charging-zones",
     "title": "State view",
     "section": "Cost-efficiency (En route/Terminal charging zone(s))",
-    "text": "Cost-efficiency (En route/Terminal charging zone(s))\nSomething",
+    "text": "Cost-efficiency (En route/Terminal charging zone(s))\n\n\n\n\n\n\n\n\n\nSome explanation\n\n\n\n\n\n\n\n\n\n\n\nSome explanation",
     "crumbs": [
       "Home",
       "<b style= \"font-size: 1.2rem\">{{< var doc.country >}}</b>"
@@ -260,7 +260,7 @@
     "href": "index.html#safety-main-ansp",
     "title": "State view",
     "section": "Safety (Main ANSP)",
-    "text": "Safety (Main ANSP)\nSomething",
+    "text": "Safety (Main ANSP)\n\n\n\n\n\n\n\n\n\nSome explanation",
     "crumbs": [
       "Home",
       "<b style= \"font-size: 1.2rem\">{{< var doc.country >}}</b>"
