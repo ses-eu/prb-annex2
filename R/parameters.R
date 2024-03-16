@@ -67,11 +67,12 @@ data_folder_a2 <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/Annex 2/data/'
                          names(tables[tables == "Table_forecast"])),
                                by = "forecast_id"
               )
-    # for spain we present only one zone
+    # for spain we present only one  traffic zone
   if (country == "Spain") {
-    ecz_list <- ecz_list %>% filter(STATFOR_ECZ_name == "Spain")
+    statfor_zone <- ecz_list %>% filter(STATFOR_ECZ_name == "Spain") %>% select(STATFOR_ECZ_name) %>% pull()
+    ecz_list <- ecz_list %>% filter (ECZ_Name != "Spain all")
   }
-  statfor_zone <- ecz_list %>% select(STATFOR_ECZ_name) %>% pull() 
+
   forecast <- ecz_list %>% select(forecast) %>% pull()
   forecastid <- ecz_list %>% select(forecast_id) %>% pull()
 

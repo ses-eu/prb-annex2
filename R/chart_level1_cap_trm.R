@@ -6,14 +6,14 @@ source("R/parameters.R")
 data_raw_target  <-  read_xlsx(
   paste0(data_folder, "targets.xlsx"),
   # here("data","hlsr2021_data.xlsx"),
-  sheet = "ER_CAP",
+  sheet = "TRM_CAP",
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
   clean_names() 
 
 data_raw_actual  <-  read_xlsx(
-  paste0(data_folder, "AUA_export.xlsx"),
-  sheet = "AUA_export",
+  paste0(data_folder, "PSAPT_STATE_EXPORT.xlsx"),
+  sheet = "PSAPT_STATE_EXPORT",
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
   clean_names() 
@@ -21,20 +21,19 @@ data_raw_actual  <-  read_xlsx(
 # prepare data ----
 data_prep_target <- data_raw_target %>% 
   filter(
-    state == country,
-    year_report == year_report) %>% 
+    state == country) %>% 
   mutate(
-    # type = 'Target',
-    er_cap_target = round(x331_ert_delay_target, 2)
+    trm_cap_target = round(x332_state_arr_delay_target, 2)
   ) %>% 
   select(
     year,
-    er_cap_target
+    trm_cap_target
   )
 
 data_prep_actual <- data_raw_actual %>% 
   filter(
-    entity_name == main_ansp) %>% 
+    state_name == country,
+    year >= 2020) %>% 
   pivot_longer(
     cols = c(avg_atc_cap, avg_atc_stff, avg_atc_dsrptn, avg_weather, avg_other_nonatc),
     names_to = "type",
@@ -92,13 +91,13 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
     data = data_prep_target,
     inherit = FALSE,
     x = ~ year,
-    y = ~ er_cap_target,
+    y = ~ trm_cap_target,
     yaxis = "y1",
     type = 'scatter',  mode = 'lines+markers',
     line = list(color = '#FF0000', width = 3),
     marker = list(size = 9, color = '#FF0000'),
     name = "Target",
-    text = ~ paste0 ("<b>", format(er_cap_target, digits = 2), "</b>"),
+    text = ~ paste0 ("<b>", format(trm_cap_target, digits = 2), "</b>"),
     textfont = list(color = '#FF0000', size = myfont),
     textposition = "top center",
     hovertemplate = paste('Target: %{y:.2f}<extra></extra>'),
@@ -109,7 +108,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
       data = data_prep_actual,
       inherit = FALSE,
       x = ~ year,
-      y = ~ round(ifr/1000, 0),
+      y = ~ round(arr/1000, 0),
       yaxis = "y2",
       type = 'scatter',  mode = 'lines+markers',
       line = list(color = '#FFC000', width = 3),
@@ -126,7 +125,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
   ) %>%
   layout(
     font = list(family = "Roboto"),
-    title = list(text=paste0("Average en route ATFM delay per flight ", country),
+    title = list(text=paste0("Average terminal ATFM delay per flight ", country),
                  y = 1, 
                  x = 0, 
                  xanchor = 'left', 
@@ -154,7 +153,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
                  zerolinecolor = 'rgb(255,255,255)',
                  titlefont = list(size = myfont), tickfont = list(size = myfont)
                  ),
-    yaxis2 = list(title = "\n IFR flights ('000)",
+    yaxis2 = list(title = "\n Arrival flights ('000)",
                   overlaying = "y",
                   side = "right",
                   showgrid = FALSE,
@@ -183,5 +182,5 @@ myc(NA, NA, 14, 70)
 # export to image ----
 w = 1200
 h = 600
-export_fig(myc(w, h, 14 * w/900, 70 * w/1000),"cap_er_main.png", w, h)
+export_fig(myc(w, h, 14 * w/900, 70 * w/1000),"cap_trm_main.png", w, h)
 
