@@ -1,6 +1,8 @@
 
-## parameters
-source("R/parameters.R")
+# parameters ----
+if (exists("data_folder") == FALSE) {
+  source("R/parameters.R")
+}
 
 # define range
 sheet <- c("8_TRM_ATSP", "8_TRM_ATSP (2)")

@@ -9,6 +9,7 @@ library(janitor)
 library(webshot)
 library(data.table)
 library(magick)
+library(reactable)
 
 # parameters ----
 
@@ -52,31 +53,38 @@ data_folder_a2 <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/Annex 2/data/'
   table_range <- names(tables[tables == "Table_States"])
   # get parameters
   state_parameters <- read_range(paste0(data_folder, "Lists.xlsx"), "Lists", table_range) %>% 
-    filter(State == country)
+    filter(State == country) %>% clean_names()
 
-  main_ansp <- state_parameters %>% select(Main_ANSP) %>% pull()
-  nat_curr <- state_parameters %>% select(Currency) %>% pull()
+  main_ansp <- state_parameters %>% select(main_ansp) %>% pull()
+  nat_curr <- state_parameters %>% select(currency) %>% pull()
   state_type <- state_parameters %>% select(dashboard_case) %>% pull()
 
   # get ecz list and forecast
   table_range <- names(tables[tables == "Table_ECZ"])
+  
   ecz_list <- read_range(paste0(data_folder, "Lists.xlsx"), "Lists", table_range) %>% 
     filter(State == country) %>% 
     left_join(read_range(paste0(data_folder, "Lists.xlsx"), 
                          "Lists", 
                          names(tables[tables == "Table_forecast"])),
                                by = "forecast_id"
-              )
-    # for spain we present only one  traffic zone
+              ) %>% clean_names()
+
+      # for spain we present only one  traffic zone
   if (country == "Spain") {
-    statfor_zone <- ecz_list %>% filter(STATFOR_ECZ_name == "Spain") %>% select(STATFOR_ECZ_name) %>% pull()
-    ecz_list <- ecz_list %>% filter (ECZ_Name != "Spain all")
+    statfor_zone <- ecz_list %>% filter(statfor_ecz_name == "Spain") %>% select(statfor_ecz_name) %>% pull()
+     ecz_list <- ecz_list %>% filter (ecz_name != "Spain all")
   }
 
-  forecast <- ecz_list %>% select(forecast) %>% pull()
-  forecastid <- ecz_list %>% select(forecast_id) %>% pull()
+  forecast <- ecz_list %>% select(forecast) %>% pull() %>%  unique()
+  forecastid <- ecz_list %>% select(forecast_id) %>% pull() %>%  unique()
 
-
+  # get tcz list
+  table_range <- names(tables[tables == "Table_TCZ"])
+  
+  tcz_list <- read_range(paste0(data_folder, "Lists.xlsx"), "Lists", table_range) %>% 
+    filter(State == country) %>% clean_names()
+  
 # get ceff file ----
 ceff_files <- list.files(paste0(data_folder_a2, 'ceff/'))
 

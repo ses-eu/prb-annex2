@@ -8,7 +8,7 @@ if (exists("data_folder") == FALSE) {
 data_raw  <-  read_xlsx(
   paste0(data_folder, "CEFF.xlsx"),
   # here("data","hlsr2021_data.xlsx"),
-  sheet = "ERT_CZ",
+  sheet = "TRM_CZ",
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
   clean_names() 
@@ -18,7 +18,7 @@ data_raw  <-  read_xlsx(
 
 data_prep <- data_raw %>% 
   filter(
-    entity_code == ecz_list$ecz_id[1]) %>% 
+    entity_code == tcz_list$tcz_id[1]) %>% 
   mutate(
     unit_cost_er = round(x5_5_unit_cost_nc2017/x2017_xrate, 2)
   ) %>% 
@@ -83,7 +83,7 @@ myc <-  function(mywidth, myheight, myfont) {
     ) %>% 
     layout(
       font = list(family = "Roboto"),
-      title = list(text=paste0("En route unit costs - ", ecz_list$ecz_name[1]),
+      title = list(text=paste0("Terminal unit costs - ", tcz_list$tcz_name[1]),
                    y = 1, 
                    x = 0, 
                    xanchor = 'left', 
@@ -104,7 +104,7 @@ myc <-  function(mywidth, myheight, myfont) {
                    zeroline = TRUE,
                    tickfont = list(size = myfont)
       ),
-      yaxis = list(title = "En route unit costs (€2017)",
+      yaxis = list(title = "Terminal unit costs (€2017)",
                    # gridcolor = 'rgb(255,255,255)',
                    showgrid = TRUE,
                    showline = FALSE,
@@ -135,5 +135,5 @@ myc(NA, NA, 14)
 # export to image ----
 w = 1200
 h = 600
-export_fig(myc(w, h, 14 * w/900),"cef_er1_main.png", w, h)
+export_fig(myc(w, h, 14 * w/900),"cef_trm1_main.png", w, h)
 

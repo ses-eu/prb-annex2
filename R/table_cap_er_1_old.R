@@ -1,13 +1,8 @@
-## libraries
-library(tidyr)
-library(dplyr)
-library(openxlsx)
-library(readxl)
-library(reactable)
-library(janitor)
 
-## parameters
-source("R/parameters.R")
+# parameters ----
+if (exists("data_folder") == FALSE) {
+  source("R/parameters.R")
+}
 
 ## import data
 wb <- loadWorkbook(paste0(data_folder, "Lists.xlsx"))

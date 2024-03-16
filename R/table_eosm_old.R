@@ -1,15 +1,8 @@
-## libraries
-# library(tidyverse)
-library(dplyr)
-library(readxl)
-library(reactable)
-library(janitor)
-# library(here)
-# library(htmltools)
 
-
-## parameters
-source("R/parameters.R")
+# parameters ----
+if (exists("data_folder") == FALSE) {
+  source("R/parameters.R")
+}
 
 ## import data
 data_raw  <-  read_xlsx(

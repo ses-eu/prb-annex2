@@ -1,4 +1,9 @@
 
+# parameters ----
+if (exists("data_folder") == FALSE) {
+  source("R/parameters.R")
+}
+
 #---------------- sections definition
 # section 1
 idx_1 <- paste0('<br>

@@ -1,6 +1,8 @@
 
-## parameters
-source("R/parameters.R")
+# parameters ----
+if (exists("data_folder") == FALSE) {
+  source("R/parameters.R")
+}
 
 # define ranges and import data
 sheet <- country

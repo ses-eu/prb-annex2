@@ -1,6 +1,8 @@
 
-## parameters
-source("R/parameters.R")
+# parameters ----
+if (exists("data_folder") == FALSE) {
+  source("R/parameters.R")
+}
 
 if (state_type == 3) {state_type = 1}
 

@@ -1,10 +1,8 @@
-## libraries
-# library(tidyverse)
-library(dplyr)
-library(reactable)
-library(data.table)
-library(janitor)
-library(stringr)
+
+# parameters ----
+if (exists("data_folder") == FALSE) {
+  source("R/parameters.R")
+}
 
 ## parameters
 source("R/parameters.R")

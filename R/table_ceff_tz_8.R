@@ -1,12 +1,9 @@
-## libraries
-# library(tidyverse)
-library(dplyr)
-library(reactable)
-library(janitor)
-library(stringr)
 
-## parameters
-source("R/parameters.R")
+# parameters ----
+if (exists("data_folder") == FALSE) {
+  source("R/parameters.R")
+}
+
 if (exists("tz") == FALSE) {tz = 1}
 
 ## import data

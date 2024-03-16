@@ -1,6 +1,8 @@
 
 # parameters ----
-source("R/parameters.R")
+if (exists("data_folder") == FALSE) {
+  source("R/parameters.R")
+}
 
 # import data  ----
 data_raw_target  <-  read_xlsx(
