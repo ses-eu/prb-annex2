@@ -73,7 +73,9 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
                                         "Culture")
                        ),
       colors = c('#0070C0', '#44546A', '#DAE3F3', '#00B0F0', '#002060'),
-      # hovertemplate = paste('%{y:.2f}<extra></extra>'),
+      text = ~ paste0(type, ': ', score_text),
+      textfont = list(color = 'transparent'),
+      hovertemplate = paste0('%{text}<extra></extra>'),
       # hoverinfo = "none",
       showlegend = T
     ) %>%
@@ -87,8 +89,9 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
       mode = "markers",
       name = "EoSM score",
       marker = list (color = '#FFC000',
-                     symbol = "square",
+                     symbol = "diamond",
                      size = 11),
+      hovertemplate = paste0('EoSM score %{y}<extra></extra>'),
       # hovertemplate = paste('%{text}<extra></extra>'),
       # hoverinfo = "none",
       showlegend = T
@@ -116,6 +119,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
       mode = "line",
       name = "Target risk mgt",
       line = list (color = '#FF0000', width = 3, dash = 'solid'),
+      # hovertemplate = paste0('%{x}'),
       hoverinfo = 'none',
       showlegend = F
     ) %>%
@@ -129,13 +133,28 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
                mode = "marker",
                name = "fake series",
                marker = list (color = 'transparent'),
+               # hovertemplate = paste0('%{x}'),
                hoverinfo = 'none',
                showlegend = F
+    ) %>%
+    add_trace (
+      inherit = FALSE,
+      data = data_prep_eosm,
+      x =  ~ year,
+      y = 60,
+      yaxis = "y1",
+      type = 'scatter',
+      mode = "marker",
+      name = "",
+      marker = list (color = 'transparent'),
+      hovertemplate = paste0('-'),
+      # hoverinfo = 'none',
+      showlegend = F
     ) %>%
     add_annotations (text = c('Risk management target',
                               'Other MO targets'),
                      x = 0.97,
-                     y = c(84, 64),      
+                     y = c(86, 66),      
                      showarrow = F,
                      xref = "paper",
                      yref = "y",
@@ -198,7 +217,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
                    ticksuffix = "",
                    tickformat = ",.0f",
                    dtick = 25,
-                   range = list(0,108.5),
+                   range = list(0,113),
                    zeroline = TRUE,
                    zerolinecolor = 'rgb(255,255,255)',
                    titlefont = list(size = myfont), tickfont = list(size = myfont)
@@ -206,17 +225,17 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
       # showlegend = FALSE
       legend = list(
         orientation = 'h', 
-        xanchor = "center",
-        x = 0.5, 
+        xanchor = "left",
+        x = -0.05, 
         y =-0.1,
-        font = list(size = myfont)
+        font = list(size = myfont*0.95)
       ),
       margin = list(t = mymargin/2, r = mymargin)
   )
   
 }
 
-myc(NA, NA, 14, 70)
+myc(NA, 320, 14, 70)
 
 # export to image ----
 w = 1200

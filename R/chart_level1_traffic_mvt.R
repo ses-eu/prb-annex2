@@ -84,23 +84,6 @@ myc <- function (mywidth, myheight, myfont) {
   showlegend = T
 ) %>% 
   add_trace(
-    data = data_prep_actual,
-   inherit = FALSE,
-   x = ~ yr,
-   y = ~ round(mvts/1000,0),
-   yaxis = "y1",
-   cliponaxis = FALSE,
-   yaxis = "y1",
-   type = 'scatter',  mode = 'lines+markers',
-   line = list(width = 3, dash = 'solid', color = '#FFC000'),
-   marker = list(size = 9, color = '#FFC000'),
-   color = ~ rank,
-   opacity = 1,
-   # hovertemplate = paste('Target: %{y:.2f}%<extra></extra>'),
-   # hoverinfo = "none",
-   showlegend = T
-  ) %>% 
-    add_trace(
       data = data_prep_planned,
       inherit = FALSE,
       x = ~ year,
@@ -115,24 +98,24 @@ myc <- function (mywidth, myheight, myfont) {
       opacity = 1,
       showlegend = T
     ) %>%
-  add_trace(
-    data = data_prep_actual,
-   inherit = FALSE,
-   x = ~ yr,
-   y = ~ round(mvts/1000,0),
-   yaxis = "y1",
-   cliponaxis = FALSE,
-   yaxis = "y1",
-   type = 'scatter',  mode = 'lines+markers',
-   line = list(width = 3, dash = 'solid', color = '#FFC000'),
-   marker = list(size = 9, color = '#FFC000'),
-   color = ~ rank,
-   opacity = 1,
-   # hovertemplate = paste('Target: %{y:.2f}%<extra></extra>'),
-   # hoverinfo = "none",
-   showlegend = T
-  ) %>% 
-  config( responsive = TRUE,
+    add_trace(
+      data = data_prep_actual,
+      inherit = FALSE,
+      x = ~ yr,
+      y = ~ round(mvts/1000,0),
+      yaxis = "y1",
+      cliponaxis = FALSE,
+      yaxis = "y1",
+      type = 'scatter',  mode = 'lines+markers',
+      line = list(width = 3, dash = 'solid', color = '#FFC000'),
+      marker = list(size = 9, color = '#FFC000'),
+      color = ~ rank,
+      opacity = 1,
+      # hovertemplate = paste('Target: %{y:.2f}%<extra></extra>'),
+      # hoverinfo = "none",
+      showlegend = T
+    ) %>%
+    config( responsive = TRUE,
           displaylogo = FALSE,
           displayModeBar = F
           # modeBarButtons = list(list("toImage")),
@@ -183,7 +166,7 @@ myc <- function (mywidth, myheight, myfont) {
   )
 }
 
-myc(NULL, NULL, 14)
+myc(NULL, 280, 14)
 
 # export to image ----
 w = 1200

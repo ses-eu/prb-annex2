@@ -10,6 +10,7 @@ library(webshot)
 library(data.table)
 library(magick)
 library(reactable)
+library(gt)
 
 # parameters ----
 
@@ -35,6 +36,16 @@ data_folder_a2 <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/Annex 2/data/'
       mutate_all(~ str_replace_all(., "<br><br><br><br>", "<br><br>"))   
   }
 
+## read table range function ----
+read_mytable <- function(file, sheet, table){
+  wb <- loadWorkbook(paste0(data_folder, file))
+  tables <- getTables(wb, sheet = sheet)
+  # get the range
+  table_range <- names(tables[tables == table])
+  # read range
+  read_range(paste0(data_folder, file), sheet, table_range) 
+  }
+
 ## export figure function ----
   # the export function needs webshot and PhantomJS. Install PhantomJS with 'webshot::install_phantomjs()' and then cut the folder from wherever is installed and paste it in C:\Users\[username]\dev\r\win-library\4.2\webshot\PhantomJS
 
@@ -47,28 +58,32 @@ data_folder_a2 <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/Annex 2/data/'
   }
 
 # get main state parameters  ----
-  wb <- loadWorkbook(paste0(data_folder, "Lists.xlsx"))
-  tables <- getTables(wb, sheet = "Lists")
-  # get the range
-  table_range <- names(tables[tables == "Table_States"])
-  # get parameters
-  state_parameters <- read_range(paste0(data_folder, "Lists.xlsx"), "Lists", table_range) %>% 
+  state_parameters <- read_mytable("Lists.xlsx", "Lists", "Table_States") %>% 
     filter(State == country) %>% clean_names()
 
   main_ansp <- state_parameters %>% select(main_ansp) %>% pull()
   nat_curr <- state_parameters %>% select(currency) %>% pull()
   state_type <- state_parameters %>% select(dashboard_case) %>% pull()
-
-  # get ecz list and forecast
-  table_range <- names(tables[tables == "Table_ECZ"])
+  pp_version <- state_parameters %>% select(pp_adoption_full) %>% pull()
   
-  ecz_list <- read_range(paste0(data_folder, "Lists.xlsx"), "Lists", table_range) %>% 
+  # get ACC list
+  acc_list <- read_mytable("Lists.xlsx", "Lists", "Table_ACCs") %>% 
+    filter(State == country) %>% clean_names()
+  
+  acc_no <- nrow(acc_list)
+  acc1 <- acc_list$acc_full_name[1]
+  acc2 <- if_else(acc_no <2, '', acc_list$acc_full_name[2])
+  acc3 <- if_else(acc_no <3, '', acc_list$acc_full_name[3])
+  acc4 <- if_else(acc_no <4, '', acc_list$acc_full_name[4])
+  acc5 <- if_else(acc_no <5, '', acc_list$acc_full_name[5])
+  
+  # get ecz list and forecast
+  ecz_list <- read_mytable("Lists.xlsx", "Lists", "Table_ECZ") %>%
     filter(State == country) %>% 
-    left_join(read_range(paste0(data_folder, "Lists.xlsx"), 
-                         "Lists", 
-                         names(tables[tables == "Table_forecast"])),
-                               by = "forecast_id"
-              ) %>% clean_names()
+    left_join(
+      read_mytable("Lists.xlsx", "Lists", "Table_forecast"),
+      by = "forecast_id"
+      ) %>% clean_names()
 
       # for spain we present only one  traffic zone
   if (country == "Spain") {
@@ -80,10 +95,20 @@ data_folder_a2 <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/Annex 2/data/'
   forecastid <- ecz_list %>% select(forecast_id) %>% pull() %>%  unique()
 
   # get tcz list
-  table_range <- names(tables[tables == "Table_TCZ"])
-  
-  tcz_list <- read_range(paste0(data_folder, "Lists.xlsx"), "Lists", table_range) %>% 
+  tcz_list <- read_mytable("Lists.xlsx", "Lists", "Table_TCZ") %>%
     filter(State == country) %>% clean_names()
+
+  # get context data
+  context_data <- read_mytable("context_data.xlsx", "context", "Table_context") %>%  clean_names() %>% 
+    filter(state == .env$country,
+           year_report == .env$year_report  
+    ) 
+  
+  tsu_share <- paste0(format(round(as.numeric(context_data$tsu_share) *100,1), nsmall=1),'%')
+  
+  ert_cost_share <- paste0(format(round(as.numeric(context_data$ert_cost_share) *100,1), nsmall=1),'%')
+
+  ert_trm_share <- context_data$ert_trm_share
   
 # get ceff file ----
 ceff_files <- list.files(paste0(data_folder_a2, 'ceff/'))

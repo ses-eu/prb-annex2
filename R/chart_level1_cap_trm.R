@@ -95,6 +95,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
     x = ~ year,
     y = ~ trm_cap_target,
     yaxis = "y1",
+    cliponaxis = FALSE,
     type = 'scatter',  mode = 'lines+markers',
     line = list(color = '#FF0000', width = 3),
     marker = list(size = 9, color = '#FF0000'),
@@ -115,7 +116,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
       type = 'scatter',  mode = 'lines+markers',
       line = list(color = '#FFC000', width = 3),
       marker = list(size = 9, color = '#FFC000'),
-      name = "IFR movements",
+      name = "IFR arrivals",
       hovertemplate = paste("IFR mvts ('000): %{y:,}<extra></extra>"),
       opacity = 1,
       showlegend = T
@@ -127,7 +128,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
   ) %>%
   layout(
     font = list(family = "Roboto"),
-    title = list(text=paste0("Average terminal ATFM delay per flight ", country),
+    title = list(text=paste0("Average terminal ATFM delay per flight - ", country),
                  y = 1, 
                  x = 0, 
                  xanchor = 'left', 
@@ -168,18 +169,18 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
     # showlegend = FALSE
     legend = list(
       orientation = 'h', 
-      xanchor = "center",
-      x = 0.5, 
+      xanchor = "left",
+      x = -0.10, 
       y =-0.1,
       traceorder= 'reversed',
-      font = list(size = myfont)
+      font = list(size = myfont*0.9)
       ),
     margin = list(t = mymargin/2, r = mymargin)
     
   )
 }
   
-myc(NA, NA, 14, 70)
+myc(NA, 320, 14, 70)
 
 # export to image ----
 w = 1200

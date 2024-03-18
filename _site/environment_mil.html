@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.427">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>State view – environment_mil</title>
+<title>State view</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -48,17 +48,17 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
-
 <script src="site_libs/core-js-2.5.3/shim.min.js"></script>
-<script src="site_libs/react-17.0.0/react.min.js"></script>
-<script src="site_libs/react-17.0.0/react-dom.min.js"></script>
+<script src="site_libs/react-18.2.0/react.min.js"></script>
+<script src="site_libs/react-18.2.0/react-dom.min.js"></script>
 <script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
-<script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
 <script src="site_libs/reactable-binding-0.4.4/reactable.js"></script>
 
@@ -70,9 +70,9 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     <img src="./images/prb_logo.png" alt="" class="navbar-logo">
     </a>
@@ -83,165 +83,165 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="https://ses-eu.github.io/prb-monitoring/" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="https://ses-eu.github.io/prb-monitoring/"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://ses-eu.github.io/prb-monitoring/dashboard.html" rel="" target="">
- <span class="menu-text">Interactive dashboard</span></a>
+    <a class="nav-link" href="https://ses-eu.github.io/prb-monitoring/dashboard.html"> 
+<span class="menu-text">Interactive dashboard</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-state-view" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-state-view" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">State view</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-state-view">    
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Austria/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Austria/">
  <span class="dropdown-text">Austria</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Belgium/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Belgium/">
  <span class="dropdown-text">Belgium</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Bulgaria/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Bulgaria/">
  <span class="dropdown-text">Bulgaria</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Croatia/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Croatia/">
  <span class="dropdown-text">Croatia</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Cyprus/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Cyprus/">
  <span class="dropdown-text">Cyprus</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Czech Republic/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Czech Republic/">
  <span class="dropdown-text">Czech Republic</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Denmark/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Denmark/">
  <span class="dropdown-text">Denmark</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Estonia/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Estonia/">
  <span class="dropdown-text">Estonia</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Finland/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Finland/">
  <span class="dropdown-text">Finland</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/France/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/France/">
  <span class="dropdown-text">France</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Germany/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Germany/">
  <span class="dropdown-text">Germany</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Greece/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Greece/">
  <span class="dropdown-text">Greece</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Hungary/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Hungary/">
  <span class="dropdown-text">Hungary</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Ireland/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Ireland/">
  <span class="dropdown-text">Ireland</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Italy/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Italy/">
  <span class="dropdown-text">Italy</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Latvia/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Latvia/">
  <span class="dropdown-text">Latvia</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Lithuania/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Lithuania/">
  <span class="dropdown-text">Lithuania</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Luxembourg/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Luxembourg/">
  <span class="dropdown-text">Luxembourg</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Malta/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Malta/">
  <span class="dropdown-text">Malta</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Netherlands/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Netherlands/">
  <span class="dropdown-text">Netherlands</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Norway/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Norway/">
  <span class="dropdown-text">Norway</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Poland/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Poland/">
  <span class="dropdown-text">Poland</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Portugal/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Portugal/">
  <span class="dropdown-text">Portugal</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Romania/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Romania/">
  <span class="dropdown-text">Romania</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Slovakia/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Slovakia/">
  <span class="dropdown-text">Slovakia</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Slovenia/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Slovenia/">
  <span class="dropdown-text">Slovenia</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Spain/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Spain/">
  <span class="dropdown-text">Spain</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Sweden/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Sweden/">
  <span class="dropdown-text">Sweden</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Switzerland/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Switzerland/">
  <span class="dropdown-text">Switzerland</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="https://ses-eu.github.io/prb-monitoring/about.html" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="https://ses-eu.github.io/prb-monitoring/about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://transport.ec.europa.eu/transport-modes/air/single-european-sky/ses-performance-and-charging/publications_en" rel="" target="_blank">
- <span class="menu-text">Publications <i class="fa-solid fa-external-link-alt" aria-label="external-link-alt"></i></span></a>
+    <a class="nav-link" href="https://transport.ec.europa.eu/transport-modes/air/single-european-sky/ses-performance-and-charging/publications_en" target="_blank"> 
+<span class="menu-text">Publications <i class="fa-solid fa-external-link-alt" aria-label="external-link-alt"></i></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./environment_kea.html"><b>2 Environment</b></a></li><li class="breadcrumb-item"><a href="./environment_mil.html">Military dimension</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./environment_kea.html"><b>2 Environment</b></a></li><li class="breadcrumb-item"><a href="./environment_mil.html">Military dimension</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -369,32 +369,12 @@ ul.task-list li input[type="checkbox"] {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#military-dimension" id="toc-military-dimension" class="nav-link active" data-scroll-target="#military-dimension">Military dimension</a>
-  <ul class="collapse">
-  <li><a href="#update-on-military-dimension-of-the-plan" id="toc-update-on-military-dimension-of-the-plan" class="nav-link" data-scroll-target="#update-on-military-dimension-of-the-plan">Update on Military dimension of the plan</a></li>
-  <li><a href="#military---related-measures-implemented-or-planned-to-improve-capacity" id="toc-military---related-measures-implemented-or-planned-to-improve-capacity" class="nav-link" data-scroll-target="#military---related-measures-implemented-or-planned-to-improve-capacity">Military - related measures implemented or planned to improve capacity</a></li>
-  <li><a href="#pi6-effective-use-of-reserved-or-segregated-airspace---national-level" id="toc-pi6-effective-use-of-reserved-or-segregated-airspace---national-level" class="nav-link" data-scroll-target="#pi6-effective-use-of-reserved-or-segregated-airspace---national-level">PI#6 Effective use of reserved or segregated airspace - national level</a></li>
-  <li><a href="#pi6-effective-use-of-reserved-or-segregated-airspace-per-acc" id="toc-pi6-effective-use-of-reserved-or-segregated-airspace-per-acc" class="nav-link" data-scroll-target="#pi6-effective-use-of-reserved-or-segregated-airspace-per-acc">PI#6 Effective use of reserved or segregated airspace (per ACC)</a></li>
-  <li><a href="#initiatives-implemented-or-planned-to-improve-pi6" id="toc-initiatives-implemented-or-planned-to-improve-pi6" class="nav-link" data-scroll-target="#initiatives-implemented-or-planned-to-improve-pi6">Initiatives implemented or planned to improve PI#6</a></li>
-  <li><a href="#pi7-rate-of-planning-via-available-airspace-structures---national-level" id="toc-pi7-rate-of-planning-via-available-airspace-structures---national-level" class="nav-link" data-scroll-target="#pi7-rate-of-planning-via-available-airspace-structures---national-level">PI#7 Rate of planning via available airspace structures - national level</a></li>
-  <li><a href="#pi7-rate-of-planning-via-available-airspace-structures-per-acc" id="toc-pi7-rate-of-planning-via-available-airspace-structures-per-acc" class="nav-link" data-scroll-target="#pi7-rate-of-planning-via-available-airspace-structures-per-acc">PI#7 Rate of planning via available airspace structures (per ACC)</a></li>
-  <li><a href="#initiatives-implemented-or-planned-to-improve-pi7" id="toc-initiatives-implemented-or-planned-to-improve-pi7" class="nav-link" data-scroll-target="#initiatives-implemented-or-planned-to-improve-pi7">Initiatives implemented or planned to improve PI#7</a></li>
-  <li><a href="#pi8-rate-of-using-available-airspace-structures---national-level" id="toc-pi8-rate-of-using-available-airspace-structures---national-level" class="nav-link" data-scroll-target="#pi8-rate-of-using-available-airspace-structures---national-level">PI#8 Rate of using available airspace structures - national level</a></li>
-  <li><a href="#pi8-rate-of-using-available-airspace-structures-per-acc" id="toc-pi8-rate-of-using-available-airspace-structures-per-acc" class="nav-link" data-scroll-target="#pi8-rate-of-using-available-airspace-structures-per-acc">PI#8 Rate of using available airspace structures (per ACC)</a></li>
-  <li><a href="#initiatives-implemented-or-planned-to-improve-pi8" id="toc-initiatives-implemented-or-planned-to-improve-pi8" class="nav-link" data-scroll-target="#initiatives-implemented-or-planned-to-improve-pi8">Initiatives implemented or planned to improve PI#8</a></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
+
 
 
 
@@ -410,21 +390,19 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="pi6-effective-use-of-reserved-or-segregated-airspace---national-level" class="level3">
 <h3 class="anchored" data-anchor-id="pi6-effective-use-of-reserved-or-segregated-airspace---national-level">PI#6 Effective use of reserved or segregated airspace - national level</h3>
-<div class="cell" data-options="B15:N17" data-file="R/table_env_mil.R">
+<div class="cell" data-options="B15:N17">
 <div class="cell-output-display">
-
-<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a90ec0a097bc8cdf9c9a" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-a90ec0a097bc8cdf9c9a">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Latvia"],"2020":["13%"],"2021":["87%"],"2022":["59%"],"2023":[null],"2024":[null]},"columns":[{"id":"a","name":"Ratio PI#6","type":"character","minWidth":25,"align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2020","name":"2020","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2021","name":"2021","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2022","name":"2022","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2023","name":"2023","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2024","name":"2024","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"9ac191c51e5574ed650126d5b0bdbeda"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-38358f436cb7b6cf3081" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-38358f436cb7b6cf3081">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Spain"],"2020":["53%"],"2021":["44%"],"2022":["45%"],"2023":[null],"2024":[null]},"columns":[{"id":"a","name":"Ratio PI#6","type":"character","minWidth":25,"align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2020","name":"2020","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2021","name":"2021","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2022","name":"2022","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2023","name":"2023","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2024","name":"2024","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"713eed9b0c067c96ff02e02148b2e44f"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
 <section id="pi6-effective-use-of-reserved-or-segregated-airspace-per-acc" class="level3">
 <h3 class="anchored" data-anchor-id="pi6-effective-use-of-reserved-or-segregated-airspace-per-acc">PI#6 Effective use of reserved or segregated airspace (per ACC)</h3>
-<div class="cell" data-options="B20:N29" data-file="R/table_env_mil.R">
+<div class="cell" data-options="B20:N29">
 <div class="cell-output-display">
-
-<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-97d9673b3ea5784aea2b" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-97d9673b3ea5784aea2b">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Riga"],"2020":["13%"],"2021":["87%"],"2022":["59%"],"2023":[null],"2024":[null]},"columns":[{"id":"a","name":"Ratio PI#6","type":"character","minWidth":25,"align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2020","name":"2020","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2021","name":"2021","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2022","name":"2022","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2023","name":"2023","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2024","name":"2024","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"7194edca390001198ec0c4ebd1fdad09"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-115df9dede632c555790" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-115df9dede632c555790">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Barcelona","Canarias","Madrid","Palma","Sevilla"],"2020":[null,null,null,null,null],"2021":[null,null,null,null,null],"2022":[null,null,null,null,null],"2023":[null,null,null,null,null],"2024":[null,null,null,null,null]},"columns":[{"id":"a","name":"Ratio PI#6","type":"character","minWidth":25,"align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2020","name":"2020","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2021","name":"2021","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2022","name":"2022","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2023","name":"2023","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2024","name":"2024","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"11042b2a8ce6b67fe2f1e6ef9e178f3c"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -434,21 +412,19 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="pi7-rate-of-planning-via-available-airspace-structures---national-level" class="level3">
 <h3 class="anchored" data-anchor-id="pi7-rate-of-planning-via-available-airspace-structures---national-level">PI#7 Rate of planning via available airspace structures - national level</h3>
-<div class="cell" data-options="B37:N39" data-file="R/table_env_mil.R">
+<div class="cell" data-options="B37:N39">
 <div class="cell-output-display">
-
-<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-1123a32acb86fa77a0fe" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-1123a32acb86fa77a0fe">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Latvia"],"2020":["n/a"],"2021":["n/a"],"2022":["n/a"],"2023":[null],"2024":[null]},"columns":[{"id":"a","name":"Ratio PI#7","type":"character","minWidth":25,"align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2020","name":"2020","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2021","name":"2021","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2022","name":"2022","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2023","name":"2023","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2024","name":"2024","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"70e5d9543578db918c2d7e4c4f673f6b"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-ecaa6d4c8c7301dda150" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ecaa6d4c8c7301dda150">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Spain"],"2020":["49%"],"2021":["74%"],"2022":["74%"],"2023":[null],"2024":[null]},"columns":[{"id":"a","name":"Ratio PI#7","type":"character","minWidth":25,"align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2020","name":"2020","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2021","name":"2021","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2022","name":"2022","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2023","name":"2023","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2024","name":"2024","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"ba82a084a1ba83ceff4525d77431e803"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
 <section id="pi7-rate-of-planning-via-available-airspace-structures-per-acc" class="level3">
 <h3 class="anchored" data-anchor-id="pi7-rate-of-planning-via-available-airspace-structures-per-acc">PI#7 Rate of planning via available airspace structures (per ACC)</h3>
-<div class="cell" data-options="B42:N51" data-file="R/table_env_mil.R">
+<div class="cell" data-options="B42:N51">
 <div class="cell-output-display">
-
-<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-7f361ae22ffe95d6d13e" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-7f361ae22ffe95d6d13e">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Riga"],"2020":["n/a"],"2021":["n/a"],"2022":["n/a"],"2023":[null],"2024":[null]},"columns":[{"id":"a","name":"Ratio PI#7","type":"character","minWidth":25,"align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2020","name":"2020","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2021","name":"2021","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2022","name":"2022","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2023","name":"2023","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2024","name":"2024","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"4b6ffbde57abf8b5d9d9c6918605b51e"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-967e7dd378f542788577" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-967e7dd378f542788577">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Barcelona","Canarias","Madrid","Palma","Sevilla"],"2020":["n/a","n/a","n/a","n/a","n/a"],"2021":["n/a","n/a","n/a","n/a","n/a"],"2022":["n/a","n/a","n/a","n/a","n/a"],"2023":[null,null,null,null,null],"2024":[null,null,null,null,null]},"columns":[{"id":"a","name":"Ratio PI#7","type":"character","minWidth":25,"align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2020","name":"2020","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2021","name":"2021","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2022","name":"2022","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2023","name":"2023","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2024","name":"2024","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"3e3d7be1de7d5fa16427f2a373b138f9"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -458,21 +434,19 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="pi8-rate-of-using-available-airspace-structures---national-level" class="level3">
 <h3 class="anchored" data-anchor-id="pi8-rate-of-using-available-airspace-structures---national-level">PI#8 Rate of using available airspace structures - national level</h3>
-<div class="cell" data-options="B59:N61" data-file="R/table_env_mil.R">
+<div class="cell" data-options="B59:N61">
 <div class="cell-output-display">
-
-<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-9020cf9b2015e9d93d2f" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-9020cf9b2015e9d93d2f">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Latvia"],"2020":["n/a"],"2021":["n/a"],"2022":["n/a"],"2023":[null],"2024":[null]},"columns":[{"id":"a","name":"Ratio PI#8","type":"character","minWidth":25,"align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2020","name":"2020","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2021","name":"2021","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2022","name":"2022","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2023","name":"2023","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2024","name":"2024","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"b4c26b3e5a69c6364be1a799df2d3f1d"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-dc803c7ddd0e97cc7874" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-dc803c7ddd0e97cc7874">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Spain"],"2020":["52%"],"2021":["79%"],"2022":["75%"],"2023":[null],"2024":[null]},"columns":[{"id":"a","name":"Ratio PI#8","type":"character","minWidth":25,"align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2020","name":"2020","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2021","name":"2021","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2022","name":"2022","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2023","name":"2023","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2024","name":"2024","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"02f663163379721a9e5be35a4da388fd"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
 <section id="pi8-rate-of-using-available-airspace-structures-per-acc" class="level3">
 <h3 class="anchored" data-anchor-id="pi8-rate-of-using-available-airspace-structures-per-acc">PI#8 Rate of using available airspace structures (per ACC)</h3>
-<div class="cell" data-options="B64:N73" data-file="R/table_env_mil.R">
+<div class="cell" data-options="B64:N73">
 <div class="cell-output-display">
-
-<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-f372fb3adef19675e558" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-f372fb3adef19675e558">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Riga"],"2020":["n/a"],"2021":["n/a"],"2022":["n/a"],"2023":[null],"2024":[null]},"columns":[{"id":"a","name":"Ratio PI#8","type":"character","minWidth":25,"align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2020","name":"2020","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2021","name":"2021","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2022","name":"2022","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2023","name":"2023","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2024","name":"2024","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"b7619a36697ebb8fc4ea7228650e3a38"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-ec83066b81b57215b1db" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ec83066b81b57215b1db">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Barcelona","Canarias","Madrid","Palma","Sevilla"],"2020":["n/a","n/a","n/a","n/a","n/a"],"2021":["n/a","n/a","n/a","n/a","n/a"],"2022":["n/a","n/a","n/a","n/a","n/a"],"2023":[null,null,null,null,null],"2024":[null,null,null,null,null]},"columns":[{"id":"a","name":"Ratio PI#8","type":"character","minWidth":25,"align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2020","name":"2020","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2021","name":"2021","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2022","name":"2022","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2023","name":"2023","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"2024","name":"2024","type":"character","minWidth":15,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"3ca0881cfd0dafa9f75302d7538478c6"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -564,10 +538,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -577,8 +570,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -591,6 +593,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -634,6 +755,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -659,6 +781,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -716,27 +864,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          // default icon
-          link.classList.add("external");
-      }
-    }
 });
 </script>
-<nav class="page-navigation column-body">
+<nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
-      <a href="./environment_apt.html" class="pagination-link">
+      <a href="./environment_apt.html" class="pagination-link" aria-label="Airports">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Airports</span>
       </a>          
   </div>
@@ -744,6 +876,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 

@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.427">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>State view – environment_kea</title>
+<title>State view</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -48,17 +48,17 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
-
 <script src="site_libs/core-js-2.5.3/shim.min.js"></script>
-<script src="site_libs/react-17.0.0/react.min.js"></script>
-<script src="site_libs/react-17.0.0/react-dom.min.js"></script>
+<script src="site_libs/react-18.2.0/react.min.js"></script>
+<script src="site_libs/react-18.2.0/react-dom.min.js"></script>
 <script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
-<script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
 <script src="site_libs/reactable-binding-0.4.4/reactable.js"></script>
 
@@ -70,9 +70,9 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     <img src="./images/prb_logo.png" alt="" class="navbar-logo">
     </a>
@@ -83,165 +83,165 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="https://ses-eu.github.io/prb-monitoring/" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="https://ses-eu.github.io/prb-monitoring/"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://ses-eu.github.io/prb-monitoring/dashboard.html" rel="" target="">
- <span class="menu-text">Interactive dashboard</span></a>
+    <a class="nav-link" href="https://ses-eu.github.io/prb-monitoring/dashboard.html"> 
+<span class="menu-text">Interactive dashboard</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-state-view" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-state-view" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">State view</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-state-view">    
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Austria/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Austria/">
  <span class="dropdown-text">Austria</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Belgium/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Belgium/">
  <span class="dropdown-text">Belgium</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Bulgaria/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Bulgaria/">
  <span class="dropdown-text">Bulgaria</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Croatia/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Croatia/">
  <span class="dropdown-text">Croatia</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Cyprus/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Cyprus/">
  <span class="dropdown-text">Cyprus</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Czech Republic/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Czech Republic/">
  <span class="dropdown-text">Czech Republic</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Denmark/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Denmark/">
  <span class="dropdown-text">Denmark</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Estonia/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Estonia/">
  <span class="dropdown-text">Estonia</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Finland/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Finland/">
  <span class="dropdown-text">Finland</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/France/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/France/">
  <span class="dropdown-text">France</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Germany/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Germany/">
  <span class="dropdown-text">Germany</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Greece/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Greece/">
  <span class="dropdown-text">Greece</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Hungary/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Hungary/">
  <span class="dropdown-text">Hungary</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Ireland/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Ireland/">
  <span class="dropdown-text">Ireland</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Italy/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Italy/">
  <span class="dropdown-text">Italy</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Latvia/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Latvia/">
  <span class="dropdown-text">Latvia</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Lithuania/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Lithuania/">
  <span class="dropdown-text">Lithuania</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Luxembourg/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Luxembourg/">
  <span class="dropdown-text">Luxembourg</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Malta/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Malta/">
  <span class="dropdown-text">Malta</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Netherlands/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Netherlands/">
  <span class="dropdown-text">Netherlands</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Norway/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Norway/">
  <span class="dropdown-text">Norway</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Poland/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Poland/">
  <span class="dropdown-text">Poland</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Portugal/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Portugal/">
  <span class="dropdown-text">Portugal</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Romania/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Romania/">
  <span class="dropdown-text">Romania</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Slovakia/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Slovakia/">
  <span class="dropdown-text">Slovakia</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Slovenia/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Slovenia/">
  <span class="dropdown-text">Slovenia</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Spain/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Spain/">
  <span class="dropdown-text">Spain</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Sweden/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Sweden/">
  <span class="dropdown-text">Sweden</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Switzerland/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Switzerland/">
  <span class="dropdown-text">Switzerland</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="https://ses-eu.github.io/prb-monitoring/about.html" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="https://ses-eu.github.io/prb-monitoring/about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://transport.ec.europa.eu/transport-modes/air/single-european-sky/ses-performance-and-charging/publications_en" rel="" target="_blank">
- <span class="menu-text">Publications <i class="fa-solid fa-external-link-alt" aria-label="external-link-alt"></i></span></a>
+    <a class="nav-link" href="https://transport.ec.europa.eu/transport-modes/air/single-european-sky/ses-performance-and-charging/publications_en" target="_blank"> 
+<span class="menu-text">Publications <i class="fa-solid fa-external-link-alt" aria-label="external-link-alt"></i></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./environment_kea.html"><b>2 Environment</b></a></li><li class="breadcrumb-item"><a href="./environment_kea.html">Horizontal flight efficiency</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./environment_kea.html"><b>2 Environment</b></a></li><li class="breadcrumb-item"><a href="./environment_kea.html">Horizontal flight efficiency</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -369,23 +369,12 @@ ul.task-list li input[type="checkbox"] {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#horizontal-flight-efficiency" id="toc-horizontal-flight-efficiency" class="nav-link active" data-scroll-target="#horizontal-flight-efficiency">Horizontal flight efficiency</a>
-  <ul class="collapse">
-  <li><a href="#kea" id="toc-kea" class="nav-link" data-scroll-target="#kea">KEA</a></li>
-  <li><a href="#end-of-month-indicators-evolution-in-2022" id="toc-end-of-month-indicators-evolution-in-2022" class="nav-link" data-scroll-target="#end-of-month-indicators-evolution-in-2022">End of month indicators evolution in 2022</a></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
+
 
 
 
@@ -394,22 +383,20 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="horizontal-flight-efficiency">Horizontal flight efficiency</h2>
 <section id="kea" class="level3">
 <h3 class="anchored" data-anchor-id="kea">KEA</h3>
-<div class="cell" data-file="R/table_env_kea_1.R">
+<div class="cell">
 <div class="cell-output-display">
-
-<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-9e1c86f59508e592c3ee" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-9e1c86f59508e592c3ee">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Target","Actual performance"],"x2020":["1.30%","1.24%"],"x2021":["1.25%","1.62%"],"x2022":["1.25%","6.26%"],"x2023":["1.25%","  "],"x2024":["1.25%","  "]},"columns":[{"id":"a","name":"","type":"character","align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":40},{"id":"x2020","name":"2020","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2021","name":"2021","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2022","name":"2022","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2023","name":"2023","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2024","name":"2024","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"aece4c0f0f61493dad6b7d178f1fc0b4"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-7475f2da1c49c2ff2dca" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-7475f2da1c49c2ff2dca">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Target","Actual performance"],"x2020":["3.23%","3.11%"],"x2021":["3.08%","3.30%"],"x2022":["3.08%","3.32%"],"x2023":["3.08%","  "],"x2024":["3.08%","  "]},"columns":[{"id":"a","name":"","type":"character","align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":40},{"id":"x2020","name":"2020","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2021","name":"2021","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2022","name":"2022","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2023","name":"2023","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2024","name":"2024","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"a4ad12e9af483208a57337dbbacbc534"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><br> <img src="images/2022/Latvia/env_kea_3.png" class="img-fluid"></p>
 </section>
 <section id="end-of-month-indicators-evolution-in-2022" class="level3">
 <h3 class="anchored" data-anchor-id="end-of-month-indicators-evolution-in-2022">End of month indicators evolution in 2022</h3>
-<div class="cell" data-file="R/table_env_kea_2.R">
+<div class="cell">
 <div class="cell-output-display">
-
-<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-858477ebd1832b2a8cc4" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-858477ebd1832b2a8cc4">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["KEA","KEP","KES"],"JAN":["1.63%","1.97%","1.64%"],"FEB":["1.65%","2.01%","1.68%"],"MAR":["1.89%","2.26%","1.92%"],"APR":["2.19%","2.57%","2.24%"],"MAY":["2.56%","2.95%","2.63%"],"JUN":["2.95%","3.32%","3.03%"],"JUL":["3.40%","3.77%","3.51%"],"AUG":["3.91%","4.28%","4.04%"],"SEP":["4.46%","4.82%","4.59%"],"OCT":["5.01%","5.37%","5.13%"],"NOV":["5.57%","5.94%","5.69%"],"DEC":["6.26%","6.61%","6.34%"]},"columns":[{"id":"a","name":"","type":"character","minWidth":16,"align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"JAN","name":"JAN","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"FEB","name":"FEB","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"MAR","name":"MAR","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"APR","name":"APR","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"MAY","name":"MAY","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"JUN","name":"JUN","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"JUL","name":"JUL","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"AUG","name":"AUG","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"SEP","name":"SEP","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"OCT","name":"OCT","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"NOV","name":"NOV","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"DEC","name":"DEC","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"2b7488f48a7d0f174de34f5cd17b0b3e"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-7dbaf346086fc9d68509" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-7dbaf346086fc9d68509">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["KEA","KEP","KES"],"JAN":["3.28%","4.57%","4.46%"],"FEB":["3.28%","4.56%","4.45%"],"MAR":["3.28%","4.53%","4.43%"],"APR":["3.30%","4.53%","4.42%"],"MAY":["3.32%","4.52%","4.41%"],"JUN":["3.34%","4.53%","4.42%"],"JUL":["3.33%","4.52%","4.41%"],"AUG":["3.34%","4.51%","4.41%"],"SEP":["3.34%","4.53%","4.42%"],"OCT":["3.34%","4.53%","4.42%"],"NOV":["3.34%","4.53%","4.42%"],"DEC":["3.32%","4.50%","4.40%"]},"columns":[{"id":"a","name":"","type":"character","minWidth":16,"align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"JAN","name":"JAN","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"FEB","name":"FEB","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"MAR","name":"MAR","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"APR","name":"APR","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"MAY","name":"MAY","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"JUN","name":"JUN","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"JUL","name":"JUL","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"AUG","name":"AUG","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"SEP","name":"SEP","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"OCT","name":"OCT","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"NOV","name":"NOV","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}},{"id":"DEC","name":"DEC","type":"character","minWidth":7,"align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}}}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"b5b4839591764a6f405fdaa0a934e2b4"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><br></p>
@@ -506,10 +493,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -519,8 +525,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -533,6 +548,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -576,6 +710,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -601,6 +736,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -658,34 +819,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          // default icon
-          link.classList.add("external");
-      }
-    }
 });
 </script>
-<nav class="page-navigation column-body">
+<nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./environment_apt.html" class="pagination-link">
+      <a href="./environment_apt.html" class="pagination-link" aria-label="Airports">
         <span class="nav-page-text">Airports</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 

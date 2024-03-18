@@ -130,7 +130,7 @@ myc <-  function(mywidth, myheight, myfont) {
   
 }
 
-myc(NA, NA, 14)
+myc(NA, 280, 14)
 
 # export to image ----
 w = 1200

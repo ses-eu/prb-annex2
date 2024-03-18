@@ -1,101 +1,20 @@
-```{r}
-if (exists("data_folder") == FALSE) {
-  source("R/parameters.R")
-}
-```
-
-[Annual Montiroring Report {{< var doc.year_report >}} - {{< var doc.country >}}]{.fakeh1}
+[Annual Montiroring Report {{< var doc.year_report >}} - {{< var doc.country >}}]{class="fakeh1"}
 
 ## Contextual information
-
-*`r pp_version`*
-
-::: columns
-:::: {.column width="20%"}
-::::: columns
-:::::: {.column width="50%"}
-[**List of ACCs  ** `r acc_no`]{.context-text}
-::::::
-
-:::::: {.column width="50%"}
-<!-- note the two spaces at the end to add soft lbs -->
-[`r acc1`  
-  `r acc2`  
-  `r acc3`  
-  `r acc4`  
-  `r acc5`]{.context-text}
-::::::
-:::::
-::::
-
-:::: {.column width="40%"}
-[**Share of Union-wide traffic (TSUs) `r year_report` **    `r tsu_share`]{.context-text}
-
-[**Share of Union-wide en route costs `r year_report` ** `r ert_cost_share`]{.context-text}
-
-[**Share en route / terminal costs `r year_report` ** `r ert_trm_share`]{.context-text}
-
-::::: columns
-:::::: {.column width="50%"}
-[**En route charging zone(s)**]{.context-text}
-::::::
-
-:::::: {.column width="50%"}
-```{r}
-ecz_list_string <- paste0(
-  ecz_list$ecz_name[1],
-  if_else(is.na(ecz_list$ecz_name[2]) == TRUE, '' ,  paste0('<br/>', ecz_list$ecz_name[2]))
-)
-```
-
-<div>
-<p class="context-text">`r ecz_list_string`</p>
-</div>
-
-::::::
-:::::
-
-::::: columns
-:::::: {.column width="50%"}
-[**Terminal charging zone(s)**]{.context-text}
-::::::
-
-:::::: {.column width="50%"}
-```{r}
-tcz_list_string <- paste0(
-  tcz_list$tcz_name[1],
-  if_else(is.na(tcz_list$tcz_name[2]) == TRUE, '' ,  paste0('<br/>', tcz_list$tcz_name[2]))
-)
-```
-
-<div>
-<p class="context-text">`r tcz_list_string`</p>
-</div>
-
-::::::
-:::::
-::::
-
-:::: {.column width="40%"}
-[**Main ANSP ** `r main_ansp`]{.context-text}
-
-[**Other ANSPs **]{.context-text}
-
-::::
-
-:::
+TBadded
 
 ## Traffic (En route traffic zone)
-
-::: {#container-mvt}
-:::: {#chart-mvt style="float: left; width: 60%"}
+::: {.columns}
+  
+:::: {.column width="60%"}
 ```{r}
 #| file: R/chart_level1_traffic_mvt.R
 #| out.width: "100%"
 ```
+
 ::::
 
-:::: {#concl-mvt}
+:::: {.column width="40%"}
 ```{r}
 mvt_conc <- read_mytable("PRB_findings.xlsx", "traffic_IFR", "Table_Findings_traffic_IFR") %>% 
   filter(Year_Report == year_report, State == country) %>% 
@@ -106,20 +25,18 @@ mvt_conc1 <- mvt_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 `r mvt_conc1`
 ::::
-:::
-
-::: {#container-su style="clear: both"}
 
 <br>
 
-:::: {#chart-su style="float: left; width: 60%"}
+:::: {.column width="60%"}
 ```{r}
-#| file: R/chart_level1_traffic_su.R
+#| file: R/chart_level1_traffic_mvt.R
 #| out.width: "100%"
 ```
+
 ::::
 
-:::: {#concl-su}
+:::: {.column width="40%"}
 ```{r}
 tsu_conc <- read_mytable("PRB_findings.xlsx", "traffic_SUs", "Table_Findings_traffic_TSU") %>% 
   filter(Year_Report == year_report, State == country) %>% 
@@ -132,18 +49,17 @@ tsu_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ::::
 :::
 
-::: {#container-saf style="clear: both"}
-
 ## Safety (Main ANSP)
-
-:::: {#chart-saf style="float: left; width: 60%"}
+::: {.columns}
+  
+:::: {.column width="60%"}
 ```{r}
 #| file: R/chart_level1_saf.R
 #| out.width: "100%"
 ```
 ::::
 
-:::: {#concl-saf}
+:::: {.column width="40%"}
 ```{r}
 saf_conc <- read_mytable("PRB_findings.xlsx", "traffic_SUs", "Table_Findings_traffic_TSU") %>% 
   filter(Year_Report == year_report, State == country) %>% 
@@ -156,18 +72,17 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ::::
 :::
 
-::: {#container-env style="clear: both"}
-
 ## Environment (Member State)
-
-:::: {#chart-env style="float: left; width: 60%"}
+::: {.columns}
+  
+:::: {.column width="60%"}
 ```{r}
 #| file: R/chart_level1_kea.R
 #| out.width: "100%"
 ```
 ::::
 
-:::: {#concl-env}
+:::: {.column width="40%"}
 ```{r}
 env_conc <- read_mytable("PRB_findings.xlsx", "environment", "Table_Findings_environment") %>% 
   filter(Year_Report == year_report, State == country) %>% 
@@ -180,11 +95,10 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ::::
 :::
 
-::: {#container-cap style="clear: both"}
-
 ## Capacity (Member State)
-
-:::: {#chart-cap style="float: left; width: 60%"}
+::: {.columns}
+  
+:::: {.column width="60%"}
 ```{r}
 #| file: R/chart_level1_cap_er.R
 #| out.width: "100%"
@@ -198,7 +112,7 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ```
 ::::
 
-:::: {#concl-cap}
+:::: {.column width="40%"}
 ```{r}
 cap_er_conc <- read_mytable("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity") %>% 
   filter(Year_Report == year_report, State == country) %>% 
@@ -211,25 +125,22 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 ::::
 :::
 
-::: {#container-cef style="clear: both"}
-
 ## Cost-efficiency (En route/Terminal charging zone(s))
-
-:::: {#chart-cef style="float: left; width: 60%"}
+::: {.columns}
+  
+:::: {.column width="60%"}
 ```{r}
 #| file: R/chart_level1_cef_er.R
 #| out.width: "100%"
 ```
-
 <br>
-
 ```{r}
 #| file: R/chart_level1_cef_trm.R
 #| out.width: "100%"
 ```
 ::::
 
-:::: {#concl-cef}
+:::: {.column width="40%"}
 ```{r}
 cef_conc <- read_mytable("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF") %>% 
   filter(Year_Report == year_report, State == country) %>% 
@@ -238,7 +149,7 @@ cef_conc <- read_mytable("PRB_findings.xlsx", "cost-efficiency", "Table_Findings
 cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
 ```
 
-`r cef_conc1 `
+`r cap_er_conc1`
 ::::
 :::
 
