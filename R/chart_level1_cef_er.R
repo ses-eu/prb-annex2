@@ -4,6 +4,15 @@ if (exists("data_folder") == FALSE) {
   source("R/parameters.R")
 }
 
+# fix tz if script not executed from qmd file
+if (exists("ez") == FALSE) {ez = 1}
+# tz=1
+
+# initialise list to store plots
+myplot = list()
+
+for (ez in 1:nrow(ecz_list)) {
+
 # import data  ----
 data_raw  <-  read_xlsx(
   paste0(data_folder, "CEFF.xlsx"),
@@ -18,7 +27,7 @@ data_raw  <-  read_xlsx(
 
 data_prep <- data_raw %>% 
   filter(
-    entity_code == ecz_list$ecz_id[1]) %>% 
+    entity_code == ecz_list$ecz_id[ez]) %>% 
   mutate(
     unit_cost_er = round(x5_5_unit_cost_nc2017/x2017_xrate, 2)
   ) %>% 
@@ -83,7 +92,7 @@ myc <-  function(mywidth, myheight, myfont) {
     ) %>% 
     layout(
       font = list(family = "Roboto"),
-      title = list(text=paste0("En route unit costs - ", ecz_list$ecz_name[1]),
+      title = list(text=paste0("En route unit costs - ", ecz_list$ecz_name[ez]),
                    y = 0.99, 
                    x = 0, 
                    xanchor = 'left', 
@@ -130,10 +139,15 @@ myc <-  function(mywidth, myheight, myfont) {
   
 }
 
-myc(NA, 280, 14)
+myplot[[ez]] <- myc(NA, 280, 14)
 
 # export to image ----
 w = 1200
 h = 600
-export_fig(myc(w, h, 14 * w/900),"cef_er1_main.png", w, h)
+export_fig(myc(w, h, 14 * w/900), paste0("cef_er", ez, "_main.png"), w, h)
 
+}
+
+htmltools::tagList(myplot)
+
+# https://stackoverflow.com/questions/35193612/multiple-r-plotly-figures-generated-in-a-rmarkdown-knitr-chunk-document

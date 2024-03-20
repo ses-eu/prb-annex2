@@ -6,14 +6,12 @@ if (exists("data_folder") == FALSE) {
 
   # fix tz if script not executed from qmd file
   if (exists("tz") == FALSE) {tz = 1}
-
-
     # tz=1
 
 # initialise list to store plots
 myplot = list()
 
-for (tz in 1:state_type) {
+for (tz in 1:nrow(tcz_list)) {
 # import data  ----
 data_raw  <-  read_xlsx(
   paste0(data_folder, "CEFF.xlsx"),
