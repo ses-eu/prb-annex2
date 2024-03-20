@@ -161,6 +161,8 @@ tsu_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 :::
 
 ::: {#container-saf style="clear: both"}
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
 
 ## Safety (Main ANSP)
 
@@ -185,6 +187,9 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 :::
 
 ::: {#container-env style="clear: both"}
+
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
 
 ## Environment (Member State)
 
@@ -211,6 +216,8 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ::: {#container-cap style="clear: both"}
 
 ## Capacity (Member State)
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
 
 :::: {#chart-cap style="float: left; width: 60%"}
 ```{r}
@@ -240,6 +247,8 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 :::
 
 ::: {#container-cef style="clear: both"}
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
 
 ## Cost-efficiency (En route/Terminal charging zone(s))
 
