@@ -78,6 +78,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
       x = ~ year,
       y = ~ avg_delay,
       yaxis = "y1",
+      cliponaxis = FALSE,
       name = "Total delay",
       type = 'scatter',  mode = 'lines',
       line = list(color = 'transparent', width = 0),
@@ -128,11 +129,11 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
   layout(
     font = list(family = "Roboto"),
     title = list(text=paste0("Average en route ATFM delay per flight - ", country),
-                 y = 1, 
+                 y = 0.99, 
                  x = 0, 
                  xanchor = 'left', 
                  yanchor =  'top',
-                 font = list(size = myfont * 20/14)
+                 font = list(size = myfont * 20/15)
             ),
     bargap = 0.25,
     barmode = 'stack',
@@ -155,7 +156,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
                  zerolinecolor = 'rgb(255,255,255)',
                  titlefont = list(size = myfont), tickfont = list(size = myfont)
                  ),
-    yaxis2 = list(title = "\n IFR flights ('000)",
+    yaxis2 = list(title = "IFR flights ('000)",
                   overlaying = "y",
                   side = "right",
                   showgrid = FALSE,

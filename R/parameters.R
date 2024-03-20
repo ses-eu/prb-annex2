@@ -15,7 +15,7 @@ library(gt)
 # parameters ----
 
 data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/PBI files/'
-country <- 'Spain'
+country <- 'Poland'
 year_report <- 2022
 
 data_folder_a2 <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/Annex 2/data/'
@@ -89,6 +89,8 @@ read_mytable <- function(file, sheet, table){
   if (country == "Spain") {
     statfor_zone <- ecz_list %>% filter(statfor_ecz_name == "Spain") %>% select(statfor_ecz_name) %>% pull()
      ecz_list <- ecz_list %>% filter (ecz_name != "Spain all")
+  } else {
+    statfor_zone <- ecz_list %>% filter(state  == country) %>% select(statfor_ecz_name) %>% pull()
   }
 
   forecast <- ecz_list %>% select(forecast) %>% pull() %>%  unique()
@@ -105,11 +107,33 @@ read_mytable <- function(file, sheet, table){
     ) 
   
   tsu_share <- paste0(format(round(as.numeric(context_data$tsu_share) *100,1), nsmall=1),'%')
-  
   ert_cost_share <- paste0(format(round(as.numeric(context_data$ert_cost_share) *100,1), nsmall=1),'%')
-
   ert_trm_share <- context_data$ert_trm_share
+  no_apt_big <- context_data$no_apts_big
+  no_apt_small <- context_data$no_apts_small
   
+
+  other_orgs <- read_mytable("Lists.xlsx", "Lists", "Table_PP_2023_ANSPs") %>%  clean_names() %>% 
+    filter(state == .env$country)
+  other_ansps <- other_orgs %>% filter(type == "Other ANSPs") %>% select(ansp)
+  other_met <- other_orgs %>% filter(type == "MET Providers") %>% select(ansp)
+  
+  other_ansps_str <- '- ' 
+  for (i in 1:nrow(other_ansps)) {
+    other_ansps_str <- paste0(if_else(i == 1, '', other_ansps_str),
+                              '• ',
+                              other_ansps[i,],
+                              '<br/>')
+  }
+  
+  other_met_str <- '-' 
+  for (i in 1:nrow(other_met)) {
+    other_met_str <- paste0(if_else(i == 1, '', other_met_str),
+                            '• ',
+                            other_met[i,], 
+                            '<br/>')
+  }
+    
 # get ceff file ----
 ceff_files <- list.files(paste0(data_folder_a2, 'ceff/'))
 

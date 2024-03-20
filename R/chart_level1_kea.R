@@ -121,7 +121,7 @@ myc <-  function(mywidth, myheight, myfont) {
                  x = 0, 
                  xanchor = 'left', 
                  yanchor =  'top',
-                 font = list(size = myfont * 20/14)
+                 font = list(size = myfont * 20/15)
             ),
     bargap = 0.25,
     hovermode = "x unified",
@@ -157,7 +157,8 @@ myc <-  function(mywidth, myheight, myfont) {
       x = 0.5, 
       y =-0.1,
       font = list(size = myfont)
-      )
+      ),
+    margin = list (t = 40)
     
   )
 }

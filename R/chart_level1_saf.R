@@ -172,11 +172,11 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
     layout(
       font = list(family = "Roboto"),
       title = list(text=paste0("EoSM - ", main_safety_ansp),
-                   y = 1, 
+                   y = 0.99, 
                    x = 0, 
                    xanchor = 'left', 
                    yanchor =  'top',
-                   font = list(size = myfont * 20/14)
+                   font = list(size = myfont * 20/15)
       ),
       bargap = 0.25,
       hovermode = "x unified",

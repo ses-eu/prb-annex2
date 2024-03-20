@@ -4,40 +4,46 @@ if (exists("data_folder") == FALSE) {
 }
 ```
 
-[Annual Montiroring Report {{< var doc.year_report >}} - {{< var doc.country >}}]{.fakeh1}
+[Annual Monitoring Report {{< var doc.year_report >}} - {{< var doc.country >}}]{.fakeh1}
 
 ## Contextual information
-
 *`r pp_version`*
 
+<!-- ******************* 1st column -->
 ::: columns
-:::: {.column width="20%"}
+:::: {.column width="30%"}
 ::::: columns
 :::::: {.column width="50%"}
-[**List of ACCs  ** `r acc_no`]{.context-text}
+**List of ACCs  ** `r acc_no`
 ::::::
 
 :::::: {.column width="50%"}
-<!-- note the two spaces at the end to add soft lbs -->
-[`r acc1`  
-  `r acc2`  
-  `r acc3`  
-  `r acc4`  
-  `r acc5`]{.context-text}
+`r acc1`<br/>`r acc2`<br/>`r acc3`<br/>`r acc4`<br/>`r acc5`
+::::::
+:::::
+
+::::: columns
+:::::: {.column width="50%"}
+**No of airports in the scope of the performance plan**
+::::::
+
+:::::: {.column width="50%"}
+**≥80'K    ** `r no_apt_big`<br/> **<80'K     ** `r no_apt_small`
 ::::::
 :::::
 ::::
 
-:::: {.column width="40%"}
-[**Share of Union-wide traffic (TSUs) `r year_report` **    `r tsu_share`]{.context-text}
+<!-- ******************* 2nd column -->
+:::: {.column width="38%"}
+<p style="margin-bottom: 0.5rem"> **Share of Union-wide traffic (TSUs) `r year_report` **  `r tsu_share` </p>
 
-[**Share of Union-wide en route costs `r year_report` ** `r ert_cost_share`]{.context-text}
+<p style="margin-bottom: 0.5rem"> **Share of Union-wide en route costs `r year_report` ** `r ert_cost_share` </p>
 
-[**Share en route / terminal costs `r year_report` ** `r ert_trm_share`]{.context-text}
+**Share en route / terminal costs `r year_report` ** `r ert_trm_share`
 
 ::::: columns
 :::::: {.column width="50%"}
-[**En route charging zone(s)**]{.context-text}
+**En route charging zone(s)**
 ::::::
 
 :::::: {.column width="50%"}
@@ -48,9 +54,7 @@ ecz_list_string <- paste0(
 )
 ```
 
-<div>
-<p class="context-text">`r ecz_list_string`</p>
-</div>
+`r ecz_list_string`
 
 ::::::
 :::::
@@ -68,21 +72,45 @@ tcz_list_string <- paste0(
 )
 ```
 
-<div>
-<p class="context-text">`r tcz_list_string`</p>
-</div>
+`r tcz_list_string`
 
 ::::::
 :::::
 ::::
 
-:::: {.column width="40%"}
-[**Main ANSP ** `r main_ansp`]{.context-text}
+<!-- ******************* 3rd column -->
+:::: {.column width="32%"}
+::::: columns
+:::::: {.column width="30%"}
+**Main ANSP ** 
+::::::
 
-[**Other ANSPs **]{.context-text}
+:::::: {.column width="70%"}
+• `r main_ansp`
+::::::
+:::::
+
+::::: columns
+:::::: {.column width="30%"}
+**Other ANSPs **
+::::::
+
+:::::: {.column width="70%"}
+`r other_ansps_str`
+::::::
+:::::
+
+::::: columns
+:::::: {.column width="30%"}
+**Met Providers **
+::::::
+
+:::::: {.column width="70%"}
+`r other_met_str`
+::::::
+:::::
 
 ::::
-
 :::
 
 ## Traffic (En route traffic zone)
@@ -223,9 +251,11 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 
 <br>
 
-```{r}
+```{r, options=(tz = tz)}
+for (tz in 1:state_type) {
 #| file: R/chart_level1_cef_trm.R
 #| out.width: "100%"
+}
 ```
 ::::
 
@@ -238,7 +268,6 @@ cef_conc <- read_mytable("PRB_findings.xlsx", "cost-efficiency", "Table_Findings
 cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
 ```
 
-`r cef_conc1 `
+`r cef_conc1`
 ::::
 :::
-

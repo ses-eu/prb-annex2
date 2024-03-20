@@ -130,11 +130,11 @@ myc <- function (mywidth, myheight, myfont) {
   layout(
     font = list(family = "Roboto"),
     title = list(text=paste0("En route service units - ", forecast, " - ", country),
-                 y = 1, 
+                 y = 0.99, 
                  x = 0, 
                  xanchor = 'left', 
                  yanchor =  'top',
-                 font = list(size = myfont * 20/14)
+                 font = list(size = myfont * 20/15)
                  ),
     hovermode = "x unified",
     hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
@@ -164,11 +164,13 @@ myc <- function (mywidth, myheight, myfont) {
     # showlegend = FALSE
     legend = list(
       orientation = 'h', 
-      xanchor = "center",
-      x = 0.5, 
+      xanchor = "left",
+      x = -0.1, 
       y =-0.1,
-      font = list(size = myfont)
-      )
+      font = list(size = myfont*0.95)
+      ),
+    margin = list (t = 40)
+    
     
   )
 }

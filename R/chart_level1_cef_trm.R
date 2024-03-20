@@ -4,6 +4,11 @@ if (exists("data_folder") == FALSE) {
   source("R/parameters.R")
 }
 
+  # fix tz if script not executed from qmd file
+  if (exists("tz") == FALSE) {tz = 1}
+
+  # tz=1
+
 # import data  ----
 data_raw  <-  read_xlsx(
   paste0(data_folder, "CEFF.xlsx"),
@@ -18,7 +23,7 @@ data_raw  <-  read_xlsx(
 
 data_prep <- data_raw %>% 
   filter(
-    entity_code == tcz_list$tcz_id[1]) %>% 
+    entity_code == tcz_list$tcz_id[tz]) %>% 
   mutate(
     unit_cost_er = round(x5_5_unit_cost_nc2017/x2017_xrate, 2)
   ) %>% 
@@ -83,12 +88,12 @@ myc <-  function(mywidth, myheight, myfont) {
     ) %>% 
     layout(
       font = list(family = "Roboto"),
-      title = list(text=paste0("Terminal unit costs - ", tcz_list$tcz_name[1]),
-                   y = 1, 
+      title = list(text=paste0("Terminal unit costs - ", tcz_list$tcz_name[tz]),
+                   y = 0.99, 
                    x = 0, 
                    xanchor = 'left', 
                    yanchor =  'top',
-                   font = list(size = myfont * 20/14)
+                   font = list(size = myfont * 20/15)
       ),
       bargap = 0.25,
       hovermode = "x unified",

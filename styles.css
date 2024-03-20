@@ -20,17 +20,6 @@ h1, h2 {
   color: #747a7f;
 }
 
-.context-text {
-  font-size: 0.8rem;
-  margin-bottom: 0rem;
-}
-
-.context-table {
-  border: none;
-  padding: 0px;
-  margin: 0px;
-}
-
 .fakeh1 {
   color: #747a7f;
   font-size: calc(1.325rem + 0.9vw);
