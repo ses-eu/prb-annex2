@@ -7,8 +7,13 @@ if (exists("data_folder") == FALSE) {
   # fix tz if script not executed from qmd file
   if (exists("tz") == FALSE) {tz = 1}
 
-  # tz=1
 
+    # tz=1
+
+# initialise list to store plots
+myplot = list()
+
+for (tz in 1:state_type) {
 # import data  ----
 data_raw  <-  read_xlsx(
   paste0(data_folder, "CEFF.xlsx"),
@@ -39,6 +44,8 @@ data_prep <- data_raw %>%
          status = str_replace(status, "D", "Determined unit cost")
   ) %>% 
   arrange(year_text)
+
+
 
 # plot chart ----
 myc <-  function(mywidth, myheight, myfont) {
@@ -135,10 +142,14 @@ myc <-  function(mywidth, myheight, myfont) {
   
 }
 
-myc(NA, 280, 14)
+myplot[[tz]] <- myc(NA, 280, 14)
 
 # export to image ----
 w = 1200
 h = 600
-export_fig(myc(w, h, 14 * w/900),"cef_trm1_main.png", w, h)
+export_fig(myc(w, h, 14 * w/900),paste0("cef_trm", tz, "_main.png"), w, h)
+}
 
+htmltools::tagList(myplot)
+
+# https://stackoverflow.com/questions/35193612/multiple-r-plotly-figures-generated-in-a-rmarkdown-knitr-chunk-document

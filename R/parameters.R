@@ -11,6 +11,7 @@ library(data.table)
 library(magick)
 library(reactable)
 library(gt)
+library(htmltools)
 
 # parameters ----
 

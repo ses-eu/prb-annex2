@@ -251,11 +251,8 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 
 <br>
 
-```{r, options=(tz = tz)}
-for (tz in 1:state_type) {
+```{r}
 #| file: R/chart_level1_cef_trm.R
-#| out.width: "100%"
-}
 ```
 ::::
 
