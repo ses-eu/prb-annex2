@@ -180,11 +180,13 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
     
   )
 }
-  
-myc(NA, 320, 14, 70)
 
 # export to image ----
 w = 1200
 h = 600
 export_fig(myc(w, h, 14 * w/900, 70 * w/1000),"cap_trm_main.png", w, h)
+  
+myc(NA, 320, 14, 70)
+
+
 

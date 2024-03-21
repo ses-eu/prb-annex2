@@ -1,4 +1,4 @@
-```{r}
+```{r, eval=TRUE}
 if (exists("data_folder") == FALSE) {
   source("R/parameters.R")
 }
@@ -228,8 +228,10 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 <br>
 
 ```{r}
-#| file: R/chart_level1_cap_trm.R
 #| out.width: "100%"
+if(nrow(tcz_list) >0) {
+ source("R/chart_level1_cap_trm.R")
+}
 ```
 ::::
 
@@ -261,8 +263,10 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 <br>
 
 ```{r}
-#| file: R/chart_level1_cef_trm.R
 #| out.width: "100%"
+if(nrow(tcz_list) >0) {
+ source("R/chart_level1_cef_trm.R")
+}
 ```
 ::::
 
