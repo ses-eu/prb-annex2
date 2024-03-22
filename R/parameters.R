@@ -16,7 +16,7 @@ library(htmltools)
 # parameters ----
 
 data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/PBI files/'
-country <- 'Spain'
+country <- 'Ireland'
 year_report <- 2022
 
 data_folder_a2 <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/Annex 2/data/'
@@ -116,23 +116,27 @@ read_mytable <- function(file, sheet, table){
 
   other_orgs <- read_mytable("Lists.xlsx", "Lists", "Table_PP_2023_ANSPs") %>%  clean_names() %>% 
     filter(state == .env$country)
-  other_ansps <- other_orgs %>% filter(type == "Other ANSPs") %>% select(ansp)
-  other_met <- other_orgs %>% filter(type == "MET Providers") %>% select(ansp)
+  other_ansps <- other_orgs %>% filter(type == "Other ANSPs") %>% select(ansp) %>% filter(ansp != '-')
+  other_met <- other_orgs %>% filter(type == "MET Providers") %>% select(ansp) %>% filter(ansp != '-')
   
-  other_ansps_str <- '- ' 
-  for (i in 1:nrow(other_ansps)) {
-    other_ansps_str <- paste0(if_else(i == 1, '', other_ansps_str),
-                              '• ',
-                              other_ansps[i,],
-                              '<br/>')
+  other_ansps_str <- '--'
+  if(nrow(other_ansps)>0) {
+    for (i in 1:nrow(other_ansps)) {
+      other_ansps_str <- paste0(if_else(i == 1, '', other_ansps_str),
+                                '• ',
+                                other_ansps[i,],
+                                '<br/>')
+    }
   }
   
-  other_met_str <- '-' 
-  for (i in 1:nrow(other_met)) {
+  other_met_str <- '--' 
+  if(nrow(other_met)>0) {
+    for (i in 1:nrow(other_met)) {
     other_met_str <- paste0(if_else(i == 1, '', other_met_str),
                             '• ',
                             other_met[i,], 
                             '<br/>')
+    }
   }
     
 # get ceff file ----

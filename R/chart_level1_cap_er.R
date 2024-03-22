@@ -30,7 +30,7 @@ data_prep_target <- data_raw_target %>%
   select(
     year,
     er_cap_target
-  )
+  ) %>% arrange(year)
 
 data_prep_actual <- data_raw_actual %>% 
   filter(

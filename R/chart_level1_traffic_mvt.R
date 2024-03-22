@@ -56,7 +56,8 @@ data_prep_actual <-  data_prep %>%
     )
 
 data_prep_planned <- data_raw_planned %>% 
-  filter(x121_ecz_name == country) %>% 
+  filter(state == country,
+         year > 2020) %>% 
   select(state, year, x121_ecz_ifr_mvt)  %>%
   rename(mvts = x121_ecz_ifr_mvt) %>% 
   mutate(rank = 'Planned')
@@ -123,7 +124,10 @@ myc <- function (mywidth, myheight, myfont) {
   ) %>% 
   layout(
     font = list(family = "Roboto"),
-    title = list(text=paste0("IFR movements - ", forecast, " - ", country),
+    title = list(text=paste0("IFR movements - ", forecast, " - ", 
+                             if_else(country == "Spain", 
+                                     country, ecz_list$ecz_name[1])
+                    ),
                  y = 0.99, 
                  x = 0, 
                  xanchor = 'left', 

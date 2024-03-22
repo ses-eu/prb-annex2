@@ -39,8 +39,7 @@ file.copy('R/yaml_full_version.txt', '_quarto.yml')
 
 # no terminal case
 if (state_type == 0) {
-  genscripts <- list('generate_index_qmd.R',
-                     'generate_saf_qmd.R',
+  genscripts <- list('generate_saf_qmd.R',
                      'generate_env_kea_qmd.R',
                      'generate_env_mil_qmd.R',
                      'generate_cap_er_qmd.R',
@@ -106,7 +105,8 @@ if (atspcheck == 24) {
 # delete and regenerate .qmd files
 root_files <- list.files()
 for (i in 1:length(root_files)) {
-  if (grepl('.qmd', root_files[i], fixed = TRUE) == TRUE) {
+  if ((grepl('.qmd', root_files[i], fixed = TRUE) == TRUE) & 
+      (grepl('index', root_files[i], fixed = TRUE) == FALSE)) {
     file.remove(root_files[i])
   }
 }

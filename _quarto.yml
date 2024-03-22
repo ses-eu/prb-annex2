@@ -12,9 +12,9 @@ website:
     background: "#f8f9fa"
     logo: "images/prb_logo.png"
     left: 
-      - href: https://ses-eu.github.io/prb-monitoring/
+      - href: https://www.sesperformance.eu/
         text: Home
-      - href: https://ses-eu.github.io/prb-monitoring/dashboard.html
+      - href: https://www.sesperformance.eu/dashboard
         text: Interactive dashboard
       - text: "State view"
         menu:
@@ -77,7 +77,7 @@ website:
           - text: "Switzerland"
             href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Switzerland/'
             # ---
-      - href: https://ses-eu.github.io/prb-monitoring/about.html
+      - href: https://www.sesperformance.eu/about
         text: About
       - href: https://transport.ec.europa.eu/transport-modes/air/single-european-sky/ses-performance-and-charging/publications_en
         text: Publications {{< fa external-link-alt >}}

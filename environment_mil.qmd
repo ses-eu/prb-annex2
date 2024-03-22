@@ -1,11 +1,11 @@
 ##  Military dimension
 ### Update on Military dimension of the plan
 
-No impact of military on capacity has been identified. Current decrease in air traffic due to sanctions on Russia and Belorussia and flexible arrangements between the LGS and the National Armed Forces allow for environmentally friendly flight trajectories and it reduces the impact to capacity. <br/><br/>**Additional information related to Russia's war of aggression against Ukraine**<br/>In general, military training activities have increased over the past years. At the same time, civmil airspace design and airspace use flexibility provisions between the NAF and LGS ensure that there's no impact on scheduled air traffic.<br/>New large military FUA areas over Eastern part of the Riga FIR, next to Russian Federation and Belorussia, have been established.
+The impact of military operations on civil traffic was very high in 2022. The war in Ukraine forced the Hungarian air defence and air force to create special training areas which were activated on an ad-hoc basis. Apart from those special air corridors were also established in order to allow the crossing of the allied forces UAVs.<br/><br/>The newly created military areas whose activation was on an ad-hoc basis had a negative effect on capacity, especially in the East sectors of Hungarian airspace.<br/><br/>The war against Ukraine forced the Hungarian air defence and air force to create special training areas which were activated on an ad-hoc basis. Apart from those special air corridors were also established in order to allow the crossing of the allied forces UAVs.<br/><br/>The new ad-hoc areas were not AMC manageable areas, therefore they were activated when it became necessary, so planning was much more difficult.
 
 ### Military - related measures implemented or planned to improve capacity
 
-Each new long term or short term area for military purposes undergoes airspace design analysis with respect to impact on major air traffic flows as to not to disrupt them or to change their vertical dimensions dynamically, if necessary.<br/><br/>Close cooperation between Latvian ANSP and the Latvian military.
+During the implementation of the new ad-hoc activation areas, HungaroControl representatives tried to negotiate the vertical dimension of these areas in a way that makes fewer problems for overflight traffic. <br/><br/>Thanks to the good cooperation between the military and civil sides, these areas were active only when they were really needed and only for so long time which these special tasks in such a war environment required.
 
 ### PI#6 Effective use of reserved or segregated airspace - national level
 
@@ -26,7 +26,7 @@ Each new long term or short term area for military purposes undergoes airspace d
 
 ### Initiatives implemented or planned to improve PI#6
 
-Existing  LGS and NAF airspace booking and airspace use procedures are continuously being updated.  This data includes all FUA areas, including those being active for 24/7 for longer periods of time, but not on continuous basis. Due to involvement of military units from different countries, individual airspace planning and airspace use capabilities are not the same each year and do not ensure the same consistent performance in airspace use, even if planned through the Latvian NAF.  <br/>The results of the assessment are also shared with the Military Aviation Administration for further review.
+The war in Ukraine has had a negative impact on the efficiency of military airspace utilisation.<br/>Unfortunately, as long as there is a war going on in a neighbouring country, the effectiveness of military airspace utilization will remain uncertain.
 
 ### PI#7 Rate of planning via available airspace structures - national level
 
@@ -47,7 +47,7 @@ Existing  LGS and NAF airspace booking and airspace use procedures are continuou
 
 ### Initiatives implemented or planned to improve PI#7
 
-FRA has been implemented in 2015.
+With the implementation of free route airspace in Hungary in 2015 all the ATS routes have been eliminated. <br/>Since that the entire CDR route concept is not applicable anymore in Hungary.
 
 ### PI#8 Rate of using available airspace structures - national level
 
@@ -68,4 +68,4 @@ FRA has been implemented in 2015.
 
 ### Initiatives implemented or planned to improve PI#8
 
-FRA in Riga FIR was implemented in 2015.
+With the implementation of free route airspace in Hungary in 2015 all the ATS routes have been eliminated. <br/>Since that the entire CDR route concept is not applicable anymore in Hungary.

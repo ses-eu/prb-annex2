@@ -1,20 +1,21 @@
 ## Airports
 ### Overview
-Latvia identified 4 airports as subject to RP3 monitoring. In accordance with IR (EU) 2019/317 and the traffic figures at these 4 airports, pre-departure delays are not monitored and the capacity performance monitoring focuses on arrival ATFM delay and slot adherence.<br/>Traffic at these Latvian airports in 2022 was still 36% lower than in 2019, regardless of a 43% increase with respect to 2021.<br/><br/>Average arrival ATFM delays in 2022 was 0.00 min/arr, compared to 0.02 min/arr in 2021.<br/>ATFM slot adherence has improved (2022: 99.6%; 2021: 98.8%).
+Hungary identified only its main airport Budapest as subject to RP3 monitoring. The Airport Operator Data Flow is correctly established and all capacity indicators can be monitored.<br/>Traffic at Budapest airport in 2022 was still by 20% lower compared to 2019 regardless the increase of 80% with respect to 2021.<br/><br/>Like in 2021, no arrival ATFM delays were observed in the entire 2022 at Budapest while ATFM slot adherence has slightly deteriorated (2022: 95.4%; 2021: 96.0%).
 
 
 ### Arrival ATFM Delay
 :::: {.columns}
   
 ::: {.column width="48%" }
-![](images/2022/Latvia/cap_trm_3_1.png)
+![](images/2022/Hungary/cap_trm_3_1.png)
 :::
 
 ::: {.column width="2%" }
 :::
 
 ::: {.column width="50%" }
-Average arrival ATFM delays in 2022 were zero at all three Latvian airports. 
+No arrival ATFM delays were recorded in the entire 2022 at Budapest (LHBP: 2019: 0.03 min/arr.; 2020: 0.08 min/arr.; 2021: 0 min/arr.; 2022: 0 min/arr.)
+Regarding the Russian war, the Hungarian monitoring report mentions that  since all cancelled flights to/and from Russia and Ukraine represented less than 10% of LHBP traffic, and that there were no war related delays at LHBP in 2022. 
 :::
 ::::
 
@@ -23,7 +24,7 @@ Average arrival ATFM delays in 2022 were zero at all three Latvian airports.
 :::: {.columns}
   
 ::: {.column width="48%"}
-![](images/2022/Latvia/cap_trm_2_1.png)
+![](images/2022/Hungary/cap_trm_2_1.png)
 :::
 
 ::: {.column width="2%" }
@@ -39,29 +40,27 @@ The national target on arrival ATFM delay in 2022 was met.
 :::: {.columns}
   
 ::: {.column width="48%"}
-![](images/2022/Latvia/cap_trm_1_1.png)
+![](images/2022/Hungary/cap_trm_1_1.png)
 :::
 
 ::: {.column width="2%" }
 :::
 
 ::: {.column width="50%"}
-Riga's ATFM slot compliance was  99.6%, a further improvement with respect to the already good value in 2021 (98.8%). With regard to the 0.4% of flights that did not adhere, 0.3% was early and 0.1% was late.
-EVVA did not have any regulated departures and EVLA had only 4, with a 100% slot adherence.
-According to the Latvian monitoring report: LGS provides to the CAA monthly summary of the ATFM slot adherence data. In comparison to previous years, ATFM slot adherence has remained very high.,
+Budapest's ATFM slot compliance was 95.4%, very similar to the performance in 2021 (96%). With regard to the 4.6% of flights that did not adhere, 1.5% was early and 3.1% was late.,
 :::
 ::::
 
 
 ### ATC Pre-departure Delay
-This indicator is not monitored for airports below 80 000 IFR movements annual average during the 2016-2018 period, so it is not monitored for any airport in Latvia.
+The performance in terms of ATC pre-departure delay at Budapest has further improved with respect to the previous years (LHBP; 2019: 0.30 min/dep.; 2020: 0.16 min/dep.; 2021: 0.14 min/dep.;  2022: 0.10 min/dep.)
 
 
 ### All Causes Pre-departure Delay
-This indicator is not monitored for airports below 80 000 IFR movements annual average during the 2016-2018 period, so it is not monitored for any airport in Latvia.
+The total (all causes) delay in the actual off block time at Budapest significantly increased in 2022 (LHBP: 2020: 12.58 min/dep.; 2021: 15.61 min/dep.; 2022: 21.12 min/dep.). The highest delays per flight were observed in June and July averaging more than 30 min/dep.<br/>According to the Hungarian monitoring report: *The actual performance in this respect was a bit worse than in the previous years, which could be explained with the overall staffing issues at the LHBP. After COVID-19 pandemic similar staffing problems were  experienced at many airport in Europe.*
 
 
 ### Appendix
 n/a:  airport operator data flow not established, or more than two months of missing / non-validated data<br/>
-![](images/2022/Latvia/cap_trm_4.png)
+![](images/2022/Hungary/cap_trm_4.png)
 

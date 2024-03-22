@@ -129,7 +129,10 @@ myc <- function (mywidth, myheight, myfont) {
   ) %>% 
   layout(
     font = list(family = "Roboto"),
-    title = list(text=paste0("En route service units - ", forecast, " - ", country),
+    title = list(text=paste0("En route service units - ", forecast, " - ", 
+                             if_else(country == "Spain", 
+                                     country, ecz_list$ecz_name[1])
+                             ),
                  y = 0.99, 
                  x = 0, 
                  xanchor = 'left', 

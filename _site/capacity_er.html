@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.427">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>State view – capacity_er</title>
+<title>State view</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -48,17 +48,17 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
-
 <script src="site_libs/core-js-2.5.3/shim.min.js"></script>
-<script src="site_libs/react-17.0.0/react.min.js"></script>
-<script src="site_libs/react-17.0.0/react-dom.min.js"></script>
+<script src="site_libs/react-18.2.0/react.min.js"></script>
+<script src="site_libs/react-18.2.0/react-dom.min.js"></script>
 <script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
-<script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
 <script src="site_libs/reactable-binding-0.4.4/reactable.js"></script>
 
@@ -70,9 +70,9 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     <img src="./images/prb_logo.png" alt="" class="navbar-logo">
     </a>
@@ -83,171 +83,171 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="https://ses-eu.github.io/prb-monitoring/" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="https://www.sesperformance.eu/"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://ses-eu.github.io/prb-monitoring/dashboard.html" rel="" target="">
- <span class="menu-text">Interactive dashboard</span></a>
+    <a class="nav-link" href="https://www.sesperformance.eu/dashboard"> 
+<span class="menu-text">Interactive dashboard</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-state-view" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-state-view" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">State view</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-state-view">    
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Austria/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Austria/">
  <span class="dropdown-text">Austria</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Belgium/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Belgium/">
  <span class="dropdown-text">Belgium</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Bulgaria/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Bulgaria/">
  <span class="dropdown-text">Bulgaria</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Croatia/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Croatia/">
  <span class="dropdown-text">Croatia</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Cyprus/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Cyprus/">
  <span class="dropdown-text">Cyprus</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Czech Republic/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Czech Republic/">
  <span class="dropdown-text">Czech Republic</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Denmark/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Denmark/">
  <span class="dropdown-text">Denmark</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Estonia/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Estonia/">
  <span class="dropdown-text">Estonia</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Finland/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Finland/">
  <span class="dropdown-text">Finland</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/France/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/France/">
  <span class="dropdown-text">France</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Germany/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Germany/">
  <span class="dropdown-text">Germany</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Greece/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Greece/">
  <span class="dropdown-text">Greece</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Hungary/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Hungary/">
  <span class="dropdown-text">Hungary</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Ireland/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Ireland/">
  <span class="dropdown-text">Ireland</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Italy/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Italy/">
  <span class="dropdown-text">Italy</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Latvia/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Latvia/">
  <span class="dropdown-text">Latvia</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Lithuania/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Lithuania/">
  <span class="dropdown-text">Lithuania</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Luxembourg/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Luxembourg/">
  <span class="dropdown-text">Luxembourg</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Malta/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Malta/">
  <span class="dropdown-text">Malta</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Netherlands/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Netherlands/">
  <span class="dropdown-text">Netherlands</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Norway/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Norway/">
  <span class="dropdown-text">Norway</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Poland/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Poland/">
  <span class="dropdown-text">Poland</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Portugal/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Portugal/">
  <span class="dropdown-text">Portugal</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Romania/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Romania/">
  <span class="dropdown-text">Romania</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Slovakia/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Slovakia/">
  <span class="dropdown-text">Slovakia</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Slovenia/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Slovenia/">
  <span class="dropdown-text">Slovenia</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Spain/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Spain/">
  <span class="dropdown-text">Spain</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Sweden/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Sweden/">
  <span class="dropdown-text">Sweden</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Switzerland/" rel="" target="">
+    <a class="dropdown-item" href="https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Switzerland/">
  <span class="dropdown-text">Switzerland</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="https://ses-eu.github.io/prb-monitoring/about.html" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="https://www.sesperformance.eu/about"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://transport.ec.europa.eu/transport-modes/air/single-european-sky/ses-performance-and-charging/publications_en" rel="" target="_blank">
- <span class="menu-text">Publications <i class="fa-solid fa-external-link-alt" aria-label="external-link-alt"></i></span></a>
+    <a class="nav-link" href="https://transport.ec.europa.eu/transport-modes/air/single-european-sky/ses-performance-and-charging/publications_en" target="_blank"> 
+<span class="menu-text">Publications <i class="fa-solid fa-external-link-alt" aria-label="external-link-alt"></i></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./capacity_er.html"><b>3 Capacity</b></a></li><li class="breadcrumb-item"><a href="./capacity_er.html">En route</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./capacity_er.html"><b>3 Capacity</b></a></li><li class="breadcrumb-item"><a href="./capacity_er.html">En route</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><b style="font-size: 1.2rem">Latvia</b></span></a>
+ <span class="menu-text"><b style="font-size: 1.2rem">Hungary</b></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -329,7 +329,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cost-efficiency-er1-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">En route main ANSP (LGS)</span></a>
+ <span class="menu-text">En route main ANSP (HungaroControl (EC))</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -348,7 +348,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cost-efficiency-tz1-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Terminal charging zone - main ANSP (LGS)</span></a>
+ <span class="menu-text">Terminal charging zone - main ANSP (HungaroControl (EC))</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -369,28 +369,12 @@ ul.task-list li input[type="checkbox"] {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#en-route" id="toc-en-route" class="nav-link active" data-scroll-target="#en-route">En route</a>
-  <ul class="collapse">
-  <li><a href="#minutes-of-atfm-en-route-delay" id="toc-minutes-of-atfm-en-route-delay" class="nav-link" data-scroll-target="#minutes-of-atfm-en-route-delay">Minutes of ATFM en-route delay</a></li>
-  <li><a href="#nsas-assessment-of-capacity-performance" id="toc-nsas-assessment-of-capacity-performance" class="nav-link" data-scroll-target="#nsas-assessment-of-capacity-performance">NSA’s assessment of capacity performance</a></li>
-  <li><a href="#monitoring-process-for-capacity-performance" id="toc-monitoring-process-for-capacity-performance" class="nav-link" data-scroll-target="#monitoring-process-for-capacity-performance">Monitoring process for capacity performance</a></li>
-  <li><a href="#capacity-planning" id="toc-capacity-planning" class="nav-link" data-scroll-target="#capacity-planning">Capacity Planning</a></li>
-  <li><a href="#atco-in-ops-fte" id="toc-atco-in-ops-fte" class="nav-link" data-scroll-target="#atco-in-ops-fte">ATCO in OPS (FTE)</a></li>
-  <li><a href="#application-of-corrective-measures-for-capacity-if-applicable" id="toc-application-of-corrective-measures-for-capacity-if-applicable" class="nav-link" data-scroll-target="#application-of-corrective-measures-for-capacity-if-applicable">Application of Corrective Measures for Capacity (if applicable)</a></li>
-  <li><a href="#summary-of-capacity-performance" id="toc-summary-of-capacity-performance" class="nav-link" data-scroll-target="#summary-of-capacity-performance">Summary of capacity performance</a></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
+
 
 
 
@@ -401,49 +385,47 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="minutes-of-atfm-en-route-delay">Minutes of ATFM en-route delay</h3>
 <div class="columns">
 <div class="column" style="width:55%;">
-<div class="cell" data-file="R/table_cap_er_1.R">
+<div class="cell">
 <div class="cell-output-display">
-
-<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-12073cfb5350a6d9af13" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-12073cfb5350a6d9af13">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["National  Target","Actual performance"],"x2020":["0.06","0"],"x2021":["0.01","0"],"x2022":["0.03","0"],"x2023":["0.03",null],"x2024":["0.03",null]},"columns":[{"id":"a","name":"","type":"character","align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":40},{"id":"x2020","name":"2020","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2021","name":"2021","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2022","name":"2022","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2023","name":"2023","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2024","name":"2024","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"6398b041b46781b424f6e92efb6581f3"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-8b371d34e63be70847b7" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-8b371d34e63be70847b7">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["National  Target","Actual performance"],"x2020":["0.9","0"],"x2021":["0.06","0.01"],"x2022":["0.11","0.54"],"x2023":["0.11",null],"x2024":["0.11",null]},"columns":[{"id":"a","name":"","type":"character","align":"left","style":{"whiteSpace":"pre","font-size":"0.8rem"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":40},{"id":"x2020","name":"2020","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2021","name":"2021","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2022","name":"2022","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2023","name":"2023","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12},{"id":"x2024","name":"2024","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":12}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"8d683e9fe6d234679f5b92a5a3e82042"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div><div class="column" style="width:1%;">
 
 </div><div class="column" style="width:44%;">
-<p><strong>Observations</strong> NA</p>
+<p><strong>Observations</strong> The value for en route ATFM delay per flight presented here is subsequent to the NM post operations delay attribution process.</p>
 </div>
 </div>
 </section>
 <section id="nsas-assessment-of-capacity-performance" class="level3">
 <h3 class="anchored" data-anchor-id="nsas-assessment-of-capacity-performance">NSA’s assessment of capacity performance</h3>
-<p>After two years of COVID-19 pandemic, along with the other Baltic states, Latvia was hot by the aftermath of Russian invasion in Ukraine. Sanctions imposed by EU, along with the sanctions imposed by Russia against EU, changed the traffic flows dramatically.<br><br>Traffic flow between Russia to Europe stopped, while the Europe ↔︎ China and Europe ↔︎ SE Asia segments dramatically dropped. Due to restrictions on overflying EU airspace, Russian aircraft operators started to fly over high seas in the Baltic sea in order to connect Kaliningrad to mainland Russia. This increased the traffic in Latvian delegated airspace, but has a negative impact on the receivables of the ANSP.<br><br>Due to Russian invasion in Ukraine and the EU sanctions against the Russia and Belorussia, air traffic flows have remained at approximately 60% of 2019 air traffic level. <br><br>No capacity issues have been identified.</p>
+<p>The Ukrainian war has had a significant impact, in both operational and economic context of the service provision of ANS in Hungary. <br><br>Operational: due to the closure of the Ukrainian airspace and the war-related sanctions, there have been reroutings in the Hungarian airspace, having a net positive impact on the number of overflights. <br><br>Traffic to and from Russia and Ukraine is missing, on the other hand, reroutings to and from North Europe, and the Far East (and other parts of Asia), as well as new routes between Russia and non-EU states have brought a significant amount of additional traffic. The size of this impact has further increased towards the year-end, as the traffic between Europe and Asia started to gain momentum. <br><br>The Hungarian ANSP experienced a very strong recovery (with overflights already passing the 2019-level (by 20% on some days) in 2022), and this was only in part a consequence of the reroutings, there was also a very strong increase of the organic traffic on the South-East axis. Especially in the summer, when leisure traffic from Western Europe to Greece and Türkiye created an unexpected high demand on our flow. <br><br>In addition to the already high demand, ANS provision was impacted by the war in one more way: there were military airspaces to decrease capacity and to increase complexity in the Hungarian airspace. <br><br>Reaction time: there is very little the Hungarian ANSP could have done to react to the explosion of traffic demand in the short run (i.e.&nbsp;through the course of 2022). ATCO training was postponed under COVID (as an adaptation to the traffic decrease) and although already resumed, cannot be accelerated on short notice. <br><br>The originally planned number of ATCOs was not (and will not be) enough to manage the traffic without disruptions (regulations, delays and re-routings of the re-routings).<br><br>The war has caused a significant increase in traffic in Budapest ACC, resulting in traffic reaching pre-COVID 2019 levels already in 2022. Budapest ACC was able to manage the unexpected traffic growth with ca. 60% fewer delays than in 2019, which was though not enough to meet the target, but allowed air traffic on the Eastern border of the Network to operate without any particular problems.<br><br>Our view is that had the war not broken out, Budapest ACC would have been able to handle the 2022 traffic within its capacity target.<br><br>We believe that a very significant part of the excess delay was due to the war. We have flagged this issue to the PRB and EC and also to the Network Management Board already, and although we understand that in 317/2019 the definition of “exceptional event” does not by word apply to our situation, we still believe that by the legislative intent a regular war in the neighbouring country, causing significant disruptions does qualify as an “exceptional event”.</p>
 </section>
 <section id="monitoring-process-for-capacity-performance" class="level3">
 <h3 class="anchored" data-anchor-id="monitoring-process-for-capacity-performance">Monitoring process for capacity performance</h3>
-<p>Capacity monitoring takes place during annual inspections, in addition to regular monthly statistical data sent by the LGS to the LV CAA.</p>
+<p>The war has caused a significant increase in traffic in Budapest ACC, resulting in traffic reaching pre-COVID 2019 levels already in 2022. <br><br>Budapest ACC was able to manage the unexpected traffic growth with ca 60% fewer delays than in 2019, which was though not enough to meet the target, but allowed air traffic on the Eastern border of the Network to operate without any particular problems.</p>
 </section>
 <section id="capacity-planning" class="level3">
 <h3 class="anchored" data-anchor-id="capacity-planning">Capacity Planning</h3>
-<p>Capacity planning measures by LGS are checked during annual inspections.</p>
+<p>Capacity planning with NM for the year 2022 was completed in January with the conclusion that there will be no capacity issue.<br><br>Unfortunately at the end of February Russians started a war against Ukraine, and due to the closure of the Ukrainian airspace, all flights which have used that airspace for overflight before were forced to reroute via our airspace. <br><br>Unfortunately, the capacity planning process did not follow this huge rerouting and we were able to introduce only a few measures for summer in order to manage the extremely increased demand.</p>
 </section>
 <section id="atco-in-ops-fte" class="level3">
 <h3 class="anchored" data-anchor-id="atco-in-ops-fte">ATCO in OPS (FTE)</h3>
 <div class="cell">
 <div class="cell-output-display">
-
-<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d1aaa61e145dc241ad68" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-d1aaa61e145dc241ad68">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Planned (Perf Plan)","Actual"],"x2019":["-","     56"],"x2020":["-","     60"],"x2021":["58","58"],"x2022":["63","58"],"x2023":["62",null],"x2024":["61",null]},"columns":[{"id":"a","name":"Riga ACC","type":"character","align":"left","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":32},{"id":"x2019","name":"2019","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"x2020","name":"2020","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"x2021","name":"2021","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"x2022","name":"2022","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"x2023","name":"2023","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"x2024","name":"2024","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":10}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"38915720848e20ef4a3eead9cee9051f"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-4186eda890daccff6a8a" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-4186eda890daccff6a8a">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"a":["Planned (Perf Plan)","Actual"],"x2019":["-","    106"],"x2020":["-","    101"],"x2021":["111","109"],"x2022":["119","115"],"x2023":["116",null],"x2024":["119",null]},"columns":[{"id":"a","name":"Budapest ACC","type":"character","align":"left","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":32},{"id":"x2019","name":"2019","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"x2020","name":"2020","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"x2021","name":"2021","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"x2022","name":"2022","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"x2023","name":"2023","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":10},{"id":"x2024","name":"2024","type":"character","align":"center","style":{"font-size":"0.8rem","white-space":"wrap"},"headerStyle":{"background":"#D9D9D9","fontSize":"0.8rem","style":{"white-space":"wrap"}},"minWidth":10}],"pagination":false,"highlight":true,"bordered":true,"compact":true,"dataKey":"5818dcc5c57fd633c66e9bfa1f8d78af"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
 <section id="application-of-corrective-measures-for-capacity-if-applicable" class="level3">
 <h3 class="anchored" data-anchor-id="application-of-corrective-measures-for-capacity-if-applicable">Application of Corrective Measures for Capacity (if applicable)</h3>
-<p>Not applicable</p>
+<p>The war has caused a significant increase in traffic in Budapest ACC, resulting in traffic reaching pre-COVID 2019 levels already in 2022. This was unexpected and the measures which were introduced during the first part of the year could only mitigate the capacity shortage. <br><br>Since there is no sign that the war in Ukraine will be over in 2023 and thus the traffic demand in Budapest ACC will remain very high, further adjustments are needed on terms of sector capacities and in the availability of ATCOs, through fine-tuning of the ATCO rostering.</p>
 </section>
 <section id="summary-of-capacity-performance" class="level3">
 <h3 class="anchored" data-anchor-id="summary-of-capacity-performance">Summary of capacity performance</h3>
-<p>Latvia experienced an increase in traffic from 163k flights in 2021, with zero ATFM delay, to 190k flights in 2022, also with zero en route ATFM delay. <br><br>Traffic levels were still substantially below the 295k flights in 2019.</p>
+<p>Hungary experienced an increase in traffic from 491k flights in 2021, with practically zero ATFM delays, to 897k flights in 2022 with 481k minutes of en route AFTM delay. <br><br>The traffic level in 2022 was higher than the 892k flights handled in 2019, which encountered treble the 2022 delays: 1.4 million minutes of ATFM delay. <br><br>There were an additional 318k minutes of en route ATFM delay originating in the Budapest ACC that were re-attributed to DFS (272k) and DSNA (46k) via the NM post operations delay attribution process, according to the NMB agreement for eNM/S22 measures, to ameliorate capacity shortfalls in both Karlsruhe UAC and Reims ACC.</p>
 
 
 </section>
@@ -529,10 +511,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -542,8 +543,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -556,6 +566,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -599,6 +728,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -624,6 +754,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -681,34 +837,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          // default icon
-          link.classList.add("external");
-      }
-    }
 });
 </script>
-<nav class="page-navigation column-body">
+<nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./capacity_trm.html" class="pagination-link">
+      <a href="./capacity_trm.html" class="pagination-link" aria-label="Airports">
         <span class="nav-page-text">Airports</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 

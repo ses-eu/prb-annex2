@@ -35,31 +35,31 @@
   
 ::: {.column width="55%"}
   
-<p style="margin-bottom: 0rem;">**AUC vs. DU**C<br/>In 2022, the en route AUC was -6.0% (or -2.27 €2017) lower than the planned DUC. This results from the combination of significantly lower than planned en route costs in real terms (-6.0%, or -1.1 M€2017) and TSUs that are in line with the plan. It should be noted that actual inflation index in 2022 was +7.8 p.p. higher than planned.<br/><br/>E**n route service unit**s<br/>The difference between actual and planned TSUs (-0.1%) falls inside the ±2% dead band. Hence loss of en route revenues is borne by the ANSPs (see items 10 to 14).<br/><br/>E**n route costs by entit**y<br/>Actual real en route costs are -6.0% (-1.1 M€2017) lower than planned. This is the result of lower costs for the main ANSP, LGS (-5.8%, or -0.9 M€2017), the NSA/EUROCONTROL (-7.4%, or -0.2 M€2017) and the MET service provider (-6.6%, or -0.02 M€2017).<br/><br/>E**n route costs for the main ANSP (LGS) at charging zone leve**l<br/>Significantly lower than planned en route costs in real terms for LGS in 2022 (-5.8%, or -0.9 M€2017) result from:<br/>- Significantly lower staff costs (-9.1%), mainly due to the war in Ukraine, which did not allow a return to pre-COVID situation and had an impact on staff plan and on reallocation of costs between En-route and Terminal, based on Activity Based Costing method.<br/>- Significantly lower other operating costs (-13.1%), resulting from austerity measures required by the new crisis situation (ATCOs training courses cancelled, reduction of direct spending for ATCOs...). <br/>- Significantly higher depreciation (+7.4%), due to the commissioning of several large investment projects, mostly related to ATS and launched before the pandemic. A number of unplanned investments for the ACC also resulted in higher-than-expected costs.<br/>- Significantly higher cost of capital (+6.4%). This can be explained by the fact that a number of investments were commissioned slightly earlier than planned, resulting in higher costs.<br/>- Significantly lower deduction for VFR exempted flights (-12.4%).<br/>**</p>
+<p style="margin-bottom: 0rem;">**AUC vs. DUC**</p>
 
-NA
+In 2022, the en route AUC was -33.8% (or -4 780.28 HUF2017, -15.47 €2017) lower than the planned DUC. This results from the combination of significantly higher than planned TSUs (+31.6%) and significantly lower than planned en route costs in real terms (-12.9%, or -4 417.6 MHUF2017, -14.3 M€2017). It should be noted that actual inflation index in 2022 was +15.4 p.p. higher than planned.
 
-<p style="margin-bottom: 0rem;">**NA**</p>
+<p style="margin-bottom: 0rem;">**En route service units**</p>
 
-NA
+The difference between actual and planned TSUs (+31.6%) falls outside the ±10% threshold foreseen in the traffic risk sharing mechanism. The resulting gain of additional en route revenues is therefore shared between the ANSP and the airspace users, with the ANSP (HungaroControl) retaining an amount of +3.6 M€2017.
 
-<p style="margin-bottom: 0rem;">**NA**</p>
+<p style="margin-bottom: 0rem;">**En route costs by entity**</p>
 
-NA
+Actual real en route costs are -12.9% (-14.3 M€2017) lower than planned. This is the result of lower costs for the main ANSP, HungaroControl (-13.3%, or -12.7 M€2017), the NSA/EUROCONTROL (-10.9%, or -1.2 M€2017) and the MET service provider (-10.4%, or -0.3 M€2017).
 
-<p style="margin-bottom: 0rem;">**NA**</p>
+<p style="margin-bottom: 0rem;">**En route costs for the main ANSP (HungaroControl) at charging zone level**</p>
 
-NA
+Significantly lower than planned en route costs in real terms for HungaroControl in 2022 (-13.3%, or -12.7 M€2017) result from:<br/>- Significantly lower staff costs (-14.1%), due to the postponement of the pay rise for non-ATCO staff and lower than planned execution of the non-ATCO recruitment plan. This result is also impacted by the higher actual inflation index (+15.4 p.p.).<br/>- Significantly lower other operating costs (-26.8%), mainly due to the slower execution of procurement processes and lower travel and training costs. This result is also impacted by the higher actual inflation index (+15.4 p.p.).<br/>- Significantly lower depreciation (-9.8%), due to changes in the investment commissioning schedule. <br/>- Significantly higher cost of capital (+37.4%), understood to be mainly due to a change (correction) in the methodology used to calculate the net current assets (inclusion of pension related obligations towards ATCOs).
 
 :::
   
 ::: {.column width="45%"}
-![](images/2022/Latvia/1_ERT_3.png)
+![](images/2022/Hungary/1_ERT_3.png)
 
-![](images/2022/Latvia/1_ERT_1.png)
+![](images/2022/Hungary/1_ERT_1.png)
 
 
-![](images/2022/Latvia/1_ERT_2.png)
+![](images/2022/Hungary/1_ERT_2.png)
 :::
   
 ::::
@@ -77,7 +77,7 @@ The monitoring of the AUCU is carried out in national currency in nominal terms.
   
 ::: {.column width="61%"}
 
-![](images/2022/Latvia/2_ERT_1.png)
+![](images/2022/Hungary/2_ERT_1.png)
 
 <small>* The traffic adjustment on adjustments is not considered to avoid double counting, as the related adjustments have already been taken into account in full in the AUCU for the current year or previous years.</small><br><small>** The difference in revenue due to the application of the temporary unit rates in 2022, if applicable, is already reflected in the DUC (part to be charged retroactively) and is therefore not considered in the total adjustments, in order to avoid double counting.</small>
 
@@ -113,7 +113,7 @@ Source: These data are taken from the June 2023 en route Reporting Tables (for E
   
 ::: {.column width="45%"}
 
-![](images/2022/Latvia/2_ERT_2.png)
+![](images/2022/Hungary/2_ERT_2.png)
 
 :::
 
@@ -131,4 +131,4 @@ Source: These data are taken from the June 2023 en route Reporting Tables (for E
 
 
 ### 9 Focus on en route AUCU monitoring at charging zone level
-The actual en route unit cost incurred by airspace users (AUCU) in respect of activities performed in 2022 (44.43 €) is +3.3% higher than the nominal DUC (43.03 €). The difference between these two figures (+1.40 €/SU) is due to:<br/>- the positive inflation adjustment resulting from higher than planned inflation (+1.99 €/SU);<br/>- the impact of adjustments resulting from the costs exempted from cost-sharing mechanism (-0.23 €/SU);<br/>- the addition of the traffic adjustment (+0.01 €/SU) for the costs not subject to traffic risk sharing; and<br/>- the deduction of the other revenues (-0.36 €/SU).<br/>The share of the regulatory result (see items 10 to 14) in the AUCU (before the deduction of other revenues) is 11.2%.
+The actual en route unit cost incurred by airspace users (AUCU) in respect of activities performed in 2022 (13 111.30 HUF or 33.58 €) is -17.5% lower than the nominal DUC (15 896.42 HUF or 40.72 €). The difference between these two figures (-2 785.13 HUF/SU or -7.13 €/SU) is due to:<br/>- the positive inflation adjustment resulting from higher than planned inflation (+1 152.64 HUF/SU or +2.95 €/SU);<br/>- the impact of adjustments resulting from the costs exempted from cost-sharing mechanism (-309.87 HUF/SU or -0.79 €/SU);<br/>- the deduction of the traffic risk sharing adjustment (-2 891.14 HUF/SU or -7.41 €/SU);<br/>- the deduction of the traffic adjustment (-459.24 HUF/SU or -1.18 €/SU) for the costs not subject to traffic risk sharing, and,<br/>- the deduction of the other revenues (-277.50 HUF/SU or -0.71 €/SU).<br/>The share of the regulatory result (see items 10 to 14) in the AUCU (before the deduction of other revenues) is 21.8%.
