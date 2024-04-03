@@ -11,4 +11,4 @@ htmltools::tagList(t)
 
 
 <p style = "margin-bottom: 0px;">**<br/>Total other ANSP overall regulatory result (RR) for the terminal activity**</p>
-Ex-post, the overall RR for the other ANSP in the terminal charging zone for Hungary (Hungary MET) corresponds to 14.6% of the terminal revenues. The ex-post RoE is 38.0%.<br/>It should be noted that no cost of capital (and associated assumptions) was included in the PP.
+Ex-post, the overall RR for the other ANSP in the terminal charging zone for Austria (Austria-MET) corresponds to 22.3% of the terminal revenues. The ex-post RoE 338.4% is higher than planned 7.3%.

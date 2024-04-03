@@ -34,7 +34,7 @@ data_prep_target <- data_raw_target %>%
 
 data_prep_actual <- data_raw_actual %>% 
   filter(
-    entity_name == main_ansp) %>% 
+    entity_name == main_ansp_aua) %>% 
   pivot_longer(
     cols = c(avg_atc_cap, avg_atc_stff, avg_atc_dsrptn, avg_weather, avg_other_nonatc),
     names_to = "type",
@@ -152,6 +152,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
                  showgrid = TRUE,
                  showline = FALSE,
                  tickformat = ".2f",
+                 rangemode = "nonnegative",
                  zeroline = TRUE,
                  zerolinecolor = 'rgb(255,255,255)',
                  titlefont = list(size = myfont), tickfont = list(size = myfont)
@@ -162,6 +163,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
                   showgrid = FALSE,
                  showline = FALSE,
                  tickformat = ",",
+                 rangemode = "nonnegative",
                  zeroline = TRUE,
                  zerolinecolor = 'rgb(255,255,255)',
                  titlefont = list(size = myfont), tickfont = list(size = myfont)

@@ -1,30 +1,23 @@
 ## Airports
 ### Overview
-Hungary identified only its main airport Budapest as subject to RP3 monitoring. The Airport Operator Data Flow is correctly established and all capacity indicators can be monitored.<br/>Traffic at Budapest airport in 2022 was still by 20% lower compared to 2019 regardless the increase of 80% with respect to 2021.<br/><br/>Like in 2021, no arrival ATFM delays were observed in the entire 2022 at Budapest while ATFM slot adherence has slightly deteriorated (2022: 95.4%; 2021: 96.0%).
+Austria identified six airports as subject to RP3 monitoring. According to the traffic figures at these 4 airports, only Vienna (LOWW) must be monitored for pre-departure delays. <br/>The Airport Operator Data Flow, necessary for the monitoring of these pre-departure delays, is correctly established where required and the monitoring of all capacity indicators can be performed.<br/>Traffic at the ensemble of these airports increased by 58% in 2022 with respect to 2021 but it is still 25% below 2019 levels.<br/><br/>During 2022, arrival ATFM delays in Austria remained very low and ATFM slot adherence improved (2022: 98.8%; 2021: 97.4%) resulting in values above 95% for all airports.
 
 
 ### Arrival ATFM Delay
-:::: {.columns}
-  
-::: {.column width="48%" }
-![](images/2022/Hungary/cap_trm_3_1.png)
-:::
-
-::: {.column width="2%" }
-:::
-
-::: {.column width="50%" }
-No arrival ATFM delays were recorded in the entire 2022 at Budapest (LHBP: 2019: 0.03 min/arr.; 2020: 0.08 min/arr.; 2021: 0 min/arr.; 2022: 0 min/arr.)
-Regarding the Russian war, the Hungarian monitoring report mentions that  since all cancelled flights to/and from Russia and Ukraine represented less than 10% of LHBP traffic, and that there were no war related delays at LHBP in 2022. 
-:::
-::::
+![](images/2022/Austria/cap_trm_3_1.png)
+Average arrival ATFM delay in Austria in 2022 was 0.15 min/arr, compared to 0.11 min/arr in 2021. 
+Only Vienna and Innsbruck registered delays in 2022.
+At Vienna (LOWW: 2019: 0.91 min/arr.; 2020: 0.49 min/arr.; 2021: 0.14 min/arr.; 2022: 0.19 min/arr.) 68% of these delays were attributed to weather and 26% to ATC staffing issues. 
+Innsbruck (LOWI: 2020: 0.18 min/arr.; 2021: 0.09 min/arr.; 2021: 0.17 min/arr.; 2022: 0.17 min/arr.) observed arrival ATFM delays only in January, February and December and were all related to weather.
+According to the Austrian monitoring report there were no changes in TFC flows / patterns around airports due to the Russian war. 
+                      
 
 
 ### Arrival ATFM Delay – National Target
 :::: {.columns}
   
 ::: {.column width="48%"}
-![](images/2022/Hungary/cap_trm_2_1.png)
+![](images/2022/Austria/cap_trm_2_1.png)
 :::
 
 ::: {.column width="2%" }
@@ -37,30 +30,21 @@ The national target on arrival ATFM delay in 2022 was met.
 
 
 ### ATFM Slot Adherence
-:::: {.columns}
-  
-::: {.column width="48%"}
-![](images/2022/Hungary/cap_trm_1_1.png)
-:::
-
-::: {.column width="2%" }
-:::
-
-::: {.column width="50%"}
-Budapest's ATFM slot compliance was 95.4%, very similar to the performance in 2021 (96%). With regard to the 4.6% of flights that did not adhere, 1.5% was early and 3.1% was late.,
-:::
-::::
+![](images/2022/Austria/cap_trm_1_1.png)
+All Austrian airports showed adherence above 95% and the national average was 98.8%, an improvement with respect to 2021 (97.4%). With regard to the 1.2% of flights that did not adhere, 0.9% was early and 0.3% was late
+According to the Austrian monitoring report: In general, slot adherence improved again, compared to the previous COVID years and has reached the high standards as before COVID-19. 
+                      
 
 
 ### ATC Pre-departure Delay
-The performance in terms of ATC pre-departure delay at Budapest has further improved with respect to the previous years (LHBP; 2019: 0.30 min/dep.; 2020: 0.16 min/dep.; 2021: 0.14 min/dep.;  2022: 0.10 min/dep.)
+Vienna is the only Austrian airport subject to the monitoring of this indicator. The performance has deteriorated (LOWW; 2019: 1.56 min/dep.; 2020: 0.75 min/dep.; 2021: 0.63 min/dep.; 2022: 0.92min/dep.) but remained under 2019 values.<br/>According to the Austrian monitoring report: *Performance is stable and improved even in comparison to traffic volumes of previous years, including 2019 and 2018. Main reason is full implementation of Airport CDM since April 2022.*
 
 
 ### All Causes Pre-departure Delay
-The total (all causes) delay in the actual off block time at Budapest significantly increased in 2022 (LHBP: 2020: 12.58 min/dep.; 2021: 15.61 min/dep.; 2022: 21.12 min/dep.). The highest delays per flight were observed in June and July averaging more than 30 min/dep.<br/>According to the Hungarian monitoring report: *The actual performance in this respect was a bit worse than in the previous years, which could be explained with the overall staffing issues at the LHBP. After COVID-19 pandemic similar staffing problems were  experienced at many airport in Europe.*
+Vienna is the only Austrian airport subject to the monitoring of this indicator. <br/>The total (all causes) delay in the actual off block time at Vienna in 2022 increased drastically to 14.60 min/dep. The highest delays per flight were observed from June to August.<br/>According to the Austrian monitoring report: *Increasing traffic caused additional 'All cause departure delays per flight'. No ATC Departure Delays have been applied. *
 
 
 ### Appendix
 n/a:  airport operator data flow not established, or more than two months of missing / non-validated data<br/>
-![](images/2022/Hungary/cap_trm_4.png)
+![](images/2022/Austria/cap_trm_4.png)
 

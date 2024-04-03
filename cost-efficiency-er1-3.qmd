@@ -11,4 +11,4 @@ htmltools::tagList(t)
 
 
 <p style = "margin-bottom: 0px;">**<br/>Total other ANSP overall regulatory result (RR) for the en route activity**</p>
-Ex-post, the overall RR for the other ANSP in the en route charging zone for Hungary (Hungary MET) corresponds to 8.7% of the en route revenues. The ex-post RoE 18.3% is higher than planned 3.5%.
+Ex-post, the overall RR for the other ANSP in the en route charging zone for Austria (Austria MET) corresponds to 18.6% of the en route revenues. The ex-post RoE 358.6% is higher than planned 7.3%.

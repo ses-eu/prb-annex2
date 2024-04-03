@@ -155,6 +155,7 @@ myfig <- function(){
                    showgrid = TRUE,
                    showline = FALSE,
                    tickformat = ".2f",
+                   rangemode = "nonnegative",
                    zeroline = TRUE,
                    zerolinecolor = 'rgb(255,255,255)',
                    titlefont = list(size = myfont), tickfont = list(size = myfont)

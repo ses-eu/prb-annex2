@@ -16,7 +16,7 @@ library(htmltools)
 # parameters ----
 
 data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/PBI files/'
-country <- 'Ireland'
+country <- 'Austria'
 year_report <- 2022
 
 data_folder_a2 <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/Annex 2/data/'
@@ -61,8 +61,12 @@ read_mytable <- function(file, sheet, table){
 # get main state parameters  ----
   state_parameters <- read_mytable("Lists.xlsx", "Lists", "Table_States") %>% 
     filter(State == country) %>% clean_names()
+  
+  aua_entities <- read_mytable("Lists.xlsx", "Lists", "Table_AUA") %>% 
+    filter(State == country) %>% clean_names()
 
   main_ansp <- state_parameters %>% select(main_ansp) %>% pull()
+  main_ansp_aua <- aua_entities %>%  filter(year == .env$year_report) %>% select(ansp_name) %>% pull()
   nat_curr <- state_parameters %>% select(currency) %>% pull()
   state_type <- state_parameters %>% select(dashboard_case) %>% pull()
   pp_version <- state_parameters %>% select(pp_adoption_full) %>% pull()

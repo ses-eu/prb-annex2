@@ -1,7 +1,7 @@
 ## Airports
 ### Overview
 
-Hungary identified only its main airport Budapest as subject to RP3 monitoring. The Airport Operator Data Flow is correctly established and all environmental indicators can be monitored.<br/>Traffic at Budapest airport in 2022 was still by 20% lower compared to 2019 regardless the increase of 80% with respect to 2021.<br/>Both additional time indicators remained in 2022 lower than the 2019 values.<br/>The share of CDO flights for Budapest has decreased to 25.8% which is below the overall RP3 value in 2022.
+Austria identified six airports as subject to RP3 monitoring. According to the traffic figures at these 6 airports, only Vienna (LOWW) must be monitored for additional taxi-out and ASMA times. <br />The Airport Operator Data Flow, necessary for the monitoring of the additional times, is correctly established where required and the monitoring of all environment indicators can be performed.<br />Traffic at the ensemble of these airports increased by 58% in 2022 with respect to 2021 but it is still 25% below 2019 levels.<br />Observed additional times at Vienna remain low- compared to pre-COVID levels. The share of CDO flights reduced from 29.2% to 27.9% in 2022.
 
 ### Additional Taxi-Out Time															
 
@@ -9,7 +9,7 @@ Hungary identified only its main airport Budapest as subject to RP3 monitoring. 
   
 ::: {.column width="48%"}
 <br>
-![](images/2022/Hungary/env_apt_1.png)
+![](images/2022/Austria/env_apt_1.png)
 
 :::
 
@@ -18,7 +18,7 @@ Hungary identified only its main airport Budapest as subject to RP3 monitoring. 
 
 ::: {.column width="50%"}
 <br>
-Additional taxi-out times at Budapest (LHBP; 2019: 1.63 min/dep.; 2020:  0.87 min/dep.; 2021:  1.06 min/dep.;  2022:  1.4 min/dep.) have gradually increased during RP3.<br/>According to the Hungarian monitoring report: *Since the actual value of this PI is still acceptable, no additional initiatives are needed.*   
+Additional taxi-out times at Vienna remain around 2 min/dep in 2022 (LOWW; 2019: 3.1 min/dep.; 2020: 2.07 min/dep.; 2021: 1.94 min/dep.;2022: 2.09 min/dep.) <br />According to the Austrian monitoring report: *Continuous improvements are made to shorten taxi times, nonetheless, various facts like partial closure of gates due to COVID at the beginning of 2022 were influencing ground movements.*   
 
 :::
 ::::
@@ -30,7 +30,7 @@ Additional taxi-out times at Budapest (LHBP; 2019: 1.63 min/dep.; 2020:  0.87 mi
   
 ::: {.column width="48%"}
 <br>
-![](images/2022/Hungary/env_apt_2.png)
+![](images/2022/Austria/env_apt_2.png)
 
 :::
 
@@ -39,7 +39,7 @@ Additional taxi-out times at Budapest (LHBP; 2019: 1.63 min/dep.; 2020:  0.87 mi
 
 ::: {.column width="50%"}
 <br>
-The additional times in the terminal airspace in 2022 have significantly decreased (LHBP; 2019: 0.85 min/arr.; 2020: 0.66 min/arr.; 2021: 0.67 min/arr.; 2022: 0.34 min/arr.)  resulting in one of the lowest additional ASMA times amongst the SES monitored airports.<br/><br/>According to the Hungarian monitoring report: *As the actual value of this PI shows improvement compared to the previous year's value therefore no additional initiatives are needed.*   
+Additional ASMA times at Vienna lowered again in 2022 and are now 61% lower than pre-COVID (LOWW; 2019: 2.13 min/arr.; 2020: 1.28 min/arr.; 2021: 0.95 min/arr.;2022: 0.82 min/arr.) <br />According to the Austrian monitoring report the *AMAN functionality has been fully applied.*   
 
 :::
 ::::
@@ -47,29 +47,13 @@ The additional times in the terminal airspace in 2022 have significantly decreas
 
 
 ### Share of arrivals applying CDO
-
-:::: {.columns}
-  
-::: {.column width="48%"}
 <br>
-![](images/2022/Hungary/env_apt_3.png)
-:::
-
-::: {.column width="2%"}
-:::
-
-::: {.column width="50%"}
-<br>
-The share of CDO flights for Budapest (LHBP) has decreased from 34.0% in 2021 to 25.8% in 2022. This value is  below the overall RP3 value in 2022 (29.0%).<br/>From April to October, the monthly values were below 25%.<br/><br/>According to the Hungarian monitoring report: *Since the actual value of this PI is still acceptable, no additional initiatives are needed.   
-:::
-::::
-
- 
+![](images/2022/Austria/env_apt_3.png)<p>Vienna (LOWW) has the highest share of CDO flights in Austria: 30.6% which is slightly higher than the overall RP3 value in 2022 (29.0%).</p><p>The other airports have 24-30% of CDO flights, except for Innsbruck (LOWI): 15.7% and Salzburg (LOWS): 13.9%.</p><p>All airports have seen a (slight) reduction of the share of CDO flights, except for Klagenfurt (LOWK) which had an increase of 3.4 percentage points.</p><p>According to the Austrian monitoring report: *Awareness campaigns on both sides, ATCOs and Airlines increase the CDO application. Despite additional traffic compared to 2020 and 2021, the CDO value could be maintained or even improved.</p>* 
                       
 
 ### Appendix
 
-n/a:  airport operator data flow not established, or more than two months of missing / non-validated data<br/>   
+n/a:  airport operator data flow not established, or more than two months of missing / non-validated data<br />   
 
-![](images/2022/Hungary/env_apt_4.png)
+![](images/2022/Austria/env_apt_4.png)
 

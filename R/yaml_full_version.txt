@@ -87,6 +87,19 @@ website:
     contents:
       - text: '<b style= "font-size: 1.2rem">{{< var doc.country >}}</b>'
         href: index.html
+      - section: "<b>Overview</b>"
+        contents:
+          - text: "Traffic"
+            href: index.html#traffic-en-route-traffic-zone
+          - text: "Safety"
+            href: index.html#safety-main-ansp
+          - text: "Environment"
+            href: index.html#environment-member-state
+          - text: "Capacity"
+            href: index.html#capacity-member-state
+          - text: "Cost-efficiency"
+            href: index.html#cost-efficiency-en-routeterminal-charging-zones
+      - text: "---"
       - text: "<b>1 Safety</b>"
         href: safety.html
       - text: "---"

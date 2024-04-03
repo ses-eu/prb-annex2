@@ -1,0 +1,163 @@
+project:
+  type: website
+  execute-dir: project
+  
+website:
+  title: "State view"
+  search: false 
+  favicon: "images/prb_logo_smaller.png"
+  page-navigation: true
+  navbar:
+    title: false
+    background: "#f8f9fa"
+    logo: "images/prb_logo.png"
+    left: 
+      - href: https://www.sesperformance.eu/
+        text: Home
+      - href: https://www.sesperformance.eu/dashboard
+        text: Interactive dashboard
+      - text: "State view"
+        menu:
+          - text: "Austria"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Austria/'
+          - text: "Belgium"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Belgium/'
+          - text: "Bulgaria"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Bulgaria/'
+          - text: "Croatia"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Croatia/'
+          - text: "Cyprus"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Cyprus/'
+          - text: "Czech Republic"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Czech Republic/'
+          - text: "Denmark"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Denmark/'
+          - text: "Estonia"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Estonia/'
+          - text: "Finland"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Finland/'
+          - text: "France"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/France/'
+          - text: "Germany"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Germany/'
+          - text: "Greece"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Greece/'
+          - text: "Hungary"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Hungary/'
+          - text: "Ireland"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Ireland/'
+          - text: "Italy"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Italy/'
+          - text: "Latvia"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Latvia/'
+          - text: "Lithuania"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Lithuania/'
+          - text: "Luxembourg"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Luxembourg/'
+          - text: "Malta"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Malta/'
+          - text: "Netherlands"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Netherlands/'
+          - text: "Norway"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Norway/'
+          - text: "Poland"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Poland/'
+          - text: "Portugal"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Portugal/'
+          - text: "Romania"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Romania/'
+          - text: "Slovakia"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Slovakia/'
+          - text: "Slovenia"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Slovenia/'
+          - text: "Spain"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Spain/'
+          - text: "Sweden"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Sweden/'
+          - text: "Switzerland"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Switzerland/'
+            # ---
+      - href: https://www.sesperformance.eu/about
+        text: About
+      - href: https://transport.ec.europa.eu/transport-modes/air/single-european-sky/ses-performance-and-charging/publications_en
+        text: Publications {{< fa external-link-alt >}}
+        target: "_blank"
+
+  sidebar: 
+    contents:
+      - text: '<b style= "font-size: 1.2rem">{{< var doc.country >}}</b>'
+        href: index.html
+      - section: "<b>Overview</b>"
+        contents:
+          - text: "Traffic"
+            href: index.html#traffic-en-route-traffic-zone
+          - text: "Safety"
+            href: #safety-main-ansp
+          - text: "Environment"
+          - text: "Capacity"
+          - text: "Cost-efficiency"
+      - text: "---"
+      - text: "<b>1 Safety</b>"
+        href: safety.html
+      - text: "---"
+      - section: "<b>2 Environment</b>"
+        contents:
+          # - text: "2.1 Horizontal flight efficiency"
+          #   href: environment_kea.html
+          - environment_kea.qmd
+          - environment_apt.qmd
+          - environment_mil.qmd
+      - text: "---"
+      - section: "<b>3 Capacity</b>"
+        contents:
+          - capacity_er.qmd
+          - capacity_trm.qmd
+      - text: "---"
+      - section: "<b>4 Cost-efficiency</b>"
+        contents:
+          - cost-efficiency-er1-1.qmd
+          - cost-efficiency-er1-2.qmd
+          - cost-efficiency-er1-3.qmd
+          - text: '----'
+          - cost-efficiency-tz1-1.qmd
+          - cost-efficiency-tz1-2.qmd
+          - cost-efficiency-tz1-3.qmd
+          - text: '-----'
+          - cost-efficiency-tz2-1.qmd
+          - cost-efficiency-tz2-2.qmd
+          - cost-efficiency-tz2-3.qmd
+          - text: '----'
+          - cost-efficiency-g2g.qmd
+  # 
+  # site-url: "https://eurocontrol.int/"
+
+  # page-footer: 
+  #   center: 
+  #     - href: '/'
+  #       text: '© European Union, 2023'
+  #     - href: disclaimer.qmd
+  #       text: "{{< fa triangle-exclamation >}} Disclaimer"
+  #     - href: mailto:prb-office@prb.eusinglesky.eu
+  #       text: '{{< fa envelope color="#ffffff">}} prb-office@prb.eusinglesky.eu'
+      # - text: 'Powered by EUROCONTROL'
+      #   href: 'https://www.eurocontrol.int/' 
+
+format:
+  html:
+    theme: cosmo
+    toc: false
+    toc-depth: 3
+    number-sections: false
+    number-depth: 2
+    page-layout: full
+    css: styles.css
+    link-external-newwindow: true
+    link-external-icon: true
+    # link-external-filter: '^(?:http:|https:)\/\/ansperformance\.eu\/|^(?:http:|https:)\/\/.*ace-handbook\.netlify\.app\/'
+    grid:
+      sidebar-width: 200px
+      margin-width: 200px
+    
+execute:
+  echo: false
+  warning: false

@@ -1,11 +1,11 @@
 ##  Military dimension
 ### Update on Military dimension of the plan
 
-The impact of military operations on civil traffic was very high in 2022. The war in Ukraine forced the Hungarian air defence and air force to create special training areas which were activated on an ad-hoc basis. Apart from those special air corridors were also established in order to allow the crossing of the allied forces UAVs.<br/><br/>The newly created military areas whose activation was on an ad-hoc basis had a negative effect on capacity, especially in the East sectors of Hungarian airspace.<br/><br/>The war against Ukraine forced the Hungarian air defence and air force to create special training areas which were activated on an ad-hoc basis. Apart from those special air corridors were also established in order to allow the crossing of the allied forces UAVs.<br/><br/>The new ad-hoc areas were not AMC manageable areas, therefore they were activated when it became necessary, so planning was much more difficult.
+Military dimension has little to no impact on the environmental KPA, due to a highly efficient and flexible use of airspace with close military coordination.<br/><br/>Practically no impact of MIL dimension on the capacity KPA.<br/>The planning of airspace use at pre-tactical level is done via the civil/military joint unit Airspace Management Cell<br/>(AMC). Day-to-day co-ordination of Operational Air Traffic (OAT) and General Air Traffic (GAT) is handled at the tactical level between civil ATS Units and representatives of the Military Control Centre (MCC).<br/>FUA Level 3 is fully applied.
 
 ### Military - related measures implemented or planned to improve capacity
 
-During the implementation of the new ad-hoc activation areas, HungaroControl representatives tried to negotiate the vertical dimension of these areas in a way that makes fewer problems for overflight traffic. <br/><br/>Thanks to the good cooperation between the military and civil sides, these areas were active only when they were really needed and only for so long time which these special tasks in such a war environment required.
+n/a
 
 ### PI#6 Effective use of reserved or segregated airspace - national level
 
@@ -26,7 +26,7 @@ During the implementation of the new ad-hoc activation areas, HungaroControl rep
 
 ### Initiatives implemented or planned to improve PI#6
 
-The war in Ukraine has had a negative impact on the efficiency of military airspace utilisation.<br/>Unfortunately, as long as there is a war going on in a neighbouring country, the effectiveness of military airspace utilization will remain uncertain.
+Preparations for LARA implementation are set, which is planned for operational use by end 2023.
 
 ### PI#7 Rate of planning via available airspace structures - national level
 
@@ -47,7 +47,7 @@ The war in Ukraine has had a negative impact on the efficiency of military airsp
 
 ### Initiatives implemented or planned to improve PI#7
 
-With the implementation of free route airspace in Hungary in 2015 all the ATS routes have been eliminated. <br/>Since that the entire CDR route concept is not applicable anymore in Hungary.
+nothing reported
 
 ### PI#8 Rate of using available airspace structures - national level
 
@@ -68,4 +68,4 @@ With the implementation of free route airspace in Hungary in 2015 all the ATS ro
 
 ### Initiatives implemented or planned to improve PI#8
 
-With the implementation of free route airspace in Hungary in 2015 all the ATS routes have been eliminated. <br/>Since that the entire CDR route concept is not applicable anymore in Hungary.
+Not yet measured, as CDRs are not in place, and due to extremely flexible usage of airspace, nearly all aircraft planning through reserved area are able to do so.<br/>Only a few aircraft might be subject to minor reroutings (horizontal / vertical).
