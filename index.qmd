@@ -175,7 +175,7 @@ tsu_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 :::: {#concl-saf}
 ```{r}
-saf_conc <- read_mytable("PRB_findings.xlsx", "traffic_SUs", "Table_Findings_traffic_TSU") %>% 
+saf_conc <- read_mytable("PRB_findings.xlsx", "safety", "Table_Findings_safety") %>% 
   filter(Year_Report == year_report, State == country) %>% 
   select(Conclusion) %>% toString() %>% paste0(., "@")
 

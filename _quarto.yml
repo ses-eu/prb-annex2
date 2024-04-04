@@ -79,6 +79,8 @@ website:
             # ---
       - href: https://www.sesperformance.eu/about
         text: About
+      - href: https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Network%20Manager/
+        text: NM View
       - href: https://transport.ec.europa.eu/transport-modes/air/single-european-sky/ses-performance-and-charging/publications_en
         text: Publications {{< fa external-link-alt >}}
         target: "_blank"
@@ -94,8 +96,11 @@ website:
           - text: "Safety"
             href: #safety-main-ansp
           - text: "Environment"
+            href: index.html##environment-member-state
           - text: "Capacity"
+            href: index.html#capacity-member-state
           - text: "Cost-efficiency"
+            href: index.html##cost-efficiency-en-routeterminal-charging-zones
       - text: "---"
       - text: "<b>1 Safety</b>"
         href: safety.html
@@ -118,15 +123,15 @@ website:
           - cost-efficiency-er1-1.qmd
           - cost-efficiency-er1-2.qmd
           - cost-efficiency-er1-3.qmd
-          - text: '----'
+          - text: "---"
           - cost-efficiency-tz1-1.qmd
           - cost-efficiency-tz1-2.qmd
           - cost-efficiency-tz1-3.qmd
-            # - text: '-----'
+          - text: "---"
             # - cost-efficiency-tz2-1.qmd
             # - cost-efficiency-tz2-2.qmd
             # - cost-efficiency-tz2-3.qmd
-          - text: '----'
+          - text: "---"
           - cost-efficiency-g2g.qmd
   # 
   # site-url: "https://eurocontrol.int/"
@@ -161,3 +166,4 @@ format:
 execute:
   echo: false
   warning: false
+  

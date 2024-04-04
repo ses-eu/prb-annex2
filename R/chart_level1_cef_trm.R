@@ -25,8 +25,6 @@ myfig <- function(){
     clean_names() 
   
   # prepare data ----
-  ##xxx this will have to be parametrised
-  
   data_prep <- data_raw %>% 
     filter(
       entity_code == tcz_list$tcz_id[tz]) %>% 

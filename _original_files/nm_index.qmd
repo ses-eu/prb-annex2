@@ -1,0 +1,148 @@
+```{r, eval=TRUE}
+if (exists("data_folder") == FALSE) {
+  source("R/parameters.R")
+}
+```
+
+[Annual Monitoring Report {{< var doc.year_report >}} - Network Manager]{.fakeh1}
+
+*`r pp_version`*
+
+## Safety (Network Manager - SES RP3 area)
+
+::: {#container-saf1}
+:::: {#chart-eosm style="float: left; width: 60%"}
+```{r}
+#| file: R/chart_level1_saf_nm.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#concl-eosm}
+```{r}
+saf_conc <- read_mytable("NM findings.xlsx", "NM_findings_EoSM", "NM_findings_EoSM") %>% 
+  filter(Year_Report == year_report) %>% 
+  select(Conclusion) %>% toString() %>% paste0(., "@")
+
+saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+```
+
+`r saf_conc1`
+::::
+:::
+
+::: {#container-saf2 style="clear: both"}
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+:::: {#chart-deliveries style="float: left; width: 60%"}
+```{r}
+#| file: R/chart_level1_saf_deliveries_nm.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#concl-deliveries}
+```{r}
+saf_conc <- read_mytable("NM findings.xlsx", "NM_findings_over", "NM_findings_over") %>% 
+  filter(Year_Report == year_report) %>% 
+  select(Conclusion) %>% toString() %>% paste0(., "@")
+
+saf_conc2 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+```
+
+`r saf_conc2`
+::::
+:::
+
+::: {#container-env style="clear: both"}
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+## Environment (Network Manager - SES RP3 area)
+
+:::: {#chart-env style="float: left; width: 60%"}
+```{r}
+#| file: R/chart_level1_kea.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#concl-env}
+```{r}
+env_conc <- read_mytable("NM findings.xlsx", "NM_findings_KEP", "NM_findings_KEP") %>% 
+  filter(Year_Report == year_report) %>% 
+  select(Conclusion) %>% toString() %>% paste0(., "@")
+
+env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+```
+
+`r env_conc1`
+::::
+:::
+
+::: {#container-cap style="clear: both"}
+
+## Capacity (Network Manager - SES RP3 area)
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+:::: {#chart-cap style="float: left; width: 60%"}
+```{r}
+#| file: R/chart_level1_cap_er_nm.R
+#| out.width: "100%"
+```
+
+<br>
+
+```{r}
+#| file: R/chart_level1_cap_trm_nm.R
+#| out.width: "100%"
+```
+
+<br>
+
+```{r}
+#| file: R/chart_level1_cap_15m_nm.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#concl-cap}
+```{r}
+cap_er_conc <- read_mytable("NM findings.xlsx", "NM_findings_CAP", "NM_findings_CAP") %>% 
+  filter(Year_Report == year_report) %>% 
+  select(Conclusion) %>% toString() %>% paste0(., "@")
+
+cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+```
+
+`r cap_er_conc1`
+::::
+:::
+
+::: {#container-cef style="clear: both"}
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+## Cost-efficiency (Network Manager - SES RP3 area)
+
+:::: {#chart-cef style="float: left; width: 60%"}
+```{r}
+#| file: R/chart_level1_cef_nm.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#concl-cef}
+```{r}
+cef_conc <- read_mytable("NM findings.xlsx", "NM_findings_CEFF", "NM_findings_CEFF") %>% 
+  filter(Year_Report == year_report) %>% 
+  select(Conclusion) %>% toString() %>% paste0(., "@")
+
+cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+```
+
+`r cef_conc1`
+::::
+:::
