@@ -9,6 +9,8 @@ file.copy('_original_files/full_quarto.yml', '_quarto.yml', overwrite = TRUE, co
 
 if (country == "Network Manager") {
       file.copy('_original_files/nm_index.qmd', 'index.qmd', overwrite = TRUE, copy.mode = TRUE)
+} else if (country == "SES RP3") {
+  file.copy('_original_files/ses_index.qmd', 'index.qmd', overwrite = TRUE, copy.mode = TRUE)
   } else {
     file.copy('_original_files/state_index.qmd', 'index.qmd', overwrite = TRUE, copy.mode = TRUE)
   }
@@ -37,7 +39,7 @@ if (country == "Network Manager") {
 
 # modify _quarto.yml ----
   ## NM case ----
-  if (country == "Network Manager") {
+  if (country == "Network Manager" | country == "SES RP3") {
     tx  <- readLines("_quarto.yml")
     ### this removes the unwanted lines
     tx <- tx[-c(105:135)]
@@ -124,7 +126,7 @@ if (country == "Network Manager") {
   }
 
   ## generate new qmd files ----
-  if (country != "Network Manager") {
+  if (country != "Network Manager" & country != "SES RP3") {
     for (i in 1:length(genscripts)) {
       source(here("R", genscripts[i]))
     }
@@ -137,11 +139,14 @@ if (country == "Network Manager") {
   destination_dir <- paste0('//ihx-vdm05/LIVE_var_www_performance$/oscar/prb-monitoring-test/2022/')
 
   ## delete previous version ----
-  unlink(paste0(destination_dir, country), recursive = TRUE) 
+  country_lower <- country %>% str_to_lower() %>% str_replace_all(., " ","-")
+  unlink(paste0(destination_dir, country_lower), recursive = TRUE) 
+
   ## copy new site to folder ----
   file.copy(site_dir, destination_dir, overwrite = TRUE, recursive=TRUE, copy.mode = TRUE)
+
   ## rename _site with state name ----
-  file.rename(paste0(destination_dir, "/_site"), paste0(destination_dir, country))
+  file.rename(paste0(destination_dir, "/_site"), paste0(destination_dir, country_lower))
   # copyDirectory(here::here("images"), paste0(destination_dir,"images"), overwrite = TRUE)
 
 

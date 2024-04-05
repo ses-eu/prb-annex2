@@ -71,6 +71,15 @@ data_prep_planned <- data_raw_planned %>%
   group_by(year) %>% summarise (tsu = sum(x121_ecz_su, na.rm=TRUE)) %>% 
   mutate(rank = 'Determined')
 
+if (country == 'SES RP3') {
+  data_prep_planned <- data_raw_planned %>% 
+    filter(status == 'D',
+           year > 2020) %>% 
+    select(state, year, x121_ecz_su)  %>% 
+    group_by(year) %>% summarise (tsu = sum(x121_ecz_su, na.rm=TRUE)) %>% 
+    mutate(rank = 'Determined')
+}
+
 mycolors <-  c('#1969B4','#044598', '#229FDD')
 
 # plot chart ----

@@ -4,54 +4,54 @@ if (exists("data_folder") == FALSE) {
   source("R/parameters.R")
 }
 
-# fix tz if script not executed from qmd file
-if (exists("ez") == FALSE) {ez = 1}
-# tz=1
-
-# initialise list to store plots
-myplot = list()
-
-for (ez in 1:nrow(ecz_list)) {
-
 # import data  ----
 data_raw  <-  read_xlsx(
-  paste0(data_folder, "CEFF.xlsx"),
+  paste0(data_folder, "SES.xlsx"),
   # here("data","hlsr2021_data.xlsx"),
-  sheet = "ERT_CZ",
+  sheet = "SES_DUC",
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
   clean_names() 
 
 # prepare data ----
-data_prep <- data_raw %>% 
+data_prep_all <- data_raw %>% 
   filter(
-    entity_code == ecz_list$ecz_id[ez]) %>% 
+    year_report == .env$year_report) %>% 
   mutate(
-    unit_cost_er = round(x5_5_unit_cost_nc2017/x2017_xrate, 2)
+    unit_cost_er = round(duc_value, 3)
   ) %>% 
   select(
     year,
     status,
     unit_cost_er
   ) %>% 
-  filter(year > 2021) %>% 
   mutate(year_text = as.character(year),
-         year_text = str_replace(year_text, "20202021", "2020-2021"),
-         status = str_replace(status, "A", "Actual unit cost"),
-         status = str_replace(status, "D", "Determined unit cost")
+         status = str_replace(status, "Actual", "Actual unit cost"),
+         status = str_replace(status, "Determined", "Determined unit cost")
   ) %>% 
-  arrange(year_text)
+  arrange(year_text) %>% 
+  select(-year)
+
+data_actual_trend <- data_prep_all %>% 
+  filter(status %like% "Actual unit cost") %>% 
+  pivot_wider(names_from = 'status', values_from = 'unit_cost_er' ) %>% 
+  clean_names()
+
+data_target_trend <- data_prep_all %>% 
+  filter(status %like% "Target") %>% 
+  pivot_wider(names_from = 'status', values_from = 'unit_cost_er' ) %>% 
+  clean_names()
 
 # plot chart ----
 myc <-  function(mywidth, myheight, myfont) {
-  data_prep %>% 
     plot_ly(
       width = mywidth,
       height = myheight,
+      data = data_prep_all,
       x = ~ year_text,
       y = ~ unit_cost_er,
       yaxis = "y1",
-      text = ~ format(unit_cost_er, nsmall = 2),
+      text = ~ format(round(unit_cost_er,2), nsmall = 2),
       textangle = -90,
       textposition = "inside", 
       cliponaxis = FALSE,
@@ -61,28 +61,49 @@ myc <-  function(mywidth, myheight, myfont) {
       color = ~ factor(status, levels = c("Determined unit cost", 
                                           "Actual unit cost")),
       colors = c('#5B9BD5', '#FFC000'),
-      hovertemplate = paste('%{xother} %{y:.2f}'),
-      hoverinfo = "none",
+      hovertemplate = paste0('%{xother} %{y:.2f}'),
+      # hovertemplate = paste('%{y:.2f}<extra></extra>'),
+      # hoverinfo = "x+y",
       showlegend = T
     ) %>%
-    # add_trace(
-    #   inherit = FALSE,
-    #   data = data_prep,
-    #   x = ~ year_text,
-    #   y = ~ unit_cost_er/2,
-    #   yaxis = "y1",
-    #   type = 'scatter',
-    #   mode = "markers",
-    #   text = ~ paste0(substr(status,1,1), ": ", format(unit_cost_er, nsmall = 2)),
-    #   color = ~ factor(status, levels = c("Determined unit cost",
-    #                                       "Actual unit cost")),
-    #   colors = c('#5B9BD5', '#FFC000'),
-    #   # line = list(width = 0),
-    #   marker = list(color = 'transparent'),
-    #   hovertemplate = paste('%{text}<extra></extra>'),
-    #   # hoverinfo = "none",
-    #   showlegend = F
-    # ) %>% 
+  add_trace(
+    inherit = FALSE,
+    data = data_target_trend,
+    x = ~ year_text,
+    y = ~ target,
+    yaxis = "y1",
+    type = 'scatter',
+    mode = "line+markers",
+    name = 'Target trend',
+    text = ~ paste0('<b>', format(target_trend * 100, nsmall = 1), '%</b>'),
+    textposition = "top center",
+    cliponaxis = FALSE,
+    textfont = list(color = '#FF0000', size = myfont),
+    line = list(width = 3, color = '#FF0000'),
+    marker = list(size = 9, color = '#FF0000'),
+    hovertemplate = paste('Target trend: %{text}<extra></extra>'),
+    # hoverinfo = "none",
+    showlegend = T
+  ) %>%
+    add_trace(
+      inherit = FALSE,
+      data = data_actual_trend,
+      x = ~ year_text,
+      y = ~ actual_unit_cost,
+      yaxis = "y1",
+      type = 'scatter',
+      mode = "line+markers",
+      name = 'Actual trend',
+      text = ~ paste0('<b>', format(actual_unit_cost_trend * 100, nsmall = 1), '%</b>'),
+      textposition = "bottom center",
+      cliponaxis = FALSE,
+      textfont = list(color = 'black', size = myfont),
+      line = list(width = 3, color = '#ED7D31'),
+      marker = list(size = 9, color = '#ED7D31'),
+      hovertemplate = paste('Actual trend: %{text}<extra></extra>'),
+      # hoverinfo = "none",
+      showlegend = T
+    ) %>%
     config( responsive = TRUE,
             displaylogo = FALSE,
             displayModeBar = F
@@ -90,7 +111,7 @@ myc <-  function(mywidth, myheight, myfont) {
     ) %>% 
     layout(
       font = list(family = "Roboto"),
-      title = list(text=paste0("En route unit costs - ", ecz_list$ecz_name[ez]),
+      title = list(text=paste0("En route unit costs - SES RP3"),
                    y = 0.99, 
                    x = 0, 
                    xanchor = 'left', 
@@ -137,15 +158,10 @@ myc <-  function(mywidth, myheight, myfont) {
   
 }
 
-myplot[[ez]] <- myc(NA, 280, 14)
+myc(NA, 320, 14)
 
 # export to image ----
 w = 1200
 h = 600
-export_fig(myc(w, h, 14 * w/900), paste0("cef_er", ez, "_main.png"), w, h)
+export_fig(myc(w, h, 14 * w/900), paste0("cef_er_main.png"), w, h)
 
-}
-
-htmltools::tagList(myplot)
-
-# https://stackoverflow.com/questions/35193612/multiple-r-plotly-figures-generated-in-a-rmarkdown-knitr-chunk-document

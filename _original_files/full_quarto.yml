@@ -14,73 +14,73 @@ website:
     left: 
       - href: https://www.sesperformance.eu/
         text: Home
-      - href: https://www.sesperformance.eu/dashboard
-        text: Interactive dashboard
+      - href: https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/ses-rp3/
+        text: SES view
       - text: "State view"
         menu:
           - text: "Austria"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Austria/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/austria/'
           - text: "Belgium"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Belgium/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/belgium/'
           - text: "Bulgaria"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Bulgaria/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/bulgaria/'
           - text: "Croatia"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Croatia/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/croatia/'
           - text: "Cyprus"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Cyprus/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/cyprus/'
           - text: "Czech Republic"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Czech Republic/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/czech-republic/'
           - text: "Denmark"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Denmark/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/denmark/'
           - text: "Estonia"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Estonia/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/estonia/'
           - text: "Finland"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Finland/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/finland/'
           - text: "France"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/France/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/france/'
           - text: "Germany"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Germany/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/germany/'
           - text: "Greece"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Greece/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/greece/'
           - text: "Hungary"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Hungary/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/hungary/'
           - text: "Ireland"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Ireland/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/ireland/'
           - text: "Italy"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Italy/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/italy/'
           - text: "Latvia"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Latvia/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/latvia/'
           - text: "Lithuania"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Lithuania/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/lithuania/'
           - text: "Luxembourg"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Luxembourg/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/luxembourg/'
           - text: "Malta"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Malta/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/malta/'
           - text: "Netherlands"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Netherlands/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/netherlands/'
           - text: "Norway"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Norway/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/norway/'
           - text: "Poland"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Poland/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/poland/'
           - text: "Portugal"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Portugal/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/portugal/'
           - text: "Romania"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Romania/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/romania/'
           - text: "Slovakia"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Slovakia/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/slovakia/'
           - text: "Slovenia"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Slovenia/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/slovenia/'
           - text: "Spain"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Spain/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/spain/'
           - text: "Sweden"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Sweden/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/sweden/'
           - text: "Switzerland"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Switzerland/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/switzerland/'
             # ---
+      - href: https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/network-manager/
+        text: NM View
       - href: https://www.sesperformance.eu/about
         text: About
-      - href: https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/Network%20Manager/
-        text: NM View
       - href: https://transport.ec.europa.eu/transport-modes/air/single-european-sky/ses-performance-and-charging/publications_en
         text: Publications {{< fa external-link-alt >}}
         target: "_blank"

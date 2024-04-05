@@ -19,7 +19,7 @@ library(fs)
 # parameters ----
 
 data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/PBI files/'
-country <- 'Austria'
+country <- 'Network Manager'
 year_report <- 2022
 
 data_folder_a2 <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/Annex 2/data/'

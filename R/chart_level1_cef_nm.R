@@ -34,9 +34,9 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
       textposition = "inside", 
       cliponaxis = FALSE,
       insidetextanchor =  "middle",
-      textfont = list(color = 'black', size = myfont),
+      textfont = list(color = 'white', size = myfont),
       type = "bar",
-      colors = c('#5B9BD5'),
+      marker = list(color = '#5B9BD5'),
       hovertemplate = paste('Determined CSU: %{y:.2f}<extra></extra>'),
       # hoverinfo = "none",
       showlegend = T
@@ -54,7 +54,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
       insidetextanchor =  "middle",
       textfont = list(color = 'black', size = myfont),
       type = "bar",
-      colors = c('#FFC000'),
+      marker = list(color = '#FFC000'),
       hovertemplate = paste('Actual CSU: %{y:.2f}<extra></extra>'),
       # hoverinfo = "none",
       showlegend = T

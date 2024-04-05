@@ -60,7 +60,7 @@ myfig <- function(){
         textposition = "inside", 
         cliponaxis = FALSE,
         insidetextanchor =  "middle",
-        textfont = list(color = 'black', size = myfont),
+        textfont = list(color = 'white', size = myfont),
         type = "bar",
         color = ~ factor(status, levels = c("Determined unit cost", 
                                             "Actual unit cost")),

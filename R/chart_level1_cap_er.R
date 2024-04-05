@@ -4,53 +4,97 @@ if (exists("data_folder") == FALSE) {
   source("R/parameters.R")
 }
 
-# import data  ----
-data_raw_target  <-  read_xlsx(
-  paste0(data_folder, "targets.xlsx"),
-  # here("data","hlsr2021_data.xlsx"),
-  sheet = "ER_CAP",
-  range = cell_limits(c(1, 1), c(NA, NA))) %>%
-  as_tibble() %>% 
-  clean_names() 
+if (country == 'SES RP3') {
+  # SES case ----
+  ## import data  ----
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "SES.xlsx"),
+    # here("data","hlsr2021_data.xlsx"),
+    sheet = "SES_ATFM_ERT_delay",
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
 
-data_raw_actual  <-  read_xlsx(
-  paste0(data_folder, "AUA_export.xlsx"),
-  sheet = "AUA_export",
-  range = cell_limits(c(1, 1), c(NA, NA))) %>%
-  as_tibble() %>% 
-  clean_names() 
+  ## prepare data ----
+  data_prep_target <- data_raw %>% 
+    filter(
+      year_report == .env$year_report) %>% 
+    mutate(
+      er_cap_target = round(target, 2)
+    ) %>% 
+    select(
+      year,
+      er_cap_target
+    ) %>% arrange(year)
 
-# prepare data ----
-data_prep_target <- data_raw_target %>% 
-  filter(
-    state == country) %>% 
-  mutate(
-    er_cap_target = round(x331_ert_delay_target, 2)
-  ) %>% 
-  select(
-    year,
-    er_cap_target
-  ) %>% arrange(year)
-
-data_prep_actual <- data_raw_actual %>% 
-  filter(
-    entity_name == main_ansp_aua) %>% 
-  pivot_longer(
-    cols = c(avg_atc_cap, avg_atc_stff, avg_atc_dsrptn, avg_weather, avg_other_nonatc),
-    names_to = "type",
-    values_to = "delay"
-  ) %>% 
-  mutate(
-    type = case_when(
-      type == "avg_atc_cap" ~ "Capacity",
-      type == "avg_atc_stff" ~ "Staffing",
-      type == "avg_atc_dsrptn" ~ "Disruptions",
-      type == "avg_weather" ~ "Weather",
-      type == "avg_other_nonatc" ~ "Other non-ATC"
+  data_prep_actual <- data_raw %>% 
+    filter(
+      year_report == .env$year_report) %>% 
+    select(-c(year_report,target)) %>% 
+    pivot_longer(
+      cols = c(capacity, staffing, disruptions, weather, other_non_atc),
+      names_to = "type",
+      values_to = "delay"
+    ) %>% 
+    mutate(
+      type = case_when(
+        type == "capacity" ~ "Capacity",
+        type == "staffing" ~ "Staffing",
+        type == "disruptions" ~ "Disruptions",
+        type == "weather" ~ "Weather",
+        type == "other_non_atc" ~ "Other non-ATC"
+      ) 
+    ) %>% 
+    rename (avg_delay = avg_er_atfm_delay) %>% 
+    mutate(ifr = NA)
+} else {
+# state case ----
+  ## import data  ----
+  data_raw_target  <-  read_xlsx(
+    paste0(data_folder, "targets.xlsx"),
+    # here("data","hlsr2021_data.xlsx"),
+    sheet = "ER_CAP",
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+  
+  data_raw_actual  <-  read_xlsx(
+    paste0(data_folder, "AUA_export.xlsx"),
+    sheet = "AUA_export",
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+  
+  ## prepare data ----
+  data_prep_target <- data_raw_target %>% 
+    filter(
+      state == country) %>% 
+    mutate(
+      er_cap_target = round(x331_ert_delay_target, 2)
+    ) %>% 
+    select(
+      year,
+      er_cap_target
+    ) %>% arrange(year)
+  
+  data_prep_actual <- data_raw_actual %>% 
+    filter(
+      entity_name == main_ansp_aua) %>% 
+    pivot_longer(
+      cols = c(avg_atc_cap, avg_atc_stff, avg_atc_dsrptn, avg_weather, avg_other_nonatc),
+      names_to = "type",
+      values_to = "delay"
+    ) %>% 
+    mutate(
+      type = case_when(
+        type == "avg_atc_cap" ~ "Capacity",
+        type == "avg_atc_stff" ~ "Staffing",
+        type == "avg_atc_dsrptn" ~ "Disruptions",
+        type == "avg_weather" ~ "Weather",
+        type == "avg_other_nonatc" ~ "Other non-ATC"
+      )
     )
-  )
-
-# data_for_chart <-  merge(x = data_prep_target, y = data_prep_actual, by="year", all.x = TRUE) 
+}
 
 # plot chart ----
 myc <-  function(mywidth, myheight, myfont, mymargin) {
@@ -166,7 +210,12 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
                  rangemode = "nonnegative",
                  zeroline = TRUE,
                  zerolinecolor = 'rgb(255,255,255)',
-                 titlefont = list(size = myfont), tickfont = list(size = myfont)
+                 titlefont = list(size = if_else(country == 'SES RP3', 1, myfont), 
+                                  color = if_else(country == 'SES RP3', 'transparent', 'black')
+                                  ), 
+                 tickfont = list(size = if_else(country == 'SES RP3', 1, myfont),
+                                 color = if_else(country == 'SES RP3', 'transparent', 'black')
+                                 )
     ),
     # showlegend = FALSE
     legend = list(

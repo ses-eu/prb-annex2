@@ -9,7 +9,7 @@ mychart_title <- mymetric
 myaxis_title <- paste0(mymetric, " (%)")
 mytooltip_decimals <- 1
 mybarcolor <- '#FFC000'
-mytextcolor <- 'black'
+mytextcolor <- 'white'
 
 # import data  ----
 data_raw  <-  read_xlsx(
