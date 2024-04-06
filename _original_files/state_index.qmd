@@ -102,7 +102,7 @@ tcz_list_string <- paste0(
 
 ::::: columns
 :::::: {.column width="30%"}
-**Met Providers **
+**MET Providers **
 ::::::
 
 :::::: {.column width="70%"}
@@ -116,7 +116,7 @@ tcz_list_string <- paste0(
 ## Traffic (En route traffic zone)
 
 ::: {#container-mvt}
-:::: {#chart-mvt style="float: left; width: 60%"}
+:::: {#chart-mvt class="mychart"}
 ```{r}
 #| file: R/chart_level1_traffic_mvt.R
 #| out.width: "100%"
@@ -140,7 +140,7 @@ mvt_conc1 <- mvt_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 <br>
 
-:::: {#chart-su style="float: left; width: 60%"}
+:::: {#chart-su class="mychart"}
 ```{r}
 #| file: R/chart_level1_traffic_su.R
 #| out.width: "100%"
@@ -166,7 +166,7 @@ tsu_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ## Safety (Main ANSP)
 
-:::: {#chart-saf style="float: left; width: 60%"}
+:::: {#chart-saf class="mychart"}
 ```{r}
 #| file: R/chart_level1_saf.R
 #| out.width: "100%"
@@ -193,7 +193,7 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ## Environment (Member State)
 
-:::: {#chart-env style="float: left; width: 60%"}
+:::: {#chart-env class="mychart"}
 ```{r}
 #| file: R/chart_level1_kea.R
 #| out.width: "100%"
@@ -219,7 +219,7 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
-:::: {#chart-cap style="float: left; width: 60%"}
+:::: {#chart-cap class="mychart"}
 ```{r}
 #| file: R/chart_level1_cap_er.R
 #| out.width: "100%"
@@ -255,7 +255,7 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 
 ## Cost-efficiency (En route/Terminal charging zone(s))
 
-:::: {#chart-cef style="float: left; width: 60%"}
+:::: {#chart-cef class="mychart"}
 ```{r}
 #| file: R/chart_level1_cef_er.R
 #| out.width: "100%"

@@ -4,9 +4,109 @@ if (exists("data_folder") == FALSE) {
 }
 ```
 
-[Annual Monitoring Report {{< var doc.year_report >}} - SES View]{.fakeh1}
+[Annual Monitoring Report {{< var doc.year_report >}} - SES RP3]{.fakeh1}
 
 ## Contextual information
+```{r fetch-data-ses}
+data_context <-read_xlsx(
+  paste0(data_folder, "SES.xlsx"),
+  sheet = "Context",
+  range = cell_limits(c(1, 1), c(NA, NA))) %>%
+  as_tibble() %>% 
+  clean_names() %>% 
+  filter(year_report == .env$year_report & year == .env$year_report)
+
+acc_no <- data_context %>% select(number_of_acc) %>% pull()
+no_apt_big <- data_context %>% select(no_apts_big) %>% pull()
+no_apt_small <- data_context %>% select(no_apts_small) %>% pull()
+
+ert_trm_share <- data_context %>% select(ert_trm_share) %>% pull()
+ert_cz <- data_context %>% select(ert_cz) %>% pull()
+trm_cz <- data_context %>% select(trm_cz) %>% pull()
+
+main_ansp <- data_context %>% select(main_ans_ps_ert) %>% pull()
+other_ansp <- data_context %>% select(other_ans_ps_ert) %>% pull()
+met_ansp <- data_context %>% select(met_providers) %>% pull()
+
+```
+
+
+::: columns
+<!-- ******************* 1st column -->
+:::: {.column width="34%"}
+**No of ACCs  ** `r acc_no`
+
+::::: columns
+:::::: {.column width="60%"}
+**No of airports in the scope of the performance plan**
+::::::
+
+:::::: {.column width="40%"}
+**≥80'K    ** `r no_apt_big`<br/> **<80'K     ** `r no_apt_small`
+::::::
+:::::
+::::
+
+<!-- ******************* 2nd column -->
+:::: {.column width="38%"}
+
+**Share en route / terminal costs `r year_report` ** `r ert_trm_share`
+
+::::: columns
+:::::: {.column width="55%"}
+**En route charging zone(s)**
+::::::
+
+:::::: {.column width="45%"}
+`r ert_cz`
+::::::
+:::::
+
+::::: columns
+:::::: {.column width="55%"}
+[**Terminal charging zone(s)**]{.context-text}
+::::::
+
+:::::: {.column width="45%"}
+`r trm_cz`
+::::::
+:::::
+::::
+
+<!-- ******************* 3rd column -->
+:::: {.column width="28%"}
+::::: columns
+:::::: {.column width="70%"}
+**No of main ANSPs ** 
+::::::
+
+:::::: {.column width="30%"}
+`r main_ansp`
+::::::
+:::::
+
+::::: columns
+:::::: {.column width="70%"}
+**No of other ANSPs **
+::::::
+
+:::::: {.column width="30%"}
+`r other_ansp`
+::::::
+:::::
+
+::::: columns
+:::::: {.column width="70%"}
+**No of MET Providers **
+::::::
+
+:::::: {.column width="30%"}
+`r met_ansp`
+::::::
+:::::
+
+::::
+:::
 
 
 ## Main PRB findings - {{< var doc.year_report >}}
@@ -16,7 +116,7 @@ tsu_conc <- read_mytable("PRB_findings.xlsx", "main", "Table_Findings_main") %>%
   filter(Year_Report == year_report, State == 'SES') %>% 
   select(Conclusion) %>% toString() %>% paste0(., "@")
 
-main_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '') 
+main_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '') %>%  str_replace_all('@', '') 
 ```
 
 `r main_conc1`
@@ -24,7 +124,7 @@ main_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n'
 ## Traffic (SES RP3 area)
 
 ::: {#container-mvt}
-:::: {#chart-mvt style="float: left; width: 60%"}
+:::: {#chart-mvt class="mychart"}
 ```{r}
 #| file: R/chart_level1_traffic_mvt.R
 #| out.width: "100%"
@@ -48,7 +148,7 @@ mvt_conc1 <- mvt_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 <br>
 
-:::: {#chart-su style="float: left; width: 60%"}
+:::: {#chart-su class="mychart"}
 ```{r}
 #| file: R/chart_level1_traffic_su.R
 #| out.width: "100%"
@@ -74,7 +174,24 @@ tsu_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 <div style="height: 1px"></div>
 
 ## Safety (SES RP3 area)
+:::: {#chart-saf class="mychart"}
+```{r}
+#| file: R/chart_level1_saf_ses.R
+#| out.width: "100%"
+```
+::::
 
+:::: {#concl-saf}
+```{r}
+saf_conc <- read_mytable("PRB_findings.xlsx", "safety", "Table_Findings_safety") %>% 
+  filter(Year_Report == year_report, State == 'SES') %>% 
+  select(Conclusion) %>% toString() %>% paste0(., "@")
+
+saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+```
+
+`r saf_conc1`
+::::
 :::
 
 ::: {#container-env style="clear: both"}
@@ -84,7 +201,7 @@ tsu_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ## Environment (SES RP3 area)
 
-:::: {#chart-env style="float: left; width: 60%"}
+:::: {#chart-env class="mychart"}
 ```{r}
 #| file: R/chart_level1_kea.R
 #| out.width: "100%"
@@ -110,7 +227,7 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
-:::: {#chart-cap style="float: left; width: 60%"}
+:::: {#chart-cap class="mychart"}
 ```{r}
 #| file: R/chart_level1_cap_er.R
 #| out.width: "100%"
@@ -137,7 +254,7 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 
 ## Cost-efficiency (SES RP3 area)
 
-:::: {#chart-cef style="float: left; width: 60%"}
+:::: {#chart-cef class="mychart"}
 ```{r}
 #| file: R/chart_level1_cef_er_ses.R
 #| out.width: "100%"

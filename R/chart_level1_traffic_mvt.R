@@ -152,6 +152,7 @@ myc <- function (mywidth, myheight, myfont) {
                  showgrid = TRUE,
                  showline = FALSE,
                  tickformat = ",",
+                 tickprefix = " ",
                  # showticklabels = TRUE,
                  # tickcolor = 'rgb(127,127,127)',
                  # ticks = 'outside',

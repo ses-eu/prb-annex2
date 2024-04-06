@@ -11,7 +11,7 @@ if (exists("data_folder") == FALSE) {
 ## Safety (Network Manager - SES RP3 area)
 
 ::: {#container-saf1}
-:::: {#chart-eosm style="float: left; width: 60%"}
+:::: {#chart-eosm class="mychart"}
 ```{r}
 #| file: R/chart_level1_saf_nm.R
 #| out.width: "100%"
@@ -35,7 +35,7 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
-:::: {#chart-deliveries style="float: left; width: 60%"}
+:::: {#chart-deliveries class="mychart"}
 ```{r}
 #| file: R/chart_level1_saf_deliveries_nm.R
 #| out.width: "100%"
@@ -61,7 +61,7 @@ saf_conc2 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ## Environment (Network Manager - SES RP3 area)
 
-:::: {#chart-env style="float: left; width: 60%"}
+:::: {#chart-env class="mychart"}
 ```{r}
 #| file: R/chart_level1_kea.R
 #| out.width: "100%"
@@ -87,7 +87,7 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
-:::: {#chart-cap style="float: left; width: 60%"}
+:::: {#chart-cap class="mychart"}
 ```{r}
 #| file: R/chart_level1_cap_er_nm.R
 #| out.width: "100%"
@@ -127,7 +127,7 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 
 ## Cost-efficiency (Network Manager - SES RP3 area)
 
-:::: {#chart-cef style="float: left; width: 60%"}
+:::: {#chart-cef class="mychart"}
 ```{r}
 #| file: R/chart_level1_cef_nm.R
 #| out.width: "100%"

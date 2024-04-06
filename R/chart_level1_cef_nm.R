@@ -121,6 +121,8 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
                    # gridcolor = 'rgb(255,255,255)',
                    showgrid = TRUE,
                    showline = FALSE,
+                   # tickprefix = " ",
+                   # showtickprefix = 'all',
                    ticksuffix = "",
                    tickformat = ".1f",
                    # showticklabels = TRUE,

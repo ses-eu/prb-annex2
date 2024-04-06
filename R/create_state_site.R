@@ -38,16 +38,52 @@ if (country == "Network Manager") {
   cat(newvariables, file = "_variables.yml")
 
 # modify _quarto.yml ----
-  ## NM case ----
+  ## NM, SES case ----
   if (country == "Network Manager" | country == "SES RP3") {
     tx  <- readLines("_quarto.yml")
+
+    ### find beginning and end of level 1 state blocks
+    for (i in 1:length(tx)) {
+      if (tx[i] %like% 'block level1 state beginning') {block_l1_sta_beg = i}
+      if (tx[i] %like% 'block level1 state end') {block_l1_sta_end = i}
+    }
     ### this removes the unwanted lines
-    tx <- tx[-c(105:135)]
+    tx <- tx[-c(block_l1_sta_beg:block_l1_sta_end)]
+    
+    ### find beginning and end of level 1 nm,ses blocks
+    for (i in 1:length(tx)) {
+      if (tx[i] %like% 'block level1 ses beginning') {block_l1_ses_beg = i}
+      if (tx[i] %like% 'block level1 ses end') {block_l1_ses_end = i}
+      
+      if (tx[i] %like% 'block level1 nm beginning') {block_l1_nm_beg = i}
+      if (tx[i] %like% 'block level1 nm end') {block_l1_nm_end = i}
+    }
+    ### this removes the unwanted lines
+    if (country == "Network Manager") {
+      tx <- tx[-c(block_l1_ses_beg:block_l1_ses_end)]
+    } else {tx <- tx[-c(block_l1_nm_beg:block_l1_nm_end)]}
+
+    ### find beginning and end of level 2 block to remove
+    for (i in 1:length(tx)) {
+      if (tx[i] %like% 'block level2 beginning') {block_l2_beg = i}
+      if (tx[i] %like% 'block level2 end') {block_l2_end = i}
+    }
+    ### this removes the unwanted lines
+    tx <- tx[-c(block_l2_beg:block_l2_end)]
+    
     ### write new file
     writeLines(tx, con="_quarto.yml")
     
  } else {
-    ## no terminal zone case ----
+   ### find beginning and end of level 1 blocks to remove
+   for (i in 1:length(tx)) {
+     if (tx[i] %like% 'block level1 ses beginning') {block_l1_ses_beg = i}
+     if (tx[i] %like% 'block level1 nm end') {block_l1_nm_end = i}
+   }
+   ### this removes the unwanted lines
+   tx <- tx[-c(block_l1_ses_beg:block_l1_nm_end)]
+   
+   ## no terminal zone case ----
     if (state_type == 0) {
       genscripts <- list('generate_saf_qmd.R',
                          'generate_env_kea_qmd.R',
@@ -131,6 +167,7 @@ if (country == "Network Manager") {
       source(here("R", genscripts[i]))
     }
   }
+  
 # render site ----
   quarto::quarto_render(as_job = FALSE)
 

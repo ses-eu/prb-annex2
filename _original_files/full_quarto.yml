@@ -3,7 +3,7 @@ project:
   execute-dir: project
   
 website:
-  title: "State view"
+  title: "PRB Annual Monitoring Report"
   search: false 
   favicon: "images/prb_logo_smaller.png"
   page-navigation: true
@@ -91,17 +91,50 @@ website:
         href: index.html
       - section: "<b>Overview</b>"
         contents:
+# block level1 state beginning
+          - text: "Contextual information"
+            href: index.html#contextual-information
           - text: "Traffic"
             href: index.html#traffic-en-route-traffic-zone
           - text: "Safety"
-            href: #safety-main-ansp
+            href: index.html#safety-main-ansp
           - text: "Environment"
-            href: index.html##environment-member-state
+            href: index.html#environment-member-state
           - text: "Capacity"
             href: index.html#capacity-member-state
           - text: "Cost-efficiency"
-            href: index.html##cost-efficiency-en-routeterminal-charging-zones
+            href: index.html#cost-efficiency-en-routeterminal-charging-zones
       - text: "---"
+# block level1 state end
+# block level1 ses beginning
+          - text: "Contextual information"
+            href: index.html#contextual-information
+          - text: "Main PRB findings"
+            href: index.html#main-prb-findings--
+          - text: "Traffic"
+            href: index.html#traffic-ses-rp3-area
+          - text: "Safety"
+            href: index.html#safety-ses-rp3-area
+          - text: "Environment"
+            href: index.html#environment-ses-rp3-area
+          - text: "Capacity"
+            href: index.html#capacity-ses-rp3-area
+          - text: "Cost-efficiency"
+            href: index.html#cost-efficiency-ses-rp3-area
+      - text: "---"
+# block level1 ses end
+# block level1 nm beginning
+          - text: "Safety"
+            href: index.html#safety-network-manager---ses-rp3-area
+          - text: "Environment"
+            href: index.html#environment-network-manager---ses-rp3-area
+          - text: "Capacity"
+            href: index.html#capacity-network-manager---ses-rp3-area
+          - text: "Cost-efficiency"
+            href: index.html#cost-efficiency-network-manager---ses-rp3-area
+      - text: "---"
+# block level1 nm end
+# block level2 beginning
       - text: "<b>1 Safety</b>"
         href: safety.html
       - text: "---"
@@ -133,7 +166,8 @@ website:
           - cost-efficiency-tz2-3.qmd
           - text: "---"
           - cost-efficiency-g2g.qmd
-  # 
+# block level2 end
+# 
   # site-url: "https://eurocontrol.int/"
 
   # page-footer: 

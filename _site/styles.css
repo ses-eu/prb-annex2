@@ -82,3 +82,17 @@ h3 {
 .nav-item {
   font-size: 1rem;
 }
+
+@media screen and (width >= 768px) {
+  .mychart {
+    float: left; 
+    width: 60%;
+  }
+}
+
+@media screen and (width < 768px) {
+  .mychart {
+    float: left; 
+    width: 100%;
+  }
+}

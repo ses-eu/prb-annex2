@@ -19,7 +19,7 @@ library(fs)
 # parameters ----
 
 data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/PBI files/'
-country <- 'Network Manager'
+country <- 'SES RP3'
 year_report <- 2022
 
 data_folder_a2 <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/Annex 2/data/'
@@ -318,6 +318,7 @@ if (country != "Network Manager" & country != "SES RP3") {
                      # gridcolor = 'rgb(255,255,255)',
                      showgrid = TRUE,
                      showline = FALSE,
+                     tickprefix = " ",
                      ticksuffix = "% ",
                      tickformat = ".1f",
                      # showticklabels = TRUE,
@@ -410,6 +411,7 @@ if (country != "Network Manager" & country != "SES RP3") {
                      # gridcolor = 'rgb(255,255,255)',
                      showgrid = TRUE,
                      showline = FALSE,
+                     tickprefix = " ",
                      ticksuffix = "% ",
                      tickformat = ".1f",
                      # showticklabels = TRUE,
