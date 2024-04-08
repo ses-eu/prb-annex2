@@ -7,13 +7,13 @@ if (exists("data_folder") == FALSE) {
 ## import data
 sheet <- "3_ATSP"
 range <- range <- "C24:M28" 
-ert_2_10_1  <- read_range(file, sheet, range)
+ert_2_10_1  <- read_range(ceff_file, sheet, range)
 
 range <- range <- "C29:M32" 
-ert_2_10_2  <- read_range(file, sheet, range)
+ert_2_10_2  <- read_range(ceff_file, sheet, range)
 
 range <- range <- if_else(nat_curr == 'EUR', "C33:M35", "C33:M36") 
-ert_2_10_3  <- read_range(file, sheet, range)
+ert_2_10_3  <- read_range(ceff_file, sheet, range)
 
 
 ## prepare data

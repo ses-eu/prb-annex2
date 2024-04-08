@@ -1,8 +1,8 @@
 
-# parameters ----
-if (exists("data_folder") == FALSE) {
-  source("R/parameters.R")
-}
+# # parameters ----
+# if (exists("data_folder") == FALSE) {
+#   source("R/parameters.R")
+# }
 
 mymetric <- "Percentage overdeliveries"
 mychart_title <- mymetric

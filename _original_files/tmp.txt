@@ -1,0 +1,23 @@
+---
+params:
+  country:      $country
+  year_report:  $year_report
+  data_folder:  $data_folder
+  forecast_id:  $forecast_id
+  forecast:     $forecast
+  statfor_zone: $statfor_zone
+  ecz_list:     $ecz_list
+---
+
+```{r, eval=TRUE}
+data_folder <- params$data_folder
+year_report <- params$year_report
+country <- params$country
+forecast <- params$forecast
+forecast_id <- params$forecast_id
+statfor_zone <- params$statfor_zone
+ecz_list <- params$ecz_list
+
+source("R/libraries.R")
+source("R/utils.R")
+```

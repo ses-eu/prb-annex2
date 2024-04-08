@@ -23,7 +23,8 @@ for (tz in 1:state_type) {
     
 #---------------- sections definition
   # section 2.10
-ceff_5_10 <- paste0('## Terminal charging zone ', 
+ceff_5_10 <- paste0(
+'## Terminal charging zone ', 
 if_else(state_type == 2, as.character(tz), ""),' - main ANSP (', main_ansp, ')
 ### 10 Monitoring of the terminal ANSPs regulatory results (RR)
 ', trm_2_10[1,1]
@@ -91,6 +92,6 @@ cat(paste0(
   ceff_5_13
   
 ),
-  file = paste0("cost-efficiency-tz", tz, "-2.qmd")
+  file = paste0("_cost-efficiency-tz", tz, "-2.qmd")
 )
 }

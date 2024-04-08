@@ -4,13 +4,10 @@ if (exists("data_folder") == FALSE) {
   source("R/parameters.R")
 }
 
-## parameters
-source("R/parameters.R")
-
 ## import data
 sheet <- "1_ERT"
 range <- if_else(nat_curr == 'EUR', "C21:M27", "C21:M28")
-ert_1_3_1  <- read_range(file, sheet, range)
+ert_1_3_1  <- read_range(ceff_file, sheet, range)
 myrownames <- ert_1_3_1[1]
 mycolnames <- colnames(ert_1_3_1)
 if (nat_curr == 'EUR') {

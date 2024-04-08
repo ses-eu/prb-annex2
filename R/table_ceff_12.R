@@ -7,10 +7,10 @@ if (exists("data_folder") == FALSE) {
 ## import data
 sheet <- "3_ATSP"
 range <- range <- "C38:M46" 
-ert_2_11_1  <- read_range(file, sheet, range)
+ert_2_11_1  <- read_range(ceff_file, sheet, range)
 
 range <- range <- "C47:M56" 
-ert_2_11_2  <- read_range(file, sheet, range)
+ert_2_11_2  <- read_range(ceff_file, sheet, range)
 
 # data prep 1
 myrownames1 <- ert_2_11_1[1]

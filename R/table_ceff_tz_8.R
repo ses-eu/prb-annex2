@@ -9,10 +9,10 @@ if (exists("tz") == FALSE) {tz = 1}
 ## import data
 sheet <- c("6_TRM", "6_TRM (2)")
 range <- range <- "H49:M53" 
-trm_1_8_1  <- read_range(file, sheet[tz], range)
+trm_1_8_1  <- read_range(ceff_file, sheet[tz], range)
 
 range <- range <- "H54:M61" 
-trm_1_8_2  <- read_range(file, sheet[tz], range)
+trm_1_8_2  <- read_range(ceff_file, sheet[tz], range)
 
 ## prepare data
 data_for_table1 <- trm_1_8_1 %>% 

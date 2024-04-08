@@ -1,0 +1,14 @@
+## Terminal charging zone  - Other terminal ANSPs/METSPs
+### 14 Other ANSP(s) / METSP(s) regulatory results for terminal activity
+
+
+```{r, options=(tz = 1)}
+#| file: R/table_ceff_tz_14.R
+```
+```{r, options=(tz = 1)}
+htmltools::tagList(t)
+```
+
+
+<p style = "margin-bottom: 0px;">**<br/>Total other ANSP overall regulatory result (RR) for the terminal activity**</p>
+Ex-post, the overall RR for the other ANSP in the terminal charging zone for Hungary (Hungary MET) corresponds to 14.6% of the terminal revenues. The ex-post RoE is 38.0%.<br/>It should be noted that no cost of capital (and associated assumptions) was included in the PP.

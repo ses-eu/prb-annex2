@@ -1,8 +1,8 @@
-
-# parameters ----
-if (exists("data_folder") == FALSE) {
-  source("R/parameters.R")
-}
+# 
+# # parameters ----
+# if (exists("data_folder") == FALSE) {
+#   source("R/parameters.R")
+# }
 
 if (country == 'SES RP3') {
   # SES case ----

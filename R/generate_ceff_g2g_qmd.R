@@ -20,7 +20,8 @@ g2g_3  <- read_range(file, sheet, range)
 
 #---------------- sections definition
   # section 
-ceff_7_1 <- paste0('## Gate-to-gate
+ceff_7_1 <- paste0(
+'## Gate-to-gate
 ### 1 Monitoring of gate-to-gate ANS costs
 
 ```{r}
@@ -102,5 +103,5 @@ cat(paste0(
   ceff_7_2,
   ceff_7_3
 ),
-    file = "cost-efficiency-g2g.qmd")
+    file = "_cost-efficiency-g2g.qmd")
 

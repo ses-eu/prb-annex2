@@ -10,10 +10,10 @@ if (exists("tz") == FALSE) {tz = 1}
 sheet <- c("7_TRM_ATSP", "7_TRM_ATSP (2)")
 
 range <- range <- "C38:M46" 
-trm_2_11_1  <- read_range(file, sheet[tz], range)
+trm_2_11_1  <- read_range(ceff_file, sheet[tz], range)
 
 range <- range <- "C47:M56" 
-trm_2_11_2  <- read_range(file, sheet[tz], range)
+trm_2_11_2  <- read_range(ceff_file, sheet[tz], range)
 
 # data prep 1
 myrownames1 <- trm_2_11_1[1]

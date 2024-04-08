@@ -1,276 +1,79 @@
+---
+params:
+  country:        $country
+  year_report:    $year_report
+  data_folder:    $data_folder
+  forecast_id:    $forecast_id
+  forecast:       $forecast
+  statfor_zone:   $statfor_zone
+  ecz_list:       $ecz_list
+  no_ecz:         $no_ecz
+  tcz_list:       $tcz_list
+  no_tcz:         $no_tcz
+  nat_curr:       $nat_curr
+  pp_version:     $pp_version
+  acc_no:         $acc_no
+  acc1:           $acc1
+  acc2:           $acc2
+  acc3:           $acc3
+  acc4:           $acc4
+  acc5:           $acc5
+  no_apt_big:     $no_apt_big
+  no_apt_small:   $no_apt_small
+  tsu_share:      $tsu_share
+  ert_cost_share: $ert_cost_share
+  ert_trm_share:  ert_trm_share
+  main_ansp:      $main_ansp
+  main_ansp_aua:  $main_ansp_aua
+  other_ansps_str: $other_ansps_str
+  other_met_str:  $other_met_str
+
+  cap_file:       $cap_file
+  ceff_file:      $ceff_file
+  env_kea_file:   $env_kea_file
+  env_apt_file:   $env_apt_file
+  env_mil_file:   $env_mil_file
+  saf_eosm_file:  $saf_eosm_file
+---
+
 ```{r, eval=TRUE}
-if (exists("data_folder") == FALSE) {
-  source("R/parameters.R")
-}
+data_folder <- params$data_folder
+year_report <- params$year_report
+country <- params$country
+forecast <- params$forecast
+forecast_id <- params$forecast_id
+statfor_zone <- params$statfor_zone
+ecz_list <- params$ecz_list
+no_ecz <- params$no_ecz
+tcz_list <- params$tcz_list
+no_tcz <- params$no_tcz
+nat_curr <- params$nat_curr
+pp_version <- params$pp_version
+acc_no <- params$acc_no
+acc1 <- params$acc1
+acc2 <- params$acc2
+acc3 <- params$acc3
+acc4 <- params$acc4
+acc5 <- params$acc5
+no_apt_big <- params$no_apt_big
+no_apt_small <- params$no_apt_small
+tsu_share <- params$tsu_share
+ert_cost_share <- params$ert_cost_share
+ert_trm_share <- params$ert_trm_share
+main_ansp <- params$main_ansp
+main_ansp_aua <- params$main_ansp_aua
+other_ansps_str <- params$other_ansps_str
+other_met_str <- params$other_met_str
+
+cap_file <- params$cap_file
+ceff_file <- params$ceff_file
+env_kea_file <- params$env_kea_file
+env_apt_file <- params$env_apt_file
+env_mil_file <- params$env_mil_file
+saf_eosm_file <- params$saf_eosm_file
+
+source("R/libraries.R")
+source("R/utils.R")
 ```
 
-[Annual Monitoring Report {{< var doc.year_report >}} - SES RP3]{.fakeh1}
-
-## Contextual information
-```{r fetch-data-ses}
-data_context <-read_xlsx(
-  paste0(data_folder, "SES.xlsx"),
-  sheet = "Context",
-  range = cell_limits(c(1, 1), c(NA, NA))) %>%
-  as_tibble() %>% 
-  clean_names() %>% 
-  filter(year_report == .env$year_report & year == .env$year_report)
-
-acc_no <- data_context %>% select(number_of_acc) %>% pull()
-no_apt_big <- data_context %>% select(no_apts_big) %>% pull()
-no_apt_small <- data_context %>% select(no_apts_small) %>% pull()
-
-ert_trm_share <- data_context %>% select(ert_trm_share) %>% pull()
-ert_cz <- data_context %>% select(ert_cz) %>% pull()
-trm_cz <- data_context %>% select(trm_cz) %>% pull()
-
-main_ansp <- data_context %>% select(main_ans_ps_ert) %>% pull()
-other_ansp <- data_context %>% select(other_ans_ps_ert) %>% pull()
-met_ansp <- data_context %>% select(met_providers) %>% pull()
-
-```
-
-
-::: columns
-<!-- ******************* 1st column -->
-:::: {.column width="34%"}
-**No of ACCs  ** `r acc_no`
-
-::::: columns
-:::::: {.column width="60%"}
-**No of airports in the scope of the performance plan**
-::::::
-
-:::::: {.column width="40%"}
-**≥80'K    ** `r no_apt_big`<br/> **<80'K     ** `r no_apt_small`
-::::::
-:::::
-::::
-
-<!-- ******************* 2nd column -->
-:::: {.column width="38%"}
-
-**Share en route / terminal costs `r year_report` ** `r ert_trm_share`
-
-::::: columns
-:::::: {.column width="55%"}
-**En route charging zone(s)**
-::::::
-
-:::::: {.column width="45%"}
-`r ert_cz`
-::::::
-:::::
-
-::::: columns
-:::::: {.column width="55%"}
-[**Terminal charging zone(s)**]{.context-text}
-::::::
-
-:::::: {.column width="45%"}
-`r trm_cz`
-::::::
-:::::
-::::
-
-<!-- ******************* 3rd column -->
-:::: {.column width="28%"}
-::::: columns
-:::::: {.column width="70%"}
-**No of main ANSPs ** 
-::::::
-
-:::::: {.column width="30%"}
-`r main_ansp`
-::::::
-:::::
-
-::::: columns
-:::::: {.column width="70%"}
-**No of other ANSPs **
-::::::
-
-:::::: {.column width="30%"}
-`r other_ansp`
-::::::
-:::::
-
-::::: columns
-:::::: {.column width="70%"}
-**No of MET Providers **
-::::::
-
-:::::: {.column width="30%"}
-`r met_ansp`
-::::::
-:::::
-
-::::
-:::
-
-
-## Main PRB findings - {{< var doc.year_report >}}
-
-```{r}
-tsu_conc <- read_mytable("PRB_findings.xlsx", "main", "Table_Findings_main") %>% 
-  filter(Year_Report == year_report, State == 'SES') %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-main_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '') %>%  str_replace_all('@', '') 
-```
-
-`r main_conc1`
-
-## Traffic (SES RP3 area)
-
-::: {#container-mvt}
-:::: {#chart-mvt class="mychart"}
-```{r}
-#| file: R/chart_level1_traffic_mvt.R
-#| out.width: "100%"
-```
-::::
-
-:::: {#concl-mvt}
-```{r}
-mvt_conc <- read_mytable("PRB_findings.xlsx", "traffic_IFR", "Table_Findings_traffic_IFR") %>% 
-  filter(Year_Report == year_report, State == 'SES') %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-mvt_conc1 <- mvt_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '') 
-```
-
-`r mvt_conc1`
-::::
-:::
-
-::: {#container-su style="clear: both"}
-
-<br>
-
-:::: {#chart-su class="mychart"}
-```{r}
-#| file: R/chart_level1_traffic_su.R
-#| out.width: "100%"
-```
-::::
-
-:::: {#concl-su}
-```{r}
-tsu_conc <- read_mytable("PRB_findings.xlsx", "traffic_SUs", "Table_Findings_traffic_TSU") %>% 
-  filter(Year_Report == year_report, State == 'SES') %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-tsu_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '') 
-```
-
-`r tsu_conc1`
-::::
-:::
-
-::: {#container-saf style="clear: both"}
-
-<!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
-
-## Safety (SES RP3 area)
-:::: {#chart-saf class="mychart"}
-```{r}
-#| file: R/chart_level1_saf_ses.R
-#| out.width: "100%"
-```
-::::
-
-:::: {#concl-saf}
-```{r}
-saf_conc <- read_mytable("PRB_findings.xlsx", "safety", "Table_Findings_safety") %>% 
-  filter(Year_Report == year_report, State == 'SES') %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
-```
-
-`r saf_conc1`
-::::
-:::
-
-::: {#container-env style="clear: both"}
-
-<!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
-
-## Environment (SES RP3 area)
-
-:::: {#chart-env class="mychart"}
-```{r}
-#| file: R/chart_level1_kea.R
-#| out.width: "100%"
-```
-::::
-
-:::: {#concl-env}
-```{r}
-env_conc <- read_mytable("PRB_findings.xlsx", "environment", "Table_Findings_environment") %>% 
-  filter(Year_Report == year_report, State == 'SES') %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
-```
-
-`r env_conc1`
-::::
-:::
-
-::: {#container-cap style="clear: both"}
-
-## Capacity (SES RP3 area)
-<!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
-
-:::: {#chart-cap class="mychart"}
-```{r}
-#| file: R/chart_level1_cap_er.R
-#| out.width: "100%"
-```
-::::
-
-:::: {#concl-cap}
-```{r}
-cap_er_conc <- read_mytable("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity") %>% 
-  filter(Year_Report == year_report, State == 'SES') %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
-```
-
-`r cap_er_conc1`
-::::
-:::
-
-
-::: {#container-cef style="clear: both"}
-<!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
-
-## Cost-efficiency (SES RP3 area)
-
-:::: {#chart-cef class="mychart"}
-```{r}
-#| file: R/chart_level1_cef_er_ses.R
-#| out.width: "100%"
-```
-::::
-
-:::: {#concl-cef}
-```{r}
-cef_conc <- read_mytable("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF") %>% 
-  filter(Year_Report == year_report, State == 'SES') %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
-```
-
-`r cef_conc1`
-::::
-:::
-
+{{< include ./_original_files/state_index.qmd >}}

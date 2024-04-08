@@ -1,12 +1,13 @@
-
-# parameters ----
-if (exists("data_folder") == FALSE) {
-  source("R/parameters.R")
-}
+# 
+# # parameters ----
+# if (exists("data_folder") == FALSE) {
+#   source("R/parameters.R")
+# }
 
 #wrap script in function so it can be called from qmd
 myfig <- function(){
   # import data  ----
+
   data_raw_target  <-  read_xlsx(
     paste0(data_folder, "targets.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
@@ -192,5 +193,4 @@ myfig <- function(){
   return(myc(NA, 320, 14, 70))
 
 }
-
 

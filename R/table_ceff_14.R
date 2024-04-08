@@ -9,7 +9,7 @@ sheet <- "4_ATSP"
 
 # check how many tables are needed
 range <- "C13:C66"
-ert_2_14_0 <- read_range(file, sheet, range)
+ert_2_14_0 <- read_range(ceff_file, sheet, range)
 notables <- 5- sum(str_count(ert_2_14_0[[1]], "Other ANSP planned regulatory result"), na.rm=T)
   
 ##https://stackoverflow.com/questions/75575583/interactive-ggiraph-objects-created-in-a-loop-does-not-show-in-quarto-html-outpu
@@ -20,10 +20,10 @@ t2 <- list()
 for (i in 1:notables) {
   #define ranges
 range <- paste0("C", 13 + (i - 1)*11, ":M", 17 + (i - 1)*11)
-ert_2_14_1  <- read_range(file, sheet, range) 
+ert_2_14_1  <- read_range(ceff_file, sheet, range) 
 
 range <- paste0("C", 18 + (i - 1)*11, ":M", 22 + (i - 1)*11) 
-ert_2_14_2  <- read_range(file, sheet, range)
+ert_2_14_2  <- read_range(ceff_file, sheet, range)
 
 # data prep 1
 myrownames <- ert_2_14_1[1]

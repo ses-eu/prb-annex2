@@ -1,8 +1,8 @@
-
-# parameters ----
-if (exists("data_folder") == FALSE) {
-  source("R/parameters.R")
-}
+# 
+# # parameters ----
+# if (exists("data_folder") == FALSE) {
+#   source("R/parameters.R")
+# }
 
 # import data  ----
 data_raw  <-  read_xlsx(
@@ -41,8 +41,8 @@ data_prep <- rbind(data_raw, data_spain) %>%
 
 data_prep_forecast <-  data_prep %>%
   filter(
-    forecast_id == forecastid
-    ) %>%
+    forecast_id == .env$forecast_id
+  ) %>%
   mutate(tsu = case_when (
     year > max_actual_year ~ tsu,
     TRUE ~ NA
@@ -55,7 +55,7 @@ data_prep_actual <-  data_prep %>%
     rank == 'Base forecast'
   ) %>%
   mutate(
-    forecast_id = forecastid,
+    forecast_id = .env$forecast_id,
     rank = 'Actual',
     tsu = case_when (
     year <= year_report ~ tsu,

@@ -7,7 +7,7 @@ if (exists("data_folder") == FALSE) {
 ## import data
 sheet <- "2_ERT"
 range <- range <- "D38:M45" 
-ert_1_7  <- read_range(file, sheet, range)
+ert_1_7  <- read_range(ceff_file, sheet, range)
 
 ## prepare data
 ert_1_7_c <- ert_1_7 %>% 

@@ -7,7 +7,7 @@ if (exists("data_folder") == FALSE) {
 ## import data
 sheet <- "9_G2G"
 range <- "C20:M24"
-g2g_1_2  <- read_range(file, sheet, range)
+g2g_1_2  <- read_range(ceff_file, sheet, range)
 
 myrownames <- g2g_1_2[1]
 mycolnames <- colnames(g2g_1_2)

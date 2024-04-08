@@ -1,8 +1,8 @@
 
-# parameters ----
-if (exists("data_folder") == FALSE) {
-  source("R/parameters.R")
-}
+# # parameters ----
+# if (exists("data_folder") == FALSE) {
+#   source("R/parameters.R")
+# }
 
   mymetric <- "Arrival ATFM delay savings"
   mychart_title <- paste0("Percentage of ", str_to_lower(mymetric)) %>% str_replace("atfm", "ATFM")

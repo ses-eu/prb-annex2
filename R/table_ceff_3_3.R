@@ -7,7 +7,7 @@ if (exists("data_folder") == FALSE) {
 ## import data
 sheet <- "1_ERT"
 range <- if_else(nat_curr == 'EUR', "C37:M47", "C37:M49")
-ert_1_3_3  <- read_range(file, sheet, range)
+ert_1_3_3  <- read_range(ceff_file, sheet, range)
 myrownames <- ert_1_3_3[1]
 mycolnames <- colnames(ert_1_3_3)
 if (nat_curr == 'EUR') {

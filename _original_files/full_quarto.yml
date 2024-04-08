@@ -6,7 +6,7 @@ website:
   title: "PRB Annual Monitoring Report"
   search: false 
   favicon: "images/prb_logo_smaller.png"
-  page-navigation: true
+  page-navigation: false
   navbar:
     title: false
     background: "#f8f9fa"
@@ -14,70 +14,70 @@ website:
     left: 
       - href: https://www.sesperformance.eu/
         text: Home
-      - href: https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/ses-rp3/
+      - href: destination-dir/ses-rp3/
         text: SES view
       - text: "State view"
         menu:
           - text: "Austria"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/austria/'
+            href: 'destination-dir/austria/'
           - text: "Belgium"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/belgium/'
+            href: 'destination-dir/belgium/'
           - text: "Bulgaria"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/bulgaria/'
+            href: 'destination-dir/bulgaria/'
           - text: "Croatia"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/croatia/'
+            href: 'destination-dir/croatia/'
           - text: "Cyprus"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/cyprus/'
+            href: 'destination-dir/cyprus/'
           - text: "Czech Republic"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/czech-republic/'
+            href: 'destination-dir/czech-republic/'
           - text: "Denmark"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/denmark/'
+            href: 'destination-dir/denmark/'
           - text: "Estonia"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/estonia/'
+            href: 'destination-dir/estonia/'
           - text: "Finland"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/finland/'
+            href: 'destination-dir/finland/'
           - text: "France"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/france/'
+            href: 'destination-dir/france/'
           - text: "Germany"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/germany/'
+            href: 'destination-dir/germany/'
           - text: "Greece"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/greece/'
+            href: 'destination-dir/greece/'
           - text: "Hungary"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/hungary/'
+            href: 'destination-dir/hungary/'
           - text: "Ireland"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/ireland/'
+            href: 'destination-dir/ireland/'
           - text: "Italy"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/italy/'
+            href: 'destination-dir/italy/'
           - text: "Latvia"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/latvia/'
+            href: 'destination-dir/latvia/'
           - text: "Lithuania"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/lithuania/'
+            href: 'destination-dir/lithuania/'
           - text: "Luxembourg"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/luxembourg/'
+            href: 'destination-dir/luxembourg/'
           - text: "Malta"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/malta/'
+            href: 'destination-dir/malta/'
           - text: "Netherlands"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/netherlands/'
+            href: 'destination-dir/netherlands/'
           - text: "Norway"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/norway/'
+            href: 'destination-dir/norway/'
           - text: "Poland"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/poland/'
+            href: 'destination-dir/poland/'
           - text: "Portugal"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/portugal/'
+            href: 'destination-dir/portugal/'
           - text: "Romania"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/romania/'
+            href: 'destination-dir/romania/'
           - text: "Slovakia"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/slovakia/'
+            href: 'destination-dir/slovakia/'
           - text: "Slovenia"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/slovenia/'
+            href: 'destination-dir/slovenia/'
           - text: "Spain"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/spain/'
+            href: 'destination-dir/spain/'
           - text: "Sweden"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/sweden/'
+            href: 'destination-dir/sweden/'
           - text: "Switzerland"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/switzerland/'
+            href: 'destination-dir/switzerland/'
             # ---
-      - href: https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/network-manager/
+      - href: destination-dir/network-manager/
         text: NM View
       - href: https://www.sesperformance.eu/about
         text: About
@@ -87,7 +87,16 @@ website:
 
   sidebar: 
     contents:
-      - text: '<b style= "font-size: 1.2rem">{{< var doc.country >}}</b>'
+      - section: '<b style= "font-size: 1.2rem">Year report</b>'
+        contents:
+          - text: "2022"
+            href: 'home_address/2022/country_lower/index.html#main'
+          - text: "2021"
+            href: 'home_address/2021/country_lower/index.html#main'
+          - text: "2020"
+            href: 'home_address/2020/country_lower/index.html#main'
+      - text: "---"
+      - text: '<b style= "font-size: 1.2rem">country placeholder</b>'
         href: index.html
       - section: "<b>Overview</b>"
         contents:
@@ -160,6 +169,7 @@ website:
           - cost-efficiency-tz1-1.qmd
           - cost-efficiency-tz1-2.qmd
           - cost-efficiency-tz1-3.qmd
+# block tcz2
           - text: "---"
           - cost-efficiency-tz2-1.qmd
           - cost-efficiency-tz2-2.qmd

@@ -1,8 +1,8 @@
-
-# parameters ----
-if (exists("data_folder") == FALSE) {
-  source("R/parameters.R")
-}
+# 
+# # parameters ----
+# if (exists("data_folder") == FALSE) {
+#   source("R/parameters.R")
+# }
 
 #wrap script in function so it can be called from qmd
 myfig <- function(){
@@ -14,7 +14,7 @@ myfig <- function(){
   # initialise list to store plots
   myplot = list()
   
-  for (tz in 1:nrow(tcz_list)) {
+  for (tz in 1:no_tcz) {
   # import data  ----
   data_raw  <-  read_xlsx(
     paste0(data_folder, "CEFF.xlsx"),
@@ -65,28 +65,28 @@ myfig <- function(){
         color = ~ factor(status, levels = c("Determined unit cost", 
                                             "Actual unit cost")),
         colors = c('#5B9BD5', '#FFC000'),
-        # hovertemplate = paste('%{y:.2f}<extra></extra>'),
-        hoverinfo = "none",
+        hovertemplate = paste('%{xother} %{y:.2f}'),
+        # hoverinfo = "none",
         showlegend = T
       ) %>%
-      add_trace(
-        inherit = FALSE,
-        data = data_prep,
-        x = ~ year_text,
-        y = ~ unit_cost_er/2,
-        yaxis = "y1",
-        type = 'scatter',
-        mode = "markers",
-        text = ~ paste0(substr(status,1,1), ": ", format(unit_cost_er, nsmall = 2)),
-        color = ~ factor(status, levels = c("Determined unit cost",
-                                            "Actual unit cost")),
-        colors = c('#5B9BD5', '#FFC000'),
-        # line = list(width = 0),
-        marker = list(color = 'transparent'),
-        hovertemplate = paste('%{text}<extra></extra>'),
-        # hoverinfo = "none",
-        showlegend = F
-      ) %>% 
+      # add_trace(
+      #   inherit = FALSE,
+      #   data = data_prep,
+      #   x = ~ year_text,
+      #   y = ~ unit_cost_er/2,
+      #   yaxis = "y1",
+      #   type = 'scatter',
+      #   mode = "markers",
+      #   text = ~ paste0(substr(status,1,1), ": ", format(unit_cost_er, nsmall = 2)),
+      #   color = ~ factor(status, levels = c("Determined unit cost",
+      #                                       "Actual unit cost")),
+      #   colors = c('#5B9BD5', '#FFC000'),
+      #   # line = list(width = 0),
+      #   marker = list(color = 'transparent'),
+      #   hovertemplate = paste('%{text}<extra></extra>'),
+      #   # hoverinfo = "none",
+      #   showlegend = F
+      # ) %>% 
       config( responsive = TRUE,
               displaylogo = FALSE,
               displayModeBar = F

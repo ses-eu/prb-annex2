@@ -13,7 +13,8 @@ saf_2_r <- read_range(saf_eosm_file, sheet, range)
 
 #---------------- sections definition
 # section 1
-saf_1 <- paste0('# 1 Safety
+saf_1 <- paste0(
+'# 1 Safety
 ### Effectiveness of Safety Management
 
 ```{r}
@@ -37,5 +38,5 @@ cat(paste0(
   saf_2
   
 ),
-file = "safety.qmd")
+file = "_safety.qmd")
 

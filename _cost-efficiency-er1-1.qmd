@@ -1,0 +1,134 @@
+[4 Cost-efficiency]{class="fakeh1"}
+
+## En route charging zone
+### 1 Contextual economic information: en route air navigation services
+
+```{r}
+#| file: R/table_ceff_er_0.R
+#| out.width: "100%"
+```  
+
+
+### 2 Monitoring of the en route determined unit cost (DUC) at charging zone level
+  The **Determined Unit Cost (DUC)** is the cost per service unit, at which the service is planned to be provided during the year. The **Actual Unit Cost (AUC)** reflects the cost per service unit, at which the service has actually been provided during the year.<br/><br/>The monitoring of the DUC / AUC is carried out in national currency in real terms, at 2017 prices.
+
+### 3 En route actual unit cost (AUC) vs. en route determined unit cost (DUC)
+
+```{r}
+#| file: R/table_ceff_3_1.R
+#| out.width: "100%"
+```  
+```{r}
+#| file: R/table_ceff_3_2.R
+#| out.width: "100%"
+```
+```{r}
+#| file: R/table_ceff_3_3.R
+#| out.width: "100%"
+```  
+
+
+
+### 4 Focus on en route DUC monitoring at charging zone level
+  
+:::: {.columns}
+  
+::: {.column width="55%"}
+  
+<p style="margin-bottom: 0rem;">**AUC vs. DUC**</p>
+
+In 2022, the en route AUC was -33.8% (or -4 780.28 HUF2017, -15.47 €2017) lower than the planned DUC. This results from the combination of significantly higher than planned TSUs (+31.6%) and significantly lower than planned en route costs in real terms (-12.9%, or -4 417.6 MHUF2017, -14.3 M€2017). It should be noted that actual inflation index in 2022 was +15.4 p.p. higher than planned.
+
+<p style="margin-bottom: 0rem;">**En route service units**</p>
+
+The difference between actual and planned TSUs (+31.6%) falls outside the ±10% threshold foreseen in the traffic risk sharing mechanism. The resulting gain of additional en route revenues is therefore shared between the ANSP and the airspace users, with the ANSP (HungaroControl) retaining an amount of +3.6 M€2017.
+
+<p style="margin-bottom: 0rem;">**En route costs by entity**</p>
+
+Actual real en route costs are -12.9% (-14.3 M€2017) lower than planned. This is the result of lower costs for the main ANSP, HungaroControl (-13.3%, or -12.7 M€2017), the NSA/EUROCONTROL (-10.9%, or -1.2 M€2017) and the MET service provider (-10.4%, or -0.3 M€2017).
+
+<p style="margin-bottom: 0rem;">**En route costs for the main ANSP (HungaroControl) at charging zone level**</p>
+
+Significantly lower than planned en route costs in real terms for HungaroControl in 2022 (-13.3%, or -12.7 M€2017) result from:<br/>- Significantly lower staff costs (-14.1%), due to the postponement of the pay rise for non-ATCO staff and lower than planned execution of the non-ATCO recruitment plan. This result is also impacted by the higher actual inflation index (+15.4 p.p.).<br/>- Significantly lower other operating costs (-26.8%), mainly due to the slower execution of procurement processes and lower travel and training costs. This result is also impacted by the higher actual inflation index (+15.4 p.p.).<br/>- Significantly lower depreciation (-9.8%), due to changes in the investment commissioning schedule. <br/>- Significantly higher cost of capital (+37.4%), understood to be mainly due to a change (correction) in the methodology used to calculate the net current assets (inclusion of pension related obligations towards ATCOs).
+
+:::
+  
+::: {.column width="45%"}
+![](images/2022/Hungary/1_ERT_3.png)
+
+![](images/2022/Hungary/1_ERT_1.png)
+
+
+![](images/2022/Hungary/1_ERT_2.png)
+:::
+  
+::::
+
+{{< pagebreak >}}
+
+### 5 Monitoring of the en route actual unit cost for users (AUCU) at charging zone level
+The **Actual Unit Cost for Users(AUCU)** reflects the price per service units that is charged *in fine* to users for the services provided in the year. It corresponds to the sum of the DUC for the year and of the different adjustments stemming from that year.
+The monitoring of the AUCU is carried out in national currency in nominal terms.
+
+
+### 6 En route actual unit cost for users (AUCU) at charging zone level
+  
+:::: {.columns}
+  
+::: {.column width="61%"}
+
+![](images/2022/Hungary/2_ERT_1.png)
+
+<small>* The traffic adjustment on adjustments is not considered to avoid double counting, as the related adjustments have already been taken into account in full in the AUCU for the current year or previous years.</small><br><small>** The difference in revenue due to the application of the temporary unit rates in 2022, if applicable, is already reflected in the DUC (part to be charged retroactively) and is therefore not considered in the total adjustments, in order to avoid double counting.</small>
+
+:::
+
+::: {.column width="1%"}
+:::
+
+::: {.column width="38%"}
+
+```{r}
+#| file: R/table_ceff_6.R
+#| out.width: "100%"
+```  
+:::
+
+::::
+
+
+### 7 En route costs exempt from cost sharing
+
+```{r}
+#| file: R/table_ceff_7.R
+#| out.width: "100%"
+```  
+Source: These data are taken from the June 2023 en route Reporting Tables (for Eurocontrol costs and costs of competent authorities and qualified entities) and from the “NSA Report on the verification of cost risk sharing for the year 2022” submitted in accordance with Article 28 (7) of Regulation (EU) 2019/317 (for ANSPs costs).										
+
+
+
+### 8 En route regulatory result at charging zone level
+
+:::: {.columns}
+  
+::: {.column width="45%"}
+
+![](images/2022/Hungary/2_ERT_2.png)
+
+:::
+
+::: {.column width="55%"}
+
+```{r}
+#| file: R/table_ceff_8.R
+#| out.width: "100%"
+```
+
+<small>*** before deduction of other revenues, as is the case for the regulatory results (see items 10 to 14)</small>
+:::
+
+::::
+
+
+### 9 Focus on en route AUCU monitoring at charging zone level
+The actual en route unit cost incurred by airspace users (AUCU) in respect of activities performed in 2022 (13 111.30 HUF or 33.58 €) is -17.5% lower than the nominal DUC (15 896.42 HUF or 40.72 €). The difference between these two figures (-2 785.13 HUF/SU or -7.13 €/SU) is due to:<br/>- the positive inflation adjustment resulting from higher than planned inflation (+1 152.64 HUF/SU or +2.95 €/SU);<br/>- the impact of adjustments resulting from the costs exempted from cost-sharing mechanism (-309.87 HUF/SU or -0.79 €/SU);<br/>- the deduction of the traffic risk sharing adjustment (-2 891.14 HUF/SU or -7.41 €/SU);<br/>- the deduction of the traffic adjustment (-459.24 HUF/SU or -1.18 €/SU) for the costs not subject to traffic risk sharing, and,<br/>- the deduction of the other revenues (-277.50 HUF/SU or -0.71 €/SU).<br/>The share of the regulatory result (see items 10 to 14) in the AUCU (before the deduction of other revenues) is 21.8%.

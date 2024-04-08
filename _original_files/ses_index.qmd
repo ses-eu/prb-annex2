@@ -1,9 +1,3 @@
-```{r, eval=TRUE}
-if (exists("data_folder") == FALSE) {
-  source("R/parameters.R")
-}
-```
-
 [Annual Monitoring Report {{< var doc.year_report >}} - SES RP3]{.fakeh1}
 
 ## Contextual information

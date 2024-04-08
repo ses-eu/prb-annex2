@@ -34,7 +34,8 @@ for (tz in 1:state_type) {
   
   
     # section 1.1
-ceff_4_1 <- paste0('## Terminal charging zone ', 
+ceff_4_1 <- paste0(
+'## Terminal charging zone ', 
 if_else(state_type == 2, as.character(tz), ""),'
 ### 1 Contextual economic information: terminal air navigation services
 
@@ -195,7 +196,7 @@ cat(paste0(
   ceff_4_8,
   ceff_4_9
 ),
-  file = paste0("cost-efficiency-tz", tz, "-1.qmd")
+  file = paste0("_cost-efficiency-tz", tz, "-1.qmd")
 )
 
 }

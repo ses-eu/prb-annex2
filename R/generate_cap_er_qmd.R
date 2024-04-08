@@ -1,9 +1,3 @@
-
-# parameters ----
-if (exists("data_folder") == FALSE) {
-  source("R/parameters.R")
-}
-
 # define ranges and import data
 sheet <- country
 
@@ -27,7 +21,8 @@ cap_er_1_7_r <- read_range(cap_file, sheet, range)
 
 #---------------- sections definition
   # section cap_er 1.1
-cap_er_1_1 <- paste0('[3 Capacity]{class="fakeh1"}
+cap_er_1_1 <- paste0(
+'[3 Capacity]{class="fakeh1"}
 
 ## En route
 ### Minutes of ATFM en-route delay
@@ -94,8 +89,7 @@ cap_er_1_7 <- paste0("\n\n### Summary of capacity performance
 )
                    
 # assemble all and create .qmd
-cat(paste0(
-  cap_er_1_1,
+cat(paste0(cap_er_1_1,
   cap_er_1_2,
   cap_er_1_3,
   cap_er_1_4,
@@ -103,5 +97,5 @@ cat(paste0(
   cap_er_1_6,
   cap_er_1_7
 ),
-    file = "capacity_er.qmd")
+    file = "_capacity_er.qmd")
 

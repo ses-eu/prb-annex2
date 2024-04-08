@@ -1,0 +1,132 @@
+## Terminal charging zone 
+### 1 Contextual economic information: terminal air navigation services
+
+```{r, options=(tz = 1)}
+#| file: R/table_ceff_tz_0.R
+#| out.width: "100%"
+```  
+
+
+### 2 Monitoring of the terminal determined unit cost (DUC) at charging zone level
+  The **Determined Unit Cost (DUC)** is the cost per service unit, at which the service is planned to be provided during the year. The **Actual Unit Cost (AUC)** reflects the cost per service unit, at which the service has actually been provided during the year.<br/><br/>The monitoring of the DUC / AUC is carried out in national currency in real terms, at 2017 prices.
+
+### 3 Terminal actual unit cost (AUC) vs. terminal determined unit cost (DUC)
+
+```{r, options=(tz = 1)}
+#| file: R/table_ceff_tz_3_1.R
+#| out.width: "100%"
+```  
+```{r, options=(tz = 1)}
+#| file: R/table_ceff_tz_3_2.R
+#| out.width: "100%"
+```
+```{r, options=(tz = 1)}
+#| file: R/table_ceff_tz_3_3.R
+#| out.width: "100%"
+```  
+
+
+
+### 4 Focus on terminal DUC monitoring at charging zone level
+  
+:::: {.columns}
+  
+::: {.column width="55%"}
+  
+<p style="margin-bottom: 0rem;">**AUC vs. DUC**</p>
+
+In 2022, the terminal AUC was -19.0% (or -22 290.3 HUF2017, -72.14 €2017) lower than the planned DUC. This results from the combination of significantly higher than planned TNSUs (+12.7%) and significantly lower than planned terminal costs in real terms (-8.7%, or -584.7 MHUF2017, -1.9 M€2017). It should be noted that actual inflation index in 2022 was +15.4 p.p. higher than planned.
+
+<p style="margin-bottom: 0rem;">**Terminal service units**</p>
+
+The difference between actual and planned TNSUs (+12.7%) falls outside the ±10% threshold foreseen in the traffic risk sharing mechanism. The resulting gain of additional terminal revenues is therefore shared between the ANSP and the airspace users, with the ANSP (HungaroControl) retaining an amount of +0.8 M€2017.
+
+<p style="margin-bottom: 0rem;">**Terminal costs by entity**</p>
+
+Actual real terminal costs are -8.7% (-1.9 M€2017) lower than planned. This is the result of lower costs for the main ANSP, HungaroControl (-8.9%, or -1.9 M€2017) and the MET service provider (-6.9%, or -0.02 M€2017) and higher costs for the NSA (+0.3%, or +0.001 M€2017).
+
+<p style="margin-bottom: 0rem;">**Terminal costs for the main ANSP (HungaroControl) at charging zone level**</p>
+
+Lower than planned terminal costs in real terms for HungaroControl in 2022 (-8.9%, or -1.9 M€2017) result from:<br/>- Significantly lower staff costs (-16.5%), due to the postponement of the pay rise for non-ATCO staff and lower than planned execution of the non-ATCO recruitment plan. This result is also impacted by the higher actual inflation index (+15.4 p.p.).<br/>- Significantly lower other operating costs (-15.5%). This result is also impacted by the higher actual inflation index (+15.4 p.p.).<br/>- Significantly lower depreciation (-7.5%), due to changes in the investment commissioning schedule. <br/>- Significantly higher cost of capital (+48.3%), understood to be mainly due to a change (correction) in the methodology used to calculate the net current assets (inclusion of pension related obligations towards ATCOs).
+
+:::
+  
+::: {.column width="45%"}
+![](images/2022/Hungary/5_TRM_3.png)
+
+![](images/2022/Hungary/5_TRM_1.png)
+
+
+![](images/2022/Hungary/5_TRM_2.png)
+:::
+  
+::::
+
+
+
+### 5 Monitoring of the terminal actual unit cost for users (AUCU) at charging zone level
+The **Actual Unit Cost for Users(AUCU)** reflects the price per service units that is charged *in fine* to users for the services provided in the year. It corresponds to the sum of the DUC for the year and of the different adjustments stemming from that year.
+The monitoring of the AUCU is carried out in national currency in nominal terms.
+
+
+### 6 Terminal actual unit cost for users (AUCU) at charging zone level
+  
+:::: {.columns}
+  
+::: {.column width="61%"}
+
+![](images/2022/Hungary/6_TRM_1.png)
+
+<small>* The traffic adjustment on adjustments is not considered to avoid double counting, as the related adjustments have already been taken into account in full in the AUCU for the current year or previous years.</small><br><small>** The difference in revenue due to the application of the temporary unit rates in 2022, if applicable, is already reflected in the DUC (part to be charged retroactively) and is therefore not considered in the total adjustments, in order to avoid double counting.</small>
+
+:::
+
+::: {.column width="1%"}
+:::
+
+::: {.column width="38%"}
+
+```{r, options=(tz = 1)}
+#| file: R/table_ceff_tz_6.R
+#| out.width: "100%"
+```  
+:::
+
+::::
+
+
+### 7 Terminal costs exempt from cost sharing
+
+```{r, options=(tz = 1)}
+#| file: R/table_ceff_tz_7.R
+#| out.width: "100%"
+```  
+Source: These data are taken from the June 2023 terminal Reporting Tables (for Eurocontrol costs and costs of competent authorities and qualified entities) and from the “NSA Report on the verification of cost risk sharing for the year 2022” submitted in accordance with Article 28 (7) of Regulation (EU) 2019/317 (for ANSPs costs).										
+
+
+
+### 8 Terminal regulatory result at charging zone level
+
+:::: {.columns}
+  
+::: {.column width="45%"}
+
+![](images/2022/Hungary/6_TRM_2.png)
+
+:::
+
+::: {.column width="55%"}
+
+```{r, options=(tz = 1)}
+#| file: R/table_ceff_tz_8.R
+#| out.width: "100%"
+```
+
+<small>*** before deduction of other revenues, as is the case for the regulatory results (see items 10 to 14)</small>
+:::
+
+::::
+
+
+### 9 Focus on terminal AUCU monitoring at charging zone level
+The actual terminal unit cost incurred by airspace users (AUCU) in respect of activities performed in 2022 (129 367.34 HUF or 331.37 €) is -2.3% lower than the nominal DUC (132 473.11 HUF or 339.32 €). The difference between these two figures (-3 105.77 HUF/SU or -7.96 €/SU) is due to:<br/>- the positive inflation adjustment resulting from higher than planned inflation (+11 747.92 HUF/SU or +30.09 €/SU);<br/>- the impact of adjustments resulting from the costs exempted from cost-sharing mechanism (-2 345.50 HUF/SU or -6.01 €/SU);<br/>- the deduction of the traffic risk sharing adjustment (-9 529.13 HUF/SU or -24.41 €/SU);<br/>- the deduction of the traffic adjustment (-405.91 HUF/SU or -1.04 €/SU) for the costs not subject to traffic risk sharing; and,<br/>- the deduction of the other revenues (-2 573.14 HUF/SU or -6.59 €/SU).<br/>The share of the regulatory result (see items 10 to 14) in the AUCU (before the deduction of other revenues) is 22.3%.

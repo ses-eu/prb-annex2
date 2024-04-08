@@ -1,8 +1,8 @@
-
-# parameters ----
-if (exists("data_folder") == FALSE) {
-  source("R/parameters.R")
-}
+# 
+# # parameters ----
+# if (exists("data_folder") == FALSE) {
+#   source("R/parameters.R")
+# }
 
 mymetric <- "IFR flights with ATFM delay > 15 min"
 mychart_title <- "IFR flights with ATFM delay above 15 min."

@@ -1,8 +1,8 @@
-
-# parameters ----
-if (exists("data_folder") == FALSE) {
-  source("R/parameters.R")
-}
+# 
+# # parameters ----
+# if (exists("data_folder") == FALSE) {
+#   source("R/parameters.R")
+# }
 
 # import data  ----
 data_raw  <-  read_xlsx(
@@ -33,7 +33,7 @@ data_prep <- data_raw %>%
 
 data_prep_forecast <-  data_prep %>%
   filter(
-    forecast_id == forecastid
+    forecast_id == .env$forecast_id
     ) %>%
   mutate(mvts = case_when (
     yr > max_actual_year ~ mvts,
@@ -47,7 +47,7 @@ data_prep_actual <-  data_prep %>%
     rank == 'Base forecast'
   ) %>%
   mutate(
-    forecast_id = forecastid,
+    forecast_id = .env$forecast_id,
     rank = 'Actual',
     mvts = case_when (
     yr <= year_report ~ mvts,

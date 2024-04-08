@@ -7,10 +7,10 @@ if (exists("data_folder") == FALSE) {
 ## import data
 sheet <- "2_ERT"
 range <- range <- "H49:M53" 
-ert_1_8_1  <- read_range(file, sheet, range)
+ert_1_8_1  <- read_range(ceff_file, sheet, range)
 
 range <- range <- "H54:M61" 
-ert_1_8_2  <- read_range(file, sheet, range)
+ert_1_8_2  <- read_range(ceff_file, sheet, range)
 
 ## prepare data
 data_for_table1 <- ert_1_8_1 %>% 

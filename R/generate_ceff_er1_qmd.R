@@ -29,7 +29,8 @@ ert_1_9  <- read_range(file, sheet, range)
 
 #---------------- sections definition
   # section 1.1
-ceff_1_1 <- paste0('[4 Cost-efficiency]{class="fakeh1"}
+ceff_1_1 <- paste0(
+'[4 Cost-efficiency]{class="fakeh1"}
 
 ## En route charging zone
 ### 1 Contextual economic information: en route air navigation services
@@ -191,5 +192,5 @@ cat(paste0(
   ceff_1_8,
   ceff_1_9
 ),
-    file = "cost-efficiency-er1-1.qmd")
+    file = "_cost-efficiency-er1-1.qmd")
 

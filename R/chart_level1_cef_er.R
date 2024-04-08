@@ -1,8 +1,8 @@
-
-# parameters ----
-if (exists("data_folder") == FALSE) {
-  source("R/parameters.R")
-}
+# 
+# # parameters ----
+# if (exists("data_folder") == FALSE) {
+#   source("R/parameters.R")
+# }
 
 # fix tz if script not executed from qmd file
 if (exists("ez") == FALSE) {ez = 1}
@@ -11,7 +11,7 @@ if (exists("ez") == FALSE) {ez = 1}
 # initialise list to store plots
 myplot = list()
 
-for (ez in 1:nrow(ecz_list)) {
+for (ez in 1:no_ecz) {
 
 # import data  ----
 data_raw  <-  read_xlsx(
@@ -62,7 +62,7 @@ myc <-  function(mywidth, myheight, myfont) {
                                           "Actual unit cost")),
       colors = c('#5B9BD5', '#FFC000'),
       hovertemplate = paste('%{xother} %{y:.2f}'),
-      hoverinfo = "none",
+      # hoverinfo = "none",
       showlegend = T
     ) %>%
     # add_trace(

@@ -10,7 +10,7 @@ if (exists("tz") == FALSE) {tz = 1}
 sheet <- c("5_TRM", "5_TRM (2)")
 range <- if_else(nat_curr == 'EUR', "C21:M27", "C21:M28")
 
-trm_1_3_1  <- read_range(file, sheet[tz], range)
+trm_1_3_1  <- read_range(ceff_file, sheet[tz], range)
 myrownames <- trm_1_3_1[1]
 mycolnames <- colnames(trm_1_3_1)
 

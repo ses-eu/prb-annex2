@@ -8,11 +8,11 @@ if (exists("data_folder") == FALSE) {
 sheet <- "9_G2G"
 
 range <- "C46:M51"
-g2g_3_1  <- read_range(file, sheet, range)
+g2g_3_1  <- read_range(ceff_file, sheet, range)
 mycolnames <- colnames(g2g_3_1)
 
 range <- "C52:M57"
-g2g_3_2  <- read_range(file, sheet, range)
+g2g_3_2  <- read_range(ceff_file, sheet, range)
 mycolnames2 <- colnames(g2g_3_2)
 
 

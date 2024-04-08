@@ -19,7 +19,8 @@ for (tz in 1:state_type) {
 
 #---------------- sections definition
   # section 2.14[i]
-ceff_6_14_1 <- paste0('## Terminal charging zone ', 
+ceff_6_14_1 <- paste0(
+'## Terminal charging zone ', 
 if_else(state_type == 2, as.character(tz), ""),' - Other terminal ANSPs/METSPs
 ### 14 Other ANSP(s) / METSP(s) regulatory results for terminal activity
 
@@ -49,6 +50,6 @@ cat(paste0(
 
   
 ),
-    file = paste0("cost-efficiency-tz", tz, "-3.qmd")
+    file = paste0("_cost-efficiency-tz", tz, "-3.qmd")
 )
 }

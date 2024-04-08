@@ -9,7 +9,7 @@ if (exists("tz") == FALSE) {tz = 1}
 ## import data
 sheet <- c("6_TRM", "6_TRM (2)")
 range <- range <- "D38:M45" 
-trm_1_7  <- read_range(file, sheet[tz], range)
+trm_1_7  <- read_range(ceff_file, sheet[tz], range)
 
 ## prepare data
 trm_1_7_c <- trm_1_7 %>% 

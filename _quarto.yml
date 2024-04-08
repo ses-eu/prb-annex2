@@ -6,7 +6,7 @@ website:
   title: "PRB Annual Monitoring Report"
   search: false 
   favicon: "images/prb_logo_smaller.png"
-  page-navigation: true
+  page-navigation: false
   navbar:
     title: false
     background: "#f8f9fa"
@@ -14,70 +14,70 @@ website:
     left: 
       - href: https://www.sesperformance.eu/
         text: Home
-      - href: https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/ses-rp3/
+      - href: https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/ses-rp3/
         text: SES view
       - text: "State view"
         menu:
           - text: "Austria"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/austria/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/austria/'
           - text: "Belgium"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/belgium/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/belgium/'
           - text: "Bulgaria"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/bulgaria/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/bulgaria/'
           - text: "Croatia"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/croatia/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/croatia/'
           - text: "Cyprus"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/cyprus/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/cyprus/'
           - text: "Czech Republic"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/czech-republic/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/czech-republic/'
           - text: "Denmark"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/denmark/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/denmark/'
           - text: "Estonia"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/estonia/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/estonia/'
           - text: "Finland"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/finland/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/finland/'
           - text: "France"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/france/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/france/'
           - text: "Germany"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/germany/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/germany/'
           - text: "Greece"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/greece/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/greece/'
           - text: "Hungary"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/hungary/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/hungary/'
           - text: "Ireland"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/ireland/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/ireland/'
           - text: "Italy"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/italy/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/italy/'
           - text: "Latvia"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/latvia/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/latvia/'
           - text: "Lithuania"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/lithuania/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/lithuania/'
           - text: "Luxembourg"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/luxembourg/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/luxembourg/'
           - text: "Malta"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/malta/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/malta/'
           - text: "Netherlands"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/netherlands/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/netherlands/'
           - text: "Norway"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/norway/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/norway/'
           - text: "Poland"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/poland/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/poland/'
           - text: "Portugal"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/portugal/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/portugal/'
           - text: "Romania"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/romania/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/romania/'
           - text: "Slovakia"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/slovakia/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/slovakia/'
           - text: "Slovenia"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/slovenia/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/slovenia/'
           - text: "Spain"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/spain/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/spain/'
           - text: "Sweden"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/sweden/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/sweden/'
           - text: "Switzerland"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/switzerland/'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/switzerland/'
             # ---
-      - href: https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2022/network-manager/
+      - href: https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/network-manager/
         text: NM View
       - href: https://www.sesperformance.eu/about
         text: About
@@ -87,27 +87,63 @@ website:
 
   sidebar: 
     contents:
-      - text: '<b style= "font-size: 1.2rem">{{< var doc.country >}}</b>'
+      - section: '<b style= "font-size: 1.2rem">Year report</b>'
+        contents:
+          - text: "2022 &#10003"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/hungary/index.html#main'
+          - text: "2021"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2021/hungary/index.html#main'
+          - text: "2020"
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2020/hungary/index.html#main'
+      - text: "---"
+      - text: '<b style= "font-size: 1.2rem">Hungary</b>'
         href: index.html
       - section: "<b>Overview</b>"
         contents:
-# block level1 ses beginning
+# block level1 state beginning
           - text: "Contextual information"
             href: index.html#contextual-information
-          - text: "Main PRB findings"
-            href: index.html#main-prb-findings--
           - text: "Traffic"
-            href: index.html#traffic-ses-rp3-area
+            href: index.html#traffic-en-route-traffic-zone
           - text: "Safety"
-            href: index.html#safety-ses-rp3-area
+            href: index.html#safety-main-ansp
           - text: "Environment"
-            href: index.html#environment-ses-rp3-area
+            href: index.html#environment-member-state
           - text: "Capacity"
-            href: index.html#capacity-ses-rp3-area
+            href: index.html#capacity-member-state
           - text: "Cost-efficiency"
-            href: index.html#cost-efficiency-ses-rp3-area
+            href: index.html#cost-efficiency-en-routeterminal-charging-zones
       - text: "---"
-# block level1 ses end
+# block level1 state end
+# block level2 beginning
+      - text: "<b>1 Safety</b>"
+        href: safety.html
+      - text: "---"
+      - section: "<b>2 Environment</b>"
+        contents:
+          # - text: "2.1 Horizontal flight efficiency"
+          #   href: environment_kea.html
+          - environment_kea.qmd
+          - environment_apt.qmd
+          - environment_mil.qmd
+      - text: "---"
+      - section: "<b>3 Capacity</b>"
+        contents:
+          - capacity_er.qmd
+          - capacity_trm.qmd
+      - text: "---"
+      - section: "<b>4 Cost-efficiency</b>"
+        contents:
+          - cost-efficiency-er1-1.qmd
+          - cost-efficiency-er1-2.qmd
+          - cost-efficiency-er1-3.qmd
+          - text: "---"
+          - cost-efficiency-tz1-1.qmd
+          - cost-efficiency-tz1-2.qmd
+          - cost-efficiency-tz1-3.qmd
+          - text: "---"
+          - cost-efficiency-g2g.qmd
+# block level2 end
 # 
   # site-url: "https://eurocontrol.int/"
 
