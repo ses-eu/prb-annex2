@@ -56,11 +56,16 @@ data_prep_actual <-  data_prep %>%
     )
 
 data_prep_planned <- data_raw_planned %>% 
-  filter(state == country,
+  filter(state == .env$country,
          year > 2020) %>% 
-  select(state, year, x121_ecz_ifr_mvt)  %>%
+  select(state, year, x121_ecz_ifr_mvt, x121_ecz_name) %>%
   rename(mvts = x121_ecz_ifr_mvt) %>% 
   mutate(rank = 'Planned')
+
+## Spain is always different
+  if (country == "Spain") {
+    data_prep_planned <- data_prep_planned %>% filter (x121_ecz_name == "Spain")    
+  }
 
 # plot chart ----
 mycolors <-  c('#1969B4','#044598', '#229FDD')

@@ -1,21 +1,21 @@
 ## Airports
 ### Overview
-Hungary identified only its main airport Budapest as subject to RP3 monitoring. The Airport Operator Data Flow is correctly established and all capacity indicators can be monitored.<br/>Traffic at Budapest airport in 2022 was still by 20% lower compared to 2019 regardless the increase of 80% with respect to 2021.<br/><br/>Like in 2021, no arrival ATFM delays were observed in the entire 2022 at Budapest while ATFM slot adherence has slightly deteriorated (2022: 95.4%; 2021: 96.0%).
+Norway has identified four airports as subject to RP2 monitoring. However, in accordance with IR (EU) 2019/317 and the traffic figures, only two of these airports (Oslo (EGNM) and Bergen (ENBR)) must be monitored for pre-departure delays. Oslo (A-CDM implemented) is the only Norwegian airport that has finished the full implementation of the Airport Operator Data Flow required for the monitoring of these pre-departure delays. <br/>Regarding the APDF implementation and the calculation of the pre-departure delays at Bergen, Norway's monitoring  mentions that Avinor's IT-department is set on the case, and expected to be solved for calculating the 2023 figures.<br/>Traffic at the ensemble of these four Norwegian airports in 2022 was still 10% lower than in 2019.<br/><br/>Average arrival ATFM delays in 2022 was 0.10 min/arr, compared to 0.01 min/arr in 2021.<br/>ATFM slot adherence has improved (2022: 99.3%; 2021: 98.6%).
 
 
 ### Arrival ATFM Delay
 :::: {.columns}
   
 ::: {.column width="48%" }
-![](images/2022/Hungary/cap_trm_3_1.png)
+![](images/2022/Norway/cap_trm_3_1.png)
 :::
 
 ::: {.column width="2%" }
 :::
 
 ::: {.column width="50%" }
-No arrival ATFM delays were recorded in the entire 2022 at Budapest (LHBP: 2019: 0.03 min/arr.; 2020: 0.08 min/arr.; 2021: 0 min/arr.; 2022: 0 min/arr.)
-Regarding the Russian war, the Hungarian monitoring report mentions that  since all cancelled flights to/and from Russia and Ukraine represented less than 10% of LHBP traffic, and that there were no war related delays at LHBP in 2022. 
+Arrival ATFM delays in 2021 decreased and became marginal at all Norwegian airports. However in 2022 Oslo showed a significant increase in arrival delays (ENGM; 2019: 0.31 min/arr; 2020: 0.05 min/arr; 2021: 0.01 min/arr;  2021: 0.17 min/arr) while the rest of airports registered minimum delays.
+51% of the arrival ATFM delays in Norway were attributed to Weather, followed by ATC Staffing issues (39%) at Oslo. 
 :::
 ::::
 
@@ -24,7 +24,7 @@ Regarding the Russian war, the Hungarian monitoring report mentions that  since 
 :::: {.columns}
   
 ::: {.column width="48%"}
-![](images/2022/Hungary/cap_trm_2_1.png)
+![](images/2022/Norway/cap_trm_2_1.png)
 :::
 
 ::: {.column width="2%" }
@@ -40,27 +40,27 @@ The national target on arrival ATFM delay in 2022 was met.
 :::: {.columns}
   
 ::: {.column width="48%"}
-![](images/2022/Hungary/cap_trm_1_1.png)
+![](images/2022/Norway/cap_trm_1_1.png)
 :::
 
 ::: {.column width="2%" }
 :::
 
 ::: {.column width="50%"}
-Budapest's ATFM slot compliance was 95.4%, very similar to the performance in 2021 (96%). With regard to the 4.6% of flights that did not adhere, 1.5% was early and 3.1% was late.,
+All Norwegian airports showed adherence above 98% and the national average was 99.3%. With regard to the 0.7% of flights that did not adhere, 0.3% was early and 0.4% was late.,
 :::
 ::::
 
 
 ### ATC Pre-departure Delay
-The performance in terms of ATC pre-departure delay at Budapest has further improved with respect to the previous years (LHBP; 2019: 0.30 min/dep.; 2020: 0.16 min/dep.; 2021: 0.14 min/dep.;  2022: 0.10 min/dep.)
+The calculation of the ATC pre-departure delay is based on the data provided by the airport operators through the Airport Operator Data Flow (APDF) which is properly implemented at Oslo but not implemented at Bergen. Therefore the monitoring of this indicator in Norway is limited to Oslo.<br/>The performance at Oslo has slightly deteriorated (ENGM; 2019: 0.14 min/dep.; 2020: 0.05 min/dep.; 2021: 0.06 min/dep.; 2022: 0.10 min/dep.)<br/><br/>According to the Norwegian monitoring report: *Pre-departure delay in 2022 (ENGM)  is increasing compared to the two previous years during the pandemic,  but still below the level before the pandemic (2017-2019).*
 
 
 ### All Causes Pre-departure Delay
-The total (all causes) delay in the actual off block time at Budapest significantly increased in 2022 (LHBP: 2020: 12.58 min/dep.; 2021: 15.61 min/dep.; 2022: 21.12 min/dep.). The highest delays per flight were observed in June and July averaging more than 30 min/dep.<br/>According to the Hungarian monitoring report: *The actual performance in this respect was a bit worse than in the previous years, which could be explained with the overall staffing issues at the LHBP. After COVID-19 pandemic similar staffing problems were  experienced at many airport in Europe.*
+The calculation of the All causes pre-departure delay is based on the data provided by the airport operators through the Airport Operator Data Flow (APDF) which is properly implemented at Oslo but not implemented at Bergen. Therefore the monitoring of this indicator in Norway is limited to Oslo.<br/>The total (all causes) delay in the actual off block time at Oslo increased again in 2022 (ENGM: 2020: 5.01 min/dep.; 2021: 6.74 min/dep.; 2022: 12.74 min/dep.) but still resulting in the third lowest value among the RP3 monitored airports. The highest delays per flight were observed in December, averaging more than 20 min/dep.
 
 
 ### Appendix
 n/a:  airport operator data flow not established, or more than two months of missing / non-validated data<br/>
-![](images/2022/Hungary/cap_trm_4.png)
+![](images/2022/Norway/cap_trm_4.png)
 

@@ -90,13 +90,13 @@ website:
       - section: '<b style= "font-size: 1.2rem">Year report</b>'
         contents:
           - text: "2022 &#10003"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/hungary/index.html#main'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2022/norway/index.html#main'
           - text: "2021"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2021/hungary/index.html#main'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2021/norway/index.html#main'
           - text: "2020"
-            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2020/hungary/index.html#main'
+            href: 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private/2020/norway/index.html#main'
       - text: "---"
-      - text: '<b style= "font-size: 1.2rem">Hungary</b>'
+      - text: '<b style= "font-size: 1.2rem">Norway</b>'
         href: index.html
       - section: "<b>Overview</b>"
         contents:

@@ -28,14 +28,14 @@
 :::: {.columns}
   
 ::: {.column width="50%"}
-![](images/2022/Hungary/9_G2G_1.png)
+![](images/2022/Norway/9_G2G_1.png)
 :::
 
 ::: {.column width="2%"}
 :::
 
 ::: {.column width="48%"}
-In the year 2022, actual gate-to-gate ANS costs are -12.2% (-16.2 M€2017) lower than planned, as en route costs are lower than planned by -14.3 M€2017 and terminal costs are lower than planned by -1.9 M€2017.<br/><br/>The actual share of en route in gate-to-gate ANS costs (83.0%) is slightly lower than planned in the PP for 2022 (83.6%).
+In the year 2022, actual gate-to-gate ANS costs are -3.1% (-5.0 M€2017) lower than planned, as en route costs are lower than planned by -7.1 M€2017 and terminal costs are higher than planned by +2.1 M€2017.<br/><br/>The actual share of en route in gate-to-gate ANS costs (72.7%) is lower than planned in the PP for 2022 (74.9%).
 :::
 
 ::::
@@ -51,14 +51,14 @@ In the year 2022, actual gate-to-gate ANS costs are -12.2% (-16.2 M€2017) lowe
 :::: {.columns}
   
 ::: {.column width="50%"}
-![](images/2022/Hungary/9_G2G_2.png)
+![](images/2022/Norway/9_G2G_2.png)
 :::
 
 ::: {.column width="2%"}
 :::
 
 ::: {.column width="48%"}
-For the ANSPs providing services in the en route and terminal charging zones of Hungary covered by the SES performance scheme, the ex-post gate-to-gate regulatory result in 2022 amounts to +11 203.7 MHUF (+9 309.4 MHUF for en route and +1 894.4 MHUF for terminal - see boxes 10 to 14 for the detailed analysis at charging zones level), corresponding to 23.4% of gate-to-gate ANS revenues.<br/><br/>This is higher than the return planned for the year (5.9% of gate-to-gate revenues).
+For the ANSPs providing services in the en route and terminal charging zones of Norway covered by the SES performance scheme, the ex-post gate-to-gate regulatory result in 2022 amounts to +165.2 MNOK (+149.7 MNOK for en route and +15.5 MNOK for terminal), corresponding to 10.0% of gate-to-gate ANS revenues, compared to 5.1% included in the performance plan for RP3. See also **Note 2** in items 10.
 :::
 
 ::::

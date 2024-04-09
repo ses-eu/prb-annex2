@@ -10,5 +10,5 @@ htmltools::tagList(t)
 
 
 
-<p style = "margin-bottom: 0px;">**<br/>Total other ANSP overall regulatory result (RR) for the en route activity**</p>
-Ex-post, the overall RR for the other ANSP in the en route charging zone for Hungary (Hungary MET) corresponds to 8.7% of the en route revenues. The ex-post RoE 18.3% is higher than planned 3.5%.
+<p style = "margin-bottom: 0px;">**<br/>Total other ANSPs overall regulatory result (RR) for the en route activity**</p>
+Ex-post, the overall RR for the other ANSPs in the en route charging zone for Norway (KJE and Norway MET) amounts to a gain of +5.8 MNOK (26.3% of the en route revenues). It should be noted that KJE and Norway MET do not charge cost of capital. See also **Note 2** in item 10.

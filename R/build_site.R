@@ -1,8 +1,8 @@
 ###build site
 
-# clean environment ----
+# clean environment and set year report ----
   rm(list = ls())
-  year_report <- 2022
+  year_report <- 2022 # set your year report here
 
 # get functions ----
   source("R/utils.R")
@@ -17,7 +17,7 @@
   
   ## build pages
   if (test_check == TRUE) {
-    state_list <- 'Hungary' # set your test country here
+    state_list <- 'Belgium' # set your test country here
   } 
 
   for (i in 1:length(state_list)) {

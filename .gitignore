@@ -7,3 +7,7 @@
 
 /_freeze/
 /_site/
+
+/*.qmd
+_quarto.yml
+_variables.yml

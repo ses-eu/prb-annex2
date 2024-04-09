@@ -1,7 +1,7 @@
 ## Airports
 ### Overview
 
-Hungary identified only its main airport Budapest as subject to RP3 monitoring. The Airport Operator Data Flow is correctly established and all environmental indicators can be monitored.<br/>Traffic at Budapest airport in 2022 was still by 20% lower compared to 2019 regardless the increase of 80% with respect to 2021.<br/>Both additional time indicators remained in 2022 lower than the 2019 values.<br/>The share of CDO flights for Budapest has decreased to 25.8% which is below the overall RP3 value in 2022.
+Norway has identified four airports as subject to RP2 monitoring. However, in accordance with IR (EU) 2019/317 and the traffic figures, only two of these airports (Oslo (EGNM) and Bergen (ENBR)) must be monitored for additional taxi-out and ASMA times. Oslo (A-CDM implemented) is the only Norwegian airport that has finished the full implementation of the Airport Operator Data Flow required for the monitoring of additional times. As reported in RP2, it seems the ATM system is not ready to implement the APDF at Bergen. Norway's monitoring report does not provide any explanation on the measures planned to solve this situation.<br/>Traffic at the ensemble of these four Norwegian airports in 2022 was still 10% lower than in 2019.<br/>Additional ASMA times at Oslo remained low but the taxi operation is heavily influenced by de-icing operation in the winter months, resulting in one of the highest additional taxi-out times in the SES area.<br/>The share of CDO flights is still in the higher range of all observed values in 2022. Norway is in the second place in terms of highest share of CDO flights when calculated by State (65.4%). All airports saw a reduction in the share of CDO flights.
 
 ### Additional Taxi-Out Time															
 
@@ -9,7 +9,7 @@ Hungary identified only its main airport Budapest as subject to RP3 monitoring. 
   
 ::: {.column width="48%"}
 <br>
-![](images/2022/Hungary/env_apt_1.png)
+![](images/2022/Norway/env_apt_1.png)
 
 :::
 
@@ -18,7 +18,7 @@ Hungary identified only its main airport Budapest as subject to RP3 monitoring. 
 
 ::: {.column width="50%"}
 <br>
-Additional taxi-out times at Budapest (LHBP; 2019: 1.63 min/dep.; 2020:  0.87 min/dep.; 2021:  1.06 min/dep.;  2022:  1.4 min/dep.) have gradually increased during RP3.<br/>According to the Hungarian monitoring report: *Since the actual value of this PI is still acceptable, no additional initiatives are needed.*   
+The additional taxi-out times at Oslo have slightly increased (ENGM; 2019: 3.92 min/dep.;  2020: 2.68 min/dep.; 2021: 2.87 min/dep.; 2022: 3.26 min/dep.)<br/>The annual average is influenced by the performance during the winter months due to de-icing.<br/>According to the Norwegian monitoring report, the reason for the missing data for the calculation of additional taxi-out time at Bergen Airport is because they have not implemented A-CDM.   
 
 :::
 ::::
@@ -30,7 +30,7 @@ Additional taxi-out times at Budapest (LHBP; 2019: 1.63 min/dep.; 2020:  0.87 mi
   
 ::: {.column width="48%"}
 <br>
-![](images/2022/Hungary/env_apt_2.png)
+![](images/2022/Norway/env_apt_2.png)
 
 :::
 
@@ -39,7 +39,7 @@ Additional taxi-out times at Budapest (LHBP; 2019: 1.63 min/dep.; 2020:  0.87 mi
 
 ::: {.column width="50%"}
 <br>
-The additional times in the terminal airspace in 2022 have significantly decreased (LHBP; 2019: 0.85 min/arr.; 2020: 0.66 min/arr.; 2021: 0.67 min/arr.; 2022: 0.34 min/arr.)  resulting in one of the lowest additional ASMA times amongst the SES monitored airports.<br/><br/>According to the Hungarian monitoring report: *As the actual value of this PI shows improvement compared to the previous year's value therefore no additional initiatives are needed.*   
+Additional ASMA times at Oslo (ENGM; 2019: 1.03 min/arr.; 2020: 0.64 min/arr.;  2021: 0.53 min/arr.; 2022: 0.68 min/arr.) increased slightly in 2022. <br/>The  Norwegian monitoring report mentions that surveillance data from the ENBR area should be good enough for the calculation additional time in TMA to be calculated and it is unknown the reason why this has not been calculated by EUROCONTROL. As explained in previous monitoring exercises, there are several indicators that require the establishment of the Airport Operator Data Flow between the airport and EUROCONTROL. This data is then merged with surveillance data for the calculation of the indicator.   
 
 :::
 ::::
@@ -52,7 +52,7 @@ The additional times in the terminal airspace in 2022 have significantly decreas
   
 ::: {.column width="48%"}
 <br>
-![](images/2022/Hungary/env_apt_3.png)
+![](images/2022/Norway/env_apt_3.png)
 :::
 
 ::: {.column width="2%"}
@@ -60,7 +60,7 @@ The additional times in the terminal airspace in 2022 have significantly decreas
 
 ::: {.column width="50%"}
 <br>
-The share of CDO flights for Budapest (LHBP) has decreased from 34.0% in 2021 to 25.8% in 2022. This value is  below the overall RP3 value in 2022 (29.0%).<br/>From April to October, the monthly values were below 25%.<br/><br/>According to the Hungarian monitoring report: *Since the actual value of this PI is still acceptable, no additional initiatives are needed.   
+Although the values have reduced for all airports with respect to 2021, all airports still have very high shares of CDO flights with all airports having more than double the overall RP3 value in 2022 (29.0%).<br/>In the second half of the year, the monthly values for Oslo/Gardermoen have continuously decreased from 64.5% in July to 53.6% in December.   
 :::
 ::::
 
@@ -71,5 +71,5 @@ The share of CDO flights for Budapest (LHBP) has decreased from 34.0% in 2021 to
 
 n/a:  airport operator data flow not established, or more than two months of missing / non-validated data<br/>   
 
-![](images/2022/Hungary/env_apt_4.png)
+![](images/2022/Norway/env_apt_4.png)
 

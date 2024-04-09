@@ -159,5 +159,12 @@ if (country != "Network Manager" & country != "SES RP3") {
   }
   
   saf_eosm_file <-  paste0(data_folder_a2, "saf/", saf_eosm_file)
+} else {
+  cap_file <- ''
+  ceff_file <- ''
+  env_kea_file <- ''
+  env_apt_file <- ''
+  env_mil_file <- ''
+  saf_eosm_file <- ''
 }
 

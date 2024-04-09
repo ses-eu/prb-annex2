@@ -1,11 +1,11 @@
 ##  Military dimension
 ### Update on Military dimension of the plan
 
-The impact of military operations on civil traffic was very high in 2022. The war in Ukraine forced the Hungarian air defence and air force to create special training areas which were activated on an ad-hoc basis. Apart from those special air corridors were also established in order to allow the crossing of the allied forces UAVs.<br/><br/>The newly created military areas whose activation was on an ad-hoc basis had a negative effect on capacity, especially in the East sectors of Hungarian airspace.<br/><br/>The war against Ukraine forced the Hungarian air defence and air force to create special training areas which were activated on an ad-hoc basis. Apart from those special air corridors were also established in order to allow the crossing of the allied forces UAVs.<br/><br/>The new ad-hoc areas were not AMC manageable areas, therefore they were activated when it became necessary, so planning was much more difficult.
+LARA has been implemented and Civil/Military Airspace Committee maintain a continued focus on the effectiveness of the booking procedures.<br/><br/>The AMC procedure has been revised establishing new and larger areas in southern Norway with a design that is optimized to cater to civilian traffic flows. The civil/military airspace continually work on optimizing the airspace structure to minimize the impact of military air operations on civilian air traffic. LARA has been deployed to both civil and military users and further integration into the ATM system is ongoing.
 
 ### Military - related measures implemented or planned to improve capacity
 
-During the implementation of the new ad-hoc activation areas, HungaroControl representatives tried to negotiate the vertical dimension of these areas in a way that makes fewer problems for overflight traffic. <br/><br/>Thanks to the good cooperation between the military and civil sides, these areas were active only when they were really needed and only for so long time which these special tasks in such a war environment required.
+The AMC procedure has been revised establishing new and larger areas in southern Norway with a design that is optimized to cater to civilian traffic flows. The Civil/military airspace committee focus on the improvement of the booking procedures and the intention to improve the ratio between booked versus used reserved airspace.<br/><br/>The civil/military airspace continually work on optimizing the airspace structure to minimize the impact of military air operations on civilian air traffic. LARA has been deployed to both civil and military users and further integration into the ATM system is ongoing.
 
 ### PI#6 Effective use of reserved or segregated airspace - national level
 
@@ -26,7 +26,7 @@ During the implementation of the new ad-hoc activation areas, HungaroControl rep
 
 ### Initiatives implemented or planned to improve PI#6
 
-The war in Ukraine has had a negative impact on the efficiency of military airspace utilisation.<br/>Unfortunately, as long as there is a war going on in a neighbouring country, the effectiveness of military airspace utilization will remain uncertain.
+No data available per ACC
 
 ### PI#7 Rate of planning via available airspace structures - national level
 
@@ -47,7 +47,7 @@ The war in Ukraine has had a negative impact on the efficiency of military airsp
 
 ### Initiatives implemented or planned to improve PI#7
 
-With the implementation of free route airspace in Hungary in 2015 all the ATS routes have been eliminated. <br/>Since that the entire CDR route concept is not applicable anymore in Hungary.
+No data available per ACC
 
 ### PI#8 Rate of using available airspace structures - national level
 
@@ -68,4 +68,4 @@ With the implementation of free route airspace in Hungary in 2015 all the ATS ro
 
 ### Initiatives implemented or planned to improve PI#8
 
-With the implementation of free route airspace in Hungary in 2015 all the ATS routes have been eliminated. <br/>Since that the entire CDR route concept is not applicable anymore in Hungary.
+No data available per ACC
