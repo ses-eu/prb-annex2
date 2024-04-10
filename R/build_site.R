@@ -17,11 +17,12 @@
   
   ## build pages
   if (test_check == TRUE) {
-    state_list <- 'Belgium' # set your test country here
+    state_list <- 'Home' # set your test country here (Home for home page)
   } 
 
   for (i in 1:length(state_list)) {
     country <- state_list[i]
+    # if (country != 'Home') {source("R/parameters.R")}
     source("R/parameters.R")
     source("R/create_state_pages.R")
   }

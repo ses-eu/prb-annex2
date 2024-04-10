@@ -86,7 +86,7 @@
   }
 
 # get level 2 data files (not needed for SES or NM) ----
-if (country != "Network Manager" & country != "SES RP3") {
+if (country != "Network Manager" & country != "SES RP3" & country != "Home") {
   
   ## get ceff file ----
   ceff_files <- list.files(paste0(data_folder_a2, 'ceff/'))

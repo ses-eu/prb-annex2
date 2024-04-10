@@ -12,7 +12,7 @@ website:
     background: "#f8f9fa"
     logo: "images/prb_logo.png"
     left: 
-      - href: https://www.sesperformance.eu/
+      - href: 'home_address'
         text: Home
       - href: destination-dir/ses-rp3/
         text: SES view
@@ -79,7 +79,7 @@ website:
             # ---
       - href: destination-dir/network-manager/
         text: NM View
-      - href: https://www.sesperformance.eu/about
+      - href: home_address/about
         text: About
       - href: https://transport.ec.europa.eu/transport-modes/air/single-european-sky/ses-performance-and-charging/publications_en
         text: Publications {{< fa external-link-alt >}}
@@ -180,16 +180,19 @@ website:
 # 
   # site-url: "https://eurocontrol.int/"
 
-  # page-footer: 
-  #   center: 
-  #     - href: '/'
-  #       text: '© European Union, 2023'
-  #     - href: disclaimer.qmd
-  #       text: "{{< fa triangle-exclamation >}} Disclaimer"
-  #     - href: mailto:prb-office@prb.eusinglesky.eu
-  #       text: '{{< fa envelope color="#ffffff">}} prb-office@prb.eusinglesky.eu'
-      # - text: 'Powered by EUROCONTROL'
-      #   href: 'https://www.eurocontrol.int/' 
+  page-footer: 
+    # left: |
+    #   Proudly supported by
+    #   [![](images/euctrl-logo-wide-poweredby.svg){fig-alt="EUROCONTROL" width=95px}](https://eurocontrol.int)
+    center: 
+      - href: '/'
+        text: '© European Union, 2023'
+      - href: home_address/disclaimer
+        text: "{{< fa triangle-exclamation >}} Disclaimer"
+      - href: mailto:prb-office@prb.eusinglesky.eu
+        text: '{{< fa envelope color="#ffffff">}} prb-office@prb.eusinglesky.eu'
+      - text: 'Website published by EUROCONTROL for the European Commission'
+        href: 'https://www.eurocontrol.int/'
 
 format:
   html:

@@ -15,17 +15,22 @@
 # replace new index and quarto yaml file ----
   file.copy('_original_files/full_quarto.yml', '_quarto.yml', overwrite = TRUE, copy.mode = TRUE)
 
-  if (country == "Network Manager") {
+  if (country == "Home") {
+    file.copy('_original_files/home_index.qmd', 'index.qmd', overwrite = TRUE, copy.mode = TRUE)
+    ##for the home page we add as well the other qmds here
+    file.copy('_original_files/home_about.qmd', 'about.qmd', overwrite = TRUE, copy.mode = TRUE)
+    
+  } else if (country == "Network Manager") {
     tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
     tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/nm_index.qmd") 
     writeLines(tmp_text, 'index.qmd')
 
-    } else if (country == "SES RP3") {
+  } else if (country == "SES RP3") {
       tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
       tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/ses_index.qmd") 
       writeLines(tmp_text, 'index.qmd')
       
-    } else {
+  } else {
       tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
       tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/state_index.qmd") 
       writeLines(tmp_text, 'index.qmd')
@@ -98,10 +103,23 @@
   tx <- str_replace(tx, 'country_lower', country_lower)  
   ## add check box to year report
   tx <- str_replace(tx, paste0('text: "', year_report, '"'),
-                        paste0('text: "', year_report, ' &#10003"'))
+                        paste0('text: "<span style= \'color: #2151bf\'>', year_report, ' &#10003</span>"'))
   
-  ## NM, SES case ----
-  if (country == "Network Manager" | country == "SES RP3") {
+  ## Home page case ----
+  if (country == "Home") {
+    ### find beginning and end of blocks to remove
+    for (i in 1:length(tx)) {
+      if (tx[i] %like% 'sidebar:') {block_beg = i}
+      if (tx[i] %like% 'block level2 end') {block_end = i}
+    }
+    ### this removes the unwanted lines
+    tx <- tx[-c(block_beg:block_end)]
+
+    ### write new file
+    writeLines(tx, con="_quarto.yml")
+    
+  } else if (country == "Network Manager" | country == "SES RP3") {
+    ## NM, SES case ----
     ## remove bottom page navigation
     # tx <- str_replace(tx, '  page-navigation: true', '  page-navigation: false')
     
@@ -215,13 +233,14 @@
  }
 
 # generate new qmd files ----
-  if (country != "Network Manager" & country != "SES RP3") {
+  if (country != "Network Manager" & country != "SES RP3" & country != "Home") {
     for (i in 1:length(genscripts)) {
       source(here("R", genscripts[i]))
     }
   }
   
 # render site ----
+  # quarto::quarto_render(as_job = FALSE)
   quarto::quarto_render(as_job = FALSE,
                         execute_params = list(country = country, 
                                               year_report = year_report,
@@ -260,14 +279,23 @@
                         )
 
 # copy site to test folder ----
-  ## delete previous version ----
-  unlink(paste0(destination_dir, country_lower), recursive = TRUE) 
+  if (country == 'Home') {
+    ## delete previous files except country folders ----
+    files_to_be_deleted <- list.files(root_dir) 
+    files_to_be_deleted[files_to_be_deleted %like% c("202") == FALSE]
+    #xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    fs::file_delete(files_to_be_deleted) 
 
-  ## copy new site to folder ----
-  file.copy(site_dir, destination_dir, overwrite = TRUE, recursive=TRUE, copy.mode = TRUE)
 
-  ## rename _site with state name ----
-  file.rename(paste0(destination_dir, "/_site"), paste0(destination_dir, country_lower))
-  # copyDirectory(here::here("images"), paste0(destination_dir,"images"), overwrite = TRUE)
+  } else {
+    ## delete previous version ----
+    unlink(paste0(destination_dir, country_lower), recursive = TRUE) 
 
+    ## copy new site to folder ----
+    file.copy(site_dir, destination_dir, overwrite = TRUE, recursive=TRUE, copy.mode = TRUE)
+  
+    ## rename _site with state name ----
+    file.rename(paste0(destination_dir, "/_site"), paste0(destination_dir, country_lower))
+    # copyDirectory(here::here("images"), paste0(destination_dir,"images"), overwrite = TRUE)
+  }
 
