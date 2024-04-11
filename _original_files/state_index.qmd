@@ -60,10 +60,13 @@ ecz_list_string <- paste0(
 
 :::::: {.column width="50%"}
 ```{r}
-tcz_list_string <- paste0(
-  tcz_list$tcz_name[1],
-  if_else(is.na(tcz_list$tcz_name[2]) == TRUE, '' ,  paste0('<br/>', tcz_list$tcz_name[2]))
-)
+tcz_list_string <- if_else(no_tcz == 0, '',
+                           paste0(tcz_list$tcz_name[1], 
+                                  if_else(is.na(tcz_list$tcz_name[2]) == TRUE, '' ,  
+                                          paste0('<br/>', tcz_list$tcz_name[2])
+                                          )
+                                  )
+                           )
 ```
 
 `r tcz_list_string`

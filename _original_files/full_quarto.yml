@@ -79,7 +79,7 @@ website:
             # ---
       - href: destination-dir/network-manager/
         text: NM View
-      - href: home_address/about
+      - href: home_address/about.html
         text: About
       - href: https://transport.ec.europa.eu/transport-modes/air/single-european-sky/ses-performance-and-charging/publications_en
         text: Publications {{< fa external-link-alt >}}
@@ -186,12 +186,12 @@ website:
     #   [![](images/euctrl-logo-wide-poweredby.svg){fig-alt="EUROCONTROL" width=95px}](https://eurocontrol.int)
     center: 
       - href: '/'
-        text: '© European Union, 2023'
-      - href: home_address/disclaimer
-        text: "{{< fa triangle-exclamation >}} Disclaimer"
+        text: '<span style= "font-size: 0.825rem">© European Union, 2024</span>'
+      - href: home_address/disclaimer.html
+        text: '<span style= "font-size: 0.825rem">{{< fa triangle-exclamation >}} Disclaimer</span>'
       - href: mailto:prb-office@prb.eusinglesky.eu
-        text: '{{< fa envelope color="#ffffff">}} prb-office@prb.eusinglesky.eu'
-      - text: 'Website published by EUROCONTROL for the European Commission'
+        text: '<span style= "font-size: 0.825rem">{{< fa envelope color="#ffffff">}} prb-office@prb.eusinglesky.eu</span>'
+      - text: '<span style= "font-size: 0.825rem">Website published by EUROCONTROL for the European Commission</span>'
         href: 'https://www.eurocontrol.int/'
 
 format:

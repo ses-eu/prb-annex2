@@ -12,14 +12,24 @@
     }
   }
 
-# replace new index and quarto yaml file ----
+  
+# replace index, quarto yaml and css files ----
   file.copy('_original_files/full_quarto.yml', '_quarto.yml', overwrite = TRUE, copy.mode = TRUE)
-
+  
+  file.copy('_original_files/full_styles.css', 'styles.css', overwrite = TRUE, copy.mode = TRUE)
+  
+  
   if (country == "Home") {
     file.copy('_original_files/home_index.qmd', 'index.qmd', overwrite = TRUE, copy.mode = TRUE)
     ##for the home page we add as well the other qmds here
     file.copy('_original_files/home_about.qmd', 'about.qmd', overwrite = TRUE, copy.mode = TRUE)
+    file.copy('_original_files/home_disclaimer.qmd', 'disclaimer.qmd', overwrite = TRUE, copy.mode = TRUE)
     
+    ## we also remove one line from the css file
+    tmp_text <- readLines("_original_files/full_styles.css")
+    tmp_text <- str_replace(tmp_text, fixed("  font-size: 0.9rem;"), "") 
+    writeLines(tmp_text, 'styles.css')
+
   } else if (country == "Network Manager") {
     tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
     tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/nm_index.qmd") 
@@ -280,21 +290,37 @@
 
 # copy site to test folder ----
   if (country == 'Home') {
-    ## delete previous files except country folders ----
+    ## Home page ----
+    ### delete previous files except country folders
     files_to_be_deleted <- list.files(root_dir) 
-    files_to_be_deleted[files_to_be_deleted %like% c("202") == FALSE]
-    #xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-    fs::file_delete(files_to_be_deleted) 
+    files_to_be_deleted <- files_to_be_deleted[files_to_be_deleted %like% c("202") == FALSE]
 
-
+    fs::file_delete(paste0(root_dir, files_to_be_deleted)) 
+    
+    ### copy files to folder
+    files_to_be_copied <- list.files(site_dir) 
+    dirs_to_be_copied <- list.dirs(site_dir, full.names = FALSE, recursive = FALSE)
+    files_to_be_copied <- files_to_be_copied[files_to_be_copied %in% dirs_to_be_copied == FALSE]
+    
+    fs::file_copy(paste0(site_dir,'/', files_to_be_copied),
+                 paste0(root_dir, files_to_be_copied), 
+                 overwrite = TRUE)
+    
+    for (i in 1:length(dirs_to_be_copied)) {
+      fs::dir_copy(paste0(site_dir,'/', dirs_to_be_copied[i]),
+                    paste0(root_dir, dirs_to_be_copied[i]), 
+                    overwrite = TRUE)
+    }
+      
   } else {
-    ## delete previous version ----
+    ## Other pages/sites ----
+    ### delete previous version
     unlink(paste0(destination_dir, country_lower), recursive = TRUE) 
 
-    ## copy new site to folder ----
+    ### copy new site to folder
     file.copy(site_dir, destination_dir, overwrite = TRUE, recursive=TRUE, copy.mode = TRUE)
   
-    ## rename _site with state name ----
+    ### rename _site with state name
     file.rename(paste0(destination_dir, "/_site"), paste0(destination_dir, country_lower))
     # copyDirectory(here::here("images"), paste0(destination_dir,"images"), overwrite = TRUE)
   }
