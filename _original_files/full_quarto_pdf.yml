@@ -1,0 +1,63 @@
+project:
+  type: book
+  output-dir: _book
+
+execute:
+  freeze: false
+  echo: false
+  warning: false
+
+format:
+  pdf: 
+    toc: true
+    lof: true
+    geometry:
+      - a4paper
+      # - showframe
+      # - inner=3cm
+      # - outer=4cm
+      - top=2cm
+      - bottom=1cm
+      - left=2.5cm
+      - right=2.2cm
+      - footskip=0.7cm
+    mainfont: "Calibri"
+    fig-pos: 'h'
+    include-in-header:
+      - text: |
+          % \usepackage{libertine} % so we can see the checkmarks in the intro
+          \usepackage{xcolor}
+          \usepackage{ragged2e} % for justifying text in multiple column layout
+          
+          \RedeclareSectionCommand[
+            beforeskip=0pt,
+            afterskip=2pt]{chapter} %so to remove the word chapter and the space before
+          
+          \setsansfont{Calibri}
+          
+          \definecolor{MyBlue}{RGB}{54,95,145}
+          \addtokomafont{chapter}{\color{MyBlue}}
+          \addtokomafont{chapterprefix}{\color{MyBlue}}
+          \addtokomafont{chapter}{\fontsize{14pt}{14pt}\selectfont}
+          \addtokomafont{chapterprefix}{\fontsize{14pt}{14pt}\selectfont}
+
+          \addtokomafont{section}{\color{MyBlue}}
+          \addtokomafont{section}{\fontsize{12pt}{12pt}\selectfont}
+
+          \newenvironment{tightcenter}{%
+            \setlength\topsep{5pt}
+            \setlength\parskip{0pt}
+            \bfseries
+            \begin{center}
+          }{%
+            \end{center}
+          }
+
+book:
+  title: "PRB Annual Monitoring Report"
+  author: "Performance Review Body"
+  date: "2023-12-15"
+  chapters:
+    - index.qmd
+
+

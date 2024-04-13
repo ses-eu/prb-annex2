@@ -1,0 +1,27 @@
+[Annual Monitoring Report {{< var doc.year_report >}} - SES RP3]{.fakeh1}
+
+## Traffic (SES RP3 area)
+
+```{=tex}
+\begin{wrapfigure}{l}{0.48\textwidth}
+```
+
+```{r}
+#| file: R/chart_level1_traffic_mvt.R
+#| out.width: "100%"
+```
+
+```{=tex}
+\end{wrapfigure}
+```
+
+
+```{r}
+mvt_conc <- read_mytable("PRB_findings.xlsx", "traffic_IFR", "Table_Findings_traffic_IFR") %>% 
+  filter(Year_Report == year_report, State == 'SES') %>% 
+  select(Conclusion) %>% toString() %>% paste0(., "@")
+
+mvt_conc1 <- mvt_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '') 
+```
+
+`r mvt_conc1`
