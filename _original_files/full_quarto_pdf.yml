@@ -10,7 +10,7 @@ execute:
 format:
   pdf: 
     toc: true
-    lof: true
+    lof: false
     geometry:
       - a4paper
       # - showframe
@@ -28,7 +28,8 @@ format:
           % \usepackage{libertine} % so we can see the checkmarks in the intro
           \usepackage{xcolor}
           \usepackage{ragged2e} % for justifying text in multiple column layout
-          
+          \usepackage{wrapfig}
+
           \RedeclareSectionCommand[
             beforeskip=0pt,
             afterskip=2pt]{chapter} %so to remove the word chapter and the space before

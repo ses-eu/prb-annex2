@@ -46,7 +46,7 @@ data_prep_forecast <-  data_prep %>%
   mutate(tsu = case_when (
     year > max_actual_year ~ tsu,
     TRUE ~ NA
-  )
+    )
   )
 
 data_prep_actual <-  data_prep %>%
@@ -61,7 +61,7 @@ data_prep_actual <-  data_prep %>%
     year <= year_report ~ tsu,
     TRUE ~ NA
     )
-    )
+  )
 
 data_prep_planned <- data_raw_planned %>% 
   filter(state == country,

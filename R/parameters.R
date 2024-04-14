@@ -5,6 +5,20 @@
   home_address <- 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test-private'
   external_address <- str_replace(destination_dir, fixed('//ihx-vdm05/LIVE_var_www_performance$'), 'https://www.eurocontrol.int/performance')
 
+# set graphs parameters ----
+  ## web
+  mywidth = NULL
+  myheight = 280
+  myfont = 14
+  mymargin = 70
+  
+  ## pdf
+  mywidth_pdf = 270
+  myheight_pdf = 240
+  myfont_pdf = 10
+  mymargin_pdf = 70
+  
+    
 # set state parameters  ----
 
   ## main state parameters  ----

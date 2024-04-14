@@ -1,9 +1,15 @@
-[Annual Monitoring Report {{< var doc.year_report >}} - SES RP3]{.fakeh1}
-
 ## Traffic (SES RP3 area)
 
 ```{=tex}
-\begin{wrapfigure}{l}{0.48\textwidth}
+\begin{wrapfigure}{l}{0.52\textwidth}
+```
+
+```{r, eval=TRUE}
+if (knitr::is_latex_output()) {
+  mywidth <- params$mywidth_pdf
+  myheight <- params$myheight_pdf
+  myfont <- params$myfont_pdf
+}
 ```
 
 ```{r}

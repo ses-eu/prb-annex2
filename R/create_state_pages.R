@@ -279,6 +279,16 @@
                                               main_ansp_aua = main_ansp_aua,
                                               other_ansps_str = other_ansps_str,
                                               other_met_str = other_met_str,
+                                              
+                                              # chart_layout = chart_layout, 
+                                              mywidth = mywidth,
+                                              myheight = myheight,
+                                              myfont = myfont,
+                                              mymargin = mymargin,
+                                              mywidth_pdf = mywidth_pdf,
+                                              myheight_pdf = myheight_pdf,
+                                              myfont_pdf = myfont_pdf,
+                                              mymargin_pdf = mymargin_pdf,
 
                                               cap_file = cap_file,
                                               ceff_file = ceff_file,

@@ -178,9 +178,9 @@ myc <- function (mywidth, myheight, myfont) {
   )
 }
 
-myc(NULL, 280, 14)
+myc(mywidth, myheight, myfont)
 
-# export to image ----
-w = 1200
-h = 600
-export_fig(myc(w, h, 14 * w/900),"traffic_mvt_main.png", w, h)
+# # export to image ----
+# w = 1200
+# h = 600
+# export_fig(myc(w, h, 14 * w/900),"traffic_mvt_main.png", w, h)
