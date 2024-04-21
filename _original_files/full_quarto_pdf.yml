@@ -21,20 +21,20 @@ format:
       - left=2.5cm
       - right=2.2cm
       - footskip=0.7cm
-    mainfont: "Calibri"
+    mainfont: "Roboto"
     fig-pos: 'h'
     include-in-header:
       - text: |
-          % \usepackage{libertine} % so we can see the checkmarks in the intro
           \usepackage{xcolor}
           \usepackage{ragged2e} % for justifying text in multiple column layout
           \usepackage{wrapfig}
+          % \usepackage{floatflt}
 
           \RedeclareSectionCommand[
             beforeskip=0pt,
             afterskip=2pt]{chapter} %so to remove the word chapter and the space before
           
-          \setsansfont{Calibri}
+          \setsansfont{Roboto}
           
           \definecolor{MyBlue}{RGB}{54,95,145}
           \addtokomafont{chapter}{\color{MyBlue}}

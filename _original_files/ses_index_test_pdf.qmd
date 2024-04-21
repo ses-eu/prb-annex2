@@ -1,15 +1,25 @@
-## Traffic (SES RP3 area)
-
-```{=tex}
-\begin{wrapfigure}{l}{0.52\textwidth}
-```
-
 ```{r, eval=TRUE}
 if (knitr::is_latex_output()) {
   mywidth <- params$mywidth_pdf
   myheight <- params$myheight_pdf
   myfont <- params$myfont_pdf
+  mylinewidth <- params$mylinewidth_pdf
 }
+```
+
+# SES View
+<!-- https://tex.stackexchange.com/questions/215442/is-there-a-way-to-set-a-parbox-to-a-minimum-height -->
+```{=tex}
+\setlength{\fboxrule}{0pt} % Set the border width to 0pt (no border)
+\sbox{0}{\parbox{1\textwidth}{
+\vspace{-15pt}
+```
+
+## Traffic (SES RP3 area)
+
+```{=tex}
+\begin{wrapfigure}{l}{0.58\linewidth}
+\vspace{-15pt}
 ```
 
 ```{r}
@@ -27,7 +37,78 @@ mvt_conc <- read_mytable("PRB_findings.xlsx", "traffic_IFR", "Table_Findings_tra
   filter(Year_Report == year_report, State == 'SES') %>% 
   select(Conclusion) %>% toString() %>% paste0(., "@")
 
-mvt_conc1 <- mvt_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '') 
+mvt_conc1 <- mvt_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n', '▪' = '•')) %>%
+  str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '') 
 ```
 
 `r mvt_conc1`
+
+```{=tex}
+}}
+\ifdim\dimexpr\ht0+\dp0<7.9cm 
+\dp0\dimexpr7.9cm-\ht0\fi
+
+\fbox{\usebox{0}}
+
+{
+\begin{wrapfigure}{l}{0.58\linewidth}
+\vspace{0pt}
+```
+
+```{r}
+#| file: R/chart_level1_traffic_su.R
+#| out.width: "100%"
+```
+
+```{=tex}
+\end{wrapfigure}
+```
+
+```{r}
+tsu_conc <- read_mytable("PRB_findings.xlsx", "traffic_SUs", "Table_Findings_traffic_TSU") %>% 
+  filter(Year_Report == year_report, State == 'SES') %>% 
+  select(Conclusion) %>% toString() %>% paste0(., "@")
+
+tsu_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n', '▪' = '•')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '') 
+```
+
+`r tsu_conc1`
+
+```{=tex}
+\hfill\break
+\hfill\break
+}
+```
+
+```{=tex}
+{
+```
+
+## Safety (SES RP3 area)
+
+```{=tex}
+\begin{wrapfigure}{l}{0.58\linewidth}
+\vspace{-15pt}
+```
+
+```{r}
+#| file: R/chart_level1_saf_ses.R
+#| out.width: "100%"
+```
+
+```{=tex}
+\end{wrapfigure}
+```
+
+```{r}
+saf_conc <- read_mytable("PRB_findings.xlsx", "safety", "Table_Findings_safety") %>% 
+  filter(Year_Report == year_report, State == 'SES') %>% 
+  select(Conclusion) %>% toString() %>% paste0(., "@")
+
+saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n', '▪' = '•')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+```
+
+`r saf_conc1`
+```{=tex}
+}
+```

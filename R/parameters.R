@@ -11,13 +11,14 @@
   myheight = 280
   myfont = 14
   mymargin = 70
+  mylinewidth = 3
   
   ## pdf
-  mywidth_pdf = 270
-  myheight_pdf = 240
-  myfont_pdf = 10
+  mywidth_pdf = 300
+  myheight_pdf = 220
+  myfont_pdf = 8
   mymargin_pdf = 70
-  
+  mylinewidth_pdf = 2
     
 # set state parameters  ----
 

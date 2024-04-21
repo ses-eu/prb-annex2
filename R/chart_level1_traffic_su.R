@@ -1,5 +1,5 @@
 # 
-# # parameters ----
+# # parameters
 # if (exists("data_folder") == FALSE) {
 #   source("R/parameters.R")
 # }
@@ -80,117 +80,133 @@ if (country == 'SES RP3') {
     mutate(rank = 'Determined')
 }
 
-mycolors <-  c('#1969B4','#044598', '#229FDD')
+# chart ----
+## set parameters for chart ----
+  mycolors <-  c('#1969B4','#044598', '#229FDD')
+  
+  if (knitr::is_latex_output()) {
+    mytitle <- paste0("IFR movements - ", forecast, " -\n",
+                      if_else(country == "Spain",
+                              country, ecz_list$ecz_name[1]))
+    mytitle_pos <- 0.95
+    mytop_margin <- 40
+    mylegend_pos_x <- 0
+  } else {
+    mytitle <- paste0("IFR movements - ", forecast, " - ", 
+                      if_else(country == "Spain", 
+                              country, ecz_list$ecz_name[1]))
+    mytitle_pos <- 0.99
+    mytop_margin <- 40
+    mylegend_pos_x <- -0.1
+  }
 
-# plot chart ----
-myc <- function (mywidth, myheight, myfont) {
-  plot_ly(
-    width = mywidth,
-    height = myheight,
-    data = data_prep_forecast,
-  x = ~ year,
-  y = ~ round(tsu/1000,0),
-  yaxis = "y1",
-  cliponaxis = FALSE,
-  yaxis = "y1",
-  type = 'scatter',  mode = 'lines+markers',
-  line = list(width = 3, dash = 'dash'),
-  marker = list(size = 9),
-  color = ~ rank,
-  colors = mycolors,
-  opacity = 1,
-  showlegend = T
-) %>% 
-  add_trace(
-    data = data_prep_planned,
-    inherit = FALSE,
+## define chart function ----
+  myc <- function (mywidth, myheight, myfont, mylinewidth) {
+    plot_ly(
+      width = mywidth,
+      height = myheight,
+      data = data_prep_forecast,
     x = ~ year,
-    y = ~ round(tsu,0),
+    y = ~ round(tsu/1000,0),
     yaxis = "y1",
     cliponaxis = FALSE,
     yaxis = "y1",
     type = 'scatter',  mode = 'lines+markers',
-    line = list(width = 3, dash = 'solid', color = '#5B9BD5'),
-    marker = list(size = 9, color = '#5B9BD5'),
+    line = list(width = mylinewidth, dash = 'dash'),
+    marker = list(size = mylinewidth * 3),
     color = ~ rank,
+    colors = mycolors,
     opacity = 1,
     showlegend = T
-  ) %>%
-  add_trace(
-    data = data_prep_actual,
-   inherit = FALSE,
-   x = ~ year,
-   y = ~ round(tsu/1000,0),
-   yaxis = "y1",
-   cliponaxis = FALSE,
-   yaxis = "y1",
-   type = 'scatter',  mode = 'lines+markers',
-   line = list(width = 3, dash = 'solid', color = '#FFC000'),
-   marker = list(size = 9, color = '#FFC000'),
-   color = ~ rank,
-   opacity = 1,
-   showlegend = T
-  ) %>%
-  config( responsive = TRUE,
-          displaylogo = FALSE,
-          displayModeBar = F
-          # modeBarButtons = list(list("toImage")),
   ) %>% 
-  layout(
-    font = list(family = "Roboto"),
-    title = list(text=paste0("En route service units - ", forecast, " - ", 
-                             if_else(country == "Spain", 
-                                     country, ecz_list$ecz_name[1])
-                             ),
-                 y = 0.99, 
-                 x = 0, 
-                 xanchor = 'left', 
-                 yanchor =  'top',
-                 font = list(size = myfont * 20/15)
-                 ),
-    hovermode = "x unified",
-    hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
-    xaxis = list(title = "",
-                 gridcolor = 'rgb(255,255,255)',
-                 showgrid = FALSE,
-                 showline = FALSE,
-                 showticklabels = TRUE,
-                 dtick = 1,
-                 # tickcolor = 'rgb(127,127,127)',
-                 # ticks = 'outside',
-                 zeroline = TRUE,
-                 tickfont = list(size = myfont)
-                 ),
-    yaxis = list(title = "En route service units ('000)",
-                 # gridcolor = 'rgb(255,255,255)',
-                 showgrid = TRUE,
-                 showline = FALSE,
-                 tickprefix = " ",
-                 tickformat = ",",
-                 # showticklabels = TRUE,
-                 # tickcolor = 'rgb(127,127,127)',
-                 # ticks = 'outside',
-                 zeroline = TRUE,
-                 zerolinecolor = 'rgb(255,255,255)',
-                 titlefont = list(size = myfont), tickfont = list(size = myfont)
-                 ),
-    # showlegend = FALSE
-    legend = list(
-      orientation = 'h', 
-      xanchor = "left",
-      x = -0.1, 
-      y =-0.1,
-      font = list(size = myfont*0.95)
-      ),
-    margin = list (t = 40)
-    
-    
-  )
-}
+    add_trace(
+      data = data_prep_planned,
+      inherit = FALSE,
+      x = ~ year,
+      y = ~ round(tsu,0),
+      yaxis = "y1",
+      cliponaxis = FALSE,
+      yaxis = "y1",
+      type = 'scatter',  mode = 'lines+markers',
+      line = list(width = mylinewidth, dash = 'solid', color = '#5B9BD5'),
+      marker = list(size = mylinewidth * 3, color = '#5B9BD5'),
+      color = ~ rank,
+      opacity = 1,
+      showlegend = T
+    ) %>%
+    add_trace(
+      data = data_prep_actual,
+     inherit = FALSE,
+     x = ~ year,
+     y = ~ round(tsu/1000,0),
+     yaxis = "y1",
+     cliponaxis = FALSE,
+     yaxis = "y1",
+     type = 'scatter',  mode = 'lines+markers',
+     line = list(width = mylinewidth, dash = 'solid', color = '#FFC000'),
+     marker = list(size = mylinewidth * 3, color = '#FFC000'),
+     color = ~ rank,
+     opacity = 1,
+     showlegend = T
+    ) %>%
+    config( responsive = TRUE,
+            displaylogo = FALSE,
+            displayModeBar = F
+            # modeBarButtons = list(list("toImage")),
+    ) %>% 
+    layout(
+      font = list(family = "Roboto"),
+      title = list(text = mytitle,
+                   y = mytitle_pos, 
+                   x = 0, 
+                   xanchor = 'left', 
+                   yanchor =  'top',
+                   font = list(size = myfont * 20/15)
+                   ),
+      hovermode = "x unified",
+      hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
+      xaxis = list(title = "",
+                   gridcolor = 'rgb(255,255,255)',
+                   showgrid = FALSE,
+                   showline = FALSE,
+                   showticklabels = TRUE,
+                   dtick = 1,
+                   # tickcolor = 'rgb(127,127,127)',
+                   # ticks = 'outside',
+                   zeroline = TRUE,
+                   tickfont = list(size = myfont)
+                   ),
+      yaxis = list(title = "En route service units ('000)",
+                   # gridcolor = 'rgb(255,255,255)',
+                   showgrid = TRUE,
+                   showline = FALSE,
+                   tickprefix = " ",
+                   tickformat = ",",
+                   # showticklabels = TRUE,
+                   # tickcolor = 'rgb(127,127,127)',
+                   # ticks = 'outside',
+                   zeroline = TRUE,
+                   zerolinecolor = 'rgb(255,255,255)',
+                   titlefont = list(size = myfont), tickfont = list(size = myfont)
+                   ),
+      # showlegend = FALSE
+      legend = list(
+        orientation = 'h', 
+        xanchor = "left",
+        x = mylegend_pos_x, 
+        y = -0.1,
+        font = list(size = myfont*0.95)
+        ),
+      margin = list (t = mytop_margin)
+      
+      
+    )
+  }
+  
+## plot chart ----
+  myc(mywidth, myheight, myfont, mylinewidth)
 
-myc(NA, 280, 14)
-
-# export to image ----
-w = 1200
-h = 600
-export_fig(myc(w, h, 14 * w/900),"traffic_su_main.png", w, h)
+# # export to image
+# w = 1200
+# h = 600
+# export_fig(myc(w, h, 14 * w/900),"traffic_su_main.png", w, h)
