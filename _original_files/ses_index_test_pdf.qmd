@@ -4,21 +4,21 @@ if (knitr::is_latex_output()) {
   myheight <- params$myheight_pdf
   myfont <- params$myfont_pdf
   mylinewidth <- params$mylinewidth_pdf
+  mymargin <- params$mymargin_pdf
 }
 ```
 
 # SES View
-<!-- https://tex.stackexchange.com/questions/215442/is-there-a-way-to-set-a-parbox-to-a-minimum-height -->
-```{=tex}
-\setlength{\fboxrule}{0pt} % Set the border width to 0pt (no border)
-\sbox{0}{\parbox{1\textwidth}{
-\vspace{-15pt}
-```
 
 ## Traffic (SES RP3 area)
+<!-- https://tex.stackexchange.com/questions/215442/is-there-a-way-to-set-a-parbox-to-a-minimum-height -->
 
 ```{=tex}
-\begin{wrapfigure}{l}{0.58\linewidth}
+\setlength{\fboxrule}{0pt} % Set the border width to 0pt (no border)
+\setlength{\fboxsep}{0pt} % Remove padding
+\sbox{0}{\parbox{1\textwidth}{
+
+\begin{wrapfigure}[14]{l}{0.58\linewidth}
 \vspace{-15pt}
 ```
 
@@ -29,6 +29,7 @@ if (knitr::is_latex_output()) {
 
 ```{=tex}
 \end{wrapfigure}
+\setlength\parskip{1em plus 0.8em} % Space between paragraphs
 ```
 
 
@@ -45,14 +46,15 @@ mvt_conc1 <- mvt_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ```{=tex}
 }}
-\ifdim\dimexpr\ht0+\dp0<7.9cm 
-\dp0\dimexpr7.9cm-\ht0\fi
+\ifdim\dimexpr\ht0+\dp0<7.0cm 
+\dp0\dimexpr7.0cm-\ht0\fi
 
 \fbox{\usebox{0}}
 
-{
-\begin{wrapfigure}{l}{0.58\linewidth}
-\vspace{0pt}
+\sbox{0}{\parbox{1\textwidth}{
+
+\begin{wrapfigure}[14]{l}{0.58\linewidth}
+\vspace{-15pt}
 ```
 
 ```{r}
@@ -62,6 +64,7 @@ mvt_conc1 <- mvt_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ```{=tex}
 \end{wrapfigure}
+\setlength\parskip{1em plus 0.8em} % Space between paragraphs
 ```
 
 ```{r}
@@ -75,9 +78,11 @@ tsu_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 `r tsu_conc1`
 
 ```{=tex}
-\hfill\break
-\hfill\break
-}
+}}
+\ifdim\dimexpr\ht0+\dp0<7.0cm 
+\dp0\dimexpr7.0cm-\ht0\fi
+
+\fbox{\usebox{0}}
 ```
 
 ```{=tex}
@@ -87,7 +92,9 @@ tsu_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ## Safety (SES RP3 area)
 
 ```{=tex}
-\begin{wrapfigure}{l}{0.58\linewidth}
+\sbox{0}{\parbox{1\textwidth}{
+
+\begin{wrapfigure}[14]{l}{0.58\linewidth}
 \vspace{-15pt}
 ```
 
@@ -98,6 +105,7 @@ tsu_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ```{=tex}
 \end{wrapfigure}
+\setlength\parskip{1em plus 0.8em} % Space between paragraphs
 ```
 
 ```{r}
@@ -110,5 +118,47 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 `r saf_conc1`
 ```{=tex}
-}
+}}
+\ifdim\dimexpr\ht0+\dp0<7.0cm 
+\dp0\dimexpr7.0cm-\ht0\fi
+
+\fbox{\usebox{0}}
+```
+
+## Environment (SES RP3 area)
+
+```{=tex}
+\sbox{0}{\parbox{1\textwidth}{
+
+\begin{wrapfigure}[14]{l}{0.58\linewidth}
+\vspace{-15pt}
+
+```
+
+```{r}
+#| file: R/chart_level1_kea.R
+#| out.width: "100%"
+```
+
+```{=tex}
+\end{wrapfigure}
+
+\setlength\parskip{1em plus 0.8em} % Space between paragraphs
+```
+
+```{r}
+env_conc <- read_mytable("PRB_findings.xlsx", "environment", "Table_Findings_environment") %>% 
+  filter(Year_Report == year_report, State == 'SES') %>% 
+  select(Conclusion) %>% toString() %>% paste0(., "@")
+
+env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n', '▪' = '•')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+```
+
+`r env_conc1`
+```{=tex}
+}}
+\ifdim\dimexpr\ht0+\dp0<7.0cm 
+\dp0\dimexpr7.0cm-\ht0\fi
+
+\fbox{\usebox{0}}
 ```

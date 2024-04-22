@@ -8,16 +8,16 @@
 # set graphs parameters ----
   ## web
   mywidth = NULL
-  myheight = 280
+  myheight = 300
   myfont = 14
-  mymargin = 70
+  mymargin = list (t = 40)
   mylinewidth = 3
   
   ## pdf
   mywidth_pdf = 300
   myheight_pdf = 220
   myfont_pdf = 8
-  mymargin_pdf = 70
+  mymargin_pdf = list (t = 20, l = 0)
   mylinewidth_pdf = 2
     
 # set state parameters  ----

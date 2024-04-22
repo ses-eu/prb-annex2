@@ -89,20 +89,16 @@ if (country == 'SES RP3') {
                       if_else(country == "Spain",
                               country, ecz_list$ecz_name[1]))
     mytitle_pos <- 0.95
-    mytop_margin <- 40
-    mylegend_pos_x <- 0
   } else {
     mytitle <- paste0("IFR movements - ", forecast, " - ", 
                       if_else(country == "Spain", 
                               country, ecz_list$ecz_name[1]))
     mytitle_pos <- 0.99
-    mytop_margin <- 40
-    mylegend_pos_x <- -0.1
   }
 
 ## define chart function ----
-  myc <- function (mywidth, myheight, myfont, mylinewidth) {
-    plot_ly(
+  myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
+    plotly::plot_ly(
       width = mywidth,
       height = myheight,
       data = data_prep_forecast,
@@ -119,7 +115,7 @@ if (country == 'SES RP3') {
     opacity = 1,
     showlegend = T
   ) %>% 
-    add_trace(
+    plotly::add_trace(
       data = data_prep_planned,
       inherit = FALSE,
       x = ~ year,
@@ -134,7 +130,7 @@ if (country == 'SES RP3') {
       opacity = 1,
       showlegend = T
     ) %>%
-    add_trace(
+    plotly::add_trace(
       data = data_prep_actual,
      inherit = FALSE,
      x = ~ year,
@@ -149,12 +145,12 @@ if (country == 'SES RP3') {
      opacity = 1,
      showlegend = T
     ) %>%
-    config( responsive = TRUE,
+    plotly::config( responsive = TRUE,
             displaylogo = FALSE,
             displayModeBar = F
             # modeBarButtons = list(list("toImage")),
     ) %>% 
-    layout(
+    plotly::layout(
       font = list(family = "Roboto"),
       title = list(text = mytitle,
                    y = mytitle_pos, 
@@ -193,18 +189,18 @@ if (country == 'SES RP3') {
       legend = list(
         orientation = 'h', 
         xanchor = "left",
-        x = mylegend_pos_x, 
+        x = 0, 
         y = -0.1,
-        font = list(size = myfont*0.95)
+        font = list(size = myfont)
         ),
-      margin = list (t = mytop_margin)
+      margin = mymargin
       
       
     )
   }
   
 ## plot chart ----
-  myc(mywidth, myheight, myfont, mylinewidth)
+  myc(mywidth, myheight+20, myfont, mylinewidth, mymargin)
 
 # # export to image
 # w = 1200

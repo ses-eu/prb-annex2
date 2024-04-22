@@ -1,8 +1,11 @@
-# 
-# # parameters
-# if (exists("data_folder") == FALSE) {
-#   source("R/parameters.R")
-# }
+
+## pdf
+# mywidth = 300
+# myheight = 220
+# myfont = 8
+# mymargin = list (t = 20, l = 10)
+# mylinewidth = 2
+
 
 # import data  ----
 data_raw  <-  read_xlsx(
@@ -12,6 +15,12 @@ data_raw  <-  read_xlsx(
   as_tibble() %>% 
   clean_names() %>% 
   mutate(management_objectives = str_replace_all(management_objectives, 'Other Mos' , 'Other MOs'))
+
+if (knitr::is_latex_output()) {
+  data_raw <- data_raw %>% 
+    mutate(management_objectives = str_replace_all( management_objectives,"management", "mgmt."))
+}
+
 
 data_prep <- data_raw %>% 
   filter(year_report == .env$year_report) %>% 
@@ -35,8 +44,8 @@ data_prep_planned <- data_prep %>%
   mycolors <-  c('#FFC000', '#FFC000','#5B9BD5', '#5B9BD5')
 
   ## define chart function ----
-  myc <- function (mywidth, myheight, myfont, mylinewidth) {
-    plot_ly(
+  myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
+    plotly::plot_ly(
       width = mywidth,
       height = myheight,
       data = data_prep_planned,
@@ -57,7 +66,7 @@ data_prep_planned <- data_prep %>%
       hovertemplate = paste0('%{xother} %{y:.0f}'),
       showlegend = T
     ) %>% 
-    add_trace(
+    plotly::add_trace(
       data = data_prep_actual,
       x = ~ year,
       y = ~ number_of_ans_ps,
@@ -72,12 +81,12 @@ data_prep_planned <- data_prep %>%
       hovertemplate = paste0('%{xother} %{y:.0f}'),
       showlegend = T
       ) %>%
-    config( responsive = TRUE,
+    plotly::config( responsive = TRUE,
             displaylogo = FALSE,
             displayModeBar = F
             # modeBarButtons = list(list("toImage")),
     ) %>% 
-    layout(
+    plotly::layout(
       font = list(family = "Roboto"),
       title = list(text = paste0("Number of ANSPs on or above target"),
                    y = 0.99, 
@@ -99,7 +108,7 @@ data_prep_planned <- data_prep %>%
                    zeroline = TRUE,
                    tickfont = list(size = myfont)
                    ),
-      yaxis = list(title = "Number of ANSPs on or above target",
+      yaxis = list(title = "No of ANSPs on or above target",
                    # gridcolor = 'rgb(255,255,255)',
                    showgrid = TRUE,
                    showline = FALSE,
@@ -115,18 +124,18 @@ data_prep_planned <- data_prep %>%
       legend = list(
         orientation = 'h', 
         xanchor = "left",
-        x = -0.05, 
+        x = -0.1, 
         y =-0.1,
-        font = list(size = myfont*0.95)
+        font = list(size = myfont)
         ),
-      margin = list (t = 40)
+      margin = mymargin
       
       
     )
   }
 
 ## plot chart ----
-  myc(mywidth, myheight, myfont, mylinewidth)
+  myc(mywidth, myheight, myfont, mylinewidth, mymargin)
 
 # # export to image
 # w = 1200

@@ -84,8 +84,8 @@ data_prep_planned <- data_raw_planned %>%
   }
 
 ## define chart function ----
-  myc <- function (mywidth, myheight, myfont, mylinewidth) {
-    plot_ly(
+  myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
+    plotly::plot_ly(
       width = mywidth,
       height = myheight,
       data = data_prep_forecast,
@@ -104,7 +104,7 @@ data_prep_planned <- data_raw_planned %>%
     # hoverinfo = "none",
     showlegend = T
   ) %>% 
-    add_trace(
+      plotly::add_trace(
         data = data_prep_planned,
         inherit = FALSE,
         x = ~ year,
@@ -119,7 +119,7 @@ data_prep_planned <- data_raw_planned %>%
         opacity = 1,
         showlegend = T
       ) %>%
-      add_trace(
+      plotly::add_trace(
         data = data_prep_actual,
         inherit = FALSE,
         x = ~ yr,
@@ -136,12 +136,12 @@ data_prep_planned <- data_raw_planned %>%
         # hoverinfo = "none",
         showlegend = T
       ) %>%
-      config( responsive = TRUE,
+      plotly::config( responsive = TRUE,
             displaylogo = FALSE,
             displayModeBar = F
             # modeBarButtons = list(list("toImage")),
     ) %>% 
-    layout(
+    plotly::layout(
       font = list(family = "Roboto"),
       title = list(text = mytitle,
                    y = mytitle_pos, 
@@ -180,17 +180,17 @@ data_prep_planned <- data_raw_planned %>%
       legend = list(
         orientation = 'h', 
         xanchor = "left",
-        x = -0.1, 
+        x = 0, 
         y =-0.1,
-        font = list(size = myfont*0.95)
+        font = list(size = myfont)
         ),
-      margin = list (t = 40)
+      margin = mymargin
       
     )
   }
 
 ## plot chart ----
-  myc(mywidth, myheight, myfont, mylinewidth)
+  myc(mywidth, myheight, myfont, mylinewidth, mymargin)
 
 # # export to image
 # w = 1200

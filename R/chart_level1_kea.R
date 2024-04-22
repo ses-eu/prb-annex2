@@ -112,10 +112,10 @@ if (country == "Network Manager") {
 
 # plot chart ----
 ## function moved to parameters  
-mybarct(NA, 300, 14)
+mybarct(mywidth, myheight, myfont, mylinewidth, mymargin)
 
-# export to image ----
-w = 1200
-h = 600
-export_fig(mybarct(w, h, 14 * w/900), paste0("env_", mymetric , "_main.png"), w, h)
+# # export to image 
+# w = 1200
+# h = 600
+# export_fig(mybarct(w, h, 14 * w/900), paste0("env_", mymetric , "_main.png"), w, h)
 
