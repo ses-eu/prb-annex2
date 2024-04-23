@@ -1,8 +1,9 @@
-# 
-# # parameters ----
-# if (exists("data_folder") == FALSE) {
-#   source("R/parameters.R")
-# }
+# parameters 
+# mywidth = 300
+# myheight = 220
+# myfont = 8
+# mymargin = list (t = 20, l = 0)
+# mylinewidth = 2
 
 # import data  ----
 data_raw  <-  read_xlsx(
@@ -42,9 +43,12 @@ data_target_trend <- data_prep_all %>%
   pivot_wider(names_from = 'status', values_from = 'unit_cost_er' ) %>% 
   clean_names()
 
-# plot chart ----
-myc <-  function(mywidth, myheight, myfont) {
-    plot_ly(
+# chart ----
+## set parameters for chart ----
+
+## define chart function ----
+myc <-  function(mywidth, myheight, myfont, mylinewidth, mymargin) {
+    plotly::plot_ly(
       width = mywidth,
       height = myheight,
       data = data_prep_all,
@@ -66,26 +70,26 @@ myc <-  function(mywidth, myheight, myfont) {
       # hoverinfo = "x+y",
       showlegend = T
     ) %>%
-  add_trace(
-    inherit = FALSE,
-    data = data_target_trend,
-    x = ~ year_text,
-    y = ~ target,
-    yaxis = "y1",
-    type = 'scatter',
-    mode = "line+markers",
-    name = 'Target trend',
-    text = ~ paste0('<b>', format(target_trend * 100, nsmall = 1), '%</b>'),
-    textposition = "top center",
-    cliponaxis = FALSE,
-    textfont = list(color = '#FF0000', size = myfont),
-    line = list(width = 3, color = '#FF0000'),
-    marker = list(size = 9, color = '#FF0000'),
-    hovertemplate = paste('Target trend: %{text}<extra></extra>'),
-    # hoverinfo = "none",
-    showlegend = T
-  ) %>%
-    add_trace(
+    plotly::add_trace(
+      inherit = FALSE,
+      data = data_target_trend,
+      x = ~ year_text,
+      y = ~ target,
+      yaxis = "y1",
+      type = 'scatter',
+      mode = "line+markers",
+      name = 'Target trend',
+      text = ~ paste0('<b>', format(target_trend * 100, nsmall = 1), '%</b>'),
+      textposition = "top center",
+      cliponaxis = FALSE,
+      textfont = list(color = '#FF0000', size = myfont),
+      line = list(width = mylinewidth, color = '#FF0000'),
+      marker = list(size = mylinewidth * 3, color = '#FF0000'),
+      hovertemplate = paste('Target trend: %{text}<extra></extra>'),
+      # hoverinfo = "none",
+      showlegend = T
+    ) %>%
+    plotly::add_trace(
       inherit = FALSE,
       data = data_actual_trend,
       x = ~ year_text,
@@ -98,18 +102,18 @@ myc <-  function(mywidth, myheight, myfont) {
       textposition = "bottom center",
       cliponaxis = FALSE,
       textfont = list(color = 'black', size = myfont),
-      line = list(width = 3, color = '#ED7D31'),
-      marker = list(size = 9, color = '#ED7D31'),
+      line = list(width = mylinewidth, color = '#ED7D31'),
+      marker = list(size = mylinewidth * 3, color = '#ED7D31'),
       hovertemplate = paste('Actual trend: %{text}<extra></extra>'),
       # hoverinfo = "none",
       showlegend = T
     ) %>%
-    config( responsive = TRUE,
+    plotly::config( responsive = TRUE,
             displaylogo = FALSE,
             displayModeBar = F
             # modeBarButtons = list(list("toImage")),
     ) %>% 
-    layout(
+    plotly::layout(
       font = list(family = "Roboto"),
       title = list(text=paste0("En route unit costs - SES RP3"),
                    y = 0.99, 
@@ -151,17 +155,18 @@ myc <-  function(mywidth, myheight, myfont) {
         xanchor = "center",
         x = 0.5, 
         y =-0.1,
-        font = list(size = myfont)
-      )
-      
+        font = list(size = myfont*0.9)
+      ),
+      margin = mymargin
     )
   
 }
 
-myc(NA, 320, 14)
+## plot chart ----
+myc(mywidth, myheight+20, myfont, mylinewidth, mymargin)
 
-# export to image ----
-w = 1200
-h = 600
-export_fig(myc(w, h, 14 * w/900), paste0("cef_er_main.png"), w, h)
+# # export to image
+# w = 1200
+# h = 600
+# export_fig(myc(w, h, 14 * w/900), paste0("cef_er_main.png"), w, h)
 

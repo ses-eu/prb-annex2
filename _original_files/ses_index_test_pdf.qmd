@@ -162,3 +162,79 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 \fbox{\usebox{0}}
 ```
+
+## Capacity (SES RP3 area)
+
+```{=tex}
+\sbox{0}{\parbox{1\textwidth}{
+
+\begin{wrapfigure}[14]{l}{0.58\linewidth}
+\vspace{-15pt}
+
+```
+
+```{r}
+#| file: R/chart_level1_cap_er.R
+#| out.width: "100%"
+```
+
+```{=tex}
+\end{wrapfigure}
+
+\setlength\parskip{1em plus 0.8em} % Space between paragraphs
+```
+
+```{r}
+cap_er_conc <- read_mytable("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity") %>% 
+  filter(Year_Report == year_report, State == 'SES') %>% 
+  select(Conclusion) %>% toString() %>% paste0(., "@")
+
+cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n', '▪' = '•')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+```
+
+`r cap_er_conc1`
+```{=tex}
+}}
+\ifdim\dimexpr\ht0+\dp0<7.0cm 
+\dp0\dimexpr7.0cm-\ht0\fi
+
+\fbox{\usebox{0}}
+```
+
+## Cost-efficiency (SES RP3 area)
+
+```{=tex}
+\sbox{0}{\parbox{1\textwidth}{
+
+\begin{wrapfigure}[14]{l}{0.58\linewidth}
+\vspace{-15pt}
+
+```
+
+```{r}
+#| file: R/chart_level1_cef_er_ses.R
+#| out.width: "100%"
+```
+
+```{=tex}
+\end{wrapfigure}
+
+\setlength\parskip{1em plus 0.8em} % Space between paragraphs
+```
+
+```{r}
+cef_conc <- read_mytable("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF") %>% 
+  filter(Year_Report == year_report, State == 'SES') %>% 
+  select(Conclusion) %>% toString() %>% paste0(., "@")
+
+cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n', '▪' = '•')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+```
+
+`r cef_conc1`
+```{=tex}
+}}
+\ifdim\dimexpr\ht0+\dp0<7.0cm 
+\dp0\dimexpr7.0cm-\ht0\fi
+
+\fbox{\usebox{0}}
+```
