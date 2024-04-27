@@ -1,18 +1,4 @@
-# country <- 'Network Manager'
-# source("R/parameters_new.R")
 
-# remove .qmd files ----
-  ## get file list ----
-  root_files <- list.files()
-
-  ## remove all qmd files  ----
-  for (i in 1:length(root_files)) {
-    if (grepl('.qmd', root_files[i], fixed = TRUE) == TRUE) {
-      file.remove(root_files[i])
-    }
-  }
-
-  
 # replace index, quarto yaml and css files ----
   ## quarto yaml
   if (out_format == 'pdf') {
@@ -89,18 +75,28 @@
       }
     }
 
-
-# find all scripts that generate .qmd files ----
-  ## get all R scripts ----
-  rscripts <- list.files(here('R'))
-
-  ## get only 'generate' scripts ----
-  genscripts <- list()
-  for (i in 1:length(rscripts)) {
-    if (grepl('generate', rscripts[i], fixed = TRUE) == TRUE) {
-      genscripts <- append(genscripts, rscripts[i])
+# remove .qmd files ----
+  ## get file list ----
+  root_files <- list.files()
+  
+  ## remove all non '_' qmd files  ----
+  for (i in 1:length(root_files)) {
+    if (grepl('.qmd', root_files[i], fixed = TRUE) == TRUE & substr(root_files[1], 1, 1) != '_') {
+      file.remove(root_files[i])
     }
   }
+
+# find all scripts that generate .qmd files ----
+  # ## get all R scripts ----
+  # rscripts <- list.files(here('R'))
+  # 
+  # ## get only 'generate' scripts ----
+  # genscripts <- list()
+  # for (i in 1:length(rscripts)) {
+  #   if (grepl('generate', rscripts[i], fixed = TRUE) == TRUE) {
+  #     genscripts <- append(genscripts, rscripts[i])
+  #   }
+  # }
 
 # remove and regenerate variables ----
   file.remove('_variables.yml')
@@ -189,13 +185,13 @@ if (out_format == 'web') {
      
      ### no terminal zone case ----
       if (state_type == 0) {
-        genscripts <- list('generate_saf_qmd.R',
-                           'generate_env_kea_qmd.R',
-                           'generate_env_mil_qmd.R',
-                           'generate_cap_er_qmd.R',
-                           'generate_ceff_er1_qmd.R',
-                           'generate_ceff_er2_qmd.R',
-                           'generate_ceff_er3_qmd.R')
+        # genscripts <- list('generate_saf_qmd.R',
+        #                    'generate_env_kea_qmd.R',
+        #                    'generate_env_mil_qmd.R',
+        #                    'generate_cap_er_qmd.R',
+        #                    'generate_ceff_er1_qmd.R',
+        #                    'generate_ceff_er2_qmd.R',
+        #                    'generate_ceff_er3_qmd.R')
       
         tx <- str_replace(tx, "- capacity_trm.qmd", "  # - capacity_trm.qmd")
         tx <- str_replace(tx, "- environment_apt.qmd", "  # - environment_apt.qmd")
@@ -225,7 +221,7 @@ if (out_format == 'web') {
     
       ### remove file, entry from menu and from list of pages to generate ----
         if (atspcheck == 24) {
-          genscripts <- genscripts[genscripts != "generate_ceff6_tz_qmd.R"]
+          # genscripts <- genscripts[genscripts != "generate_ceff6_tz_qmd.R"]
           # tx  <- readLines("_quarto.yml")
           tx <- str_replace(tx, "- cost-efficiency-tz1-3.qmd", "  # - cost-efficiency-tz1-3.qmd")
   
@@ -244,7 +240,7 @@ if (out_format == 'web') {
       atspcheck <- sum(is.na(ert_2_14_1) == TRUE)
     
       if (atspcheck == 24) {
-        genscripts <- genscripts[genscripts != "generate_ceff_er3_qmd.R"]
+        # genscripts <- genscripts[genscripts != "generate_ceff_er3_qmd.R"]
         tx  <- readLines("_quarto.yml")
         tx <- str_replace(tx, "- cost-efficiency-er1-3.qmd", "  # - cost-efficiency-er1-3.qmd")
         writeLines(tx, con="_quarto.yml")
@@ -254,12 +250,12 @@ if (out_format == 'web') {
       } 
    }
 
-  # generate new qmd files ----
-    if (country != "Network Manager" & country != "SES RP3" & country != "Home") {
-      for (i in 1:length(genscripts)) {
-        source(here("R", genscripts[i]))
-      }
-    }
+  # # generate new qmd files ----
+  #   if (country != "Network Manager" & country != "SES RP3" & country != "Home") {
+  #     for (i in 1:length(genscripts)) {
+  #       source(here("R", genscripts[i]))
+  #     }
+  #   }
 }
     
 # render site ----

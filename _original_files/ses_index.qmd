@@ -1,7 +1,7 @@
 [Annual Monitoring Report {{< var doc.year_report >}} - SES RP3]{.fakeh1}
 
 ## Contextual information
-```{r fetch-data-ses}
+```{r fetch-data-ses, eval=TRUE}
 data_context <-read_xlsx(
   paste0(data_folder, "SES.xlsx"),
   sheet = "Context",
@@ -21,7 +21,6 @@ trm_cz <- data_context %>% select(trm_cz) %>% pull()
 main_ansp <- data_context %>% select(main_ans_ps_ert) %>% pull()
 other_ansp <- data_context %>% select(other_ans_ps_ert) %>% pull()
 met_ansp <- data_context %>% select(met_providers) %>% pull()
-
 ```
 
 

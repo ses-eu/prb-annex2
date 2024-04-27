@@ -83,6 +83,12 @@ myfont <- params$myfont
 mymargin <- params$mymargin
 mylinewidth <- params$mylinewidth
 
+myheight <- params$myheight
+mywidth <- params$mywidth
+myfont <- params$myfont
+mymargin <- params$mymargin
+mylinewidth <- params$mylinewidth
+
 cap_file <- params$cap_file
 ceff_file <- params$ceff_file
 env_kea_file <- params$env_kea_file

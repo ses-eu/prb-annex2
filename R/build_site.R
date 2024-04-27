@@ -3,7 +3,7 @@
   # clean environment and set main parameters ----
     rm(list = ls())
     year_report <- 2022 # set your year report here
-    out_format <- 'pdf' # set your output format here: 'pdf' or 'web'
+    out_format <- 'web' # set your output format here: 'pdf' or 'web'
     
   # get functions ----
     source("R/utils.R")
@@ -12,10 +12,8 @@
     source("R/get_data.R")
     
     ## add Home to State list
-    # state_list <- c(state_list, "Home")
-    state_list <- c("SES RP3")
-    
-      
+    state_list <- c(state_list, "Home")
+
   # build state pages ----
     
     ## set test check to TRUE to build only one state site, FALSE for all
@@ -23,12 +21,11 @@
     
     ## build pages
     if (test_check == TRUE) {
-      state_list <- 'SES RP3' # set your test country here (Home for home page)
+      state_list <- 'Switzerland' # set your test country here (Home for home page)
     } 
   
-    for (j in 1:length(state_list)) {
-      country <- state_list[j]
-      # country <- state_list[i]
+    for (i in 1:length(state_list)) {
+      country <- state_list[i]
       source("R/parameters.R")
       source("R/create_pages.R")
     }
