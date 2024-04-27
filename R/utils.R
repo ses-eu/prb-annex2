@@ -92,7 +92,7 @@ read_mytable <- function(file, sheet, table){
         yaxis = "y1",
         type = 'scatter',  mode = 'lines+markers',
         line = list(color = '#FF0000', width = mylinewidth),
-        marker = list(size = mylinewidth * 3, color = '#FF0000'),
+        marker = list(size = mylinewidth * 3, color = mymarker_color),
         name = "Target",
         opacity = 1,
         hovertemplate = paste0('Target: %{y:.', mytooltip_decimals ,'f}%<extra></extra>'),
@@ -168,9 +168,9 @@ read_mytable <- function(file, sheet, table){
   }
 
 ## plot bar chart without target  ----
-  mybarc <-  function(mywidth, myheight, myfont) {
+  mybarc <-  function(mywidth, myheight, myfont, mylinewidth, mymargin) {
     data_for_chart %>% 
-      plot_ly(
+      plotly::plot_ly(
         width = mywidth,
         height = myheight,
         x = ~ year,
@@ -185,7 +185,7 @@ read_mytable <- function(file, sheet, table){
         hoverinfo = "none",
         showlegend = F
       ) %>%
-      add_trace(
+      plotly::add_trace(
         x = ~ year,
         y = ~ actual,
         yaxis = "y1",
@@ -204,12 +204,12 @@ read_mytable <- function(file, sheet, table){
         showlegend = T
         
       ) %>% 
-      config( responsive = TRUE,
+      plotly::config( responsive = TRUE,
               displaylogo = FALSE,
               displayModeBar = F
               # modeBarButtons = list(list("toImage")),
       ) %>% 
-      layout(
+      plotly::layout(
         font = list(family = "Roboto"),
         title = list(text = mychart_title,
                      y = 1, 
@@ -255,7 +255,7 @@ read_mytable <- function(file, sheet, table){
           y =-0.1,
           font = list(size = myfont)
         ),
-        margin = list (t = 40)
+        margin = mymargin
         
       )
   }

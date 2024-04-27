@@ -9,6 +9,7 @@
   myaxis_title <- paste0(mymetric, " (%)")
   mytooltip_decimals <- 1
   targetcolor <- 'transparent'
+  mymarker_color <- '#FF0000'
   
 ## import data  ----
   data_raw  <-  read_xlsx(
@@ -29,11 +30,11 @@
 
 
 # plot chart ----
-## function moved to parameters  
-  mybarct(NA, 300, 14)
-
-# export to image ----
-w = 1200
-h = 600
-export_fig(mybarct(w, h, 14 * w/900), paste0("cap_trm_savings_main.png"), w, h)
+## function moved to utils  
+  mybarct(mywidth, myheight, myfont, mylinewidth, mymargin)
+  
+# # export to image
+# w = 1200
+# h = 600
+# export_fig(mybarct(w, h, 14 * w/900), paste0("cap_trm_savings_main.png"), w, h)
 

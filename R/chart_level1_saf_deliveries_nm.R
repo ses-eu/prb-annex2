@@ -33,10 +33,10 @@ data_for_chart <- data_raw %>%
 
 # plot chart ----
 ## moved to parameters  
-mybarc(NA, 300, 14)
+mybarc(mywidth, myheight, myfont, mylinewidth, mymargin)
 
-# export to image ----
-w = 1200
-h = 600
-export_fig(mybarc(w, h, 14 * w/900),"saf_deliveries_main.png", w, h)
-
+# # export to image ----
+# w = 1200
+# h = 600
+# export_fig(mybarc(w, h, 14 * w/900),"saf_deliveries_main.png", w, h)
+# 

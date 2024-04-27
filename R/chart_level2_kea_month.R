@@ -1,8 +1,7 @@
- 
 # parameters ----
 mytooltip_decimals <- 2
-targetcolor <- '#FF0000'
-mymarker_color <- '#FF0000'
+targetcolor <- 'transparent'
+mymarker_color <- 'transparent'
 
 if (country == "Network Manager") {
   # NM case ----
@@ -56,7 +55,7 @@ if (country == "Network Manager") {
 } else  {
   # State case ----
   mymetric <- "KEA"
-  mychart_title <- paste0(mymetric, " - ", country)
+  mychart_title <- paste0('Monthly ', mymetric, " - ", country)
   myaxis_title <- paste0(mymetric, " (%)")
   
   ## import data  ----
@@ -65,41 +64,57 @@ if (country == "Network Manager") {
     # here("data","hlsr2021_data.xlsx"),
     sheet = "KEA",
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
-    as_tibble() %>% 
-    clean_names() 
-  
-  data_raw_actual  <-  read_xlsx(
-    paste0(data_folder, "HFE_clean.xlsx"),
-    # here("data","hlsr2021_data.xlsx"),
-    sheet = "Table_HFE",
-    range = cell_limits(c(1, 1), c(NA, NA))) %>%
-    as_tibble() %>% 
-    clean_names() 
-  
+    as_tibble() %>%
+    clean_names()
+  # 
+  # data_raw_actual  <-  read_xlsx(
+  #   paste0(data_folder, "HFE_clean.xlsx"),
+  #   # here("data","hlsr2021_data.xlsx"),
+  #   sheet = "Table_HFE",
+  #   range = cell_limits(c(1, 1), c(NA, NA))) %>%
+  #   as_tibble() %>% 
+  #   clean_names() 
+
   ## prepare data ----
-  data_prep_target <- data_raw_target %>% 
+  target_value <- data_raw_target %>%
     filter(
-      state == .env$country
-    ) %>% 
+      state == .env$country,
+      year == .env$year_report
+    ) %>%
     mutate(
       # type = 'Target',
       target = round(x321_kea_target * 100, 2)
-    ) %>% 
+    ) %>%
     select(
-      year,
       target
-    )
+    ) %>% pull()
+  # 
+  # data_prep_actual <- data_raw_actual %>% 
+  #   filter(
+  #     entity_name == country) %>% 
+  #   mutate (actual = hfe_kpi) %>% 
+  #   select(
+  #     year,
+  #     actual
+  #   ) 
+  # 
+  # data_for_chart <-  merge(x = data_prep_target, y = data_prep_actual, by="year", all.x = TRUE) 
   
-  data_prep_actual <- data_raw_actual %>% 
-    filter(
-      entity_name == country) %>% 
-    mutate (actual = hfe_kpi) %>% 
-    select(
-      year,
-      actual
-    ) 
+  sheet <- country
+  range <- "A11:M14"
+  df <- read_range(env_kea_file, sheet, range)  
   
-  data_for_chart <-  merge(x = data_prep_target, y = data_prep_actual, by="year", all.x = TRUE) 
+  ## prepare data
+  data_for_chart <- df %>% 
+    mutate_at(c(-1), ~ as.numeric(.)) %>% 
+    mutate(across(c(2:13), ~paste0(format(round(.*100,2)), "%"))) %>%  
+    mutate_all(~ str_replace(., "NA%", "")) %>% 
+    rename(a = 1) %>% 
+    filter(a == 'KEA') %>% 
+    pivot_longer(-a, names_to = "month") %>% 
+    mutate(actual = as.numeric(str_replace(value, '%', '')),
+           target = target_value,
+           year = seq(1:12))
   
     }
 

@@ -149,15 +149,16 @@ website:
       - text: "---"
       - section: "<b>2 Environment</b>"
         contents:
-          # - text: "2.1 Horizontal flight efficiency"
-          #   href: environment_kea.html
-          - environment_kea.qmd
+          - text: "KPI - KEA"
+            href: environment_kea.html
+          # - environment_kea.qmd
           - environment_apt.qmd
           - environment_mil.qmd
       - text: "---"
       - section: "<b>3 Capacity</b>"
-        contents:
-          - capacity_er.qmd
+          - text: "KPI – en route ATFM delay"
+            href: capacity_er.html
+          # - capacity_er.qmd
           - capacity_trm.qmd
       - text: "---"
       - section: "<b>4 Cost-efficiency</b>"
