@@ -85,7 +85,8 @@ website:
         text: Publications {{< fa external-link-alt >}}
         target: "_blank"
 
-  sidebar: 
+  sidebar:
+    collapse-level: 3
     contents:
       - section: '<b style= "font-size: 1.2rem">Year report</b>'
         contents:
@@ -152,31 +153,37 @@ website:
           - text: "KPI - KEA"
             href: environment_kea.html
           # - environment_kea.qmd
-          - environment_apt.qmd
-          - environment_mil.qmd
+          # - environment_apt.qmd
+          # - environment_mil.qmd
       - text: "---"
       - section: "<b>3 Capacity</b>"
+        contents:
           - text: "KPI – en route ATFM delay"
-            href: capacity_er.html
+            href: capacity_er.html#kpi-en-route-atfm-delay
+          - text: "ATCOs in OPS"
+            href: capacity_er.html#atcos-in-ops
           # - capacity_er.qmd
-          - capacity_trm.qmd
+          # - capacity_trm.qmd
       - text: "---"
       - section: "<b>4 Cost-efficiency</b>"
         contents:
-          - cost-efficiency-er1-1.qmd
-          - cost-efficiency-er1-2.qmd
-          - cost-efficiency-er1-3.qmd
-          - text: "---"
-          - cost-efficiency-tz1-1.qmd
-          - cost-efficiency-tz1-2.qmd
-          - cost-efficiency-tz1-3.qmd
+          - section: "<b>En route CZ</b>"
+            contents:
+            - text: "KPI – DUC/AUC, costs and SUs"
+              href: cost-efficiency-er1-1.html
+          # - cost-efficiency-er1-2.qmd
+          # - cost-efficiency-er1-3.qmd
+          # - text: "---"
+          # - cost-efficiency-tz1-1.qmd
+          # - cost-efficiency-tz1-2.qmd
+          # - cost-efficiency-tz1-3.qmd
 # block tcz2
-          - text: "---"
-          - cost-efficiency-tz2-1.qmd
-          - cost-efficiency-tz2-2.qmd
-          - cost-efficiency-tz2-3.qmd
-          - text: "---"
-          - cost-efficiency-g2g.qmd
+          # - text: "---"
+          # - cost-efficiency-tz2-1.qmd
+          # - cost-efficiency-tz2-2.qmd
+          # - cost-efficiency-tz2-3.qmd
+          # - text: "---"
+          # - cost-efficiency-g2g.qmd
 # block level2 end
 # 
   # site-url: "https://eurocontrol.int/"

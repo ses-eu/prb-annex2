@@ -9,6 +9,7 @@ library(webshot)
 library(data.table)
 library(here)
 library(fs)
+library(purrr)
 
 # functions ----
 ## right x characters function ----

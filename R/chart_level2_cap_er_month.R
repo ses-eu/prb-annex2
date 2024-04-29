@@ -62,7 +62,7 @@ if (country == 'SES RP3') {
   
   data_raw_actual  <-  read_xlsx(
     paste0(data_folder, "CAP dataset master.xlsx"),
-    sheet = "en route monthly delay",
+    sheet = "Avg en-route ATFM delay",
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
@@ -70,7 +70,7 @@ if (country == 'SES RP3') {
   ## prepare data ----
   data_prep_target <- data_raw_target %>% 
     filter(
-      state == country ) %>% 
+      state == country) %>% 
     mutate(
       er_cap_target = round(delay_target, 2)
     ) %>% 

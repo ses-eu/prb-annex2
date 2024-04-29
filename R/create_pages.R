@@ -104,6 +104,8 @@
     year_report: ", year_report, "
     country: '", country, "'
     country_lower: '", country_lower, "'
+    ecz1: '", ecz_list$ecz_name[1], "'
+    ecz2: '", ecz_list$ecz_name[2], "'
   "
   )
   
@@ -273,6 +275,7 @@ if (out_format == 'web') {
                                               nat_curr = nat_curr,
                                               pp_version = pp_version,
                                               acc_no = acc_no,
+                                              acc_list = acc_list,
                                               acc1 = acc1,
                                               acc2 = acc2,
                                               acc3 = acc3,

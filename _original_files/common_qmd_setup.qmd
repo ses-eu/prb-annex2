@@ -13,6 +13,7 @@ params:
   nat_curr:       $nat_curr
   pp_version:     $pp_version
   acc_no:         $acc_no
+  acc_list:       $acc_list
   acc1:           $acc1
   acc2:           $acc2
   acc3:           $acc3
@@ -62,6 +63,7 @@ no_tcz <- params$no_tcz
 nat_curr <- params$nat_curr
 pp_version <- params$pp_version
 acc_no <- params$acc_no
+acc_list <- params$acc_list
 acc1 <- params$acc1
 acc2 <- params$acc2
 acc3 <- params$acc3
