@@ -99,4 +99,4 @@ sagittis. Aptent cum ridiculus habitasse; molestie vitae faucibus integer, dui n
 :::::
 ::::
 
-`r if (params$no_tcz >0) ":::"`
+`r if (params$no_tcz == 0) ":::"`

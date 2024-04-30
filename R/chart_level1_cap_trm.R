@@ -34,7 +34,7 @@ myfig <- function(){
     filter(
       state == .env$country,
       year >= 2020) %>% 
-    mutate(movements = 1000) %>%    #temporary line until the arrivals are added to the master file
+    mutate(movements = arrivals) %>%    #temporary line until the arrivals are added to the master file
     pivot_longer(
       cols = c(atc_capacity, atc_staffing, atc_disruptions, weather, other_non_atc),
       names_to = "type",
