@@ -1,0 +1,30 @@
+[4 Cost-efficiency]{class="fakeh1"}
+
+## En route CZ - {{< var doc.ecz1 >}}
+
+::: {#container-cap style="clear: both"}
+
+### KPI – DUC/AUC, costs and SUs
+
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+:::: {#chart-kea class="mychart"}
+```{r}
+#| file: R/chart_level1_cef_er.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#concl-cef}
+```{r}
+cef_conc <- read_mytable("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF") %>% 
+  filter(Year_Report == params$year_report, State == params$country) %>% 
+  select(Conclusion) %>% toString() %>% paste0(., "@")
+
+cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+```
+
+`r cef_conc1`
+::::
+:::

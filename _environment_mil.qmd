@@ -1,0 +1,71 @@
+##  Military dimension
+### Update on Military dimension of the plan
+
+For obvious flight safety reasons, military activities must be segregated from civil flows which has an impact on both horizontal (HFE) and vertical flight efficiency (VFE). <br/>Because ASM manageable areas form an integral part of the nominal system, military airspace reservations shall be considered as part of the performance baseline rather than a key factor degrading environmental KPIs.<br/>As a result of implementation of the FUA concept  the impact of military activities using Restricted Airspace -RSA on civil performance is highly minored when associated with an efficient ASM process: <br/>At strategic level (HLAPB) by designing areas in accordance with A-FUA concept (MVPA/VGA structures), especially for congested airspaces.<br/>At pre-tactical level (AMC), by managing these areas in a dynamic way, with an associated level 2 CDM process, validated by HLAPB. <br/>At tactical level (ACC/Regional Military Control Centre) by activating/deactivating areas as close as possible to actual use and allowing crossing or direct routes when possible (in accordance with TRA status), with an associated level 3 CDM process validated by HLAPB.<br/>At each level, HLAPB, AMC or ACC/Regional Military Control Centre, a key factor of efficiency is a trust-driven civil-military cooperation. As a counterpart, AOs and CFSPs must be reactive and take efficiently into account available or released airspaces. At last, ANSP have also to adapt the route network to create more DCTs within military areas.<br/>Finally, local circumstances (e.g. constrained airspace, proximity of international hubs, etc….) as well as a large  number of military missions that differ from one State to another must be taken into account. Therefore, airspace needs (e.g. airspace requirements for the 5th generation fighters)  and related ASM procedures of the States differ and standardized objectives cannot be defined.
+
+### Military - related measures implemented or planned to improve capacity
+
+FABEC States are working on mid-term improvements regarding implementation of ASM level 1, 2, and 3 procedures. Some local initiatives regarding ASM/ATFCM convergence, like the traffic Light Scheme concept in France are promoted at FABEC level, as well as at ECAC level in the EUROCONTROL OEP framework.<br/>Another major improvement is the interconnection of the existing ASM tools (e.g. LARA, STANLY_ACOS) at FABEC Level, to enhance regional coordination among FABEC AMCs as well as with the NM.
+
+### PI#6 Effective use of reserved or segregated airspace - national level
+
+```{r,  options=(range = "B15:N17")}
+#| file: R/table_env_mil.R
+#| out.width: "100%"
+```
+
+
+
+### PI#6 Effective use of reserved or segregated airspace (per ACC)
+
+```{r,  options=(range = "B20:N29")}
+#| file: R/table_env_mil.R
+#| out.width: "100%"
+```
+
+
+### Initiatives implemented or planned to improve PI#6
+
+Remark<br/>The Rolling UUP and Procedure 3 were introduced in Switzerland on 01.01.2016. <br/><br/>Monitoring of effectiveness<br/>Since introduction of Rolling UUP and Procedure 3 in 2016, the PI#6 ratio improved and remained high and stable over years implying more reliable flight planning possibilities by AUs across Swiss airspace. <br/><br/>Ongoing national civil-military initiatives<br/>Additional improvements are foreseen at the mid/long term such as introduction of VPA, improved CDM-ATFCM, improved civ-mil ASM Tools, etc.  that shall give even more direct routing options to the Airspace Users. In addition, CH NSA is in the process of defining specific national PIs and/or "Use cases" in order to better assess (and improve, if necessary) the effectiveness of national FUA processes.
+
+### PI#7 Rate of planning via available airspace structures - national level
+
+```{r,  options=(range = "B37:N39")}
+#| file: R/table_env_mil.R
+#| out.width: "100%"
+```
+
+
+
+### PI#7 Rate of planning via available airspace structures (per ACC)
+
+```{r,  options=(range = "B42:N51")}
+#| file: R/table_env_mil.R
+#| out.width: "100%"
+```
+
+
+### Initiatives implemented or planned to improve PI#7
+
+Remark<br/>In the figures provided by Eurocontrol (PRISMIL) until 2021 (included), there was no way of knowing whether the flights that filed through the available RSA are indeed a subset of the flights that could have filed through the available RSA.<br/>**This correction is now available and has been computed retroactively for all years.**<br/><br/>Ongoing national civil-military initiatives<br/>Promoting a more proactive flight planning process (considering the last published airspace status) by the Airspace Users. Additional improvements are foreseen at the mid/long term such as introduction of VPA, improved CDM-ATFCM, improved civ-mil ASM Tools, etc. that shall give even more direct routing options to the Airspace Users.<br/><br/>Monitoring of effectiveness<br/>Military mission planning remained stable at a high level over years implying more reliable flight planning by AUs across Swiss airspace. CH NSA is in the process of defining specific national PIs and/or "Use cases" in order to better assess (and improve, if necessary) the effectiveness of national FUA processes.
+
+### PI#8 Rate of using available airspace structures - national level
+
+```{r,  options=(range = "B59:N61")}
+#| file: R/table_env_mil.R
+#| out.width: "100%"
+```
+
+
+
+### PI#8 Rate of using available airspace structures (per ACC)
+
+```{r,  options=(range = "B64:N73")}
+#| file: R/table_env_mil.R
+#| out.width: "100%"
+```
+
+
+### Initiatives implemented or planned to improve PI#8
+
+See remark PI#7 (same as above).

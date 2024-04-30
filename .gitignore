@@ -10,6 +10,5 @@
 /_book/
 /images/
 
-/*.qmd
 _quarto.yml
 _variables.yml

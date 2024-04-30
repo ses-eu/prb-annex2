@@ -1,0 +1,69 @@
+## Airports
+### Overview
+Switzerland identifies its two main airports Zurich (LSZH) and Geneva (LSGG) as subject to RP3 monitoring. Both airports have a fully implemented data flow that allows the proper monitoring of the pre-departure delays. <br/>Traffic in 2022 at these two airports was still 18% lower than in 2019,but recovered 69% with respect to 2021.<br/><br/>Average arrival ATFM delays in 2022 was 0.74 min/arr, compared to 0.37 min/arr in 2021.<br/>ATFM slot adherence has improved (2022: 95.6%; 2021: 94.8%).
+
+
+### Arrival ATFM Delay
+:::: {.columns}
+  
+::: {.column width="48%" }
+![](images/2022/Switzerland/cap_trm_3_1.png)
+:::
+
+::: {.column width="2%" }
+:::
+
+::: {.column width="50%" }
+ATFM delays at both Swiss increased significantly in 2022.
+At Zurich (LSZH: 2019: 1.99 min/arr.; 2020: 0.60 min/arr.; 2021: 0.51 min/arr.; 2022: 0.93 min/arr.) 66% of these delays were attributed to weather and 30% to aerodrome capacity issues.
+At Geneva  (LSGG: 2019: 1.04 min/arr.; 2020: 0.49 min/arr.; 2021: 0.19 min/arr.; 2022: 0.48 min/arr.) 42% of the delays were attributed to Aerodrome Capacity issues, 36% to Weather, and 13% to ATC staffing issues.
+According to the Swiss monitoring report: 2022 delays were mostly due to non CRSTMP causes. 
+:::
+::::
+
+
+### Arrival ATFM Delay – National Target
+:::: {.columns}
+  
+::: {.column width="48%"}
+![](images/2022/Switzerland/cap_trm_2_1.png)
+:::
+
+::: {.column width="2%" }
+:::
+
+::: {.column width="50%"}
+The national target on arrival ATFM delay in 2022 was met. 
+:::
+::::
+
+
+### ATFM Slot Adherence
+:::: {.columns}
+  
+::: {.column width="48%"}
+![](images/2022/Switzerland/cap_trm_1_1.png)
+:::
+
+::: {.column width="2%" }
+:::
+
+::: {.column width="50%"}
+
+These airports showed adherence above 94% and the national average was 95,6%, a small improvement with respect to the performance in 2021 (94.8%). With regard to the 4.4% of flights that did not adhere, 2.9% was early and 1.5% was late.,
+:::
+::::
+
+
+### ATC Pre-departure Delay
+The performance at Zurich has deteriorated (LSZH; 2019: 1.63 min/dep.; 2020: 0.52 min/dep.; 2021: 0.39 min/dep.; 2022: 0.71 min/dep.) but it was still  better than in 2019. <br><br> The improvement of the quality of the data reporting at Geneva in 2022 allowed for the calculation of this indicator, showing also a result slightly better than in 2019 (LSGG: 2019: 0.36 min/dep.; 2022: 0.32 min/dep.)<br><br> According to the Swiss monitoring report: *2022 actual performance is worse than 2020 or 2021, which is fully in line with traffic increase at the airport, compared with a very low level of traffic in 2020, and a rather low level in 2021. In 2022, traffic levels remained lower than 2019, however, traffic predictability and traffic volatility were 2 factors playing a key role in generating delay at departure. No particular issues have been identified and no specific measures have been implemented in 2022 in relation to this PI.*
+
+
+### All Causes Pre-departure Delay
+The total (all causes) delay in the actual off block time at both Geneva and Zurich increased again in 2022 (LSZH: 2020: 7.55 min/dep.; 2021: 9.66 min/dep.;2022: 15.82 min/dep.; LSGG: 2020: 8.46 min/dep.; 2021: 9.03 min/dep.; 2022: 15.12 min/dep.). The highest delays per flight at these airports were observed in Summer and in December.<br><br>According to the Swiss monitoring report: *With the increase of traffic at airports , the indicator 'average time of all cause departure delay per flight' deteriorated in 2022 compared with 2021. At ANSP level, we are not in a position to explain all delays  reasons, and more particularly the non-ATFM delays.*
+
+
+### Appendix
+n/a:  airport operator data flow not established, or more than two months of missing / non-validated data<br/>
+![](images/2022/Switzerland/cap_trm_4.png)
+

@@ -1,0 +1,13 @@
+# 1 Safety
+### Effectiveness of Safety Management
+
+```{r}
+#| file: R/table_saf_eosm.R
+#| out.width: "100%"
+```
+
+Note: EoSM questionnaire has been updated in RP3 using CANSO Standard of Excellence as the basis, maturity levels of study areas and calculation of the score have been updated too. A direct comparison with  maturity levels and scoring of EoSM used RP2 is not advisable.
+
+
+### Observations															
+Maturity levels have been maintained compared with 2021. Four out of five EoSM components of the ANSP meet the RP3 target level. Only the component "Safety Risk Management" is below 2024 target level, requiring improvement of three questions during RP3.

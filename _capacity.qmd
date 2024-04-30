@@ -1,0 +1,102 @@
+[3 Capacity]{class="fakeh1"}
+
+::: {#container-cap style="clear: both"}
+
+## KPI – en route ATFM delay
+
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+:::: {#chart-cap class="mychart"}
+```{r chart-cap-er}
+#| file: R/chart_level1_cap_er.R
+#| out.width: "100%"
+```
+
+<br>
+
+```{r chart-cap-er-month}
+#| file: R/chart_level2_cap_er_month.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#concl-cap}
+```{r}
+cap_er_conc <- read_mytable("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity") %>% 
+  filter(Year_Report == params$year_report, State == params$country) %>% 
+  select(Conclusion) %>% toString() %>% paste0(., "@")
+
+cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+```
+
+`r cap_er_conc1`
+::::
+:::
+
+
+::: {#container-cap style="clear: both"}
+
+## ATCOs in OPS
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+:::: {#chart-cap class="mychart"}
+
+```{r chart-cap-atco}
+#| file: R/chart_level2_cap_atco.R
+#| out.width: "100%"
+```
+
+::::
+
+:::: {#concl-cap}
+Amet nibh blandit, ullamcorper praesent vitae, hac scelerisque elementum condimentum penatibus tempor. Phasellus eros facilisis eget varius magnis
+penatibus, ultricies ad ultricies. Felis rhoncus et aptent orci ac ullamcorper cras dapibus. Dis facilisi urna pharetra mattis faucibus. Elementum
+lacinia ante sagittis lobortis, rhoncus arcu metus massa, venenatis a. Iaculis habitasse luctus aliquam cubilia molestie penatibus!
+
+Lorem eros aenean nisi vestibulum interdum hac porta, eros ornare, ante ridiculus? Ornare ante consequat neque; sociosqu quisque donec mattis
+mollis, habitant in enim facilisi. Nec est vel mattis, gravida fringilla aptent? Leo metus feugiat ultrices, imperdiet ante laoreet cursus dapibus
+risus mus habitasse.
+::::
+:::
+
+`r if (params$no_tcz == 0) "::: {.content-hidden}"`
+
+:::: {#container-cap style="clear: both"}
+
+## KPI – terminal ATFM delay
+
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+::::: {#chart-cap class="mychart"}
+
+```{r chart-cap-trm}
+#| out.width: "100%"
+  source("R/chart_level1_cap_trm.R")
+  if(no_tcz > 0) {
+    myfig()
+  }
+```
+
+<br>
+
+```{r chart-cap-trm-month}
+#| file: R/chart_level2_cap_trm_month.R
+#| out.width: "100%"
+```
+:::::
+
+::::: {#concl-cap-trm}
+Dolor molestie nullam non dictum parturient non enim fames. Morbi semper senectus risus aptent bibendum maecenas. Eget egestas convallis ridiculus
+iaculis fringilla. Faucibus felis mattis pretium rhoncus primis luctus, consequat vehicula himenaeos lectus nostra cum condimentum at porta.
+
+Elit cubilia tristique vestibulum dictumst laoreet lacus ultricies, hac libero, maecenas praesent scelerisque at sapien! Gravida ullamcorper
+tristique facilisi posuere facilisi nec torquent. Facilisis diam eros porttitor pharetra tempus maecenas egestas. Tempus imperdiet blandit:
+pharetra quam himenaeos habitant habitant placerat molestie? Himenaeos fermentum semper quis euismod donec dapibus molestie commodo quisque
+sagittis. Aptent cum ridiculus habitasse; molestie vitae faucibus integer, dui nec mollis cubilia!
+:::::
+::::
+
+`r if (params$no_tcz >0) ":::"`

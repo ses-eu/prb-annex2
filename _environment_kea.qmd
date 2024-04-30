@@ -1,0 +1,33 @@
+[2 Environment]{class="fakeh1"}
+
+::: {#container-cap style="clear: both"}
+
+## KPI - KEA
+
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+:::: {#chart-kea class="mychart"}
+```{r}
+#| file: R/chart_level1_kea.R
+#| out.width: "100%"
+```
+
+```{r}
+#| file: R/chart_level2_kea_month.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#concl-kea}
+```{r}
+env_conc <- read_mytable("PRB_findings.xlsx", "environment", "Table_Findings_environment") %>% 
+  filter(Year_Report == params$year_report, State == params$country) %>% 
+  select(Conclusion) %>% toString() %>% paste0(., "@")
+
+env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+```
+
+`r env_conc1`
+::::
+:::

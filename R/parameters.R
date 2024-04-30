@@ -62,6 +62,7 @@
   ## tcz list ----
   tcz_list <- tcz_list_table %>% filter(state == .env$country) 
   no_tcz <- nrow(tcz_list)
+  # terminal <- if_else(no_tcz > 0, TRUE, FALSE)
   
   ## context data ----
   context_data <- context_data_table %>% 
