@@ -48,14 +48,14 @@ if (country == 'SES RP3') {
   data_raw_target  <-  read_xlsx(
     paste0(data_folder, "CAP dataset master.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
-    sheet = "en route delay targets",
+    sheet = "terminal delay targets",
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
   
   data_raw_actual  <-  read_xlsx(
     paste0(data_folder, "CAP dataset master.xlsx"),
-    sheet = "en route monthly delay",
+    sheet = "terminal monthly delay",
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
@@ -67,7 +67,7 @@ if (country == 'SES RP3') {
       year == .env$year_report
       ) %>% 
     mutate(
-      target = round(delay_target, 2)
+      target = round(x332_state_arr_delay_target, 2)
     ) %>% 
     select(
       year,
@@ -108,7 +108,7 @@ if (knitr::is_latex_output()) {
   
   } 
 
-mytitle <- paste0("Average monthly en route ATFM delay per flight - ", year_report)
+mytitle <- paste0("Average monthly terminal ATFM delay per flight - ", year_report)
 
 ## plot chart ----
 mycapchart_month(mywidth, myheight+20, myfont, mylinewidth, mymargin)

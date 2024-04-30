@@ -159,9 +159,11 @@ website:
       - section: "<b>3 Capacity</b>"
         contents:
           - text: "KPI – en route ATFM delay"
-            href: capacity_er.html#kpi-en-route-atfm-delay
+            href: capacity.html#kpi-en-route-atfm-delay
           - text: "ATCOs in OPS"
-            href: capacity_er.html#atcos-in-ops
+            href: capacity.html#atcos-in-ops
+          - text: "KPI – terminal ATFM delay"
+            href: capacity.html#kpi-terminal-atfm-delay
           # - capacity_er.qmd
           # - capacity_trm.qmd
       - text: "---"

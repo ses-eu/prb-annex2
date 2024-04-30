@@ -43,7 +43,7 @@
       writeLines(tmp_text, 'index.qmd')
       
       # generate level 2 .qmd master files (some will be removed later depending on the state case)
-      level2_files <- list("capacity_er.qmd",
+      level2_files <- list("capacity.qmd",
                            "cost-efficiency-er1-1.qmd",
                            "cost-efficiency-er1-2.qmd",
                            "cost-efficiency-er1-3.qmd",   #this one might be removed later depending on check

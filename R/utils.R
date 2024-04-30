@@ -260,4 +260,231 @@ read_mytable <- function(file, sheet, table){
         
       )
   }
+
+  ## plot capacity annual chart  ----
+  mycapchart <-  function(mywidth, myheight, myfont, mylinewidth, mymargin,
+                          data_prep_target,
+                          data_prep_actual,
+                          mytitle,
+                          myrightaxis,
+                          mytrafficmetric) {
+    plotly::plot_ly(
+      data = data_prep_actual,
+      width = mywidth,
+      height = myheight,
+      x = ~ year,
+      y = ~ delay,
+      yaxis = "y1",
+      color = ~ factor(type, levels = c("Capacity", "Staffing", 
+                                        "Disruptions", "Weather",
+                                        "Other non-ATC")
+      ),   
+      colors = c('#ED7D31', '#F8CBAD', '#BF8F00', '#92D050', '#A5A5A5'),
+      cliponaxis = FALSE,
+      type = "bar",
+      # hovertemplate = paste('KEA: %{y:.2f}%<extra></extra>'),
+      # hoverinfo = "none",
+      showlegend = T
+    ) %>% 
+      plotly::add_trace(
+        data = data_prep_actual,
+        inherit = FALSE,
+        x = ~ year,
+        y = ~ average_delay,
+        yaxis = "y1",
+        cliponaxis = FALSE,
+        name = "Total delay",
+        type = 'scatter',  mode = 'lines',
+        line = list(color = 'transparent', width = 0),
+        text = ~ format(round(average_delay, 2), digits = 2),
+        textfont = list(color = 'black', size = myfont),
+        textposition = "top center",
+        hovertemplate = paste('Total delay: %{y:.2f}<extra></extra>'),
+        opacity = 1,
+        showlegend = F
+      ) %>%
+      plotly::add_trace(
+        data = data_prep_target,
+        inherit = FALSE,
+        x = ~ year,
+        y = ~ target,
+        cliponaxis = FALSE,
+        yaxis = "y1",
+        type = 'scatter',  mode = 'lines+markers',
+        line = list(color = '#FF0000', width = mylinewidth),
+        marker = list(size = mylinewidth * 3, color = '#FF0000'),
+        name = "Target",
+        text = ~ paste0 ("<b>", format(target, digits = 2), "</b>"),
+        textfont = list(color = '#FF0000', size = myfont),
+        textposition = "top center",
+        hovertemplate = paste('Target: %{y:.2f}<extra></extra>'),
+        opacity = 1,
+        showlegend = T
+      ) %>%
+      plotly::add_trace(
+        data = data_prep_actual,
+        inherit = FALSE,
+        x = ~ year,
+        y = ~ round(movements/1000, 0),
+        yaxis = "y2",
+        type = 'scatter',  mode = 'lines+markers',
+        line = list(color = '#FFC000', width = mylinewidth),
+        marker = list(size = mylinewidth * 3, color = '#FFC000'),
+        name = mytrafficmetric,
+        hovertemplate = paste("IFR mvts ('000): %{y:,}<extra></extra>"),
+        opacity = 1,
+        showlegend = T
+      ) %>%
+      plotly::config( responsive = TRUE,
+                      displaylogo = FALSE,
+                      displayModeBar = F
+                      # modeBarButtons = list(list("toImage")),
+      ) %>%
+      plotly::layout(
+        font = list(family = "Roboto"),
+        title = list(text = mytitle,
+                     y = 0.99, 
+                     x = 0, 
+                     xanchor = 'left', 
+                     yanchor =  'top',
+                     font = list(size = myfont * 20/15)
+        ),
+        bargap = 0.25,
+        barmode = 'stack',
+        hovermode = "x unified",
+        hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
+        xaxis = list(title = "",
+                     gridcolor = 'rgb(255,255,255)',
+                     showgrid = FALSE,
+                     showline = FALSE,
+                     showticklabels = TRUE,
+                     dtick = 1,
+                     zeroline = TRUE,
+                     tickfont = list(size = myfont)
+        ),
+        yaxis = list(title = "Average minutes of delay",
+                     showgrid = TRUE,
+                     showline = FALSE,
+                     tickformat = ".2f",
+                     rangemode = "nonnegative",
+                     zeroline = TRUE,
+                     zerolinecolor = 'rgb(255,255,255)',
+                     titlefont = list(size = myfont), tickfont = list(size = myfont)
+        ),
+        yaxis2 = list(title = myrightaxis,
+                      overlaying = "y",
+                      side = "right",
+                      showgrid = FALSE,
+                      showline = FALSE,
+                      tickformat = ",",
+                      rangemode = "nonnegative",
+                      zeroline = TRUE,
+                      zerolinecolor = 'rgb(255,255,255)',
+                      titlefont = list(size = if_else(country == 'SES RP3', 1, myfont), 
+                                       color = if_else(country == 'SES RP3', 'transparent', 'black')
+                      ), 
+                      tickfont = list(size = if_else(country == 'SES RP3', 1, myfont),
+                                      color = if_else(country == 'SES RP3', 'transparent', 'black')
+                      )
+        ),
+        # showlegend = FALSE
+        legend = list(
+          orientation = 'h', 
+          xanchor = "left",
+          x = mylegend_x_pos, 
+          y =-0.1,
+          font = list(size = myfont*0.9)
+        ),
+        margin = mymargin
+        
+      )
+  }
+ 
+  ## plot capacity monthly chart  ----
+  
+  mycapchart_month <-  function(mywidth, myheight, myfont, mylinewidth, mymargin) {
+    plotly::plot_ly(
+      data = data_prep_actual,
+      width = mywidth,
+      height = myheight,
+      x = ~ month,
+      y = ~ delay,
+      yaxis = "y1",
+      color = ~ factor(type, levels = c("Capacity", "Staffing", 
+                                        "Disruptions", "Weather",
+                                        "Other non-ATC")
+      ),   
+      colors = c('#ED7D31', '#F8CBAD', '#BF8F00', '#92D050', '#A5A5A5'),
+      cliponaxis = FALSE,
+      type = "bar",
+      # hovertemplate = paste('KEA: %{y:.2f}%<extra></extra>'),
+      # hoverinfo = "none",
+      showlegend = T
+    ) %>% 
+      plotly::add_trace(
+        data = data_prep_actual,
+        inherit = FALSE,
+        x = ~ month,
+        y = ~ average_delay,
+        yaxis = "y1",
+        cliponaxis = FALSE,
+        name = "Total delay",
+        type = 'scatter',  mode = 'lines',
+        line = list(color = 'transparent', width = 0),
+        text = ~ format(round(average_delay, 2), digits = 2),
+        textfont = list(color = 'black', size = myfont*0.9),
+        textposition = "top center",
+        hovertemplate = paste('Total delay: %{y:.2f}<extra></extra>'),
+        opacity = 1,
+        showlegend = F
+      ) %>%
+      plotly::config( responsive = TRUE,
+                      displaylogo = FALSE,
+                      displayModeBar = F
+                      # modeBarButtons = list(list("toImage")),
+      ) %>%
+      plotly::layout(
+        font = list(family = "Roboto"),
+        title = list(text = mytitle,
+                     y = 0.99, 
+                     x = 0, 
+                     xanchor = 'left', 
+                     yanchor =  'top',
+                     font = list(size = myfont * 20/15)
+        ),
+        bargap = 0.25,
+        barmode = 'stack',
+        hovermode = "x unified",
+        hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
+        xaxis = list(title = "",
+                     gridcolor = 'rgb(255,255,255)',
+                     showgrid = FALSE,
+                     showline = FALSE,
+                     showticklabels = TRUE,
+                     tickformat = "%b",
+                     tick0 = min(data_prep_actual$month),
+                     dtick = "M1",
+                     zeroline = TRUE,
+                     tickfont = list(size = myfont)
+        ),
+        yaxis = list(title = "Average minutes of delay",
+                     showgrid = TRUE,
+                     showline = FALSE,
+                     tickformat = ".2f",
+                     rangemode = "nonnegative",
+                     zeroline = TRUE,
+                     zerolinecolor = 'rgb(255,255,255)',
+                     titlefont = list(size = myfont), tickfont = list(size = myfont)
+        ),
+        legend = list(
+          orientation = 'h', 
+          xanchor = "center",
+          x = 0.5, 
+          y =-0.1,
+          font = list(size = myfont*0.9)
+        ),
+        margin = mymargin
+        
+      )
+  }
   
