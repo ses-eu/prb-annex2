@@ -9,14 +9,14 @@
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
-:::: {#chart-kea class="mychart"}
+:::: {#chart-cef-er-duc class="mychart"}
 ```{r}
 #| file: R/chart_level1_cef_er.R
 #| out.width: "100%"
 ```
 ::::
 
-:::: {#concl-cef}
+:::: {#concl-cef-er-duc}
 ```{r}
 cef_conc <- read_mytable("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF") %>% 
   filter(Year_Report == params$year_report, State == params$country) %>% 
@@ -28,3 +28,55 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 `r cef_conc1`
 ::::
 :::
+
+::: {#container-cap style="clear: both"}
+
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+:::: {#chart-cef-su class="mychart"}
+```{r}
+#| file: R/chart_level2_cef_su.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#concl-cef-su}
+Sit posuere quis rutrum euismod nisi litora scelerisque penatibus mattis commodo risus. Accumsan tortor in: proin ligula ligula,
+proin ullamcorper ad. Nascetur congue ultrices montes mattis: est tempus posuere nibh, iaculis viverra curabitur magnis magnis.
+
+Dolor lobortis nisi sociosqu, tempor dignissim fames nullam. Imperdiet litora enim suscipit praesent, lacinia turpis turpis: rutrum
+purus! Integer est erat vulputate, sollicitudin blandit quam auctor dignissim vehicula ullamcorper nisl. Faucibus sociosqu iaculis
+ad metus montes ac sociosqu sed. Tellus enim erat molestie faucibus sapien. Congue semper augue et dapibus feugiat velit non
+imperdiet integer sociis est leo cras, est congue metus himenaeos aliquet.
+
+Sit magna curae eleifend: laoreet, donec cum pulvinar. Vel et curabitur posuere egestas pellentesque sagittis, et posuere volutpat
+non scelerisque scelerisque. Suspendisse nibh cubilia etiam arcu faucibus nam volutpat orci ut. Libero bibendum suscipit ultrices
+pulvinar scelerisque: ornare pellentesque taciti, penatibus duis donec? Aptent class fusce enim sagittis cubilia etiam velit
+egestas mi.
+::::
+:::
+
+::: {#container-cap style="clear: both"}
+
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+:::: {#chart-cef-er-cost class="mychart"}
+```{r}
+#| file: R/chart_level2_cef_er_cost.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#concl-cef-er-cost}
+Lorem ullamcorper varius maecenas felis posuere fusce, turpis posuere habitant ut? Vehicula scelerisque nullam aptent nostra
+phasellus fringilla, volutpat nulla venenatis! Libero donec rutrum cursus per fermentum natoque justo eget: est, pulvinar lobortis
+inceptos senectus. Magna nunc vitae mollis facilisis magna.
+
+Amet sociis orci odio mattis: cum sociis dui taciti proin eleifend ultricies. Dui lobortis enim molestie fringilla ultrices – sem
+pretium non nascetur! Risus luctus augue; dapibus in iaculis. Enim odio mollis, leo massa faucibus vehicula consequat. Auctor fames
+velit: mollis lectus tortor, porta facilisis ante.
+::::
+:::
+

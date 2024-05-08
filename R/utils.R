@@ -10,6 +10,7 @@ library(data.table)
 library(here)
 library(fs)
 library(purrr)
+library(plotly)
 
 # functions ----
 ## right x characters function ----
@@ -486,5 +487,99 @@ read_mytable <- function(file, sheet, table){
         margin = mymargin
         
       )
+  }
+  
+  ## plot CEF non-stacked bar chart  ----
+  mybarc_nonst <-  function(mywidth, myheight, myfont) {
+    data_prep %>% 
+      plotly::plot_ly(
+        width = mywidth,
+        height = myheight,
+        x = ~ year_text,
+        y = ~ mymetric,
+        yaxis = "y1",
+        text = ~ format(mymetric, nsmall = 2),
+        textangle = -90,
+        textposition = "inside", 
+        cliponaxis = FALSE,
+        insidetextanchor =  "middle",
+        textfont = list(color = 'black', size = myfont),
+        type = "bar",
+        color = ~ factor(status, levels = myfactor),
+        colors = c('#5B9BD5', '#FFC000'),
+        hovertemplate = paste('%{xother} %{y:.2f}'),
+        # hoverinfo = "none",
+        showlegend = T
+      ) %>%
+      # add_trace(
+      #   inherit = FALSE,
+      #   data = data_prep,
+      #   x = ~ year_text,
+      #   y = ~ unit_cost_er/2,
+      #   yaxis = "y1",
+      #   type = 'scatter',
+      #   mode = "markers",
+      #   text = ~ paste0(substr(status,1,1), ": ", format(unit_cost_er, nsmall = 2)),
+      #   color = ~ factor(status, levels = c("Determined unit cost",
+      #                                       "Actual unit cost")),
+    #   colors = c('#5B9BD5', '#FFC000'),
+    #   # line = list(width = 0),
+    #   marker = list(color = 'transparent'),
+    #   hovertemplate = paste('%{text}<extra></extra>'),
+    #   # hoverinfo = "none",
+    #   showlegend = F
+    # ) %>% 
+    plotly::config( responsive = TRUE,
+                    displaylogo = FALSE,
+                    displayModeBar = F
+                    # modeBarButtons = list(list("toImage")),
+    ) %>% 
+      plotly::layout(
+        font = list(family = "Roboto"),
+        title = list(text = mychart_title,
+                     y = 0.99, 
+                     x = 0, 
+                     xanchor = 'left', 
+                     yanchor =  'top',
+                     font = list(size = myfont * 20/15)
+        ),
+        bargap = 0.25,
+        hovermode = "x unified",
+        hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
+        xaxis = list(title = "",
+                     gridcolor = 'rgb(255,255,255)',
+                     showgrid = FALSE,
+                     showline = FALSE,
+                     showticklabels = TRUE,
+                     dtick = 1,
+                     # tickcolor = 'rgb(127,127,127)',
+                     # ticks = 'outside',
+                     zeroline = TRUE,
+                     tickfont = list(size = myfont)
+        ),
+        yaxis = list(title = myaxis_title,
+                     # gridcolor = 'rgb(255,255,255)',
+                     showgrid = TRUE,
+                     showline = FALSE,
+                     ticksuffix = "",
+                     tickformat = ",.0f",
+                     # showticklabels = TRUE,
+                     # tickcolor = 'rgb(127,127,127)',
+                     # ticks = 'outside',
+                     zeroline = TRUE,
+                     zerolinecolor = 'rgb(255,255,255)',
+                     titlefont = list(size = myfont), tickfont = list(size = myfont)
+        ),
+        # showlegend = FALSE
+        legend = list(
+          orientation = 'h', 
+          xanchor = "center",
+          x = 0.5, 
+          y =-0.1,
+          font = list(size = myfont)
+        )
+        
+      )
+    
   }
   

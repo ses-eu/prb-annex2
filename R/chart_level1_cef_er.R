@@ -1,39 +1,34 @@
-# 
-# # parameters ----
-# if (exists("data_folder") == FALSE) {
-#   source("R/parameters.R")
-# }
 
-# fix tz if script not executed from qmd file
+# fix ez if script not executed from qmd file ----
 if (exists("ez") == FALSE) {ez = 1}
-# tz=1
+# ez=1
 
-# initialise list to store plots
+# initialise list to store plots ----
 myplot = list()
 
+# loop through czs ----
 for (ez in 1:no_ecz) {
-
-# import data  ----
+## import data  ----
 data_raw  <-  read_xlsx(
-  paste0(data_folder, "CEFF.xlsx"),
+  paste0(data_folder, "CEFF dataset master.xlsx"),
   # here("data","hlsr2021_data.xlsx"),
-  sheet = "ERT_CZ",
+  sheet = "Enroute_T1",
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
   clean_names() 
 
-# prepare data ----
+## prepare data ----
 data_prep <- data_raw %>% 
   filter(
     entity_code == ecz_list$ecz_id[ez]) %>% 
   mutate(
-    unit_cost_er = round(x5_5_unit_cost_nc2017/x2017_xrate, 2)
-  ) %>% 
+    mymetric = round(x5_5_unit_cost_nc2017/xrate2017, 2)
+  ) %>%  
   select(
     year,
     status,
-    unit_cost_er
-  ) %>% 
+    mymetric
+  ) %>%  
   filter(year > 2021) %>% 
   mutate(year_text = as.character(year),
          year_text = str_replace(year_text, "20202021", "2020-2021"),
@@ -42,110 +37,28 @@ data_prep <- data_raw %>%
   ) %>% 
   arrange(year_text)
 
-# plot chart ----
-myc <-  function(mywidth, myheight, myfont) {
-  data_prep %>% 
-    plot_ly(
-      width = mywidth,
-      height = myheight,
-      x = ~ year_text,
-      y = ~ unit_cost_er,
-      yaxis = "y1",
-      text = ~ format(unit_cost_er, nsmall = 2),
-      textangle = -90,
-      textposition = "inside", 
-      cliponaxis = FALSE,
-      insidetextanchor =  "middle",
-      textfont = list(color = 'white', size = myfont),
-      type = "bar",
-      color = ~ factor(status, levels = c("Determined unit cost", 
-                                          "Actual unit cost")),
-      colors = c('#5B9BD5', '#FFC000'),
-      hovertemplate = paste('%{xother} %{y:.2f}'),
-      # hoverinfo = "none",
-      showlegend = T
-    ) %>%
-    # add_trace(
-    #   inherit = FALSE,
-    #   data = data_prep,
-    #   x = ~ year_text,
-    #   y = ~ unit_cost_er/2,
-    #   yaxis = "y1",
-    #   type = 'scatter',
-    #   mode = "markers",
-    #   text = ~ paste0(substr(status,1,1), ": ", format(unit_cost_er, nsmall = 2)),
-    #   color = ~ factor(status, levels = c("Determined unit cost",
-    #                                       "Actual unit cost")),
-    #   colors = c('#5B9BD5', '#FFC000'),
-    #   # line = list(width = 0),
-    #   marker = list(color = 'transparent'),
-    #   hovertemplate = paste('%{text}<extra></extra>'),
-    #   # hoverinfo = "none",
-    #   showlegend = F
-    # ) %>% 
-    config( responsive = TRUE,
-            displaylogo = FALSE,
-            displayModeBar = F
-            # modeBarButtons = list(list("toImage")),
-    ) %>% 
-    layout(
-      font = list(family = "Roboto"),
-      title = list(text=paste0("En route unit costs - ", ecz_list$ecz_name[ez]),
-                   y = 0.99, 
-                   x = 0, 
-                   xanchor = 'left', 
-                   yanchor =  'top',
-                   font = list(size = myfont * 20/15)
-      ),
-      bargap = 0.25,
-      hovermode = "x unified",
-      hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
-      xaxis = list(title = "",
-                   gridcolor = 'rgb(255,255,255)',
-                   showgrid = FALSE,
-                   showline = FALSE,
-                   showticklabels = TRUE,
-                   dtick = 1,
-                   # tickcolor = 'rgb(127,127,127)',
-                   # ticks = 'outside',
-                   zeroline = TRUE,
-                   tickfont = list(size = myfont)
-      ),
-      yaxis = list(title = "En route unit costs (€2017)",
-                   # gridcolor = 'rgb(255,255,255)',
-                   showgrid = TRUE,
-                   showline = FALSE,
-                   ticksuffix = "",
-                   tickformat = ",.0f",
-                   # showticklabels = TRUE,
-                   # tickcolor = 'rgb(127,127,127)',
-                   # ticks = 'outside',
-                   zeroline = TRUE,
-                   zerolinecolor = 'rgb(255,255,255)',
-                   titlefont = list(size = myfont), tickfont = list(size = myfont)
-      ),
-      # showlegend = FALSE
-      legend = list(
-        orientation = 'h', 
-        xanchor = "center",
-        x = 0.5, 
-        y =-0.1,
-        font = list(size = myfont)
-      )
-      
-    )
-  
-}
+### replace 0 by NAs so they are not plotted
+data_prep[data_prep == 0] <- NA
 
-myplot[[ez]] <- myc(NA, 280, 14)
+## chart parameters ----
+mychart_title <- paste0("En route unit costs - ", ecz_list$ecz_name[ez])
+myaxis_title <- "En route unit costs (€2017)"
 
-# export to image ----
-w = 1200
-h = 600
-export_fig(myc(w, h, 14 * w/900), paste0("cef_er", ez, "_main.png"), w, h)
+###set up order of traces
+myfactor <- data_prep %>% select(status) %>% unique() 
+as.list(myfactor$status)
+myfactor <- sort(myfactor$status, decreasing = TRUE)
+
+
+## define chart function ----
+# function moved to utils
+
+## plot chart  ----
+myplot[[ez]] <- mybarc_nonst(mywidth, myheight-20, myfont)
 
 }
 
+# create html plotlist ----
 htmltools::tagList(myplot)
 
 # https://stackoverflow.com/questions/35193612/multiple-r-plotly-figures-generated-in-a-rmarkdown-knitr-chunk-document
