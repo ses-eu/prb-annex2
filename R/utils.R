@@ -490,7 +490,7 @@ read_mytable <- function(file, sheet, table){
   }
   
   ## plot CEF non-stacked bar chart  ----
-  mybarc_nonst <-  function(mywidth, myheight, myfont) {
+  mybarc_nonst <-  function(mywidth, myheight, myfont, mymargin) {
     data_prep %>% 
       plotly::plot_ly(
         width = mywidth,
@@ -499,10 +499,10 @@ read_mytable <- function(file, sheet, table){
         y = ~ mymetric,
         yaxis = "y1",
         text = ~ format(mymetric, nsmall = 2),
-        textangle = -90,
-        textposition = "inside", 
+        textangle = 0,
+        textposition = "outside", 
         cliponaxis = FALSE,
-        insidetextanchor =  "middle",
+        # insidetextanchor =  "middle",
         textfont = list(color = 'black', size = myfont),
         type = "bar",
         color = ~ factor(status, levels = myfactor),
@@ -575,10 +575,10 @@ read_mytable <- function(file, sheet, table){
           orientation = 'h', 
           xanchor = "center",
           x = 0.5, 
-          y =-0.1,
+          y = mylegend_y_position,
           font = list(size = myfont)
-        )
-        
+        ),
+        margin = mymargin
       )
     
   }

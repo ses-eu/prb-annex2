@@ -48,6 +48,8 @@ myfig <- function(){
   ### chart parameters ----
   mychart_title <- paste0("Terminal unit costs - ", tcz_list$tcz_name[tz])
   myaxis_title <- "Terminal unit costs (€2017)"
+  mylegend_y_position <- -0.1
+  
   ###set up order of traces
   myfactor <- data_prep %>% select(status) %>% unique() 
   as.list(myfactor$status)
@@ -56,7 +58,7 @@ myfig <- function(){
   
   ### plot chart ----
 
-  myplot[[tz]] <-   mybarc_nonst(mywidth, myheight-20, myfont)
+  myplot[[tz]] <-   mybarc_nonst(mywidth, myheight, myfont, mymargin)
 
 
   }

@@ -80,3 +80,28 @@ velit: mollis lectus tortor, porta facilisis ante.
 ::::
 :::
 
+::: {#container-cap style="clear: both"}
+
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+:::: {#chart-cef-er-cost-entity class="mychart"}
+```{r}
+#| file: R/chart_level2_cef_er_cost_entity.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#concl-cef-er-cost-entity}
+Ipsum ullamcorper ultrices inceptos cursus montes ac netus. Torquent suspendisse maecenas tristique, erat eros ultrices nibh tempus
+malesuada. Sapien sociis suscipit; ad ac urna – integer imperdiet. Enim blandit aenean, habitant posuere class lacinia eget
+accumsan cum. Cras feugiat dictumst lectus duis ad, condimentum fusce, dui habitasse. Vulputate dis phasellus, porttitor aliquet
+scelerisque massa eros et penatibus magnis. Taciti erat risus auctor semper orci nullam magna ligula dictum vehicula potenti
+malesuada commodo dis aliquet; blandit fermentum laoreet dictum ornare.
+
+Amet ante leo natoque commodo habitasse vitae ornare ac! Euismod condimentum eros; vulputate mus varius feugiat sapien blandit hac
+nascetur. Tortor taciti nulla sociosqu vivamus vulputate pretium leo. Mattis accumsan posuere mattis commodo dictum? Proin interdum
+hendrerit eget habitasse luctus, litora magnis taciti. Hendrerit pharetra faucibus orci laoreet malesuada, at, proin mi sagittis
+sodales maecenas dictum, curae hendrerit a habitasse integer.
+::::
+:::

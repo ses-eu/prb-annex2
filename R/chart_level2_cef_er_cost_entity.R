@@ -30,11 +30,11 @@ for (ez in 1:no_ecz) {
         entity_type_id %like% "ANSP" & entity_type_id != "ANSP1" ~ "Other ATSP",
         entity_type == "MUAC" ~ "Other ATSP",
         entity_type == "MET" ~ "METSP",
-        .default = "NSA (including EUROCONTROL)"
+        .default = "NSA (including\nEUROCONTROL)"
       ),
       mymetric = round(x5_3_cost_nc2017/xrate2017/10^6,2),
-      status = str_replace(status, "A", "Actual unit cost"),
-      status = str_replace(status, "D", "Determined unit cost")
+      status = str_replace(status, "A", "Actual costs"),
+      status = str_replace(status, "D", "Determined costs")
     ) %>% 
     select(
       year,
@@ -44,7 +44,11 @@ for (ez in 1:no_ecz) {
     ) %>% 
     group_by(entity_group, status) %>% 
     reframe(year, status, entity_group, mymetric = sum(mymetric)) %>% 
-    rename(year_text = entity_group)
+    mutate(year_text = factor(entity_group, levels = c("Main ATSP",
+                                                       "Other ATSP",
+                                                       "METSP",
+                                                       "NSA (including\nEUROCONTROL)"
+                                                       )))
   
   ### replace 0 by NAs so they are not plotted
   data_prep[data_prep == 0] <- NA
@@ -52,6 +56,8 @@ for (ez in 1:no_ecz) {
   ## chart parameters ----
   mychart_title <- paste0("Total en route costs per entity group - ", year_report)
   myaxis_title <- "En route costs (€2017'000)"
+  mylegend_y_position <- -0.17
+  
   ###set up order of traces
   myfactor <- data_prep %>% select(status) %>% unique() 
   as.list(myfactor$status)
@@ -61,7 +67,7 @@ for (ez in 1:no_ecz) {
   # function moved to utils
   
   ## plot chart  ----
-  myplot[[ez]] <- mybarc_nonst(mywidth, myheight-20, myfont)
+  myplot[[ez]] <- mybarc_nonst(mywidth, myheight, myfont, mymargin)
   
 }
 

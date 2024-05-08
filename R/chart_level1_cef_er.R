@@ -43,6 +43,7 @@ data_prep[data_prep == 0] <- NA
 ## chart parameters ----
 mychart_title <- paste0("En route unit costs - ", ecz_list$ecz_name[ez])
 myaxis_title <- "En route unit costs (€2017)"
+mylegend_y_position <- -0.1
 
 ###set up order of traces
 myfactor <- data_prep %>% select(status) %>% unique() 
@@ -54,7 +55,7 @@ myfactor <- sort(myfactor$status, decreasing = TRUE)
 # function moved to utils
 
 ## plot chart  ----
-myplot[[ez]] <- mybarc_nonst(mywidth, myheight-20, myfont)
+myplot[[ez]] <- mybarc_nonst(mywidth, myheight, myfont, mymargin)
 
 }
 

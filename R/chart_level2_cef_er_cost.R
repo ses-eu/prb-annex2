@@ -43,6 +43,8 @@ for (ez in 1:no_ecz) {
   ## chart parameters ----
   mychart_title <- paste0("Total en route costs - ", ecz_list$ecz_name[ez])
   myaxis_title <- "En route costs (€2017'000)"
+  mylegend_y_position <- -0.1
+  
   ###set up order of traces
   myfactor <- data_prep %>% select(status) %>% unique() 
   as.list(myfactor$status)
@@ -52,7 +54,7 @@ for (ez in 1:no_ecz) {
   # function moved to utils
   
   ## plot chart  ----
-  myplot[[ez]] <- mybarc_nonst(mywidth, myheight-20, myfont)
+  myplot[[ez]] <- mybarc_nonst(mywidth, myheight, myfont, mymargin)
   
 }
 
