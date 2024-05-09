@@ -53,7 +53,7 @@ read_mytable <- function(file, sheet, table){
 ## plot bar chart with target  ----
   mybarct <-  function(mywidth, myheight, myfont, mylinewidth, mymargin) {
     data_for_chart %>% 
-      plotly::plot_ly(
+      plot_ly(
         width = mywidth,
         height = myheight,
         x = ~ year,
@@ -68,7 +68,7 @@ read_mytable <- function(file, sheet, table){
         # hoverinfo = "none",
         showlegend = F
       ) %>% 
-      plotly::add_trace(
+      add_trace(
         inherit = FALSE,
         x = ~ year,
         y = ~ actual,
@@ -87,7 +87,7 @@ read_mytable <- function(file, sheet, table){
         # hoverinfo = "none",
         showlegend = T
       ) %>%
-      plotly::add_trace(
+      add_trace(
         inherit = FALSE,
         x = ~ year,
         y = ~ target,
@@ -101,7 +101,7 @@ read_mytable <- function(file, sheet, table){
         # hoverinfo = "none",
         showlegend = T
       ) %>%
-      plotly::add_trace(
+      add_trace(
         inherit = FALSE,
         x = ~ year,
         y = ~ target + 0.025 * max(data_for_chart$target),
@@ -114,12 +114,12 @@ read_mytable <- function(file, sheet, table){
         hoverinfo = "none",
         showlegend = F
       ) %>%
-      plotly::config( responsive = TRUE,
+      config( responsive = TRUE,
               displaylogo = FALSE,
               displayModeBar = F
               # modeBarButtons = list(list("toImage")),
       ) %>% 
-      plotly::layout(
+      layout(
         font = list(family = "Roboto"),
         title = list(text = mychart_title,
                      y = 1, 
@@ -172,7 +172,7 @@ read_mytable <- function(file, sheet, table){
 ## plot bar chart without target  ----
   mybarc <-  function(mywidth, myheight, myfont, mylinewidth, mymargin) {
     data_for_chart %>% 
-      plotly::plot_ly(
+      plot_ly(
         width = mywidth,
         height = myheight,
         x = ~ year,
@@ -187,7 +187,7 @@ read_mytable <- function(file, sheet, table){
         hoverinfo = "none",
         showlegend = F
       ) %>%
-      plotly::add_trace(
+      add_trace(
         x = ~ year,
         y = ~ actual,
         yaxis = "y1",
@@ -206,12 +206,12 @@ read_mytable <- function(file, sheet, table){
         showlegend = T
         
       ) %>% 
-      plotly::config( responsive = TRUE,
+      config( responsive = TRUE,
               displaylogo = FALSE,
               displayModeBar = F
               # modeBarButtons = list(list("toImage")),
       ) %>% 
-      plotly::layout(
+      layout(
         font = list(family = "Roboto"),
         title = list(text = mychart_title,
                      y = 1, 
@@ -269,7 +269,7 @@ read_mytable <- function(file, sheet, table){
                           mytitle,
                           myrightaxis,
                           mytrafficmetric) {
-    plotly::plot_ly(
+    plot_ly(
       data = data_prep_actual,
       width = mywidth,
       height = myheight,
@@ -287,7 +287,7 @@ read_mytable <- function(file, sheet, table){
       # hoverinfo = "none",
       showlegend = T
     ) %>% 
-      plotly::add_trace(
+      add_trace(
         data = data_prep_actual,
         inherit = FALSE,
         x = ~ year,
@@ -304,7 +304,7 @@ read_mytable <- function(file, sheet, table){
         opacity = 1,
         showlegend = F
       ) %>%
-      plotly::add_trace(
+      add_trace(
         data = data_prep_target,
         inherit = FALSE,
         x = ~ year,
@@ -322,7 +322,7 @@ read_mytable <- function(file, sheet, table){
         opacity = 1,
         showlegend = T
       ) %>%
-      plotly::add_trace(
+      add_trace(
         data = data_prep_actual,
         inherit = FALSE,
         x = ~ year,
@@ -336,12 +336,12 @@ read_mytable <- function(file, sheet, table){
         opacity = 1,
         showlegend = T
       ) %>%
-      plotly::config( responsive = TRUE,
+      config( responsive = TRUE,
                       displaylogo = FALSE,
                       displayModeBar = F
                       # modeBarButtons = list(list("toImage")),
       ) %>%
-      plotly::layout(
+      layout(
         font = list(family = "Roboto"),
         title = list(text = mytitle,
                      y = 0.99, 
@@ -404,7 +404,7 @@ read_mytable <- function(file, sheet, table){
   ## plot capacity monthly chart  ----
   
   mycapchart_month <-  function(mywidth, myheight, myfont, mylinewidth, mymargin) {
-    plotly::plot_ly(
+    plot_ly(
       data = data_prep_actual,
       width = mywidth,
       height = myheight,
@@ -422,7 +422,7 @@ read_mytable <- function(file, sheet, table){
       # hoverinfo = "none",
       showlegend = T
     ) %>% 
-      plotly::add_trace(
+      add_trace(
         data = data_prep_actual,
         inherit = FALSE,
         x = ~ month,
@@ -439,12 +439,12 @@ read_mytable <- function(file, sheet, table){
         opacity = 1,
         showlegend = F
       ) %>%
-      plotly::config( responsive = TRUE,
+      config( responsive = TRUE,
                       displaylogo = FALSE,
                       displayModeBar = F
                       # modeBarButtons = list(list("toImage")),
       ) %>%
-      plotly::layout(
+      layout(
         font = list(family = "Roboto"),
         title = list(text = mytitle,
                      y = 0.99, 
@@ -492,7 +492,7 @@ read_mytable <- function(file, sheet, table){
   ## plot CEF non-stacked bar chart  ----
   mybarc_nonst <-  function(mywidth, myheight, myfont, mymargin) {
     data_prep %>% 
-      plotly::plot_ly(
+      plot_ly(
         width = mywidth,
         height = myheight,
         x = ~ year_text,
@@ -529,12 +529,12 @@ read_mytable <- function(file, sheet, table){
     #   # hoverinfo = "none",
     #   showlegend = F
     # ) %>% 
-    plotly::config( responsive = TRUE,
+    config( responsive = TRUE,
                     displaylogo = FALSE,
                     displayModeBar = F
                     # modeBarButtons = list(list("toImage")),
     ) %>% 
-      plotly::layout(
+      layout(
         font = list(family = "Roboto"),
         title = list(text = mychart_title,
                      y = 0.99, 

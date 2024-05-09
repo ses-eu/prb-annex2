@@ -105,3 +105,27 @@ hendrerit eget habitasse luctus, litora magnis taciti. Hendrerit pharetra faucib
 sodales maecenas dictum, curae hendrerit a habitasse integer.
 ::::
 :::
+
+::: {#container-cap style="clear: both"}
+
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+:::: {#chart-cef-er-cost-main class="mychart"}
+```{r}
+#| file: R/chart_level2_cef_er_cost_main.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#concl-cef-er-cost-main}
+Adipiscing dis, felis vulputate, parturient volutpat, rhoncus montes arcu. Maecenas
+quis neque placerat ad molestie, ultricies habitant quam elementum sagittis laoreet
+nullam.
+
+Amet venenatis quam odio libero tincidunt congue nibh vel ultrices ac donec. Erat
+odio mauris augue ut eleifend. Egestas bibendum a velit ad in libero ligula natoque.
+Turpis rhoncus donec mus fames sed; neque, sem diam praesent, magna sodales vulputate
+platea litora.
+::::
+:::
