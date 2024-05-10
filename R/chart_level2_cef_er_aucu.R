@@ -12,7 +12,7 @@ for (ez in 1:no_ecz) {
   data_raw  <-  read_xlsx(
     paste0(data_folder, "CEFF dataset master.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
-    sheet = "Enroute_T1",
+    sheet = "Enroute_T2",
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
@@ -20,74 +20,68 @@ for (ez in 1:no_ecz) {
   ## prepare data ----
   data_prep <- data_raw %>% 
     filter(
-      charging_zone_code == ecz_list$ecz_id[ez],
-      entity_type_id == "ANSP1",
-      year == .env$year_report
+      entity_code == ecz_list$ecz_id[ez],
     ) %>% 
     select(
       year,
-      entity_name,
-      status,
-      x1_1_staff,
-      x1_2_other_operating_cost,
-      x1_3_depreciation,
-      x1_4_cost_of_capital,
-      x1_5_exceptional_items,
-      x4_1_cost_for_vfr_exempted
+      x3_1_investment,
+      x3_3_cost_authority_qes,
+      x3_4_ectl_cost_eur,
+      x3_5_pension_cost,
+      x3_6_interest_loan,
+      x3_7_change_in_law
     ) %>% 
-    pivot_longer(cols = -c(year, entity_name, status),
+    pivot_longer(cols = -c(year),
       names_to = 'type', 
-      values_to = 'value') %>% 
-    pivot_wider(names_from = 'status', values_from = 'value') %>% 
-    arrange(desc(type)) %>% 
-    mutate(mymetric = (A-D)/1000,
-           mylabel = if_else(A == 0, '-', 
-                             paste0(
-                               if_else(mymetric > 0, '+', ''),
-                               round((A/D-1) *100, 0), 
-                               '%')),
-           ylabel = as.factor(c("VFR exempted", 
-                          "Exceptional items",
-                          "Cost of capital",
-                          "Depreciation costs",
-                          "Other operating costs",
-                          "Staff costs"))) 
+      values_to = 'mymetric') %>% 
+    mutate(xlabel = rep(c("New and existing investments", 
+                          "Competent authorities\nand qualified entities costs",
+                          "Eurocontrol costs",
+                          "Pension costs",
+                          "Interest on loans",
+                          "Changes in law"), 4),
+           year_text = as.character(year),
+           year_text = str_replace(year_text, "20202021", "2020-2021"),
+           )
   
 
   ## chart parameters ----
-  mychart_title <- paste0(main_ansp,", Actual v Determined costs - ", year_report)
-  myaxis_title <- "Costs (€2017'000)"
-  mybarcolor <- '#A5A5A5'
+  mychart_title <- paste0("Cost exempt - ", year_report)
+  myaxis_title <- "Cost exempt from cost sharing\n(€2017'000)"
+  mybarcolor <- c( '#C9C9C9', '#B4C7E7', '#FFC000', '#A9D18E', '#F4B183', '#8497B0')
   mytextcolor <- 'black'
+  mylegend_y_position <- -0.2
   
   ## define chart function ----
-  myhbarc <-  function(mywidth, myheight, myfont, mymargin) {
+  mybarc_group <-  function(mywidth, myheight, myfont, mymargin) {
     data_prep %>% 
       plot_ly(
         width = mywidth,
         height = myheight,
-        x = ~ round(mymetric, 0),
-        y = ~ factor(ylabel, levels = c("VFR exempted", 
-                                       "Exceptional items",
-                                       "Cost of capital",
-                                       "Depreciation costs",
-                                       "Other operating costs",
-                                       "Staff costs")),
+        y = ~ round(mymetric/1000, 0),
+        x = ~ year_text,
         yaxis = "y1",
-        marker = list(color = mybarcolor),
-        text = ~ mylabel,
+        colors = mybarcolor,
+        # color = ~ xlabel,
+        color = ~ factor(xlabel, levels = c("Changes in law",
+                                            "Interest on loans",
+                                            "Pension costs",
+                                            "Eurocontrol costs",
+                                            "Competent authorities\nand qualified entities costs",
+                                            "New and existing investments"
+                                            )),
+        # text = ~ mylabel,
         # text = ~ as.character(format(round(VALUE,0), big.mark = " ")),
         # textangle = -90,
         textposition = "auto", 
         cliponaxis = FALSE,
-        orientation = 'h',
         # insidetextanchor =  "middle",
         # name = mymetric,
         textfont = list(color = mytextcolor, size = myfont),
         type = "bar",
-        hovertemplate = paste0('%{y} (A-D): %{x:+0,}<extra></extra>'),
+        # hovertemplate = paste0('%{y} (A-D): %{x:+0,}<extra></extra>'),
         # hoverinfo = "none",
-        showlegend = F
+        showlegend = T
       ) %>% 
       config( responsive = TRUE,
               displaylogo = FALSE,
@@ -105,9 +99,9 @@ for (ez in 1:no_ecz) {
         ),
         bargap = 0.25,
         barmode = 'stack',
-        hovermode = "y",
+        hovermode = "x unified",
         hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
-        yaxis = list(title = "",
+        xaxis = list(title = "",
                      gridcolor = 'rgb(255,255,255)',
                      showgrid = FALSE,
                      showline = FALSE,
@@ -118,13 +112,13 @@ for (ez in 1:no_ecz) {
                      zeroline = TRUE,
                      tickfont = list(size = myfont)
         ),
-        xaxis = list(title = myaxis_title,
+        yaxis = list(title = myaxis_title,
                      # gridcolor = 'rgb(255,255,255)',
                      showgrid = TRUE,
                      showline = FALSE,
                      # tickprefix = if_else(" ",
                      # ticksuffix = "% ",
-                     tickformat = "+0,",
+                     tickformat = "0,",
                      # showticklabels = TRUE,
                      # tickcolor = 'rgb(127,127,127)',
                      # ticks = 'outside',
@@ -132,14 +126,20 @@ for (ez in 1:no_ecz) {
                      zerolinecolor = 'rgb(255,255,255)',
                      titlefont = list(size = myfont), tickfont = list(size = myfont)
         ),
-        showlegend = FALSE,
+        legend = list(
+          orientation = 'h', 
+          xanchor = "left",
+          x = -0.1, 
+          y = mylegend_y_position,
+          font = list(size = myfont*0.9)
+          ),
         margin = mymargin
         
       )
   }
   
   ## plot chart  ----
-  myplot[[ez]] <- myhbarc(mywidth, myheight, myfont, mymargin)
+  myplot[[ez]] <- mybarc_group(mywidth, myheight+40, myfont, mymargin)
   
 }
 

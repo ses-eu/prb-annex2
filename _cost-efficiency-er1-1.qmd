@@ -129,3 +129,24 @@ Turpis rhoncus donec mus fames sed; neque, sem diam praesent, magna sodales vulp
 platea litora.
 ::::
 :::
+
+::: {#container-cap style="clear: both"}
+
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+:::: {#chart-cef-er-cex class="mychart"}
+```{r}
+#| file: R/chart_level2_cef_er_cex.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#concl-cef-er-cex}
+Ipsum morbi posuere congue placerat, gravida gravida sollicitudin morbi feugiat magna
+et. Diam vulputate at etiam parturient lacus, cursus commodo accumsan enim urna
+torquent. Aenean ut dictumst convallis; egestas bibendum diam. Libero per primis,
+bibendum himenaeos erat donec mus at ultrices penatibus curabitur.
+::::
+:::
+
