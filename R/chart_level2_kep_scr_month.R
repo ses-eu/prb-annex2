@@ -1,3 +1,4 @@
+ 
 if (country == "Network Manager") {
   # NM case ----
   mymetric <- "KEP"
@@ -49,76 +50,108 @@ if (country == "Network Manager") {
     
 } else  {
   # State case ----
-  mymetric <- "KEA"
-  mychart_title <- paste0('Monthly ', mymetric, " - ", country)
-  myaxis_title <- paste0(mymetric, " (%)")
-  
   ## import data  ----
-  data_raw_target  <-  read_xlsx(
+  data_raw_kep  <-  read_xlsx(
     paste0(data_folder, "ENV dataset master.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
-    sheet = "Table_KEA Targets",
+    sheet = "Table_KEP MM",
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
   
-  data_raw_actual  <-  read_xlsx(
+  data_raw_scr  <-  read_xlsx(
+    paste0(data_folder, "ENV dataset master.xlsx"),
+    # here("data","hlsr2021_data.xlsx"),
+    sheet = "Table_SCR MM",
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+  
+  data_raw_kea  <-  read_xlsx(
     paste0(data_folder, "ENV dataset master.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
     sheet = "Table_HFE MM",
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
-
-    ## prepare data ----
-  target_value <- data_raw_target %>%
+  
+  
+  ## prepare data ----
+  data_raw_kep_p <- data_raw_kep %>% 
+    rename(status = indicator_type,
+           mymetric = kep_value) %>% 
+    mutate(mymetric = round(mymetric, 2)) %>% 
     filter(
-      entity_name == .env$country,
-      year == .env$year_report
-    ) %>%
+      entity_name == country,
+      lubridate::year(month) == year_report
+    ) 
+  
+  data_raw_scr_p <- data_raw_scr %>% 
+    rename(status = indicator_type,
+           mymetric = scr_value) %>% 
+    mutate(mymetric = round(mymetric * 100, 2)) %>% 
+    filter(
+      entity_name == country,
+      lubridate::year(month) == year_report
+    ) 
+  
+  data_prep <- data_raw_kep_p %>% 
+    rbind(data_raw_scr_p) %>% 
     mutate(
-      # type = 'Target',
-      target = round(kea_reference_value, 2)
-    ) %>%
-    select(
-      target
-    ) %>% pull()
+      year_text = lubridate::floor_date(month, unit = 'month') 
+      ) %>% as_tibble()
 
-  data_prep_actual <- data_raw_actual %>% 
+  data_prep_kea <- data_raw_kea %>% 
     filter(
       entity_name == country,
       lubridate::year(month) == year_report) %>% 
-    mutate (actual = hfe_kpi,
+    mutate (kea = hfe_kpi,
             year = lubridate::floor_date(month, unit = 'month' )) %>% 
     select(
       year,
-      actual
+      kea
     ) 
-
   
+  ## chart parameters ----
+  mychart_title <- paste0("Monthly KEA, KEP and SCR - ", country)
+  myaxis_title <- "KEA, KEP and SCR (%)"
+  mylegend_y_position <- -0.1
+  mycolors <- c('#FFC000', '#5B9BD5')
+  
+  mytextangle <- -90
+  mytextposition <- "inside"
+  mytextsize <- myfont * 0.9
+  mylabelposition <- 'top'
 
-  ## prepare datasetfor chart
-  data_for_chart <- data_prep_actual %>% 
-    mutate(target = target_value)
+  mydtick <- 'M1'
+  mytickformat_x <- "%b"
+  myrange <- NA
+  
+  myticksuffix <- "%"
+  mytickformat_y <- ",.0f"
+  
+  ###set up order of traces
+  myfactor <- c("KEP", "SCR")
   
     }
 
-# chart parameters ----
-mytooltip_decimals <- 2
-targetcolor <- 'transparent'
-mymarker_color <- 'transparent'
-mydtick <- 'M1'
-mytickformat <- '%b'
-mytextangle <- '-90'
-
-
-
 # plot chart ----
 ## function moved to utils  
-mybarct(mywidth, myheight, myfont, mylinewidth, mymargin)
+mybarc_nonst(mywidth, myheight, myfont, mymargin) %>% 
+  add_trace(
+    data = data_prep_kea,
+    inherit = FALSE,
+    x = ~ year,
+    y = ~ kea,
+    yaxis = "y1",
+    type = 'scatter',  mode = 'markers',
+    marker = list(size = mylinewidth * 3, color = '#FF0000'),
+    name = "KEA",
+    opacity = 1,
+    hovertemplate = paste0('%{y:.2f}', myticksuffix),
+    # hoverinfo = "none",
+    showlegend = T
+  )
 
-# # export to image 
-# w = 1200
-# h = 600
-# export_fig(mybarct(w, h, 14 * w/900), paste0("env_", mymetric , "_main.png"), w, h)
+
 

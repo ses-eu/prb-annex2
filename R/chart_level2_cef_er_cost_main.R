@@ -60,83 +60,17 @@ for (ez in 1:no_ecz) {
   mybarcolor <- '#A5A5A5'
   mytextcolor <- 'black'
   
+  ###set up order of traces
+  myfactor <- c("VFR exempted", 
+                "Exceptional items",
+                "Cost of capital",
+                "Depreciation costs",
+                "Other operating costs",
+                "Staff costs")
+  
+  
   ## define chart function ----
-  myhbarc <-  function(mywidth, myheight, myfont, mymargin) {
-    data_prep %>% 
-      plot_ly(
-        width = mywidth,
-        height = myheight,
-        x = ~ round(mymetric, 0),
-        y = ~ factor(ylabel, levels = c("VFR exempted", 
-                                       "Exceptional items",
-                                       "Cost of capital",
-                                       "Depreciation costs",
-                                       "Other operating costs",
-                                       "Staff costs")),
-        yaxis = "y1",
-        marker = list(color = mybarcolor),
-        text = ~ mylabel,
-        # text = ~ as.character(format(round(VALUE,0), big.mark = " ")),
-        # textangle = -90,
-        textposition = "auto", 
-        cliponaxis = FALSE,
-        orientation = 'h',
-        # insidetextanchor =  "middle",
-        # name = mymetric,
-        textfont = list(color = mytextcolor, size = myfont),
-        type = "bar",
-        hovertemplate = paste0('%{y} (A-D): %{x:+0,}<extra></extra>'),
-        # hoverinfo = "none",
-        showlegend = F
-      ) %>% 
-      config( responsive = TRUE,
-              displaylogo = FALSE,
-              displayModeBar = F
-              # modeBarButtons = list(list("toImage")),
-      ) %>% 
-      layout(
-        font = list(family = "Roboto"),
-        title = list(text = mychart_title,
-                     y = 0.99, 
-                     x = 0, 
-                     xanchor = 'left', 
-                     yanchor =  'top',
-                     font = list(size = myfont * 20/15)
-        ),
-        bargap = 0.25,
-        barmode = 'stack',
-        hovermode = "y",
-        hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
-        yaxis = list(title = "",
-                     gridcolor = 'rgb(255,255,255)',
-                     showgrid = FALSE,
-                     showline = FALSE,
-                     showticklabels = TRUE,
-                     # dtick = 1,
-                     # tickcolor = 'rgb(127,127,127)',
-                     # ticks = 'outside',
-                     zeroline = TRUE,
-                     tickfont = list(size = myfont)
-        ),
-        xaxis = list(title = myaxis_title,
-                     # gridcolor = 'rgb(255,255,255)',
-                     showgrid = TRUE,
-                     showline = FALSE,
-                     # tickprefix = if_else(" ",
-                     # ticksuffix = "% ",
-                     tickformat = "+0,",
-                     # showticklabels = TRUE,
-                     # tickcolor = 'rgb(127,127,127)',
-                     # ticks = 'outside',
-                     zeroline = TRUE,
-                     zerolinecolor = 'rgb(255,255,255)',
-                     titlefont = list(size = myfont), tickfont = list(size = myfont)
-        ),
-        showlegend = FALSE,
-        margin = mymargin
-        
-      )
-  }
+  ### function moved to utils
   
   ## plot chart  ----
   myplot[[ez]] <- myhbarc(mywidth, myheight, myfont, mymargin)

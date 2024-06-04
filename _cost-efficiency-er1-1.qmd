@@ -10,7 +10,7 @@
 <div style="height: 1px"></div>
 
 :::: {#chart-cef-er-duc class="mychart"}
-```{r}
+```{r chart-cef-er-duc}
 #| file: R/chart_level1_cef_er.R
 #| out.width: "100%"
 ```
@@ -35,7 +35,7 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 <div style="height: 1px"></div>
 
 :::: {#chart-cef-su class="mychart"}
-```{r}
+```{r chart-cef-su}
 #| file: R/chart_level2_cef_su.R
 #| out.width: "100%"
 ```
@@ -63,7 +63,7 @@ egestas mi.
 <div style="height: 1px"></div>
 
 :::: {#chart-cef-er-cost class="mychart"}
-```{r}
+```{r chart-cef-er-cost}
 #| file: R/chart_level2_cef_er_cost.R
 #| out.width: "100%"
 ```
@@ -86,7 +86,7 @@ velit: mollis lectus tortor, porta facilisis ante.
 <div style="height: 1px"></div>
 
 :::: {#chart-cef-er-cost-entity class="mychart"}
-```{r}
+```{r chart-cef-er-cost-entity}
 #| file: R/chart_level2_cef_er_cost_entity.R
 #| out.width: "100%"
 ```
@@ -112,7 +112,7 @@ sodales maecenas dictum, curae hendrerit a habitasse integer.
 <div style="height: 1px"></div>
 
 :::: {#chart-cef-er-cost-main class="mychart"}
-```{r}
+```{r chart-cef-er-cost-main}
 #| file: R/chart_level2_cef_er_cost_main.R
 #| out.width: "100%"
 ```
@@ -130,23 +130,41 @@ platea litora.
 ::::
 :::
 
-::: {#container-cap style="clear: both"}
+::: {#container-cef-er-aucu style="clear: both"}
+
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+:::: {#chart-cef-er-aucu class="mychart"}
+```{r chart-cef-er-aucu}
+#| file: R/chart_level2_cef_er_aucu.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#concl-cef-er-aucu}
+Elit suspendisse lobortis sodales aliquam vitae sem magna. Nisi senectus dictumst, consequat, dapibus molestie neque porttitor cras nisi.
+Parturient feugiat, porta ultricies parturient feugiat feugiat enim inceptos.
+
+Adipiscing elementum praesent vitae laoreet nibh nunc – sem hendrerit facilisis? Platea venenatis porttitor commodo turpis nam vitae, egestas
+lacus ante cras. Habitant conubia suscipit porttitor tortor neque hac praesent. Lacus vehicula tristique blandit egestas, dui platea.
+::::
+:::
+
+::: {#container-cef-er-cex style="clear: both"}
 
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
 :::: {#chart-cef-er-cex class="mychart"}
-```{r}
+```{r chart-cef-er-cex}
 #| file: R/chart_level2_cef_er_cex.R
 #| out.width: "100%"
 ```
 ::::
 
 :::: {#concl-cef-er-cex}
-Ipsum morbi posuere congue placerat, gravida gravida sollicitudin morbi feugiat magna
-et. Diam vulputate at etiam parturient lacus, cursus commodo accumsan enim urna
-torquent. Aenean ut dictumst convallis; egestas bibendum diam. Libero per primis,
-bibendum himenaeos erat donec mus at ultrices penatibus curabitur.
+Ipsum morbi posuere congue placerat, gravida gravida sollicitudin morbi feugiat magna et. Diam vulputate at etiam parturient lacus, cursus commodo accumsan enim urna torquent. Aenean ut dictumst convallis; egestas bibendum diam. Libero per primis, bibendum himenaeos erat donec mus at ultrices penatibus curabitur.
 ::::
 :::
 

@@ -44,7 +44,19 @@ for (ez in 1:no_ecz) {
   mychart_title <- paste0("Total en route costs - ", ecz_list$ecz_name[ez])
   myaxis_title <- "En route costs (€2017'000)"
   mylegend_y_position <- -0.1
+  mycolors = c('#5B9BD5', '#FFC000')
   
+  mytextangle <- 0
+  mytextposition <- "outside"
+  
+  mydtick <- '1'
+  mytickformat_x <- "0"
+  mytextsize <- myfont
+  mylabelposition <- 'middle'
+  
+  myticksuffix <- ""
+  mytickformat_y <- ",.0f"
+
   ###set up order of traces
   myfactor <- data_prep %>% select(status) %>% unique() 
   as.list(myfactor$status)

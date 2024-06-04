@@ -21,7 +21,7 @@
   
   ## build pages
   if (test_check == TRUE) {
-    state_list <- 'Netherlands' # set your test country here (Home for home page)
+    state_list <- 'Belgium' # set your test country here (Home for home page)
   } 
 
   for (i in 1:length(state_list)) {

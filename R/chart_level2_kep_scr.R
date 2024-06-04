@@ -50,66 +50,88 @@ if (country == "Network Manager") {
     
 } else  {
   # State case ----
-  mymetric <- "KEA"
-  mychart_title <- paste0(mymetric, " - ", country)
-  myaxis_title <- paste0(mymetric, " (%)")
-  
   ## import data  ----
-  data_raw_target  <-  read_xlsx(
+  data_raw_kep  <-  read_xlsx(
     paste0(data_folder, "ENV dataset master.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
-    sheet = "Table_KEA Targets",
+    sheet = "Table_KEP",
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
   
-  data_raw_actual  <-  read_xlsx(
+  data_raw_scr  <-  read_xlsx(
     paste0(data_folder, "ENV dataset master.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
-    sheet = "Table_HFE",
+    sheet = "Table_SCR",
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
   
   ## prepare data ----
-  data_prep_target <- data_raw_target %>% 
-    filter(
-      entity_name == .env$country
-    ) %>% 
-    mutate(
-      # type = 'Target',
-      target = round(kea_reference_value, 2)
-    ) %>% 
-    select(
-      year,
-      target
-    )
+  ## create sequence of years to ensure full series
+  rp3_years <- 2020:2024
+  rp3_years <- data.frame(rp3_years) %>% rename(year = rp3_years)
   
-  data_prep_actual <- data_raw_actual %>% 
+  data_raw_kep_p <- data_raw_kep %>% 
+    rename(status = indicator_type,
+           mymetric = kep_value) %>% 
+    mutate(mymetric = round(mymetric, 2)) %>% 
     filter(
       entity_name == country,
-      year <= year_report) %>% 
-    mutate (actual = hfe_kpi) %>% 
-    select(
-      year,
-      actual
     ) 
   
-  data_for_chart <-  merge(x = data_prep_target, y = data_prep_actual, by="year", all.x = TRUE) 
+  data_raw_kep_p_f <- rp3_years %>% left_join(data_raw_kep_p, by= 'year') %>% 
+    mutate(entity_name = country,
+           status = 'KEP')
+  
+  data_raw_scr_p <- data_raw_scr %>% 
+    rename(status = indicator_type,
+           mymetric = scr_value) %>% 
+    mutate(mymetric = round(mymetric * 100, 2)) %>% 
+    filter(
+      entity_name == country,
+    ) 
+
+  data_raw_scr_p_f <- rp3_years %>% left_join(data_raw_scr_p, by= 'year') %>% 
+    mutate(entity_name = country,
+           status = 'SCR')
+  
+  data_prep <- data_raw_kep_p_f %>% 
+    rbind(data_raw_scr_p_f) %>% 
+    mutate(
+      mymetric = case_when(
+        year > year_report ~ NA,
+        year <= year_report ~ mymetric
+        ),
+      year_text = as.factor(year)
+      ) %>% as_tibble()
+
+
+  ## chart parameters ----
+  mychart_title <- paste0("KEP and SCR - ", country)
+  myaxis_title <- "KEP and SCR (%)"
+  mylegend_y_position <- -0.1
+  mycolors = c('#FFC000', '#5B9BD5' )
+  
+  mytextangle <- 0
+  mytextposition <- "outside"
+  mytextsize <- myfont
+  mylabelposition <- 'middle'
+  
+  mydtick <- '1'
+  mytickformat_x <- "0"
+  # myrange <- list(2019, 2025)
+  
+  myticksuffix <- "%"
+  mytickformat_y <- ",.0f"
+  ###set up order of traces
+  myfactor <- c("KEP", "SCR")
   
     }
 
-# chart parameters ----
-mytooltip_decimals <- 2
-targetcolor <- '#FF0000'
-mymarker_color <- '#FF0000'
-mydtick <- 1
-mytickformat <- '0'
-mytextangle <- '0'
-
 # plot chart ----
 ## function moved to utils  
-mybarct(mywidth, myheight, myfont, mylinewidth, mymargin)
+mybarc_nonst(mywidth, myheight, myfont, mymargin)
 
 # # export to image 
 # w = 1200

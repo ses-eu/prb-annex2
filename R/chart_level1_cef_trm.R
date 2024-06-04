@@ -49,6 +49,16 @@ myfig <- function(){
   mychart_title <- paste0("Terminal unit costs - ", tcz_list$tcz_name[tz])
   myaxis_title <- "Terminal unit costs (€2017)"
   mylegend_y_position <- -0.1
+  mycolors = c('#5B9BD5', '#FFC000')
+
+  mytextangle <- -90
+  mytextposition <- "inside"
+  
+  mydtick <- '1'
+  mytickformat_x <- "0"
+  
+  myticksuffix <- ""
+  mytickformat_y <- ",.0f"
   
   ###set up order of traces
   myfactor <- data_prep %>% select(status) %>% unique() 

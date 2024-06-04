@@ -38,6 +38,15 @@ read_mytable <- function(file, sheet, table){
   read_range(paste0(data_folder, file), sheet, table_range) 
   }
 
+## add columns to df if they don't exist ----
+  add_cols <- function(df, cols) {
+    add <- cols[!cols %in% names(df)]
+    if (length(add) != 0) {
+      df[add] <- NA
+    }
+    return(df)
+  }
+
 ## export figure function ----
   # the export function needs webshot and PhantomJS. Install PhantomJS with 'webshot::install_phantomjs()' and then cut the folder from wherever is installed and paste it in C:\Users\[username]\dev\r\win-library\4.2\webshot\PhantomJS
 
@@ -76,7 +85,7 @@ read_mytable <- function(file, sheet, table){
         marker = list(color =('#FFC000')),
         text = ~ paste0(format(actual, nsmall = mytooltip_decimals),'%'),
         # text = ~ as.character(format(round(VALUE,0), big.mark = " ")),
-        # textangle = -90,
+        textangle = mytextangle,
         textposition = "inside", 
         cliponaxis = FALSE,
         insidetextanchor =  "middle",
@@ -122,7 +131,7 @@ read_mytable <- function(file, sheet, table){
       layout(
         font = list(family = "Roboto"),
         title = list(text = mychart_title,
-                     y = 1, 
+                     y = 0.99, 
                      x = 0, 
                      xanchor = 'left', 
                      yanchor =  'top',
@@ -136,7 +145,9 @@ read_mytable <- function(file, sheet, table){
                      showgrid = FALSE,
                      showline = FALSE,
                      showticklabels = TRUE,
-                     dtick = 1,
+                     dtick = mydtick,
+                     tickformat = mytickformat,
+                     xperiod0 = min(data_for_chart$year),
                      # tickcolor = 'rgb(127,127,127)',
                      # ticks = 'outside',
                      zeroline = TRUE,
@@ -498,37 +509,32 @@ read_mytable <- function(file, sheet, table){
         x = ~ year_text,
         y = ~ mymetric,
         yaxis = "y1",
-        text = ~ format(mymetric, nsmall = 2),
-        textangle = 0,
-        textposition = "outside", 
+        text = ~ paste0(format(mymetric, nsmall = 2), myticksuffix),
+        textangle = mytextangle,
+        textposition = mytextposition, 
         cliponaxis = FALSE,
-        # insidetextanchor =  "middle",
-        textfont = list(color = 'black', size = myfont),
+        insidetextanchor =  mylabelposition,
+        textfont = list(color = 'black', size = mytextsize),
         type = "bar",
         color = ~ factor(status, levels = myfactor),
-        colors = c('#5B9BD5', '#FFC000'),
-        hovertemplate = paste('%{xother} %{y:.2f}'),
+        colors = mycolors,
+        hovertemplate = paste0('%{y:.2f}', myticksuffix),
         # hoverinfo = "none",
         showlegend = T
       ) %>%
-      # add_trace(
-      #   inherit = FALSE,
-      #   data = data_prep,
-      #   x = ~ year_text,
-      #   y = ~ unit_cost_er/2,
-      #   yaxis = "y1",
-      #   type = 'scatter',
-      #   mode = "markers",
-      #   text = ~ paste0(substr(status,1,1), ": ", format(unit_cost_er, nsmall = 2)),
-      #   color = ~ factor(status, levels = c("Determined unit cost",
-      #                                       "Actual unit cost")),
-    #   colors = c('#5B9BD5', '#FFC000'),
-    #   # line = list(width = 0),
-    #   marker = list(color = 'transparent'),
-    #   hovertemplate = paste('%{text}<extra></extra>'),
-    #   # hoverinfo = "none",
-    #   showlegend = F
-    # ) %>% 
+    add_trace(           ### series to force the full x series of years
+      inherit = FALSE,
+      data = data_prep,
+      x = ~ year_text,
+      y = 0,
+      yaxis = "y1",
+      type = 'scatter',
+      mode = "markers",
+      # line = list(width = 0),
+      marker = list(color = 'transparent'),
+      hoverinfo = "none",
+      showlegend = F
+    ) %>%
     config( responsive = TRUE,
                     displaylogo = FALSE,
                     displayModeBar = F
@@ -543,6 +549,7 @@ read_mytable <- function(file, sheet, table){
                      yanchor =  'top',
                      font = list(size = myfont * 20/15)
         ),
+        uniformtext=list(minsize = myfont*0.8, mode='show'),
         bargap = 0.25,
         hovermode = "x unified",
         hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
@@ -551,7 +558,10 @@ read_mytable <- function(file, sheet, table){
                      showgrid = FALSE,
                      showline = FALSE,
                      showticklabels = TRUE,
-                     dtick = 1,
+                     dtick = mydtick,
+                     tickformat = mytickformat_x,
+                     # range = myrange,
+                     # tickvals = myticktext,
                      # tickcolor = 'rgb(127,127,127)',
                      # ticks = 'outside',
                      zeroline = TRUE,
@@ -561,8 +571,8 @@ read_mytable <- function(file, sheet, table){
                      # gridcolor = 'rgb(255,255,255)',
                      showgrid = TRUE,
                      showline = FALSE,
-                     ticksuffix = "",
-                     tickformat = ",.0f",
+                     ticksuffix = myticksuffix,
+                     tickformat = mytickformat_y,
                      # showticklabels = TRUE,
                      # tickcolor = 'rgb(127,127,127)',
                      # ticks = 'outside',
@@ -581,5 +591,158 @@ read_mytable <- function(file, sheet, table){
         margin = mymargin
       )
     
+  }
+  
+  ## plot CEF horizontal barchart A-D  ----
+  myhbarc <-  function(mywidth, myheight, myfont, mymargin) {
+    data_prep %>% 
+      plot_ly(
+        width = mywidth,
+        height = myheight,
+        x = ~ round(mymetric, 0),
+        y = ~ factor(ylabel, levels = myfactor),
+        yaxis = "y1",
+        marker = list(color = mybarcolor),
+        text = ~ mylabel,
+        # text = ~ as.character(format(round(VALUE,0), big.mark = " ")),
+        # textangle = -90,
+        textposition = "auto", 
+        cliponaxis = FALSE,
+        orientation = 'h',
+        # insidetextanchor =  "middle",
+        # name = mymetric,
+        textfont = list(color = mytextcolor, size = myfont),
+        type = "bar",
+        hovertemplate = paste0('%{y} (A-D): %{x:+0,}<extra></extra>'),
+        # hoverinfo = "none",
+        showlegend = F
+      ) %>% 
+      config( responsive = TRUE,
+              displaylogo = FALSE,
+              displayModeBar = F
+              # modeBarButtons = list(list("toImage")),
+      ) %>% 
+      layout(
+        font = list(family = "Roboto"),
+        title = list(text = mychart_title,
+                     y = 0.99, 
+                     x = 0, 
+                     xanchor = 'left', 
+                     yanchor =  'top',
+                     font = list(size = myfont * 20/15)
+        ),
+        bargap = 0.25,
+        barmode = 'stack',
+        hovermode = "y",
+        hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
+        yaxis = list(title = "",
+                     gridcolor = 'rgb(255,255,255)',
+                     showgrid = FALSE,
+                     showline = FALSE,
+                     showticklabels = TRUE,
+                     # dtick = 1,
+                     # tickcolor = 'rgb(127,127,127)',
+                     # ticks = 'outside',
+                     zeroline = TRUE,
+                     tickfont = list(size = myfont)
+        ),
+        xaxis = list(title = myaxis_title,
+                     # gridcolor = 'rgb(255,255,255)',
+                     showgrid = TRUE,
+                     showline = FALSE,
+                     # tickprefix = if_else(" ",
+                     # ticksuffix = "% ",
+                     tickformat = "+0,",
+                     # showticklabels = TRUE,
+                     # tickcolor = 'rgb(127,127,127)',
+                     # ticks = 'outside',
+                     zeroline = TRUE,
+                     zerolinecolor = 'rgb(255,255,255)',
+                     titlefont = list(size = myfont), tickfont = list(size = myfont)
+        ),
+        showlegend = FALSE,
+        margin = mymargin
+        
+      )
+  }
+  
+  ## plot grouped/stacked barchart  ----
+  mybarc_group <-  function(mywidth, myheight, myfont, mymargin) {
+    data_prep %>% 
+      plot_ly(
+        width = mywidth,
+        height = myheight,
+        y = ~ round(mymetric/1000, 0),
+        x = ~ year_text,
+        yaxis = "y1",
+        colors = mybarcolor,
+        # color = ~ xlabel,
+        color = ~ factor(xlabel, levels = myfactor),
+        # text = ~ mylabel,
+        # text = ~ as.character(format(round(VALUE,0), big.mark = " ")),
+        # textangle = -90,
+        textposition = "auto", 
+        cliponaxis = FALSE,
+        # insidetextanchor =  "middle",
+        # name = mymetric,
+        textfont = list(color = mytextcolor, size = myfont),
+        type = "bar",
+        # hovertemplate = paste0('%{y} (A-D): %{x:+0,}<extra></extra>'),
+        # hoverinfo = "none",
+        showlegend = T
+      ) %>% 
+      config( responsive = TRUE,
+              displaylogo = FALSE,
+              displayModeBar = F
+              # modeBarButtons = list(list("toImage")),
+      ) %>% 
+      layout(
+        font = list(family = "Roboto"),
+        title = list(text = mychart_title,
+                     y = 0.99, 
+                     x = 0, 
+                     xanchor = 'left', 
+                     yanchor =  'top',
+                     font = list(size = myfont * 20/15)
+        ),
+        bargap = 0.25,
+        barmode = 'stack',
+        hovermode = "x unified",
+        hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
+        xaxis = list(title = "",
+                     gridcolor = 'rgb(255,255,255)',
+                     showgrid = FALSE,
+                     showline = FALSE,
+                     showticklabels = TRUE,
+                     # dtick = 1,
+                     # tickcolor = 'rgb(127,127,127)',
+                     # ticks = 'outside',
+                     zeroline = TRUE,
+                     tickfont = list(size = myfont)
+        ),
+        yaxis = list(title = myaxis_title,
+                     # gridcolor = 'rgb(255,255,255)',
+                     showgrid = TRUE,
+                     showline = FALSE,
+                     # tickprefix = if_else(" ",
+                     # ticksuffix = "% ",
+                     tickformat = "0,",
+                     # showticklabels = TRUE,
+                     # tickcolor = 'rgb(127,127,127)',
+                     # ticks = 'outside',
+                     zeroline = TRUE,
+                     zerolinecolor = 'rgb(200,200,200)',
+                     titlefont = list(size = myfont), tickfont = list(size = myfont)
+        ),
+        legend = list(
+          orientation = 'h', 
+          xanchor = "left",
+          x = 0, 
+          y = mylegend_y_position,
+          font = list(size = myfont)
+        ),
+        margin = mymargin
+        
+      )
   }
   

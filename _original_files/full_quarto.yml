@@ -151,7 +151,9 @@ website:
       - section: "<b>2 Environment</b>"
         contents:
           - text: "KPI - KEA"
-            href: environment_kea.html
+            href: environment_kea.html#kpi--kea
+          - text: "PIs - KEP and SCR"
+            href: environment_kea.html#pis---kep-and-scr
           # - environment_kea.qmd
           # - environment_apt.qmd
           # - environment_mil.qmd
