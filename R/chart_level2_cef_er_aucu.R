@@ -32,21 +32,42 @@ for (ez in 1:no_ecz) {
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
-  
+
   ## prepare data ----
 
   # filter raw tables on ecz
+  ## t1
   data_prep_t1 <- data_raw_t1 %>% 
     filter(
       entity_code == ecz_list$ecz_id[ez],
       status == 'A'
     ) 
   
-  data_prep_t2 <- data_raw_t2 %>% 
+  ## t2
+  data_prep_t2_ini <- data_raw_t2 %>% 
     filter(
       entity_code == ecz_list$ecz_id[ez]
     ) 
   
+  #temp table with values for 2020 and 2021 separated that I'll need later for aucu calculations
+  #first I need the 10.5 and 4.7 value separated also for the calculations 
+  
+  other_rev_20202021 <- data_prep_t2_ini %>% filter(year == 20202021) %>% select(x10_5_other_revenue) %>% pull()
+  total_su_t2_20202021<- data_prep_t2_ini %>% filter(year == 20202021) %>% select(x4_7_total_su) %>% pull()
+  
+  data_temp_t2 <- data_prep_t2_ini %>%  
+    filter(year == 20202021) %>% 
+    mutate_all(~ if_else(is.numeric(.x),NA,.x)) %>% 
+    mutate(year = 2020,
+           x10_5_other_revenue = other_rev_20202021,
+           x4_7_total_su= total_su_t2_20202021
+           ) %>% 
+    rbind(filter(data_prep_t2_ini, year == 20202021)) %>% 
+    mutate(year = if_else(year == 20202021, 2021, year))
+  
+  data_prep_t2 <- data_prep_t2_ini %>% rbind(data_temp_t2)
+  
+  ## t3
   data_prep_t3 <- data_raw_t3 %>% 
     filter(
       entity_code == ecz_list$ecz_id[ez],
@@ -54,10 +75,20 @@ for (ez in 1:no_ecz) {
     ) %>% 
     mutate(year = as.numeric(year))
   
+  ## t exchange rates
+  yearly_xrates <- get_xrates()
+  
+  data_prep_xrates <- yearly_xrates %>% 
+    filter(
+      entity_code == ecz_list$ecz_id[ez]
+    ) %>% 
+    select(-entity_code)
+  
   #join all tables
   data_prep_all <- data_prep_t1 %>% 
     left_join(data_prep_t2, by = 'year', suffix = c(".t1", ".t2")) %>% 
-    left_join(data_prep_t3, by = 'year', suffix = c("", ".t3"))
+    left_join(data_prep_t3, by = 'year', suffix = c("", ".t3")) %>% 
+    left_join(data_prep_xrates, by = 'year')
     
   
   # get some parameters for 2020 and 2021. Needed later for calcs
@@ -105,43 +136,50 @@ for (ez in 1:no_ecz) {
     left_join(data_prep_forecast_su, by = 'year')
   
   # calcs
-  data_prep <- data_prep_all %>% 
+  ## calculate all values for individual years following the indications in the CEFF computations file
+  data_prep_years_split <- data_prep_all %>% 
+    filter(year != 20202021) %>%
+    mutate_all(~ ifelse(is.na(.), 0, .)) %>% 
     mutate(
       initial_duc = case_when(
         year == 2020 ~ (initial_duc_2020 - (total_adjustment/x15_forecast_su_temp)) * tsu_2020/(tsu_2020 + tsu_2021),
         year == 2021 ~ (initial_duc_2021 - (total_adjustment/x15_forecast_su_temp)) * tsu_2021/(tsu_2020 + tsu_2021),
-        year == 20202021 ~ (initial_duc_2021 - (total_adjustment/x15_forecast_su_temp)) * tsu_2021/(tsu_2020 + tsu_2021),
         .default = if_else(x8_1_temp_unit_rate >0,
                                  x8_1_temp_unit_rate - (total_adjustment/x15_forecast_su_temp),
                                  x4_2_cost_excl_vfr/x5_4_total_su)
         ),
-      
+      initial_duc = initial_duc / pp_exchangerate,
       new_duc = case_when(
-        year == 2020 | year == 2021 | year == 20202021 ~ x4_2_cost_excl_vfr / tsu_20202021,
-        .default = x4_2_cost_excl_vfr / x5_4_total_su
+        year == 2020 | year == 2021 ~ x4_2_cost_excl_vfr / tsu_20202021 / pp_exchangerate,
+        .default = x4_2_cost_excl_vfr / x5_4_total_su / pp_exchangerate
       ),
       retro_ur = new_duc - initial_duc,
       
-      infl_adj = x2_5_adjust_inflation / x4_7_total_su,
-      dif_a_d_costs = x3_8_diff_det_cost_actual_cost / x4_7_total_su,
-      trs_adj = x4_9_adjust_traffic_risk_art_27_2 / x4_7_total_su,
-      dc_notrs = x5_1_det_cost_no_traffic_risk / x4_7_total_su,
-      fin_inc = x6_4_financial_incentive / x4_7_total_su,
-      rev_c_mod = x7_1_adj_revenue_charge_modulation / x4_7_total_su,
-      cross_fin = x9_1_cross_financing_other / x4_7_total_su,
-      other_rev = x10_5_other_revenue / x4_7_total_su,
-      loss_rev = x11_1_loss_revenue_lower_unit_rate / x4_7_total_su,
+      infl_adj = x2_5_adjust_inflation / x4_7_total_su / pp_exchangerate,
+      dif_a_d_costs = x3_8_diff_det_cost_actual_cost / x4_7_total_su / pp_exchangerate,
+      trs_adj = x4_9_adjust_traffic_risk_art_27_2 / x4_7_total_su / pp_exchangerate,
+      dc_notrs = x5_1_det_cost_no_traffic_risk / x4_7_total_su / pp_exchangerate,
+      fin_inc = x6_4_financial_incentive / x4_7_total_su / pp_exchangerate,
+      rev_c_mod = x7_1_adj_revenue_charge_modulation / x4_7_total_su / pp_exchangerate,
+      cross_fin = x9_1_cross_financing_other / x4_7_total_su / pp_exchangerate,
+      other_rev = case_when(
+        year == 2020 | year == 2021 ~ x10_5_other_revenue * x5_4_total_su / tsu_20202021 / x4_7_total_su / pp_exchangerate,
+        .default = x10_5_other_revenue / x4_7_total_su / pp_exchangerate
+        ),
+      loss_rev = x11_1_loss_revenue_lower_unit_rate / x4_7_total_su / pp_exchangerate,
       
-      total_adjustments_aucu = infl_adj + dif_a_d_costs + trs_adj + dc_notrs + 
-        fin_inc + rev_c_mod + cross_fin + other_rev + loss_rev,
+      total_adjustments_aucu = infl_adj + dif_a_d_costs + trs_adj + dc_notrs + fin_inc + rev_c_mod + cross_fin + other_rev + loss_rev,
       aucu = new_duc + total_adjustments_aucu,
-      check_adj = (x12_total_adjust - x8_2_diff_revenue_temp_unit_rate -
-                     x5_2_unit_rate_no_traffic_risk) / x4_7_total_su
+      check_adj = (x12_total_adjust - x8_2_diff_revenue_temp_unit_rate - x5_2_unit_rate_no_traffic_risk) / x4_7_total_su / pp_exchangerate,
+      
+      year_text = as.character(year)
       
     ) %>% 
-    
     select(
-      year,
+      year_text,
+      x4_7_total_su,
+      x5_4_total_su,
+      
       x8_1_temp_unit_rate,
       x15_forecast_su_temp,
       total_adjustment,
@@ -162,13 +200,20 @@ for (ez in 1:no_ecz) {
       check_adj,
       aucu
     ) %>% 
-    filter(year > 2021) %>% 
-    mutate(
-      year_text = as.character(year),
-      year_text = str_replace_all(year, '20202021', '2020-2021')
-    ) %>% 
     arrange(year_text)
+  
+  ## calculate values 2020-2021 as a sum of the individual years
+  data_prep_20202021 <- data_prep_years_split %>% 
+    filter(year_text == '2020' | year_text == '2021') %>%
+    bind_rows(summarise(., across(where(is.numeric), sum),
+                        across(where(is.character), ~'2020-2021'))) %>% 
+    filter(year_text == '2020-2021')
+  
+  ## join prep tables with the relevant years
+  data_prep <- data_prep_20202021 %>% 
+    rbind(filter(data_prep_years_split, year_text != '2020' & year_text != '2021'))
 
+  ## select relevant values for chart
   data_for_chart <- data_prep %>% 
     select(
       year_text,
@@ -176,14 +221,7 @@ for (ez in 1:no_ecz) {
       total_adjustments_aucu,
       aucu
     ) 
-  # %>% 
-  #   mutate(
-  #     mylabel = paste0('DUC: ', new_duc, '/n',
-  #       'AUCU: ', aucu, '/n',
-  #       'Total adjustments: ', total_adjustments_aucu
-  #     )
-  #   )
-  
+
   ## chart parameters ----
   mychart_title <- paste0("AUCU")
   myaxis_title <- "AUCU (€/SU)"
@@ -489,3 +527,6 @@ for (ez in 1:no_ecz) {
 htmltools::tagList(myplot)
 
 # https://stackoverflow.com/questions/35193612/multiple-r-plotly-figures-generated-in-a-rmarkdown-knitr-chunk-document
+
+
+

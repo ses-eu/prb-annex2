@@ -52,6 +52,7 @@
     if (country == "Spain") {
       statfor_zone <- ecz_list %>% filter(statfor_ecz_name == "Spain") %>% select(statfor_ecz_name) %>% pull()
       ecz_list <- ecz_list %>% filter (ecz_name != "Spain all")
+      no_ecz <- nrow(ecz_list)
     } else {
       statfor_zone <- ecz_list %>% filter(state  == country) %>% select(statfor_ecz_name) %>% pull()
     }
@@ -63,7 +64,7 @@
   tcz_list <- tcz_list_table %>% filter(state == .env$country) 
   no_tcz <- nrow(tcz_list)
   # terminal <- if_else(no_tcz > 0, TRUE, FALSE)
-  
+
   ## context data ----
   context_data <- context_data_table %>% 
     filter(state == .env$country,

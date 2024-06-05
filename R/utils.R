@@ -47,6 +47,31 @@ read_mytable <- function(file, sheet, table){
     return(df)
   }
 
+## get yearly exchange rates ----
+  get_xrates <- function() {
+    data_raw_xrates  <-  read_xlsx(
+      paste0(data_folder, "CEFF dataset master.xlsx"),
+      # here("data","hlsr2021_data.xlsx"),
+      sheet = "ERT_XRATE2017",
+      range = cell_limits(c(1, 1), c(NA, NA))) %>%
+      as_tibble() %>% 
+      clean_names()  
+    
+    yearly_xrates <- data_raw_xrates %>% 
+      filter(
+        entity_code %in% ecz_list$ecz_id == TRUE
+      ) %>% 
+      select(entity_code, contains('pp_exchangerate_' )) %>% 
+      pivot_longer(cols = starts_with("pp_exchangerate_"),
+                   names_to = "year",
+                   values_to = 'pp_exchangerate') %>% 
+      mutate(year = str_replace_all(year, 'pp_exchangerate_', ''),
+             year = as.numeric(year),
+             pp_exchangerate = if_else(pp_exchangerate == 0, NA, pp_exchangerate),
+      )
+    return(yearly_xrates)
+  }
+
 ## export figure function ----
   # the export function needs webshot and PhantomJS. Install PhantomJS with 'webshot::install_phantomjs()' and then cut the folder from wherever is installed and paste it in C:\Users\[username]\dev\r\win-library\4.2\webshot\PhantomJS
 
@@ -181,7 +206,7 @@ read_mytable <- function(file, sheet, table){
   }
 
 ## plot bar chart without target  ----
-  mybarc <-  function(mywidth, myheight, myfont, mylinewidth, mymargin) {
+  mybarc <-  function(mywidth, myheight, myfont, mymargin) {
     data_for_chart %>% 
       plot_ly(
         width = mywidth,
@@ -203,16 +228,16 @@ read_mytable <- function(file, sheet, table){
         y = ~ actual,
         yaxis = "y1",
         marker = list(color = mybarcolor),
-        text = ~ paste0(format(actual, nsmall = mytooltip_decimals),'%'),
+        text = ~ paste0(format(actual,  big.mark  = ",", nsmall = mytooltip_decimals), myticksuffix),
         # text = ~ as.character(format(round(VALUE,0), big.mark = " ")),
-        # textangle = -90,
-        textposition = "inside", 
+        textangle = mytextangle,   #auto
+        textposition = mytextposition,   #"inside", 
         cliponaxis = FALSE,
-        insidetextanchor =  "middle",
+        insidetextanchor = mylabelposition, # "middle",
         name = mymetric,
         textfont = list(color = mytextcolor, size = myfont),
         type = "bar",
-        hovertemplate = paste0(mymetric, ': %{y:.', mytooltip_decimals, 'f}%<extra></extra>'),
+        hovertemplate = paste0(mymetric, ': %{y:,.', mytooltip_decimals, 'f}', myticksuffix ,'<extra></extra>'),
         # hoverinfo = "none",
         showlegend = T
         
@@ -225,7 +250,7 @@ read_mytable <- function(file, sheet, table){
       layout(
         font = list(family = "Roboto"),
         title = list(text = mychart_title,
-                     y = 1, 
+                     y = 0.99, 
                      x = 0, 
                      xanchor = 'left', 
                      yanchor =  'top',
@@ -240,7 +265,7 @@ read_mytable <- function(file, sheet, table){
                      showgrid = FALSE,
                      showline = FALSE,
                      showticklabels = TRUE,
-                     dtick = 1,
+                     dtick = mydtick,  # 1,
                      # tickcolor = 'rgb(127,127,127)',
                      # ticks = 'outside',
                      zeroline = TRUE,
@@ -251,8 +276,8 @@ read_mytable <- function(file, sheet, table){
                      showgrid = TRUE,
                      showline = FALSE,
                      tickprefix = " ",
-                     ticksuffix = "% ",
-                     tickformat = ".1f",
+                     ticksuffix = myticksuffix,  #"% ",
+                     tickformat = mytickformat_y,  #".1f",
                      # showticklabels = TRUE,
                      # tickcolor = 'rgb(127,127,127)',
                      # ticks = 'outside',

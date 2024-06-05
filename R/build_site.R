@@ -26,6 +26,7 @@
 
   for (i in 1:length(state_list)) {
     country <- state_list[i]
+    # country <- "Spain"
     source("R/parameters.R")
     source("R/create_pages.R")
   }

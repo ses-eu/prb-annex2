@@ -290,6 +290,7 @@ if (out_format == 'web') {
                                               main_ansp_aua = main_ansp_aua,
                                               other_ansps_str = other_ansps_str,
                                               other_met_str = other_met_str,
+                                              # yearly_xrates = yearly_xrates,
                                               
                                               # chart_layout = chart_layout, 
                                               mywidth = mywidth,
