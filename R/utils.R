@@ -697,7 +697,7 @@ read_mytable <- function(file, sheet, table){
       plot_ly(
         width = mywidth,
         height = myheight,
-        y = ~ round(mymetric/1000, 0),
+        y = ~ round(mymetric/1000, mytooltip_decimals),
         x = ~ year_text,
         yaxis = "y1",
         colors = mybarcolor,
@@ -761,8 +761,9 @@ read_mytable <- function(file, sheet, table){
         ),
         legend = list(
           orientation = 'h', 
-          xanchor = "left",
-          x = 0, 
+          traceorder= 'normal',
+          xanchor = mylegend_x_anchor ,  # "left"
+          x = mylegend_x_position,       # 0
           y = mylegend_y_position,
           font = list(size = myfont)
         ),

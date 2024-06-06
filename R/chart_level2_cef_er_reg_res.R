@@ -97,10 +97,8 @@ for (ez in 1:no_ecz) {
            trs,
            x6_4_financial_incentive)
       
-  ###############exrate and join 20 and 21, and force MET in the legend
-  
   # join t1 and t2 for joint calculations
-  data_prep <- data_prep_t1 %>% 
+  data_prep_years_split <- data_prep_t1 %>% 
     left_join(data_prep_t2, by = c("year", "entity_code")) %>% 
     rowwise() %>% 
     mutate(
@@ -124,19 +122,35 @@ for (ez in 1:no_ecz) {
       )
       ) %>% 
     mutate(year_text = as.character(year)
-           # , year_text = str_replace(year_text, "20202021", "2020-2021"),
-    )
+    ) %>% 
+    select(year_text, xlabel, mymetric)
   
+  ## sum 2020-2021 together
+  data_prep_202021 <- data_prep_years_split %>% 
+    filter(year_text == c('2020', '2021')) %>% 
+    group_by(xlabel) %>% 
+    summarise(mymetric = sum(mymetric, na.rm = TRUE)) %>% 
+    mutate( year_text = '2020-2021') %>% 
+    relocate(year_text, .before = xlabel)
   
+  data_prep <- data_prep_202021 %>% 
+    rbind(data_prep_years_split) %>% 
+    filter(year_text != '2020' & year_text != '2021') 
+    
   ## chart parameters ----
   mychart_title <- paste0("Regulatory result at CZ level")
   myaxis_title <- "Regulatory result (€M)"
   mybarcolor <- c( '#5B9BD5', '#FFC000', '#BFBFBF')
   mytextcolor <- 'black'
+  
   mylegend_y_position <- -0.15
+  mylegend_x_position <- 0.5
+  mylegend_x_anchor <- 'center'
   myfactor <- c("Main ANSP",
     "Other ANSP",
     "MET")
+  
+  mytooltip_decimals <- 2
   
   ## define chart function ----
   ### function moved to utils
