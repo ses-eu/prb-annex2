@@ -178,6 +178,12 @@ Ipsum morbi posuere congue placerat, gravida gravida sollicitudin morbi feugiat 
 #| file: R/chart_level2_cef_er_reg_res.R
 #| out.width: "100%"
 ```
+
+```{r chart-cef-er-reg-res_aucu}
+#| file: R/chart_level2_cef_er_reg_res_aucu.R
+#| out.width: "100%"
+```
+
 ::::
 
 :::: {#concl-cef-er-cex}

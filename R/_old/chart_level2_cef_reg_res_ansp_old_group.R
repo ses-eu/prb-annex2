@@ -9,123 +9,105 @@ myplot = list()
 # loop through czs ----
 for (ez in 1:no_ecz) {
   
-  data_prep <- aucu(ez)
+  data_prep <- regulatory_result(ez)
   
   ## select relevant values for chart
   data_for_chart <- data_prep %>% 
-    select(
-      year_text,
-      new_duc,
-      total_adjustments_aucu,
-      aucu
-    ) 
+    filter(xlabel == 'Main ANSP') %>% 
+    mutate(
+      share_rr_act_rev_expost = regulatory_result/actual_revenues * 100,
+      share_rr_act_rev_exante = ex_ante_roe/actual_revenues * 100
+      ) %>% 
+    select(-xlabel, -x5_4_total_su, -actual_revenues)
 
+  
   ## chart parameters ----
-  mychart_title <- paste0("AUCU")
-  myaxis_title <- "AUCU (€/SU)"
-  mybarcolor <- c( '#5B9BD5', 'transparent', '#BFBFBF', '#9DC3E6')
+  mychart_title <- paste0("Regulatory Result - ", main_ansp)
+  myaxis_title <- "Regulatory result (€M)"
+  mybarcolor <- c( '#CEE0EA', '#4B8DB1')
   mytextcolor <- 'black'
   mylegend_y_position <- -0.28
   mylocalmargin = list (t = 60, b = 80)
   
+  mytickformat_y <- ",.0f"
+  mytooltipformat <- ",.2f"
+  
+  
   ## define chart function ----
-  mybarc_aucu <-  function(mywidth, myheight, myfont, mymargin) {
+  mybarc_reg_res_ansp <-  function(mywidth, myheight, myfont, mymargin) {
     mychart <- list()
-    data_for_chart_filtered <- list()
+    data_for_chart_value <- list()
+    data_for_chart_share <- list()
     
     ### loop through years ----
     for (i in 1:nrow(data_for_chart)) {
        # i=2
       ### prepare data for chart ----
-      data_for_chart_filtered[[i]] <- data_for_chart %>% 
+      data_for_chart_value[[i]] <- data_for_chart %>% 
+        select(-c(share_rr_act_rev_expost, share_rr_act_rev_exante)) %>% 
         slice(i:i) %>% 
-        pivot_longer(-c(year_text), names_to = 'type', values_to = 'metric')  %>% 
-        mutate(
-          mydatalabel = case_when(
-            type == 'total_adjustments_aucu' ~ if_else(is.na(metric) == TRUE, 
-                                                    NA, 
-                                                    paste0(if_else(metric >= 0, '+', ''),
-                                                           trimws(format(round(metric, 2), big.mark = ",", nsmall = 2)))
-                                                    ),
-            .default = if_else(is.na(metric) == TRUE, NA, format(round(metric, 2), big.mark = ",", nsmall = 2))
-            ),
-          new_duc = case_when(
-              type == 'new_duc' ~ metric,
-              .default = NA),
-          total_adjustments_aucu = case_when(
-              type == 'total_adjustments_aucu' ~ abs(metric),
-              .default = NA),      
-          aucu = case_when(
-              type == 'aucu' ~ metric,
-              .default = NA),
-          fake_series = case_when(
-              type == 'total_adjustments_aucu' ~ min(c(aucu, new_duc), na.rm = TRUE),
-              .default = NA)
-          ) %>% 
-        relocate(fake_series, .after = new_duc) %>% 
-        select(-metric) %>% 
-        pivot_longer(-c(year_text, type, mydatalabel), names_to ='subtype', values_to = 'metric') %>% 
-        mutate(mydatalabel = case_when(
-          subtype == 'fake_series' ~ NA,
-          .default = mydatalabel
-            ))
+        pivot_longer(-year_text, names_to = "type", values_to = 'metric') %>% 
+        mutate(type = case_when(
+          type == 'regulatory_result'  ~ 'Ex-post',
+          type == 'ex_ante_roe'  ~ 'Ex-ante')
+        )
     
+      data_for_chart_share[[i]] <- data_for_chart %>% 
+        select(-c(regulatory_result, ex_ante_roe)) %>% 
+        slice(i:i) %>% 
+        pivot_longer(-year_text, names_to = "type", values_to = 'share') %>% 
+        mutate(type = case_when(
+          type == 'share_rr_act_rev_expost'  ~ 'Ex-post',
+          type == 'share_rr_act_rev_exante'  ~ 'Ex-ante')
+        )
+      
       ### plot indivicual year charts ----
-      mychart[[i]] <- data_for_chart_filtered[[i]] %>% 
+      mychart[[i]] <-  data_for_chart_value[[i]] %>% 
       plot_ly(
         width = mywidth,
-        height = myheight,
-        y = ~ round(metric, 2),
-        x = ~ factor(type, levels = c('new_duc', 'total_adjustments_aucu',
-                                      'aucu')),
+        height = myheight+40,
+        y = ~ round(metric, 2)/1000,
+        # y = ~ if_else(is.na(metric) == TRUE, 0, round(metric, 2)/1000),
+        x = ~ factor(type, levels = c('Ex-post', 'Ex-ante')),
         yaxis = "y1",
         type = 'bar',
-        color = ~ factor(subtype, levels = c('new_duc', 'fake_series',
-                                                       'total_adjustments_aucu',
-                                                       'aucu')),
+        color = ~ factor(type, levels = c('Ex-post', 'Ex-ante')),
         colors = mybarcolor,
-        text = ~ mydatalabel,
-        textangle = -90,
+        text = '',
+        # textangle = -90,
         textposition = "outside", 
         cliponaxis = FALSE,
         # insidetextanchor =  "middle",
         # name = mymetric,
-        textfont = list(color = mytextcolor, size = myfont * 0.8),
-        # hovertemplate = paste0('%{y} (A-D): %{x:+0,}<extra></extra>'),
+        # textfont = list(color = mytextcolor, size = myfont * 0.8),
+        hovertemplate = paste('%{y:,.2f}'),
         hoverinfo = "none",
-        showlegend = FALSE
+        showlegend = T
       ) %>% 
-      # add_trace(
-      #   # data = filter(data_for_chart_filtered[[i]], subtype != 'fake_series'),
-      #   y = 0,
-      #   x = 'total_adjustments_aucu',
-      #   yaxis = "y1",
-      #   type = 'scatter',  mode = 'markers',
-      #   marker = list(size = mylinewidth, color = 'transparent'),
-      #   # color = ~ factor(subtype, levels = c('new_duc', 'fake_series',
-      #   #                                      'total_adjustments_aucu',
-      #   #                                      'aucu')),
-      #   # text = ~ mylabel,
-      #   # text = ~ as.character(format(round(VALUE,0), big.mark = " ")),
-      #   # textangle = -90,
-      #   textposition = "none",
-      #   cliponaxis = FALSE,
-      #   # insidetextanchor =  "middle",
-      #   # name = mymetric,
-      #   textfont = list(color = 'transparent'),
-      #   hovertemplate = paste0('%{x}: %{y}<extra></extra>'),
-      #   # hoverinfo = "none",
-      #   showlegend = F
-      # ) %>%
-      layout(
+        add_trace(
+          data =  data_for_chart_value[[i]],
+          x = ~ factor(type, levels = c('Ex-post', 'Ex-ante')),
+          y = ~ '',
+          name = "Fake series to force all years in x axis",
+          yaxis = "y1",
+          type = 'bar',
+          color = ~ factor(type, levels = c('Ex-post', 'Ex-ante')),
+          colors = mybarcolor,
+          text = '',
+          marker = list(color = 'transparent'),
+          showlegend = F,
+          # hovertemplate = '',
+          hoverinfo = 'none'
+        ) %>% 
+        layout(
         showlegend = F,  
         barmode = "stack",
-        bargap = '0',
+        bargap = '20',
         xaxis = list(title = '',
                      gridcolor = 'rgb(255,255,255)',
                      showgrid = FALSE,
-                     showline = TRUE,
-                     showticklabels = FALSE,
+                     showline = FALSE,
+                     showticklabels = TRUE,
                      # dtick = 1,
                      # tickcolor = 'rgb(127,127,127)',
                      # ticks = 'outside',
@@ -143,7 +125,8 @@ for (ez in 1:no_ecz) {
               displaylogo = FALSE,
               displayModeBar = F
               # modeBarButtons = list(list("toImage")),
-      ) %>% 
+      ) %>%
+
       layout(
         font = list(family = "Roboto"),
         title = list(text = mychart_title,
@@ -153,7 +136,7 @@ for (ez in 1:no_ecz) {
                      yanchor =  'top',
                      font = list(size = myfont * 20/15)
         ),
-        hovermode = "x",
+        hovermode = "x unified",
         hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
         # uniformtext = list(minsize = myfont, mode='show'),
         yaxis = list(title = myaxis_title,
@@ -162,14 +145,15 @@ for (ez in 1:no_ecz) {
                      showline = FALSE,
                      # tickprefix = if_else(" ",
                      # ticksuffix = "% ",
-                     tickformat = "0, ",
-                     tickcolor='white',     # to increase space between tick and plot
-                     ticklen = 7,
+                     tickformat = mytickformat_y,
+                     # tickcolor='black',
+                     # ticklen = 7,
                      # showticklabels = TRUE,
                      # ticks = 'outside',
                      zeroline = TRUE,
                      zerolinecolor = 'rgb(255,255,255)',
-                     titlefont = list(size = myfont), tickfont = list(size = myfont)
+                     titlefont = list(size = myfont), 
+                     tickfont = list(size = myfont)
         ),
         # legend = list(
         #   orientation = 'h', 
@@ -183,7 +167,7 @@ for (ez in 1:no_ecz) {
           list (
             xanchor = "center",
             x = 0.125,
-            y = -0.15,
+            y = -0.18,
             text = '2020-2021',
             font = list(size = myfont),
             xref = "paper",
@@ -196,7 +180,7 @@ for (ez in 1:no_ecz) {
           list (
             xanchor = "center",
             x = 0.375,
-            y = -0.15,
+            y = -0.18,
             text = '2022',
             font = list(size = myfont),
             xref = "paper",
@@ -205,11 +189,11 @@ for (ez in 1:no_ecz) {
             # arrowhead = 7,
             ax = 0,
             ay = 0
-          ), 
+          ),
           list (
             xanchor = "center",
             x = 0.625,
-            y = -0.15,
+            y = -0.18,
             text = '2023',
             font = list(size = myfont),
             xref = "paper",
@@ -218,38 +202,12 @@ for (ez in 1:no_ecz) {
             # arrowhead = 7,
             ax = 0,
             ay = 0
-          ), 
+          ),
           list (
             xanchor = "center",
             x = 0.875,
-            y = -0.15,
+            y = -0.18,
             text = '2024',
-            font = list(size = myfont),
-            xref = "paper",
-            yref = "paper",
-            showarrow = FALSE,
-            # arrowhead = 7,
-            ax = 0,
-            ay = 0
-          ), 
-          list (
-            xanchor = "left",
-            x = 0.22,
-            y = mylegend_y_position,
-            text = '■',
-            font = list(size = myfont * 1.2, color = '#5B9BD5'),
-            xref = "paper",
-            yref = "paper",
-            showarrow = FALSE,
-            # arrowhead = 7,
-            ax = 0,
-            ay = 0
-          ), 
-          list (
-            xanchor = "left",
-            x = 0.26,
-            y = mylegend_y_position,
-            text = 'DUC',
             font = list(size = myfont),
             xref = "paper",
             yref = "paper",
@@ -263,20 +221,20 @@ for (ez in 1:no_ecz) {
             x = 0.35,
             y = mylegend_y_position,
             text = '■',
-            font = list(size = myfont * 1.2, color = '#9DC3E6'),
+            font = list(size = myfont * 1.2, color = '#CEE0EA'),
             xref = "paper",
             yref = "paper",
             showarrow = FALSE,
             # arrowhead = 7,
             ax = 0,
             ay = 0
-          ), 
+          ),
           list (
             xanchor = "left",
             x = 0.39,
             y = mylegend_y_position,
-            text = 'AUCU',
-            font = list(size = myfont),
+            text = 'Ex-ante RR (in value)',
+            font = list(size = myfont*0.9),
             xref = "paper",
             yref = "paper",
             showarrow = FALSE,
@@ -289,20 +247,20 @@ for (ez in 1:no_ecz) {
             x = 0.50,
             y = mylegend_y_position,
             text = '■',
-            font = list(size = myfont * 1.2, color = '#BFBFBF'),
+            font = list(size = myfont * 1.2, color = '#4B8DB1'),
             xref = "paper",
             yref = "paper",
             showarrow = FALSE,
             # arrowhead = 7,
             ax = 0,
             ay = 0
-          ), 
+          ),
           list (
             xanchor = "left",
             x = 0.54,
             y = mylegend_y_position,
-            text = 'Total adjustments',
-            font = list(size = myfont),
+            text = 'Ex-post RR (in value)',
+            font = list(size = myfont*0.9),
             xref = "paper",
             yref = "paper",
             showarrow = FALSE,
@@ -310,15 +268,41 @@ for (ez in 1:no_ecz) {
             ax = 0,
             ay = 0
           )
-          ),
+          # list (
+          #   xanchor = "left",
+          #   x = 0.22,
+          #   y = mylegend_y_position,
+          #   text = '■',
+          #   font = list(size = myfont * 1.2, color = '#5B9BD5'),
+          #   xref = "paper",
+          #   yref = "paper",
+          #   showarrow = FALSE,
+          #   # arrowhead = 7,
+          #   ax = 0,
+          #   ay = 0
+          # ),
+          # list (
+          #   xanchor = "left",
+          #   x = 0.26,
+          #   y = mylegend_y_position,
+          #   text = 'DUC',
+          #   font = list(size = myfont),
+          #   xref = "paper",
+          #   yref = "paper",
+          #   showarrow = FALSE,
+          #   # arrowhead = 7,
+          #   ax = 0,
+          #   ay = 0
+          # )
+        ),
         
-        margin = mymargin
+        margin = mylocalmargin
         
       )
   }
   
   ## plot chart  ----
-  myplot[[ez]] <- mybarc_aucu(mywidth, myheight+40, myfont, mylocalmargin)
+  myplot[[ez]] <- mybarc_reg_res_ansp (mywidth, myheight+40, myfont, mylocalmargin)
 }
 
 # create html plotlist ----

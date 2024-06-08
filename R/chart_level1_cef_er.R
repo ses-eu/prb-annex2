@@ -30,44 +30,97 @@ data_prep <- data_raw %>%
     mymetric
   ) %>%  
   filter(year > 2021) %>% 
-  mutate(year_text = as.character(year),
-         year_text = str_replace(year_text, "20202021", "2020-2021"),
+  mutate(xlabel = as.character(year),
+         xlabel = str_replace(xlabel, "20202021", "2020-2021"),
          status = str_replace(status, "A", "Actual unit cost"),
          status = str_replace(status, "D", "Determined unit cost")
   ) %>% 
-  arrange(year_text)
+  arrange(xlabel) %>% 
+  rename(type = status)
 
 ### replace 0 by NAs so they are not plotted
 data_prep[data_prep == 0] <- NA
 
 ## chart parameters ----
-mychart_title <- paste0("En route unit costs - ", ecz_list$ecz_name[ez])
-myaxis_title <- "En route unit costs (€2017)"
-mylegend_y_position <- -0.1
+mysuffix <- ""
+mydecimals <- 2
+
+### trace parameters
 mycolors = c('#5B9BD5', '#FFC000')
+###set up order of traces
+myfactor <- data_prep %>% select(type) %>% unique() 
+as.list(myfactor$type)
+myfactor <- sort(myfactor$type, decreasing = TRUE)
 
 mytextangle <- -90
 mytextposition <- "inside"
+myinsidetextanchor <- "middle"
+mytextfont_color <- 'black'
+mytextfont_size <- myfont
 
-mydtick <- '1'
-mytickformat_x <- "0"
-mytextsize <- myfont
-mylabelposition <- 'middle'
+myhovertemplate <- paste0('%{y:,.', mydecimals, 'f}', mysuffix)
+mytrace_showlegend <- T
 
-myticksuffix <- ""
-mytickformat_y <- ",.0f"
+### layout parameters
+myfont_family <- "Roboto"
+mybargap <- 0.25
+mybarmode <- 'group'
+myhovermode <- "x unified"
+myhoverlabel_bgcolor <- 'rgba(255,255,255,0.88)'
+myminsize <- myfont*0.8
 
-###set up order of traces
-myfactor <- data_prep %>% select(status) %>% unique() 
-as.list(myfactor$status)
-myfactor <- sort(myfactor$status, decreasing = TRUE)
+#### title
+mytitle_text <- paste0("En route unit costs - ", ecz_list$ecz_name[ez])
+mytitle_x <- 0
+mytitle_y <- 0.99
+mytitle_xanchor <- 'left'
+mytitle_yanchor <- 'top'
+mytitle_font_size <- myfont * 20/15
+
+#### xaxis
+myxaxis_title <- ''
+myxaxis_gridcolor <- 'rgb(255,255,255)'
+myxaxis_showgrid <- TRUE
+myxaxis_showline <- FALSE
+myxaxis_showticklabels <- TRUE
+myxaxis_tickformat <- "0"
+myxaxis_dtick <- 1
+myxaxis_zeroline <- TRUE
+myxaxis_tickfont_size <- myfont
+
+#### yaxis
+myyaxis_title <- "En route unit costs (€2017)"
+myyaxis_gridcolor <- 'rgb(240,240,240)'
+myyaxis_showgrid <- TRUE
+myyaxis_showline <- FALSE
+myyaxis_tickprefix <- ""
+myyaxis_ticksuffix <- ""
+myyaxis_tickformat <- ".0f"
+
+myyaxis_zeroline <- TRUE
+myyaxis_zerolinecolor <- 'rgb(255,255,255)'
+myyaxis_titlefont_size <- myfont
+myyaxis_tickfont_size <- myfont
+
+#### legend
+mylegend_traceorder <- 'normal'
+mylegend_orientation <- 'h'
+mylegend_xanchor <- "center"
+mylegend_yanchor <- "center"
+mylegend_x <- 0.5
+mylegend_y <- -0.1
+mylegend_font_size <- myfont
+
+#### margin
+mylocalmargin = mymargin
 
 
 ## define chart function ----
 # function moved to utils
 
 ## plot chart  ----
-myplot[[ez]] <- mybarc_nonst(mywidth, myheight, myfont, mymargin)
+myplot[[ez]] <- mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin)
+# myplot[[ez]]
 
 }
 

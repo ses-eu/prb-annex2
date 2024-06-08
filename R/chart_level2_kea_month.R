@@ -1,9 +1,5 @@
 if (country == "Network Manager") {
   # NM case ----
-  mymetric <- "KEP"
-  mychart_title <- mymetric
-  myaxis_title <- paste0(mymetric, " (%)")
-  
   ## import data  ----
   data_raw  <-  read_xlsx(
     paste0(data_folder, "NM_data.xlsx"),
@@ -23,10 +19,6 @@ if (country == "Network Manager") {
   
 } else if (country == "SES RP3"){
     # SES case ----
-    mymetric <- "KEA"
-    mychart_title <- paste0(mymetric, " - ", country)
-    myaxis_title <- paste0(mymetric, " (%)")
-    
     ## import data  ----
     data_raw  <-  read_xlsx(
       paste0(data_folder, "SES.xlsx"),
@@ -49,10 +41,6 @@ if (country == "Network Manager") {
     
 } else  {
   # State case ----
-  mymetric <- "KEA"
-  mychart_title <- paste0('Monthly ', mymetric, " - ", country)
-  myaxis_title <- paste0(mymetric, " (%)")
-  
   ## import data  ----
   data_raw_target  <-  read_xlsx(
     paste0(data_folder, "ENV dataset master.xlsx"),
@@ -88,37 +76,106 @@ if (country == "Network Manager") {
     filter(
       entity_name == country,
       lubridate::year(month) == year_report) %>% 
-    mutate (actual = hfe_kpi,
-            year = lubridate::floor_date(month, unit = 'month' )) %>% 
+    mutate (mymetric = hfe_kpi,
+            xlabel = lubridate::floor_date(month, unit = 'month' )) %>% 
     select(
-      year,
-      actual
+      xlabel,
+      mymetric
     ) 
 
-  
-
   ## prepare datasetfor chart
-  data_for_chart <- data_prep_actual %>% 
-    mutate(target = target_value)
+  data_prep <- data_prep_actual %>% 
+    mutate(myothermetric = target_value,
+           type = "Actual")
   
     }
 
-# chart parameters ----
-mytooltip_decimals <- 2
-targetcolor <- 'transparent'
-mymarker_color <- 'transparent'
-mydtick <- 'M1'
-mytickformat <- '%b'
-mytextangle <- '-90'
+## chart parameters ----
+mysuffix <- "%"
+mydecimals <- 2
 
+### trace parameters
+mycolors = c( '#FFC000')
+###set up order of traces
+myfactor <- "Actual"
 
+mytextangle <- -90
+mytextposition <- "inside"
+myinsidetextanchor <- 'middle'
+mytextfont_color <- 'black'
+mytextfont_size <- myfont
+
+myhovertemplate <- paste0('%{y:,.', mydecimals, 'f}', mysuffix)
+mytrace_showlegend <- T
+
+### layout parameters
+myfont_family <- "Roboto"
+mybargap <- 0.25
+mybarmode <- 'group'
+myhovermode <- "x unified"
+myhoverlabel_bgcolor <- 'rgba(255,255,255,0.88)'
+myminsize <- myfont*0.8
+
+#### title
+mytitle_text <- paste0(if_else(country == "Network Manager", "Monthly KEP - ", "Monthly KEA - "), 
+                       country)
+mytitle_x <- 0
+mytitle_y <- 0.99
+mytitle_xanchor <- 'left'
+mytitle_yanchor <- 'top'
+mytitle_font_size <- myfont * 20/15
+
+#### xaxis
+myxaxis_title <- ''
+myxaxis_gridcolor <- 'rgb(255,255,255)'
+myxaxis_showgrid <- TRUE
+myxaxis_showline <- FALSE
+myxaxis_showticklabels <- TRUE
+myxaxis_dtick <- 'M1'
+myxaxis_tickformat <- "%b"
+myxaxis_zeroline <- TRUE
+myxaxis_tickfont_size <- myfont
+
+#### yaxis
+myyaxis_title <- paste0(if_else(country == "Network Manager", "KEP", "KEA"), " (%)")
+myyaxis_gridcolor <- 'rgb(240,240,240)'
+myyaxis_showgrid <- TRUE
+myyaxis_showline <- FALSE
+myyaxis_tickprefix <- ""
+myyaxis_ticksuffix <- "%"
+myyaxis_tickformat <- ".1f"
+
+myyaxis_zeroline <- TRUE
+myyaxis_zerolinecolor <- 'rgb(255,255,255)'
+myyaxis_titlefont_size <- myfont
+myyaxis_tickfont_size <- myfont
+
+#### legend
+mylegend_traceorder <- 'normal'
+mylegend_orientation <- 'h'
+mylegend_xanchor <- "center"
+mylegend_yanchor <- "center"
+mylegend_x <- 0.5
+mylegend_y <- -0.1
+mylegend_font_size <- myfont
+
+#### margin
+mylocalmargin = mymargin
+
+#____additional trace parameters
+myat_name <- "Target"
+myat_mode <- "line"
+myat_marker_color <- 'transparent'
+myat_line_color <- '#FF0000'
+myat_line_width <- mylinewidth
+
+myat_textbold <- TRUE
+myat_textangle <- 0
+myat_textposition <- 'top'
+myat_textfont_color <- 'transparent'
+myat_textfont_size <- myfont
 
 # plot chart ----
 ## function moved to utils  
-mybarct(mywidth, myheight, myfont, mylinewidth, mymargin)
-
-# # export to image 
-# w = 1200
-# h = 600
-# export_fig(mybarct(w, h, 14 * w/900), paste0("env_", mymetric , "_main.png"), w, h)
-
+mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin) %>% 
+  add_line_trace(., data_prep)

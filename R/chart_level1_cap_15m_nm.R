@@ -35,8 +35,8 @@ data_for_chart <- data_raw %>%
 ## moved to parameters  
 mybarc(NA, 300, 14)
 
-# export to image ----
-w = 1200
-h = 600
-export_fig(mybarc(w, h, 14 * w/900),"cap_ifr_15_main.png", w, h)
+# # export to image ----
+# w = 1200
+# h = 600
+# export_fig(mybarc(w, h, 14 * w/900),"cap_ifr_15_main.png", w, h)
 

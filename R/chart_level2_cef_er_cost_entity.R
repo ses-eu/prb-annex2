@@ -36,15 +36,16 @@ for (ez in 1:no_ecz) {
       status = str_replace(status, "A", "Actual costs"),
       status = str_replace(status, "D", "Determined costs")
     ) %>% 
+    rename(type = status) %>% 
     select(
       year,
-      status,
+      type,
       entity_group,
       mymetric
     ) %>% 
-    group_by(entity_group, status) %>% 
-    reframe(year, status, entity_group, mymetric = sum(mymetric)) %>% 
-    mutate(year_text = factor(entity_group, levels = c("Main ATSP",
+    group_by(entity_group, type) %>% 
+    reframe(year, type, entity_group, mymetric = sum(mymetric)) %>% 
+    mutate(xlabel = factor(entity_group, levels = c("Main ATSP",
                                                        "Other ATSP",
                                                        "METSP",
                                                        "NSA (including\nEUROCONTROL)"
@@ -54,31 +55,84 @@ for (ez in 1:no_ecz) {
   data_prep[data_prep == 0] <- NA
   
   ## chart parameters ----
-  mychart_title <- paste0("Total en route costs per entity group - ", year_report)
-  myaxis_title <- "En route costs (€2017'000)"
-  mylegend_y_position <- -0.17
+  mysuffix <- ""
+  mydecimals <- 2
+  
+  ### trace parameters
   mycolors = c('#5B9BD5', '#FFC000')
-
+  ###set up order of traces
+  myfactor <- data_prep %>% select(type) %>% unique() 
+  as.list(myfactor$type)
+  myfactor <- sort(myfactor$type, decreasing = TRUE)
+  
   mytextangle <- 0
   mytextposition <- "outside"
+  myinsidetextanchor <- NA
+  mytextfont_color <- 'black'
+  mytextfont_size <- myfont
   
-  mydtick <- '1'
-  mytickformat_x <- "0"
-  # myrange <- NA
+  myhovertemplate <- paste0('%{y:,.', mydecimals, 'f}', mysuffix)
+  mytrace_showlegend <- T
   
-  myticksuffix <- ""
-  mytickformat <- ",.0f"
+  ### layout parameters
+  myfont_family <- "Roboto"
+  mybargap <- 0.25
+  mybarmode <- 'group'
+  myhovermode <- "x unified"
+  myhoverlabel_bgcolor <- 'rgba(255,255,255,0.88)'
+  myminsize <- myfont*0.8
   
-  ###set up order of traces
-  myfactor <- data_prep %>% select(status) %>% unique() 
-  as.list(myfactor$status)
-  myfactor <- sort(myfactor$status, decreasing = TRUE)
+  #### title
+  mytitle_text <- paste0("Total en route costs per entity group - ", year_report)
+  mytitle_x <- 0
+  mytitle_y <- 0.99
+  mytitle_xanchor <- 'left'
+  mytitle_yanchor <- 'top'
+  mytitle_font_size <- myfont * 20/15
+  
+  #### xaxis
+  myxaxis_title <- ''
+  myxaxis_gridcolor <- 'rgb(255,255,255)'
+  myxaxis_showgrid <- TRUE
+  myxaxis_showline <- FALSE
+  myxaxis_showticklabels <- TRUE
+  myxaxis_tickformat <- "0"
+  myxaxis_dtick <- 1
+  myxaxis_zeroline <- TRUE
+  myxaxis_tickfont_size <- myfont
+  
+  #### yaxis
+  myyaxis_title <- "En route costs (€2017'000)"
+  myyaxis_gridcolor <- 'rgb(240,240,240)'
+  myyaxis_showgrid <- TRUE
+  myyaxis_showline <- FALSE
+  myyaxis_tickprefix <- ""
+  myyaxis_ticksuffix <- ""
+  myyaxis_tickformat <- ".0f"
+  
+  myyaxis_zeroline <- TRUE
+  myyaxis_zerolinecolor <- 'rgb(255,255,255)'
+  myyaxis_titlefont_size <- myfont
+  myyaxis_tickfont_size <- myfont
+  
+  #### legend
+  mylegend_traceorder <- 'normal'
+  mylegend_orientation <- 'h'
+  mylegend_xanchor <- "center"
+  mylegend_yanchor <- "center"
+  mylegend_x <- 0.5
+  mylegend_y <- -0.17
+  mylegend_font_size <- myfont
+  
+  #### margin
+  mylocalmargin = mymargin
   
   ## define chart function ----
   # function moved to utils
   
   ## plot chart  ----
-  myplot[[ez]] <- mybarc_nonst(mywidth, myheight, myfont, mymargin)
+  myplot[[ez]] <- mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin)
+  # myplot[[ez]]
   
 }
 

@@ -321,19 +321,24 @@ read_mytable <- function(file, sheet, table){
     
     #subtable for the ex post roe calc
     data_prep_t1_1 <- data_filtered_t1 %>% 
-      filter(
-        # for this calculation we need only actuals
-        status == 'A') %>% 
-      mutate(
-        ex_post_roe = x3_4_total_assets * x3_8_share_of_equity_perc * x3_6_return_on_equity_perc,
-      ) %>% 
       select(year,
+             status,
              entity_type,
              charging_zone_code,
              entity_type_id,
              entity_name,
              entity_code,
-             ex_post_roe)
+             x3_4_total_assets,
+             x3_8_share_of_equity_perc,
+             x3_6_return_on_equity_perc) %>% 
+      mutate(
+        roe = x3_4_total_assets * x3_8_share_of_equity_perc * x3_6_return_on_equity_perc,
+      ) %>% 
+      select(-c(x3_4_total_assets, x3_8_share_of_equity_perc, x3_6_return_on_equity_perc)) %>% 
+      pivot_wider(names_from = 'status',
+                  values_from = 'roe') %>% 
+      rename(ex_ante_roe_nc = D,
+             ex_post_roe_nc = A)
     
     #subtable for the calc of Difference in costs: gain (+)/Loss (-) retained/borne by the ATSP
     data_prep_t1_2 <- data_filtered_t1 %>% 
@@ -354,9 +359,19 @@ read_mytable <- function(file, sheet, table){
         .default = dif_cost_gain_loss)
       )
     
+    #subtable for the calc actual revenues
+    data_prep_t1_3 <- data_filtered_t1 %>% 
+      filter(status == 'A') %>% 
+      select(year,
+             entity_code,
+             status,
+             x4_2_cost_excl_vfr
+             )
+    
     # join the t1 subtables
     data_prep_t1 <- data_prep_t1_1 %>% 
-      left_join(data_prep_t1_2, by = c("year", "entity_code"))
+      left_join(data_prep_t1_2, by = c("year", "entity_code")) %>% 
+      left_join(data_prep_t1_3, by = c("year", "entity_code"))
     
     # extract data from t2
     data_prep_t2 <- data_raw_t2 %>% 
@@ -387,34 +402,46 @@ read_mytable <- function(file, sheet, table){
       mutate(
         atsp_gain_loss_cost_sharing = sum(dif_cost_gain_loss, x2_5_adjust_inflation, x3_8_diff_det_cost_actual_cost, na.rm = TRUE),
         total_net_gain_loss = sum(atsp_gain_loss_cost_sharing, trs, x6_4_financial_incentive, na.rm = TRUE),
-        regulatory_result = total_net_gain_loss + ex_post_roe
+        regulatory_result_nc = total_net_gain_loss + ex_post_roe_nc,
+        actual_revenues_nc = sum(x4_2_cost_excl_vfr, total_net_gain_loss, na.rm = TRUE)
       ) %>% 
       select(-entity_type, -charging_zone_code, -entity_name, -entity_code) %>% 
-      mutate(xlabel = case_when(
+      mutate(type = case_when(
         entity_type_id == 'ANSP1'  ~ 'Main ANSP',
         entity_type_id %like% 'MET'  ~ 'MET',
         .default = 'Other ANSP'
       )) %>% 
-      group_by(year, xlabel) %>% 
+      group_by(year, type) %>% 
       # the plot function already divides by 1000
-      summarise(mymetric = sum(regulatory_result)/10^3) %>%
+      summarise(regulatory_result_nc = sum(regulatory_result_nc)/10^3,
+                ex_ante_roe_nc = sum(ex_ante_roe_nc)/10^3,
+                actual_revenues_nc = sum(actual_revenues_nc)/10^3
+                ) %>%
       ungroup() %>% 
-      mutate(mymetric = case_when(
+      mutate(regulatory_result_nc = case_when(
         year > year_report ~ 0,
-        .default = mymetric
-      )
-      ) %>% 
+        .default = regulatory_result_nc),
+        ex_ante_roe_nc = case_when(
+          year > year_report ~ 0,
+          .default = ex_ante_roe_nc),
+        actual_revenues_nc = case_when(
+          year > year_report ~ 0,
+          .default = actual_revenues_nc)
+        ) %>% 
       mutate(year_text = as.character(year)
       ) %>% 
-      select(year_text, xlabel, mymetric)
+      select(year_text, type, regulatory_result_nc, ex_ante_roe_nc, actual_revenues_nc)
     
     ## sum 2020-2021 together
     data_prep_202021 <- data_prep_years_split %>% 
       filter(year_text == c('2020', '2021')) %>% 
-      group_by(xlabel) %>% 
-      summarise(mymetric = sum(mymetric, na.rm = TRUE)) %>% 
-      mutate( year_text = '2020-2021') %>% 
-      relocate(year_text, .before = xlabel)
+      group_by(type) %>% 
+      summarise(regulatory_result_nc = sum(regulatory_result_nc, na.rm = TRUE),
+                ex_ante_roe_nc = sum(ex_ante_roe_nc, na.rm = TRUE),
+                actual_revenues_nc = sum(actual_revenues_nc, na.rm = TRUE),
+      ) %>% 
+      mutate(year_text = '2020-2021') %>% 
+      relocate(year_text, .before = type)
     
     data_prep_nat_curr <- data_prep_202021 %>% 
       rbind(data_prep_years_split) %>% 
@@ -445,8 +472,11 @@ read_mytable <- function(file, sheet, table){
     
     regulatory_result <- data_prep_nat_curr %>% 
       left_join(data_prep_xrates, by = "year_text") %>% 
-      mutate(mymetric = mymetric / pp_exchangerate) %>% 
-      select(-pp_exchangerate) %>% 
+      mutate(regulatory_result = regulatory_result_nc / pp_exchangerate,
+             ex_ante_roe = ex_ante_roe_nc / pp_exchangerate,
+             actual_revenues = actual_revenues_nc / pp_exchangerate
+             ) %>% 
+      select(-pp_exchangerate, -regulatory_result_nc, -ex_ante_roe_nc, -actual_revenues_nc) %>% 
       left_join(tsus, by = "year_text")
     
     return(regulatory_result)
@@ -463,6 +493,132 @@ read_mytable <- function(file, sheet, table){
     invisible(cropped <- image_crop(figure, paste0(width, "x", height)))
     invisible(image_write(cropped, paste0(fig_dir, fig_name)))
   }
+
+  
+## universal barchart  ----
+mybarchart <-  function(df, mywidth, myheight, myfont, mymargin) {
+  df %>% 
+    plot_ly(
+      width = mywidth,
+      height = myheight,
+      x = ~ xlabel,
+      y = ~ mymetric,
+      yaxis = "y1",
+      # marker = list(color = mymarker_color),
+      colors = mycolors,
+      color = ~ factor(type, levels = myfactor),
+      text = ~ paste0(format(mymetric,  big.mark  = ",", nsmall = mydecimals), mysuffix),
+      # text = ~ mymetric,
+      textangle = mytextangle,
+      textposition = mytextposition, 
+      insidetextanchor = myinsidetextanchor,
+      textfont = list(color = mytextfont_color, size = mytextfont_size),
+      cliponaxis = FALSE,
+      type = "bar",
+      hovertemplate = myhovertemplate,
+      # hoverinfo = "none",
+      showlegend = mytrace_showlegend
+    ) %>% 
+    config( responsive = TRUE,
+            displaylogo = FALSE,
+            displayModeBar = F
+            # modeBarButtons = list(list("toImage")),
+    ) %>% 
+    layout(
+      uniformtext=list(minsize = myminsize, mode='show'),
+      font = list(family = myfont_family),
+      title = list(text = mytitle_text,
+                   x = mytitle_x, 
+                   y = mytitle_y, 
+                   xanchor = mytitle_xanchor, 
+                   yanchor = mytitle_yanchor,
+                   font = list(size = mytitle_font_size)
+      ),
+      bargap = mybargap,
+      barmode = mybarmode,
+      hovermode = myhovermode,
+      hoverlabel = list(bgcolor = myhoverlabel_bgcolor),
+      xaxis = list(title = myxaxis_title,
+                   gridcolor = myxaxis_gridcolor,
+                   showgrid = myxaxis_showgrid,
+                   showline = myxaxis_showline,
+                   showticklabels = myxaxis_showticklabels,
+                   dtick = myxaxis_dtick,
+                   tickformat = myxaxis_tickformat,
+                   # tickcolor = 'rgb(127,127,127)',
+                   # ticks = 'outside',
+                   zeroline = myxaxis_zeroline, 
+                   tickfont = list(size = myxaxis_tickfont_size)
+      ),
+      yaxis = list(title = myyaxis_title,
+                   gridcolor = myyaxis_gridcolor,
+                   showgrid = myyaxis_showgrid,
+                   showline = myyaxis_showline,
+                   tickprefix = myyaxis_tickprefix,
+                   ticksuffix = myyaxis_ticksuffix, 
+                   tickformat = myyaxis_tickformat,
+                   # showticklabels = TRUE,
+                   # tickcolor = 'rgb(127,127,127)',
+                   # ticks = 'outside',
+                   zeroline = myyaxis_zeroline,
+                   zerolinecolor = myyaxis_zerolinecolor,
+                   titlefont = list(size = myyaxis_titlefont_size), 
+                   tickfont = list(size = myyaxis_tickfont_size)
+      ),
+      legend = list(
+        traceorder= mylegend_traceorder,
+        orientation = mylegend_orientation, 
+        xanchor = mylegend_xanchor,
+        yanchor = mylegend_yanchor,
+        x = mylegend_x,  
+        y = mylegend_y, 
+        font = list(size = mylegend_font_size)
+      ),
+      margin = mymargin
+      
+    )
+}
+
+## universal empty trace to force year series  ----
+add_empty_trace <- function(myplot, df){
+  myplot %>%   
+  add_trace(
+    data = df,
+    x = ~ xlabel,
+    y = ~ '',
+    name = "Fake series to force all years in x axis",
+    yaxis = "y1",
+    mode = "markers",
+    type = 'scatter',
+    marker = list(size = mylinewidth, color = 'transparent'),
+    showlegend = F,
+    # hovertemplate = '',
+    hoverinfo = 'none'
+    )
+}
+
+## add linetrace  ----
+add_line_trace <- function(myplot, df){
+  myplot %>%   
+    add_trace(
+      data = df,
+      x = ~ xlabel,
+      y = ~ myothermetric,
+      yaxis = "y1",
+      mode = myat_mode, 
+      type = 'scatter',
+      name = myat_name,
+      text = ~ paste0(if_else(myat_textbold == TRUE, "<b>",""),
+        format(myothermetric,  big.mark  = ",", nsmall = mydecimals), mysuffix,
+        if_else(myat_textbold == TRUE, "</b>","")),
+      textangle = myat_textangle,
+      textposition = myat_textposition,
+      textfont = list(color = myat_textfont_color, size = myat_textfont_size),
+      line = list(color = myat_line_color, width = myat_line_width),
+      marker = list(size = myat_line_width * 3, color = myat_marker_color),
+      showlegend = T
+    )
+}
 
 
 ## plot bar chart with target  ----
@@ -1072,7 +1228,7 @@ read_mytable <- function(file, sheet, table){
       )
   }
   
-  ## plot grouped/stacked barchart  ----
+  ## plot grouped barchart  ----
   mybarc_group <-  function(mywidth, myheight, myfont, mymargin) {
     data_prep %>% 
       plot_ly(
@@ -1093,7 +1249,7 @@ read_mytable <- function(file, sheet, table){
         # name = mymetric,
         textfont = list(color = mytextcolor, size = myfont),
         type = "bar",
-        # hovertemplate = paste0('%{y} (A-D): %{x:+0,}<extra></extra>'),
+        hovertemplate = paste('%{y}'),
         # hoverinfo = "none",
         showlegend = T
       ) %>% 
@@ -1112,7 +1268,7 @@ read_mytable <- function(file, sheet, table){
                      font = list(size = myfont * 20/15)
         ),
         bargap = 0.25,
-        barmode = 'stack',
+        barmode = mybarmode,      #  'stack',
         hovermode = "x unified",
         hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
         xaxis = list(title = "",
