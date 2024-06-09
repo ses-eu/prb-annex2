@@ -1,10 +1,6 @@
  
 if (country == "Network Manager") {
   # NM case ----
-  mymetric <- "KEP"
-  mychart_title <- mymetric
-  myaxis_title <- paste0(mymetric, " (%)")
-  
   ## import data  ----
   data_raw  <-  read_xlsx(
     paste0(data_folder, "NM_data.xlsx"),
@@ -24,10 +20,6 @@ if (country == "Network Manager") {
   
 } else if (country == "SES RP3"){
     # SES case ----
-    mymetric <- "KEA"
-    mychart_title <- paste0(mymetric, " - ", country)
-    myaxis_title <- paste0(mymetric, " (%)")
-    
     ## import data  ----
     data_raw  <-  read_xlsx(
       paste0(data_folder, "SES.xlsx"),
@@ -78,80 +70,135 @@ if (country == "Network Manager") {
   
   ## prepare data ----
   data_raw_kep_p <- data_raw_kep %>% 
-    rename(status = indicator_type,
-           mymetric = kep_value) %>% 
+    rename(type = indicator_type,
+           mymetric = kep_value,
+           xlabel = month) %>% 
     mutate(mymetric = round(mymetric, 2)) %>% 
     filter(
       entity_name == country,
-      lubridate::year(month) == year_report
-    ) 
+      lubridate::year(xlabel) == year_report
+    ) %>% 
+    select(xlabel, type, mymetric)
   
   data_raw_scr_p <- data_raw_scr %>% 
-    rename(status = indicator_type,
-           mymetric = scr_value) %>% 
+    rename(type = indicator_type,
+           mymetric = scr_value,
+           xlabel = month) %>% 
     mutate(mymetric = round(mymetric * 100, 2)) %>% 
     filter(
       entity_name == country,
-      lubridate::year(month) == year_report
-    ) 
+      lubridate::year(xlabel) == year_report
+    )  %>% 
+    select(xlabel, type, mymetric)
   
   data_prep <- data_raw_kep_p %>% 
     rbind(data_raw_scr_p) %>% 
     mutate(
-      year_text = lubridate::floor_date(month, unit = 'month') 
+      xlabel = lubridate::floor_date(xlabel, unit = 'month') 
       ) %>% as_tibble()
 
   data_prep_kea <- data_raw_kea %>% 
     filter(
       entity_name == country,
       lubridate::year(month) == year_report) %>% 
-    mutate (kea = hfe_kpi,
-            year = lubridate::floor_date(month, unit = 'month' )) %>% 
+    mutate (myothermetric = hfe_kpi,
+            type = indicator_type,
+            xlabel = lubridate::floor_date(month, unit = 'month' )) %>% 
     select(
-      year,
-      kea
+      xlabel,
+      type,
+      myothermetric
     ) 
   
-  ## chart parameters ----
-  mychart_title <- paste0("Monthly KEA, KEP and SCR - ", country)
-  myaxis_title <- "KEA, KEP and SCR (%)"
-  mylegend_y_position <- -0.1
-  mycolors <- c('#FFC000', '#5B9BD5')
-  
-  mytextangle <- -90
-  mytextposition <- "inside"
-  mytextsize <- myfont * 0.9
-  mylabelposition <- 'top'
-
-  mydtick <- 'M1'
-  mytickformat_x <- "%b"
-  myrange <- NA
-  
-  myticksuffix <- "%"
-  mytickformat_y <- ",.0f"
-  
-  ###set up order of traces
-  myfactor <- c("KEP", "SCR")
   
     }
 
+## chart parameters ----
+mysuffix <- "%"
+mydecimals <- 2
+
+### trace parameters
+mycolors = c('#FFC000', '#5B9BD5')
+###set up order of traces
+myfactor <- c("KEP", "SCR")
+
+mytextangle <- -90
+mytextposition <- "inside"
+myinsidetextanchor <- 'top'
+mytextfont_color <- 'black'
+mytextfont_size <- myfont * 0.9
+
+myhovertemplate <- paste0('%{y:,.', mydecimals, 'f}', mysuffix)
+mytrace_showlegend <- T
+
+### layout parameters
+myfont_family <- "Roboto"
+mybargap <- 0.25
+mybarmode <- 'group'
+myhovermode <- "x unified"
+myhoverlabel_bgcolor <- 'rgba(255,255,255,0.88)'
+myminsize <- myfont*0.8
+
+#### title
+mytitle_text <- paste0("Monthly KEA, KEP and SCR - ", country)
+mytitle_x <- 0
+mytitle_y <- 0.99
+mytitle_xanchor <- 'left'
+mytitle_yanchor <- 'top'
+mytitle_font_size <- myfont * 20/15
+
+#### xaxis
+myxaxis_title <- ''
+myxaxis_gridcolor <- 'rgb(255,255,255)'
+myxaxis_showgrid <- TRUE
+myxaxis_showline <- FALSE
+myxaxis_showticklabels <- TRUE
+myxaxis_dtick <- 'M1'
+myxaxis_tickformat <- "%b"
+myxaxis_zeroline <- TRUE
+myxaxis_tickfont_size <- myfont
+
+#### yaxis
+myyaxis_title <- "KEA, KEP and SCR (%)"
+myyaxis_gridcolor <- 'rgb(240,240,240)'
+myyaxis_showgrid <- TRUE
+myyaxis_showline <- FALSE
+myyaxis_tickprefix <- ""
+myyaxis_ticksuffix <- "%"
+myyaxis_tickformat <- ".1f"
+
+myyaxis_zeroline <- TRUE
+myyaxis_zerolinecolor <- 'rgb(255,255,255)'
+myyaxis_titlefont_size <- myfont
+myyaxis_tickfont_size <- myfont
+
+#### legend
+mylegend_traceorder <- 'normal'
+mylegend_orientation <- 'h'
+mylegend_xanchor <- "center"
+mylegend_yanchor <- "center"
+mylegend_x <- 0.5
+mylegend_y <- -0.1
+mylegend_font_size <- myfont
+
+#### margin
+mylocalmargin = mymargin
+
+#____additional trace parameters
+myat_name <- "KEA"
+myat_mode <- "markers"
+myat_marker_color <- '#FF0000'
+myat_line_color <- 'transparent'
+myat_line_width <- mylinewidth
+myat_showlegend <- T
+
+myat_textbold <- TRUE
+myat_textangle <- 0
+myat_textposition <- 'top'
+myat_textfont_color <- 'transparent'
+myat_textfont_size <- myfont
+
 # plot chart ----
 ## function moved to utils  
-mybarc_nonst(mywidth, myheight, myfont, mymargin) %>% 
-  add_trace(
-    data = data_prep_kea,
-    inherit = FALSE,
-    x = ~ year,
-    y = ~ kea,
-    yaxis = "y1",
-    type = 'scatter',  mode = 'markers',
-    marker = list(size = mylinewidth * 3, color = '#FF0000'),
-    name = "KEA",
-    opacity = 1,
-    hovertemplate = paste0('%{y:.2f}', myticksuffix),
-    # hoverinfo = "none",
-    showlegend = T
-  )
-
-
-
+mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin) %>% 
+  add_line_trace(., data_prep_kea)

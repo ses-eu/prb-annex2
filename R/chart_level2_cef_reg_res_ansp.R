@@ -94,7 +94,7 @@ for (ez in 1:no_ecz) {
       hoverinfo = 'none'
     ) 
     
-  myplot[[ez]]
+  # myplot[[ez]]
 }
 
 # create html plotlist ----

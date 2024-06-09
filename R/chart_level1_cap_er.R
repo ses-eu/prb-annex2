@@ -1,10 +1,3 @@
- 
-# parameters 
-# mywidth = 300
-# myheight = 220
-# myfont = 8
-# # mymargin = list (t = 20, l = 0)
-# mylinewidth = 2
 
 if (country == 'SES RP3') {
   # SES case ----
@@ -72,20 +65,27 @@ if (country == 'SES RP3') {
     filter(
       state == .env$country) %>% 
     mutate(
-      target = round(delay_target, 2)
+      myothermetric = round(delay_target, 2),
+      type = 'Target',
+      xlabel = year
     ) %>% 
     select(
-      year,
-      target
-    ) %>% arrange(year)
+      xlabel,
+      type,
+      myothermetric
+    ) %>% arrange(xlabel)
   
-  data_prep_actual <- data_raw_actual %>% 
+  data_prep <- data_raw_actual %>% 
     filter(
-      state == .env$country) %>% 
+      state == .env$country,
+      year <= .env$year_report) %>% 
+    rename(movements = ifr_movements,
+           xlabel = year) %>% 
+    # right_join(rp3_years, by = "xlabel") %>% 
     pivot_longer(
       cols = c(atc_capacity, atc_staffing, atc_disruptions, weather, other_non_atc),
       names_to = "type",
-      values_to = "delay"
+      values_to = "mymetric"
     ) %>% 
     mutate(
       type = case_when(
@@ -95,36 +95,133 @@ if (country == 'SES RP3') {
         type == "weather" ~ "Weather",
         type == "other_non_atc" ~ "Other non-ATC"
       )
-    ) %>% 
-    rename(movements = ifr_movements)
+    )
+  
+  data_prep_total <- data_prep %>% 
+    select(xlabel, mymetric) %>% 
+    group_by(xlabel) %>% 
+    summarise(myothermetric = sum(mymetric)) %>%
+    mutate(myothermetric = format(round(myothermetric,2), digits = 2)) %>% 
+    mutate(type = "Total")
 }
 
 # chart ----
-## set parameters for chart ----
 
-  if (knitr::is_latex_output()) {
-    if (country == 'SES RP3') {
-      mymargin <- list (t = 20, r = 0, l = 30)
-    } else {
-      mymargin <- list (t = 20, r = 50, l = 10)
-    }
-    mylegend_x_pos <- -0.12
-  } else {
-    mymargin <- list (t = 40, r = 70)
-    mylegend_x_pos <- -0.12
-  }
-  
-mytitle <- paste0("Average en route ATFM delay per flight - ", country)
-myrightaxis <- "IFR flights ('000)"
-mytrafficmetric <- "IFR mvts."
+## chart parameters ----
+mysuffix <- ""
+mydecimals <- 2
 
-## plot chart ----
-# function defined in utils
-mycapchart(mywidth, myheight+20, myfont, mylinewidth, mymargin,
-           data_prep_target,
-           data_prep_actual,
-           mytitle,
-           myrightaxis,
-           mytrafficmetric)
+### trace parameters
+mycolors = c('#ED7D31', '#F8CBAD', '#BF8F00', '#92D050', '#A5A5A5')
+###set up order of traces
+myfactor <- c("Capacity", "Staffing", 
+              "Disruptions", "Weather",
+              "Other non-ATC")
 
+mytextangle <- 0
+mytextposition <- "inside"
+myinsidetextanchor <- 'middle'
+mytextfont_color <- 'transparent'
+mytextfont_size <- 1
 
+myhovertemplate <- paste0('%{y:,.', mydecimals, 'f}', mysuffix)
+mytrace_showlegend <- T
+
+### layout parameters
+myfont_family <- "Roboto"
+mybargap <- 0.25
+mybarmode <- 'stack'
+myhovermode <- "x unified"
+myhoverlabel_bgcolor <- 'rgba(255,255,255,0.88)'
+myminsize <- myfont*0.8
+
+#### title
+mytitle_text <- paste0("Average en route ATFM delay per flight - ", country)
+mytitle_x <- 0
+mytitle_y <- 0.99
+mytitle_xanchor <- 'left'
+mytitle_yanchor <- 'top'
+mytitle_font_size <- myfont * 20/15
+
+#### xaxis
+myxaxis_title <- ""
+myxaxis_gridcolor <- 'rgb(255,255,255)'
+myxaxis_showgrid <- TRUE
+myxaxis_showline <- FALSE
+myxaxis_showticklabels <- TRUE
+myxaxis_dtick <- 1
+myxaxis_tickformat <- "0"
+myxaxis_zeroline <- TRUE
+myxaxis_tickfont_size <- myfont
+
+#### yaxis
+myyaxis_title <- "Average minutes of delay"
+myyaxis_gridcolor <- 'rgb(240,240,240)'
+myyaxis_showgrid <- TRUE
+myyaxis_showline <- FALSE
+myyaxis_tickprefix <- ""
+myyaxis_ticksuffix <- ""
+myyaxis_tickformat <- ".2f"
+
+myyaxis_zeroline <- TRUE
+myyaxis_zerolinecolor <- 'rgb(255,255,255)'
+myyaxis_titlefont_size <- myfont
+myyaxis_tickfont_size <- myfont
+
+#### legend
+mylegend_traceorder <- 'normal'
+mylegend_orientation <- 'h'
+mylegend_xanchor <- "center"
+mylegend_yanchor <- "center"
+mylegend_x <- 0.5
+mylegend_y <- -0.1
+mylegend_font_size <- myfont
+
+#### margin
+mylocalmargin <- mymargin
+
+# if (knitr::is_latex_output()) {
+#   if (country == 'SES RP3') {
+#     mylocalmargin <- list (t = 20, r = 0, l = 30)
+#   } else {
+#     mylocalmargin <- list (t = 20, r = 50, l = 10)
+#   }
+# } else {
+#   mylocalmargin <- list (t = 40, r = 70)
+# }
+
+#____additional trace parameters
+## additional trace with text totals
+myat_name <- "Total delay"
+myat_mode <- "markers"
+myat_marker_color <- 'transaprent'
+myat_line_color <- 'transparent'
+myat_line_width <- 1
+myat_showlegend <- F
+
+myat_textbold <- TRUE
+myat_textangle <- 0
+myat_textposition <- 'top'
+myat_textfont_color <- 'black'
+myat_textfont_size <- myfont
+
+# plot chart ----
+## function moved to utils  
+myplot <- mybarchart(data_prep, mywidth, myheight + 20, myfont, mylocalmargin) %>% 
+  add_line_trace(., data_prep_total)
+
+## additional target trace
+myat_name <- "Target"
+myat_mode <- "line+markers"
+myat_marker_color <- '#FF0000'
+myat_line_color <- '#FF0000'
+myat_line_width <- mylinewidth
+myat_showlegend <- T
+
+myat_textbold <- TRUE
+myat_textangle <- 0
+myat_textposition <- 'top'
+myat_textfont_color <- '#FF0000'
+myat_textfont_size <- myfont
+
+myplot %>%  add_line_trace(., data_prep_target)

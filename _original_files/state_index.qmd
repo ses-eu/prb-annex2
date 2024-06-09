@@ -114,14 +114,14 @@ tcz_list_string <- if_else(no_tcz == 0, '',
 
 ::: {#container-mvt}
 :::: {#chart-mvt class="mychart"}
-```{r}
+```{r chart-mvt}
 #| file: R/chart_level1_traffic_mvt.R
 #| out.width: "100%"
 ```
 ::::
 
 :::: {#concl-mvt}
-```{r}
+```{r concl-mvt}
 mvt_conc <- read_mytable("PRB_findings.xlsx", "traffic_IFR", "Table_Findings_traffic_IFR") %>% 
   filter(Year_Report == params$year_report, State == params$country) %>% 
   select(Conclusion) %>% toString() %>% paste0(., "@")
@@ -138,14 +138,14 @@ mvt_conc1 <- mvt_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 <br>
 
 :::: {#chart-su class="mychart"}
-```{r}
+```{r chart-su}
 #| file: R/chart_level1_traffic_su.R
 #| out.width: "100%"
 ```
 ::::
 
 :::: {#concl-su}
-```{r}
+```{r concl-su}
 tsu_conc <- read_mytable("PRB_findings.xlsx", "traffic_SUs", "Table_Findings_traffic_TSU") %>% 
   filter(Year_Report == params$year_report, State == params$country) %>% 
   select(Conclusion) %>% toString() %>% paste0(., "@")
@@ -164,14 +164,14 @@ tsu_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ## Safety (Main ANSP)
 
 :::: {#chart-saf class="mychart"}
-```{r}
+```{r chart-saf}
 #| file: R/chart_level1_saf.R
 #| out.width: "100%"
 ```
 ::::
 
 :::: {#concl-saf}
-```{r}
+```{r concl-saf}
 saf_conc <- read_mytable("PRB_findings.xlsx", "safety", "Table_Findings_safety") %>% 
   filter(Year_Report == params$year_report, State == params$country) %>% 
   select(Conclusion) %>% toString() %>% paste0(., "@")
@@ -191,14 +191,14 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ## Environment (Member State)
 
 :::: {#chart-env class="mychart"}
-```{r}
+```{r chart-env}
 #| file: R/chart_level1_kea.R
 #| out.width: "100%"
 ```
 ::::
 
 :::: {#concl-env}
-```{r}
+```{r concl-env}
 env_conc <- read_mytable("PRB_findings.xlsx", "environment", "Table_Findings_environment") %>% 
   filter(Year_Report == params$year_report, State == params$country) %>% 
   select(Conclusion) %>% toString() %>% paste0(., "@")
@@ -217,24 +217,24 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 <div style="height: 1px"></div>
 
 :::: {#chart-cap class="mychart"}
-```{r}
+```{r chart-cap-er}
 #| file: R/chart_level1_cap_er.R
 #| out.width: "100%"
 ```
 
+`r if (params$no_tcz == 0) "::::: {.content-hidden}"`
 <br>
 
-```{r}
+```{r chart-cap-trm}
+#| file: R/chart_level1_cap_trm.R
 #| out.width: "100%"
-  source("R/chart_level1_cap_trm.R")
-  if(no_tcz > 0) {
-    myfig()
-  }
 ```
+
+`r if (params$no_tcz == 0) ":::::"`
 ::::
 
 :::: {#concl-cap}
-```{r}
+```{r concl-cap}
 cap_er_conc <- read_mytable("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity") %>% 
   filter(Year_Report == params$year_report, State == params$country) %>% 
   select(Conclusion) %>% toString() %>% paste0(., "@")
@@ -253,24 +253,24 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 ## Cost-efficiency (En route/Terminal charging zone(s))
 
 :::: {#chart-cef class="mychart"}
-```{r}
+```{r chart-cef-er}
 #| file: R/chart_level1_cef_er.R
 #| out.width: "100%"
 ```
 
+`r if (params$no_tcz == 0) "::::: {.content-hidden}"`
 <br>
 
-```{r}
+```{r chart-cef-trm}
+#| file: R/chart_level1_cef_trm.R
 #| out.width: "100%"
-  source("R/chart_level1_cef_trm.R")
-  if(no_tcz > 0) {
-    myfig()
-  }
 ```
+
+`r if (params$no_tcz == 0) ":::::"`
 ::::
 
 :::: {#concl-cef}
-```{r}
+```{r concl-cef}
 cef_conc <- read_mytable("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF") %>% 
   filter(Year_Report == params$year_report, State == params$country) %>% 
   select(Conclusion) %>% toString() %>% paste0(., "@")

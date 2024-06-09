@@ -73,11 +73,8 @@ risus mus habitasse.
 ::::: {#chart-cap class="mychart"}
 
 ```{r chart-cap-trm}
+#| file: R/chart_level1_cap_trm.R
 #| out.width: "100%"
-  source("R/chart_level1_cap_trm.R")
-  if(no_tcz > 0) {
-    myfig()
-  }
 ```
 
 <br>

@@ -176,6 +176,7 @@ myat_mode <- "line+markers"
 myat_marker_color <- '#FF0000'
 myat_line_color <- '#FF0000'
 myat_line_width <- mylinewidth
+myat_showlegend <- T
 
 myat_textbold <- TRUE
 myat_textangle <- 0
