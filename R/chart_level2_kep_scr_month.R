@@ -187,6 +187,8 @@ mylocalmargin = mymargin
 #____additional trace parameters
 myat_name <- "KEA"
 myat_mode <- "markers"
+myat_yaxis <- "y1"
+myat_symbol <- NA
 myat_marker_color <- '#FF0000'
 myat_line_color <- 'transparent'
 myat_line_width <- mylinewidth

@@ -33,9 +33,9 @@ for (ez in 1:no_ecz) {
       type == 'reg_res_per_su'  ~ 'Regulatory result per SU',
       type == 'aucu_excluding_or'  ~ 'AUCU (before other revenues)'
       ),
-      xlabel = year_text
-    
-    )
+      xlabel = year_text,
+      myothermetric = round(rr_as_perc_aucu, 2)
+    ) 
     
   ## chart parameters ----
   mysuffix <- ""
@@ -108,22 +108,25 @@ for (ez in 1:no_ecz) {
   #### margin
   mylocalmargin = list(t = 60, b = 0, l = 60, r = 40)
   
-  ## define chart function ----
-  ### function moved to utils
+  #____additional trace parameters
+  myat_name <- "Share of RR in AUCU"
+  myat_mode <- "markers"
+  myat_yaxis <- "y2"
+  myat_symbol <- NA
+  myat_marker_color <- '#E46C0A'
+  myat_line_color <- 'transparent'
+  myat_line_width <- mylinewidth
+  myat_showlegend <- T
+  
+  myat_textbold <- FALSE
+  myat_textangle <- 0
+  myat_textposition <- 'top'
+  myat_textfont_color <- 'transparent'
+  myat_textfont_size <- myfont
   
   ## plot chart  ----
   myplot[[ez]] <- mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin) %>% 
-    add_trace(
-      data = filter(data_prep, type == 'Regulatory result per SU'),
-      x = ~ xlabel,
-      y = ~ round(rr_as_perc_aucu, 2),
-      name = "Share of RR in AUCU",
-      yaxis = "y2",
-      mode = "markers",
-      type = 'scatter',
-      marker = list(size = mylinewidth * 3, color = '#E46C0A'),
-      showlegend = T
-    ) %>% 
+    add_line_trace(., filter(data_prep, type == 'Regulatory result per SU'))  %>% 
     add_empty_trace(., data_prep) %>% 
     layout(yaxis2 = list(
       title = 'Regulatory result as a % of AUCU',
@@ -137,5 +140,3 @@ for (ez in 1:no_ecz) {
 
 # create html plotlist ----
 htmltools::tagList(myplot)
-
-# https://stackoverflow.com/questions/35193612/multiple-r-plotly-figures-generated-in-a-rmarkdown-knitr-chunk-document

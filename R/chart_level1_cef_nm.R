@@ -22,7 +22,8 @@ data_prep_costs <- data_prep_wide %>%
   mutate(xlabel= year) %>% 
   select(xlabel, planned_costs, actual_costs) %>% 
   pivot_longer(-xlabel, names_to = "type", values_to = "myothermetric") %>% 
-  mutate(type = if_else(type == "actual_costs", "Actual costs", "Planned costs"))
+  mutate(type = if_else(type == "actual_costs", "Actual costs", "Planned costs"),
+         myothermetric = round(myothermetric/1000, 2))
 
 # chart parameters ----
 mysuffix <- ""
@@ -97,38 +98,44 @@ mylegend_font_size <- myfont
 #### margin
 mylocalmargin = list(t = 60, b = 0, l = 60, r = 50)
 
+#____additional trace parameters
+myat_name <- "Planned costs"
+myat_mode <- "line+markers"
+myat_yaxis <- "y2"
+myat_symbol <- NA
+myat_marker_color <- '#5B9BD5'
+myat_line_color <- '#5B9BD5'
+myat_line_width <- mylinewidth
+myat_showlegend <- T
+
+myat_textbold <- FALSE
+myat_textangle <- 0
+myat_textposition <- 'top'
+myat_textfont_color <- 'transparent'
+myat_textfont_size <- myfont
+
 # plot chart  ----
-mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin) %>% 
-  add_trace(
-    inherit = FALSE,
-    data = filter(data_prep_costs, type == "Planned costs"),
-    x = ~ xlabel,
-    y = ~ round(myothermetric/1000, 2),
-    # name = "Actual costs",
-    yaxis = "y2",
-    type = 'scatter',
-    mode = "line+markers",
-    name = "Planned costs",
-    text = "",
-    line = list(width = mylinewidth, color = '#5B9BD5'),
-    marker = list(size = mylinewidth * 3, color = '#5B9BD5'),
-    showlegend = T
-  )  %>%
-  add_trace(
-    inherit = FALSE,
-    data = filter(data_prep_costs, type == "Actual costs"),
-    x = ~ xlabel,
-    y = ~ round(myothermetric/1000, 2),
-    # name = "Actual costs",
-    yaxis = "y2",
-    type = 'scatter',
-    mode = "line+markers",
-    name = "Actual costs",
-    text = "",
-    line = list(width = mylinewidth, color = '#FFC000'),
-    marker = list(size = mylinewidth * 3, color = '#FFC000'),
-    showlegend = T
-  )  %>% 
+myplot_trace1 <- mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin) %>% 
+  add_line_trace(., filter(data_prep_costs, type == "Planned costs"))
+
+#____additional trace parameters
+myat_name <- "Actual costs"
+myat_mode <- "line+markers"
+myat_yaxis <- "y2"
+myat_symbol <- NA
+myat_marker_color <- '#FFC000'
+myat_line_color <- '#FFC000'
+myat_line_width <- mylinewidth
+myat_showlegend <- T
+
+myat_textbold <- FALSE
+myat_textangle <- 0
+myat_textposition <- 'top'
+myat_textfont_color <- 'transparent'
+myat_textfont_size <- myfont
+
+
+myplot_trace1 %>% add_line_trace(., filter(data_prep_costs, type == "Actual costs")) %>% 
   layout(yaxis2 = list(title = "Total costs ('000 €2017)",
                      overlaying = "y",
                      side = "right",
@@ -140,4 +147,3 @@ mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin) %>%
                      zerolinecolor = 'rgb(255,255,255)',
                      titlefont = list(size = myfont), tickfont = list(size = myfont)
   ))
-

@@ -604,7 +604,7 @@ add_line_trace <- function(myplot, df){
       data = df,
       x = ~ xlabel,
       y = ~ myothermetric,
-      yaxis = "y1",
+      yaxis = myat_yaxis,
       mode = myat_mode, 
       type = 'scatter',
       name = myat_name,
@@ -615,7 +615,9 @@ add_line_trace <- function(myplot, df){
       textposition = myat_textposition,
       textfont = list(color = myat_textfont_color, size = myat_textfont_size),
       line = list(color = myat_line_color, width = myat_line_width),
-      marker = list(size = myat_line_width * 3, color = myat_marker_color),
+      marker = list(size = myat_line_width * 3, 
+                    color = myat_marker_color,
+                    symbol = myat_symbol),
       showlegend = myat_showlegend
     )
 }

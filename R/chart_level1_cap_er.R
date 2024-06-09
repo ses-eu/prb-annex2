@@ -213,6 +213,8 @@ myplot <- mybarchart(data_prep, mywidth, myheight + 20, myfont, mylocalmargin) %
 ## additional target trace
 myat_name <- "Target"
 myat_mode <- "line+markers"
+myat_yaxis <- "y1"
+myat_symbol <- NA
 myat_marker_color <- '#FF0000'
 myat_line_color <- '#FF0000'
 myat_line_width <- mylinewidth

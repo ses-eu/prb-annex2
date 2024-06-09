@@ -195,6 +195,8 @@ mylocalmargin <- mymargin
 ## additional trace with text totals
 myat_name <- "Total delay"
 myat_mode <- "markers"
+myat_yaxis <- "y1"
+myat_symbol <- NA
 myat_marker_color <- 'transaprent'
 myat_line_color <- 'transparent'
 myat_line_width <- 1
