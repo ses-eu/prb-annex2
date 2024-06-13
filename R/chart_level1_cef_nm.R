@@ -32,9 +32,7 @@ mydecimals <- 2
 ### trace parameters
 mycolors = c('#5B9BD5', '#FFC000', '#5B9BD5', '#FFC000')
 ###set up order of traces
-myfactor <- data_prep %>% select(type) %>% unique() 
-as.list(myfactor$type)
-myfactor <- sort(myfactor$type, decreasing = TRUE)
+myfactor <- c("Determined CSU", "Actual CSU")
 
 mytextangle <- -90
 mytextposition <- "inside"
@@ -79,7 +77,7 @@ myyaxis_showgrid <- TRUE
 myyaxis_showline <- FALSE
 myyaxis_tickprefix <- ""
 myyaxis_ticksuffix <- ""
-myyaxis_tickformat <- ".1f"
+myyaxis_tickformat <- ".0f"
 
 myyaxis_zeroline <- TRUE
 myyaxis_zerolinecolor <- 'rgb(255,255,255)'
@@ -96,7 +94,7 @@ mylegend_y <- -0.1
 mylegend_font_size <- myfont
 
 #### margin
-mylocalmargin = list(t = 60, b = 0, l = 60, r = 50)
+mylocalmargin = list(t = 60, b = 0, l = 40, r = 50)
 
 #____additional trace parameters
 myat_name <- "Planned costs"
@@ -147,3 +145,4 @@ myplot_trace1 %>% add_line_trace(., filter(data_prep_costs, type == "Actual cost
                      zerolinecolor = 'rgb(255,255,255)',
                      titlefont = list(size = myfont), tickfont = list(size = myfont)
   ))
+

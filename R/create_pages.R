@@ -10,8 +10,18 @@
   ## styles css
   file.copy('_original_files/full_styles.css', 'styles.css', overwrite = TRUE, copy.mode = TRUE)
   
+# remove .qmd files ----
+  ## get file list 
+  root_files <- list.files()
   
-  ## create index pages and other adjustments
+  ## remove all non '_' qmd files 
+  for (i in 1:length(root_files)) {
+    if (grepl('.qmd', root_files[i], fixed = TRUE) == TRUE & substr(root_files[i], 1, 1) != '_') {
+      file.remove(root_files[i])
+    }
+  }
+    
+# create index pages and other adjustments ----
   if (country == "Home") {
     file.copy('_original_files/home_index.qmd', 'index.qmd', overwrite = TRUE, copy.mode = TRUE)
     ###for the home page we add as well the other qmds here
@@ -74,17 +84,6 @@
         writeLines(tmp_text, level2_files[[i]])
       }
     }
-
-# remove .qmd files ----
-  ## get file list ----
-  root_files <- list.files()
-  
-  ## remove all non '_' qmd files  ----
-  for (i in 1:length(root_files)) {
-    if (grepl('.qmd', root_files[i], fixed = TRUE) == TRUE & substr(root_files[1], 1, 1) != '_') {
-      file.remove(root_files[i])
-    }
-  }
 
 # find all scripts that generate .qmd files ----
   # ## get all R scripts ----

@@ -10,13 +10,22 @@ if (country == "Network Manager") {
     clean_names() 
   
   ## prepare data ----
-  data_for_chart <- data_raw %>% 
+  data_prep <- data_raw %>% 
     filter(year_report == .env$year_report) %>% 
     mutate(
-      target = round(nm_target * 100, 2),
-      actual = round(actual * 100, 2)
-    ) %>% 
-    select(year, target, actual)
+      xlabel = year
+      # target = round(nm_target * 100, 2),
+      # actual = round(actual * 100, 2)
+    ) 
+  
+  data_prep_actual <- data_prep %>% 
+    mutate(mymetric = round(actual * 100, 2),
+           type = "Actual") %>% 
+    select(xlabel, mymetric, type)
+  
+  data_prep_target <- data_prep %>% 
+    mutate(myothermetric = round(nm_target * 100, 2),
+           type = "Target")
   
 } else if (country == "SES RP3"){
     # SES case ----

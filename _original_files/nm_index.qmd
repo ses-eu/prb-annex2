@@ -8,14 +8,14 @@
 
 ::: {#container-saf1}
 :::: {#chart-eosm class="mychart"}
-```{r}
+```{r chart-eosm}
 #| file: R/chart_level1_saf_nm.R
 #| out.width: "100%"
 ```
 ::::
 
 :::: {#concl-eosm}
-```{r}
+```{r concl-eosm}
 saf_conc <- read_mytable("NM findings.xlsx", "NM_findings_EoSM", "NM_findings_EoSM") %>% 
   filter(Year_Report == params$year_report) %>% 
   select(Conclusion) %>% toString() %>% paste0(., "@")
@@ -32,14 +32,14 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 <div style="height: 1px"></div>
 
 :::: {#chart-deliveries class="mychart"}
-```{r}
+```{r chart-deliveries}
 #| file: R/chart_level1_saf_deliveries_nm.R
 #| out.width: "100%"
 ```
 ::::
 
 :::: {#concl-deliveries}
-```{r}
+```{r concl-deliveries}
 saf_conc <- read_mytable("NM findings.xlsx", "NM_findings_over", "NM_findings_over") %>% 
   filter(Year_Report == params$year_report) %>% 
   select(Conclusion) %>% toString() %>% paste0(., "@")
@@ -58,14 +58,14 @@ saf_conc2 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ## Environment (Network Manager - SES RP3 area)
 
 :::: {#chart-env class="mychart"}
-```{r}
+```{r chart-env}
 #| file: R/chart_level1_kea.R
 #| out.width: "100%"
 ```
 ::::
 
 :::: {#concl-env}
-```{r}
+```{r concl-env}
 env_conc <- read_mytable("NM findings.xlsx", "NM_findings_KEP", "NM_findings_KEP") %>% 
   filter(Year_Report == params$year_report) %>% 
   select(Conclusion) %>% toString() %>% paste0(., "@")
@@ -84,28 +84,28 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 <div style="height: 1px"></div>
 
 :::: {#chart-cap class="mychart"}
-```{r}
+```{r chart-cap-er}
 #| file: R/chart_level1_cap_er_nm.R
 #| out.width: "100%"
 ```
 
 <br>
 
-```{r}
+```{r chart-cap-trm}
 #| file: R/chart_level1_cap_trm_nm.R
 #| out.width: "100%"
 ```
 
 <br>
 
-```{r}
+```{r chart-cap-15m}
 #| file: R/chart_level1_cap_15m_nm.R
 #| out.width: "100%"
 ```
 ::::
 
 :::: {#concl-cap}
-```{r}
+```{r concl-cap}
 cap_er_conc <- read_mytable("NM findings.xlsx", "NM_findings_CAP", "NM_findings_CAP") %>% 
   filter(Year_Report == params$year_report) %>% 
   select(Conclusion) %>% toString() %>% paste0(., "@")
@@ -124,14 +124,14 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 ## Cost-efficiency (Network Manager - SES RP3 area)
 
 :::: {#chart-cef class="mychart"}
-```{r}
+```{r chart-cef}
 #| file: R/chart_level1_cef_nm.R
 #| out.width: "100%"
 ```
 ::::
 
 :::: {#concl-cef}
-```{r}
+```{r concl-cef}
 cef_conc <- read_mytable("NM findings.xlsx", "NM_findings_CEFF", "NM_findings_CEFF") %>% 
   filter(Year_Report == params$year_report) %>% 
   select(Conclusion) %>% toString() %>% paste0(., "@")

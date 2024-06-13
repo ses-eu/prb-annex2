@@ -57,8 +57,11 @@ for (ez in 1:no_ecz) {
   ## chart parameters ----
   mychart_title <- paste0(main_ansp,", Actual v Determined costs - ", year_report)
   myaxis_title <- "Costs (€2017'000)"
-  mybarcolor <- '#A5A5A5'
+  mybarcolor_pos <- '#A5A5A5'
+  mybarcolor_neg <- '#A5A5A5'
   mytextcolor <- 'black'
+  myhovertemplate <- paste0('%{y} (A-D): %{x:+0,}<extra></extra>')
+  myxaxis_tickformat <- "+0,"
   
   ###set up order of traces
   myfactor <- c("VFR exempted", 

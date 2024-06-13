@@ -1,10 +1,3 @@
-# parameters 
-# mywidth = 300
-# myheight = 220
-# myfont = 8
-# mymargin = list (t = 20, l = 0)
-# mylinewidth = 2
-
 # import data  ----
 data_raw  <-  read_xlsx(
   paste0(data_folder, "SES.xlsx"),
@@ -26,147 +19,144 @@ data_prep_all <- data_raw %>%
     status,
     unit_cost_er
   ) %>% 
-  mutate(year_text = as.character(year),
-         status = str_replace(status, "Actual", "Actual unit cost"),
-         status = str_replace(status, "Determined", "Determined unit cost")
+  mutate(xlabel = as.character(year),
+         type = str_replace(status, "Actual", "Actual unit cost"),
+         type = str_replace(type, "Determined", "Determined unit cost")
   ) %>% 
-  arrange(year_text) %>% 
-  select(-year)
+  arrange(xlabel)
+
+data_prep <- data_prep_all %>% 
+  filter(status == "Actual" | status == "Determined") %>% 
+  mutate(mymetric = round(unit_cost_er,2))
 
 data_actual_trend <- data_prep_all %>% 
-  filter(status %like% "Actual unit cost") %>% 
-  pivot_wider(names_from = 'status', values_from = 'unit_cost_er' ) %>% 
-  clean_names()
+  select(xlabel, type, unit_cost_er) %>% 
+  filter(type %like% "Actual unit cost") %>% 
+  pivot_wider(names_from = 'type', values_from = 'unit_cost_er' ) %>% 
+  clean_names()%>% 
+  mutate(type = 'Actual')
 
-data_target_trend <- data_prep_all %>% 
-  filter(status %like% "Target") %>% 
-  pivot_wider(names_from = 'status', values_from = 'unit_cost_er' ) %>% 
-  clean_names()
+data_target_trend <- data_prep_all %>%
+  select(xlabel, type, unit_cost_er) %>% 
+  filter(type %like% "Target")  %>% 
+  pivot_wider(names_from = 'type', values_from = 'unit_cost_er' ) %>% 
+  clean_names() %>% 
+  mutate(type = 'Target')
 
-# chart ----
-## set parameters for chart ----
+# chart parameters ----
+mysuffix <- ""
+mydecimals <- 2
 
-## define chart function ----
-myc <-  function(mywidth, myheight, myfont, mylinewidth, mymargin) {
-    plotly::plot_ly(
-      width = mywidth,
-      height = myheight,
-      data = data_prep_all,
-      x = ~ year_text,
-      y = ~ unit_cost_er,
-      yaxis = "y1",
-      text = ~ format(round(unit_cost_er,2), nsmall = 2),
-      textangle = -90,
-      textposition = "inside", 
-      cliponaxis = FALSE,
-      insidetextanchor =  "middle",
-      textfont = list(color = 'white', size = myfont),
-      type = "bar",
-      color = ~ factor(status, levels = c("Determined unit cost", 
-                                          "Actual unit cost")),
-      colors = c('#5B9BD5', '#FFC000'),
-      hovertemplate = paste0('%{xother} %{y:.2f}'),
-      # hovertemplate = paste('%{y:.2f}<extra></extra>'),
-      # hoverinfo = "x+y",
-      showlegend = T
-    ) %>%
-    plotly::add_trace(
-      inherit = FALSE,
-      data = data_target_trend,
-      x = ~ year_text,
-      y = ~ target,
-      yaxis = "y1",
-      type = 'scatter',
-      mode = "line+markers",
-      name = 'Target trend',
-      text = ~ paste0('<b>', format(target_trend * 100, nsmall = 1), '%</b>'),
-      textposition = "top center",
-      cliponaxis = FALSE,
-      textfont = list(color = '#FF0000', size = myfont),
-      line = list(width = mylinewidth, color = '#FF0000'),
-      marker = list(size = mylinewidth * 3, color = '#FF0000'),
-      hovertemplate = paste('Target trend: %{text}<extra></extra>'),
-      # hoverinfo = "none",
-      showlegend = T
-    ) %>%
-    plotly::add_trace(
-      inherit = FALSE,
-      data = data_actual_trend,
-      x = ~ year_text,
-      y = ~ actual_unit_cost,
-      yaxis = "y1",
-      type = 'scatter',
-      mode = "line+markers",
-      name = 'Actual trend',
-      text = ~ paste0('<b>', format(actual_unit_cost_trend * 100, nsmall = 1), '%</b>'),
-      textposition = "bottom center",
-      cliponaxis = FALSE,
-      textfont = list(color = 'black', size = myfont),
-      line = list(width = mylinewidth, color = '#ED7D31'),
-      marker = list(size = mylinewidth * 3, color = '#ED7D31'),
-      hovertemplate = paste('Actual trend: %{text}<extra></extra>'),
-      # hoverinfo = "none",
-      showlegend = T
-    ) %>%
-    plotly::config( responsive = TRUE,
-            displaylogo = FALSE,
-            displayModeBar = F
-            # modeBarButtons = list(list("toImage")),
-    ) %>% 
-    plotly::layout(
-      font = list(family = "Roboto"),
-      title = list(text=paste0("En route unit costs - SES RP3"),
-                   y = 0.99, 
-                   x = 0, 
-                   xanchor = 'left', 
-                   yanchor =  'top',
-                   font = list(size = myfont * 20/15)
-      ),
-      bargap = 0.25,
-      hovermode = "x unified",
-      hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
-      xaxis = list(title = "",
-                   gridcolor = 'rgb(255,255,255)',
-                   showgrid = FALSE,
-                   showline = FALSE,
-                   showticklabels = TRUE,
-                   dtick = 1,
-                   # tickcolor = 'rgb(127,127,127)',
-                   # ticks = 'outside',
-                   zeroline = TRUE,
-                   tickfont = list(size = myfont)
-      ),
-      yaxis = list(title = "En route unit costs (€2017)",
-                   # gridcolor = 'rgb(255,255,255)',
-                   showgrid = TRUE,
-                   showline = FALSE,
-                   ticksuffix = "",
-                   tickformat = ",.0f",
-                   # showticklabels = TRUE,
-                   # tickcolor = 'rgb(127,127,127)',
-                   # ticks = 'outside',
-                   zeroline = TRUE,
-                   zerolinecolor = 'rgb(255,255,255)',
-                   titlefont = list(size = myfont), tickfont = list(size = myfont)
-      ),
-      # showlegend = FALSE
-      legend = list(
-        orientation = 'h', 
-        xanchor = "center",
-        x = 0.5, 
-        y =-0.1,
-        font = list(size = myfont*0.9)
-      ),
-      margin = mymargin
-    )
-  
-}
+### trace parameters
+mycolors = c('#5B9BD5', '#FFC000')
+###set up order of traces
+myfactor <- data_prep %>% select(type) %>% unique() 
+as.list(myfactor$type)
+myfactor <- sort(myfactor$type, decreasing = TRUE)
 
-## plot chart ----
-myc(mywidth, myheight+20, myfont, mylinewidth, mymargin)
+mytextangle <- -90
+mytextposition <- "inside"
+myinsidetextanchor <- "middle"
+mytextfont_color <- 'black'
+mytextfont_size <- myfont
 
-# # export to image
-# w = 1200
-# h = 600
-# export_fig(myc(w, h, 14 * w/900), paste0("cef_er_main.png"), w, h)
+myhovertemplate <- paste0('%{y:,.', mydecimals, 'f}', mysuffix)
+mytrace_showlegend <- T
 
+### layout parameters
+myfont_family <- "Roboto"
+mybargap <- 0.25
+mybarmode <- 'group'
+myhovermode <- "x unified"
+myhoverlabel_bgcolor <- 'rgba(255,255,255,0.88)'
+myminsize <- myfont*0.8
+
+#### title
+mytitle_text <- paste0("En route unit costs - SES RP3")
+mytitle_x <- 0
+mytitle_y <- 0.99
+mytitle_xanchor <- 'left'
+mytitle_yanchor <- 'top'
+mytitle_font_size <- myfont * 20/15
+
+#### xaxis
+myxaxis_title <- ''
+myxaxis_gridcolor <- 'rgb(255,255,255)'
+myxaxis_showgrid <- TRUE
+myxaxis_showline <- FALSE
+myxaxis_showticklabels <- TRUE
+myxaxis_tickformat <- "0"
+myxaxis_dtick <- 1
+myxaxis_zeroline <- TRUE
+myxaxis_tickfont_size <- myfont
+
+#### yaxis
+myyaxis_title <- "En route unit costs (€2017)"
+myyaxis_gridcolor <- 'rgb(240,240,240)'
+myyaxis_showgrid <- TRUE
+myyaxis_showline <- FALSE
+myyaxis_tickprefix <- ""
+myyaxis_ticksuffix <- ""
+myyaxis_tickformat <- ".0f"
+
+myyaxis_zeroline <- TRUE
+myyaxis_zerolinecolor <- 'rgb(255,255,255)'
+myyaxis_titlefont_size <- myfont
+myyaxis_tickfont_size <- myfont
+
+#### legend
+mylegend_traceorder <- 'normal'
+mylegend_orientation <- 'h'
+mylegend_xanchor <- "center"
+mylegend_yanchor <- "center"
+mylegend_x <- 0.5
+mylegend_y <- -0.1
+mylegend_font_size <- myfont
+
+#### margin
+mylocalmargin = mymargin
+
+# plot chart  ----
+mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin) %>% 
+add_trace(
+  data = data_target_trend,
+  x = ~ xlabel,
+  y = ~ target,
+  yaxis = 'y1',
+  mode = 'line+markers', 
+  type = 'scatter',
+  name = "Target trend",
+  text = ~ paste0("<b>", format(target_trend*100,  big.mark  = ",", nsmall = 1), 
+                  "%",
+                  "</b>"),
+  textangle = 0,
+  textposition = 'top',
+  textfont = list(color = '#FF0000', size = myfont),
+  line = list(color = '#FF0000', width = mylinewidth),
+  marker = list(size = mylinewidth * 3, 
+                color = '#FF0000',
+                symbol = NA),
+  hovertemplate =  paste0('%{y:,.1f}%'),
+  showlegend = T
+) %>% 
+  add_trace(
+    data = data_actual_trend,
+    x = ~ xlabel,
+    y = ~ actual_unit_cost,
+    yaxis = 'y1',
+    mode = 'line+markers', 
+    type = 'scatter',
+    name = "Actual trend",
+    text = ~ paste0("<b>", format(actual_unit_cost_trend*100,  big.mark  = ",", nsmall = 1), 
+                    "%",
+                    "</b>"),
+    textangle = 0,
+    textposition = 'bottom',
+    textfont = list(color = 'black', size = myfont),
+    line = list(color = '#ED7D31', width = mylinewidth),
+    marker = list(size = mylinewidth * 3, 
+                  color = '#ED7D31',
+                  symbol = NA),
+    hovertemplate =  paste0('%{y:,.1f}%'),
+    showlegend = T
+  ) 

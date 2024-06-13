@@ -90,6 +90,7 @@ h3 {
 @media screen and (width >= 768px) {
   .mychart {
     float: left; 
+    margin-right: 10px;
     width: 60%;
   }
 }

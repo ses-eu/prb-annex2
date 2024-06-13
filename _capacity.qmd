@@ -34,7 +34,6 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 ::::
 :::
 
-
 ::: {#container-cap style="clear: both"}
 
 ## ATCOs in OPS
@@ -60,6 +59,7 @@ mollis, habitant in enim facilisi. Nec est vel mattis, gravida fringilla aptent?
 risus mus habitasse.
 ::::
 :::
+
 
 `r if (params$no_tcz == 0) "::: {.content-hidden}"`
 

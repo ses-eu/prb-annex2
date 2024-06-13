@@ -413,13 +413,28 @@ read_mytable <- function(file, sheet, table){
       )) %>% 
       group_by(year, type) %>% 
       # the plot function already divides by 1000
-      summarise(regulatory_result_nc = sum(regulatory_result_nc)/10^3,
-                ex_ante_roe_nc = sum(ex_ante_roe_nc)/10^3,
-                actual_revenues_nc = sum(actual_revenues_nc)/10^3
+      summarise(
+        atsp_gain_loss_cost_sharing_nc = sum(atsp_gain_loss_cost_sharing)/10^3,
+        trs_nc = sum(trs) /10^3,
+        financial_incentive_nc = sum(x6_4_financial_incentive)/10^3,
+        regulatory_result_nc = sum(regulatory_result_nc)/10^3,
+        ex_ante_roe_nc = sum(ex_ante_roe_nc)/10^3,
+        actual_revenues_nc = sum(actual_revenues_nc)/10^3
                 ) %>%
       ungroup() %>% 
-      mutate(regulatory_result_nc = case_when(
-        year > year_report ~ 0,
+      mutate(
+        atsp_gain_loss_cost_sharing_nc = case_when(
+          year > year_report ~ 0,
+          .default = atsp_gain_loss_cost_sharing_nc),
+        trs_nc = case_when(
+          year > year_report ~ 0,
+          .default = trs_nc),
+        financial_incentive_nc = case_when(
+          year > year_report ~ 0,
+          .default = financial_incentive_nc),
+        
+        regulatory_result_nc = case_when(
+          year > year_report ~ 0,
         .default = regulatory_result_nc),
         ex_ante_roe_nc = case_when(
           year > year_report ~ 0,
@@ -430,7 +445,10 @@ read_mytable <- function(file, sheet, table){
         ) %>% 
       mutate(year_text = as.character(year)
       ) %>% 
-      select(year_text, type, regulatory_result_nc, ex_ante_roe_nc, actual_revenues_nc)
+      select(year_text, type, regulatory_result_nc, ex_ante_roe_nc, actual_revenues_nc,
+             atsp_gain_loss_cost_sharing_nc,
+             trs_nc,
+             financial_incentive_nc)
     
     ## sum 2020-2021 together
     data_prep_202021 <- data_prep_years_split %>% 
@@ -439,7 +457,11 @@ read_mytable <- function(file, sheet, table){
       summarise(regulatory_result_nc = sum(regulatory_result_nc, na.rm = TRUE),
                 ex_ante_roe_nc = sum(ex_ante_roe_nc, na.rm = TRUE),
                 actual_revenues_nc = sum(actual_revenues_nc, na.rm = TRUE),
-      ) %>% 
+                
+                atsp_gain_loss_cost_sharing_nc = sum(atsp_gain_loss_cost_sharing_nc, na.rm = TRUE),
+                trs_nc = sum(trs_nc, na.rm = TRUE),
+                financial_incentive_nc = sum(financial_incentive_nc, na.rm = TRUE)
+                ) %>% 
       mutate(year_text = '2020-2021') %>% 
       relocate(year_text, .before = type)
     
@@ -474,9 +496,15 @@ read_mytable <- function(file, sheet, table){
       left_join(data_prep_xrates, by = "year_text") %>% 
       mutate(regulatory_result = regulatory_result_nc / pp_exchangerate,
              ex_ante_roe = ex_ante_roe_nc / pp_exchangerate,
-             actual_revenues = actual_revenues_nc / pp_exchangerate
+             actual_revenues = actual_revenues_nc / pp_exchangerate,
+             
+             atsp_gain_loss_cost_sharing = atsp_gain_loss_cost_sharing_nc / pp_exchangerate,
+             trs = trs_nc / pp_exchangerate,
+             financial_incentive = financial_incentive_nc / pp_exchangerate
+             
              ) %>% 
-      select(-pp_exchangerate, -regulatory_result_nc, -ex_ante_roe_nc, -actual_revenues_nc) %>% 
+      select(-pp_exchangerate, -regulatory_result_nc, -ex_ante_roe_nc, -actual_revenues_nc,
+             -atsp_gain_loss_cost_sharing_nc, -trs_nc, -financial_incentive_nc) %>% 
       left_join(tsus, by = "year_text")
     
     return(regulatory_result)
@@ -575,7 +603,6 @@ mybarchart <-  function(df, mywidth, myheight, myfont, mymargin) {
         font = list(size = mylegend_font_size)
       ),
       margin = mymargin
-      
     )
 }
 
@@ -622,7 +649,7 @@ add_line_trace <- function(myplot, df){
     )
 }
 
-## plot CEF horizontal barchart A-D  ----
+## plot horizontal barchart  ----
 myhbarc <-  function(mywidth, myheight, myfont, mymargin) {
   data_prep %>%
     plot_ly(
@@ -631,7 +658,7 @@ myhbarc <-  function(mywidth, myheight, myfont, mymargin) {
       x = ~ round(mymetric, 0),
       y = ~ factor(ylabel, levels = myfactor),
       yaxis = "y1",
-      marker = list(color = mybarcolor),
+      marker = list(color = ~ifelse(mymetric>=0, mybarcolor_pos, mybarcolor_neg)),
       text = ~ mylabel,
       # text = ~ as.character(format(round(VALUE,0), big.mark = " ")),
       # textangle = -90,
@@ -642,7 +669,7 @@ myhbarc <-  function(mywidth, myheight, myfont, mymargin) {
       # name = mymetric,
       textfont = list(color = mytextcolor, size = myfont),
       type = "bar",
-      hovertemplate = paste0('%{y} (A-D): %{x:+0,}<extra></extra>'),
+      hovertemplate = myhovertemplate,
       # hoverinfo = "none",
       showlegend = F
     ) %>%
@@ -681,7 +708,8 @@ myhbarc <-  function(mywidth, myheight, myfont, mymargin) {
                    showline = FALSE,
                    # tickprefix = if_else(" ",
                    # ticksuffix = "% ",
-                   tickformat = "+0,",
+                   fixedrange = TRUE,
+                   tickformat = myxaxis_tickformat,
                    # showticklabels = TRUE,
                    # tickcolor = 'rgb(127,127,127)',
                    # ticks = 'outside',
