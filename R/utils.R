@@ -419,6 +419,7 @@ read_mytable <- function(file, sheet, table){
         financial_incentive_nc = sum(x6_4_financial_incentive)/10^3,
         regulatory_result_nc = sum(regulatory_result_nc)/10^3,
         ex_ante_roe_nc = sum(ex_ante_roe_nc)/10^3,
+        ex_post_roe_nc = sum(ex_post_roe_nc)/10^3,
         actual_revenues_nc = sum(actual_revenues_nc)/10^3
                 ) %>%
       ungroup() %>% 
@@ -439,13 +440,16 @@ read_mytable <- function(file, sheet, table){
         ex_ante_roe_nc = case_when(
           year > year_report ~ 0,
           .default = ex_ante_roe_nc),
+        ex_post_roe_nc = case_when(
+          year > year_report ~ 0,
+          .default = ex_post_roe_nc),
         actual_revenues_nc = case_when(
           year > year_report ~ 0,
           .default = actual_revenues_nc)
         ) %>% 
       mutate(year_text = as.character(year)
       ) %>% 
-      select(year_text, type, regulatory_result_nc, ex_ante_roe_nc, actual_revenues_nc,
+      select(year_text, type, regulatory_result_nc, ex_ante_roe_nc, ex_post_roe_nc, actual_revenues_nc,
              atsp_gain_loss_cost_sharing_nc,
              trs_nc,
              financial_incentive_nc)
@@ -456,6 +460,7 @@ read_mytable <- function(file, sheet, table){
       group_by(type) %>% 
       summarise(regulatory_result_nc = sum(regulatory_result_nc, na.rm = TRUE),
                 ex_ante_roe_nc = sum(ex_ante_roe_nc, na.rm = TRUE),
+                ex_post_roe_nc = sum(ex_post_roe_nc, na.rm = TRUE),
                 actual_revenues_nc = sum(actual_revenues_nc, na.rm = TRUE),
                 
                 atsp_gain_loss_cost_sharing_nc = sum(atsp_gain_loss_cost_sharing_nc, na.rm = TRUE),
@@ -496,6 +501,7 @@ read_mytable <- function(file, sheet, table){
       left_join(data_prep_xrates, by = "year_text") %>% 
       mutate(regulatory_result = regulatory_result_nc / pp_exchangerate,
              ex_ante_roe = ex_ante_roe_nc / pp_exchangerate,
+             ex_post_roe = ex_post_roe_nc / pp_exchangerate,
              actual_revenues = actual_revenues_nc / pp_exchangerate,
              
              atsp_gain_loss_cost_sharing = atsp_gain_loss_cost_sharing_nc / pp_exchangerate,
@@ -503,7 +509,7 @@ read_mytable <- function(file, sheet, table){
              financial_incentive = financial_incentive_nc / pp_exchangerate
              
              ) %>% 
-      select(-pp_exchangerate, -regulatory_result_nc, -ex_ante_roe_nc, -actual_revenues_nc,
+      select(-pp_exchangerate, -regulatory_result_nc, -ex_ante_roe_nc, -ex_post_roe_nc, -actual_revenues_nc,
              -atsp_gain_loss_cost_sharing_nc, -trs_nc, -financial_incentive_nc) %>% 
       left_join(tsus, by = "year_text")
     
@@ -714,7 +720,7 @@ myhbarc <-  function(mywidth, myheight, myfont, mymargin) {
                    # tickcolor = 'rgb(127,127,127)',
                    # ticks = 'outside',
                    zeroline = TRUE,
-                   zerolinecolor = 'rgb(255,255,255)',
+                   zerolinecolor = 'rgb(225,225,225)',
                    titlefont = list(size = myfont), tickfont = list(size = myfont)
       ),
       showlegend = FALSE,

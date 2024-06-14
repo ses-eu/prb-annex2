@@ -16,13 +16,13 @@ for (ez in 1:no_ecz) {
     filter(type == "Main ANSP",
            year_text == if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))
            )  %>% 
-    select(year_text, atsp_gain_loss_cost_sharing, trs, financial_incentive, regulatory_result) %>% 
+    select(year_text, atsp_gain_loss_cost_sharing, trs, financial_incentive, ex_post_roe) %>% 
     pivot_longer(-year_text, names_to = "status", values_to = "mymetric") %>% 
     mutate (ylabel = case_when (
       status == 'atsp_gain_loss_cost_sharing' ~ "Cost sharing", 
       status == 'trs' ~ "Traffic risk sharing",
       status == 'financial_incentive' ~ "Incentives",
-      status == 'regulatory_result' ~ "Actual RoE in value"),
+      status == 'ex_post_roe' ~ "Actual RoE in value"),
       mylabel = format(round(mymetric,0), big.mark = ",", nsmall =0)
     )
     
@@ -41,23 +41,60 @@ for (ez in 1:no_ecz) {
                 "Traffic risk sharing",
                 "Cost sharing")
   
+  mylocalmargin <- list (t = 40, b = 60)
   
   ## define chart function ----
   ### function moved to utils
 
   ## plot chart  ----
   
-  ### calculate annotation position
-  annotation_x <- (max(data_prep$mymetric) - min(data_prep$mymetric)) /10
-
+  ### calculate x range, and annotation and image position
+  myroundup <- max(floor((log10(abs(max(data_prep$mymetric))))), floor((log10(abs(min(data_prep$mymetric))))))
+  range_min <- floor(min(data_prep$mymetric)/10^myroundup) * 10^myroundup
+  range_max <- ceiling(max(data_prep$mymetric)/10^myroundup) * 10^myroundup
+  
+  annotation_x <- (range_max - range_min) /20
+  
   ### plot chart and add annotations
-  myplot[[ez]] <- myhbarc(mywidth, myheight+30, myfont, mymargin) %>% 
+  myplot[[ez]] <- myhbarc(mywidth, myheight+30, myfont, mylocalmargin) %>% 
     layout(
+      xaxis = list(
+        range = c(range_min, range_max)
+        ),
+      images = list(
+        list(
+          # Add images
+          source =  base64enc::dataURI(file = here("images","arrow_right.png")),  
+          xref = "paper",  
+          yref = "paper",  
+          x = if_else(range_min >=0,0, abs(range_min)/(range_max-range_min)),  
+          y = -0.12,  
+          sizex = 0.18,  
+          sizey = 0.18,  
+          layer = "above",
+          xanchor="left",  
+          yanchor="bottom" 
+        ),
+        list(
+          # Add images
+          source =  base64enc::dataURI(file = here("images","arrow_left.png")),  
+          xref = "paper",  
+          yref = "paper",  
+          x = if_else(range_min >=0,0, abs(range_min)/(range_max-range_min)),  
+          y = -0.12,  
+          sizex = 0.18,  
+          sizey = 0.18,  
+          layer = "above",
+          xanchor="right",  
+          yanchor="bottom" 
+        )
+        )
+      ,
       annotations = list(
         list(
         xanchor = "left",
         x = annotation_x,
-        y = -0.18,
+        y = -0.2,
         text = '<b>ANSP gain</b>',
         font = list(size = myfont*0.85),
         xref = "x",
@@ -70,7 +107,7 @@ for (ez in 1:no_ecz) {
       list(
         xanchor = "right",
         x = -annotation_x,
-        y = -0.18,
+        y = -0.2,
         text = '<b>ANSP loss</b>',
         font = list(size = myfont*0.85),
         xref = "x",
@@ -83,40 +120,7 @@ for (ez in 1:no_ecz) {
       )
     )
   
-  ### add arrows
-  image_folder <- here("images")
-  library(webshot)
-  
-  myimages <- list(
-    list(
-      source = base64enc::dataURI(file = paste0(image_folder,"/arrow_right.png")),
-      x = 0, 
-      y = 0,
-      # sizex = 0.18, 
-      # sizey = 0.18,
-      xref = "x", 
-      yref = "paper",
-      xanchor = "left", 
-      yanchor = "center"
-    ),
-    list(
-      source = base64enc::dataURI(file = paste0(image_folder,"/arrow_left.png")),
-      # source =raster2uri(as.raster(arrow_right)), #https://plotly-r.com/embedding-images.html
-      x = 0,
-      y = 0,
-      sizex = 0.18, sizey = 0.18,
-      xref = "x", 
-      yref = "paper",
-      xanchor = "right", 
-      yanchor = "center"
-    )
-  )
-      
-  ### update plot with images
-  myplot[[ez]] <- myplot[[ez]] %>% 
-    layout(
-      annotations = myimages
-    )
+  myplot[[ez]]
   
 }
 
