@@ -38,17 +38,23 @@ if (country == "Network Manager") {
       clean_names() 
     
     ## prepare data ----
-    data_for_chart <- data_raw %>% 
+    data_prep <- data_raw %>% 
       filter(year_report == .env$year_report) %>% 
-      mutate ( status = str_to_lower(status)) %>% 
-      select (-year_report) %>% 
-      pivot_wider(names_from = status, values_from = kea_value) %>% 
       mutate(
-        target = round(target * 100, 2),
-        actual = round(actual * 100, 2)
-      ) %>% 
-      select(year, target, actual)
+        xlabel = year,
+        type = status
+      ) 
     
+    data_prep_actual <- data_prep %>% 
+      filter(type == "Actual") %>% 
+      mutate(mymetric = round(kea_value * 100, 2)) %>% 
+      select(xlabel, mymetric, type)
+    
+    data_prep_target <- data_prep %>% 
+      filter(type == "Target") %>% 
+      mutate(myothermetric = round(kea_value * 100, 2)) %>% 
+      select(xlabel, myothermetric, type)
+
 } else  {
   # State case ----
 
