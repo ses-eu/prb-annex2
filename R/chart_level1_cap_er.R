@@ -15,23 +15,28 @@ if (country == 'SES RP3') {
     filter(
       year_report == .env$year_report) %>% 
     mutate(
-      target = round(target, 2)
+      xlabel = year,
+      myothermetric = round(target, 2),
+      type = "Target"
     ) %>% 
     select(
-      year,
-      target
-    ) %>% arrange(year)
+      xlabel,
+      type,
+      myothermetric
+    ) %>% arrange(xlabel)
 
-  data_prep_actual <- data_raw %>% 
+  data_prep <- data_raw %>% 
     filter(
       year_report == .env$year_report) %>% 
-    select(-c(year_report,target)) %>% 
+    select(-c(year_report, target)) %>% 
     pivot_longer(
       cols = c(capacity, staffing, disruptions, weather, other_non_atc),
       names_to = "type",
-      values_to = "delay"
+      values_to = "mymetric"
     ) %>% 
     mutate(
+      movements = NA,
+      xlabel = year,
       type = case_when(
         type == "capacity" ~ "Capacity",
         type == "staffing" ~ "Staffing",
@@ -39,9 +44,15 @@ if (country == 'SES RP3') {
         type == "weather" ~ "Weather",
         type == "other_non_atc" ~ "Other non-ATC"
       ) 
-    ) %>% 
-    rename (average_delay = avg_er_atfm_delay) %>% 
-    mutate(ifr = NA)
+    ) 
+  
+  data_prep_total <- data_prep %>% 
+    select(xlabel, mymetric) %>% 
+    group_by(xlabel) %>% 
+    summarise(myothermetric = sum(mymetric)) %>%
+    mutate(myothermetric = format(round(myothermetric,2), digits = 2)) %>% 
+    mutate(type = "Total")
+  
 } else {
 # state case ----
   ## import data  ----
