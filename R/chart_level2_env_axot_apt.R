@@ -2,7 +2,7 @@
 data_raw  <-  read_xlsx(
   paste0(data_folder, "ENV dataset master.xlsx"),
   # here("data","hlsr2021_data.xlsx"),
-  sheet = "Table_CDO airports",
+  sheet = "Table_AXOT airports",
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
   clean_names() 
@@ -10,18 +10,14 @@ data_raw  <-  read_xlsx(
 airports_table <- read_mytable("Lists.xlsx", "Lists", "Table_TCZs_RP3") %>%  clean_names()
 
 ## prepare data ----
-airports_country <- airports_table %>% 
-  filter(country_name == .env$country) 
-
 data_prep <- data_raw %>% 
   filter(
     entity_name == .env$country,
-    year == .env$year_report,
-    airport_code %in% airports_country$apt_code) %>% 
+    year == .env$year_report) %>% 
   mutate(
     xlabel = airport,
-    type = indicator_type,
-    mymetric = round(cdo_airport_value * 100, 0)
+    type = indicator_type2,
+    mymetric = axot_airport_value_min_flight
   ) %>%  
   select(
     xlabel,
@@ -29,8 +25,8 @@ data_prep <- data_raw %>%
     mymetric)
 
 ## chart parameters ----
-mysuffix <- "%"
-mydecimals <- 0
+mysuffix <- ""
+mydecimals <- 2
 
 ### trace parameters
 mycolors = c('#0070C0')
@@ -55,7 +51,7 @@ myhoverlabel_bgcolor <- 'rgba(255,255,255,0.88)'
 myminsize <- myfont*0.8
 
 #### title
-mytitle_text <- paste0("CDO by airport - ", year_report)
+mytitle_text <- paste0("AXOT by airport - ", year_report)
 mytitle_x <- 0
 mytitle_y <- 0.99
 mytitle_xanchor <- 'left'
@@ -79,8 +75,8 @@ myyaxis_gridcolor <- 'rgb(240,240,240)'
 myyaxis_showgrid <- TRUE
 myyaxis_showline <- FALSE
 myyaxis_tickprefix <- ""
-myyaxis_ticksuffix <- "%"
-myyaxis_tickformat <- ".0f"
+myyaxis_ticksuffix <- ""
+myyaxis_tickformat <- ".1f"
 
 myyaxis_zeroline <- TRUE
 myyaxis_zerolinecolor <- 'rgb(255,255,255)'

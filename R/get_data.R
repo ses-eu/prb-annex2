@@ -24,5 +24,4 @@
 
   other_orgs_table <- read_mytable("Lists.xlsx", "Lists", "Table_PP_2023_ANSPs") %>%  clean_names()
 
-  airports <- read_mytable("Lists.xlsx", "Lists", "Table_TCZs_RP3") %>%  clean_names()
   

@@ -57,7 +57,7 @@
                            "cost-efficiency-er1-1.qmd",
                            "cost-efficiency-er1-2.qmd",
                            "cost-efficiency-er1-3.qmd",   #this one might be removed later depending on check
-                           "environment_kea.qmd",
+                           "environment.qmd",
                            # "environment_mil.qmd",
                            "safety.qmd")
       

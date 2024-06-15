@@ -49,7 +49,7 @@ for (ez in 1:no_ecz) {
   mycolors = c('#5B9BD5', '#FFC000')
   ###set up order of traces
   myfactor <- data_prep %>% select(type) %>% unique() 
-  as.list(myfactor$type)
+  invisible(as.list(myfactor$type))
   myfactor <- sort(myfactor$type, decreasing = TRUE)
   
   mytextangle <- 0

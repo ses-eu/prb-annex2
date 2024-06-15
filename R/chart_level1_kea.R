@@ -82,7 +82,7 @@ if (country == "Network Manager") {
     ) %>% 
     mutate(
       # type = 'Target',
-      target = round(kea_reference_value, 2)
+      target = round(kea_reference_value_percent, 2)
     ) %>% 
     select(
       year,
@@ -98,7 +98,7 @@ if (country == "Network Manager") {
     filter(
       entity_name == country,
       year <= year_report) %>% 
-    mutate (actual = hfe_kpi) %>% 
+    mutate (actual = hfe_kpi_percent) %>% 
     select(
       year,
       actual

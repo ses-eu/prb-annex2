@@ -71,7 +71,7 @@ if (country == "Network Manager") {
   ## prepare data ----
   data_raw_kep_p <- data_raw_kep %>% 
     rename(type = indicator_type,
-           mymetric = kep_value,
+           mymetric = kep_value_percent,
            xlabel = month) %>% 
     mutate(mymetric = round(mymetric, 2)) %>% 
     filter(
@@ -101,7 +101,7 @@ if (country == "Network Manager") {
     filter(
       entity_name == country,
       lubridate::year(month) == year_report) %>% 
-    mutate (myothermetric = hfe_kpi,
+    mutate (myothermetric = hfe_kpi_percent,
             type = indicator_type,
             xlabel = lubridate::floor_date(month, unit = 'month' )) %>% 
     select(

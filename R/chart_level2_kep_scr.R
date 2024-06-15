@@ -66,7 +66,7 @@ if (country == "Network Manager") {
   
   data_prep_kep <- data_raw_kep %>% 
     mutate(type = indicator_type,
-           mymetric = round(kep_value,2),
+           mymetric = round(kep_value_percent,2),
            xlabel = year) %>% 
     filter(
       entity_name == country,

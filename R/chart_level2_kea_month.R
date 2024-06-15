@@ -66,7 +66,7 @@ if (country == "Network Manager") {
     ) %>%
     mutate(
       # type = 'Target',
-      target = round(kea_reference_value, 2)
+      target = round(kea_reference_value_percent, 2)
     ) %>%
     select(
       target
@@ -76,7 +76,7 @@ if (country == "Network Manager") {
     filter(
       entity_name == country,
       lubridate::year(month) == year_report) %>% 
-    mutate (mymetric = hfe_kpi,
+    mutate (mymetric = hfe_kpi_percent,
             xlabel = lubridate::floor_date(month, unit = 'month' )) %>% 
     select(
       xlabel,

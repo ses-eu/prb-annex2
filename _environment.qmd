@@ -1,6 +1,6 @@
 [2 Environment]{class="fakeh1"}
 
-::: {#container-cap style="clear: both"}
+::: {#container-kea style="clear: both"}
 
 ## KPI - KEA
 
@@ -32,7 +32,7 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ::::
 :::
 
-::: {#container-cap style="clear: both"}
+::: {#container-kep-scr style="clear: both"}
 
 ## PIs - KEP and SCR
 
@@ -62,3 +62,32 @@ pharetra ligula mi!
 ::::
 :::
 
+::: {#container-cdo style="clear: both"}
+
+## PI - CDO
+
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+:::: {#chart-cdo class="mychart"}
+```{r chart-cdo-country}
+#| file: R/chart_level2_env_cdo_country.R
+#| out.width: "100%"
+```
+
+```{r chart-cdo-apt}
+#| file: R/chart_level2_env_cdo_apt.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#concl-cdo}
+Dolor netus cursus vestibulum, cum suscipit tempus nisi volutpat! Diam laoreet pharetra dapibus bibendum malesuada donec hendrerit
+montes aliquam: ac suscipit himenaeos. Nec enim a, tempus porttitor turpis curabitur semper luctus odio phasellus ultricies at
+ridiculus! Morbi gravida velit sodales augue lacus nulla – fusce penatibus.
+
+Elit sociis fringilla lectus suspendisse eros nec in aptent eleifend sed? Hendrerit sodales pellentesque, montes sollicitudin dis,
+bibendum nisi urna. Sodales praesent suspendisse imperdiet luctus parturient varius morbi vehicula. Eros cras curae suspendisse
+pharetra ligula mi!
+::::
+:::
