@@ -64,10 +64,7 @@ pharetra ligula mi!
 
 ::: {#container-cdo style="clear: both"}
 
-## PI - CDO
-
-<!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
+## PIs - CDO
 
 :::: {#chart-cdo class="mychart"}
 ```{r chart-cdo-country}
@@ -92,7 +89,8 @@ pharetra ligula mi!
 ::::
 :::
 
-::: {#container-cdo style="clear: both"}
+
+::: {#container-axot-asma style="clear: both"}
 
 ## PIs - AXOT and ASMA
 

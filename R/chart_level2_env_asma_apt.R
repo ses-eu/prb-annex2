@@ -70,7 +70,7 @@ myxaxis_zeroline <- TRUE
 myxaxis_tickfont_size <- myfont
 
 #### yaxis
-myyaxis_title <- "To be added (%)"
+myyaxis_title <- "To be added"
 myyaxis_gridcolor <- 'rgb(240,240,240)'
 myyaxis_showgrid <- TRUE
 myyaxis_showline <- FALSE
