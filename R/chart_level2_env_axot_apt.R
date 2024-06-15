@@ -16,7 +16,7 @@ data_prep <- data_raw %>%
     year == .env$year_report) %>% 
   mutate(
     xlabel = airport,
-    type = indicator_type2,
+    type = indicator_type,
     mymetric = axot_airport_value_min_flight
   ) %>%  
   select(
