@@ -178,7 +178,7 @@ myareachart <-  function(mywidth, myheight, myfont, mymargin) {
                    showline = myxaxis_showline,
                    showticklabels = myxaxis_showticklabels,
                    dtick = myxaxis_dtick,
-                   range = c(2019.5, 2024),
+                   range = c(2019.7, 2024),
                    tickformat = myxaxis_tickformat,
                    # tickcolor = 'rgb(127,127,127)',
                    # ticks = 'outside',
