@@ -11,6 +11,7 @@ library(here)
 library(fs)
 library(purrr)
 library(plotly)
+library(gt)
 
 # functions ----
 ## right x characters function ----

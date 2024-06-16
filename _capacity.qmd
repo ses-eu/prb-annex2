@@ -19,6 +19,13 @@
 #| file: R/chart_level2_cap_er_month.R
 #| out.width: "100%"
 ```
+<br>
+
+```{r chart-cap-delay-bin}
+#| file: R/chart_level2_cap_delay_bin.R
+#| out.width: "100%"
+```
+
 ::::
 
 :::: {#concl-cap}
@@ -34,13 +41,13 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 ::::
 :::
 
-::: {#container-cap style="clear: both"}
+::: {#container-cap-atco style="clear: both"}
 
 ## ATCOs in OPS
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
-:::: {#chart-cap class="mychart"}
+:::: {#chart-cap-atco class="mychart"}
 
 ```{r chart-cap-atco}
 #| file: R/chart_level2_cap_atco.R
@@ -49,7 +56,7 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 
 ::::
 
-:::: {#concl-cap}
+:::: {#concl-cap-atco}
 Amet nibh blandit, ullamcorper praesent vitae, hac scelerisque elementum condimentum penatibus tempor. Phasellus eros facilisis eget varius magnis
 penatibus, ultricies ad ultricies. Felis rhoncus et aptent orci ac ullamcorper cras dapibus. Dis facilisi urna pharetra mattis faucibus. Elementum
 lacinia ante sagittis lobortis, rhoncus arcu metus massa, venenatis a. Iaculis habitasse luctus aliquam cubilia molestie penatibus!
@@ -60,6 +67,39 @@ risus mus habitasse.
 ::::
 :::
 
+::: {#container-cap-other style="clear: both"}
+
+## Other indicators
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+:::: {#chart-cap-other class="mychart"}
+
+```{r chart-cap-all-causes-delay}
+#| file: R/chart_level2_cap_all_causes_delay.R
+#| out.width: "100%"
+```
+
+<br>
+
+```{r chart-cap-sector-opening}
+#| file: R/chart_level2_cap_sector_opening.R
+#| out.width: "100%"
+```
+
+
+::::
+
+:::: {#concl-cap-other}
+Amet nibh blandit, ullamcorper praesent vitae, hac scelerisque elementum condimentum penatibus tempor. Phasellus eros facilisis eget varius magnis
+penatibus, ultricies ad ultricies. Felis rhoncus et aptent orci ac ullamcorper cras dapibus. Dis facilisi urna pharetra mattis faucibus. Elementum
+lacinia ante sagittis lobortis, rhoncus arcu metus massa, venenatis a. Iaculis habitasse luctus aliquam cubilia molestie penatibus!
+
+Lorem eros aenean nisi vestibulum interdum hac porta, eros ornare, ante ridiculus? Ornare ante consequat neque; sociosqu quisque donec mattis
+mollis, habitant in enim facilisi. Nec est vel mattis, gravida fringilla aptent? Leo metus feugiat ultrices, imperdiet ante laoreet cursus dapibus
+risus mus habitasse.
+::::
+:::
 
 `r if (params$no_tcz == 0) "::: {.content-hidden}"`
 
@@ -93,6 +133,20 @@ Elit cubilia tristique vestibulum dictumst laoreet lacus ultricies, hac libero, 
 tristique facilisi posuere facilisi nec torquent. Facilisis diam eros porttitor pharetra tempus maecenas egestas. Tempus imperdiet blandit:
 pharetra quam himenaeos habitant habitant placerat molestie? Himenaeos fermentum semper quis euismod donec dapibus molestie commodo quisque
 sagittis. Aptent cum ridiculus habitasse; molestie vitae faucibus integer, dui nec mollis cubilia!
+:::::
+::::
+
+:::: {#container-cap-other style="clear: both"}
+
+::::: {#table-cap-apt-pis}
+
+```{r table-cap-apt-pis}
+#| file: R/table_level2_cap_apt_pis.R
+#| out.width: "100%"
+```
+
+<!-- ![](images/{{< var doc.year_report >}}/{{< var doc.country >}}/cap_trm_4.png) -->
+
 :::::
 ::::
 
