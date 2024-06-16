@@ -37,7 +37,7 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ## PIs - KEP and SCR
 
 <!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
+<!-- <div style="height: 1px"></div> -->
 
 :::: {#chart-kep-scr class="mychart"}
 ```{r chart-env-kep-scr}
@@ -61,6 +61,8 @@ bibendum nisi urna. Sodales praesent suspendisse imperdiet luctus parturient var
 pharetra ligula mi!
 ::::
 :::
+
+`r if (params$no_tcz == 0) "::: {.content-hidden}"`
 
 ::: {#container-cdo style="clear: both"}
 
@@ -88,7 +90,6 @@ bibendum nisi urna. Sodales praesent suspendisse imperdiet luctus parturient var
 pharetra ligula mi!
 ::::
 :::
-
 
 ::: {#container-axot-asma style="clear: both"}
 
@@ -123,7 +124,20 @@ Elit sociis fringilla lectus suspendisse eros nec in aptent eleifend sed? Hendre
 bibendum nisi urna. Sodales praesent suspendisse imperdiet luctus parturient varius morbi vehicula. Eros cras curae suspendisse
 pharetra ligula mi!
 ::::
-
-![](images/{{< var doc.year_report >}}/{{< var doc.country >}}/env_apt_4.png)
-
 :::
+
+::: {#container-env-apt-pis style="clear: both"}
+
+:::: {#table-env-apt-pis}
+
+```{r table-env-apt-pis}
+#| file: R/table_level2_env_apt_pis.R
+#| out.width: "100%"
+```
+
+<!-- ![](images/{{< var doc.year_report >}}/{{< var doc.country >}}/env_apt_4.png) -->
+
+::::
+:::
+
+`r if (params$no_tcz == 0) ":::"`

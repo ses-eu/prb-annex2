@@ -41,18 +41,7 @@ data_prep <- data_raw %>%
 
 ## plot table
 
-data_prep %>% gt() %>% 
-  tab_options(
-    table.width = '100%',
-    table.font.size = myfont*0.9,
-    # column_labels.vlines.color = "black", # don't know why this doesn't work
-    column_labels.vlines.width = '1px',
-    # column_labels.border.top.color = "#EAEAEA",
-    column_labels.border.top.width = '1px',
-    # row.striping.include_table_body = FALSE,
-    table.border.top.width = '1px',
-    table.border.bottom.width = '1px',
-    data_row.padding = '3px') %>% 
+mygtable(data_prep, myfont*0.9) %>% 
   tab_spanner_delim(
     delim = "_"
   )
