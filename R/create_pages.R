@@ -64,18 +64,20 @@
       if (state_type == 1 | state_type == 3) {level2_files <- c(level2_files, c("cost-efficiency-g2g.qmd",
                                                     "cost-efficiency-tz1-1.qmd",
                                                     "cost-efficiency-tz1-2.qmd",
-                                                    "cost-efficiency-tz1-3.qmd", #this one might be removed later depending on check
+                                                    "cost-efficiency-tz1-3.qmd" #this one might be removed later depending on check
                                                     # "environment_apt.qmd",
-                                                    "capacity_trm.qmd"))
+                                                    # , "capacity_trm.qmd"
+                                                    ))
       } else if (state_type == 2) {level2_files <- c(level2_files, c("cost-efficiency-g2g.qmd",
                                                           "cost-efficiency-tz1-1.qmd",
                                                           "cost-efficiency-tz1-2.qmd",
                                                           "cost-efficiency-tz1-3.qmd",
                                                           "cost-efficiency-tz2-1.qmd",
                                                           "cost-efficiency-tz2-2.qmd",
-                                                          "cost-efficiency-tz2-3.qmd",   #xxx
+                                                          "cost-efficiency-tz2-3.qmd"   #xxx
                                                           # "environment_apt.qmd",
-                                                          "capacity_trm.qmd"))
+                                                          # , "capacity_trm.qmd"
+                                                          ))
       }
       
       for (i in 1:length(level2_files)) {
@@ -194,7 +196,7 @@ if (out_format == 'web') {
         #                    'generate_ceff_er2_qmd.R',
         #                    'generate_ceff_er3_qmd.R')
       
-        tx <- str_replace(tx, "- capacity_trm.qmd", "  # - capacity_trm.qmd")
+        # tx <- str_replace(tx, "- capacity_trm.qmd", "  # - capacity_trm.qmd")
         # tx <- str_replace(tx, "- environment_apt.qmd", "  # - environment_apt.qmd")
         
         #### it's easier just to remove the lines

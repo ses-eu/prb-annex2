@@ -1,39 +1,31 @@
 ## import data  ----
 data_raw  <-  read_xlsx(
-  paste0(data_folder, "ENV dataset master.xlsx"),
+  paste0(data_folder, "CAP dataset master.xlsx"),
   # here("data","hlsr2021_data.xlsx"),
-  sheet = "Table_AXOT airports",
+  sheet = "ATCOs",
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
   clean_names() 
 
-airports_table <- read_mytable("Lists.xlsx", "Lists", "Table_TCZs_RP3") %>%  clean_names()
-
 ## prepare data ----
 data_prep <- data_raw %>% 
   filter(
-    entity_name == .env$country,
-    year == .env$year_report,
-    airport_code %in% airports_table$apt_code) %>%
-  left_join(airports_table, by = c("airport_code" = "apt_code")) %>% 
-  mutate(
-    xlabel = apt_name,
-    type = indicator_type,
-    mymetric = axot_airport_value_min_flight
-  ) %>%  
-  select(
-    xlabel,
-    type,
-    mymetric)
+    state == .env$country,
+    year == .env$year_report) %>% 
+  select(acc, planned_atco_number, actual_atco_number) %>% 
+  rename(xlabel = acc,
+         Planned = planned_atco_number,
+         Actual = actual_atco_number) %>% 
+  pivot_longer(-xlabel, names_to = 'type', values_to = 'mymetric')
 
 ## chart parameters ----
 mysuffix <- ""
-mydecimals <- 2
+mydecimals <- 0
 
 ### trace parameters
-mycolors = c('#0070C0')
+mycolors = c('#5B9BD5', '#FFC200')
 ###set up order of traces
-myfactor <- data_prep %>% select(type) %>% unique() 
+myfactor <- c('Planned', 'Actual') 
 
 mytextangle <- 0
 mytextposition <- "outside"
@@ -53,7 +45,7 @@ myhoverlabel_bgcolor <- 'rgba(255,255,255,0.88)'
 myminsize <- myfont*0.8
 
 #### title
-mytitle_text <- paste0("AXOT by airport - ", year_report)
+mytitle_text <- paste0("ATCOs in OPS per ACC - ", year_report)
 mytitle_x <- 0
 mytitle_y <- 0.99
 mytitle_xanchor <- 'left'
@@ -72,13 +64,13 @@ myxaxis_zeroline <- TRUE
 myxaxis_tickfont_size <- myfont
 
 #### yaxis
-myyaxis_title <- "To be added"
+myyaxis_title <- "ATCOs in OPS"
 myyaxis_gridcolor <- 'rgb(240,240,240)'
 myyaxis_showgrid <- TRUE
 myyaxis_showline <- FALSE
 myyaxis_tickprefix <- ""
 myyaxis_ticksuffix <- ""
-myyaxis_tickformat <- ".1f"
+myyaxis_tickformat <- ".0f"
 
 myyaxis_zeroline <- TRUE
 myyaxis_zerolinecolor <- 'rgb(255,255,255)'
@@ -102,4 +94,5 @@ mylocalmargin = mymargin
 # function moved to utils
 
 ## plot chart  ----
-mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin)
+mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin) %>% 
+  layout(bargroupgap = 0.15)

@@ -17,7 +17,7 @@
 ::::
 
 :::: {#concl-cef-er-duc}
-```{r}
+```{r concl-cef-er-duc}
 cef_conc <- read_mytable("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF") %>% 
   filter(Year_Report == params$year_report, State == params$country) %>% 
   select(Conclusion) %>% toString() %>% paste0(., "@")
@@ -136,7 +136,7 @@ platea litora.
 <div style="height: 1px"></div>
 
 :::: {#chart-cef-er-aucu class="mychart"}
-```{r chart-cef-er-aucu}
+```{r chart-cef-er-aucu, options = (ez=1)}
 #| file: R/chart_level2_cef_er_aucu.R
 #| out.width: "100%"
 ```
@@ -157,7 +157,7 @@ lacus ante cras. Habitant conubia suscipit porttitor tortor neque hac praesent. 
 <div style="height: 1px"></div>
 
 :::: {#chart-cef-er-cex class="mychart"}
-```{r chart-cef-er-cex}
+```{r chart-cef-er-cex, R.options = list(ez=1)}
 #| file: R/chart_level2_cef_er_cex.R
 #| out.width: "100%"
 ```

@@ -49,9 +49,9 @@ for (ez in 1:no_ecz) {
   ## plot chart  ----
   
   ### calculate x range, and annotation and image position
-  myroundup <- max(floor((log10(abs(max(data_prep$mymetric))))), floor((log10(abs(min(data_prep$mymetric))))))
-  range_min <- floor(min(data_prep$mymetric)/10^myroundup) * 10^myroundup
-  range_max <- ceiling(max(data_prep$mymetric)/10^myroundup) * 10^myroundup
+  myroundup <- max(floor((log10(abs(max(data_prep$mymetric, na.rm = TRUE))))), floor((log10(abs(min(data_prep$mymetric, na.rm = TRUE))))))
+  range_min <- floor(min(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^myroundup + 10^myroundup/2
+  range_max <- ceiling(max(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^myroundup - 10^myroundup/2
   
   annotation_x <- (range_max - range_min) /20
   

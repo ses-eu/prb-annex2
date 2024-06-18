@@ -54,6 +54,13 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 #| out.width: "100%"
 ```
 
+<br>
+
+```{r chart-cap-atco-acc}
+#| file: R/chart_level2_cap_atco_acc.R
+#| out.width: "100%"
+```
+
 ::::
 
 :::: {#concl-cap-atco}
@@ -71,7 +78,7 @@ risus mus habitasse.
 
 ## Other indicators
 <!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
+<!-- <div style="height: 1px"></div> -->
 
 :::: {#chart-cap-other class="mychart"}
 

@@ -14,7 +14,9 @@ data_prep <- data_raw %>%
   filter(
     state == .env$country) %>% 
   filter(airport_icao %in% airports_table$apt_code) %>% 
-  rename("Airport Name" = airport_name) %>% 
+  left_join(airports_table, by = c("airport_icao" = "apt_code")) %>% 
+  arrange(apt_name) %>% 
+  rename("Airport Name" = apt_name) %>% 
   mutate("Avg arrival ATFM delay" = format(round(terminal_delay, 2), decimals = 2),
          "Slot adherence" = paste0(format(round(slot_adherence*100, 1), decimals = 1), "%"),
          "ATC pre departure\ndelay" = format(round(atc_predep_dly, 2), decimals = 2),

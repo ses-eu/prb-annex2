@@ -29,30 +29,35 @@ airports_table <- read_mytable("Lists.xlsx", "Lists", "Table_TCZs_RP3") %>%  cle
 ## prepare data ----
 data_prep_axot <- data_raw_axot  %>%
   filter(
-  entity_name == .env$country) %>%
+  entity_name == .env$country,
+  airport_code %in% airports_table$apt_code) %>%
+  left_join(airports_table, by = c("airport_code" = "apt_code")) %>% 
   mutate(type = "Additional taxi-out time",
          mymetric = format(round(axot_airport_value_min_flight,2), decimals =2)
          ) %>%
-  select(airport, year, type, mymetric)
+  select(apt_name, year, type, mymetric)
 # %>% 
   # filter(airport_icao %in% airports_table$apt_code)
   
 data_prep_asma <- data_raw_asma  %>%
   filter(
-    entity_name == .env$country) %>%
+    entity_name == .env$country,
+    airport_code %in% airports_table$apt_code) %>%
+  left_join(airports_table, by = c("airport_code" = "apt_code")) %>% 
   mutate(type = indicator_type,
          mymetric = format(round(asma_airport_value_min_flight,2), decimals =2 )
          ) %>%
-  select(airport, year, type, mymetric)
+  select(apt_name, year, type, mymetric)
 
 data_prep_cdo <- data_raw_cdo  %>%
   filter(
     entity_name == .env$country,
     airport_code %in% airports_table$apt_code) %>%
+  left_join(airports_table, by = c("airport_code" = "apt_code")) %>% 
   mutate(type = "Share of arrivals applying CDO",
          mymetric = paste0(round(cdo_airport_value*100,0), '%')
          ) %>%
-  select(airport, year, type, mymetric) 
+  select(apt_name, year, type, mymetric) 
 
 data_prep <- data_prep_axot %>% 
   rbind(data_prep_asma) %>% 
@@ -65,7 +70,7 @@ data_prep <- data_prep_axot %>%
                                                    "Share of arrivals applying CDO")
               # , names_glue = "{year}_{.value}" #suffix to prefix
   ) %>%
-  rename("Airport Name" = airport)
+  rename("Airport Name" = apt_name)
   
 
 
@@ -75,6 +80,7 @@ mygtable(data_prep, myfont*0.9) %>%
   tab_spanner_delim(
     delim = "_"
   )
+
   
 
 

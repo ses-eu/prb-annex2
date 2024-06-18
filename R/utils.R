@@ -740,8 +740,13 @@ mygtable <-  function(df, myfont) {
     column_labels.vlines.width = '1px',
     # column_labels.border.top.color = "#EAEAEA",
     column_labels.border.top.width = '1px',
-    # row.striping.include_table_body = FALSE,
     table.border.top.width = '1px',
     table.border.bottom.width = '1px',
-    data_row.padding = '3px')
+    data_row.padding = '3px',
+    # to disable the striped bootstrap issue
+    quarto.disable_processing = TRUE)  %>% 
+    cols_align(
+      align = "right",
+      columns = c(-1)
+    )
 }

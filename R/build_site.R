@@ -21,12 +21,12 @@
   
   ## build pages
   if (test_check == TRUE) {
-    state_list <- 'Network Manager' # set your test country here (Home for home page)
+    state_list <- 'Germany' # set your test country here (Home for home page)
   } 
 
   for (i in 1:length(state_list)) {
     country <- state_list[i]
-    # country <- "Belgium"
+    # country <- "Germany"
     source("R/parameters.R")
     source("R/create_pages.R")
   }

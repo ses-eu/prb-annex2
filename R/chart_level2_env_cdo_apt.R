@@ -17,9 +17,10 @@ data_prep <- data_raw %>%
   filter(
     entity_name == .env$country,
     year == .env$year_report,
-    airport_code %in% airports_country$apt_code) %>% 
+    airport_code %in% airports_table$apt_code) %>%
+  left_join(airports_table, by = c("airport_code" = "apt_code")) %>% 
   mutate(
-    xlabel = airport,
+    xlabel = apt_name,
     type = indicator_type,
     mymetric = round(cdo_airport_value * 100, 0)
   ) %>%  

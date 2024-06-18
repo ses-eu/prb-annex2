@@ -1,6 +1,6 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("ez") == FALSE) {ez = 1}
+# if (exists("ez") == FALSE) {ez = 1}
 # ez=1
 
 # initialise list to store plots ----

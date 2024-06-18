@@ -78,7 +78,7 @@ myyaxis_tickprefix <- ""
 myyaxis_ticksuffix <- "%"
 myyaxis_tickformat <- ".0f"
 myyaxis_rangemode <- NA
-myyaxis_range <- c(round(min(data_prep$mymetric, na.rm = TRUE)/5)*5, round(max(data_prep$mymetric, na.rm = TRUE)/5)*5)
+myyaxis_range <- c(floor(min(data_prep$mymetric, na.rm = TRUE)/5)*5, ceiling(max(data_prep$mymetric, na.rm = TRUE)/5)*5)
 
 myyaxis_zeroline <- TRUE
 myyaxis_zerolinecolor <- 'rgb(255,255,255)'

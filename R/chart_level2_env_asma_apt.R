@@ -7,15 +7,17 @@ data_raw  <-  read_xlsx(
   as_tibble() %>% 
   clean_names() 
 
-# airports_table <- read_mytable("Lists.xlsx", "Lists", "Table_TCZs_RP3") %>%  clean_names()
+airports_table <- read_mytable("Lists.xlsx", "Lists", "Table_TCZs_RP3") %>%  clean_names()
 
 ## prepare data ----
 data_prep <- data_raw %>% 
   filter(
     entity_name == .env$country,
-    year == .env$year_report) %>% 
+    year == .env$year_report,
+    airport_code %in% airports_table$apt_code) %>%
+  left_join(airports_table, by = c("airport_code" = "apt_code")) %>% 
   mutate(
-    xlabel = airport,
+    xlabel = apt_name,
     type = indicator_type,
     mymetric = asma_airport_value_min_flight
   ) %>%  
