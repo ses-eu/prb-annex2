@@ -170,7 +170,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
                    zeroline = TRUE,
                    tickvals = c(20, 40, 60, 80),
                    ticktext = c("A  ", "B  ", "C  ", "D  "),
-                   zerolinecolor = 'rgb(255,255,255)',
+                   zerolinecolor = 'rgb(240,240,240)',
                    titlefont = list(size = myfont), 
                    # showticklabels = FALSE
                    tickfont = list(size = myfont, color = 'black')

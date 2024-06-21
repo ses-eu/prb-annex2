@@ -3,12 +3,7 @@
 if (exists("ez") == FALSE) {ez = 1}
 # ez=1
 
-# initialise list to store plots ----
-myplot = list()
-
-# loop through czs ----
-for (ez in 1:no_ecz) {
-## import data  ----
+# import data  ----
 data_raw  <-  read_xlsx(
   paste0(data_folder, "CEFF dataset master.xlsx"),
   sheet = "Enroute_T1",
@@ -16,7 +11,7 @@ data_raw  <-  read_xlsx(
   as_tibble() %>% 
   clean_names() 
 
-## prepare data ----
+# prepare data ----
 data_prep <- data_raw %>% 
   filter(
     entity_code == ecz_list$ecz_id[ez]) %>% 
@@ -49,12 +44,12 @@ data_prep_planned <- data_prep %>%
 data_prep_actual <- data_prep %>% 
   filter(status == "Actual SUs")
 
-## set parameters for chart ----
+# set parameters for chart ----
 myaxis_title <- "En route TSUs '000"
 mychart_title <- 'En route service units'
 mytitle_pos <- 0.98
 
-## define chart function ----
+# define chart function ----
 myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
   plot_ly( 
     width = mywidth,
@@ -198,7 +193,7 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
                    # tickcolor = 'rgb(127,127,127)',
                    # ticks = 'outside',
                    zeroline = TRUE,
-                   zerolinecolor = 'rgb(255,255,255)',
+                   zerolinecolor = 'rgb(240,240,240)',
                    titlefont = list(size = myfont), tickfont = list(size = myfont)
       ),
       # showlegend = FALSE
@@ -213,11 +208,5 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
     )
 }
 
-## plot chart ----
-myplot[[ez]] <- myc(mywidth, myheight, myfont, mylinewidth, mymargin)
-
-}
-
-# create html plotlist ----
-htmltools::tagList(myplot)
-
+# plot chart ----
+myc(mywidth, myheight, myfont, mylinewidth, mymargin)

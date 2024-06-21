@@ -173,7 +173,7 @@ data_prep_planned <- data_raw_planned %>%
                    # tickcolor = 'rgb(127,127,127)',
                    # ticks = 'outside',
                    zeroline = TRUE,
-                   zerolinecolor = 'rgb(255,255,255)',
+                   zerolinecolor = 'rgb(240,240,240)',
                    titlefont = list(size = myfont), tickfont = list(size = myfont)
                    ),
       # showlegend = FALSE
@@ -191,8 +191,3 @@ data_prep_planned <- data_raw_planned %>%
 
 ## plot chart ----
   myc(mywidth, myheight, myfont, mylinewidth, mymargin)
-
-# # export to image
-# w = 1200
-# h = 600
-# export_fig(myc(w, h, 14 * w/900),"traffic_mvt_main.png", w, h)

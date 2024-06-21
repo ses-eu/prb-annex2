@@ -117,7 +117,7 @@ data_prep_planned <- data_prep %>%
                    # tickcolor = 'rgb(127,127,127)',
                    # ticks = 'outside',
                    zeroline = TRUE,
-                   zerolinecolor = 'rgb(255,255,255)',
+                   zerolinecolor = 'rgb(240,240,240)',
                    titlefont = list(size = myfont), tickfont = list(size = myfont)
                    ),
       # showlegend = FALSE

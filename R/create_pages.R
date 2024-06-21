@@ -300,6 +300,74 @@ if (out_format == 'web') {
                                               mymargin = mymargin,
                                               mylinewidth = mylinewidth,
                                               
+                                              mysuffix =mysuffix,
+                                              mydecimals =mydecimals,
+                                              
+                                              ### trace parameters
+                                              mycolors = mycolors,
+                                              mytextangle =mytextangle,
+                                              mytextposition =mytextposition,
+                                              myinsidetextanchor =myinsidetextanchor,
+                                              mytextfont_color =mytextfont_color,
+                                              mytextfont_size =mytextfont_size,
+                                              
+                                              # myhovertemplate =myhovertemplate,
+                                              mytrace_showlegend =mytrace_showlegend,
+                                              
+                                              ### layout parameters
+                                              myfont_family =myfont_family,
+                                              mybargap =mybargap,
+                                              mybarmode =mybarmode,
+                                              myhovermode =myhovermode,
+                                              myhoverlabel_bgcolor =myhoverlabel_bgcolor,
+                                              myminsize =myminsize,
+                                              
+                                              #### title
+                                              mytitle_text =mytitle_text,
+                                              mytitle_x =mytitle_x,
+                                              mytitle_y =mytitle_y,
+                                              mytitle_xanchor =mytitle_xanchor,
+                                              mytitle_yanchor =mytitle_yanchor,
+                                              mytitle_font_size =mytitle_font_size,
+                                              
+                                              #### xaxis
+                                              myxaxis_title =myxaxis_title,
+                                              myxaxis_gridcolor =myxaxis_gridcolor,
+                                              myxaxis_showgrid =myxaxis_showgrid,
+                                              myxaxis_showline =myxaxis_showline,
+                                              myxaxis_showticklabels =myxaxis_showticklabels,
+                                              myxaxis_tickformat =myxaxis_tickformat,
+                                              myxaxis_dtick =myxaxis_dtick,
+                                              myxaxis_zeroline =myxaxis_zeroline,
+                                              myxaxis_tickfont_size =myxaxis_tickfont_size,
+                                              
+                                              #### yaxis
+                                              myyaxis_title =myyaxis_title,
+                                              myyaxis_gridcolor =myyaxis_gridcolor,
+                                              myyaxis_showgrid =myyaxis_showgrid,
+                                              myyaxis_showline =myyaxis_showline,
+                                              myyaxis_tickprefix =myyaxis_tickprefix,
+                                              myyaxis_ticksuffix =myyaxis_ticksuffix,
+                                              myyaxis_tickformat =myyaxis_tickformat,
+                                              
+                                              myyaxis_zeroline =myyaxis_zeroline,
+                                              myyaxis_zerolinecolor =myyaxis_zerolinecolor,
+                                              myyaxis_titlefont_size =myyaxis_titlefont_size,
+                                              myyaxis_tickfont_size =myyaxis_tickfont_size,
+                                              
+                                              #### legend
+                                              mylegend_traceorder =mylegend_traceorder,
+                                              mylegend_orientation =mylegend_orientation,
+                                              mylegend_xanchor =mylegend_xanchor,
+                                              mylegend_yanchor =mylegend_yanchor,
+                                              mylegend_x =mylegend_x,
+                                              mylegend_y =mylegend_y,
+                                              mylegend_font_size =mylegend_font_size,
+                                              
+                                              #### margin
+                                              mylocalmargin = mylocalmargin,
+                                              
+                                              ## pdf
                                               mywidth_pdf = mywidth_pdf,
                                               myheight_pdf = myheight_pdf,
                                               myfont_pdf = myfont_pdf,

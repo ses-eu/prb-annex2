@@ -12,7 +12,8 @@ airports_table <- read_mytable("Lists.xlsx", "Lists", "Table_TCZs_RP3") %>%  cle
 ## prepare data ----
 data_prep <- data_raw %>% 
   filter(
-    state == .env$country) %>% 
+    state == .env$country) %>%
+  mutate_at(vars(-one_of(c('year', 'airport_icao'))), ~ ifelse(year > year_report, NA, .)) %>% 
   filter(airport_icao %in% airports_table$apt_code) %>% 
   left_join(airports_table, by = c("airport_icao" = "apt_code")) %>% 
   arrange(apt_name) %>% 

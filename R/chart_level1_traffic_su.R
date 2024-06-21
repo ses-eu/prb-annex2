@@ -185,7 +185,7 @@ if (country == 'SES RP3') {
                    # tickcolor = 'rgb(127,127,127)',
                    # ticks = 'outside',
                    zeroline = TRUE,
-                   zerolinecolor = 'rgb(255,255,255)',
+                   zerolinecolor = 'rgb(240,240,240)',
                    titlefont = list(size = myfont), tickfont = list(size = myfont)
                    ),
       # showlegend = FALSE
@@ -204,8 +204,3 @@ if (country == 'SES RP3') {
   
 ## plot chart ----
   myc(mywidth, myheight+20, myfont, mylinewidth, mymargin)
-
-# # export to image
-# w = 1200
-# h = 600
-# export_fig(myc(w, h, 14 * w/900),"traffic_su_main.png", w, h)

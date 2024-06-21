@@ -128,6 +128,7 @@ mycolors = c('#ED7D31', '#F8CBAD', '#BF8F00', '#92D050', '#A5A5A5')
 myfactor <- c("Capacity", "Staffing", 
               "Disruptions", "Weather",
               "Other non-ATC")
+myhovertemplate <- paste0('%{y:,.', mydecimals, 'f}', mysuffix)
 
 mytextangle <- 0
 mytextposition <- "inside"
@@ -135,61 +136,23 @@ myinsidetextanchor <- 'middle'
 mytextfont_color <- 'transparent'
 mytextfont_size <- 1
 
-myhovertemplate <- paste0('%{y:,.', mydecimals, 'f}', mysuffix)
-mytrace_showlegend <- T
-
 ### layout parameters
-myfont_family <- "Roboto"
 mybargap <- 0.25
 mybarmode <- 'stack'
-myhovermode <- "x unified"
-myhoverlabel_bgcolor <- 'rgba(255,255,255,0.88)'
-myminsize <- myfont*0.8
 
 #### title
 mytitle_text <- paste0("Average en route ATFM delay per flight - ", country)
-mytitle_x <- 0
-mytitle_y <- 0.99
-mytitle_xanchor <- 'left'
-mytitle_yanchor <- 'top'
-mytitle_font_size <- myfont * 20/15
 
 #### xaxis
-myxaxis_title <- ""
-myxaxis_gridcolor <- 'rgb(255,255,255)'
-myxaxis_showgrid <- TRUE
-myxaxis_showline <- FALSE
-myxaxis_showticklabels <- TRUE
-myxaxis_dtick <- 1
-myxaxis_tickformat <- "0"
-myxaxis_zeroline <- TRUE
-myxaxis_tickfont_size <- myfont
 
 #### yaxis
 myyaxis_title <- "Average minutes of delay"
-myyaxis_gridcolor <- 'rgb(240,240,240)'
-myyaxis_showgrid <- TRUE
-myyaxis_showline <- FALSE
-myyaxis_tickprefix <- ""
 myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".2f"
 
-myyaxis_zeroline <- TRUE
-myyaxis_zerolinecolor <- 'rgb(255,255,255)'
-myyaxis_titlefont_size <- myfont
-myyaxis_tickfont_size <- myfont
-
 #### legend
-mylegend_traceorder <- 'normal'
-mylegend_orientation <- 'h'
-mylegend_xanchor <- "center"
-mylegend_yanchor <- "center"
-mylegend_x <- 0.5
-mylegend_y <- -0.1
-mylegend_font_size <- myfont
 
 #### margin
-mylocalmargin <- mymargin
 
 # if (knitr::is_latex_output()) {
 #   if (country == 'SES RP3') {
@@ -233,7 +196,7 @@ myat_line_color <- '#FF0000'
 myat_line_width <- mylinewidth
 myat_showlegend <- T
 
-myat_textbold <- TRUE
+myat_textbold <- FALSE
 myat_textangle <- 0
 myat_textposition <- 'top'
 myat_textfont_color <- '#FF0000'

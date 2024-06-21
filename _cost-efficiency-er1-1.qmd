@@ -35,7 +35,7 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 <div style="height: 1px"></div>
 
 :::: {#chart-cef-su class="mychart"}
-```{r chart-cef-su}
+```{r chart-cef-su, options = (ez=1)}
 #| file: R/chart_level2_cef_su.R
 #| out.width: "100%"
 ```
@@ -63,7 +63,7 @@ egestas mi.
 <div style="height: 1px"></div>
 
 :::: {#chart-cef-er-cost class="mychart"}
-```{r chart-cef-er-cost}
+```{r chart-cef-er-cost, options = (ez=1)}
 #| file: R/chart_level2_cef_er_cost.R
 #| out.width: "100%"
 ```
@@ -86,7 +86,7 @@ velit: mollis lectus tortor, porta facilisis ante.
 <div style="height: 1px"></div>
 
 :::: {#chart-cef-er-cost-entity class="mychart"}
-```{r chart-cef-er-cost-entity}
+```{r chart-cef-er-cost-entity, options = (ez=1)}
 #| file: R/chart_level2_cef_er_cost_entity.R
 #| out.width: "100%"
 ```
@@ -112,7 +112,7 @@ sodales maecenas dictum, curae hendrerit a habitasse integer.
 <div style="height: 1px"></div>
 
 :::: {#chart-cef-er-cost-main class="mychart"}
-```{r chart-cef-er-cost-main}
+```{r chart-cef-er-cost-main, options = (ez=1)}
 #| file: R/chart_level2_cef_er_cost_main.R
 #| out.width: "100%"
 ```
@@ -174,12 +174,12 @@ Ipsum morbi posuere congue placerat, gravida gravida sollicitudin morbi feugiat 
 <div style="height: 1px"></div>
 
 :::: {#chart-cef-er-reg-res class="mychart"}
-```{r chart-cef-er-reg-res}
+```{r chart-cef-er-reg-res, options = (ez=1)}
 #| file: R/chart_level2_cef_er_reg_res.R
 #| out.width: "100%"
 ```
 
-```{r chart-cef-er-reg-res_aucu}
+```{r chart-cef-er-reg-res_aucu, options = (ez=1)}
 #| file: R/chart_level2_cef_er_reg_res_aucu.R
 #| out.width: "100%"
 ```
@@ -196,8 +196,15 @@ Ipsum morbi posuere congue placerat, gravida gravida sollicitudin morbi feugiat 
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
+:::: {#chart-cef-er-reg-res-ansp class="mychart"}
+```{r chart-cef-er-reg-res-ansp, options = (ez=1)}
+#| file: R/chart_level2_cef_reg_res_ansp.R
+#| out.width: "100%"
+```
+::::
+
 :::: {#chart-cef-er-reg-res-main-ansp class="mychart"}
-```{r chart-cef-er-reg-res-main-ansp}
+```{r chart-cef-er-reg-res-main-ansp, options = (ez=1)}
 #| file: R/chart_level2_cef_er_reg_res_main_ansp.R
 #| out.width: "100%"
 ```

@@ -1,9 +1,7 @@
 
 # fix ez if script not executed from qmd file ----
-# if (exists("ez") == FALSE) {ez = 1}
+if (exists("ez") == FALSE) {ez = 1}
 # ez=1
-
-ez
 
 # import data ----
 data_calc <- aucu(ez)
@@ -128,7 +126,8 @@ mybarc_aucu <-  function(mywidth, myheight, myfont, mymargin) {
                    # ticks = 'outside',
                    # font = list(size = 1, color = 'transparent'),
                    zeroline = TRUE
-      )
+      ),
+      yaxis = list(zerolinecolor = 'rgb(240,240,240)')
     )
     
   }
@@ -165,7 +164,7 @@ mybarc_aucu <-  function(mywidth, myheight, myfont, mymargin) {
                    # showticklabels = TRUE,
                    # ticks = 'outside',
                    zeroline = TRUE,
-                   zerolinecolor = 'rgb(255,255,255)',
+                   zerolinecolor = 'rgb(240,240,240)',
                    titlefont = list(size = myfont), tickfont = list(size = myfont)
       ),
       # legend = list(

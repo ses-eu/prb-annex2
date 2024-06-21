@@ -31,6 +31,7 @@ data_prep_axot <- data_raw_axot  %>%
   filter(
   entity_name == .env$country,
   airport_code %in% airports_table$apt_code) %>%
+  mutate_at(vars(-one_of(c('year', 'airport_code'))), ~ ifelse(year > year_report, NA, .)) %>%
   left_join(airports_table, by = c("airport_code" = "apt_code")) %>% 
   mutate(type = "Additional taxi-out time",
          mymetric = format(round(axot_airport_value_min_flight,2), decimals =2)
@@ -43,6 +44,7 @@ data_prep_asma <- data_raw_asma  %>%
   filter(
     entity_name == .env$country,
     airport_code %in% airports_table$apt_code) %>%
+  mutate_at(vars(-one_of(c('year', 'indicator_type', 'airport_code'))), ~ ifelse(year > year_report, NA, .)) %>%
   left_join(airports_table, by = c("airport_code" = "apt_code")) %>% 
   mutate(type = indicator_type,
          mymetric = format(round(asma_airport_value_min_flight,2), decimals =2 )
@@ -53,9 +55,10 @@ data_prep_cdo <- data_raw_cdo  %>%
   filter(
     entity_name == .env$country,
     airport_code %in% airports_table$apt_code) %>%
+  mutate_at(vars(-one_of(c('year', 'airport_code'))), ~ ifelse(year > year_report, NA, .)) %>%
   left_join(airports_table, by = c("airport_code" = "apt_code")) %>% 
   mutate(type = "Share of arrivals applying CDO",
-         mymetric = paste0(round(cdo_airport_value*100,0), '%')
+         mymetric = if_else(is.na(cdo_airport_value) == TRUE, NA_character_, paste0(round(cdo_airport_value*100,0), '%'))
          ) %>%
   select(apt_name, year, type, mymetric) 
 

@@ -48,6 +48,66 @@ params:
   env_apt_file:   $env_apt_file
   env_mil_file:   $env_mil_file
   saf_eosm_file:  $saf_eosm_file
+  
+  mysuffix:       $mysuffix
+  mydecimals:     $mydecimals
+  
+  mycolors:       $mycolors
+  mytextangle:    $mytextangle
+  mytextposition: $mytextposition
+  myinsidetextanchor: $myinsidetextanchor
+  mytextfont_color:   $mytextfont_color 
+  mytextfont_size:    $myfont
+  
+  # myhovertemplate:    $myhovertemplate
+  mytrace_showlegend: $mytrace_showlegend
+  
+  myfont_family:  $myfont_family
+  mybargap:       $mybargap
+  mybarmode:      $mybarmode
+  myhovermode:    $myhovermode
+  myhoverlabel_bgcolor: $myhoverlabel_bgcolor
+  myminsize:      $myminsize
+
+  mytitle_text:     $mytitle_text
+  mytitle_x:        $mytitle_x
+  mytitle_y:        $mytitle_y 
+  mytitle_xanchor:  $mytitle_xanchor
+  mytitle_yanchor:  $mytitle_yanchor
+  mytitle_font_size: $mytitle_font_size
+  
+  myxaxis_title:    $myxaxis_title
+  myxaxis_gridcolor: $myxaxis_gridcolor
+  myxaxis_showgrid: $myxaxis_showgrid
+  myxaxis_showline: $myxaxis_showline
+  myxaxis_showticklabels: $myxaxis_showticklabels
+  myxaxis_tickformat: $myxaxis_tickformat
+  myxaxis_dtick:    $myxaxis_dtick
+  myxaxis_zeroline: $myxaxis_zeroline
+  myxaxis_tickfont_size: $myxaxis_tickfont_size
+  
+  myyaxis_title:      $myyaxis_title
+  myyaxis_gridcolor:  $myyaxis_gridcolor
+  myyaxis_showgrid:   $myyaxis_showgrid
+  myyaxis_showline:   $myyaxis_showline
+  myyaxis_tickprefix: $myyaxis_tickprefix
+  myyaxis_ticksuffix: $myyaxis_ticksuffix
+  myyaxis_tickformat: $myyaxis_tickformat
+  
+  myyaxis_zeroline:   $myyaxis_zeroline
+  myyaxis_zerolinecolor: $myyaxis_zerolinecolor
+  myyaxis_titlefont_size: $myyaxis_titlefont_size
+  myyaxis_tickfont_size: $myyaxis_tickfont_size
+  
+  mylegend_traceorder: $mylegend_traceorder
+  mylegend_orientation: $mylegend_orientation
+  mylegend_xanchor:   $mylegend_xanchor
+  mylegend_yanchor:   $mylegend_yanchor
+  mylegend_x:         $mylegend_x
+  mylegend_y:         $mylegend_y
+  mylegend_font_size: $mylegend_font_size
+  
+  mylocalmargin:      $mylocalmargin
 ---
 
 ```{r, eval=TRUE}
@@ -81,24 +141,87 @@ other_ansps_str <- params$other_ansps_str
 other_met_str <- params$other_met_str
 # yearly_xrates <- params$yearly_xrates
 
-myheight <- params$myheight
-mywitdh <- params$mywitdh
-myfont <- params$myfont
-mymargin <- params$mymargin
-mylinewidth <- params$mylinewidth
-
-myheight <- params$myheight
-mywidth <- params$mywidth
-myfont <- params$myfont
-mymargin <- params$mymargin
-mylinewidth <- params$mylinewidth
-
 cap_file <- params$cap_file
 ceff_file <- params$ceff_file
 env_kea_file <- params$env_kea_file
 env_apt_file <- params$env_apt_file
 env_mil_file <- params$env_mil_file
 saf_eosm_file <- params$saf_eosm_file
+
+## chart parameters
+myheight <- params$myheight
+mywidth <- params$mywidth
+myfont <- params$myfont
+mymargin <- params$mymargin
+mylinewidth <- params$mylinewidth
+
+mysuffix <- params$mysuffix
+mydecimals <- params$mydecimals
+
+### trace parameters
+mycolors <- params$mycolors
+
+mytextangle <- params$mytextangle
+mytextposition <- params$mytextposition
+myinsidetextanchor <- params$myinsidetextanchor
+mytextfont_color <- params$mytextfont_color
+mytextfont_size <- params$mytextfont_size
+
+# myhovertemplate <- params$myhovertemplate
+mytrace_showlegend <- params$mytrace_showlegend
+
+### layout parameters
+myfont_family <- params$myfont_family
+mybargap <- params$mybargap
+mybarmode <- params$mybarmode
+myhovermode <- params$myhovermode
+myhoverlabel_bgcolor <- params$myhoverlabel_bgcolor
+myminsize <- params$myminsize
+
+#### title
+mytitle_text <- params$mytitle_text
+mytitle_x <- params$mytitle_x
+mytitle_y <- params$mytitle_y
+mytitle_xanchor <- params$mytitle_xanchor
+mytitle_yanchor <- params$mytitle_yanchor
+mytitle_font_size <- params$mytitle_font_size
+
+#### xaxis
+myxaxis_title <- params$myxaxis_title
+myxaxis_gridcolor <- params$myxaxis_gridcolor
+myxaxis_showgrid <- params$myxaxis_showgrid
+myxaxis_showline <- params$myxaxis_showline
+myxaxis_showticklabels <- params$myxaxis_showticklabels
+myxaxis_tickformat <- params$myxaxis_tickformat
+myxaxis_dtick <- params$myxaxis_dtick
+myxaxis_zeroline <- params$myxaxis_zeroline
+myxaxis_tickfont_size <- params$myxaxis_tickfont_size
+
+#### yaxis
+myyaxis_title <- params$myyaxis_title
+myyaxis_gridcolor <- params$myyaxis_gridcolor
+myyaxis_showgrid <- params$myyaxis_showgrid
+myyaxis_showline <- params$myyaxis_showline
+myyaxis_tickprefix <- params$myyaxis_tickprefix
+myyaxis_ticksuffix <- params$myyaxis_ticksuffix
+myyaxis_tickformat <- params$myyaxis_tickformat
+
+myyaxis_zeroline <- params$myyaxis_zeroline
+myyaxis_zerolinecolor <- params$myyaxis_zerolinecolorv
+myyaxis_titlefont_size <- params$myyaxis_titlefont_size
+myyaxis_tickfont_size <- params$myyaxis_tickfont_size
+
+#### legend
+mylegend_traceorder <- params$mylegend_traceorder
+mylegend_orientation <- params$mylegend_orientation
+mylegend_xanchor <- params$mylegend_xanchor
+mylegend_yanchor <- params$mylegend_yanchor
+mylegend_x <- params$mylegend_x
+mylegend_y <- params$mylegend_y
+mylegend_font_size <- params$mylegend_font_size
+
+#### margin
+mylocalmargin <- params$mylocalmargin
 
 source("R/libraries.R")
 source("R/utils.R")
