@@ -49,18 +49,18 @@ read_mytable <- function(file, sheet, table){
   }
 
 ## get yearly exchange rates ----
-  get_xrates <- function() {
+  get_xrates <- function(cztype, mycz) {
     data_raw_xrates  <-  read_xlsx(
       paste0(data_folder, "CEFF dataset master.xlsx"),
       # here("data","hlsr2021_data.xlsx"),
-      sheet = "ERT_XRATE2017",
+      sheet = if_else(cztype == "terminal", "TRM_XRATE2017", "ERT_XRATE2017"),
       range = cell_limits(c(1, 1), c(NA, NA))) %>%
       as_tibble() %>% 
       clean_names()  
     
     yearly_xrates <- data_raw_xrates %>% 
       filter(
-        entity_code %in% ecz_list$ecz_id == TRUE
+        entity_code %in% mycz == TRUE
       ) %>% 
       select(entity_code, contains('pp_exchangerate_' )) %>% 
       pivot_longer(cols = starts_with("pp_exchangerate_"),
@@ -75,12 +75,12 @@ read_mytable <- function(file, sheet, table){
 
 ## aucu calculations ----
   
-  aucu <- function(ez) {
+  aucu <- function(cztype, ez, mycz) {
   ## import data  ----
   data_raw_t1  <-  read_xlsx(
     paste0(data_folder, "CEFF dataset master.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
-    sheet = "Enroute_T1",
+    sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
@@ -88,7 +88,7 @@ read_mytable <- function(file, sheet, table){
   data_raw_t2  <-  read_xlsx(
     paste0(data_folder, "CEFF dataset master.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
-    sheet = "Enroute_T2",
+    sheet = if_else(cztype == "terminal", "Terminal_T2", "Enroute_T2"),
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
@@ -96,25 +96,25 @@ read_mytable <- function(file, sheet, table){
   data_raw_t3  <-  read_xlsx(
     paste0(data_folder, "CEFF dataset master.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
-    sheet = "Enroute_T3",
+    sheet = if_else(cztype == "terminal", "Terminal_T3", "Enroute_T3"),
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
   
   ## prepare data ----
   
-  # filter raw tables on ecz
+  # filter raw tables on cz
   ## t1
   data_prep_t1 <- data_raw_t1 %>% 
     filter(
-      entity_code == ecz_list$ecz_id[ez],
+      entity_code == mycz,
       status == 'A'
     ) 
   
   ## t2
   data_prep_t2_ini <- data_raw_t2 %>% 
     filter(
-      entity_code == ecz_list$ecz_id[ez]
+      entity_code == mycz
     ) 
   
   #temp table with values for 2020 and 2021 separated that I'll need later for aucu calculations
@@ -138,17 +138,17 @@ read_mytable <- function(file, sheet, table){
   ## t3
   data_prep_t3 <- data_raw_t3 %>% 
     filter(
-      entity_code == ecz_list$ecz_id[ez],
+      entity_code == mycz,
       year != 'After RP' & year != 'Amounts'
     ) %>% 
     mutate(year = as.numeric(year))
   
   ## t exchange rates
-  yearly_xrates <- get_xrates()
+  yearly_xrates <- get_xrates(cztype, mycz)
   
   data_prep_xrates <- yearly_xrates %>% 
     filter(
-      entity_code == ecz_list$ecz_id[ez]
+      entity_code == mycz
     ) %>% 
     select(-entity_code)
   

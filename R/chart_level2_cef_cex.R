@@ -1,12 +1,24 @@
+
 # fix ez if script not executed from qmd file ----
-if (exists("ez") == FALSE) {ez = 1}
+if (exists("cz") == FALSE) {cz = c("1", "terminal")}
 # ez=1
+
+# define cz ----
+ez <- as.numeric(cz[[1]])
+cztype <- cz[[2]]
+# cztype <- "terminal"
+mycz <- if_else(cztype == "terminal",
+                tcz_list$tcz_id[ez],
+                ecz_list$ecz_id[ez])
+mycz_name <- if_else(cztype == "terminal",
+                     tcz_list$tcz_name[ez],
+                     ecz_list$ecz_name[ez])
 
 # import data  ----
 data_raw  <-  read_xlsx(
   paste0(data_folder, "CEFF dataset master.xlsx"),
   # here("data","hlsr2021_data.xlsx"),
-  sheet = "Enroute_T2",
+  sheet = if_else(cztype == "terminal", "Terminal_T2", "Enroute_T2"),
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
   clean_names() 
@@ -14,7 +26,7 @@ data_raw  <-  read_xlsx(
 # prepare data ----
 data_prep_t2 <- data_raw %>% 
   filter(
-    entity_code == ecz_list$ecz_id[ez],
+    entity_code == mycz,
   ) %>% 
   ## to be used for the table, just kept until the table script is created
   # select(
@@ -49,11 +61,11 @@ data_prep_t2 <- data_raw %>%
   )
   
 # t exchange rates
-yearly_xrates <- get_xrates()
+yearly_xrates <- get_xrates(cztype, mycz)
 
 data_prep_xrates <- yearly_xrates %>% 
   filter(
-    entity_code == ecz_list$ecz_id[ez]
+    entity_code == mycz
   ) %>% 
   select(-entity_code) %>% 
   filter(year > 2020) %>% 
@@ -98,7 +110,7 @@ mytitle_text <- paste0("Cost exempt")
 #### yaxis
 myyaxis_title <- "Cost exempt from cost sharing\n(€'000)"
 myyaxis_ticksuffix <- ""
-myyaxis_tickformat <- ".0f"
+myyaxis_tickformat <- ",.0f"
 
 #### legend
 

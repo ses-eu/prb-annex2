@@ -157,7 +157,7 @@ lacus ante cras. Habitant conubia suscipit porttitor tortor neque hac praesent. 
 <div style="height: 1px"></div>
 
 :::: {#chart-cef-er-cex class="mychart"}
-```{r chart-cef-er-cex, R.options = list(ez=@@cz_index@@)}
+```{r chart-cef-cex, R.options = list(ez=@@cz_index@@)}
 #| file: R/chart_level2_cef_er_cex.R
 #| out.width: "100%"
 ```

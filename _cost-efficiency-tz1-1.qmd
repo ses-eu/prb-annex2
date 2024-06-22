@@ -127,3 +127,38 @@ Turpis rhoncus donec mus fames sed; neque, sem diam praesent, magna sodales vulp
 platea litora.
 ::::
 :::
+
+::: {#container-cef-trm-aucu style="clear: both"}
+
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+:::: {#chart-cef-trm-aucu class="mychart"}
+AUCU chart
+::::
+
+:::: {#concl-cef-trm-aucu}
+Elit suspendisse lobortis sodales aliquam vitae sem magna. Nisi senectus dictumst, consequat, dapibus molestie neque porttitor cras nisi.
+Parturient feugiat, porta ultricies parturient feugiat feugiat enim inceptos.
+
+Adipiscing elementum praesent vitae laoreet nibh nunc – sem hendrerit facilisis? Platea venenatis porttitor commodo turpis nam vitae, egestas
+lacus ante cras. Habitant conubia suscipit porttitor tortor neque hac praesent. Lacus vehicula tristique blandit egestas, dui platea.
+::::
+:::
+
+::: {#container-cef-trm-cex style="clear: both"}
+
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+:::: {#chart-cef-trm-cex class="mychart"}
+```{r chart-cef-cex, options = (cz=c("1", "terminal"))}
+#| file: R/chart_level2_cef_er_cex.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#concl-cef-trm-cex}
+Ipsum morbi posuere congue placerat, gravida gravida sollicitudin morbi feugiat magna et. Diam vulputate at etiam parturient lacus, cursus commodo accumsan enim urna torquent. Aenean ut dictumst convallis; egestas bibendum diam. Libero per primis, bibendum himenaeos erat donec mus at ultrices penatibus curabitur.
+::::
+:::
