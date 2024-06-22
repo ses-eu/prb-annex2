@@ -77,7 +77,7 @@ myat_textfont_color <- 'transparent'
 myat_textfont_size <- myfont
 
 # plot chart  ----
-myplot_trace1 <- mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin) %>% 
+myplot_trace1 <- mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals) %>% 
   add_line_trace(., filter(data_prep_costs, type == "Planned costs"))
 
 #____additional trace parameters

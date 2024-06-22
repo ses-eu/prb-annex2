@@ -83,7 +83,7 @@ myat_textfont_color <- 'transparent'
 myat_textfont_size <- myfont
 
 # plot chart  ----
-mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin) %>% 
+mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin, mydecimals) %>% 
   add_line_trace(., filter(data_prep, type == 'Regulatory result per SU'))  %>% 
   add_empty_trace(., data_prep) %>% 
   layout(

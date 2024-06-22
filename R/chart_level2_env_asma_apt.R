@@ -63,4 +63,4 @@ myyaxis_tickformat <- ".1f"
 # function moved to utils
 
 ## plot chart  ----
-mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin)
+mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals)

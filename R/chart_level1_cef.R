@@ -1,26 +1,32 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("ez") == FALSE) {ez = 1}
+if (exists("cz") == FALSE) {cz = c("1", "enroute")}
 # ez=1
 
-# initialise list to store plots ----
-myplot = list()
+# define cz ----
+ez <- as.numeric(cz[[1]])
+cztype <- cz[[2]]
+# cztype <- "terminal"
+mycz <- if_else(cztype == "terminal",
+                tcz_list$tcz_id[ez],
+                ecz_list$ecz_id[ez])
+mycz_name <- if_else(cztype == "terminal",
+                     tcz_list$tcz_name[ez],
+                     ecz_list$ecz_name[ez])
 
-# loop through czs ----
-for (ez in 1:no_ecz) {
-## import data  ----
+# import data  ----
 data_raw  <-  read_xlsx(
   paste0(data_folder, "CEFF dataset master.xlsx"),
   # here("data","hlsr2021_data.xlsx"),
-  sheet = "Enroute_T1",
+  sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
   clean_names() 
 
-## prepare data ----
+# prepare data ----
 data_prep <- data_raw %>% 
   filter(
-    entity_code == ecz_list$ecz_id[ez]) %>% 
+    entity_code == mycz) %>% 
   mutate(
     mymetric = round(x5_5_unit_cost_nc2017/xrate2017, 2)
   ) %>%  
@@ -41,7 +47,7 @@ data_prep <- data_raw %>%
 ### replace 0 by NAs so they are not plotted
 data_prep[data_prep == 0] <- NA
 
-## chart parameters ----
+# chart parameters ----
 mysuffix <- ""
 mydecimals <- 2
 
@@ -64,12 +70,14 @@ mybarmode <- 'group'
 myminsize <- myfont*0.95
 
 #### title
-mytitle_text <- paste0("En route unit costs - ", ecz_list$ecz_name[ez])
+mytitle_text <- paste0(if_else(cztype == "terminal", "Terminal", "En route"),
+                        " unit costs - ", mycz_name)
 
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "En route unit costs (€2017)"
+myyaxis_title <- paste0(if_else(cztype == "terminal", "Terminal ", "En route "), 
+                        " unit costs (€2017)")
 myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".0f"
 
@@ -77,16 +85,7 @@ myyaxis_tickformat <- ".0f"
 
 #### margin
 
-## define chart function ----
-# function moved to utils
+# plot chart  ----
+mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals)
 
-## plot chart  ----
-myplot[[ez]] <- mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin)
-# myplot[[ez]]
 
-}
-
-# create html plotlist ----
-htmltools::tagList(myplot)
-
-# https://stackoverflow.com/questions/35193612/multiple-r-plotly-figures-generated-in-a-rmarkdown-knitr-chunk-document

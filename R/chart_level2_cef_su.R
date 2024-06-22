@@ -1,12 +1,23 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("ez") == FALSE) {ez = 1}
+if (exists("cz") == FALSE) {cz = c("1", "terminal")}
 # ez=1
+
+# define cz ----
+ez <- as.numeric(cz[[1]])
+cztype <- cz[[2]]
+# cztype <- "terminal"
+mycz <- if_else(cztype == "terminal",
+                tcz_list$tcz_id[ez],
+                ecz_list$ecz_id[ez])
+mycz_name <- if_else(cztype == "terminal",
+                     tcz_list$tcz_name[ez],
+                     ecz_list$ecz_name[ez])
 
 # import data  ----
 data_raw  <-  read_xlsx(
   paste0(data_folder, "CEFF dataset master.xlsx"),
-  sheet = "Enroute_T1",
+  sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
   clean_names() 
@@ -14,7 +25,7 @@ data_raw  <-  read_xlsx(
 # prepare data ----
 data_prep <- data_raw %>% 
   filter(
-    entity_code == ecz_list$ecz_id[ez]) %>% 
+    entity_code == mycz) %>% 
   mutate(
     mymetric = round(x5_4_total_su/1000, 0)
   ) %>%  
@@ -45,8 +56,11 @@ data_prep_actual <- data_prep %>%
   filter(status == "Actual SUs")
 
 # set parameters for chart ----
-myaxis_title <- "En route TSUs '000"
-mychart_title <- 'En route service units'
+myaxis_title <- paste0(if_else(cztype == "terminal", "Terminal", "En route"),
+                       " TSUs '000")
+mychart_title <- paste0(if_else(cztype == "terminal", "Terminal", "En route"),
+                        " service units - ",
+                        mycz_name)
 mytitle_pos <- 0.98
 
 # define chart function ----

@@ -55,5 +55,5 @@ myyaxis_tickformat <- ".0f"
 # function moved to utils
 
 ## plot chart  ----
-mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin) %>% 
+mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals) %>% 
   layout(bargroupgap = 0.15)

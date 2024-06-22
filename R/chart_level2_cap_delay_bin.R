@@ -81,9 +81,6 @@ myyaxis_tickformat <- ".0f"
 
 #### margin
 
-## define chart function ----
-# function moved to utils
-
 ## plot chart  ----
-mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin) %>% 
+mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals) %>% 
   layout(xaxis = list(range= c(2019.5,2024.5)))

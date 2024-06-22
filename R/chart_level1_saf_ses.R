@@ -31,7 +31,7 @@ data_prep <- data_raw %>%
       management_objectives == 'Other MOs planned' ~ "top center",
       TRUE ~ 'bottom center'
     ),
-    ) 
+  ) 
 
 data_prep_actual <- data_prep %>% 
   filter(status == 'Actual')
@@ -40,32 +40,32 @@ data_prep_planned <- data_prep %>%
   filter(status == 'Planned')
 
 # chart ----
-  ## set parameters for chart ----
-  mycolors <-  c('#FFC000', '#FFC000','#5B9BD5', '#5B9BD5')
+## set parameters for chart ----
+mycolors <-  c('#FFC000', '#FFC000','#5B9BD5', '#5B9BD5')
 
-  ## define chart function ----
-  myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
-    plotly::plot_ly(
-      width = mywidth,
-      height = myheight,
-      data = data_prep_planned,
-      x = ~ year,
-      y = ~ number_of_ans_ps,
-      yaxis = "y1",
-      cliponaxis = FALSE,
-      yaxis = "y1",
-      type = 'scatter',  mode = 'lines+markers',
-      line = list(width = mylinewidth, dash = 'dot'),
-      marker = list(size = mylinewidth * 3),
-      color = ~ management_objectives,
-      colors = mycolors,
-      opacity = 1,
-      text = ~ number_of_ans_ps,
-      textposition = ~ mytextpos,
-      textfont = list(color = 'black', size = myfont),
-      hovertemplate = paste0('%{xother} %{y:.0f}'),
-      showlegend = T
-    ) %>% 
+## define chart function ----
+myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
+  plotly::plot_ly(
+    width = mywidth,
+    height = myheight,
+    data = data_prep_planned,
+    x = ~ year,
+    y = ~ number_of_ans_ps,
+    yaxis = "y1",
+    cliponaxis = FALSE,
+    yaxis = "y1",
+    type = 'scatter',  mode = 'lines+markers',
+    line = list(width = mylinewidth, dash = 'dot'),
+    marker = list(size = mylinewidth * 3),
+    color = ~ management_objectives,
+    colors = mycolors,
+    opacity = 1,
+    text = ~ number_of_ans_ps,
+    textposition = ~ mytextpos,
+    textfont = list(color = 'black', size = myfont),
+    hovertemplate = paste0('%{xother} %{y:.0f}'),
+    showlegend = T
+  ) %>% 
     plotly::add_trace(
       data = data_prep_actual,
       x = ~ year,
@@ -80,11 +80,11 @@ data_prep_planned <- data_prep %>%
       opacity = 1,
       hovertemplate = paste0('%{xother} %{y:.0f}'),
       showlegend = T
-      ) %>%
+    ) %>%
     plotly::config( responsive = TRUE,
-            displaylogo = FALSE,
-            displayModeBar = F
-            # modeBarButtons = list(list("toImage")),
+                    displaylogo = FALSE,
+                    displayModeBar = F
+                    # modeBarButtons = list(list("toImage")),
     ) %>% 
     plotly::layout(
       font = list(family = "Roboto"),
@@ -94,7 +94,7 @@ data_prep_planned <- data_prep %>%
                    xanchor = 'left', 
                    yanchor =  'top',
                    font = list(size = myfont * 20/15)
-                   ),
+      ),
       hovermode = "x unified",
       hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
       xaxis = list(title = "",
@@ -107,7 +107,7 @@ data_prep_planned <- data_prep %>%
                    # ticks = 'outside',
                    zeroline = TRUE,
                    tickfont = list(size = myfont)
-                   ),
+      ),
       yaxis = list(title = "No of ANSPs on or above target",
                    # gridcolor = 'rgb(255,255,255)',
                    showgrid = TRUE,
@@ -119,7 +119,7 @@ data_prep_planned <- data_prep %>%
                    zeroline = TRUE,
                    zerolinecolor = 'rgb(240,240,240)',
                    titlefont = list(size = myfont), tickfont = list(size = myfont)
-                   ),
+      ),
       # showlegend = FALSE
       legend = list(
         orientation = 'h', 
@@ -127,15 +127,15 @@ data_prep_planned <- data_prep %>%
         x = -0.1, 
         y =-0.1,
         font = list(size = myfont)
-        ),
+      ),
       margin = mymargin
       
       
     )
-  }
+}
 
 ## plot chart ----
-  myc(mywidth, myheight, myfont, mylinewidth, mymargin)
+myc(mywidth, myheight, myfont, mylinewidth, mymargin)
 
 # # export to image
 # w = 1200

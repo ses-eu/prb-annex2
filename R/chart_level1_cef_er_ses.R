@@ -79,7 +79,7 @@ myyaxis_tickformat <- ".0f"
 #### margin
 
 # plot chart  ----
-mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin) %>% 
+mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals) %>% 
 add_trace(
   data = data_target_trend,
   x = ~ xlabel,

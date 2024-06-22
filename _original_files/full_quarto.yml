@@ -179,19 +179,8 @@ website:
             contents:
             - text: "KPI – DUC/AUC, costs and SUs"
               href: cost-efficiency-er1-1.html
-          # - cost-efficiency-er1-2.qmd
-          # - cost-efficiency-er1-3.qmd
-          # - text: "---"
-          # - cost-efficiency-tz1-1.qmd
-          # - cost-efficiency-tz1-2.qmd
-          # - cost-efficiency-tz1-3.qmd
-# block tcz2
-          # - text: "---"
-          # - cost-efficiency-tz2-1.qmd
-          # - cost-efficiency-tz2-2.qmd
-          # - cost-efficiency-tz2-3.qmd
-          # - text: "---"
-          # - cost-efficiency-g2g.qmd
+# include ECZ2 block              
+# include TCZ block              
 # block level2 end
 # 
   # site-url: "https://eurocontrol.int/"

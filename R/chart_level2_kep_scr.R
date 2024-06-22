@@ -132,5 +132,5 @@ myyaxis_tickformat <- ".1f"
 #### margin
 
 # plot chart ----
-mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin) %>% 
+mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals) %>% 
   add_empty_trace(., data_prep)

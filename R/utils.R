@@ -531,7 +531,7 @@ read_mytable <- function(file, sheet, table){
 
   
 ## universal barchart  ----
-mybarchart <-  function(df, mywidth, myheight, myfont, mymargin) {
+mybarchart <-  function(df, mywidth, myheight, myfont, mymargin, mydecimals) {
   df %>% 
     plot_ly(
       width = mywidth,
@@ -542,7 +542,7 @@ mybarchart <-  function(df, mywidth, myheight, myfont, mymargin) {
       # marker = list(color = mymarker_color),
       colors = mycolors,
       color = ~ factor(type, levels = myfactor),
-      text = ~ paste0(format(mymetric,  big.mark  = ",", nsmall = mydecimals), mysuffix),
+      text = ~ paste0(format(round(mymetric, mydecimals),  big.mark  = ",", nsmall = mydecimals), mysuffix),
       # text = ~ mymetric,
       textangle = mytextangle,
       textposition = mytextposition, 
@@ -710,6 +710,7 @@ myhbarc <-  function(mywidth, myheight, myfont, mymargin) {
                    tickfont = list(size = myfont)
       ),
       xaxis = list(title = myaxis_title,
+                   # automargin = T,
                    # gridcolor = 'rgb(255,255,255)',
                    showgrid = TRUE,
                    showline = FALSE,
@@ -751,76 +752,3 @@ mygtable <-  function(df, myfont) {
     )
 }
 
-## main chart parameters ----
-getchartparams <-  function() {
-  mysuffix <- ""
-  mydecimals <- 2
-  
-  ### trace parameters
-  mycolors = c('#FFC000')
-  ###set up order of traces
-  myfactor <- data_prep %>% select(type) %>% unique() 
-  
-  mytextangle <- 0
-  mytextposition <- "outside"
-  myinsidetextanchor <- NA
-  mytextfont_color <- 'black'
-  mytextfont_size <- myfont
-  
-  myhovertemplate <- paste0('%{y:,.', mydecimals, 'f}', mysuffix)
-  mytrace_showlegend <- T
-  
-  ### layout parameters
-  myfont_family <- "Roboto"
-  mybargap <- 0.25
-  mybarmode <- 'group'
-  myhovermode <- "x unified"
-  myhoverlabel_bgcolor <- 'rgba(255,255,255,0.88)'
-  myminsize <- myfont*0.8
-  
-  #### title
-  mytitle_text <- "Chart title"
-  mytitle_x <- 0
-  mytitle_y <- 0.99
-  mytitle_xanchor <- 'left'
-  mytitle_yanchor <- 'top'
-  mytitle_font_size <- myfont * 20/15
-  
-  #### xaxis
-  myxaxis_title <- ''
-  myxaxis_gridcolor <- 'rgb(255,255,255)'
-  myxaxis_showgrid <- TRUE
-  myxaxis_showline <- FALSE
-  myxaxis_showticklabels <- TRUE
-  myxaxis_tickformat <- "0"
-  myxaxis_dtick <- 1
-  myxaxis_zeroline <- TRUE
-  myxaxis_tickfont_size <- myfont
-  
-  #### yaxis
-  myyaxis_title <- "Y axis title"
-  myyaxis_gridcolor <- 'rgb(240,240,240)'
-  myyaxis_showgrid <- TRUE
-  myyaxis_showline <- FALSE
-  myyaxis_tickprefix <- ""
-  myyaxis_ticksuffix <- ""
-  myyaxis_tickformat <- ".1f"
-  
-  myyaxis_zeroline <- TRUE
-  myyaxis_zerolinecolor <- 'rgb(240,240,240)'
-  myyaxis_titlefont_size <- myfont
-  myyaxis_tickfont_size <- myfont
-  
-  #### legend
-  mylegend_traceorder <- 'normal'
-  mylegend_orientation <- 'h'
-  mylegend_xanchor <- "center"
-  mylegend_yanchor <- "center"
-  mylegend_x <- 0.5
-  mylegend_y <- -0.1
-  mylegend_font_size <- myfont
-  
-  #### margin
-  mylocalmargin = mymargin
-   
-}

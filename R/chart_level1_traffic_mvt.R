@@ -34,7 +34,7 @@ data_prep <- data_raw %>%
 data_prep_forecast <-  data_prep %>%
   filter(
     forecast_id == .env$forecast_id
-    ) %>%
+  ) %>%
   mutate(mvts = case_when (
     yr > max_actual_year ~ mvts,
     TRUE ~ NA
@@ -50,10 +50,10 @@ data_prep_actual <-  data_prep %>%
     forecast_id = .env$forecast_id,
     rank = 'Actual',
     mvts = case_when (
-    yr <= year_report ~ mvts,
-    TRUE ~ NA
+      yr <= year_report ~ mvts,
+      TRUE ~ NA
     )
-    )
+  )
 
 data_prep_planned <- data_raw_planned %>% 
   filter(state == .env$country,
@@ -63,32 +63,32 @@ data_prep_planned <- data_raw_planned %>%
   mutate(rank = 'Planned')
 
 ## Spain is always different
-  if (country == "Spain") {
-    data_prep_planned <- data_prep_planned %>% filter (x121_ecz_name == "Spain")    
-  }
+if (country == "Spain") {
+  data_prep_planned <- data_prep_planned %>% filter (x121_ecz_name == "Spain")    
+}
 
 # chart ----
 ## set parameters for chart ----
-  mycolors <-  c('#1969B4','#044598', '#229FDD')
-  
-  if (knitr::is_latex_output()) {
-    mytitle <- paste0("IFR movements - ", forecast, " -\n",
-                      if_else(country == "Spain",
-                              country, ecz_list$ecz_name[1]))
-    mytitle_pos <- 0.95
-  } else {
-    mytitle <- paste0("IFR movements - ", forecast, " - ", 
-                      if_else(country == "Spain", 
-                              country, ecz_list$ecz_name[1]))
-    mytitle_pos <- 0.99
-  }
+mycolors <-  c('#1969B4','#044598', '#229FDD')
+
+if (knitr::is_latex_output()) {
+  mytitle <- paste0("IFR movements - ", forecast, " -\n",
+                    if_else(country == "Spain",
+                            country, ecz_list$ecz_name[1]))
+  mytitle_pos <- 0.95
+} else {
+  mytitle <- paste0("IFR movements - ", forecast, " - ", 
+                    if_else(country == "Spain", 
+                            country, ecz_list$ecz_name[1]))
+  mytitle_pos <- 0.99
+}
 
 ## define chart function ----
-  myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
-    plotly::plot_ly(
-      width = mywidth,
-      height = myheight,
-      data = data_prep_forecast,
+myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
+  plotly::plot_ly(
+    width = mywidth,
+    height = myheight,
+    data = data_prep_forecast,
     x = ~ yr,
     y = ~ round(mvts/1000,0),
     yaxis = "y1",
@@ -104,42 +104,42 @@ data_prep_planned <- data_raw_planned %>%
     # hoverinfo = "none",
     showlegend = T
   ) %>% 
-      plotly::add_trace(
-        data = data_prep_planned,
-        inherit = FALSE,
-        x = ~ year,
-        y = ~ round(mvts,0),
-        yaxis = "y1",
-        cliponaxis = FALSE,
-        yaxis = "y1",
-        type = 'scatter',  mode = 'lines+markers',
-        line = list(width = mylinewidth, dash = 'solid', color = '#5B9BD5'),
-        marker = list(size = mylinewidth * 3, color = '#5B9BD5'),
-        color = ~ rank,
-        opacity = 1,
-        showlegend = T
-      ) %>%
-      plotly::add_trace(
-        data = data_prep_actual,
-        inherit = FALSE,
-        x = ~ yr,
-        y = ~ round(mvts/1000,0),
-        yaxis = "y1",
-        cliponaxis = FALSE,
-        yaxis = "y1",
-        type = 'scatter',  mode = 'lines+markers',
-        line = list(width = mylinewidth, dash = 'solid', color = '#FFC000'),
-        marker = list(size = mylinewidth * 3, color = '#FFC000'),
-        color = ~ rank,
-        opacity = 1,
-        # hovertemplate = paste('Target: %{y:.2f}%<extra></extra>'),
-        # hoverinfo = "none",
-        showlegend = T
-      ) %>%
-      plotly::config( responsive = TRUE,
-            displaylogo = FALSE,
-            displayModeBar = F
-            # modeBarButtons = list(list("toImage")),
+    plotly::add_trace(
+      data = data_prep_planned,
+      inherit = FALSE,
+      x = ~ year,
+      y = ~ round(mvts,0),
+      yaxis = "y1",
+      cliponaxis = FALSE,
+      yaxis = "y1",
+      type = 'scatter',  mode = 'lines+markers',
+      line = list(width = mylinewidth, dash = 'solid', color = '#5B9BD5'),
+      marker = list(size = mylinewidth * 3, color = '#5B9BD5'),
+      color = ~ rank,
+      opacity = 1,
+      showlegend = T
+    ) %>%
+    plotly::add_trace(
+      data = data_prep_actual,
+      inherit = FALSE,
+      x = ~ yr,
+      y = ~ round(mvts/1000,0),
+      yaxis = "y1",
+      cliponaxis = FALSE,
+      yaxis = "y1",
+      type = 'scatter',  mode = 'lines+markers',
+      line = list(width = mylinewidth, dash = 'solid', color = '#FFC000'),
+      marker = list(size = mylinewidth * 3, color = '#FFC000'),
+      color = ~ rank,
+      opacity = 1,
+      # hovertemplate = paste('Target: %{y:.2f}%<extra></extra>'),
+      # hoverinfo = "none",
+      showlegend = T
+    ) %>%
+    plotly::config( responsive = TRUE,
+                    displaylogo = FALSE,
+                    displayModeBar = F
+                    # modeBarButtons = list(list("toImage")),
     ) %>% 
     plotly::layout(
       font = list(family = "Roboto"),
@@ -149,7 +149,7 @@ data_prep_planned <- data_raw_planned %>%
                    xanchor = 'left', 
                    yanchor =  'top',
                    font = list(size = myfont * 20/15)
-                   ),
+      ),
       hovermode = "x unified",
       hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
       xaxis = list(title = "",
@@ -162,7 +162,7 @@ data_prep_planned <- data_raw_planned %>%
                    # ticks = 'outside',
                    zeroline = TRUE,
                    tickfont = list(size = myfont)
-                   ),
+      ),
       yaxis = list(title = "IFR movements ('000)",
                    # gridcolor = 'rgb(255,255,255)',
                    showgrid = TRUE,
@@ -175,7 +175,7 @@ data_prep_planned <- data_raw_planned %>%
                    zeroline = TRUE,
                    zerolinecolor = 'rgb(240,240,240)',
                    titlefont = list(size = myfont), tickfont = list(size = myfont)
-                   ),
+      ),
       # showlegend = FALSE
       legend = list(
         orientation = 'h', 
@@ -183,11 +183,11 @@ data_prep_planned <- data_raw_planned %>%
         x = 0, 
         y =-0.1,
         font = list(size = myfont)
-        ),
+      ),
       margin = mymargin
       
     )
-  }
+}
 
 ## plot chart ----
-  myc(mywidth, myheight, myfont, mylinewidth, mymargin)
+myc(mywidth, myheight, myfont, mylinewidth, mymargin)

@@ -168,5 +168,5 @@ myat_textfont_size <- myfont
 
 # plot chart ----
 ## function moved to utils  
-mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin) %>% 
+mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals) %>% 
   add_line_trace(., data_prep_kea)

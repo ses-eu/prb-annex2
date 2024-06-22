@@ -1,13 +1,24 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("ez") == FALSE) {ez = 1}
+if (exists("cz") == FALSE) {cz = c("1", "terminal")}
 # ez=1
+
+# define cz ----
+ez <- as.numeric(cz[[1]])
+cztype <- cz[[2]]
+# cztype <- "terminal"
+mycz <- if_else(cztype == "terminal",
+                tcz_list$tcz_id[ez],
+                ecz_list$ecz_id[ez])
+mycz_name <- if_else(cztype == "terminal",
+                     tcz_list$tcz_name[ez],
+                     ecz_list$ecz_name[ez])
 
 # import data  ----
 data_raw  <-  read_xlsx(
   paste0(data_folder, "CEFF dataset master.xlsx"),
   # here("data","hlsr2021_data.xlsx"),
-  sheet = "Enroute_T1",
+  sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
   clean_names() 
@@ -15,7 +26,7 @@ data_raw  <-  read_xlsx(
 # prepare data ----
 data_prep <- data_raw %>% 
   filter(
-    entity_code == ecz_list$ecz_id[ez]) %>% 
+    entity_code == mycz) %>% 
   mutate(
     mymetric = round(x5_3_cost_nc2017/xrate2017/10^6,2)
   ) %>%  
@@ -38,7 +49,7 @@ data_prep[data_prep == 0] <- NA
 
 # chart parameters ----
 mysuffix <- ""
-mydecimals <- 2
+mydecimals <- 1
 
 ### trace parameters
 mycolors = c('#5B9BD5', '#FFC000')
@@ -58,12 +69,16 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("Total en route costs - ", ecz_list$ecz_name[ez])
+mytitle_text <- paste0("Total ", 
+                       if_else(cztype == "terminal", "terminal", "en route"),
+                       " costs - ", 
+                       mycz_name)
 
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "En route costs (€2017'000)"
+myyaxis_title <- paste0(if_else(cztype == "terminal", "Terminal", "En route"),
+                        " costs (€2017'000)")
 myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".0f"
 
@@ -72,4 +87,4 @@ myyaxis_tickformat <- ".0f"
 #### margin
 
 # plot chart  ----
-mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin)
+mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals)

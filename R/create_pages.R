@@ -52,38 +52,34 @@
       tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/state_index.qmd") 
       writeLines(tmp_text, 'index.qmd')
       
-      # generate level 2 .qmd master files (some will be removed later depending on the state case)
-      level2_files <- list("capacity.qmd",
-                           "cost-efficiency-er1-1.qmd",
-                           "cost-efficiency-er1-2.qmd",
-                           "cost-efficiency-er1-3.qmd",   #this one might be removed later depending on check
+      # generate level 2 .qmd master files 
+      level2_files <- c("capacity.qmd",
                            "environment.qmd",
-                           # "environment_mil.qmd",
-                           "safety.qmd")
-      
-      if (state_type == 1 | state_type == 3) {level2_files <- c(level2_files, c("cost-efficiency-g2g.qmd",
-                                                    "cost-efficiency-tz1-1.qmd",
-                                                    "cost-efficiency-tz1-2.qmd",
-                                                    "cost-efficiency-tz1-3.qmd" #this one might be removed later depending on check
-                                                    # "environment_apt.qmd",
-                                                    # , "capacity_trm.qmd"
-                                                    ))
-      } else if (state_type == 2) {level2_files <- c(level2_files, c("cost-efficiency-g2g.qmd",
-                                                          "cost-efficiency-tz1-1.qmd",
-                                                          "cost-efficiency-tz1-2.qmd",
-                                                          "cost-efficiency-tz1-3.qmd",
-                                                          "cost-efficiency-tz2-1.qmd",
-                                                          "cost-efficiency-tz2-2.qmd",
-                                                          "cost-efficiency-tz2-3.qmd"   #xxx
-                                                          # "environment_apt.qmd",
-                                                          # , "capacity_trm.qmd"
-                                                          ))
+                           "safety.qmd",
+                           "cost-efficiency-g2g.qmd")
+
+      for (i in 1:no_ecz) {
+        level2_files <- append(level2_files, paste0("cost-efficiency-er",i,"-1.qmd"))
+        
+        # generate _costeff files from generic file
+        tmp_text <- readLines("_cost-efficiency-generic.qmd")
+        tmp_text <- str_replace(tmp_text, "@@cz_index@@", as.character(i)) 
+        writeLines(tmp_text, paste0('_cost-efficiency-er', i,'-1.qmd'))
+        
       }
+      
+      for (i in 1:no_tcz) {
+        level2_files <- append(level2_files, paste0("cost-efficiency-tz",i,"-1.qmd"))
+        # level2_files <- append(level2_files, paste0("cost-efficiency-tz",i,"-2.qmd"))
+        # level2_files <- append(level2_files, paste0("cost-efficiency-tz",i,"-3.qmd"))
+      }
+      
+      level2_files <- sort(level2_files)
       
       for (i in 1:length(level2_files)) {
         tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
         tmp_text <- str_replace(tmp_text, "file-placeholder", paste0("_", level2_files[i])) 
-        writeLines(tmp_text, level2_files[[i]])
+        writeLines(tmp_text, level2_files[i])
       }
     }
 
@@ -107,6 +103,8 @@
     country_lower: '", country_lower, "'
     ecz1: '", ecz_list$ecz_name[1], "'
     ecz2: '", ecz_list$ecz_name[2], "'
+    tcz1: '", tcz_list$tcz_name[1], "'
+    tcz2: '", tcz_list$tcz_name[2], "'
   "
   )
   
@@ -186,36 +184,47 @@ if (out_format == 'web') {
      ### this removes the unwanted lines
      tx <- tx[-c(block_l1_ses_beg:block_l1_nm_end)]
      
-     ### no terminal zone case ----
-      if (state_type == 0) {
-        # genscripts <- list('generate_saf_qmd.R',
-        #                    'generate_env_kea_qmd.R',
-        #                    'generate_env_mil_qmd.R',
-        #                    'generate_cap_er_qmd.R',
-        #                    'generate_ceff_er1_qmd.R',
-        #                    'generate_ceff_er2_qmd.R',
-        #                    'generate_ceff_er3_qmd.R')
+    if (state_type != 0) {
+    ### with terminal zone(s) ----
       
-        # tx <- str_replace(tx, "- capacity_trm.qmd", "  # - capacity_trm.qmd")
-        # tx <- str_replace(tx, "- environment_apt.qmd", "  # - environment_apt.qmd")
+      # add text for the additional tczs
+      tx_tcz_initial <- readLines("_original_files/tcz_xy.yml")
+      tx_tcz <- ''
+      for (i in 1:no_tcz) {
+        tx_tcz <- append(tx_tcz, str_replace(tx_tcz_initial, "@@cz_index@@", as.character(i)))
+        tx_tcz <- str_replace(tx_tcz, "@@cz_name@@", if_else(no_tcz == 1, "", paste0(" - ", tcz_list$tcz_name[[i]]))) 
+      }
+      
+      # find position to insert
+      for (i in 1:length(tx)) {
+        if (tx[i] %like% '# include TCZ block') {block_beg = i}
+      }  
+      
+      tx <- append(tx, tx_tcz, block_beg) 
+      
+      if (state_type == 3) {
+        ### 2 en route cz (spain)
+        tx <- str_replace(tx, "<b>En route CZ</b>", paste0("<b>En route CZ - ", ecz_list$ecz_name[[1]], "</b>")) 
         
-        #### it's easier just to remove the lines
-        for (i in 1:length(tx)) {
-          if (tx[i] %like% 'cost-efficiency-tz1-1.qmd') {block_beg = i}
-          if (tx[i] %like% 'cost-efficiency-g2g.qmd') {block_end = i}
+        # add text for the additional eczs
+        tx_ecz_initial <- readLines("_original_files/ecz_xy.yml")
+        tx_ecz <- ''
+        for (i in 2:no_ecz) {
+          tx_ecz <- append(tx_ecz, str_replace(tx_ecz_initial, "@@cz_index@@", as.character(i)))
+          tx_ecz <- str_replace(tx_ecz, "@@cz_name@@", paste0(" - ", ecz_list$ecz_name[[i]])) 
         }
-        ### this removes the unwanted lines
-        tx <- tx[-c(block_beg:block_end)]
-   
-      } else if (state_type == 1) {
+        
+        # find position to insert
+        for (i in 1:length(tx)) {
+          if (tx[i] %like% '# include ECZ2 block') {block_beg = i}
+        }  
+        
+        tx <- append(tx, tx_ecz, block_beg) 
+        
+      }
       
-      ### with terminal zone case ----
-        for (i in 1:length(tx)) {
-          if (tx[i] %like% '# block tcz2') {block_beg = i}
-          if (tx[i] %like% 'cost-efficiency-tz2-3.qmd') {block_end = i}
-        }
-        tx <- tx[-c(block_beg:block_end)]
-  
+      
+      
       ### check if there are other term ATSPs ----
         sheet <- "8_TRM_ATSP"
         range <- "C13:M17" 
@@ -226,9 +235,9 @@ if (out_format == 'web') {
         if (atspcheck == 24) {
           # genscripts <- genscripts[genscripts != "generate_ceff6_tz_qmd.R"]
           # tx  <- readLines("_quarto.yml")
-          tx <- str_replace(tx, "- cost-efficiency-tz1-3.qmd", "  # - cost-efficiency-tz1-3.qmd")
+          # tx <- str_replace(tx, "- cost-efficiency-tz1-3.qmd", "  # - cost-efficiency-tz1-3.qmd")
   
-          file.remove("cost-efficiency-tz1-3.qmd")
+          # file.remove("cost-efficiency-tz1-3.qmd")
           
         } 
       }
@@ -245,10 +254,10 @@ if (out_format == 'web') {
       if (atspcheck == 24) {
         # genscripts <- genscripts[genscripts != "generate_ceff_er3_qmd.R"]
         tx  <- readLines("_quarto.yml")
-        tx <- str_replace(tx, "- cost-efficiency-er1-3.qmd", "  # - cost-efficiency-er1-3.qmd")
-        writeLines(tx, con="_quarto.yml")
+        # tx <- str_replace(tx, "- cost-efficiency-er1-3.qmd", "  # - cost-efficiency-er1-3.qmd")
+        # writeLines(tx, con="_quarto.yml")
         
-        file.remove("cost-efficiency-er1-3.qmd")
+        # file.remove("cost-efficiency-er1-3.qmd")
         
       } 
    }

@@ -46,8 +46,6 @@ range_min <- floor(min(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^myro
 range_min <- if_else(range_min >0, 0, range_min)
 range_max <- ceiling(max(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^myroundup - 10^myroundup/2
 
-annotation_x <- (range_max - range_min) /20
-
 ### plot chart and add annotations
 myplot <- myhbarc(mywidth, myheight+30, myfont, mylocalmargin) %>% 
   layout(

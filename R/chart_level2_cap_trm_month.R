@@ -171,6 +171,6 @@ myat_textfont_color <- 'black'
 myat_textfont_size <- myfont
 
 # plot chart ----
-## function moved to utils  
-mybarchart(data_prep, mywidth, myheight + 20, myfont, mylocalmargin) %>% 
+
+mybarchart(data_prep, mywidth, myheight + 20, myfont, mylocalmargin, mydecimals) %>% 
   add_line_trace(., data_prep_total)

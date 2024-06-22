@@ -252,19 +252,41 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 
 ## Cost-efficiency (En route/Terminal charging zone(s))
 
-:::: {#chart-cef class="mychart"}
-```{r chart-cef-er}
-#| file: R/chart_level1_cef_er.R
+:::: {#chart-cef-1 class="mychart"}
+```{r chart-cef-er-1, options = (cz=c("1", "enroute"))}
+#| file: R/chart_level1_cef.R
 #| out.width: "100%"
 ```
+
+<br>
+
+`r if (params$no_ecz < 2) "::::: {.content-hidden}"`
+
+```{r chart-cef-er-2, options = (cz=c("2", "enroute"))}
+#| file: R/chart_level1_cef.R
+#| out.width: "100%"
+```
+
+`r if (params$no_ecz < 2) ":::::"`
+
 
 `r if (params$no_tcz == 0) "::::: {.content-hidden}"`
 <br>
 
-```{r chart-cef-trm}
-#| file: R/chart_level1_cef_trm.R
+```{r chart-cef-trm-1, options = (cz=c("1", "terminal"))}
+#| file: R/chart_level1_cef.R
 #| out.width: "100%"
 ```
+
+`r if (params$no_tcz == 1) ":::::: {.content-hidden}"`
+<br>
+
+```{r chart-cef-trm-2, options = (cz=c("2", "terminal"))}
+#| file: R/chart_level1_cef.R
+#| out.width: "100%"
+```
+
+`r if (params$no_tcz == 1) "::::::"`
 
 `r if (params$no_tcz == 0) ":::::"`
 ::::

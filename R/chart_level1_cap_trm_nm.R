@@ -72,5 +72,5 @@ myat_textfont_size <- myfont
 # plot chart ----
 ## function moved to utils  
 mybarchart(filter(data_prep, type == "Actual"),
-           mywidth, myheight, myfont, mylocalmargin) %>% 
+           mywidth, myheight, myfont, mylocalmargin, mydecimals) %>% 
   add_line_trace(., filter(data_prep, type == "Target"))

@@ -82,7 +82,7 @@ mylocalmargin = list(t = 60, b = 80, l = 40, r = 70)
 
 
 # plot chart  ----
-myplot<- mybarchart(data_prep, mywidth, myheight + 30, myfont, mylocalmargin) %>%  
+myplot<- mybarchart(data_prep, mywidth, myheight + 30, myfont, mylocalmargin, mydecimals) %>%  
 add_trace(
   inherit = FALSE,
   data = data_prep,
