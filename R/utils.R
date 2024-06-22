@@ -291,12 +291,12 @@ read_mytable <- function(file, sheet, table){
   
 ## regulatory result calculations ----
   
-  regulatory_result <- function(ez) {
+  regulatory_result <- function(cztype, mycz) {
     ## import data  ----
     data_raw_t1  <-  read_xlsx(
       paste0(data_folder, "CEFF dataset master.xlsx"),
       # here("data","hlsr2021_data.xlsx"),
-      sheet = "Enroute_T1",
+      sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
       range = cell_limits(c(1, 1), c(NA, NA))) %>%
       as_tibble() %>% 
       clean_names() 
@@ -304,7 +304,7 @@ read_mytable <- function(file, sheet, table){
     data_raw_t2  <-  read_xlsx(
       paste0(data_folder, "CEFF dataset master.xlsx"),
       # here("data","hlsr2021_data.xlsx"),
-      sheet = "Enroute_T2",
+      sheet = if_else(cztype == "terminal", "Terminal_T2", "Enroute_T2"),
       range = cell_limits(c(1, 1), c(NA, NA))) %>%
       as_tibble() %>% 
       clean_names() 
@@ -313,7 +313,7 @@ read_mytable <- function(file, sheet, table){
     data_filtered_t1 <- data_raw_t1 %>% 
       filter(
         #we filter on the cz_code instead of entity_code to get all entities
-        charging_zone_code == ecz_list$ecz_id[ez],    
+        charging_zone_code == mycz,    
         #we keep only ANSPs
         entity_type %in% c('ANSP', 'MET', 'MUAC'),    
         #the fields we need are on a per/year basis - there are no values for 20-21 combined
@@ -378,7 +378,7 @@ read_mytable <- function(file, sheet, table){
     data_prep_t2 <- data_raw_t2 %>% 
       filter(
         #we filter on the cz_code instead of entity_code to get all entities
-        charging_zone_code == ecz_list$ecz_id[ez],    
+        charging_zone_code == mycz,    
         #we keep only ANSPs
         entity_type %in% c('ANSP', 'MET', 'MUAC'),    
         #we need actuals
@@ -476,12 +476,9 @@ read_mytable <- function(file, sheet, table){
       filter(year_text != '2020' & year_text != '2021') 
     
     # get exchange rates
-    yearly_xrates <- get_xrates()
+    yearly_xrates <- get_xrates(cztype, mycz)
     
     data_prep_xrates <- yearly_xrates %>% 
-      filter(
-        entity_code == ecz_list$ecz_id[ez]
-      ) %>% 
       select(-entity_code) %>% 
       filter(year > 2020) %>% 
       mutate(year_text = as.character(year),

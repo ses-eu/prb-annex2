@@ -162,3 +162,27 @@ lacus ante cras. Habitant conubia suscipit porttitor tortor neque hac praesent. 
 Ipsum morbi posuere congue placerat, gravida gravida sollicitudin morbi feugiat magna et. Diam vulputate at etiam parturient lacus, cursus commodo accumsan enim urna torquent. Aenean ut dictumst convallis; egestas bibendum diam. Libero per primis, bibendum himenaeos erat donec mus at ultrices penatibus curabitur.
 ::::
 :::
+
+::: {#container-cef-trm-reg-res style="clear: both"}
+
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
+
+:::: {#chart-cef-trm-reg-res class="mychart"}
+```{r chart-cef-trm-reg-res, options = (cz=c("1", "terminal"))}
+#| file: R/chart_level2_cef_er_reg_res.R
+#| out.width: "100%"
+```
+
+```{r chart-cef-trm-reg-res_aucu, options = (cz=c("1", "terminal"))}
+#| file: R/chart_level2_cef_er_reg_res_aucu.R
+#| out.width: "100%"
+```
+
+::::
+
+:::: {#concl-cef-trm-reg-res}
+Ipsum morbi posuere congue placerat, gravida gravida sollicitudin morbi feugiat magna et. Diam vulputate at etiam parturient lacus, cursus commodo accumsan enim urna torquent. Aenean ut dictumst convallis; egestas bibendum diam. Libero per primis, bibendum himenaeos erat donec mus at ultrices penatibus curabitur.
+::::
+:::
+

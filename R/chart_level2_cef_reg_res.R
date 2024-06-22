@@ -1,10 +1,21 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("ez") == FALSE) {ez = 1}
+if (exists("cz") == FALSE) {cz = c("1", "terminal")}
 # ez=1
 
+# define cz ----
+ez <- as.numeric(cz[[1]])
+cztype <- cz[[2]]
+# cztype <- "terminal"
+mycz <- if_else(cztype == "terminal",
+                tcz_list$tcz_id[ez],
+                ecz_list$ecz_id[ez])
+mycz_name <- if_else(cztype == "terminal",
+                     tcz_list$tcz_name[ez],
+                     ecz_list$ecz_name[ez])
+
 # get data ----
-data_prep <- regulatory_result(ez)
+data_prep <- regulatory_result(cztype, mycz)
 data_prep <- data_prep %>% 
   mutate(mymetric = regulatory_result / 1000) %>% 
   rename(xlabel = year_text)
@@ -38,7 +49,7 @@ mytitle_text <- paste0("Regulatory result at CZ level")
 #### yaxis
 myyaxis_title <- "Regulatory result (€M)"
 myyaxis_ticksuffix <- ""
-myyaxis_tickformat <- ".0f"
+myyaxis_tickformat <- ",.0f"
 
 #### legend
 
