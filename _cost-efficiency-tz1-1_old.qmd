@@ -1,6 +1,4 @@
-[4 Cost-efficiency]{class="fakeh1"}
-
-## @@cz_type_proper@@ CZ - {{< var doc.@@cz_short@@@@cz_index@@ >}}
+## Terminal CZ - {{< var doc.tcz1 >}}
 
 ::: {#container-cef-duc style="clear: both"}
 
@@ -9,15 +7,15 @@
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
-:::: {#chart-cef-er-duc class="mychart"}
-```{r chart-cef-er-duc, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+:::: {#chart-cef-trm-duc class="mychart"}
+```{r chart-cef-trm-duc, options = (cz=c("1", "terminal"))}
 #| file: R/chart_level1_cef.R
 #| out.width: "100%"
 ```
 ::::
 
-:::: {#concl-cef-er-duc}
-```{r concl-cef-er-duc}
+:::: {#concl-cef-trm-duc}
+```{r concl-cef-trm-duc}
 cef_conc <- read_mytable("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF") %>% 
   filter(Year_Report == params$year_report, State == params$country) %>% 
   select(Conclusion) %>% toString() %>% paste0(., "@")
@@ -35,7 +33,7 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 <div style="height: 1px"></div>
 
 :::: {#chart-cef-su class="mychart"}
-```{r chart-cef-su, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+```{r chart-cef-su, options = (cz=c("1", "terminal"))}
 #| file: R/chart_level2_cef_su.R
 #| out.width: "100%"
 ```
@@ -57,19 +55,19 @@ egestas mi.
 ::::
 :::
 
-::: {#container-cef-er-cost style="clear: both"}
+::: {#container-cef-trm-cost style="clear: both"}
 
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
-:::: {#chart-cef-er-cost class="mychart"}
-```{r chart-cef-er-cost, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+:::: {#chart-cef-trm-cost class="mychart"}
+```{r chart-cef-er-cost, options = (cz=c("1", "terminal"))}
 #| file: R/chart_level2_cef_cost.R
 #| out.width: "100%"
 ```
 ::::
 
-:::: {#concl-cef-er-cost}
+:::: {#concl-cef-trm-cost}
 Lorem ullamcorper varius maecenas felis posuere fusce, turpis posuere habitant ut? Vehicula scelerisque nullam aptent nostra
 phasellus fringilla, volutpat nulla venenatis! Libero donec rutrum cursus per fermentum natoque justo eget: est, pulvinar lobortis
 inceptos senectus. Magna nunc vitae mollis facilisis magna.
@@ -80,19 +78,19 @@ velit: mollis lectus tortor, porta facilisis ante.
 ::::
 :::
 
-::: {#container-cef-er-cost-entity style="clear: both"}
+::: {#container-cef-trm-cost-entity style="clear: both"}
 
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
-:::: {#chart-cef-er-cost-entity class="mychart"}
-```{r chart-cef-er-cost-entity, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+:::: {#chart-cef-trm-cost-entity class="mychart"}
+```{r chart-cef-trm-cost-entity, options = (cz=c("1", "terminal"))}
 #| file: R/chart_level2_cef_cost_entity.R
 #| out.width: "100%"
 ```
 ::::
 
-:::: {#concl-cef-er-cost-entity}
+:::: {#concl-cef-trm-cost-entity}
 Ipsum ullamcorper ultrices inceptos cursus montes ac netus. Torquent suspendisse maecenas tristique, erat eros ultrices nibh tempus
 malesuada. Sapien sociis suscipit; ad ac urna – integer imperdiet. Enim blandit aenean, habitant posuere class lacinia eget
 accumsan cum. Cras feugiat dictumst lectus duis ad, condimentum fusce, dui habitasse. Vulputate dis phasellus, porttitor aliquet
@@ -106,19 +104,19 @@ sodales maecenas dictum, curae hendrerit a habitasse integer.
 ::::
 :::
 
-::: {#container-cef-er-cost-main style="clear: both"}
+::: {#container-cef-trm-cost-main style="clear: both"}
 
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
-:::: {#chart-cef-er-cost-main class="mychart"}
-```{r chart-cef-er-cost-main, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+:::: {#chart-cef-trm-cost-main class="mychart"}
+```{r chart-cef-trm-cost-main, options = (cz=c("1", "terminal"))}
 #| file: R/chart_level2_cef_cost_main.R
 #| out.width: "100%"
 ```
 ::::
 
-:::: {#concl-cef-er-cost-main}
+:::: {#concl-cef-trm-cost-main}
 Adipiscing dis, felis vulputate, parturient volutpat, rhoncus montes arcu. Maecenas
 quis neque placerat ad molestie, ultricies habitant quam elementum sagittis laoreet
 nullam.
@@ -130,19 +128,16 @@ platea litora.
 ::::
 :::
 
-::: {#container-cef-er-aucu style="clear: both"}
+::: {#container-cef-trm-aucu style="clear: both"}
 
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
-:::: {#chart-cef-er-aucu class="mychart"}
-```{r chart-cef-er-aucu, options = (cz=c("1", "enroute"))}
-#| file: R/chart_level2_cef_er_aucu.R
-#| out.width: "100%"
-```
+:::: {#chart-cef-trm-aucu class="mychart"}
+[AUCU chart]
 ::::
 
-:::: {#concl-cef-er-aucu}
+:::: {#concl-cef-trm-aucu}
 Elit suspendisse lobortis sodales aliquam vitae sem magna. Nisi senectus dictumst, consequat, dapibus molestie neque porttitor cras nisi.
 Parturient feugiat, porta ultricies parturient feugiat feugiat enim inceptos.
 
@@ -151,60 +146,56 @@ lacus ante cras. Habitant conubia suscipit porttitor tortor neque hac praesent. 
 ::::
 :::
 
-::: {#container-cef-er-cex style="clear: both"}
+::: {#container-cef-trm-cex style="clear: both"}
 
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
-:::: {#chart-cef-er-cex class="mychart"}
-```{r chart-cef-cex, R.options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+:::: {#chart-cef-trm-cex class="mychart"}
+```{r chart-cef-cex, options = (cz=c("1", "terminal"))}
 #| file: R/chart_level2_cef_cex.R
 #| out.width: "100%"
 ```
 ::::
 
-:::: {#concl-cef-er-cex}
+:::: {#concl-cef-trm-cex}
 Ipsum morbi posuere congue placerat, gravida gravida sollicitudin morbi feugiat magna et. Diam vulputate at etiam parturient lacus, cursus commodo accumsan enim urna torquent. Aenean ut dictumst convallis; egestas bibendum diam. Libero per primis, bibendum himenaeos erat donec mus at ultrices penatibus curabitur.
 ::::
 :::
 
-::: {#container-cef-er-reg-res style="clear: both"}
+::: {#container-cef-trm-reg-res style="clear: both"}
 
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
-:::: {#chart-cef-er-reg-res class="mychart"}
-```{r chart-cef-er-reg-res, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+:::: {#chart-cef-trm-reg-res class="mychart"}
+```{r chart-cef-trm-reg-res, options = (cz=c("1", "terminal"))}
 #| file: R/chart_level2_cef_reg_res.R
 #| out.width: "100%"
 ```
 
-```{r chart-cef-er-reg-res_aucu, options = (cz=c("1", "enroute"))}
-#| file: R/chart_level2_cef_er_reg_res_aucu.R
-#| out.width: "100%"
-```
-
+[RR-AUCU chart]
 ::::
 
-:::: {#concl-cef-er-reg-res}
+:::: {#concl-cef-trm-reg-res}
 Ipsum morbi posuere congue placerat, gravida gravida sollicitudin morbi feugiat magna et. Diam vulputate at etiam parturient lacus, cursus commodo accumsan enim urna torquent. Aenean ut dictumst convallis; egestas bibendum diam. Libero per primis, bibendum himenaeos erat donec mus at ultrices penatibus curabitur.
 ::::
 :::
 
-::: {#container-cef-er-reg-res-main-ansp style="clear: both"}
+::: {#container-cef-trm-reg-res-main-ansp style="clear: both"}
 
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
-:::: {#chart-cef-er-reg-res-ansp class="mychart"}
-```{r chart-cef-er-reg-res-ansp, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+:::: {#chart-cef-trm-reg-res-ansp class="mychart"}
+```{r chart-cef-trm-reg-res-ansp, options = (cz=c("1", "terminal"))}
 #| file: R/chart_level2_cef_reg_res_ansp.R
 #| out.width: "100%"
 ```
 ::::
 
-:::: {#chart-cef-er-reg-res-main-ansp class="mychart"}
-```{r chart-cef-er-reg-res-main-ansp, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+:::: {#chart-cef-trm-reg-res-main-ansp class="mychart"}
+```{r chart-cef-trm-reg-res-main-ansp, options = (cz=c("1", "terminal"))}
 #| file: R/chart_level2_cef_reg_res_main_ansp.R
 #| out.width: "100%"
 ```
@@ -215,3 +206,4 @@ Ipsum morbi posuere congue placerat, gravida gravida sollicitudin morbi feugiat 
 Ipsum morbi posuere congue placerat, gravida gravida sollicitudin morbi feugiat magna et. Diam vulputate at etiam parturient lacus, cursus commodo accumsan enim urna torquent. Aenean ut dictumst convallis; egestas bibendum diam. Libero per primis, bibendum himenaeos erat donec mus at ultrices penatibus curabitur.
 ::::
 :::
+

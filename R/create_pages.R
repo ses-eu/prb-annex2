@@ -59,23 +59,37 @@
                            "cost-efficiency-g2g.qmd")
 
       for (i in 1:no_ecz) {
+        # add level2 cef er .qmd file name to list
         level2_files <- append(level2_files, paste0("cost-efficiency-er",i,"-1.qmd"))
         
-        # generate _costeff files from generic file
+        # generate level2 _cef enroute files from generic file
         tmp_text <- readLines("_cost-efficiency-generic.qmd")
         tmp_text <- str_replace(tmp_text, "@@cz_index@@", as.character(i)) 
+        tmp_text <- str_replace(tmp_text, "@@cz_type@@", "enroute") 
+        tmp_text <- str_replace(tmp_text, "@@cz_type_proper@@", "En route") 
+        tmp_text <- str_replace(tmp_text, "@@cz_short@@", "ecz") 
         writeLines(tmp_text, paste0('_cost-efficiency-er', i,'-1.qmd'))
         
       }
       
       for (i in 1:no_tcz) {
+        # add level2 cef trm .qmd file name to list
         level2_files <- append(level2_files, paste0("cost-efficiency-tz",i,"-1.qmd"))
-        # level2_files <- append(level2_files, paste0("cost-efficiency-tz",i,"-2.qmd"))
-        # level2_files <- append(level2_files, paste0("cost-efficiency-tz",i,"-3.qmd"))
-      }
+
+        # generate level2 _cef enroute files from generic file
+        tmp_text <- readLines("_cost-efficiency-generic.qmd")
+        tmp_text <- str_replace(tmp_text, "@@cz_index@@", as.character(i)) 
+        tmp_text <- str_replace(tmp_text, "@@cz_type@@", "terminal") 
+        tmp_text <- str_replace(tmp_text, "@@cz_type_proper@@", "Terminal") 
+        tmp_text <- str_replace(tmp_text, "@@cz_short@@", "tcz") 
+        
+        writeLines(tmp_text, paste0('_cost-efficiency-tz', i,'-1.qmd'))
+        
+        }
       
       level2_files <- sort(level2_files)
       
+      # generate actual .qmd files linked to respective _.qmd files
       for (i in 1:length(level2_files)) {
         tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
         tmp_text <- str_replace(tmp_text, "file-placeholder", paste0("_", level2_files[i])) 

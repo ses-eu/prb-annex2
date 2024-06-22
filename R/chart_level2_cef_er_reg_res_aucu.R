@@ -1,11 +1,22 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("ez") == FALSE) {ez = 1}
+if (exists("cz") == FALSE) {cz = c("1", "enroute")}
 # ez=1
+
+# define cz ----
+ez <- as.numeric(cz[[1]])
+cztype <- cz[[2]]
+# cztype <- "terminal"
+mycz <- if_else(cztype == "terminal",
+                tcz_list$tcz_id[ez],
+                ecz_list$ecz_id[ez])
+mycz_name <- if_else(cztype == "terminal",
+                     tcz_list$tcz_name[ez],
+                     ecz_list$ecz_name[ez])
 
 # get data ----
 # regulatory result
-data_prep_reg_all <- regulatory_result(ez)
+data_prep_reg_all <- regulatory_result(cztype, mycz)
 data_prep_reg <- data_prep_reg_all %>% 
   group_by(year_text, x5_4_total_su) %>% 
   summarise(reg_res = sum(regulatory_result)) %>% 
@@ -13,7 +24,7 @@ data_prep_reg <- data_prep_reg_all %>%
   select(year_text, reg_res, reg_res_per_su)
 
 # aucu
-data_prep_aucu_all <- aucu(ez) 
+data_prep_aucu_all <- aucu(cztype, mycz) 
 data_prep_aucu <- data_prep_aucu_all %>% 
   select(year_text, aucu_excluding_or)
 
