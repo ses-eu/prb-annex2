@@ -1,6 +1,6 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("cz") == FALSE) {cz = c("1", "terminal")}
+if (exists("cz") == FALSE) {cz = c("2", "terminal")}
 # ez=1
 
 # define cz ----
@@ -54,9 +54,9 @@ mylocalmargin <- list (t = 40, b = 60)
 
 ### calculate x range, and annotation and image position
 myroundup <- max(floor((log10(abs(max(data_prep$mymetric, na.rm = TRUE))))), floor((log10(abs(min(data_prep$mymetric, na.rm = TRUE))))))
-range_min <- floor(min(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^myroundup + 10^myroundup/2
+range_min <- floor(min(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^myroundup - 10^myroundup/2
 range_min <- if_else(range_min >0, 0, range_min)
-range_max <- ceiling(max(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^myroundup - 10^myroundup/2
+range_max <- ceiling(max(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^myroundup + 10^myroundup/2
 
 ### plot chart and add annotations
 myplot <- myhbarc(mywidth, myheight+30, myfont, mylocalmargin) %>% 
