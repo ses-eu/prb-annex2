@@ -8,15 +8,15 @@
 <div style="height: 1px"></div>
 
 :::: {#chart-cap class="mychart"}
-```{r chart-cap-er}
-#| file: R/chart_level1_cap_er.R
+```{r chart-cap-er, options = (cztype=c("enroute"))}
+#| file: R/chart_level1_cap.R
 #| out.width: "100%"
 ```
 
 <br>
 
-```{r chart-cap-er-month}
-#| file: R/chart_level2_cap_er_month.R
+```{r chart-cap-er-month, options = (cztype=c("enroute"))}
+#| file: R/chart_level2_cap_month.R
 #| out.width: "100%"
 ```
 <br>
@@ -119,15 +119,15 @@ risus mus habitasse.
 
 ::::: {#chart-cap class="mychart"}
 
-```{r chart-cap-trm}
-#| file: R/chart_level1_cap_trm.R
+```{r chart-cap-trm, options = (cztype=c("terminal"))}
+#| file: R/chart_level1_cap.R
 #| out.width: "100%"
 ```
 
 <br>
 
-```{r chart-cap-trm-month}
-#| file: R/chart_level2_cap_trm_month.R
+```{r chart-cap-trm-month, options = (cztype=c("terminal"))}
+#| file: R/chart_level2_cap_month.R
 #| out.width: "100%"
 ```
 :::::

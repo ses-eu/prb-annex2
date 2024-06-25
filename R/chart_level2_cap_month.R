@@ -9,34 +9,29 @@ if (country == 'SES RP3') {
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
-
+  
   ## prepare data ----
   data_prep_target <- data_raw %>% 
     filter(
       year_report == .env$year_report) %>% 
     mutate(
-      xlabel = year,
-      myothermetric = round(target, 2),
-      type = "Target"
+      er_cap_target = round(target, 2)
     ) %>% 
     select(
-      xlabel,
-      type,
-      myothermetric
-    ) %>% arrange(xlabel)
-
-  data_prep <- data_raw %>% 
+      year,
+      er_cap_target
+    ) %>% arrange(year)
+  
+  data_prep_actual <- data_raw %>% 
     filter(
       year_report == .env$year_report) %>% 
-    select(-c(year_report, target)) %>% 
+    select(-c(year_report,target)) %>% 
     pivot_longer(
       cols = c(capacity, staffing, disruptions, weather, other_non_atc),
       names_to = "type",
-      values_to = "mymetric"
+      values_to = "delay"
     ) %>% 
     mutate(
-      movements = NA,
-      xlabel = year,
       type = case_when(
         type == "capacity" ~ "Capacity",
         type == "staffing" ~ "Staffing",
@@ -44,61 +39,61 @@ if (country == 'SES RP3') {
         type == "weather" ~ "Weather",
         type == "other_non_atc" ~ "Other non-ATC"
       ) 
-    ) 
-  
-  data_prep_total <- data_prep %>% 
-    select(xlabel, mymetric) %>% 
-    group_by(xlabel) %>% 
-    summarise(myothermetric = sum(mymetric)) %>%
-    mutate(myothermetric = format(round(myothermetric,2), digits = 2)) %>% 
-    mutate(type = "Total")
-  
+    ) %>% 
+    rename (average_delay = avg_er_atfm_delay) %>% 
+    mutate(ifr = NA)
 } else {
-# state case ----
+  # state case ----
   ## import data  ----
   data_raw_target  <-  read_xlsx(
     paste0(data_folder, "CAP dataset master.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
-    sheet = "en route delay targets",
+    sheet = if_else(cztype == "enroute", "en route delay targets", "terminal delay targets"),
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
   
   data_raw_actual  <-  read_xlsx(
     paste0(data_folder, "CAP dataset master.xlsx"),
-    sheet = "Avg en-route ATFM delay",
+    sheet = if_else(cztype == "enroute", "en route monthly delay", "terminal monthly delay"),
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
   
   ## prepare data ----
+  if(cztype == "terminal") {
+    data_raw_target <- data_raw_target %>% 
+      rename(delay_target = x332_state_arr_delay_target)
+  }
+  
+  
   data_prep_target <- data_raw_target %>% 
     filter(
-      state == .env$country) %>% 
+      state == .env$country,
+      year == .env$year_report
+      ) %>% 
     mutate(
       myothermetric = round(delay_target, 2),
-      type = 'Target',
-      xlabel = year
+      xlabel = year,
+      type = "Target"
     ) %>% 
     select(
       xlabel,
       type,
-      myothermetric
-    ) %>% arrange(xlabel)
+      myothermetric)
   
   data_prep <- data_raw_actual %>% 
     filter(
       state == .env$country,
-      year <= .env$year_report) %>% 
-    rename(movements = ifr_movements,
-           xlabel = year) %>% 
-    # right_join(rp3_years, by = "xlabel") %>% 
+      year == .env$year_report
+      ) %>% 
     pivot_longer(
       cols = c(atc_capacity, atc_staffing, atc_disruptions, weather, other_non_atc),
       names_to = "type",
       values_to = "mymetric"
     ) %>% 
     mutate(
+      xlabel = month,
       type = case_when(
         type == "atc_capacity" ~ "Capacity",
         type == "atc_staffing" ~ "Staffing",
@@ -106,7 +101,8 @@ if (country == 'SES RP3') {
         type == "weather" ~ "Weather",
         type == "other_non_atc" ~ "Other non-ATC"
       )
-    )
+    ) %>% 
+    select(xlabel, type, mymetric)
   
   data_prep_total <- data_prep %>% 
     select(xlabel, mymetric) %>% 
@@ -136,14 +132,18 @@ myinsidetextanchor <- 'middle'
 mytextfont_color <- 'transparent'
 mytextfont_size <- 1
 
+
 ### layout parameters
 mybargap <- 0.25
 mybarmode <- 'stack'
 
 #### title
-mytitle_text <- paste0("Average en route ATFM delay per flight - ", country)
+mytitle_text <- paste0("Monthly ", if_else(cztype == "enroute", "en route", "arrival"),
+                       " ATFM delay per flight - ", year_report)
 
 #### xaxis
+myxaxis_dtick <- 'M1'
+myxaxis_tickformat <- "%b"
 
 #### yaxis
 myyaxis_title <- "Average minutes of delay"
@@ -175,7 +175,7 @@ myat_line_color <- 'transparent'
 myat_line_width <- 1
 myat_showlegend <- F
 
-myat_textbold <- TRUE
+myat_textbold <- FALSE
 myat_textangle <- 0
 myat_textposition <- 'top'
 myat_textfont_color <- 'black'
@@ -183,23 +183,6 @@ myat_textfont_size <- myfont
 
 # plot chart ----
 ## function moved to utils  
-myplot <- mybarchart(data_prep, mywidth, myheight + 20, myfont, mylocalmargin, mydecimals) %>% 
+mybarchart(data_prep, mywidth, myheight + 20, myfont, mylocalmargin, mydecimals) %>% 
   add_line_trace(., data_prep_total)
 
-## additional target trace
-myat_name <- "Target"
-myat_mode <- "line+markers"
-myat_yaxis <- "y1"
-myat_symbol <- NA
-myat_marker_color <- '#FF0000'
-myat_line_color <- '#FF0000'
-myat_line_width <- mylinewidth
-myat_showlegend <- T
-
-myat_textbold <- FALSE
-myat_textangle <- 0
-myat_textposition <- 'top'
-myat_textfont_color <- '#FF0000'
-myat_textfont_size <- myfont
-
-myplot %>%  add_line_trace(., data_prep_target)
