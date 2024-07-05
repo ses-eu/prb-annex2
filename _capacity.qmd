@@ -1,3 +1,51 @@
+```{r cap-level2-text}
+# define ranges and import data
+sheet <- country
+
+range <- "J4:J6"
+cap_er_1_1_r <- read_range(cap_file, sheet, range)  
+
+range <- "A9:O13"
+cap_er_1_2_r <- read_range(cap_file, sheet, range)  
+
+range <- "A14:O18"
+cap_er_1_3_r <- read_range(cap_file, sheet, range)  
+
+range <- "A19:O23"
+cap_er_1_4_r <- read_range(cap_file, sheet, range)  
+
+range <- "A49:O53"
+cap_er_1_6_r <- read_range(cap_file, sheet, range)  
+
+# cap_er_1_5_r_acc <- ''
+cap_er_1_5_r_txt <- ''
+cap_er_1_5_r_obs <- ''
+cap_er_1_5_r <- ''
+
+for (i in 1:acc_no) {
+  
+  # range <- paste0("A", 24 + (i-1) * 4, ":D", 25 + (i-1) * 4)
+  # cap_er_1_5_r_acc <- read_range(cap_file, sheet, range)  
+  
+  range <- paste0("K", 25 + (i-1) * 4, ":O", 27 + (i-1) * 4)
+  cap_er_1_5_r_obs <- read_range(cap_file, sheet, range)  
+  
+  range <- paste0("A", 27 + (i-1) * 4, ":O", 28 + (i-1) * 4)
+  cap_er_1_5_r_txt <- read_range(cap_file, sheet, range)  
+  
+  cap_er_1_5_r <- if_else(is.na(cap_er_1_5_r_txt[1,1]) == TRUE & is.na(cap_er_1_5_r_obs[1,1]) == TRUE, '', 
+                          paste0(cap_er_1_5_r_txt[1,1], 
+                                 if_else(is.na(cap_er_1_5_r_obs[1,1]) == TRUE, '', paste0('**Observations: **', cap_er_1_5_r_obs[1,1])),
+                                 '\n')
+                          )
+  
+}
+
+range <- "A54:O58"
+cap_er_1_7_r <- read_range(cap_file, sheet, range)  
+```
+
+
 [3 Capacity]{class="fakeh1"}
 
 ::: {#container-cap style="clear: both"}
@@ -30,14 +78,33 @@
 
 :::: {#concl-cap}
 ```{r}
-cap_er_conc <- read_mytable("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity") %>% 
-  filter(Year_Report == params$year_report, State == params$country) %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+# cap_er_conc <- read_mytable("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity") %>% 
+#   filter(Year_Report == params$year_report, State == params$country) %>% 
+#   select(Conclusion) %>% toString() %>% paste0(., "@")
+# 
+# cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
 ```
 
-`r cap_er_conc1`
+**Summary of capacity performance**
+
+`r cap_er_1_7_r[1,1]`
+
+**NSA's assessment of capacity performance**
+
+`r cap_er_1_2_r[1,1]`
+
+**Monitoring process for capacity performance**
+
+`r cap_er_1_3_r[1,1]`
+
+**Capacity planning**
+
+`r cap_er_1_4_r[1,1]`
+
+**Application of Corrective Measures for Capacity (if applicable)**
+
+`r cap_er_1_6_r[1,1]`
+
 ::::
 :::
 
@@ -64,13 +131,9 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 ::::
 
 :::: {#concl-cap-atco}
-Amet nibh blandit, ullamcorper praesent vitae, hac scelerisque elementum condimentum penatibus tempor. Phasellus eros facilisis eget varius magnis
-penatibus, ultricies ad ultricies. Felis rhoncus et aptent orci ac ullamcorper cras dapibus. Dis facilisi urna pharetra mattis faucibus. Elementum
-lacinia ante sagittis lobortis, rhoncus arcu metus massa, venenatis a. Iaculis habitasse luctus aliquam cubilia molestie penatibus!
 
-Lorem eros aenean nisi vestibulum interdum hac porta, eros ornare, ante ridiculus? Ornare ante consequat neque; sociosqu quisque donec mattis
-mollis, habitant in enim facilisi. Nec est vel mattis, gravida fringilla aptent? Leo metus feugiat ultrices, imperdiet ante laoreet cursus dapibus
-risus mus habitasse.
+`r cap_er_1_5_r`
+
 ::::
 :::
 
@@ -98,13 +161,7 @@ risus mus habitasse.
 ::::
 
 :::: {#concl-cap-other}
-Amet nibh blandit, ullamcorper praesent vitae, hac scelerisque elementum condimentum penatibus tempor. Phasellus eros facilisis eget varius magnis
-penatibus, ultricies ad ultricies. Felis rhoncus et aptent orci ac ullamcorper cras dapibus. Dis facilisi urna pharetra mattis faucibus. Elementum
-lacinia ante sagittis lobortis, rhoncus arcu metus massa, venenatis a. Iaculis habitasse luctus aliquam cubilia molestie penatibus!
 
-Lorem eros aenean nisi vestibulum interdum hac porta, eros ornare, ante ridiculus? Ornare ante consequat neque; sociosqu quisque donec mattis
-mollis, habitant in enim facilisi. Nec est vel mattis, gravida fringilla aptent? Leo metus feugiat ultrices, imperdiet ante laoreet cursus dapibus
-risus mus habitasse.
 ::::
 :::
 
@@ -133,13 +190,7 @@ risus mus habitasse.
 :::::
 
 ::::: {#concl-cap-trm}
-Dolor molestie nullam non dictum parturient non enim fames. Morbi semper senectus risus aptent bibendum maecenas. Eget egestas convallis ridiculus
-iaculis fringilla. Faucibus felis mattis pretium rhoncus primis luctus, consequat vehicula himenaeos lectus nostra cum condimentum at porta.
 
-Elit cubilia tristique vestibulum dictumst laoreet lacus ultricies, hac libero, maecenas praesent scelerisque at sapien! Gravida ullamcorper
-tristique facilisi posuere facilisi nec torquent. Facilisis diam eros porttitor pharetra tempus maecenas egestas. Tempus imperdiet blandit:
-pharetra quam himenaeos habitant habitant placerat molestie? Himenaeos fermentum semper quis euismod donec dapibus molestie commodo quisque
-sagittis. Aptent cum ridiculus habitasse; molestie vitae faucibus integer, dui nec mollis cubilia!
 :::::
 ::::
 

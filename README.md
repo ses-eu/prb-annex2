@@ -45,7 +45,9 @@ https://deploy-preview-1--sesperformance.netlify.app/
 for PR #1.
 
 # Website/pdf generation
-The dashboard is generated from templated Quarto documents (.qmd). There are different templates for the different types of pages to be generated, i.e. SES View, NM View, State View and overall website. The master `index.qmd` together with the `_quarto.yml` documents are stored in the folder `\_original_files`.
+The dashboard is generated from templated Quarto documents (.qmd). There are different templates for the different types of pages to be generated, i.e. SES View, NM View, State View and overall website. There are also different templates for the generation of the .pdf documents.
+
+The master files .qmd, .yml and .css files are stored in the folder `\_original_files`.
 
 The steps to which are laid out in the script `build_site.R`.
 

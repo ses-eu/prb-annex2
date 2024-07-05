@@ -49,7 +49,7 @@ mysuffix <- "%"
 mydecimals <- 0
 
 ### trace parameters
-mycolors = c('#4472C4', '#ED7D31', '#A5A5A5', '#FFC000', '#5B9BD5')
+mycolors = c('#4472C4', '#EF7D22', '#A0A0A0', '#FDB014', '#5B9BD5')
 ###set up order of traces
 myfactor <- c('<5 min',
               '5 - 15 min',

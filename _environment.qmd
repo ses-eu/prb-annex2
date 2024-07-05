@@ -1,3 +1,26 @@
+```{r cap-level2-text}
+# define ranges and import data
+sheet <- country
+
+range <- "A3:P4"
+env_apt_1_r <- read_range(env_apt_file, sheet, range)  
+
+range <- "A5:P7"
+env_apt_2_r <- read_range(env_apt_file, sheet, range) 
+env_apt_2_r <- if_else(is.na(env_apt_2_r[2,1]) == FALSE, pull(env_apt_2_r[2,1]), pull(env_apt_2_r[1,8]))
+
+range <- "A8:P10"
+env_apt_3_r <- read_range(env_apt_file, sheet, range) 
+env_apt_3_r <- if_else(is.na(env_apt_3_r[2,1]) == FALSE, pull(env_apt_3_r[2,1]), pull(env_apt_3_r[1,8]))
+
+range <- "A11:P13"
+env_apt_4_r <- read_range(env_apt_file, sheet, range) 
+env_apt_4_r <- if_else(is.na(env_apt_4_r[2,1]) == FALSE, pull(env_apt_4_r[2,1]), pull(env_apt_4_r[1,8])) 
+
+range <- "A14:P15"
+env_apt_5_r <- read_range(env_apt_file, sheet, range)   
+```
+
 [2 Environment]{class="fakeh1"}
 
 ::: {#container-kea style="clear: both"}
@@ -21,11 +44,11 @@
 
 :::: {#concl-kea}
 ```{r}
-env_conc <- read_mytable("PRB_findings.xlsx", "environment", "Table_Findings_environment") %>% 
-  filter(Year_Report == params$year_report, State == params$country) %>% 
+env_conc <- read_mytable("PRB_findings.xlsx", "environment", "Table_Findings_environment") %>%
+  filter(Year_Report == params$year_report, State == params$country) %>%
   select(Conclusion) %>% toString() %>% paste0(., "@")
 
-env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n')
 ```
 
 `r env_conc1`
@@ -52,17 +75,60 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ::::
 
 :::: {#concl-kep-scr}
-Dolor netus cursus vestibulum, cum suscipit tempus nisi volutpat! Diam laoreet pharetra dapibus bibendum malesuada donec hendrerit
-montes aliquam: ac suscipit himenaeos. Nec enim a, tempus porttitor turpis curabitur semper luctus odio phasellus ultricies at
-ridiculus! Morbi gravida velit sodales augue lacus nulla – fusce penatibus.
 
-Elit sociis fringilla lectus suspendisse eros nec in aptent eleifend sed? Hendrerit sodales pellentesque, montes sollicitudin dis,
-bibendum nisi urna. Sodales praesent suspendisse imperdiet luctus parturient varius morbi vehicula. Eros cras curae suspendisse
-pharetra ligula mi!
 ::::
 :::
 
 `r if (params$no_tcz == 0) "::: {.content-hidden}"`
+
+::: {#container-axot-asma style="clear: both"}
+
+## PIs - AXOT and ASMA
+
+<!-- empty line to ensure next heading leaves enough space -->
+<!-- <div style="height: 1px"></div> -->
+
+:::: {#chart-axot-asma class="mychart"}
+```{r chart-axot-asma-country}
+#| file: R/chart_level2_env_axot_asma_country.R
+#| out.width: "100%"
+```
+
+::::
+
+:::: {#concl-axot-asma}
+`r env_apt_1_r[1,1]`
+::::
+:::
+
+::: {#container-axot style="clear: both"}
+
+:::: {#chart-axot class="mychart"}
+```{r chart-axot-apt}
+#| file: R/chart_level2_env_axot_apt.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#concl-axot}
+`r env_apt_2_r`
+::::
+:::
+
+::: {#container-axot style="clear: both"}
+
+:::: {#chart-asma class="mychart"}
+```{r chart-asma-apt}
+#| file: R/chart_level2_env_asma_apt.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#concl-asma}
+`r env_apt_3_r`
+::::
+:::
+
 
 ::: {#container-cdo style="clear: both"}
 
@@ -81,52 +147,15 @@ pharetra ligula mi!
 ::::
 
 :::: {#concl-cdo}
-Dolor netus cursus vestibulum, cum suscipit tempus nisi volutpat! Diam laoreet pharetra dapibus bibendum malesuada donec hendrerit
-montes aliquam: ac suscipit himenaeos. Nec enim a, tempus porttitor turpis curabitur semper luctus odio phasellus ultricies at
-ridiculus! Morbi gravida velit sodales augue lacus nulla – fusce penatibus.
 
-Elit sociis fringilla lectus suspendisse eros nec in aptent eleifend sed? Hendrerit sodales pellentesque, montes sollicitudin dis,
-bibendum nisi urna. Sodales praesent suspendisse imperdiet luctus parturient varius morbi vehicula. Eros cras curae suspendisse
-pharetra ligula mi!
-::::
-:::
+`r env_apt_4_r`
 
-::: {#container-axot-asma style="clear: both"}
-
-## PIs - AXOT and ASMA
-
-<!-- empty line to ensure next heading leaves enough space -->
-<!-- <div style="height: 1px"></div> -->
-
-:::: {#chart-axot-asma class="mychart"}
-```{r chart-axot-asma-country}
-#| file: R/chart_level2_env_axot_asma_country.R
-#| out.width: "100%"
-```
-
-```{r chart-axot-apt}
-#| file: R/chart_level2_env_axot_apt.R
-#| out.width: "100%"
-```
-
-```{r chart-asma-apt}
-#| file: R/chart_level2_env_asma_apt.R
-#| out.width: "100%"
-```
-::::
-
-:::: {#concl-axot-asma}
-Dolor netus cursus vestibulum, cum suscipit tempus nisi volutpat! Diam laoreet pharetra dapibus bibendum malesuada donec hendrerit
-montes aliquam: ac suscipit himenaeos. Nec enim a, tempus porttitor turpis curabitur semper luctus odio phasellus ultricies at
-ridiculus! Morbi gravida velit sodales augue lacus nulla – fusce penatibus.
-
-Elit sociis fringilla lectus suspendisse eros nec in aptent eleifend sed? Hendrerit sodales pellentesque, montes sollicitudin dis,
-bibendum nisi urna. Sodales praesent suspendisse imperdiet luctus parturient varius morbi vehicula. Eros cras curae suspendisse
-pharetra ligula mi!
 ::::
 :::
 
 ::: {#container-env-apt-pis style="clear: both"}
+
+`r env_apt_5_r[1,1]`
 
 :::: {#table-env-apt-pis}
 

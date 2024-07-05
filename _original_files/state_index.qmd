@@ -217,16 +217,16 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 <div style="height: 1px"></div>
 
 :::: {#chart-cap class="mychart"}
-```{r chart-cap-er}
-#| file: R/chart_level1_cap_er.R
+```{r chart-cap-er, options = (cztype=c("enroute"))}
+#| file: R/chart_level1_cap.R
 #| out.width: "100%"
 ```
 
 `r if (params$no_tcz == 0) "::::: {.content-hidden}"`
 <br>
 
-```{r chart-cap-trm}
-#| file: R/chart_level1_cap_trm.R
+```{r chart-cap-trm, options = (cztype=c("terminal"))}
+#| file: R/chart_level1_cap.R
 #| out.width: "100%"
 ```
 

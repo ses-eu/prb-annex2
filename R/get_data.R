@@ -1,9 +1,6 @@
 
-# data folders ----
-  data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/data_for_web/'
-  data_folder_a2 <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/Annex 2/data/'
-
 # get data  ----
+  
   params_table <- read_mytable("Lists.xlsx", "Lists", "Table_States") %>% clean_names()
 
   state_list <- params_table %>% select(state) %>% unlist()
