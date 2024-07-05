@@ -2,6 +2,7 @@
 # define ranges and import data
 sheet <- country
 
+# env apt 
 range <- "A3:P4"
 env_apt_1_r <- read_range(env_apt_file, sheet, range)  
 
@@ -19,6 +20,24 @@ env_apt_4_r <- if_else(is.na(env_apt_4_r[2,1]) == FALSE, pull(env_apt_4_r[2,1]),
 
 range <- "A14:P15"
 env_apt_5_r <- read_range(env_apt_file, sheet, range)   
+
+# env mil
+
+range <- "A3:O7"
+env_mil_1_r <- read_range(env_mil_file, sheet, range) 
+
+range <- "A8:O12"
+env_mil_2_r <- read_range(env_mil_file, sheet, range) 
+
+range <- "A30:O34"
+env_mil_5_r <- read_range(env_mil_file, sheet, range) 
+
+range <- "A52:O56"
+env_mil_8_r <- read_range(env_mil_file, sheet, range) 
+
+range <- "A74:O78"
+env_mil_11_r <- read_range(env_mil_file, sheet, range) 
+
 ```
 
 [2 Environment]{class="fakeh1"}
@@ -164,9 +183,43 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 #| out.width: "100%"
 ```
 
-<!-- ![](images/{{< var doc.year_report >}}/{{< var doc.country >}}/env_apt_4.png) -->
-
 ::::
 :::
 
 `r if (params$no_tcz == 0) ":::"`
+
+::: {#container-mil-pi style="clear: both"}
+
+## Military PIs
+
+:::: {#table-env-mil-pi class="mychart"}
+```{r table-env-mil-pi}
+#| file: R/table_level2_env_mil_pi.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#concl-mil-pi}
+
+**Update on Military dimension of the plan**
+
+`r env_mil_1_r[1,1]`
+
+**Military - related measures implemented or planned to improve capacity**
+
+`r env_mil_2_r[1,1]`
+
+**Initiatives implemented or planned to improve PI#6**
+
+`r env_mil_5_r[1,1]`
+
+**Initiatives implemented or planned to improve PI#7**
+
+`r env_mil_8_r[1,1]`
+
+**Initiatives implemented or planned to improve PI#8**
+
+`r env_mil_11_r[1,1]`
+
+::::
+:::
