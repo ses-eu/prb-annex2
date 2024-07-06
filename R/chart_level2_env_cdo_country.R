@@ -45,12 +45,12 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("CDO - ", country)
+mytitle_text <- paste0("CDO")
 
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "To be added (%)"
+myyaxis_title <- "Share of flights (%)"
 myyaxis_ticksuffix <- "%"
 myyaxis_tickformat <- ".0f"
 myyaxis_rangemode <- NA

@@ -135,7 +135,7 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("Monthly KEA, KEP and SCR - ", country)
+mytitle_text <- paste0("Monthly KEA, KEP and SCR")
 
 #### xaxis
 myxaxis_dtick <- 'M1'

@@ -46,7 +46,7 @@ data_prep <- data_raw %>%
     values_to = 'value') %>% 
   pivot_wider(names_from = 'status', values_from = 'value') %>% 
   arrange(desc(type)) %>% 
-  mutate(mymetric = (A-D)/1000,
+  mutate(mymetric = (A-D)/10^6,
          mylabel = if_else(A == 0, '-', 
                            paste0(
                              if_else(mymetric > 0, '+', ''),
@@ -62,12 +62,13 @@ data_prep <- data_raw %>%
 
 # chart parameters ----
 mychart_title <- paste0(main_ansp,", Actual v Determined costs - ", year_report)
-myaxis_title <- "Costs (€2017'000)"
+myaxis_title <- "Costs (M€<sub>2017</sub>)"
 mybarcolor_pos <- '#A5A5A5'
 mybarcolor_neg <- '#A5A5A5'
 mytextcolor <- 'black'
-myhovertemplate <- paste0('%{y} (A-D): %{x:+0,}<extra></extra>')
+myhovertemplate <- paste0('%{y} (A-D): %{x:,.1f}<extra></extra>')
 myxaxis_tickformat <- "+0,"
+mydecimals <- 1
 
 ###set up order of traces
 myfactor <- c("VFR exempted", 

@@ -118,7 +118,7 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <-  paste0("KEP and SCR - ", country)
+mytitle_text <-  paste0("KEP and SCR")
 
 #### xaxis
 

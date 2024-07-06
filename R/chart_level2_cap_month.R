@@ -44,6 +44,14 @@ if (country == 'SES RP3') {
     mutate(ifr = NA)
 } else {
   # state case ----
+  ## fix ez if script not executed from qmd file ----
+  if (exists("cz") == FALSE) {cz = c("1", "enroute")}
+  # ez=1
+  
+  ## define cz ----
+  ez <- as.numeric(cz[[1]])
+  cztype <- cz[[2]]
+  
   ## import data  ----
   data_raw_target  <-  read_xlsx(
     paste0(data_folder, "CAP dataset master.xlsx"),
@@ -119,7 +127,7 @@ mysuffix <- ""
 mydecimals <- 2
 
 ### trace parameters
-mycolors = c('#ED7D31', '#F8CBAD', '#BF8F00', '#92D050', '#A5A5A5')
+mycolors = c('#EF7D22', '#F9CCAB', '#FDB014', '#70AD47', '#A0A0A0')
 ###set up order of traces
 myfactor <- c("Capacity", "Staffing", 
               "Disruptions", "Weather",
@@ -146,7 +154,7 @@ myxaxis_dtick <- 'M1'
 myxaxis_tickformat <- "%b"
 
 #### yaxis
-myyaxis_title <- "Average minutes of delay"
+myyaxis_title <- "ATFM delay (min/flight)"
 myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".2f"
 

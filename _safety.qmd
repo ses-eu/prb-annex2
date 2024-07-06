@@ -1,4 +1,4 @@
-# 1 Safety
+# 1 Safety - {{< var doc.country >}}
 ### Effectiveness of Safety Management
 
 ```{r}

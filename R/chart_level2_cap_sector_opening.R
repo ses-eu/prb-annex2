@@ -27,7 +27,7 @@ mysuffix <- ""
 mydecimals <- 0
 
 ### trace parameters
-mycolors = c('#44546A')
+mycolors = c('#8497B0')
 ###set up order of traces
 myfactor <- data_prep$type %>% unique() 
 myhovertemplate <- paste0('%{y:,.', mydecimals, 'f}', mysuffix)

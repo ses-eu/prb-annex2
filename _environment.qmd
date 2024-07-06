@@ -40,7 +40,7 @@ env_mil_11_r <- read_range(env_mil_file, sheet, range)
 
 ```
 
-[2 Environment]{class="fakeh1"}
+[2 Environment - {{< var doc.country >}}]{class="fakeh1"}
 
 ::: {#container-kea style="clear: both"}
 

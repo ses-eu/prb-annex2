@@ -55,7 +55,7 @@ mytitle_text <- paste0("CDO by airport - ", year_report)
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "To be added (%)"
+myyaxis_title <- "Share of flights (%)"
 myyaxis_ticksuffix <- "%"
 myyaxis_tickformat <- ".0f"
 

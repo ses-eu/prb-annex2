@@ -397,8 +397,10 @@ if (out_format == 'web') {
                                               mymargin_pdf = mymargin_pdf,
                                               mylinewidth_pdf = mylinewidth_pdf,
 
+                                              ## monitoring files
                                               cap_file = cap_file,
                                               ceff_file = ceff_file,
+                                              ceff_file_canarias = ceff_file_canarias,
                                               env_kea_file = env_kea_file,
                                               env_apt_file = env_apt_file,
                                               env_mil_file = env_mil_file,

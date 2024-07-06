@@ -174,15 +174,23 @@ if (country != "Network Manager" & country != "SES RP3" & country != "Home") {
   
   ## get ceff file ----
   ceff_files <- list.files(paste0(data_folder_a2, 'ceff/'))
+  ceff_file_canarias <- NA
   
   for (i in 1:length(ceff_files)) {
     if (grepl(country, ceff_files[i], fixed = TRUE) == TRUE) {
       ceff_file <- ceff_files[i]
     }
+    if (country == "Spain") {
+      if(grepl("Spain Continental", ceff_files[i], fixed = TRUE) == TRUE) {
+      ceff_file <- ceff_files[i]}
+      if(grepl("Spain Canarias", ceff_files[i], fixed = TRUE) == TRUE) {
+        ceff_file_canarias <- ceff_files[i]}
+      }
   }
   
   file <-  paste0(data_folder_a2, "ceff/", ceff_file)
   ceff_file <-  paste0(data_folder_a2, "ceff/", ceff_file)
+  ceff_file_canarias <-  paste0(data_folder_a2, "ceff/", ceff_file_canarias)
   
   # get er cap file ----
   cap_files <- list.files(paste0(data_folder_a2, 'cap/'))

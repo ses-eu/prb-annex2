@@ -53,10 +53,11 @@ data_prep <- data_raw %>%
     .default = NA)
     ) %>% 
   mutate_at(c(2:4), ~round(.,0)) %>% 
-  pivot_longer(-year, names_to = "Total costs - nominal EURO ('000)", values_to = 'mymetric') %>% 
+  pivot_longer(-year, names_to = "name", values_to = 'mymetric') %>% 
   pivot_wider(values_from = 'mymetric', names_from = 'year')
 
 mygtable(data_prep, myfont) %>% 
+  cols_label(name = html("Total costs - nominal EURO (M€<sub>2017</sub>)")) %>% 
   tab_options(column_labels.background.color = "#F2F2F2",
               column_labels.font.weight = 'bold') %>% 
   cols_align(columns = 1, align = "left") %>%

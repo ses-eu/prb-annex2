@@ -134,7 +134,7 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0(if_else(country == "Network Manager", "KEP - ", "KEA - "), country)
+mytitle_text <- paste0(if_else(country == "Network Manager", "KEP", "KEA"))
 
 #### xaxis
 

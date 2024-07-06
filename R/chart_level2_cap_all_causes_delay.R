@@ -47,7 +47,7 @@ mytitle_text <- paste0("All causes pre departure delay")
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "Average minutes of\npre departure delay per flight"
+myyaxis_title <- "Delay (min/flight)"
 myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".0f"
 

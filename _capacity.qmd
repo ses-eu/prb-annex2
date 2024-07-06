@@ -46,7 +46,7 @@ cap_er_1_7_r <- read_range(cap_file, sheet, range)
 ```
 
 
-[3 Capacity]{class="fakeh1"}
+[3 Capacity - {{< var doc.country >}}]{class="fakeh1"}
 
 ::: {#container-cap style="clear: both"}
 

@@ -51,7 +51,7 @@ mytitle_text <- paste0("AXOT by airport - ", year_report)
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "To be added"
+myyaxis_title <- "Time (min/flight)"
 myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".1f"
 

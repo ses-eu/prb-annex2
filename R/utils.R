@@ -659,7 +659,7 @@ myhbarc <-  function(mywidth, myheight, myfont, mymargin) {
     plot_ly(
       width = mywidth,
       height = myheight,
-      x = ~ round(mymetric, 0),
+      x = ~ round(mymetric, mydecimals),
       y = ~ factor(ylabel, levels = myfactor),
       yaxis = "y1",
       marker = list(color = ~ifelse(mymetric>=0, mybarcolor_pos, mybarcolor_neg)),

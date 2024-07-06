@@ -59,8 +59,7 @@ data_prep_actual <- data_prep %>%
 myaxis_title <- paste0(if_else(cztype == "terminal", "Terminal", "En route"),
                        " TSUs '000")
 mychart_title <- paste0(if_else(cztype == "terminal", "Terminal", "En route"),
-                        " service units - ",
-                        mycz_name)
+                        " service units")
 mytitle_pos <- 0.98
 
 # define chart function ----

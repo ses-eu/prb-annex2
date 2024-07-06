@@ -73,14 +73,13 @@ mybarmode <- 'group'
 #### title
 mytitle_text <- paste0("Total ", 
                        if_else(cztype == "terminal", "terminal", "en route"),
-                       " costs - ", 
-                       mycz_name)
+                       " costs")
 
 #### xaxis
 
 #### yaxis
 myyaxis_title <- paste0(if_else(cztype == "terminal", "Terminal", "En route"),
-                        " costs (€2017'000)")
+                        " costs (M€<sub>2017</sub>)")
 myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".0f"
 

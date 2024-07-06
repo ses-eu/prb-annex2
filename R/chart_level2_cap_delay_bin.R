@@ -73,7 +73,7 @@ mytitle_text <- paste0("Delay time bin")
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "To be added"
+myyaxis_title <- "Percentage"
 myyaxis_ticksuffix <- "%"
 myyaxis_tickformat <- ".0f"
 

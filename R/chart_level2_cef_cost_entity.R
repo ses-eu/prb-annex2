@@ -63,7 +63,7 @@ data_prep[data_prep == 0] <- NA
 
 # chart parameters ----
 mysuffix <- ""
-mydecimals <- 2
+mydecimals <- 1
 
 ### trace parameters
 mycolors = c('#5B9BD5', '#FFC000')
@@ -91,7 +91,7 @@ mytitle_text <- paste0("Total ",
 
 #### yaxis
 myyaxis_title <- paste0(if_else(cztype == "terminal", "Terminal", "En route"),
-                        " costs (€2017'000)")
+                        " costs (M€<sub>2017</sub>)")
 myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".0f"
 

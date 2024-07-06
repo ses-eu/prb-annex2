@@ -66,12 +66,12 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("ASMA and AXOT - ", country)
+mytitle_text <- paste0("ASMA and AXOT")
 
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "To be added"
+myyaxis_title <- "Time (min/flight)"
 myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".1f"
 myyaxis_rangemode <- NA

@@ -25,12 +25,14 @@ data_prep <- data_raw %>%
          )  %>% 
   select(year_text, atsp_gain_loss_cost_sharing, trs, financial_incentive, ex_post_roe) %>% 
   pivot_longer(-year_text, names_to = "status", values_to = "mymetric") %>% 
-  mutate (ylabel = case_when (
+  mutate (
+    mymetric = mymetric/1000,
+    ylabel = case_when (
     status == 'atsp_gain_loss_cost_sharing' ~ "Cost sharing", 
     status == 'trs' ~ "Traffic risk sharing",
     status == 'financial_incentive' ~ "Incentives",
     status == 'ex_post_roe' ~ "Actual RoE in value"),
-    mylabel = format(round(mymetric,0), big.mark = ",", nsmall =0)
+    mylabel = format(round(mymetric,1), big.mark = ",", nsmall =1)
   )
   
 # chart parameters ----
@@ -39,7 +41,7 @@ myaxis_title <- ""
 mybarcolor_pos <- '#9ECF8D'
 mybarcolor_neg <- '#F87474'
 mytextcolor <- 'black'
-myhovertemplate <- paste0('%{x:,.0f}<extra></extra>')
+myhovertemplate <- paste0('%{x:,.1f}<extra></extra>')
 myxaxis_tickformat <- "0,"
 
 ###set up order of traces
@@ -49,6 +51,7 @@ myfactor <- c("Actual RoE in value",
               "Cost sharing")
 
 mylocalmargin <- list (t = 40, b = 60)
+mydecimals <- 1
 
 # plot chart  ----
 

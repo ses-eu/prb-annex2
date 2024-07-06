@@ -145,10 +145,10 @@ website:
       - text: "---"
 # block level1 nm end
 # block level2 beginning
-      - text: "<b>1 Safety</b>"
+      - text: "<b>Safety</b>"
         href: safety.html
       - text: "---"
-      - section: "<b>2 Environment</b>"
+      - section: "<b>Environment</b>"
         contents:
           - text: "KPI - KEA"
             href: environment.html#kpi--kea
@@ -164,7 +164,7 @@ website:
           # - environment_apt.qmd
           # - environment_mil.qmd
       - text: "---"
-      - section: "<b>3 Capacity</b>"
+      - section: "<b>Capacity</b>"
         contents:
           - text: "KPI – en route ATFM delay"
             href: capacity.html#kpi-en-route-atfm-delay
@@ -175,7 +175,7 @@ website:
           # - capacity_er.qmd
           # - capacity_trm.qmd
       - text: "---"
-      - section: "<b>4 Cost-efficiency</b>"
+      - section: "<b>Cost-efficiency</b>"
         contents:
           - section: "<b>En route CZ</b>"
             contents:
