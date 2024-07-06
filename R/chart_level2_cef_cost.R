@@ -1,6 +1,6 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("cz") == FALSE) {cz = c("1", "terminal")}
+if (exists("cz") == FALSE) {cz = c("1", "enroute")}
 # ez=1
 
 # define cz ----
@@ -15,10 +15,12 @@ mycz_name <- if_else(cztype == "terminal",
                      ecz_list$ecz_name[ez])
 
 # import data  ----
+# if(cztype == "terminal") {data_raw <- data_raw_t1_trm} else {data_raw <- data_raw_t1_ert}
+
 data_raw  <-  read_xlsx(
   paste0(data_folder, "CEFF dataset master.xlsx"),
   # here("data","hlsr2021_data.xlsx"),
-  sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
+  sheet = "Enroute_T1",
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
   clean_names() 

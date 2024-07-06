@@ -1,3 +1,22 @@
+```{r cef-level2-text}
+# define ranges and import data
+sheet <- "1_ERT"
+
+## range 1.4
+range <- "C50:M71"
+ert_1_4  <- read_range(ceff_file, sheet, range)
+
+## range 1.6
+sheet <- "2_ERT"
+range <- "J16:M33"
+ert_1_6  <- read_range(ceff_file, sheet, range)
+
+## range 1.9
+sheet <- "2_ERT"
+range <- "C63:M70"
+ert_1_9  <- read_range(ceff_file, sheet, range)
+```
+
 [4 Cost-efficiency]{class="fakeh1"}
 
 ## @@cz_type_proper@@ CZ - {{< var doc.@@cz_short@@@@cz_index@@ >}}
@@ -18,14 +37,14 @@
 
 :::: {#concl-cef-er-duc}
 ```{r concl-cef-er-duc}
-cef_conc <- read_mytable("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF") %>% 
-  filter(Year_Report == params$year_report, State == params$country) %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+# cef_conc <- read_mytable("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF") %>% 
+#   filter(Year_Report == params$year_report, State == params$country) %>% 
+#   select(Conclusion) %>% toString() %>% paste0(., "@")
+# 
+# cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
 ```
 
-`r cef_conc1`
+`r ert_1_4[2,1]`
 ::::
 :::
 
@@ -42,41 +61,38 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ::::
 
 :::: {#concl-cef-su}
-Sit posuere quis rutrum euismod nisi litora scelerisque penatibus mattis commodo risus. Accumsan tortor in: proin ligula ligula,
-proin ullamcorper ad. Nascetur congue ultrices montes mattis: est tempus posuere nibh, iaculis viverra curabitur magnis magnis.
 
-Dolor lobortis nisi sociosqu, tempor dignissim fames nullam. Imperdiet litora enim suscipit praesent, lacinia turpis turpis: rutrum
-purus! Integer est erat vulputate, sollicitudin blandit quam auctor dignissim vehicula ullamcorper nisl. Faucibus sociosqu iaculis
-ad metus montes ac sociosqu sed. Tellus enim erat molestie faucibus sapien. Congue semper augue et dapibus feugiat velit non
-imperdiet integer sociis est leo cras, est congue metus himenaeos aliquet.
+`r ert_1_4[6,1]`
 
-Sit magna curae eleifend: laoreet, donec cum pulvinar. Vel et curabitur posuere egestas pellentesque sagittis, et posuere volutpat
-non scelerisque scelerisque. Suspendisse nibh cubilia etiam arcu faucibus nam volutpat orci ut. Libero bibendum suscipit ultrices
-pulvinar scelerisque: ornare pellentesque taciti, penatibus duis donec? Aptent class fusce enim sagittis cubilia etiam velit
-egestas mi.
 ::::
 :::
 
-::: {#container-cef-er-cost style="clear: both"}
+::: {#container-cef-cost style="clear: both"}
 
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
-:::: {#chart-cef-er-cost class="mychart"}
-```{r chart-cef-er-cost, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+:::: {#chart-cef-cost class="mychart"}
+```{r chart-cef-cost, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_cost.R
 #| out.width: "100%"
 ```
+
+```{r table-cef-cost, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+#| file: R/table_level2_cef_cost.R
+#| out.width: "100%"
+```
+
+```{r table-cef-cost-infl, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+#| file: R/table_level2_cef_cost_infl.R
+#| out.width: "100%"
+```
+
 ::::
 
-:::: {#concl-cef-er-cost}
-Lorem ullamcorper varius maecenas felis posuere fusce, turpis posuere habitant ut? Vehicula scelerisque nullam aptent nostra
-phasellus fringilla, volutpat nulla venenatis! Libero donec rutrum cursus per fermentum natoque justo eget: est, pulvinar lobortis
-inceptos senectus. Magna nunc vitae mollis facilisis magna.
+:::: {#concl-cef-cost}
 
-Amet sociis orci odio mattis: cum sociis dui taciti proin eleifend ultricies. Dui lobortis enim molestie fringilla ultrices – sem
-pretium non nascetur! Risus luctus augue; dapibus in iaculis. Enim odio mollis, leo massa faucibus vehicula consequat. Auctor fames
-velit: mollis lectus tortor, porta facilisis ante.
+
 ::::
 :::
 
@@ -93,16 +109,9 @@ velit: mollis lectus tortor, porta facilisis ante.
 ::::
 
 :::: {#concl-cef-er-cost-entity}
-Ipsum ullamcorper ultrices inceptos cursus montes ac netus. Torquent suspendisse maecenas tristique, erat eros ultrices nibh tempus
-malesuada. Sapien sociis suscipit; ad ac urna – integer imperdiet. Enim blandit aenean, habitant posuere class lacinia eget
-accumsan cum. Cras feugiat dictumst lectus duis ad, condimentum fusce, dui habitasse. Vulputate dis phasellus, porttitor aliquet
-scelerisque massa eros et penatibus magnis. Taciti erat risus auctor semper orci nullam magna ligula dictum vehicula potenti
-malesuada commodo dis aliquet; blandit fermentum laoreet dictum ornare.
 
-Amet ante leo natoque commodo habitasse vitae ornare ac! Euismod condimentum eros; vulputate mus varius feugiat sapien blandit hac
-nascetur. Tortor taciti nulla sociosqu vivamus vulputate pretium leo. Mattis accumsan posuere mattis commodo dictum? Proin interdum
-hendrerit eget habitasse luctus, litora magnis taciti. Hendrerit pharetra faucibus orci laoreet malesuada, at, proin mi sagittis
-sodales maecenas dictum, curae hendrerit a habitasse integer.
+
+
 ::::
 :::
 
@@ -119,14 +128,9 @@ sodales maecenas dictum, curae hendrerit a habitasse integer.
 ::::
 
 :::: {#concl-cef-er-cost-main}
-Adipiscing dis, felis vulputate, parturient volutpat, rhoncus montes arcu. Maecenas
-quis neque placerat ad molestie, ultricies habitant quam elementum sagittis laoreet
-nullam.
 
-Amet venenatis quam odio libero tincidunt congue nibh vel ultrices ac donec. Erat
-odio mauris augue ut eleifend. Egestas bibendum a velit ad in libero ligula natoque.
-Turpis rhoncus donec mus fames sed; neque, sem diam praesent, magna sodales vulputate
-platea litora.
+
+
 ::::
 :::
 
@@ -143,11 +147,9 @@ platea litora.
 ::::
 
 :::: {#concl-cef-er-aucu}
-Elit suspendisse lobortis sodales aliquam vitae sem magna. Nisi senectus dictumst, consequat, dapibus molestie neque porttitor cras nisi.
-Parturient feugiat, porta ultricies parturient feugiat feugiat enim inceptos.
 
-Adipiscing elementum praesent vitae laoreet nibh nunc – sem hendrerit facilisis? Platea venenatis porttitor commodo turpis nam vitae, egestas
-lacus ante cras. Habitant conubia suscipit porttitor tortor neque hac praesent. Lacus vehicula tristique blandit egestas, dui platea.
+
+
 ::::
 :::
 
@@ -164,7 +166,9 @@ lacus ante cras. Habitant conubia suscipit porttitor tortor neque hac praesent. 
 ::::
 
 :::: {#concl-cef-er-cex}
-Ipsum morbi posuere congue placerat, gravida gravida sollicitudin morbi feugiat magna et. Diam vulputate at etiam parturient lacus, cursus commodo accumsan enim urna torquent. Aenean ut dictumst convallis; egestas bibendum diam. Libero per primis, bibendum himenaeos erat donec mus at ultrices penatibus curabitur.
+
+
+
 ::::
 :::
 
@@ -187,7 +191,9 @@ Ipsum morbi posuere congue placerat, gravida gravida sollicitudin morbi feugiat 
 ::::
 
 :::: {#concl-cef-er-reg-res}
-Ipsum morbi posuere congue placerat, gravida gravida sollicitudin morbi feugiat magna et. Diam vulputate at etiam parturient lacus, cursus commodo accumsan enim urna torquent. Aenean ut dictumst convallis; egestas bibendum diam. Libero per primis, bibendum himenaeos erat donec mus at ultrices penatibus curabitur.
+
+
+
 ::::
 :::
 
@@ -212,6 +218,8 @@ Ipsum morbi posuere congue placerat, gravida gravida sollicitudin morbi feugiat 
 ::::
 
 :::: {#concl-cef-er-reg-res-main-ansp}
-Ipsum morbi posuere congue placerat, gravida gravida sollicitudin morbi feugiat magna et. Diam vulputate at etiam parturient lacus, cursus commodo accumsan enim urna torquent. Aenean ut dictumst convallis; egestas bibendum diam. Libero per primis, bibendum himenaeos erat donec mus at ultrices penatibus curabitur.
+
+
+
 ::::
 :::
