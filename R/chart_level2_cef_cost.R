@@ -20,7 +20,7 @@ mycz_name <- if_else(cztype == "terminal",
 data_raw  <-  read_xlsx(
   paste0(data_folder, "CEFF dataset master.xlsx"),
   # here("data","hlsr2021_data.xlsx"),
-  sheet = "Enroute_T1",
+  sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
   clean_names() 

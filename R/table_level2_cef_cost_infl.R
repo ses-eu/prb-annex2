@@ -20,7 +20,7 @@ mycz_name <- if_else(cztype == "terminal",
 data_raw  <-  read_xlsx(
   paste0(data_folder, "CEFF dataset master.xlsx"),
   # here("data","hlsr2021_data.xlsx"),
-  sheet = "Enroute_T1",
+  sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
   clean_names() 
@@ -32,7 +32,7 @@ data_prep1 <- data_raw %>%
   mutate(
     mymetric = paste0(format(round(x5_1_inflation_rate*100, 1), nsmall =1), '%'),
     mymetric = case_when( 
-      year > year_report & status == "A" ~ NA,
+      year > year_report & year != 20202021 & status == "A" ~ NA,
       .default = mymetric)
   ) %>%  
   select(
@@ -101,7 +101,7 @@ mygtable(data_prep, myfont) %>%
   cols_align(columns = 1, align = "left") %>%
   tab_style(
     style = list(
-      cell_text(weight = "bold")
+      # cell_text(weight = "bold")
     ),
     locations = cells_body(
       columns = 1

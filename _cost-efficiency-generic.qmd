@@ -1,20 +1,34 @@
 ```{r cef-level2-text}
+cz=c("@@cz_index@@", "@@cz_type@@")
+
+# define cz
+ez <- as.numeric(cz[[1]])
+cztype <- cz[[2]]
+mycz <- if_else(cztype == "terminal",
+                tcz_list$tcz_id[ez],
+                ecz_list$ecz_id[ez])
+
 # define ranges and import data
-sheet <- "1_ERT"
+sheet <- if_else(cztype == "terminal",
+                 if_else(ez >1, paste0("5_TRM (", ez, ")"), "5_TRM"),
+                 "1_ERT")
 
 ## range 1.4
 range <- "C50:M71"
-ert_1_4  <- read_range(ceff_file, sheet, range)
+cef_txt_1_4  <- read_range(ceff_file, sheet, range)
 
-## range 1.6
-sheet <- "2_ERT"
+sheet <- if_else(cztype == "terminal",
+                 if_else(ez >1, paste0("6_TRM (", ez, ")"), "6_TRM"),
+                 "2_ERT")
+range <- "C11:M14"
+cef_txt_1_5  <- read_range(ceff_file, sheet, range)
+
 range <- "J16:M33"
-ert_1_6  <- read_range(ceff_file, sheet, range)
+cef_txt_1_6  <- read_range(ceff_file, sheet, range)
 
 ## range 1.9
-sheet <- "2_ERT"
 range <- "C63:M70"
-ert_1_9  <- read_range(ceff_file, sheet, range)
+cef_txt_1_9  <- read_range(ceff_file, sheet, range)
 ```
 
 [4 Cost-efficiency]{class="fakeh1"}
@@ -28,15 +42,15 @@ ert_1_9  <- read_range(ceff_file, sheet, range)
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
-:::: {#chart-cef-er-duc class="mychart"}
-```{r chart-cef-er-duc, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+:::: {#chart-cef-duc class="mychart"}
+```{r chart-cef-duc, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level1_cef.R
 #| out.width: "100%"
 ```
 ::::
 
-:::: {#concl-cef-er-duc}
-```{r concl-cef-er-duc}
+:::: {#concl-cef-duc}
+```{r concl-cef-duc}
 # cef_conc <- read_mytable("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF") %>% 
 #   filter(Year_Report == params$year_report, State == params$country) %>% 
 #   select(Conclusion) %>% toString() %>% paste0(., "@")
@@ -44,7 +58,7 @@ ert_1_9  <- read_range(ceff_file, sheet, range)
 # cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
 ```
 
-`r ert_1_4[2,1]`
+`r cef_txt_1_4[2,1]`
 ::::
 :::
 
@@ -62,7 +76,7 @@ ert_1_9  <- read_range(ceff_file, sheet, range)
 
 :::: {#concl-cef-su}
 
-`r ert_1_4[6,1]`
+`r cef_txt_1_4[6,1]`
 
 ::::
 :::
@@ -96,59 +110,59 @@ ert_1_9  <- read_range(ceff_file, sheet, range)
 ::::
 :::
 
-::: {#container-cef-er-cost-entity style="clear: both"}
+::: {#container-cef-cost-entity style="clear: both"}
 
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
-:::: {#chart-cef-er-cost-entity class="mychart"}
-```{r chart-cef-er-cost-entity, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+:::: {#chart-cef-cost-entity class="mychart"}
+```{r chart-cef-cost-entity, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_cost_entity.R
 #| out.width: "100%"
 ```
 ::::
 
-:::: {#concl-cef-er-cost-entity}
+:::: {#concl-cef-cost-entity}
 
-
+`r cef_txt_1_4[10,1]`
 
 ::::
 :::
 
-::: {#container-cef-er-cost-main style="clear: both"}
+::: {#container-cef-cost-main style="clear: both"}
 
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
-:::: {#chart-cef-er-cost-main class="mychart"}
-```{r chart-cef-er-cost-main, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+:::: {#chart-cef-cost-main class="mychart"}
+```{r chart-cef-cost-main, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_cost_main.R
 #| out.width: "100%"
 ```
 ::::
 
-:::: {#concl-cef-er-cost-main}
+:::: {#concl-cef-cost-main}
 
-
+`r cef_txt_1_4[14,1]`
 
 ::::
 :::
 
-::: {#container-cef-er-aucu style="clear: both"}
+::: {#container-cef-aucu style="clear: both"}
 
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
-:::: {#chart-cef-er-aucu class="mychart"}
-```{r chart-cef-er-aucu, options = (cz=c("1", "enroute"))}
-#| file: R/chart_level2_cef_er_aucu.R
+:::: {#chart-cef-aucu class="mychart"}
+```{r chart-cef-aucu, options = (cz=c("1", "enroute"))}
+#| file: R/chart_level2_cef_aucu.R
 #| out.width: "100%"
 ```
 ::::
 
-:::: {#concl-cef-er-aucu}
+:::: {#concl-cef-aucu}
 
-
+`r cef_txt_1_5[1,1]`
 
 ::::
 :::

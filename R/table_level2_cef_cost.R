@@ -1,6 +1,6 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("cz") == FALSE) {cz = c("1", "enroute")}
+if (exists("cz") == FALSE) {cz = c("1", "terminal")}
 # ez=1
 
 # define cz ----
@@ -20,7 +20,7 @@ mycz_name <- if_else(cztype == "terminal",
 data_raw  <-  read_xlsx(
   paste0(data_folder, "CEFF dataset master.xlsx"),
   # here("data","hlsr2021_data.xlsx"),
-  sheet = "Enroute_T1",
+  sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
   clean_names() 
@@ -30,7 +30,10 @@ data_prep <- data_raw %>%
   filter(
     entity_code == mycz) %>% 
   mutate(
-    mymetric = round(x4_2_cost_excl_vfr/xrate2017/10^6,2)
+    mymetric = round(x4_2_cost_excl_vfr/xrate2017/10^6,2),
+    mymetric = case_when( 
+      year > year_report & year != 20202021 & status == "A" ~ NA,
+      .default = mymetric)
   ) %>%  
   select(
     year,
@@ -59,7 +62,7 @@ mygtable(data_prep, myfont) %>%
   cols_align(columns = 1, align = "left") %>%
   tab_style(
     style = list(
-      cell_text(weight = "bold")
+      # cell_text(weight = "bold")
     ),
     locations = cells_body(
       columns = 1
