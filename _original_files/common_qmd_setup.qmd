@@ -44,6 +44,7 @@ params:
 
   cap_file:       $cap_file
   ceff_file:      $ceff_file
+  ceff_file_canarias:      $ceff_file_canarias
   env_kea_file:   $env_kea_file
   env_apt_file:   $env_apt_file
   env_mil_file:   $env_mil_file
@@ -143,6 +144,7 @@ other_met_str <- params$other_met_str
 
 cap_file <- params$cap_file
 ceff_file <- params$ceff_file
+ceff_file_canarias <- params$ceff_file_canarias
 env_kea_file <- params$env_kea_file
 env_apt_file <- params$env_apt_file
 env_mil_file <- params$env_mil_file
