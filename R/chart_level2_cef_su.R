@@ -55,13 +55,6 @@ data_prep_planned <- data_prep %>%
 data_prep_actual <- data_prep %>% 
   filter(status == "Actual SUs")
 
-# set parameters for chart ----
-myaxis_title <- paste0(if_else(cztype == "terminal", "Terminal", "En route"),
-                       " TSUs '000")
-mychart_title <- paste0(if_else(cztype == "terminal", "Terminal", "En route"),
-                        " service units")
-mytitle_pos <- 0.98
-
 # define chart function ----
 myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
   plot_ly( 
@@ -221,5 +214,47 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
     )
 }
 
+# set parameters for chart ----
+myaxis_title <- paste0(if_else(cztype == "terminal", "Terminal", "En route"),
+                       " TSUs '000")
+mychart_title <- paste0(if_else(cztype == "terminal", "Terminal", "En route"),
+                        " service units")
+mytitle_pos <- 0.99
+
+mylocalmargin = list (t = 40, b = 100)
+
+mylegend_y_position <- -0.37
+
 # plot chart ----
-myc(mywidth, myheight, myfont, mylinewidth, mymargin)
+myc(mywidth, myheight+20, myfont, mylinewidth, mylocalmargin) %>% 
+  layout(
+    annotations = list( 
+    list (
+      xanchor = "right",
+      x = 0.49,
+      y = mylegend_y_position,
+      text = '<span style="color:grey;font-family:Arial"><b>Ɪ</b></span>  ±2% dead-band',
+      font = list(size = myfont),
+      xref = "paper",
+      yref = "paper",
+      showarrow = FALSE,
+      # arrowhead = 7,
+      ax = 0,
+      ay = 0
+    ),
+    list (
+      xanchor = "left",
+      x = 0.51,
+      y = mylegend_y_position,
+      text = '<span style="color:black;font-family:Arial"><b>Ɪ</b></span>  ±10% threshold',
+      font = list(size = myfont),
+      xref = "paper",
+      yref = "paper",
+      showarrow = FALSE,
+      # arrowhead = 7,
+      ax = 0,
+      ay = 0
+    )
+    )
+  )
+    

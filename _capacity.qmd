@@ -51,19 +51,31 @@ cap_trm_1_1_r <- read_range(cap_trm_file, sheet, range)
 
 range <- "A5:U7"
 cap_trm_1_2_r <- read_range(cap_trm_file, sheet, range) 
-cap_trm_1_2 <- if_else(is.na(cap_trm_1_2_r[1,11]) == TRUE,
-                        cap_trm_1_2_r[2,1], cap_trm_1_2_r[1,11])
+cap_trm_1_2 <- paste0(if_else(is.na(cap_trm_1_2_r[1,11]) == TRUE, '',
+                              pull(cap_trm_1_2_r[1,11])),
+                      if_else(is.na(cap_trm_1_2_r[2,1]) == TRUE, '',
+                              pull(cap_trm_1_2_r[2,1]))
+                      )
 
 range <- "A8:U10"
 cap_trm_1_3_r <- read_range(cap_trm_file, sheet, range)  
-cap_trm_1_3 <- paste0(if_else(is.na(cap_trm_1_3_r[1,10]) == TRUE, "", pull(cap_trm_1_3_r[1,10])), if_else(is.na(cap_trm_1_3_r[1,11]) == TRUE, "", pull(cap_trm_1_3_r[1,11])))
+cap_trm_1_3 <- paste0(if_else(is.na(cap_trm_1_3_r[1,10]) == TRUE, "",
+                              pull(cap_trm_1_3_r[1,10])),
+                      if_else(is.na(cap_trm_1_3_r[1,11]) == TRUE, "",
+                              pull(cap_trm_1_3_r[1,11])),
+                      if_else(is.na(cap_trm_1_3_r[2,1]) == TRUE, "",
+                              paste0('<br/>', pull(cap_trm_1_3_r[2,1])))
+                      )
 
 range <- "A11:U13"
 cap_trm_1_4_r <- read_range(cap_trm_file, sheet, range) 
-cap_trm_1_4 <- paste0(if_else(is.na(cap_trm_1_4_r[1,10]) == TRUE, "", pull(cap_trm_1_4_r[1,10])),
-                      if_else(is.na(cap_trm_1_4_r[1,11]) == TRUE, "", pull(cap_trm_1_4_r[1,11])), 
-                      if_else(is.na(cap_trm_1_4_r[2,1]) == TRUE, "", pull(cap_trm_1_4_r[2,1])))
-
+cap_trm_1_4 <- paste0(if_else(is.na(cap_trm_1_4_r[1,10]) == TRUE, "",
+                              pull(cap_trm_1_4_r[1,10])),
+                      if_else(is.na(cap_trm_1_4_r[1,11]) == TRUE, "",
+                              pull(cap_trm_1_4_r[1,11])),
+                      if_else(is.na(cap_trm_1_4_r[2,1]) == TRUE, "",
+                              pull(cap_trm_1_4_r[2,1]))
+                      )
 
 range <- "A14:U15"
 cap_trm_1_5_r <- read_range(cap_trm_file, sheet, range)  
