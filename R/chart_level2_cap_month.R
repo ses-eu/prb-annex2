@@ -2,46 +2,67 @@
 if (country == 'SES RP3') {
   # SES case ----
   ## import data  ----
-  data_raw  <-  read_xlsx(
-    paste0(data_folder, "SES.xlsx"),
+  data_raw_actual  <-  read_xlsx(
+    paste0(data_folder, "SES CAP file.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
-    sheet = "SES_ATFM_ERT_delay",
+    sheet = "Monthly en route delay",
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+  
+  data_raw_target  <-  read_xlsx(
+    paste0(data_folder, "SES CAP file.xlsx"),
+    # here("data","hlsr2021_data.xlsx"),
+    sheet = "Delay targets",
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
   
   ## prepare data ----
-  data_prep_target <- data_raw %>% 
+  data_prep_target <- data_raw_target %>% 
     filter(
-      year_report == .env$year_report) %>% 
+      year == .env$year_report) %>% 
+    right_join(filter(data_raw_actual, year == .env$year_report),
+               by = "year") %>% 
     mutate(
-      er_cap_target = round(target, 2)
+      xlabel = month,
+      myothermetric = round(delay_target, 2),
+      type = "Target"
     ) %>% 
     select(
-      year,
-      er_cap_target
-    ) %>% arrange(year)
+      xlabel,
+      myothermetric,
+      type
+    )
   
-  data_prep_actual <- data_raw %>% 
+  data_prep_actual <- data_raw_actual %>% 
     filter(
-      year_report == .env$year_report) %>% 
-    select(-c(year_report,target)) %>% 
+      year == .env$year_report) %>% 
+    select(-c(year,average_delay,ifr_movements)) %>% 
     pivot_longer(
-      cols = c(capacity, staffing, disruptions, weather, other_non_atc),
+      cols = c(atc_capacity, atc_staffing, atc_disruptions, weather, other_non_atc),
       names_to = "type",
-      values_to = "delay"
+      values_to = "mymetric"
     ) %>% 
     mutate(
+      xlabel = month,
       type = case_when(
-        type == "capacity" ~ "Capacity",
-        type == "staffing" ~ "Staffing",
-        type == "disruptions" ~ "Disruptions",
+        type == "atc_capacity" ~ "Capacity",
+        type == "atc_staffing" ~ "Staffing",
+        type == "atc_disruptions" ~ "Disruptions",
         type == "weather" ~ "Weather",
         type == "other_non_atc" ~ "Other non-ATC"
       ) 
-    ) %>% 
-    rename (average_delay = avg_er_atfm_delay) %>% 
-    mutate(ifr = NA)
+    ) 
+
+  data_prep_total <- data_raw_actual %>% 
+    filter(year == .env$year_report) %>% 
+    mutate(xlabel = month,
+           myothermetric = format(round(average_delay,2), digits = 2),
+           type = "Total") %>% 
+    select(xlabel, myothermetric, type)
+  
+  
 } else {
   # state case ----
   ## fix ez if script not executed from qmd file ----
@@ -74,7 +95,6 @@ if (country == 'SES RP3') {
       rename(delay_target = x332_state_arr_delay_target)
   }
   
-  
   data_prep_target <- data_raw_target %>% 
     filter(
       state == .env$country,
@@ -90,7 +110,7 @@ if (country == 'SES RP3') {
       type,
       myothermetric)
   
-  data_prep <- data_raw_actual %>% 
+  data_prep_actual <- data_raw_actual %>% 
     filter(
       state == .env$country,
       year == .env$year_report
@@ -191,6 +211,6 @@ myat_textfont_size <- myfont
 
 # plot chart ----
 ## function moved to utils  
-mybarchart(data_prep, mywidth, myheight + 20, myfont, mylocalmargin, mydecimals) %>% 
+mybarchart(data_prep_actual, mywidth, myheight + 20, myfont, mylocalmargin, mydecimals) %>% 
   add_line_trace(., data_prep_total)
 
