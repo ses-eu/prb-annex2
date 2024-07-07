@@ -126,6 +126,7 @@ if (country == 'SES RP3') {
       values_to = "mymetric"
     ) %>% 
     mutate(
+      mymetric = round(mymetric,2),
       xlabel = month,
       type = case_when(
         type == "atc_capacity" ~ "Capacity",
@@ -137,7 +138,7 @@ if (country == 'SES RP3') {
     ) %>% 
     select(xlabel, type, mymetric)
   
-  data_prep_total <- data_prep %>% 
+  data_prep_total <- data_prep_actual %>% 
     select(xlabel, mymetric) %>% 
     group_by(xlabel) %>% 
     summarise(myothermetric = sum(mymetric)) %>%
@@ -217,5 +218,6 @@ myat_textfont_size <- myfont
 # plot chart ----
 ## function moved to utils  
 mybarchart(data_prep_actual, mywidth, myheight + 20, myfont, mylocalmargin, mydecimals) %>% 
-  add_line_trace(., data_prep_total)
+  add_line_trace(., data_prep_total) %>% 
+  layout(yaxis = list(rangemode = "tozero"))
 

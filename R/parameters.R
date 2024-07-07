@@ -130,7 +130,10 @@
   ## tcz list ----
   tcz_list <- tcz_list_table %>% filter(state == .env$country) 
   no_tcz <- nrow(tcz_list)
-  # terminal <- if_else(no_tcz > 0, TRUE, FALSE)
+  
+  # to avoid annoing if_else errors
+  if(no_tcz == 0) {tcz_list <- tcz_list <- tcz_list_table %>% 
+    filter (state == "Spain") %>% mutate_all(~NA)}
 
   ## context data ----
   context_data <- context_data_table %>% 

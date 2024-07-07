@@ -4,9 +4,6 @@ cz=c("@@cz_index@@", "@@cz_type@@")
 # define cz
 ez <- as.numeric(cz[[1]])
 cztype <- cz[[2]]
-mycz <- if_else(cztype == "terminal",
-                tcz_list$tcz_id[ez],
-                ecz_list$ecz_id[ez])
 
 # define ranges and import data
 ## 1st sheet
@@ -19,18 +16,27 @@ ceff_file <- if_else(country == "Spain" & ez == 2, ceff_file_canarias, ceff_file
 range <- "C50:M71"
 cef_txt_1_4  <- read_range(ceff_file, sheet, range) %>% rename(a = 1)
 ### find specific headings
-my_index_su <- which(cef_txt_1_4$a %like% paste0(if_else(cztype == "terminal", 
-                                                                  if_else(no_tcz >1, paste0("Terminal charging zone ", ez), "Terminal"), 
+my_index_su <- which(cef_txt_1_4$a %like% paste0(if_else(cztype == "terminal",
+                                                         "Terminal",
                                                          "En route"), 
                                                  ' service units')) + 1
-my_index_cost_by_ent <- which(cef_txt_1_4$a %like% paste0(if_else(cztype == "terminal", 
-                                                                  if_else(no_tcz >1, paste0("Terminal charging zone ", ez), "Terminal"), 
+
+if(identical(my_index_su, numeric(0)) == TRUE) {my_index_su <- which(cef_txt_1_4$a %like% paste0("Terminal charging zone ", ez,' service units')) + 1} 
+
+my_index_cost_by_ent <- which(cef_txt_1_4$a %like% paste0(if_else(cztype == "terminal",
+                                                         "Terminal",
                                                          "En route"), 
-                                                          ' costs by entity')) + 1
-my_index_cost_main <- which(cef_txt_1_4$a %like% paste0(if_else(cztype == "terminal", 
-                                                                  if_else(no_tcz >1, paste0("Terminal charging zone ", ez), "Terminal"), 
+                                                 ' costs by entity')) + 1
+
+if(identical(my_index_cost_by_ent, numeric(0)) == TRUE) {my_index_cost_by_ent <- which(cef_txt_1_4$a %like% paste0("Terminal charging zone ", ez,' costs by entity')) + 1} 
+
+my_index_cost_main <- which(cef_txt_1_4$a %like% paste0(if_else(cztype == "terminal",
+                                                         "Terminal",
                                                          "En route"), 
-                                                        " costs for the main ANSP")) + 1
+                                                 " costs for the main ANSP")) + 1
+
+if(identical(my_index_cost_main, numeric(0)) == TRUE) {my_index_cost_main <- which(cef_txt_1_4$a %like% paste0("Terminal charging zone ", ez,' costs for the main ANSP')) + 1} 
+
 ## 2nd sheet
 sheet <- if_else(cztype == "terminal",
                  if_else(ez >1, paste0("6_TRM (", ez, ")"), "6_TRM"),

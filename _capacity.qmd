@@ -46,6 +46,7 @@ range <- "A54:O58"
 cap_er_1_7_r <- read_range(cap_file, sheet, range)  
 
 ## terminal
+if (no_tcz > 0) {
 range <- "A3:U4"
 cap_trm_1_1_r <- read_range(cap_trm_file, sheet, range) 
 
@@ -85,7 +86,7 @@ cap_trm_1_6_r <- read_range(cap_trm_file, sheet, range)
 
 range <- "A18:U19"
 cap_trm_1_7_r <- read_range(cap_trm_file, sheet, range)  
-
+}
 ```
 
 
@@ -223,11 +224,11 @@ cap_trm_1_7_r <- read_range(cap_trm_file, sheet, range)
 
 ::::: {#concl-cap-trm}
 
-`r cap_trm_1_1_r[1,1]`
+`r if (exists("cap_trm_1_1_r") == FALSE) {''} else {cap_trm_1_1_r[1,1]}`
 
-`r cap_trm_1_2`
+`r if (exists("cap_trm_1_2") == FALSE) {''} else {cap_trm_1_2}`
 
-`r cap_trm_1_3`
+`r if (exists("cap_trm_1_3") == FALSE) {''} else {cap_trm_1_3}`
 
 :::::
 ::::
@@ -251,7 +252,7 @@ cap_trm_1_7_r <- read_range(cap_trm_file, sheet, range)
 ::::: {#concl-cap-cap-all-causes-delay}
 **All causes pre departure delay**
 
-`r cap_trm_1_6_r[1,1]`
+`r if (exists("cap_trm_1_6_r") == FALSE) {''} else {cap_trm_1_6_r[1,1]}`
 
 :::::
 ::::
@@ -262,11 +263,12 @@ cap_trm_1_7_r <- read_range(cap_trm_file, sheet, range)
 
 **ATFM slot adherence**
 
-`r cap_trm_1_4`
+`r if (exists("cap_trm_1_4") == FALSE) {''} else {cap_trm_1_4}`
+
 
 **ATC pre-departure delay**
 
-`r cap_trm_1_5_r[1,1]`
+`r if (exists("cap_trm_1_5_r") == FALSE) {''} else {cap_trm_1_5_r[1,1]}`
 
 :::::
 

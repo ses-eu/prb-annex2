@@ -72,20 +72,22 @@
         
       }
       
-      for (i in 1:no_tcz) {
-        # add level2 cef trm .qmd file name to list
-        level2_files <- append(level2_files, paste0("cost-efficiency-tz",i,"-1.qmd"))
-
-        # generate level2 _cef enroute files from generic file
-        tmp_text <- readLines("_cost-efficiency-generic.qmd")
-        tmp_text <- str_replace(tmp_text, "@@cz_index@@", as.character(i)) 
-        tmp_text <- str_replace(tmp_text, "@@cz_type@@", "terminal") 
-        tmp_text <- str_replace(tmp_text, "@@cz_type_proper@@", "Terminal") 
-        tmp_text <- str_replace(tmp_text, "@@cz_short@@", "tcz") 
-        
-        writeLines(tmp_text, paste0('_cost-efficiency-tz', i,'-1.qmd'))
-        
-        }
+      if (no_tcz > 0) {
+        for (i in 1:no_tcz) {
+          # add level2 cef trm .qmd file name to list
+          level2_files <- append(level2_files, paste0("cost-efficiency-tz",i,"-1.qmd"))
+  
+          # generate level2 _cef enroute files from generic file
+          tmp_text <- readLines("_cost-efficiency-generic.qmd")
+          tmp_text <- str_replace(tmp_text, "@@cz_index@@", as.character(i)) 
+          tmp_text <- str_replace(tmp_text, "@@cz_type@@", "terminal") 
+          tmp_text <- str_replace(tmp_text, "@@cz_type_proper@@", "Terminal") 
+          tmp_text <- str_replace(tmp_text, "@@cz_short@@", "tcz") 
+          
+          writeLines(tmp_text, paste0('_cost-efficiency-tz', i,'-1.qmd'))
+          
+          }
+      }
       
       level2_files <- sort(level2_files)
       
@@ -101,7 +103,7 @@
   # ## get all R scripts ----
   # rscripts <- list.files(here('R'))
   # 
-  # ## get only 'generate' scripts ----
+  # ## get only 'generate' scripts 
   # genscripts <- list()
   # for (i in 1:length(rscripts)) {
   #   if (grepl('generate', rscripts[i], fixed = TRUE) == TRUE) {
@@ -276,7 +278,7 @@ if (out_format == 'web') {
       } 
    }
 
-  # # generate new qmd files ----
+  # # generate new qmd files 
   #   if (country != "Network Manager" & country != "SES RP3" & country != "Home") {
   #     for (i in 1:length(genscripts)) {
   #       source(here("R", genscripts[i]))

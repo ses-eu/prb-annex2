@@ -13,11 +13,11 @@ data_prep <- data_raw %>%
     state == .env$country,
     year <= .env$year_report) %>%
   mutate(
-    x0_5mins_perc = x0_5mins /total_dlyflt *100,
-    x5_15_mins_perc = x5_15_mins /total_dlyflt *100,
-    x15_30_mins_perc = x15_30_mins /total_dlyflt *100,
-    x30_60_mins_perc = x30_60_mins /total_dlyflt *100,
-    x60_mins_perc = x60_mins /total_dlyflt  *100
+    x0_5mins_perc = if_else(total_dlyflt ==0, 0, x0_5mins /total_dlyflt *100),
+    x5_15_mins_perc = if_else(total_dlyflt ==0, 0, x5_15_mins /total_dlyflt *100),
+    x15_30_mins_perc = if_else(total_dlyflt ==0, 0, x15_30_mins /total_dlyflt *100),
+    x30_60_mins_perc = if_else(total_dlyflt ==0, 0, x30_60_mins /total_dlyflt *100),
+    x60_mins_perc = if_else(total_dlyflt ==0, 0, x60_mins /total_dlyflt  *100)
     ) %>% 
   select(
     year, state, ansp,
