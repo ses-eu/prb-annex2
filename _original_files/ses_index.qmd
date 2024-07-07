@@ -221,8 +221,8 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 <div style="height: 1px"></div>
 
 :::: {#chart-cap class="mychart"}
-```{r chart-cap}
-#| file: R/chart_level1_cap_er.R
+```{r chart-cap, options = (cztype=c("enroute"))}
+#| file: R/chart_level1_cap.R
 #| out.width: "100%"
 ```
 ::::
