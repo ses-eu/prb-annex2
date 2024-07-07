@@ -1,11 +1,14 @@
 
 if (country == 'SES RP3') {
   # SES case ----
+  if (exists("cztype") == FALSE) {cztype = "terminal"}
+
   ## import data  ----
   data_raw_actual  <-  read_xlsx(
     paste0(data_folder, "SES CAP file.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
-    sheet = "Monthly en route delay",
+    sheet = if_else(cztype == "enroute", "Monthly en route delay",
+                    "monthly terminal delay"),
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
@@ -35,10 +38,12 @@ if (country == 'SES RP3') {
       type
     )
   
+  if(cztype == 'terminal') {data_prep_target$myothermetric = NA}
+
   data_prep_actual <- data_raw_actual %>% 
     filter(
       year == .env$year_report) %>% 
-    select(-c(year,average_delay,ifr_movements)) %>% 
+    select(c(month, atc_capacity, atc_staffing, atc_disruptions, weather, other_non_atc)) %>% 
     pivot_longer(
       cols = c(atc_capacity, atc_staffing, atc_disruptions, weather, other_non_atc),
       names_to = "type",

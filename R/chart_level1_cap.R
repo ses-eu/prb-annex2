@@ -1,11 +1,14 @@
 
 if (country == 'SES RP3') {
   # SES case ----
+  if (exists("cztype") == FALSE) {cztype = "terminal"}
+
   ## import data  ----
   data_raw_actual  <-  read_xlsx(
     paste0(data_folder, "SES CAP file.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
-    sheet = "Avg en-route ATFM delay",
+    sheet = if_else(cztype == "enroute", "Avg en-route ATFM delay",
+                    "terminal delay"),
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
@@ -13,7 +16,8 @@ if (country == 'SES RP3') {
   data_raw_target  <-  read_xlsx(
     paste0(data_folder, "SES CAP file.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
-    sheet = "Delay targets",
+    sheet = if_else(cztype == "enroute", "Delay targets",
+                    "Delay targets"),
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
@@ -30,9 +34,11 @@ if (country == 'SES RP3') {
       type,
       myothermetric
     ) %>% arrange(xlabel)
+  
+  if(cztype == 'terminal') {data_prep_target$myothermetric = NA}
 
   data_prep <- data_raw_actual %>% 
-    select(-c(ifr_movements, average_delay, total_dl_ymin)) %>% 
+    select(c(year, atc_capacity, atc_staffing, atc_disruptions, weather, other_non_atc)) %>% 
     pivot_longer(
       cols = c(atc_capacity, atc_staffing, atc_disruptions, weather, other_non_atc),
       names_to = "type",
