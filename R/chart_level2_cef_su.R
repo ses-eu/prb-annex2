@@ -221,7 +221,7 @@ mychart_title <- paste0(if_else(cztype == "terminal", "Terminal", "En route"),
                         " service units")
 mytitle_pos <- 0.99
 
-mylocalmargin = list (t = 40, b = 100)
+mylocalmargin = list (t = 40, b = 80)
 
 mylegend_y_position <- -0.37
 

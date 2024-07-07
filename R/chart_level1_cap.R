@@ -2,21 +2,27 @@
 if (country == 'SES RP3') {
   # SES case ----
   ## import data  ----
-  data_raw  <-  read_xlsx(
-    paste0(data_folder, "SES.xlsx"),
+  data_raw_actual  <-  read_xlsx(
+    paste0(data_folder, "SES CAP file.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
-    sheet = "SES_ATFM_ERT_delay",
+    sheet = "Avg en-route ATFM delay",
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
 
-  ## prepare data ----
-  data_prep_target <- data_raw %>% 
-    filter(
-      year_report == .env$year_report) %>% 
+  data_raw_target  <-  read_xlsx(
+    paste0(data_folder, "SES CAP file.xlsx"),
+    # here("data","hlsr2021_data.xlsx"),
+    sheet = "Delay targets",
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+  
+    ## prepare data ----
+  data_prep_target <- data_raw_target %>% 
     mutate(
       xlabel = year,
-      myothermetric = round(target, 2),
+      myothermetric = round(delay_target, 2),
       type = "Target"
     ) %>% 
     select(
@@ -25,12 +31,10 @@ if (country == 'SES RP3') {
       myothermetric
     ) %>% arrange(xlabel)
 
-  data_prep <- data_raw %>% 
-    filter(
-      year_report == .env$year_report) %>% 
-    select(-c(year_report, target)) %>% 
+  data_prep <- data_raw_actual %>% 
+    select(-c(ifr_movements, average_delay, total_dl_ymin)) %>% 
     pivot_longer(
-      cols = c(capacity, staffing, disruptions, weather, other_non_atc),
+      cols = c(atc_capacity, atc_staffing, atc_disruptions, weather, other_non_atc),
       names_to = "type",
       values_to = "mymetric"
     ) %>% 
@@ -38,21 +42,20 @@ if (country == 'SES RP3') {
       movements = NA,
       xlabel = year,
       type = case_when(
-        type == "capacity" ~ "Capacity",
-        type == "staffing" ~ "Staffing",
-        type == "disruptions" ~ "Disruptions",
+        type == "atc_capacity" ~ "Capacity",
+        type == "atc_staffing" ~ "Staffing",
+        type == "atc_disruptions" ~ "Disruptions",
         type == "weather" ~ "Weather",
         type == "other_non_atc" ~ "Other non-ATC"
       ) 
     ) 
   
-  data_prep_total <- data_prep %>% 
-    select(xlabel, mymetric) %>% 
-    group_by(xlabel) %>% 
-    summarise(myothermetric = sum(mymetric)) %>%
-    mutate(myothermetric = format(round(myothermetric,2), digits = 2)) %>% 
-    mutate(type = "Total")
-  
+  data_prep_total <- data_raw_actual %>% 
+    mutate(xlabel = year,
+           myothermetric = format(round(average_delay,2), digits = 2),
+           type = "Total") %>% 
+    select(xlabel, myothermetric, type)
+    
 } else {
 # state case ----
   ## fix ez if script not executed from qmd file ----
