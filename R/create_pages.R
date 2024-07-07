@@ -399,6 +399,7 @@ if (out_format == 'web') {
 
                                               ## monitoring files
                                               cap_file = cap_file,
+                                              cap_trm_file = cap_trm_file,
                                               ceff_file = ceff_file,
                                               ceff_file_canarias = ceff_file_canarias,
                                               env_kea_file = env_kea_file,

@@ -43,6 +43,7 @@ params:
   mylinewidth_pdf:  $mylinewidth_pdf
 
   cap_file:       $cap_file
+  cap_trm_file:   $cap_trm_file 
   ceff_file:      $ceff_file
   ceff_file_canarias:      $ceff_file_canarias
   env_kea_file:   $env_kea_file
@@ -143,6 +144,7 @@ other_met_str <- params$other_met_str
 # yearly_xrates <- params$yearly_xrates
 
 cap_file <- params$cap_file
+cap_trm_file <- params$cap_trm_file
 ceff_file <- params$ceff_file
 ceff_file_canarias <- params$ceff_file_canarias
 env_kea_file <- params$env_kea_file
