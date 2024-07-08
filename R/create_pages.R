@@ -203,27 +203,34 @@ if (out_format == 'web') {
     if (state_type != 0) {
     ### with terminal zone(s) ----
       
-      # add text for the additional tczs
-      tx_tcz_initial <- readLines("_original_files/tcz_xy.yml")
+      # add text for the additional tczs and env/cap terminal
+      tx_cap <- readLines("_original_files/level2_cap_terminal.yml")
+      tx_env <- readLines("_original_files/level2_env_terminal.yml")
+      tx_tcz_initial <- readLines("_original_files/level2_cef_tcz_xy.yml")
       tx_tcz <- ''
+      
       for (i in 1:no_tcz) {
         tx_tcz <- append(tx_tcz, str_replace(tx_tcz_initial, "@@cz_index@@", as.character(i)))
         tx_tcz <- str_replace(tx_tcz, "@@cz_name@@", if_else(no_tcz == 1, "", paste0(" - ", tcz_list$tcz_name[[i]]))) 
       }
       
-      # find position to insert
+      # find position to insert terminal blocks
       for (i in 1:length(tx)) {
-        if (tx[i] %like% '# include TCZ block') {block_beg = i}
+        if (tx[i] %like% '# include cap_terminal block') {cap_block_beg = i}
+        if (tx[i] %like% '# include env_terminal block') {env_block_beg = i}
+        if (tx[i] %like% '# include TCZ block') {cef_block_beg = i}
       }  
       
-      tx <- append(tx, tx_tcz, block_beg) 
+      tx <- append(tx, tx_cap, cap_block_beg) 
+      tx <- append(tx, tx_env, env_block_beg + length(tx_cap)) 
+      tx <- append(tx, tx_tcz, cef_block_beg + length(tx_cap) + + length(tx_env)) 
       
       if (state_type == 3) {
         ### 2 en route cz (spain)
         tx <- str_replace(tx, "<b>En route CZ</b>", paste0("<b>En route CZ - ", ecz_list$ecz_name[[1]], "</b>")) 
         
         # add text for the additional eczs
-        tx_ecz_initial <- readLines("_original_files/ecz_xy.yml")
+        tx_ecz_initial <- readLines("_original_files/level2_cef_ecz_xy.yml")
         tx_ecz <- ''
         for (i in 2:no_ecz) {
           tx_ecz <- append(tx_ecz, str_replace(tx_ecz_initial, "@@cz_index@@", as.character(i)))

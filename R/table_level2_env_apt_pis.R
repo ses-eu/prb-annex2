@@ -1,3 +1,6 @@
+# to avoid quarto error when there are no airports
+if (no_tcz >0) {
+
 ## import data  ----
 data_raw_axot  <-  read_xlsx(
   paste0(data_folder, "ENV dataset master.xlsx"),
@@ -84,6 +87,6 @@ mygtable(data_prep, myfont*0.9) %>%
     delim = "_"
   )
 
-  
+}  
 
 

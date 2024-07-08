@@ -157,7 +157,7 @@ myat_line_color <- '#FF0000'
 myat_line_width <- mylinewidth
 myat_showlegend <- T
 
-myat_textbold <- TRUE
+myat_textbold <- FALSE
 myat_textangle <- 0
 myat_textposition <- 'top'
 myat_textfont_color <- '#FF0000'

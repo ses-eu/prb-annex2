@@ -154,15 +154,9 @@ website:
             href: environment.html#kpi--kea
           - text: "PIs - KEP and SCR"
             href: environment.html#pis---kep-and-scr
-          - text: "PIs - AXOT and ASMA"
-            href: environment.html#pis---axot-and-asma
-          - text: "PI - CDO"
-            href: environment.html#pi---cdo
+# include env_terminal block
           - text: "Military PIs"
             href: environment.html#military-pis
-          # - environment_kea.qmd
-          # - environment_apt.qmd
-          # - environment_mil.qmd
       - text: "---"
       - section: "<b>Capacity</b>"
         contents:
@@ -170,10 +164,7 @@ website:
             href: capacity.html#kpi-en-route-atfm-delay
           - text: "ATCOs in OPS"
             href: capacity.html#atcos-in-ops
-          - text: "KPI – terminal ATFM delay"
-            href: capacity.html#kpi-terminal-atfm-delay
-          # - capacity_er.qmd
-          # - capacity_trm.qmd
+# include cap_terminal block
       - text: "---"
       - section: "<b>Cost-efficiency</b>"
         contents:
