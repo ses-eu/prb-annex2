@@ -172,8 +172,9 @@ mybargap <- 0.25
 mybarmode <- 'stack'
 
 #### title
-mytitle_text <- paste0("Monthly ", if_else(cztype == "enroute", "en route", "arrival"),
-                       " ATFM delay per flight - ", year_report)
+mytitle_text <- paste0("Monthly distribution of ", if_else(cztype == "enroute", "en route", "arrival"),
+                       " ATFM delay\nby delay groups  - ", year_report)
+mytitle_y <- 0.95
 
 #### xaxis
 myxaxis_dtick <- 'M1'
@@ -185,8 +186,11 @@ myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".2f"
 
 #### legend
+mylegend_x <- -0.1
+mylegend_xanchor <- 'left'
 
 #### margin
+mylocalmargin <- list(t=60)
 
 # if (knitr::is_latex_output()) {
 #   if (country == 'SES RP3') {

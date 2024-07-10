@@ -204,8 +204,8 @@ if (out_format == 'web') {
     ### with terminal zone(s) ----
       
       # add text for the additional tczs and env/cap terminal
-      tx_cap <- readLines("_original_files/level2_cap_terminal.yml")
       tx_env <- readLines("_original_files/level2_env_terminal.yml")
+      tx_cap <- readLines("_original_files/level2_cap_terminal.yml")
       tx_tcz_initial <- readLines("_original_files/level2_cef_tcz_xy.yml")
       tx_tcz <- ''
       
@@ -216,13 +216,13 @@ if (out_format == 'web') {
       
       # find position to insert terminal blocks
       for (i in 1:length(tx)) {
-        if (tx[i] %like% '# include cap_terminal block') {cap_block_beg = i}
         if (tx[i] %like% '# include env_terminal block') {env_block_beg = i}
+        if (tx[i] %like% '# include cap_terminal block') {cap_block_beg = i}
         if (tx[i] %like% '# include TCZ block') {cef_block_beg = i}
       }  
       
-      tx <- append(tx, tx_cap, cap_block_beg) 
-      tx <- append(tx, tx_env, env_block_beg + length(tx_cap)) 
+      tx <- append(tx, tx_env, env_block_beg) 
+      tx <- append(tx, tx_cap, cap_block_beg + length(tx_env)) 
       tx <- append(tx, tx_tcz, cef_block_beg + length(tx_cap) + + length(tx_env)) 
       
       if (state_type == 3) {

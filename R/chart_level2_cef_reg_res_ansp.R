@@ -78,6 +78,7 @@ mybarmode <- 'group'
 
 #### title
 mytitle_text <- paste0("Regulatory Result - ", main_ansp)
+mytitle_y <- 0.99
 
 #### xaxis
 

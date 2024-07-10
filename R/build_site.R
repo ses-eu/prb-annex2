@@ -4,6 +4,8 @@
   rm(list = ls())
   year_report <- 2022 # set your year report here
   out_format <- 'web' # set your output format here: 'pdf' or 'web'
+  data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/data_for_web/'
+  data_folder_a2 <- paste0(data_folder, "monitoring_files/", year_report, "/")
   
 # get functions ----
   source("R/utils.R")
@@ -17,19 +19,19 @@
 # build state pages ----
   
   ## set test check to TRUE to build only one state site, FALSE for all
-  test_check <- TRUE
+  test_check <- FALSE
   
   ## build pages
-  if (test_check == TRUE) {
-    state_list <- 'Poland' # set your test country here (Home for home page)
+  if (test_check == FALSE) {
+    state_list <- 'Malta' # set your test country here (Home for home page)
   } 
 
   for (i in 1:length(state_list)) {
     country <- state_list[i]
-    # country <- "Poland"
+    # country <- state_list
     source("R/parameters.R")
     source("R/create_pages.R")
-  }
+  
   
   ## copy site to test folder ----
   if (out_format == 'web') {
@@ -70,4 +72,4 @@
     }
   }
   
-  
+  }

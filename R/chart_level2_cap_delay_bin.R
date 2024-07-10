@@ -68,7 +68,8 @@ mybargap <- 0.25
 mybarmode <- 'stack'
 
 #### title
-mytitle_text <- paste0("Delay time bin")
+mytitle_text <- paste0("Distribution of IFR flights\nper the duration of en route ATFM delay")
+mytitle_y <- 0.95
 
 #### xaxis
 
@@ -78,8 +79,11 @@ myyaxis_ticksuffix <- "%"
 myyaxis_tickformat <- ".0f"
 
 #### legend
+mylegend_x <- 0.5
+mylegend_xanchor <- 'center'
 
 #### margin
+mylocalmargin <- list(t=60)
 
 ## plot chart  ----
 mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals) %>% 

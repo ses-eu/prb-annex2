@@ -134,7 +134,8 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0(if_else(country == "Network Manager", "KEP", "KEA"))
+mytitle_text <- paste0(if_else(country == "Network Manager", "KEP", "KEA - average horizontal flight efficiency\nof the actual trajectory (KPI#1)"))
+mytitle_y <- 0.95
 
 #### xaxis
 
@@ -144,8 +145,11 @@ myyaxis_ticksuffix <- "%"
 myyaxis_tickformat <- ".1f"
 
 #### legend
+mylegend_x <- 0.5
+mylegend_xanchor <- 'center'
 
 #### margin
+mylocalmargin <- list(t=60)
 
 #____additional trace parameters
 myat_name <- "Target"
@@ -166,7 +170,7 @@ myat_textfont_size <- myfont
 
 # plot chart ----
 ## function moved to utils  
-mybarchart(data_prep_actual, mywidth, myheight, myfont, mylocalmargin, mydecimals) %>% 
+mybarchart(data_prep_actual, mywidth, myheight+30, myfont, mylocalmargin, mydecimals) %>% 
   add_line_trace(., data_prep_target)
 
 # %>% 

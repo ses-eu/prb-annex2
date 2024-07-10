@@ -47,6 +47,9 @@ data_prep <- data_raw %>%
 mygtable(data_prep, myfont*0.9) %>% 
   tab_spanner_delim(
     delim = "_"
+  )|> 
+  tab_header(
+    title = md("**Other terminal performance indicators**")
   )
   
 

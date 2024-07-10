@@ -111,7 +111,8 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0(if_else(country == "Network Manager", "Monthly KEP", "Monthly KEA"))
+mytitle_text <- paste0(if_else(country == "Network Manager", "KEP (12 months rolling)", "KEA (12 months rolling)"))
+mytitle_y <- 0.99
 
 #### xaxis
 myxaxis_dtick <- 'M1'
@@ -123,8 +124,11 @@ myyaxis_ticksuffix <- "%"
 myyaxis_tickformat <- ".1f"
 
 #### legend
+mylegend_x <- 0.5
+mylegend_xanchor <- 'center'
 
 #### margin
+mylocalmargin = mymargin
 
 #____additional trace parameters
 myat_name <- "Target"
@@ -144,5 +148,5 @@ myat_textfont_size <- myfont
 
 # plot chart ----
 ## function moved to utils  
-mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals) %>% 
+mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin, mydecimals) %>% 
   add_line_trace(., data_prep)

@@ -41,7 +41,7 @@
   mytitle_y <- 0.99
   mytitle_xanchor <- 'left'
   mytitle_yanchor <- 'top'
-  mytitle_font_size <- myfont * 20/15
+  mytitle_font_size <- myfont * 18/15
   
   #### xaxis
   myxaxis_title <- ''

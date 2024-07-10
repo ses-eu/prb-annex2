@@ -104,6 +104,7 @@ mybarmode <- 'group'
 
 #### title
 mytitle_text <- paste0("Cost exempt")
+mytitle_y <- 0.99
 
 #### xaxis
 
@@ -113,8 +114,11 @@ myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ",.0f"
 
 #### legend
+mylegend_x <- 0.5
+mylegend_xanchor <- 'center'
 
 #### margin
+mylocalmargin = mymargin
 
 # plot chart  ----
 mybarchart(data_prep, mywidth, myheight+20, myfont, mylocalmargin, mydecimals)  %>% 

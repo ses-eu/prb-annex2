@@ -42,7 +42,8 @@ mybargap <- 0.25
 mybarmode <- 'stack'
 
 #### title
-mytitle_text <- paste0("All causes pre departure delay")
+mytitle_text <- paste0("All causes pre-departure delay")
+mytitle_y <- 0.99
 
 #### xaxis
 
@@ -52,8 +53,11 @@ myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".0f"
 
 #### legend
+mylegend_x <- 0.5
+mylegend_xanchor <- 'center'
 
 #### margin
+mylocalmargin = mymargin
 
 ## define chart function ----
 # function moved to utils

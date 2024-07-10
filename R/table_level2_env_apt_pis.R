@@ -85,6 +85,9 @@ data_prep <- data_prep_axot %>%
 mygtable(data_prep, myfont*0.9) %>% 
   tab_spanner_delim(
     delim = "_"
+  ) |> 
+  tab_header(
+    title = md("**Airport(s) indicators**")
   )
 
 }  

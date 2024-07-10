@@ -1,2 +1,6 @@
-          - text: "KPI – terminal ATFM delay"
-            href: capacity.html#kpi-terminal-atfm-delay
+          - section: "<b>Terminal performance</b>"
+            contents:
+            - text: "Arrival ATFM delay"
+              href: capacity.html#arrival-atfm-delay-kpi2
+            - text: "Other performance indicators "
+              href: capacity.html#other-performance-indicators-pi1-3

@@ -35,7 +35,8 @@ my_index_cost_main <- which(cef_txt_1_4$a %like% paste0(if_else(cztype == "termi
                                                          "En route"), 
                                                  " costs for the main ANSP")) + 1
 
-if(identical(my_index_cost_main, numeric(0)) == TRUE) {my_index_cost_main <- which(cef_txt_1_4$a %like% paste0("Terminal charging zone ", ez,' costs for the main ANSP')) + 1} 
+if(identical(my_index_cost_main, numeric(0)) == TRUE) {my_index_cost_main <- which(cef_txt_1_4$a %like% paste0("Terminal charging zone ", ez,' costs for the main ANSP')) + 1}
+if(identical(my_index_cost_main, numeric(0)) == TRUE) {my_index_cost_main <- which(cef_txt_1_4$a %like% paste0("Terminal charging zone costs for the main ANSP")) + 1}
 
 ## 2nd sheet
 sheet <- if_else(cztype == "terminal",
@@ -63,66 +64,70 @@ range <- "C66:M71"
 cef_txt_1_13  <- read_range(ceff_file, sheet, range)
 ```
 
-[4 Cost-efficiency]{class="fakeh1"}
+[Cost-efficiency - {{< var doc.country >}}]{class="fakeh1"}
 
-## @@cz_type_proper@@ CZ - {{< var doc.@@cz_short@@@@cz_index@@ >}}
 
-::: {#container-cef-duc style="clear: both"}
+::: {#container-cef-prb}
+## PRB assessment
 
-### KPI – DUC/AUC, costs and SUs
+:::: {#concl-cef-duc}
+```{r concl-cef-duc}
+cef_conc <- read_mytable("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF") %>%
+  filter(Year_Report == params$year_report, State == params$country) %>%
+  select(Conclusion) %>% toString() %>% paste0(., "@")
 
-<!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
+cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n')
+```
+::::
+:::
 
-:::: {#chart-cef-duc class="mychart"}
+
+`r if (params$no_ecz == 1) "::: {.content-hidden}"`
+
+## @@cz_type_proper@@ Charging Zone - {{< var doc.@@cz_short@@@@cz_index@@ >}}
+
+`r if (params$no_ecz == 1) ":::"`
+
+## @@cz_type_proper@@ Charging Zone
+
+::: {#container-cef-duc}
+
+### Unit cost (KPI#1)
+
+:::: {layout="[ 50, 50 ]"}
+
+::::: {#chart-cef-duc}
 ```{r chart-cef-duc, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level1_cef.R
 #| out.width: "100%"
 ```
-::::
+:::::
 
-:::: {#concl-cef-duc}
-```{r concl-cef-duc}
-# cef_conc <- read_mytable("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF") %>% 
-#   filter(Year_Report == params$year_report, State == params$country) %>% 
-#   select(Conclusion) %>% toString() %>% paste0(., "@")
-# 
-# cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
-```
-
-`r cef_txt_1_4[2,1]`
-::::
-:::
-
-::: {#container-cef-su style="clear: both"}
-
-<!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
-
-:::: {#chart-cef-su class="mychart"}
+::::: {#chart-cef-su}
 ```{r chart-cef-su, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_su.R
 #| out.width: "100%"
 ```
+:::::
 ::::
 
-:::: {#concl-cef-su}
-
-`r cef_txt_1_4[my_index_su,1]`
-
-::::
-:::
-
-::: {#container-cef-cost style="clear: both"}
-
-<!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
-
-:::: {#chart-cef-cost class="mychart"}
+:::: {layout="[ 50, 50 ]"}
+::::: {#chart-cef-cost}
 ```{r chart-cef-cost, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_cost.R
 #| out.width: "100%"
 ```
+:::::
+
+::::: {#chart-cef-cost-entity}
+```{r chart-cef-cost-entity, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+#| file: R/chart_level2_cef_cost_entity.R
+#| out.width: "100%"
+```
+:::::
+::::
+
+:::: {#table-costs}
 
 ```{r table-cef-cost, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/table_level2_cef_cost.R
@@ -133,146 +138,134 @@ cef_txt_1_13  <- read_range(ceff_file, sheet, range)
 #| file: R/table_level2_cef_cost_infl.R
 #| out.width: "100%"
 ```
-
 ::::
 
-:::: {#concl-cef-cost}
+:::: {layout="[ 50, 50 ]"}
 
-
-::::
-:::
-
-::: {#container-cef-cost-entity style="clear: both"}
-
-<!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
-
-:::: {#chart-cef-cost-entity class="mychart"}
-```{r chart-cef-cost-entity, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
-#| file: R/chart_level2_cef_cost_entity.R
-#| out.width: "100%"
-```
-::::
-
-:::: {#concl-cef-cost-entity}
-
-`r cef_txt_1_4[my_index_cost_by_ent,1]`
-
-::::
-:::
-
-::: {#container-cef-cost-main style="clear: both"}
-
-<!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
-
-:::: {#chart-cef-cost-main class="mychart"}
+::::: {#chart-cef-cost-main class="mychart"}
 ```{r chart-cef-cost-main, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_cost_main.R
 #| out.width: "100%"
 ```
-::::
-
-:::: {#concl-cef-cost-main}
-
-`r cef_txt_1_4[my_index_cost_main,1]`
-
+:::::
 ::::
 :::
 
-::: {#container-cef-aucu style="clear: both"}
+::: {.callout-note collapse=true}
 
-<!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
+#### NSA input
 
-:::: {#chart-cef-aucu class="mychart"}
+**AUC vs. DUC**
+
+`r cef_txt_1_4[2,1]`
+
+**En route service units**
+
+`r cef_txt_1_4[my_index_su,1]`
+
+**En route costs by entity**
+
+`r cef_txt_1_4[my_index_cost_by_ent,1]`
+
+**En route costs for the main ANSP at charging zone level**
+
+`r cef_txt_1_4[my_index_cost_main,1]`
+
+:::
+
+
+::: {#container-cef-aucu}
+
+### AUCU (PI#1)
+
+:::: {layout="[ 50, 50 ]"}
+::::: {#chart-cef-aucu}
 ```{r chart-cef-aucu, options = (cz=c("1", "enroute"))}
 #| file: R/chart_level2_cef_aucu.R
 #| out.width: "100%"
 ```
+:::::
 
+::::: {#table-cef-aucu}
 ```{r table-cef-aucu, options = (cz=c("1", "enroute"))}
 #| file: R/table_level2_cef_aucu.R
 #| out.width: "100%"
 ```
+:::::
 ::::
 
-:::: {#concl-cef-aucu}
+:::: {layout="[ 50, 50 ]"}
 
-`r cef_txt_1_5[1,1]`
-
-::::
-:::
-
-::: {#container-cef-er-cex style="clear: both"}
-
-<!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
-
-:::: {#chart-cef-er-cex class="mychart"}
+::::: {#chart-cef-er-cex}
 ```{r chart-cef-cex, R.options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_cex.R
 #| out.width: "100%"
 ```
+:::::
 
+::::: {#table-cef-er-cex}
 ```{r table-cef-cex, R.options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/table_level2_cef_cex.R
 #| out.width: "100%"
 ```
-::::
-
-:::: {#concl-cef-er-cex}
-
-
+:::::
 ::::
 :::
 
-::: {#container-cef-er-reg-res style="clear: both"}
+::: {.callout-note collapse=true}
 
-<!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
+#### NSA input
 
-:::: {#chart-cef-reg-res class="mychart"}
+`r cef_txt_1_5[1,1]`
+
+:::
+
+
+::: {#container-cef-reg-res}
+
+### Regulatory result
+
+:::: {layout="[ 50, 50 ]"}
+::::: {#chart-cef-reg-res}
 ```{r chart-cef-reg-res, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_reg_res.R
 #| out.width: "100%"
 ```
+:::::
 
+::::: {#chart-cef-reg-res-aucu}
 ```{r chart-cef-er-reg-res_aucu, options = (cz=c("1", "enroute"))}
 #| file: R/chart_level2_cef_er_reg_res_aucu.R
 #| out.width: "100%"
 ```
-
+:::::
 ::::
 
-:::: {#concl-cef-reg-res}
-
-`r cef_txt_1_10[1,1]`
-
-::::
-:::
-
-::: {#container-cef-reg-res-main-ansp style="clear: both"}
-
-<!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
-
-:::: {#chart-cef-reg-res-ansp class="mychart"}
+:::: {layout="[ 50, 50 ]"}
+::::: {#chart-cef-reg-res-ansp}
 ```{r chart-cef-reg-res-ansp, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_reg_res_ansp.R
 #| out.width: "100%"
 ```
-::::
+:::::
 
-:::: {#chart-cef-reg-res-main-ansp class="mychart"}
+::::: {#chart-cef-reg-res-main-ansp}
 ```{r chart-cef-er-reg-res-main-ansp, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_reg_res_main_ansp.R
 #| out.width: "100%"
 ```
-
+:::::
 ::::
 
-:::: {#concl-cef-er-reg-res-main-ansp}
+:::
+
+::: {.callout-note collapse=true}
+
+#### NSA input
+
+**Monitoring of the en route ANSPs regulatory results (RR)**
+
+`r cef_txt_1_10[1,1]`
 
 **`r cef_txt_1_13[1,1]`**
 
@@ -281,7 +274,5 @@ cef_txt_1_13  <- read_range(ceff_file, sheet, range)
 **`r cef_txt_1_13[3,1]`**
 
 `r cef_txt_1_13[4,1]`
-
-
-::::
 :::
+

@@ -1,4 +1,6 @@
-          - text: "PIs - AXOT and ASMA"
-            href: environment.html#pis---axot-and-asma
-          - text: "PI - CDO"
-            href: environment.html#pi---cdo
+          - section: "<b>Terminal performance</b>"
+            contents:
+            - text: "AXOT & ASMA"
+              href: environment.html#axot-asma
+            - text: "CDO"
+              href: environment.html#cdo

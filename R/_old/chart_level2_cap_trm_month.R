@@ -140,8 +140,11 @@ myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".2f"
 
 #### legend
+mylegend_x <- -0.1
+mylegend_xanchor <- 'left'
 
 #### margin
+mylocalmargin = mymargin
 
 # if (knitr::is_latex_output()) {
 #   if (country == 'SES RP3') {

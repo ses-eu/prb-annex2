@@ -39,6 +39,7 @@ mybarmode <- 'group'
 
 #### title
 mytitle_text <- "Percentage of en route ATFM delay savings"
+mytitle_y <- 0.99
 
 #### xaxis
 
@@ -48,8 +49,11 @@ myyaxis_ticksuffix <- "%"
 myyaxis_tickformat <- ".1f"
 
 #### legend
+mylegend_x <- 0.5
+mylegend_xanchor <- 'center'
 
 #### margin
+mylocalmargin = mymargin
 
 #____additional trace parameters
 myat_name <- "Target"

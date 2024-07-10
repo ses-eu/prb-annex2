@@ -65,11 +65,7 @@ if (country == 'SES RP3') {
 } else {
 # state case ----
   ## fix ez if script not executed from qmd file ----
-  if (exists("cz") == FALSE) {cz = c("1", "enroute")}
-
-  ## define cz ----
-  ez <- as.numeric(cz[[1]])
-  cztype <- cz[[2]]
+  if (exists("cztype") == FALSE) {cztype = "terminal"}
 
   ## import data  ----
   data_raw_target  <-  read_xlsx(
@@ -162,7 +158,8 @@ mybarmode <- 'stack'
 #### title
 mytitle_text <- paste0("Average ", 
                        if_else(cztype == "enroute", "en route", "terminal"),
-                       " ATFM delay per flight")
+                       " ATFM delay per flight\nby delay groups")
+mytitle_y <- 0.95
 
 #### xaxis
 
@@ -172,8 +169,11 @@ myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".2f"
 
 #### legend
+mylegend_x <- -0.1
+mylegend_xanchor <- 'left'
 
 #### margin
+mylocalmargin <- list(t = 60)
 
 # if (knitr::is_latex_output()) {
 #   if (country == 'SES RP3') {

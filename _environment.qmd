@@ -42,27 +42,11 @@ env_mil_11_r <- read_range(env_mil_file, sheet, range)
 
 ```
 
-[2 Environment - {{< var doc.country >}}]{class="fakeh1"}
+[Environment - {{< var doc.country >}}]{class="fakeh1"}
 
-::: {#container-kea style="clear: both"}
+::: {#container-env-prb}
 
-## KPI - KEA
-
-<!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
-
-:::: {#chart-kea class="mychart"}
-```{r chart-env-kea}
-#| file: R/chart_level1_kea.R
-#| out.width: "100%"
-```
-
-```{r chart-env-kea-month}
-#| file: R/chart_level2_kea_month.R
-#| out.width: "100%"
-```
-::::
-
+## PRB assessment
 :::: {#concl-kea}
 ```{r}
 env_conc <- read_mytable("PRB_findings.xlsx", "environment", "Table_Findings_environment") %>%
@@ -74,106 +58,145 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 `r env_conc1`
 ::::
+
 :::
 
-::: {#container-kep-scr style="clear: both"}
+::: {#container-kea}
 
-## PIs - KEP and SCR
+## En route performance
 
-<!-- empty line to ensure next heading leaves enough space -->
-<!-- <div style="height: 1px"></div> -->
+### Horizontal flight efficiency
 
-:::: {#chart-kep-scr class="mychart"}
+:::: {layout="[ 50, 50 ]"}
+
+::::: {#chart-env-kea}
+
+```{r chart-env-kea}
+#| file: R/chart_level1_kea.R
+#| out.width: "50%"
+```
+
+:::::
+
+::::: {#chart-env-kea-month}
+
+```{r chart-env-kea-month}
+#| file: R/chart_level2_kea_month.R
+#| out.width: "50%"
+```
+
+:::::
+
+::::
+
+:::: {layout="[ 50, 50 ]"}
+
+::::: {#chart-kep-scr}
 ```{r chart-env-kep-scr}
 #| file: R/chart_level2_kep_scr.R
 #| out.width: "100%"
 ```
 
+:::::
+
+::::: {#chart-kep-scr-month}
+
 ```{r chart-env-kep-scr-month}
 #| file: R/chart_level2_kep_scr_month.R
 #| out.width: "100%"
 ```
-::::
-
-:::: {#concl-kep-scr}
+:::::
 
 ::::
 :::
 
 `r if (params$no_tcz == 0) "::: {.content-hidden}"`
 
-::: {#container-axot-asma style="clear: both"}
+::: {#container-axot-asma}
 
-## PIs - AXOT and ASMA
+## Terminal performance
 
-<!-- empty line to ensure next heading leaves enough space -->
-<!-- <div style="height: 1px"></div> -->
+### AXOT & ASMA
 
-:::: {#chart-axot-asma class="mychart"}
+:::: {layout="[ 50, 50 ]"}
+
+::::: {#chart-axot-asma}
 ```{r chart-axot-asma-country}
 #| file: R/chart_level2_env_axot_asma_country.R
 #| out.width: "100%"
 ```
 
-::::
+:::::
 
-:::: {#concl-axot-asma}
-`r if (exists("env_apt_1_r") == FALSE) {''} else {env_apt_1_r[1,1]}`
-::::
-:::
-
-::: {#container-axot style="clear: both"}
-
-:::: {#chart-axot class="mychart"}
+::::: {#chart-axot}
 ```{r chart-axot-apt}
 #| file: R/chart_level2_env_axot_apt.R
 #| out.width: "100%"
 ```
+:::::
+
+<!-- :::: {#concl-axot} -->
+<!-- :::: -->
 ::::
 
-:::: {#concl-axot}
-`r if (exists("env_apt_2_r") == FALSE) {''} else {env_apt_2_r}`
-::::
-:::
+:::: {layout="[ 50, 50 ]"}
 
-::: {#container-axot style="clear: both"}
-
-:::: {#chart-asma class="mychart"}
+::::: {#chart-asma}
 ```{r chart-asma-apt}
 #| file: R/chart_level2_env_asma_apt.R
 #| out.width: "100%"
 ```
-::::
+:::::
 
-:::: {#concl-asma}
-`r if (exists("env_apt_3_r") == FALSE) {''} else {env_apt_3_r}`
 ::::
 :::
 
+::: {.callout-note collapse=true}
 
-::: {#container-cdo style="clear: both"}
+#### NSA input
 
-## PIs - CDO
+**AXOT**
 
-:::: {#chart-cdo class="mychart"}
+`r if (exists("env_apt_2_r") == FALSE) {''} else {env_apt_2_r}`
+
+**ASMA**
+
+`r if (exists("env_apt_3_r") == FALSE) {''} else {env_apt_3_r}`
+
+:::
+
+::: {#container-cdo}
+
+### CDO
+
+:::: {layout="[ 50, 50 ]"}
+
+::::: {#chart-cdo-country}
 ```{r chart-cdo-country}
 #| file: R/chart_level2_env_cdo_country.R
 #| out.width: "100%"
 ```
+:::::
 
+::::: {#chart-cdo-apt}
 ```{r chart-cdo-apt}
 #| file: R/chart_level2_env_cdo_apt.R
 #| out.width: "100%"
 ```
-::::
+:::::
 
-:::: {#concl-cdo}
-`r if (exists("env_apt_4_r") == FALSE) {''} else {env_apt_4_r}`
 ::::
 :::
 
-::: {#container-env-apt-pis style="clear: both"}
-`r if (exists("env_apt_5_r") == FALSE) {''} else {env_apt_5_r[1,1]}`
+::: {.callout-note collapse=true}
+
+#### NSA input
+
+`r if (exists("env_apt_4_r") == FALSE) {''} else {env_apt_4_r}`
+
+:::
+
+::: {#container-env-apt-pis}
 
 :::: {#table-env-apt-pis}
 
@@ -187,18 +210,21 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 `r if (params$no_tcz == 0) ":::"`
 
-::: {#container-mil-pi style="clear: both"}
+::: {#container-mil-pi}
 
-## Military PIs
+## Military dimension (PIs#6-8)
 
-:::: {#table-env-mil-pi class="mychart"}
+:::: {#table-env-mil-pi}
 ```{r table-env-mil-pi}
 #| file: R/table_level2_env_mil_pi.R
 #| out.width: "100%"
 ```
 ::::
+:::
 
-:::: {#concl-mil-pi}
+::: {.callout-note collapse=true}
+
+#### NSA input
 
 **Update on Military dimension of the plan**
 
@@ -220,5 +246,4 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 `r env_mil_11_r[1,1]`
 
-::::
 :::

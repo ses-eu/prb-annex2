@@ -42,23 +42,23 @@ acc_list_for_chart <- unique(data_for_chart$acc)
 mycolors <-  c('#FFC000','#5B9BD5')
 
 if (knitr::is_latex_output()) {
-  mytitle <- paste0("ATCO evolution")
-  mytitle_pos <- 0.94
+  mytitle <- paste0("ATCOs in OPS")
+  mytitle_pos <- 0.99
 } else {
-  mytitle <- paste0("ATCO evolution")
-  mytitle_pos <- 0.93
+  mytitle <- paste0("ATCOs in OPS")
+  mytitle_pos <- 0.99
 }
 
 ## define chart function ----
 myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
-  myplot <- plotly::plot_ly( 
+  myplot <- plot_ly( 
     width = mywidth,
     height = myheight,
   )
   for (i in 1:length(acc_list_for_chart)) {
     df <- data_for_chart %>% filter(acc == acc_list_for_chart[i])
     myplot <- myplot %>% 
-      plotly::add_trace(
+      add_trace(
         data = df,
         x = ~ year,
         y = ~ value,
@@ -77,7 +77,7 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
         # hoverinfo = "none",
         showlegend = T
       ) %>% 
-      plotly::add_trace(
+      add_trace(
         x = ~ year,
         y = ~ min_y_axis,
         yaxis = "y1",
@@ -122,19 +122,19 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
   
   
   myplot <- myplot %>% 
-    plotly::config( responsive = TRUE,
+    config( responsive = TRUE,
                     displaylogo = FALSE,
                     displayModeBar = F
     ) %>% 
-    plotly::layout(
-      updatemenus = updatemenus,
+    layout(
+      # updatemenus = updatemenus,  # in the end we don't use the menu
       font = list(family = "Roboto"),
       title = list(text = mytitle,
                    y = mytitle_pos, 
-                   x = 0.5, 
-                   xanchor = 'center', 
+                   x = 0, 
+                   xanchor = 'left', 
                    yanchor =  'top',
-                   font = list(size = myfont * 20/15)
+                   font = list(size = myfont * 18/15)
       ),
       hovermode = "x unified",
       hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
@@ -180,7 +180,4 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
 ## plot chart ----
 myc(mywidth, myheight, myfont, mylinewidth, mymargin)
 
-# # export to image
-# w = 1200
-# h = 600
-# export_fig(myc(w, h, 14 * w/900),"traffic_mvt_main.png", w, h)
+

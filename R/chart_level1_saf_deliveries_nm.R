@@ -37,6 +37,7 @@ mybarmode <- 'group'
 
 #### title
 mytitle_text <- "Percentage of overdeliveries"
+mytitle_y <- 0.99
 
 #### xaxis
 
@@ -46,8 +47,11 @@ myyaxis_ticksuffix <- "%"
 myyaxis_tickformat <- ".1f"
 
 #### legend
+mylegend_x <- 0.5
+mylegend_xanchor <- 'center'
 
 #### margin
+mylocalmargin = mymargin
 
 # plot chart ----
 ## function moved to utils  

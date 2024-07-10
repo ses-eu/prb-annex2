@@ -135,7 +135,8 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("Monthly KEA, KEP and SCR")
+mytitle_text <- paste0("KEP & KES (12 months rolling, compared to KEA)")
+mytitle_y <- 0.99
 
 #### xaxis
 myxaxis_dtick <- 'M1'
@@ -147,8 +148,11 @@ myyaxis_ticksuffix <- "%"
 myyaxis_tickformat <- ".1f"
 
 #### legend
+mylegend_x <- 0.5
+mylegend_xanchor <- 'center'
 
 #### margin
+mylocalmargin = mymargin
 
 #____additional trace parameters
 myat_name <- "KEA"
@@ -168,5 +172,5 @@ myat_textfont_size <- myfont
 
 # plot chart ----
 ## function moved to utils  
-mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals) %>% 
+mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin, mydecimals) %>% 
   add_line_trace(., data_prep_kea)

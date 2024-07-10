@@ -86,6 +86,7 @@ mybarmode <- 'group'
 mytitle_text <- paste0("Total ",
                        if_else(cztype == "terminal", "terminal", "en route"),
                        " costs per entity group - ", year_report)
+mytitle_y <- 0.99
 
 #### xaxis
 
@@ -99,6 +100,7 @@ myyaxis_tickformat <- ".0f"
 mylegend_y <- -0.17
 
 #### margin
+mylocalmargin = mymargin
 
 # plot chart  ----
 mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals)

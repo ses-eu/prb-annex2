@@ -150,20 +150,22 @@ website:
       - text: "---"
       - section: "<b>Environment</b>"
         contents:
-          - text: "KPI - KEA"
-            href: environment.html#kpi--kea
-          - text: "PIs - KEP and SCR"
-            href: environment.html#pis---kep-and-scr
+          - section: "<b>En route performance</b>"
+            contents:
+            - text: "Horizontal flight efficiency"
+              href: environment.html#horizontal-flight-efficiency
 # include env_terminal block
-          - text: "Military PIs"
-            href: environment.html#military-pis
+          - text: "<b>Military dimension</b>"
+            href: environment.html#military-dimension-pis6-8
       - text: "---"
       - section: "<b>Capacity</b>"
         contents:
-          - text: "KPI – en route ATFM delay"
-            href: capacity.html#kpi-en-route-atfm-delay
-          - text: "ATCOs in OPS"
-            href: capacity.html#atcos-in-ops
+          - section: "<b>En route performance</b>"
+            contents:
+            - text: "En route ATFM delay"
+              href: capacity.html#en-route-atfm-delay-kpi1
+            - text: "Other indicators"
+              href: capacity.html#other-indicators
 # include cap_terminal block
       - text: "---"
       - section: "<b>Cost-efficiency</b>"
@@ -203,6 +205,7 @@ format:
     css: styles.css
     link-external-newwindow: true
     link-external-icon: true
+    callout-appearance: minimal
     # link-external-filter: '^(?:http:|https:)\/\/ansperformance\.eu\/|^(?:http:|https:)\/\/.*ace-handbook\.netlify\.app\/'
     grid:
       sidebar-width: 200px

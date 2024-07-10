@@ -66,7 +66,8 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("ASMA and AXOT")
+mytitle_text <- paste0("Additional taxi-out time (AXOT) (PI#3)\n& ASMA time (PI#4)")
+mytitle_y <- 0.95
 
 #### xaxis
 
@@ -78,8 +79,11 @@ myyaxis_rangemode <- NA
 myyaxis_range <- c(round(min(data_prep$mymetric, na.rm = TRUE)/5)*5, round(max(data_prep$mymetric, na.rm = TRUE)/5)*5)
 
 #### legend
+mylegend_x <- 0.5
+mylegend_xanchor <- 'center'
 
 #### margin
+mylocalmargin <- list(t=60)
 
 ## define chart function ----
 myareachart <-  function(mywidth, myheight, myfont, mymargin) {

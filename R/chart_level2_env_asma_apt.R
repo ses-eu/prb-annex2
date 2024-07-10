@@ -46,7 +46,8 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("ASMA by airport - ", year_report)
+mytitle_text <- paste0("ASMA time, main airport(s) - ", year_report)
+mytitle_y <- 0.99
 
 #### xaxis
 
@@ -56,8 +57,11 @@ myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".1f"
 
 #### legend
+mylegend_x <- 0.5
+mylegend_xanchor <- 'center'
 
 #### margin
+mylocalmargin = mymargin
 
 ## define chart function ----
 # function moved to utils

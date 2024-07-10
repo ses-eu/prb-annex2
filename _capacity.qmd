@@ -90,44 +90,65 @@ cap_trm_1_7_r <- read_range(cap_trm_file, sheet, range)
 ```
 
 
-[3 Capacity - {{< var doc.country >}}]{class="fakeh1"}
+[Capacity - {{< var doc.country >}}]{class="fakeh1"}
 
-::: {#container-cap style="clear: both"}
+::: {#container-cap-prb}
 
-## KPI – en route ATFM delay
+```{r cap-prb}
+cap_er_conc <- read_mytable("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity") %>%
+  filter(Year_Report == params$year_report, State == params$country) %>%
+  select(Conclusion) %>% toString() %>% paste0(., "@")
 
-<!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
+cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n')
+```
 
-:::: {#chart-cap class="mychart"}
+:::
+
+::: {#container-cap-er}
+## En route performance
+
+### En route ATFM delay (KPI#1)
+
+:::: {layout="[ 50, 50 ]"}
+
+::::: {#chart-cap-er}
 ```{r chart-cap-er, options = (cztype=c("enroute"))}
 #| file: R/chart_level1_cap.R
 #| out.width: "100%"
 ```
+:::::
 
-<br>
+
+::::: {#chart-cap-er-month}
 
 ```{r chart-cap-er-month, options = (cztype=c("enroute"))}
 #| file: R/chart_level2_cap_month.R
 #| out.width: "100%"
 ```
-<br>
+
+:::::
+
+::::
+
+:::: {layout="[ 20, 60, 20 ]"}
+
+::::: {#empty-div}
+:::::
+
+::::: {#chart-cap-delay-bin}
 
 ```{r chart-cap-delay-bin}
 #| file: R/chart_level2_cap_delay_bin.R
 #| out.width: "100%"
 ```
+:::::
 
 ::::
+:::
 
-:::: {#concl-cap}
-```{r}
-# cap_er_conc <- read_mytable("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity") %>% 
-#   filter(Year_Report == params$year_report, State == params$country) %>% 
-#   select(Conclusion) %>% toString() %>% paste0(., "@")
-# 
-# cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
-```
+::: {.callout-note collapse=true}
+
+#### NSA input
 
 **Summary of capacity performance**
 
@@ -149,78 +170,91 @@ cap_trm_1_7_r <- read_range(cap_trm_file, sheet, range)
 
 `r cap_er_1_6_r[1,1]`
 
-::::
 :::
 
-::: {#container-cap-atco style="clear: both"}
+::: {#container-cap-atco}
 
-## ATCOs in OPS
-<!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
+### Other indicators
 
-:::: {#chart-cap-atco class="mychart"}
+:::: {layout="[ 50, 50 ]"}
+
+::::: {#chart-cap-atco}
 
 ```{r chart-cap-atco}
 #| file: R/chart_level2_cap_atco.R
 #| out.width: "100%"
 ```
+:::::
 
-<br>
+:::::{#chart-cap-atco-acc}
 
 ```{r chart-cap-atco-acc}
 #| file: R/chart_level2_cap_atco_acc.R
 #| out.width: "100%"
 ```
 
-::::
-
-:::: {#concl-cap-atco}
-
-`r cap_er_1_5_r`
+:::::
 
 ::::
-:::
 
-::: {#container-cap-sector-opening style="clear: both"}
+:::: {layout="[ 20, 60, 20 ]"}
 
-:::: {#chart-cap-sector-opening class="mychart"}
+::::: {#empty-div}
+:::::
+
+::::: {#chart-cap-sector-opening class="mychart"}
 
 ```{r chart-cap-sector-opening}
 #| file: R/chart_level2_cap_sector_opening.R
 #| out.width: "100%"
 ```
 
-::::
-
-:::: {#concl-cap-sector-opening}
-
+:::::
 ::::
 :::
+
+::: {.callout-note collapse=true}
+
+#### NSA input
+
+:::: {#concl-cap-atco}
+
+`r cap_er_1_5_r`
+
+::::
+
+:::
+
 
 
 `r if (params$no_tcz == 0) "::: {.content-hidden}"`
 
-:::: {#container-cap style="clear: both"}
+:::: {#container-cap}
 
-## KPI – terminal ATFM delay
+### Arrival ATFM delay (KPI#2)
 
-<!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
+::::: {layout="[ 50, 50 ]"}
 
-::::: {#chart-cap class="mychart"}
-
+:::::: {#chart-cap-trm}
 ```{r chart-cap-trm, options = (cztype=c("terminal"))}
 #| file: R/chart_level1_cap.R
 #| out.width: "100%"
 ```
+::::::
 
-<br>
-
+:::::: {#chart-cap-trm-month}
 ```{r chart-cap-trm-month, options = (cztype=c("terminal"))}
 #| file: R/chart_level2_cap_month.R
 #| out.width: "100%"
 ```
+::::::
 :::::
+
+::::
+
+:::: {.callout-note collapse=true}
+
+#### NSA input
 
 ::::: {#concl-cap-trm}
 
@@ -231,23 +265,33 @@ cap_trm_1_7_r <- read_range(cap_trm_file, sheet, range)
 `r if (exists("cap_trm_1_3") == FALSE) {''} else {cap_trm_1_3}`
 
 :::::
+
 ::::
 
-:::: {#container-cap-other style="clear: both"}
 
-## Other indicators
-<!-- empty line to ensure next heading leaves enough space -->
-<!-- <div style="height: 1px"></div> -->
+:::: {#container-cap-other}
 
-::::: {#chart-cap-all-causes-delay class="mychart"}
+### Other performance indicators (PI#1-3)
+
+::::: {layout="[ 20, 60, 20 ]"}
+
+:::::: {#empty-div}
+::::::
+
+:::::: {#chart-cap-all-causes-delay}
 
 ```{r chart-cap-all-causes-delay}
 #| file: R/chart_level2_cap_all_causes_delay.R
 #| out.width: "100%"
 ```
-
-
+::::::
 :::::
+
+::::
+
+:::: {.callout-note collapse=true}
+
+#### NSA input
 
 ::::: {#concl-cap-cap-all-causes-delay}
 **All causes pre departure delay**
@@ -257,8 +301,16 @@ cap_trm_1_7_r <- read_range(cap_trm_file, sheet, range)
 :::::
 ::::
 
-:::: {#container-cap-table-apt-pis style="clear: both"}
+:::: {#container-cap-table-apt-pis}
+```{r table-cap-apt-pis}
+#| file: R/table_level2_cap_apt_pis.R
+#| out.width: "100%"
+```
+::::
 
+:::: {.callout-note collapse=true}
+
+#### NSA input
 ::::: {#concl-cap-apt-pis}
 
 **ATFM slot adherence**
@@ -272,16 +324,7 @@ cap_trm_1_7_r <- read_range(cap_trm_file, sheet, range)
 
 :::::
 
-::::: {#table-cap-apt-pis}
 
-```{r table-cap-apt-pis}
-#| file: R/table_level2_cap_apt_pis.R
-#| out.width: "100%"
-```
-
-<!-- ![](images/{{< var doc.year_report >}}/{{< var doc.country >}}/cap_trm_4.png) -->
-
-:::::
 ::::
 
 `r if (params$no_tcz == 0) ":::"`

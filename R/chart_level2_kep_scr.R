@@ -118,7 +118,8 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <-  paste0("KEP and SCR")
+mytitle_text <-  paste0("KEP & KES – average horizontal flight efficiency of the last\nfiled flight plan (PI#1) & shortest constrained trajectory(PI#2)")
+mytitle_y <- 0.95
 
 #### xaxis
 
@@ -128,9 +129,12 @@ myyaxis_ticksuffix <- "%"
 myyaxis_tickformat <- ".1f"
 
 #### legend
+mylegend_x <- 0.5
+mylegend_xanchor <- 'center'
 
 #### margin
+mylocalmargin <- list(t = 70)
 
 # plot chart ----
-mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals) %>% 
-  add_empty_trace(., data_prep)
+mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin, mydecimals) %>% 
+  add_empty_trace(., data_prep) 

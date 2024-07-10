@@ -64,6 +64,7 @@ mybarmode <- 'stack'
 
 #### title
 mytitle_text <- paste0("AUCU and Regulatory result")
+mytitle_y <- 0.99
 
 #### xaxis
 
@@ -73,6 +74,8 @@ myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".0f"
 
 #### legend
+mylegend_x <- 0.5
+mylegend_xanchor <- 'center'
 
 #### margin
 mylocalmargin = list(t = 60, b = 0, l = 60, r = 60)

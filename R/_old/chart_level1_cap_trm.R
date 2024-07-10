@@ -97,6 +97,7 @@ mybarmode <- 'stack'
 
 #### title
 mytitle_text <- paste0("Average arrival ATFM delay per flight - ", country)
+mytitle_y <- 0.99
 
 #### xaxis
 
@@ -106,6 +107,8 @@ myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".2f"
 
 #### legend
+mylegend_x <- -0.1
+mylegend_xanchor <- 'left'
 
 #### margin
 mylocalmargin <- mymargin
