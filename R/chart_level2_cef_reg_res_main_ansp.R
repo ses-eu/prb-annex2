@@ -36,7 +36,9 @@ data_prep <- data_raw %>%
   )
   
 # chart parameters ----
-mychart_title <- paste0(main_ansp,", TBD - ", year_report)
+mychart_title <- paste0(main_ansp," net result from ", 
+                        if_else(cztype == 'terminal', 'terminal', 'en route'),
+                        " activity (M€) - ", year_report)
 myaxis_title <- ""
 mybarcolor_pos <- '#9ECF8D'
 mybarcolor_neg <- '#F87474'

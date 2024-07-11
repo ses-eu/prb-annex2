@@ -61,7 +61,7 @@ data_prep <- data_raw %>%
 
 
 # chart parameters ----
-mychart_title <- paste0(main_ansp,", Actual v Determined costs - ", year_report)
+mychart_title <- paste0("Costs by nature for main ANSP ", main_ansp," (M€<sub>2017</sub>) - ", year_report)
 myaxis_title <- "Costs (M€<sub>2017</sub>)"
 mybarcolor_pos <- '#A5A5A5'
 mybarcolor_neg <- '#A5A5A5'

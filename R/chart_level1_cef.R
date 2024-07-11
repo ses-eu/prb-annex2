@@ -28,7 +28,10 @@ data_prep <- data_raw %>%
   filter(
     entity_code == mycz) %>% 
   mutate(
-    mymetric = round(x5_5_unit_cost_nc2017/xrate2017, 2)
+    mymetric = case_when(
+      year > year_report & status == 'A' & year != 20202021 ~ NA,
+      .default = round(x5_5_unit_cost_nc2017/xrate2017, 2)
+    )
   ) %>%  
   select(
     year,
@@ -70,15 +73,15 @@ mybarmode <- 'group'
 myminsize <- myfont*0.95
 
 #### title
-mytitle_text <- paste0(if_else(cztype == "terminal", "Terminal", "En route"),
-                        " unit costs - ", mycz_name)
+mytitle_text <- paste0("DUC/AUC - " ,if_else(cztype == "terminal", "Terminal", "En route"),
+                        " determined/actual unit costs (€<sub>2017</sub>)")
 mytitle_y <- 0.99
 
 #### xaxis
 
 #### yaxis
 myyaxis_title <- paste0(if_else(cztype == "terminal", "Terminal ", "En route "), 
-                        " unit costs (€2017)")
+                        " unit costs (€<sub>2017</sub>)")
 myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".0f"
 

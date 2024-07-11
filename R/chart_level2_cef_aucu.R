@@ -19,15 +19,20 @@ data_calc <- aucu(cztype, mycz)
   
 # prep data ----
 data_prep <- data_calc %>% 
+  mutate(year = as.numeric(str_replace_all(year_text, '2020-', ''))) |> 
   select(
+    year,
     year_text,
     new_duc,
     total_adjustments_aucu,
     aucu
-  ) 
+  ) |> 
+  mutate_at(c(3:5), ~if_else(year > year_report, NA, .)) |> 
+  select(-year)
+
 
 # chart parameters ----
-mychart_title <- paste0("AUCU")
+mychart_title <- paste0("AUCU – Actual Unit Cost incurred by Users (€)")
 myaxis_title <- "AUCU (€/SU)"
 mybarcolor <- c( '#5B9BD5', 'transparent', '#BFBFBF', '#9DC3E6')
 mytextcolor <- 'black'

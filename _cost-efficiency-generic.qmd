@@ -67,6 +67,8 @@ cef_txt_1_13  <- read_range(ceff_file, sheet, range)
 [Cost-efficiency - {{< var doc.country >}}]{class="fakeh1"}
 
 
+`r if (cztype == 'terminal' | ez == 2) "::: {.content-hidden}"`
+
 ::: {#container-cef-prb}
 ## PRB assessment
 
@@ -78,17 +80,22 @@ cef_conc <- read_mytable("PRB_findings.xlsx", "cost-efficiency", "Table_Findings
 
 cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n')
 ```
+
+`r cef_conc1`
+
 ::::
 :::
+`r if (cztype == 'terminal' | ez == 2) ":::"`
 
 
-`r if (params$no_ecz == 1) "::: {.content-hidden}"`
-
+`r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) "::: {.content-hidden}"`
 ## @@cz_type_proper@@ Charging Zone - {{< var doc.@@cz_short@@@@cz_index@@ >}}
+`r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) ":::"`
 
-`r if (params$no_ecz == 1) ":::"`
 
+`r if ((params$no_ecz != 1 & cztype == 'enroute') | (params$no_tcz >= 2 & cztype == 'terminal')) "::: {.content-hidden}"`
 ## @@cz_type_proper@@ Charging Zone
+`r if ((params$no_ecz != 1 & cztype == 'enroute') | (params$no_tcz >= 2 & cztype == 'terminal')) ":::"`
 
 ::: {#container-cef-duc}
 
@@ -119,16 +126,7 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ```
 :::::
 
-::::: {#chart-cef-cost-entity}
-```{r chart-cef-cost-entity, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
-#| file: R/chart_level2_cef_cost_entity.R
-#| out.width: "100%"
-```
-:::::
-::::
-
-:::: {#table-costs}
-
+::::: {#table-costs}
 ```{r table-cef-cost, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/table_level2_cef_cost.R
 #| out.width: "100%"
@@ -138,9 +136,18 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 #| file: R/table_level2_cef_cost_infl.R
 #| out.width: "100%"
 ```
+:::::
 ::::
 
+
 :::: {layout="[ 50, 50 ]"}
+
+::::: {#chart-cef-cost-entity}
+```{r chart-cef-cost-entity, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+#| file: R/chart_level2_cef_cost_entity.R
+#| out.width: "100%"
+```
+:::::
 
 ::::: {#chart-cef-cost-main class="mychart"}
 ```{r chart-cef-cost-main, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}

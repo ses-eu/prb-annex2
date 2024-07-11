@@ -103,7 +103,7 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("Cost exempt")
+mytitle_text <- paste0("Cost exempt from cost sharing (€'000)")
 mytitle_y <- 0.99
 
 #### xaxis

@@ -77,13 +77,13 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("Regulatory Result - ", main_ansp)
+mytitle_text <- paste0("Regulatory Result for main ANSP ", main_ansp, ' (M€)')
 mytitle_y <- 0.99
 
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "Regulatory result (€M)"
+myyaxis_title <- "Regulatory result (M€)"
 myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".0f"
 

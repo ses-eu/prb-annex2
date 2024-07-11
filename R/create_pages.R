@@ -55,8 +55,7 @@
       # generate level 2 .qmd master files 
       level2_files <- c("capacity.qmd",
                            "environment.qmd",
-                           "safety.qmd",
-                           "cost-efficiency-g2g.qmd")
+                           "safety.qmd")
 
       for (i in 1:no_ecz) {
         # add level2 cef er .qmd file name to list

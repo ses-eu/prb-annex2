@@ -1,4 +1,9 @@
           - section: "<b>En route CZ@@cz_name@@</b>"
             contents:
-            - text: "KPI – DUC/AUC, costs and SUs"
-              href: cost-efficiency-er@@cz_index@@-1.html
+            - text: "Unit cost"
+              href: cost-efficiency-er@@cz_index@@-1.html#unit-cost-kpi1
+            - text: "AUCU"
+              href: cost-efficiency-er@@cz_index@@-1.html#aucu-pi1
+            - text: "Regulatory Result"
+              href: cost-efficiency-er@@cz_index@@-1.html#regulatory-result
+              

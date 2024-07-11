@@ -30,7 +30,10 @@ data_prep <- data_raw %>%
   filter(
     entity_code == mycz) %>% 
   mutate(
-    mymetric = round(x5_3_cost_nc2017/xrate2017/10^6,2)
+    mymetric = case_when(
+      year > year_report & status == 'A' & year != 20202021 ~ NA,
+      .default = round(x5_3_cost_nc2017/xrate2017/10^6,2)
+    )
   ) %>%  
   select(
     year,
@@ -72,8 +75,8 @@ mybarmode <- 'group'
 
 #### title
 mytitle_text <- paste0("Total ", 
-                       if_else(cztype == "terminal", "terminal", "en route"),
-                       " costs")
+                       if_else(cztype == "terminal", "terminal costs at TCZ level", "en route costs at ECZ level"),
+                       " (M€<sub>2017</sub>)")
 mytitle_y <- 0.99
 
 #### xaxis

@@ -216,9 +216,9 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
 
 # set parameters for chart ----
 myaxis_title <- paste0(if_else(cztype == "terminal", "Terminal", "En route"),
-                       " TSUs '000")
+                       " service units ('000)")
 mychart_title <- paste0(if_else(cztype == "terminal", "Terminal", "En route"),
-                        " service units")
+                        " service units ('000)")
 mytitle_pos <- 0.99
 
 mylocalmargin = list (t = 40, b = 80)

@@ -42,7 +42,9 @@ mybargap <- 0.25
 mybarmode <- 'stack'
 
 #### title
-mytitle_text <- paste0("Regulatory result at CZ level")
+mytitle_text <- paste0("Regulatory result by entity group at ", 
+                       if_else(cztype == 'terminal', 'TCZ', 'ECZ'),
+                       " level (M€)")
 mytitle_y <- 0.99
 
 #### xaxis

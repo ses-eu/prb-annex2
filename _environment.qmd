@@ -118,15 +118,20 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ### AXOT & ASMA
 
-:::: {layout="[ 50, 50 ]"}
+:::: {layout="[ 20, 60, 20 ]"}
+
+::::: {#empty-div}
+:::::
 
 ::::: {#chart-axot-asma}
 ```{r chart-axot-asma-country}
 #| file: R/chart_level2_env_axot_asma_country.R
 #| out.width: "100%"
 ```
-
 :::::
+::::
+
+:::: {layout="[ 50, 50 ]"}
 
 ::::: {#chart-axot}
 ```{r chart-axot-apt}
@@ -134,12 +139,6 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 #| out.width: "100%"
 ```
 :::::
-
-<!-- :::: {#concl-axot} -->
-<!-- :::: -->
-::::
-
-:::: {layout="[ 50, 50 ]"}
 
 ::::: {#chart-asma}
 ```{r chart-asma-apt}

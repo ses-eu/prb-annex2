@@ -172,8 +172,12 @@ website:
         contents:
           - section: "<b>En route CZ</b>"
             contents:
-            - text: "KPI – DUC/AUC, costs and SUs"
-              href: cost-efficiency-er1-1.html
+            - text: "Unit cost"
+              href: cost-efficiency-er1-1.html#unit-cost-kpi1
+            - text: "AUCU"
+              href: cost-efficiency-er1-1.html#aucu-pi1
+            - text: "Regulatory Result"
+              href: cost-efficiency-er1-1.html#regulatory-result
 # include ECZ2 block              
 # include TCZ block              
 # block level2 end

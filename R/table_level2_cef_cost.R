@@ -59,7 +59,8 @@ data_prep <- data_raw %>%
 mygtable(data_prep, myfont) %>% 
   cols_label(name = html("Total costs - nominal EURO (M€<sub>2017</sub>)")) %>% 
   tab_options(column_labels.background.color = "#F2F2F2",
-              column_labels.font.weight = 'bold') %>% 
+              column_labels.font.weight = 'bold',
+              container.padding.y = 0) %>% 
   cols_align(columns = 1, align = "left") %>%
   tab_style(
     style = list(
@@ -67,6 +68,11 @@ mygtable(data_prep, myfont) %>%
     ),
     locations = cells_body(
       columns = 1
-    ))
+      )
+    )|> 
+  tab_header(
+    title = md(paste0(if_else(cztype == "terminal", "**TCZ", "**ECZ"),
+                      " actual and planned data**"))
+  )
 
   

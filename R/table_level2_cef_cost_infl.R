@@ -97,7 +97,8 @@ data_prep <- data_prep1 %>% rbind(data_prep2) %>%
 
 mygtable(data_prep, myfont) %>% 
   tab_options(column_labels.background.color = "#F2F2F2",
-              column_labels.font.weight = 'bold') %>% 
+              column_labels.font.weight = 'bold',
+              container.padding.y = 0) %>% 
   cols_align(columns = 1, align = "left") %>%
   tab_style(
     style = list(

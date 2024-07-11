@@ -59,7 +59,8 @@ data_prep <- data_calc %>%
 mygtable(data_prep, myfont*0.95) %>% 
   cols_label(type = paste0("Components of the AUCU in ", year_report), value = "€/SU") %>% 
   tab_options(column_labels.background.color = "#F2F2F2",
-              column_labels.font.weight = 'bold') %>% 
+              column_labels.font.weight = 'bold',
+              container.padding.y = 0) %>% 
   fmt_number(
     decimals = 2,
   ) %>% 
@@ -71,5 +72,9 @@ mygtable(data_prep, myfont*0.95) %>%
       rows = c(3,14, 15)
     )
   ) %>% 
-  fmt_percent(rows = 15, decimals = 1, force_sign = TRUE)
+  fmt_percent(rows = 15, decimals = 1, force_sign = TRUE) |> 
+  tab_header(
+    title = md(paste0("**AUCU components (€/SU) – ", year_report, "**"))
+  )
+  
   

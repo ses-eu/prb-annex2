@@ -82,11 +82,12 @@ data_prep <- data_prep_t2 %>%
   
 # plot table ----
 mygtable(data_prep, myfont) %>% 
-  cols_label(xlabel = paste0("Cost exempt from cost sharing in ", year_report),
+  cols_label(xlabel = paste0("Cost exempt from cost sharing by item in ", year_report),
              mymetric = "€'000",
              myothermetric = "€/SU") %>% 
   tab_options(column_labels.background.color = "#F2F2F2",
-              column_labels.font.weight = 'bold') %>% 
+              column_labels.font.weight = 'bold',
+              container.padding.y = 0) %>% 
   # cols_align(columns = 1, align = "left") %>%
   fmt_number(decimals = 2) %>% 
   tab_style(

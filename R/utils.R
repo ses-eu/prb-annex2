@@ -79,7 +79,6 @@ read_mytable <- function(file, sheet, table){
   ## import data  ----
   data_raw_t1  <-  read_xlsx(
     paste0(data_folder, "CEFF dataset master.xlsx"),
-    # here("data","hlsr2021_data.xlsx"),
     sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
@@ -87,7 +86,6 @@ read_mytable <- function(file, sheet, table){
   
   data_raw_t2  <-  read_xlsx(
     paste0(data_folder, "CEFF dataset master.xlsx"),
-    # here("data","hlsr2021_data.xlsx"),
     sheet = if_else(cztype == "terminal", "Terminal_T2", "Enroute_T2"),
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
@@ -95,8 +93,22 @@ read_mytable <- function(file, sheet, table){
   
   data_raw_t3  <-  read_xlsx(
     paste0(data_folder, "CEFF dataset master.xlsx"),
-    # here("data","hlsr2021_data.xlsx"),
     sheet = if_else(cztype == "terminal", "Terminal_T3", "Enroute_T3"),
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+  
+  # temporary fields that are not yet in Muriel's database
+  data_raw_temp_ur_t2_trm <-  read_xlsx(
+    paste0(data_folder, "Temporary data en route and terminal for dashbaord.xlsx"),
+    sheet = 'Terminal_T2UR',
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+  
+    data_raw_temp_su_t2_er <-  read_xlsx(
+    paste0(data_folder, "Temporary data en route and terminal for dashbaord.xlsx"),
+    sheet = 'Forecasted SU 2223_ERT',
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
@@ -105,11 +117,22 @@ read_mytable <- function(file, sheet, table){
   
   # filter raw tables on cz
   ## t1
-  data_prep_t1 <- data_raw_t1 %>% 
+  data_prep_t1_a <- data_raw_t1 %>% 
     filter(
       entity_code == mycz,
       status == 'A'
     ) 
+    
+  colnames(data_prep_t1_a) <- paste('a', colnames(data_prep_t1_a), sep = '_')
+  
+  data_prep_t1_d <- data_raw_t1 %>% 
+      filter(
+        entity_code == mycz,
+        status == 'D'
+      ) 
+  colnames(data_prep_t1_d) <- paste('d', colnames(data_prep_t1_d), sep = '_')
+  
+  data_prep_t1 <- cbind(data_prep_t1_a, data_prep_t1_d) |> rename(year = a_year)
   
   ## t2
   data_prep_t2_ini <- data_raw_t2 %>% 
@@ -135,7 +158,28 @@ read_mytable <- function(file, sheet, table){
   
   data_prep_t2 <- data_prep_t2_ini %>% rbind(data_temp_t2)
   
-  ## t3
+  ## t2 terminal temp ur / forecast su 
+  data_raw_temp_ur_prep_t2_trm <- data_raw_temp_ur_t2_trm %>% 
+    filter(
+      entity_code == mycz
+    ) 
+
+  ## t2 er forecast su 
+  data_raw_temp_su_prep_t2_er <- data_raw_temp_su_t2_er |> 
+    filter(
+      entity_code == mycz
+    ) 
+  
+  # complete t2 terminal table with temporary values that are not yet in the DB
+  if (cztype == 'terminal') {
+    data_prep_t2 <- data_prep_t2 |> 
+      left_join(data_raw_temp_ur_prep_t2_trm, by = "entity_code") 
+  }else{
+    data_prep_t2 <- data_prep_t2 |> 
+      left_join(data_raw_temp_su_prep_t2_er, by = "entity_code") 
+  }
+  
+    ## t3
   data_prep_t3 <- data_raw_t3 %>% 
     filter(
       entity_code == mycz,
@@ -170,15 +214,15 @@ read_mytable <- function(file, sheet, table){
   
   tsu_2020 <- data_prep_t1 %>% 
     filter(year == 2020) %>% 
-    select(x5_4_total_su) %>% pull()
+    select(d_x5_4_total_su) %>% pull()
   
   tsu_2021 <- data_prep_t1 %>% 
     filter(year == 2021) %>% 
-    select(x5_4_total_su) %>% pull()  
+    select(d_x5_4_total_su) %>% pull()  
   
   tsu_20202021 <- data_prep_t1 %>% 
     filter(year == 20202021) %>% 
-    select(x5_4_total_su) %>% pull() 
+    select(d_x5_4_total_su) %>% pull() 
   
   # create table with forecast sus and format it so it can be used in calcs
   data_prep_forecast_su <- data_prep_all %>% 
@@ -212,14 +256,14 @@ read_mytable <- function(file, sheet, table){
       initial_duc = case_when(
         year == 2020 ~ (initial_duc_2020 - (total_adjustment/x15_forecast_su_temp)) * tsu_2020/(tsu_2020 + tsu_2021),
         year == 2021 ~ (initial_duc_2021 - (total_adjustment/x15_forecast_su_temp)) * tsu_2021/(tsu_2020 + tsu_2021),
-        .default = if_else(x8_1_temp_unit_rate >0,
+        .default = if_else(x8_1_temp_unit_rate >0,  
                            x8_1_temp_unit_rate - (total_adjustment/x15_forecast_su_temp),
-                           x4_2_cost_excl_vfr/x5_4_total_su)
+                           d_x4_2_cost_excl_vfr/d_x5_4_total_su)
       ),
       initial_duc = initial_duc / pp_exchangerate,
       new_duc = case_when(
-        year == 2020 | year == 2021 ~ x4_2_cost_excl_vfr / tsu_20202021 / pp_exchangerate,
-        .default = x4_2_cost_excl_vfr / x5_4_total_su / pp_exchangerate
+        year == 2020 | year == 2021 ~ d_x4_2_cost_excl_vfr / tsu_20202021 / pp_exchangerate,
+        .default = d_x4_2_cost_excl_vfr / d_x5_4_total_su / pp_exchangerate
       ),
       retro_ur = new_duc - initial_duc,
       
@@ -231,7 +275,7 @@ read_mytable <- function(file, sheet, table){
       rev_c_mod = x7_1_adj_revenue_charge_modulation / x4_7_total_su / pp_exchangerate,
       cross_fin = x9_1_cross_financing_other / x4_7_total_su / pp_exchangerate,
       other_rev = case_when(
-        year == 2020 | year == 2021 ~ x10_5_other_revenue * x5_4_total_su / tsu_20202021 / x4_7_total_su / pp_exchangerate,
+        year == 2020 | year == 2021 ~ x10_5_other_revenue * d_x5_4_total_su / tsu_20202021 / x4_7_total_su / pp_exchangerate,
         .default = x10_5_other_revenue / x4_7_total_su / pp_exchangerate
       ),
       loss_rev = x11_1_loss_revenue_lower_unit_rate / x4_7_total_su / pp_exchangerate,
@@ -249,7 +293,7 @@ read_mytable <- function(file, sheet, table){
     select(
       year_text,
       x4_7_total_su,
-      x5_4_total_su,
+      d_x5_4_total_su,
       
       x8_1_temp_unit_rate,
       x15_forecast_su_temp,

@@ -83,9 +83,10 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("Total ",
-                       if_else(cztype == "terminal", "terminal", "en route"),
-                       " costs per entity group - ", year_report)
+mytitle_text <- paste0("Total costs per entity group at", 
+                       if_else(cztype == "terminal", " TCZ", " ECZ"),
+                       " level (M€<sub>2017</sub>) - ",
+                       year_report)
 mytitle_y <- 0.99
 
 #### xaxis
@@ -103,5 +104,5 @@ mylegend_y <- -0.17
 mylocalmargin = mymargin
 
 # plot chart  ----
-mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals)
+mybarchart(data_prep, mywidth, myheight+20, myfont, mylocalmargin, mydecimals)
 
