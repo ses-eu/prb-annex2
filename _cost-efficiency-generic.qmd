@@ -187,14 +187,14 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 :::: {layout="[ 50, 50 ]"}
 ::::: {#chart-cef-aucu}
-```{r chart-cef-aucu, options = (cz=c("1", "enroute"))}
+```{r chart-cef-aucu, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_aucu.R
 #| out.width: "100%"
 ```
 :::::
 
 ::::: {#table-cef-aucu}
-```{r table-cef-aucu, options = (cz=c("1", "enroute"))}
+```{r table-cef-aucu, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/table_level2_cef_aucu.R
 #| out.width: "100%"
 ```
@@ -257,8 +257,8 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 :::::
 
 ::::: {#chart-cef-reg-res-main-ansp}
-```{r chart-cef-er-reg-res-main-ansp, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
-#| file: R/chart_level2_cef_reg_res_main_ansp.R
+```{r chart-cef-net-res-main-ansp, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+#| file: R/chart_level2_cef_net_res_main_ansp.R
 #| out.width: "100%"
 ```
 :::::

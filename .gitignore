@@ -12,6 +12,7 @@
 
 _quarto.yml
 _variables.yml
+styles.css
 index.qmd
 capacity.qmd
 environment.qmd

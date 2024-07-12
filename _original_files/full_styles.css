@@ -87,6 +87,21 @@ h3 {
   display: block;
 }
 
+@media screen and (width >= 768px) {
+  .mychart {
+    float: left; 
+    margin-right: 10px;
+    width: 60%;
+  }
+}
+
+@media screen and (width < 768px) {
+  .mychart {
+    float: left; 
+    width: 100%;
+  }
+}
+
 .gt_table {
 background-color: white;
 }

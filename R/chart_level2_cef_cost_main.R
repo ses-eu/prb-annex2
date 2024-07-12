@@ -1,6 +1,6 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("cz") == FALSE) {cz = c("1", "terminal")}
+if (exists("cz") == FALSE) {cz = c("1", "enroute")}
 # ez=1
 
 # define cz ----
@@ -23,6 +23,7 @@ data_raw  <-  read_xlsx(
   as_tibble() %>% 
   clean_names() 
 
+
 # prepare data ----
 data_prep <- data_raw %>% 
   filter(
@@ -30,6 +31,14 @@ data_prep <- data_raw %>%
     entity_type_id == "ANSP1",
     year == .env$year_report
   ) %>% 
+  mutate(
+    x1_1_staff = x1_1_staff / x5_2_inflation_index_nc2017 /xrate2017,
+    x1_2_other_operating_cost = x1_2_other_operating_cost / x5_2_inflation_index_nc2017 /xrate2017, 
+    x1_3_depreciation = x1_3_depreciation / xrate2017,
+    x1_4_cost_of_capital = x1_4_cost_of_capital / xrate2017,
+    x1_5_exceptional_items = x1_5_exceptional_items / x5_2_inflation_index_nc2017 /xrate2017,
+    x4_1_cost_for_vfr_exempted =x4_1_cost_for_vfr_exempted / x5_2_inflation_index_nc2017 /xrate2017
+  ) |> 
   select(
     year,
     entity_name,

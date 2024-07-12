@@ -85,14 +85,14 @@ if (country == 'SES RP3') {
   mycolors <-  c('#1969B4','#044598', '#229FDD')
   
   if (knitr::is_latex_output()) {
-    mytitle <- paste0("IFR movements - ", forecast, " -\n",
+    mytitle <- paste0("En route service units - ", forecast, " -\n",
                       if_else(country == "Spain",
                               country, ecz_list$ecz_name[1]))
     mytitle_pos <- 0.95
     mymargin = list (t = 40, l = 0)
     mylegend_x_pos <- -0.1
   } else {
-    mytitle <- paste0("IFR movements - ", forecast, " - ", 
+    mytitle <- paste0("En route service units - ", forecast, " - ", 
                       if_else(country == "Spain", 
                               country, ecz_list$ecz_name[1]))
     mytitle_pos <- 0.99

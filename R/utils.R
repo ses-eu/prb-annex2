@@ -431,8 +431,11 @@ read_mytable <- function(file, sheet, table){
       # the values for the combined year are 2021
       mutate(
         year = if_else(year == 20202021, 2021, year),
-        trs = (x4_7_total_su / x4_6_total_su_forecast -1) * x4_1_det_cost_traffic_risk - x4_9_adjust_traffic_risk_art_27_2
-      )%>% 
+        trs = case_when (
+          (x4_7_total_su / x4_6_total_su_forecast -1) >=0 ~ (x4_7_total_su / x4_6_total_su_forecast -1) * x4_1_det_cost_traffic_risk - x4_9_adjust_traffic_risk_art_27_2,
+        .default = (x4_7_total_su / x4_6_total_su_forecast -1) * x4_1_det_cost_traffic_risk + x4_9_adjust_traffic_risk_art_27_2
+        )
+        ) %>% 
       select(year,
              entity_code,
              x2_5_adjust_inflation,
