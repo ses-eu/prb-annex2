@@ -504,7 +504,7 @@ read_mytable <- function(file, sheet, table){
     
     ## sum 2020-2021 together
     data_prep_202021 <- data_prep_years_split %>% 
-      filter(year_text == c('2020', '2021')) %>% 
+      filter(year_text == '2020' | year_text == '2021') |> 
       group_by(type) %>% 
       summarise(regulatory_result_nc = sum(regulatory_result_nc, na.rm = TRUE),
                 ex_ante_roe_nc = sum(ex_ante_roe_nc, na.rm = TRUE),

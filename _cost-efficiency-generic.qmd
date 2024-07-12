@@ -241,8 +241,8 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 :::::
 
 ::::: {#chart-cef-reg-res-aucu}
-```{r chart-cef-er-reg-res_aucu, options = (cz=c("1", "enroute"))}
-#| file: R/chart_level2_cef_er_reg_res_aucu.R
+```{r chart-cef-reg-res_aucu, options = (cz=c("1", "enroute"))}
+#| file: R/chart_level2_cef_reg_res_aucu.R
 #| out.width: "100%"
 ```
 :::::
