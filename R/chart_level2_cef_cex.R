@@ -54,7 +54,7 @@ data_prep_t2 <- data_raw %>%
   mutate(
     actual = case_when(
       year > year_report & year != 20202021 ~ NA,
-      .default = round(x3_8_diff_det_cost_actual_cost/1000,0)
+      .default = round(x3_8_diff_det_cost_actual_cost/1000,2)
       ),
     year = as.character(year),
     year = str_replace(year, "20202021", "2020-2021")
