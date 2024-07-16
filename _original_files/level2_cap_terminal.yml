@@ -1,5 +1,7 @@
           - section: "<b>Terminal performance</b>"
             contents:
+            - text: "PRB assessment"
+              href: capacity.html#prb-assessment
             - text: "Arrival ATFM delay"
               href: capacity.html#arrival-atfm-delay-kpi2
             - text: "Other performance indicators "

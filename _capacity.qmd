@@ -92,7 +92,13 @@ cap_trm_1_7_r <- read_range(cap_trm_file, sheet, range)
 
 [Capacity - {{< var doc.country >}}]{class="fakeh1"}
 
-::: {#container-cap-prb}
+
+::: {#container-cap-er}
+## En route performance
+
+:::: {#container-cap-prb}
+
+### PRB assessment
 
 ```{r cap-prb}
 cap_er_conc <- read_mytable("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity") %>%
@@ -102,10 +108,9 @@ cap_er_conc <- read_mytable("PRB_findings.xlsx", "ER_capacity", "Table_Findings_
 cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n')
 ```
 
-:::
+`r cap_er_conc1`
 
-::: {#container-cap-er}
-## En route performance
+::::
 
 ### En route ATFM delay (KPI#1)
 
@@ -229,7 +234,23 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 
 `r if (params$no_tcz == 0) "::: {.content-hidden}"`
 
-:::: {#container-cap}
+:::: {#container-cap-trm-prb}
+
+### PRB assessment
+
+```{r cap-trm-prb}
+cap_trm_conc <- read_mytable("PRB_findings.xlsx", "TRM_capacity", "Table_Findings_TRM_capacity") %>%
+  filter(Year_Report == params$year_report, State == params$country) %>%
+  select(Conclusion) %>% toString() %>% paste0(., "@")
+
+cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n')
+```
+
+`r cap_trm_conc1`
+
+::::
+
+:::: {#container-cap-trm}
 
 ### Arrival ATFM delay (KPI#2)
 

@@ -15,17 +15,17 @@
   
   ## add Home to State list
   state_list <- c(state_list, "Home")
-  # states_from <- c(22:33) # 1st number is the index of 1st state from which you want to generate
+  # states_from <- c(22:29) # 1st number is the index of 1st state from which you want to generate
   # state_list <- state_list[states_from]
 
 # build state pages ----
   
   ## set test check to TRUE to build only one state site, FALSE for all
-  test_check <- FALSE
+  test_check <- TRUE
   
   ## build pages
   if (test_check == TRUE) {
-    state_list <- 'Norway' # set your test country here (Home for home page)
+    state_list <- 'Switzerland' # set your test country here (Home for home page)
   } 
 
   for (i in 1:length(state_list)) {

@@ -32,12 +32,12 @@ data_prep <- data_raw %>%
     year == .env$year_report
   ) %>% 
   mutate(
-    x1_1_staff = x1_1_staff / x5_2_inflation_index_nc2017 /xrate2017,
-    x1_2_other_operating_cost = x1_2_other_operating_cost / x5_2_inflation_index_nc2017 /xrate2017, 
+    x1_1_staff = x1_1_staff / (x5_2_inflation_index_nc2017/100) /xrate2017,
+    x1_2_other_operating_cost = x1_2_other_operating_cost / (x5_2_inflation_index_nc2017/100) /xrate2017, 
     x1_3_depreciation = x1_3_depreciation / xrate2017,
     x1_4_cost_of_capital = x1_4_cost_of_capital / xrate2017,
-    x1_5_exceptional_items = x1_5_exceptional_items / x5_2_inflation_index_nc2017 /xrate2017,
-    x4_1_cost_for_vfr_exempted =x4_1_cost_for_vfr_exempted / x5_2_inflation_index_nc2017 /xrate2017
+    x1_5_exceptional_items = x1_5_exceptional_items / (x5_2_inflation_index_nc2017/100) /xrate2017,
+    x4_1_cost_for_vfr_exempted =x4_1_cost_for_vfr_exempted / (x5_2_inflation_index_nc2017/100) /xrate2017
   ) |> 
   select(
     year,

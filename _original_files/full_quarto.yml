@@ -150,6 +150,8 @@ website:
       - text: "---"
       - section: "<b>Environment</b>"
         contents:
+          - text: "<b>PRB assessment</b>"
+            href: environment.html#prb-assessment
           - section: "<b>En route performance</b>"
             contents:
             - text: "Horizontal flight efficiency"
@@ -162,6 +164,8 @@ website:
         contents:
           - section: "<b>En route performance</b>"
             contents:
+            - text: "PRB assessment"
+              href: capacity.html#prb-assessment
             - text: "En route ATFM delay"
               href: capacity.html#en-route-atfm-delay-kpi1
             - text: "Other indicators"
@@ -170,6 +174,8 @@ website:
       - text: "---"
       - section: "<b>Cost-efficiency</b>"
         contents:
+          - text: "<b>PRB assessment</b>"
+            href: cost-efficiency-er1-1.html##prb-assessment
           - section: "<b>En route CZ</b>"
             contents:
             - text: "Unit cost"
