@@ -162,10 +162,10 @@ website:
       - text: "---"
       - section: "<b>Capacity</b>"
         contents:
+          - text: "<b>PRB assessment</b>"
+          - href: capacity.html#prb-assessment
           - section: "<b>En route performance</b>"
             contents:
-            - text: "PRB assessment"
-              href: capacity.html#prb-assessment
             - text: "En route ATFM delay"
               href: capacity.html#en-route-atfm-delay-kpi1
             - text: "Other indicators"
