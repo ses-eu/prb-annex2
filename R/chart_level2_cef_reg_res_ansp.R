@@ -56,7 +56,7 @@ data_prep <- data_for_chart_value %>%
 
 # chart parameters ----
 mysuffix <- ""
-mydecimals <- 2
+mydecimals <- 1
 
 ### trace parameters
 mycolors = c( '#CEE0EA', '#4B8DB1')

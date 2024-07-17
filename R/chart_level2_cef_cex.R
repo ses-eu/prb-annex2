@@ -83,7 +83,7 @@ data_prep <- data_prep_t2 %>%
   
 # chart parameters ----
 mysuffix <- ""
-mydecimals <- 2
+mydecimals <- 1
 
 ### trace parameters
 mycolors = c( '#8497B0')

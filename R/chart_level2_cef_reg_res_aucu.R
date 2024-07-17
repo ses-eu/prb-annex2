@@ -44,7 +44,7 @@ data_prep <- data_prep_reg %>%
   
 # chart parameters ----
 mysuffix <- ""
-mydecimals <- 2
+mydecimals <- 1
 
 ### trace parameters
 mycolors = c( '#9DC3E6', '#FFC000')

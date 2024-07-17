@@ -59,7 +59,7 @@ data_prep <- data_raw %>%
          mylabel = if_else(A == 0, '-', 
                            paste0(
                              if_else(mymetric > 0, '+', ''),
-                             round((A/D-1) *100, 0), 
+                             round((A/D-1) *100, 1), 
                              '%')),
          ylabel = as.factor(c("VFR exempted", 
                         "Exceptional items",

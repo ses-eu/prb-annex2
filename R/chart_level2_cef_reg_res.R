@@ -22,7 +22,7 @@ data_prep <- data_prep %>%
   
 # chart parameters ----
 mysuffix <- ""
-mydecimals <- 2
+mydecimals <- 1
 
 ### trace parameters
 mycolors = c( '#5B9BD5', '#FFC000', '#BFBFBF')

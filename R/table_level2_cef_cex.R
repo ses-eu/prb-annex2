@@ -87,9 +87,16 @@ mygtable(data_prep, myfont) %>%
              myothermetric = "€/SU") %>% 
   tab_options(column_labels.background.color = "#F2F2F2",
               column_labels.font.weight = 'bold',
-              container.padding.y = 0) %>% 
+              container.padding.y = 0) |> 
   # cols_align(columns = 1, align = "left") %>%
-  fmt_number(decimals = 2) %>% 
+  fmt_number(
+    columns = mymetric,
+    decimals = 1
+  ) |> 
+  fmt_number(
+    columns = myothermetric,
+    decimals = 2
+  ) |> 
   tab_style(
     style = list(
       cell_text(weight = "bold")
