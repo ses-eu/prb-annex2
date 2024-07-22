@@ -27,7 +27,10 @@ data_prep <- data_raw %>%
   filter(
     entity_code == mycz) %>% 
   mutate(
-    mymetric = round(x5_4_total_su/1000, 0)
+    mymetric = case_when (
+      status == 'A' & year > year_report & year != 20202021 ~ NA,
+      .default = round(x5_4_total_su/1000, 0)
+    )
   ) %>%  
   select(
     year,
