@@ -12,6 +12,10 @@ data_prep <- data_raw %>%
   filter(
     state == .env$country,
     year == .env$year_report) %>% 
+  mutate(
+    planned_atco_number = round(planned_atco_number,0),
+    actual_atco_number = round(actual_atco_number,0)
+    ) |> 
   select(acc, planned_atco_number, actual_atco_number) %>% 
   rename(xlabel = acc,
          Planned = planned_atco_number,

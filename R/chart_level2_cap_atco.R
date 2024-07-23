@@ -33,7 +33,8 @@ data_ansp <- data_acc %>% group_by(type, year) %>%
 
 data_for_chart <- rbind(data_ansp, data_acc) %>% 
   group_by(acc) %>% 
-  mutate(min_y_axis = min(value, na.rm=T)/1.5)
+  mutate(min_y_axis = min(value, na.rm=T)/1.5,
+         value = round(value, 0))
 
 acc_list_for_chart <- unique(data_for_chart$acc)
 
