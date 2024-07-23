@@ -62,13 +62,19 @@ if (year_report >= 2022) {
                                                            "**Terminal",
                                                            "**En route"),
                                             ' costs for the main ANSP')))
-  heading4_1 <- str_locate(tx, fixed(') at charging zone level**<br/>'))
-  heading4_2 <- str_locate(tx, fixed(') at charging zone level<br/>**'))
+  all_bold_locations <- str_locate_all(tx, fixed('**'))
+  heading_4 <- tail(all_bold_locations[[1]], n = 1)
 
   cef_txt_1_4_duc <- str_replace_all(substr(tx, max(heading1)+1, min(heading2)-1), fixed("<br/><br/>"), fixed("<br/>"))
   cef_txt_1_4_su <- str_replace_all(substr(tx, max(heading2)+1+7, min(heading3_1, heading3_2, na.rm = TRUE)-1) , fixed("<br/><br/>"), fixed("<br/>"))
   cef_txt_1_4_cost_all <- str_replace_all(substr(tx, max(heading3_1, heading3_2, na.rm = TRUE)+1, min(heading4_beg)-1) , fixed("<br/><br/>"), fixed("<br/>"))
-  cef_txt_1_4_cost_main <- str_replace_all(substr(tx, max(heading4_1, heading4_2, na.rm = TRUE)+1, nchar(tx)) , fixed("<br/><br/>"), fixed("<br/>"))
+  cef_txt_1_4_cost_main <- str_replace_all(substr(tx, heading_4 + 2, nchar(tx)) , fixed("<br/><br/>"), fixed("<br/>"))
+  
+  ### remove leading and trailing line breaks
+  cef_txt_1_4_duc <- sub("^<br/>|<br/>$", "", cef_txt_1_4_duc)
+  cef_txt_1_4_su <- sub("^<br/>|<br/>$", "", cef_txt_1_4_su)
+  cef_txt_1_4_cost_all <- sub("^<br/>|<br/>$", "", cef_txt_1_4_cost_all)
+  cef_txt_1_4_cost_main <- sub("^<br/>|<br/>$", "", cef_txt_1_4_cost_main)
   
   ### just to avoid errors
   my_index_su <- 2

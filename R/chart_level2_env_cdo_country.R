@@ -55,7 +55,7 @@ myyaxis_title <- "Share of flights (%)"
 myyaxis_ticksuffix <- "%"
 myyaxis_tickformat <- ".0f"
 myyaxis_rangemode <- NA
-myyaxis_range <- c(floor(min(data_prep$mymetric, na.rm = TRUE)/5)*5, ceiling(max(data_prep$mymetric, na.rm = TRUE)/5)*5)
+myyaxis_range <- c((floor(min(data_prep$mymetric, na.rm = TRUE)/5)*5)-5, (ceiling(max(data_prep$mymetric, na.rm = TRUE)/5)*5)+5)
 
 #### legend
 mylegend_x <- 0.5
