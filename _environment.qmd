@@ -211,7 +211,7 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ::: {#container-mil-pi}
 
-## Military dimension (PIs#6-8)
+## Civil-Military dimension (PIs#6-8)
 
 :::: {#table-env-mil-pi}
 ```{r table-env-mil-pi}

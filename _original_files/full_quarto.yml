@@ -157,7 +157,7 @@ website:
             - text: "Horizontal flight efficiency"
               href: environment.html#horizontal-flight-efficiency
 # include env_terminal block
-          - text: "<b>Military dimension</b>"
+          - text: "<b>Civil-Military dimension</b>"
             href: environment.html#military-dimension-pis6-8
       - text: "---"
       - section: "<b>Capacity</b>"
