@@ -135,7 +135,7 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("KEP & KES (12 months rolling, compared to KEA)")
+mytitle_text <- paste0("KEP & SCR (12 months rolling, compared to KEA)")
 mytitle_y <- 0.99
 
 #### xaxis

@@ -118,7 +118,7 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <-  paste0("KEP & KES – average horizontal flight efficiency of the last\nfiled flight plan (PI#1) & shortest constrained trajectory(PI#2)")
+mytitle_text <-  paste0("KEP & SCR – average horizontal flight efficiency of the last\nfiled flight plan (PI#1) & shortest constrained trajectory(PI#2)")
 mytitle_y <- 0.95
 
 #### xaxis
