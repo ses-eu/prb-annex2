@@ -16,8 +16,8 @@ ceff_file <- if_else(country == "Spain" & ez == 2, ceff_file_canarias, ceff_file
 range <- "C50:M71"
 cef_txt_1_4  <- read_range(ceff_file, sheet, range) %>% rename(a = 1)
 
-### this range is different as of 2022
-if (year_report >= 2022) {
+### Check if the whole range is merged and apply different logic
+if (is.na(cef_txt_1_4[2,1]) == FALSE) {
   ### find specific headings
   my_index_su <- which(cef_txt_1_4$a %like% paste0(if_else(cztype == "terminal",
                                                            "Terminal",

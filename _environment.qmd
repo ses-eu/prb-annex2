@@ -211,13 +211,37 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ::: {#container-mil-pi}
 
-## Civil-Military dimension (PIs#6-8)
+## Civil-Military dimension 
 
-:::: {#table-env-mil-pi}
-```{r table-env-mil-pi}
-#| file: R/table_level2_env_mil_pi.R
+:::: {layout="[ 20, 60, 20 ]"}
+
+::::: {#empty-div}
+:::::
+
+::::: {#chart-ersa}
+```{r chart-ersa}
+#| file: R/chart_level2_env_ersa.R
 #| out.width: "100%"
 ```
+:::::
+::::
+
+:::: {layout="[ 50, 50 ]"}
+
+::::: {#chart-cdr}
+```{r chart-cdr}
+#| file: R/chart_level2_env_cdr.R
+#| out.width: "100%"
+```
+:::::
+
+::::: {#chart-rsa}
+```{r chart-rsa}
+#| file: R/chart_level2_env_rsa.R
+#| out.width: "100%"
+```
+:::::
+
 ::::
 :::
 
