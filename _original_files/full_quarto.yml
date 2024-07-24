@@ -158,7 +158,7 @@ website:
               href: environment.html#horizontal-flight-efficiency
 # include env_terminal block
           - text: "<b>Civil-Military dimension</b>"
-            href: environment.html#military-dimension-pis6-8
+            href: environment.html#civil-military-dimension
       - text: "---"
       - section: "<b>Capacity</b>"
         contents:

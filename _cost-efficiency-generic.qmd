@@ -40,6 +40,13 @@ if (is.na(cef_txt_1_4[2,1]) == FALSE) {
   
   if(identical(my_index_cost_main, numeric(0)) == TRUE) {my_index_cost_main <- which(cef_txt_1_4$a %like% paste0("Terminal charging zone ", ez,' costs for the main ANSP')) + 1}
   if(identical(my_index_cost_main, numeric(0)) == TRUE) {my_index_cost_main <- which(cef_txt_1_4$a %like% paste0("Terminal charging zone costs for the main ANSP")) + 1}
+  
+  ### to avoid errors if else is executed
+  cef_txt_1_4_duc <- ""
+  cef_txt_1_4_su <- ""
+  cef_txt_1_4_cost_all <- ""
+  cef_txt_1_4_cost_main <- ""
+
 } else {
   ### find beginning and end of headings
   tx <- cef_txt_1_4[1,1] |> pull()

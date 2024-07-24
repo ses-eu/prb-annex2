@@ -10,13 +10,13 @@ data_raw  <-  read_xlsx(
 ## prepare data ----
 
 data_prep_acc <- data_raw |> 
-  right_join(acc_list, by = c("acc" = "acc_id")) |> 
+  filter(state == .env$country) |> 
+  # left_join(acc_list_table, by = c("acc" = "acc_id")) |> 
   select(year,
          Planned = planned_atco_number,
          Actual = actual_atco_number,
-         acc_full_name) |> 
-  pivot_longer(c(-year, -acc_full_name), values_to = "value", names_to = "type") |> 
-  rename(acc = acc_full_name) |> 
+         acc) |> 
+  pivot_longer(c(-year, -acc), values_to = "value", names_to = "type") |> 
   arrange(acc, type, year)
 
 
