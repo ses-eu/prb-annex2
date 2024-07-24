@@ -1,42 +1,41 @@
-# # parameters
+## import data  ----
+data_raw  <-  read_xlsx(
+  paste0(data_folder, "CAP dataset master.xlsx"),
+  # here("data","hlsr2021_data.xlsx"),
+  sheet = "ATCOs",
+  range = cell_limits(c(1, 1), c(NA, NA))) %>%
+  as_tibble() %>% 
+  clean_names() 
 
-## import data
-sheet <- country
-range <- "A24:A48"
-countacc_r  <- read_range(cap_file, sheet, range)
+## prepare data ----
 
-# data_for_chart <- list()
+data_prep_acc <- data_raw |> 
+  right_join(acc_list, by = c("acc" = "acc_id")) |> 
+  select(year,
+         Planned = planned_atco_number,
+         Actual = actual_atco_number,
+         acc_full_name) |> 
+  pivot_longer(c(-year, -acc_full_name), values_to = "value", names_to = "type") |> 
+  rename(acc = acc_full_name) |> 
+  arrange(acc, type, year)
 
-## prepare data
-prepare_data <- function(i, acc_name) {
-  range[i] <- paste0("A", 25 + (i-1)*4, ":O", 27+ (i-1)*4)
-  df <- read_range(cap_file, sheet, range[i])  
-  df <- df %>% 
-    select(1, 5:10) %>% 
-    clean_names() %>% 
-    rename(type = 1) %>% 
-    mutate(type = str_replace_all(type, fixed(' (Perf Plan)'), '')) %>% 
-    mutate_all(~ str_replace_all(., "-", NA_character_)) %>% 
-    mutate_at(c(-1), ~ as.numeric(.)) %>% 
-    pivot_longer(-type, names_to = 'year') %>% 
-    mutate_at('year', ~ str_replace_all(., "x", '')) %>% 
-    mutate_at('year', ~ as.numeric(.)) %>% 
-    mutate(acc = acc_name) %>% 
-    arrange(type, year)
-}
 
-data_acc <- map2_dfr(seq(1:acc_no), acc_list$acc_full_name, prepare_data)
-
-data_ansp <- data_acc %>% group_by(type, year) %>% 
+data_prep_ansp <- data_prep_acc %>% group_by(type, year) %>% 
   summarise(value = sum(value)) %>% 
-  mutate(acc = main_ansp) %>% ungroup()
+  mutate(acc = main_ansp) %>% ungroup() 
 
-data_for_chart <- rbind(data_ansp, data_acc) %>% 
+
+data_for_chart <- rbind(data_prep_ansp, data_prep_acc) %>% 
   group_by(acc) %>% 
   mutate(min_y_axis = min(value, na.rm=T)/1.5,
-         value = round(value, 0))
+         value = case_when (
+           year >= year_report & type == "Actual" ~ NA,
+           .default = round(value, 0)
+           )
+         ) 
 
 acc_list_for_chart <- unique(data_for_chart$acc)
+
 
 # chart ----
 ## set parameters for chart ----

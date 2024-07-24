@@ -57,7 +57,7 @@ data_prep <- data_raw %>%
   pivot_wider(values_from = 'mymetric', names_from = 'year')
 
 mygtable(data_prep, myfont) %>% 
-  cols_label(name = html("Total costs - nominal EURO (M€</sub>)")) %>% 
+  cols_label(name = html("Total costs - nominal EURO (M€)")) %>% 
   tab_options(column_labels.background.color = "#F2F2F2",
               column_labels.font.weight = 'bold',
               container.padding.y = 0) %>% 
