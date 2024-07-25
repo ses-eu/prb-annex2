@@ -40,7 +40,7 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("CDR availability and use - annual")
+mytitle_text <- paste0("RAI & RAU via available conditional routes (CDR) (PIs#7 & 8)")
 mytitle_y <- 0.99
 
 #### xaxis
@@ -61,6 +61,6 @@ mylocalmargin = mymargin
 # function moved to utils
 
 ## plot chart  ----
-mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals) %>% 
+mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin, mydecimals) %>% 
   layout(bargroupgap = 0.15,
          yaxis = list(range= c(0,100)))

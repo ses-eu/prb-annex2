@@ -40,8 +40,8 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("RSA availability and use - annual")
-mytitle_y <- 0.99
+mytitle_text <- paste0("RAI & RAU via available restricted and segregated\nairspace (RSA) airspace (#PIs 7& 8)")
+mytitle_y <- 0.95
 
 #### xaxis
 
@@ -55,12 +55,12 @@ mylegend_x <- 0.5
 mylegend_xanchor <- 'center'
 
 #### margin
-mylocalmargin = mymargin
+mylocalmargin = list(t = 70)
 
 ## define chart function ----
 # function moved to utils
 
 ## plot chart  ----
-mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals) %>% 
+mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin, mydecimals) %>% 
   layout(bargroupgap = 0.15,
          yaxis = list(range= c(0,100)))
