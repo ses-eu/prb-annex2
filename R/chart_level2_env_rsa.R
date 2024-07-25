@@ -61,6 +61,14 @@ mylocalmargin = list(t = 70)
 # function moved to utils
 
 ## plot chart  ----
-mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin, mydecimals) %>% 
+myplot <- mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin, mydecimals) %>% 
   layout(bargroupgap = 0.15,
          yaxis = list(range= c(0,100)))
+
+# in case all values are NA
+if (all(is.na(data_prep$mymetric)) == TRUE) {
+  myplot <- myplot |> 
+    layout(xaxis = list(range= c(2019.5,year_report + 0.5)))
+}
+
+myplot

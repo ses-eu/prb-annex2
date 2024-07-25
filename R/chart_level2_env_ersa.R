@@ -40,7 +40,7 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("ERSA - effective use of reserved\nor segregated airspace (PI#6)")
+mytitle_text <- paste0("ERSA - effective use of reserved or segregated airspace (PI#6)")
 mytitle_y <- 0.95
 
 #### xaxis
