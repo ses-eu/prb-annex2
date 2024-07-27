@@ -1,0 +1,101 @@
+## Overview
+
+The performance and charging schemes are established on the basis of Article 11 of Regulation (EC) No 549/2004 laying down the framework for the creation of the Single European Sky (the Framework Regulation) and Articles 14-16 of Regulation (EC) No 550/2004 on the provision of air navigation services in the Single European Sky (the Service Provision Regulation) respectively. Technical provisions for the third reference period (RP3), covering 2020 to 2024, are set out in [Commission Implementing Regulation (EU) 2019/317](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32019R0317) as well as [Commission Implementing Regulation (EU) 2020/1627](https://eur-lex.europa.eu/legal-content/EN/TXT/?toc=OJ%3AL%3A2020%3A366%3ATOC&uri=uriserv%3AOJ.L_.2020.366.01.0007.01.ENG#:~:text=This%20Regulation%20establishes%20exceptional%20measures%20to%20be%20applied,Article%207%20%281%29%20of%20Implementing%20Regulation%20%28EU%29%202019%2F317.).
+
+The regulatory framework defines key performance indicators (KPIs) for the key performance areas (KPAs) of:
+
+-   Safety;
+-   Environment;
+-   Capacity; and
+-   Cost-efficiency.
+
+These are used to set performance targets at Union level, national level, or functional airspace block level. The KPIs cover both en route and terminal air navigation services, as well as network functions, to improve the overall performance of the network.
+
+The Union-wide revised performance targets for the third reference period are defined in [Commission Implementing Decision (EU) 2021/891](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32021D0891) (repealing Implementing Decision (EU) 2019/903). Based on the targets, Member States prepare the performance plans, which they submitted to the Commission, as assisted by the Performance Review Body (PRB).
+
+Under Commission Implementing Regulation (EU) 2019/317, monitoring is one of the primary tasks of the PRB. It ensures that Member States, the European Commission, and stakeholders are informed about how Air Navigation Service Providers (ANSPs) perform in relation to their performance targets. The PRB Annual Monitoring Report (AMR) analyses the performance of the air navigation services of the Single European Sky (SES) against targets. The current dashboard is meant to support the dissemination of the PRB AMR analysis and conclusions for:
+
+-   The SES system as a whole;
+-   Individual Member States (including MUAC); and
+-   Network functions performed by the Network Manager.
+
+All the values and comments included in this dashboard reflect the information published in the PRB annual monitoring. The actual values for each year of the reference period are updated each year with the latest information provided by the Member States. Therefore, in case of ex-post corrections of data, the values displayed in the graphs may slightly differ with the comments provided in the bullet points.
+
+## Traffic
+
+Air traffic is presented, for the SES reference area and for the individual Member States, in terms of:
+
+-   Instrumental Flight Rules movements (IFR); and
+-   Total service units (TSUs) (i.e. unit of measurement used for charging purposes based on the multiplication of aircraft weight factor by distance factor).
+
+Actual traffic is compared with both the planned/determined traffic included in the adopted performance plan, as well as with the latest [STATFOR](https://www.eurocontrol.int/forecasting#deliverables) forecast available at the time of adoption of the local performance plans. For IFR movements, planned data reflect the information included in the adopted performance plan while actual data are sourced from the relevant STATFOR forecast. Differently, service units determined and actuals data are sourced from the en route reporting tables.
+
+## Safety - Effectiveness of safety management (EoSM)
+
+Safety is monitored through the effectiveness of safety management (EoSM) of the ANSPs KPI. The EoSM KPI measures the level of implementation of the following safety management objectives (MOs):
+
+a)  Safety policy and objectives;
+b)  Safety risk management;
+c)  Safety assurance;
+d)  Safety promotion; and
+e)  Safety culture.
+
+The EoSM for ANSPs is a set of questions to determine the minimum level of maturity for each management objective. The answers are provided by the ANSPs and verified by the NSAs. The questions are developed by EASA and included in the supporting [technical material](https://wikis.ec.europa.eu/display/eusinglesky/RP3+Supporting+Materials?preview=/54034654/77530202/RP3%20EoSM%20template.xlsx) to the Regulation. For each objective, the maturity level achieved is determined by the lowest maturity level of any question allocated to a management objective. When answering the questions, one of the following maturity levels of implementation should be selected:
+
+-   Level A which is defined as 'Informal Arrangements' --- SMS processes and/or requirements have not been agreed at the organisation level; they are either not routinely undertaken or depend on the individual assigned to the task.
+-   Level B which is defined as 'Defined' --- SMS processes and/or requirements are defined but not yet fully implemented, documented or consistently applied.
+-   Level C which is defined as 'Managed' --- SMS processes and/or requirements are fully documented and consistently applied.
+-   Level D which is defined as 'Assured' --- Evidence is available to provide confidence that SMS processes and/or requirements are being applied appropriately and are delivering positive, measurable results.
+
+In addition to the minimum level achieved for a MO, an EoSM score is calculated. Each of the 100 questions in the EoSM questionnaire scores one (1) if the target for the associated MO is achieved or nil (0) if not achieved. The score gives an indication of how many areas (questions) the ANSPs need to improve.
+
+Applicable EoSM targets are defined at Union-wide level, local level (ANSPs) and for network functions (Network Manager). For RP3, the following target should be achieved by 2024:
+
+-   At least Level C in the safety management objectives 'safety culture', 'safety policy and objectives', 'safety assurance', and 'safety promotion'; and
+-   At least Level D in the safety management objective 'safety risk management'.
+
+In addition, for the Network Manager the safety PI, defined as the ATFM over-deliveries above the capacity limits of a sector declared by the air navigation service provider where ATFM regulations are imposed, is presented.
+
+## Environment - Horizontal en route flight efficiency of the actual flight path (KEA)
+
+Environmental performance is measured through the horizontal en route flight efficiency of the actual flight path (KEA) KPI. The KEA KPI measures the additional distance flown beyond the great circle distance. 'en route' is defined as the distance flown outside a circle of 40 NM around the airport. The indicator is calculated for the whole calendar year and for each year of the reference period, as an average (excluding the ten highest daily values and the ten lowest daily values).
+
+This additional distance flown is impacted by the actions of ANSPs but also the route choices of airspace users, airspace restrictions or network measures. The higher the KEA value, the worse the performance.
+
+KEA is the only environment KPI upon which Union-wide and local (national or FAB level) performance is assessed. Applicable KEA targets are defined at Union-wide level, while local targets are derived from the national reference values set out in latest version of the [European Route Network Improvement Plan](https://www.eurocontrol.int/function/route-network-and-airspace-design) (ERNIP) available at the time of adoption of the Union-wide performance targets.
+
+For the Network Manager, the environment KPI measures the efficiency of the European route network related to the last filed flight plan trajectory (KEP). 
+
+## Capacity - Average en route ATFM delay per flight
+
+En route capacity is monitored through the average en route air traffic flow management (ATFM) delay generated by en route area control centres (ACC). ATFM delay is calculated by the Network Manager and expressed as the difference between the estimated take-off time (ETOT) and the calculated take-off time (CTOT) allocated by the Network Manager. This indicator covers all IFR flights and all ATFM delay causes, excluding exceptional events and it is calculated for the whole calendar year and for each year of the reference period.
+
+Total ATFM delay per flight is broken down across the following delay groups:
+
+-   Capacity (delay code C);
+-   Staffing (S); - Disruptions (I, T);
+-   Weather (D, W); and
+-   Other non-ATC (A, E, G, M, N, O, P, R, V, NA).
+
+Average en route ATFM delay per flight is the only capacity KPI upon which Union-wide performance is assessed. Differently, at the local level (national or FAB level), also average airport arrival ATFM delay per flight is monitored as KPI.
+
+Applicable ATFM delay targets are defined at Union-wide level, while local targets are derived from the national reference values set out in latest version of the [Network Operations Plan](https://www.eurocontrol.int/network-operations-planning) (NOP) available at the time of adoption of the Union-wide performance targets.
+
+For the network functions, two capacity KPI are defined:
+
+-   The share of en route ATFM delay savings due to collaborative decision making (CDM) network procedures, and Network Manager Operations Centre (NMOC) actions.
+-   The percentage of arrival ATFM delay savings from the collaborative decision-making network procedures and Network Manager Operations Centre actions.
+
+In addition, for the Network Manager also the capacity PI, defined as the annual percentage of IFR flights with ATFM delay above 15 minutes, is presented.
+
+## Cost-efficiency - Determined unit costs (DUC)
+
+The en route cost-efficiency performance is monitored through the year-on-year change of the determined unit costs (DUC) for en route air navigation services KPI. The KPI is defined as the en route determined costs (in real terms) divided by the total en route service units and is calculated for the whole calendar year and for each year of the reference period.
+
+The indicator measures improvements in the unitary cost for the provision of en route air navigation services. At Union-wide level the cost-efficiency KPI is expressed in terms of year-on-year percentage change against the target. At local level (charging zone), the yearly DUC values, as included in the adopted performance plan, are fixed in advance for the entire reference period and cost-efficiency performance are monitored by comparing the DUC to the actual unit cost (AUC), which is computed as the ratio between actual costs and actual service units.
+
+At local level, also the terminal DUC is monitored as KPI.
+
+Applicable cost-efficiency targets are defined at Union-wide level, while local targets are expressed in terms of consistency of the DUC at charging zone level with the Union-wide DUC trend over the reference period.
+
+For the network functions, the cost-efficiency KPI is the actual unit cost for the execution of the Network Manager tasks. The indicator is calculated as the ratio between the actual costs and the service units at the level of the geographical area where the Network Manager executes its tasks. 

@@ -2,7 +2,7 @@
 
 # clean environment and set main parameters ----
   rm(list = ls())
-  year_report <- 2022 # set your year report here
+  year_report <- 2021 # set your year report here
   out_format <- 'web' # set your output format here: 'pdf' or 'web'
   data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/data_for_web/'
   data_folder_a2 <- paste0(data_folder, "monitoring_files/", year_report, "/")
@@ -15,7 +15,7 @@
   
   ## add Home to State list
   state_list <- c(state_list, "Home")
-  # states_from <- c(22:29) # 1st number is the index of 1st state from which you want to generate
+  # states_from <- c(26:29) # 1st number is the index of 1st state from which you want to generate
   # state_list <- state_list[states_from]
 
 # build state pages ----
@@ -25,7 +25,7 @@
   
   ## build pages
   if (test_check == TRUE) {
-    state_list <- 'Switzerland' # set your test country here (Home for home page)
+    state_list <- 'Home' # set your test country here (Home for home page)
   } 
 
   for (i in 1:length(state_list)) {
@@ -43,7 +43,10 @@
       files_to_be_deleted <- list.files(root_dir) 
       files_to_be_deleted <- files_to_be_deleted[files_to_be_deleted %like% c("202") == FALSE]
       
-      fs::file_delete(paste0(root_dir, files_to_be_deleted)) 
+      ## otherwise it deletes everything
+      if (length(files_to_be_deleted) != 0) { 
+        fs::file_delete(paste0(root_dir, files_to_be_deleted)) 
+      }
       
       ### copy files to folder
       files_to_be_copied <- list.files(site_dir) 
@@ -75,3 +78,4 @@
   }
   
   }
+  
