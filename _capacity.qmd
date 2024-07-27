@@ -52,7 +52,7 @@ for (i in c(2,3,4,6,7)) {
   mytext <- sub("^<br>|<br>$", "", mytext)
   
   ### assign text to variable
-  assign(paste0("cap_er_1_", i, "_r"), mytext)
+  assign(paste0("cap_er_1_", i, "_r"), paste0(mytext,collapse = ""))
   
 }
 
@@ -188,7 +188,7 @@ for (i in 1:length(cap_trm_heading_positions)) {
   mytext <- sub("^<br>|<br>$", "", mytext)
   
   ### assign text to variable
-  assign(paste0("cap_trm_1_", i, "_r"), mytext)
+  assign(paste0("cap_trm_1_", i, "_r"), paste0(mytext,collapse = ""))
   
 }
 }
