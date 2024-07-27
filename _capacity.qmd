@@ -2,48 +2,181 @@
 # define ranges and import data
 sheet <- country
 
-## enroute 
-range <- "J4:J6"
-cap_er_1_1_r <- read_range(cap_file, sheet, range)  
+# find headings to define ranges
+range <- "A3:O81"
+cap_er_all <- read_range(cap_file, sheet, range) 
+cap_er_all <- cap_er_all |> 
+  # rename the columns where the text I need is
+  rename(a = 1,
+         b = 10,
+         c = 11) |> 
+  select(a, b, c)
 
-range <- "A9:O13"
-cap_er_1_2_r <- read_range(cap_file, sheet, range)  
+# replace NAs by empty strings
+cap_er_all[is.na(cap_er_all)] <- ""
 
-range <- "A14:O18"
-cap_er_1_3_r <- read_range(cap_file, sheet, range)  
+cap_titles <- c("Minutes of ATFM en-route delay",
+                "**Minutes of ATFM en-route delay**",
+                "NSA's assessment of capacity performance", 
+                "**NSA's assessment of capacity performance**", 
+                "Monitoring process for capacity performance",
+                "**Monitoring process for capacity performance**",
+                "Capacity Planning",
+                "**Capacity Planning**",
+                "ATCO in OPS (FTE)",
+                "**ATCO in OPS (FTE)**",
+                "Application of Corrective Measures for Capacity (if applicable)",
+                "**Application of Corrective Measures for Capacity (if applicable)**",
+                "Summary of capacity performance",
+                "**Summary of capacity performance**",
+                "En route Capacity Incentive Scheme",
+                "**En route Capacity Incentive Scheme**"
+)
 
-range <- "A19:O23"
-cap_er_1_4_r <- read_range(cap_file, sheet, range)  
+cap_heading_positions <- which(cap_er_all$a %in% cap_titles)
 
-range <- "A49:O53"
-cap_er_1_6_r <- read_range(cap_file, sheet, range)  
-
-# cap_er_1_5_r_acc <- ''
-cap_er_1_5_r_txt <- ''
-cap_er_1_5_r_obs <- ''
-cap_er_1_5_r <- ''
-
-for (i in 1:acc_no) {
+for (i in c(2,3,4,6,7)) {
+  mytext <- apply(cap_er_all[(cap_heading_positions[i-1]+1):(cap_heading_positions[i]-1), ], 2, function(col) paste(col, collapse = "<br>"))
   
-  # range <- paste0("A", 24 + (i-1) * 4, ":D", 25 + (i-1) * 4)
-  # cap_er_1_5_r_acc <- read_range(cap_file, sheet, range)  
+  # replace repeated breaks by single  
+  mytext <- gsub("(<br>)+", "<br>", mytext)
+
+  #remove empty elements of vector
+  mytext <- mytext[mytext != "<br>"]
   
-  range <- paste0("K", 25 + (i-1) * 4, ":O", 27 + (i-1) * 4)
-  cap_er_1_5_r_obs <- read_range(cap_file, sheet, range)  
+  #replace double breaks by single breaks
+  pattern <- "(<br>){2,}"
+  mytext <- str_replace_all(mytext, pattern, "<br>")
+
+  ### remove leading and trailing line breaks
+  mytext <- sub("^<br>|<br>$", "", mytext)
   
-  range <- paste0("A", 27 + (i-1) * 4, ":O", 28 + (i-1) * 4)
-  cap_er_1_5_r_txt <- read_range(cap_file, sheet, range)  
-  
-  cap_er_1_5_r <- if_else(is.na(cap_er_1_5_r_txt[1,1]) == TRUE & is.na(cap_er_1_5_r_obs[1,1]) == TRUE, '', 
-                          paste0(cap_er_1_5_r_txt[1,1], 
-                                 if_else(is.na(cap_er_1_5_r_obs[1,1]) == TRUE, '', paste0('**Observations: **', cap_er_1_5_r_obs[1,1])),
-                                 '\n')
-                          )
+  ### assign text to variable
+  assign(paste0("cap_er_1_", i, "_r"), mytext)
   
 }
 
-range <- "A54:O58"
-cap_er_1_7_r <- read_range(cap_file, sheet, range)  
+# incentive scheme text --------------
+  ### find observations positions
+  observations_positions <- which(cap_er_all$b %in% c("Observations", "**Observations**"))
+  observations_positions <- observations_positions[-1] # ignore first one
+  
+  ### build observations text
+  mytext <- ""
+  for (i in observations_positions) {
+   # check if there is text for the observation
+    check_observation <- if_else(cap_er_all$b[i+1] == "", FALSE, TRUE)
+    
+    if (check_observation) {
+      mytext <- paste0(mytext,
+                       if_else(cap_er_all$a[i] == "****", 
+                               "",
+                               paste0(cap_er_all$a[i], ": ")),
+                               cap_er_all$b[i+1],
+                               '<br>')
+    }
+  }
+  
+  ### add overall text at the end
+  # find the last title Actual performance
+  actual_perf_positions <- which(cap_er_all$a %in% c("Actual performance", "**Actual performance**"))
+  actual_perf_positions <- actual_perf_positions[length(actual_perf_positions)] # we only need the last
+  
+  mytext_inc <- apply(cap_er_all[(actual_perf_positions+1):nrow(cap_er_all), ], 2, function(col) paste(col, collapse = "<br>"))
+  
+  # replace repeated breaks by single  
+  mytext_inc <- gsub("(<br>)+", "<br>", mytext_inc)
+  
+  #remove empty elements of vector
+  mytext_inc <- mytext_inc[mytext_inc != "<br>"]
+  
+  ### remove leading and trailing line breaks
+  mytext_inc <- sub("^<br>|<br>$", "", mytext_inc)
+  
+  cap_er_1_8_r <- paste0(mytext, mytext_inc)
+
+# ACC text --------------
+  ### find observations positions
+  observations_positions <- which(cap_er_all$c %in% c("Observations", "**Observations**"))
+
+  ### build observations text
+  mytext <- ""
+  for (i in observations_positions) {
+   # check if there is text for the observation
+    check_observation <- if_else(cap_er_all$c[i+1] == "", FALSE, TRUE)
+   # check if there is text for the acc
+    check_acc <- if_else(cap_er_all$a[i+3] == "" | cap_er_all$a[i+3] == "****", 
+                                 FALSE, TRUE)
+
+    if (check_observation) {
+      mytext <- paste0(mytext,
+                       if_else(cap_er_all$a[i] == "****", 
+                               "",
+                               paste0(cap_er_all$a[i], ": ")
+                               , cap_er_all$b[i+1],
+                               '<br>')
+                       )
+    }
+
+    if (check_acc) {
+      mytext <- paste0(mytext, cap_er_all$a[i+3],'<br>')
+    }    
+    
+  }
+  
+  mytext_acc <- mytext
+  
+  # replace repeated breaks by single  
+  mytext_acc <- gsub("(<br>)+", "<br>", mytext_acc)
+  
+  #remove empty elements of vector
+  mytext_acc <- mytext_acc[mytext_acc != "<br>"]
+  
+  ### remove leading and trailing line breaks
+  mytext_acc <- sub("^<br>|<br>$", "", mytext_acc)
+  
+  cap_er_1_5_r <- paste0(mytext, mytext_acc)
+
+## enroute 
+#old code based on fixed positions
+# range <- "A9:O13"
+# cap_er_1_2_r <- read_range(cap_file, sheet, range)  
+# 
+# range <- "A14:O18"
+# cap_er_1_3_r <- read_range(cap_file, sheet, range)  
+
+# range <- "A19:O23"
+# cap_er_1_4_r <- read_range(cap_file, sheet, range)  
+
+# range <- "A49:O53"
+# cap_er_1_6_r <- read_range(cap_file, sheet, range)  
+
+# # cap_er_1_5_r_acc <- ''
+# cap_er_1_5_r_txt <- ''
+# cap_er_1_5_r_obs <- ''
+# cap_er_1_5_r <- ''
+# 
+# for (i in 1:acc_no) {
+#   
+#   # range <- paste0("A", 24 + (i-1) * 4, ":D", 25 + (i-1) * 4)
+#   # cap_er_1_5_r_acc <- read_range(cap_file, sheet, range)  
+#   
+#   range <- paste0("K", 25 + (i-1) * 4, ":O", 27 + (i-1) * 4)
+#   cap_er_1_5_r_obs <- read_range(cap_file, sheet, range)  
+#   
+#   range <- paste0("A", 27 + (i-1) * 4, ":O", 28 + (i-1) * 4)
+#   cap_er_1_5_r_txt <- read_range(cap_file, sheet, range)  
+#   
+#   cap_er_1_5_r <- if_else(is.na(cap_er_1_5_r_txt[1,1]) == TRUE & is.na(cap_er_1_5_r_obs[1,1]) == TRUE, '', 
+#                           paste0(cap_er_1_5_r_txt[1,1], 
+#                                  if_else(is.na(cap_er_1_5_r_obs[1,1]) == TRUE, '', paste0('**Observations: **', cap_er_1_5_r_obs[1,1])),
+#                                  '\n')
+#                           )
+#   
+# }
+
+# range <- "A54:O58"
+# cap_er_1_7_r <- read_range(cap_file, sheet, range)  
 
 ## terminal
 if (no_tcz > 0) {
@@ -170,23 +303,27 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 
 **Summary of capacity performance**
 
-`r cap_er_1_7_r[1,1]`
+`r cap_er_1_7_r`
 
 **NSA's assessment of capacity performance**
 
-`r cap_er_1_2_r[1,1]`
+`r cap_er_1_2_r`
 
 **Monitoring process for capacity performance**
 
-`r cap_er_1_3_r[1,1]`
+`r cap_er_1_3_r`
 
 **Capacity planning**
 
-`r cap_er_1_4_r[1,1]`
+`r cap_er_1_4_r`
 
 **Application of Corrective Measures for Capacity (if applicable)**
 
-`r cap_er_1_6_r[1,1]`
+`r cap_er_1_6_r`
+
+**En route Capacity Incentive Scheme**														
+
+`r cap_er_1_8_r`
 
 :::
 
