@@ -47,28 +47,28 @@ for (i in 1:length(env_apt_heading_positions)) {
   mytext <- sub("^<br>|<br>$", "", mytext)
   
   ### assign text to variable
-  assign(paste0("env_apt_", i, "_r"), paste0(mytext,collapse = ""))
+  assign(paste0("env_apt_", i, ""), paste0(mytext,collapse = ""))
 }
 
 
 # # env apt old code based on ranges
 # range <- "A3:P4"
-# env_apt_1_r <- read_range(env_apt_file, sheet, range)  
+# env_apt_1 <- read_range(env_apt_file, sheet, range)  
 # 
 # range <- "A5:P7"
-# env_apt_2_r <- read_range(env_apt_file, sheet, range) 
-# env_apt_2_r <- if_else(is.na(env_apt_2_r[2,1]) == FALSE, pull(env_apt_2_r[2,1]), pull(env_apt_2_r[1,8]))
+# env_apt_2 <- read_range(env_apt_file, sheet, range) 
+# env_apt_2 <- if_else(is.na(env_apt_2[2,1]) == FALSE, pull(env_apt_2[2,1]), pull(env_apt_2[1,8]))
 # 
 # range <- "A8:P10"
-# env_apt_3_r <- read_range(env_apt_file, sheet, range) 
-# env_apt_3_r <- if_else(is.na(env_apt_3_r[2,1]) == FALSE, pull(env_apt_3_r[2,1]), pull(env_apt_3_r[1,8]))
+# env_apt_3 <- read_range(env_apt_file, sheet, range) 
+# env_apt_3 <- if_else(is.na(env_apt_3[2,1]) == FALSE, pull(env_apt_3[2,1]), pull(env_apt_3[1,8]))
 # 
 # range <- "A11:P13"
-# env_apt_4_r <- read_range(env_apt_file, sheet, range) 
-# env_apt_4_r <- if_else(is.na(env_apt_4_r[2,1]) == FALSE, pull(env_apt_4_r[2,1]), pull(env_apt_4_r[1,8])) 
+# env_apt_4 <- read_range(env_apt_file, sheet, range) 
+# env_apt_4 <- if_else(is.na(env_apt_4[2,1]) == FALSE, pull(env_apt_4[2,1]), pull(env_apt_4[1,8])) 
 # 
 # range <- "A14:P15"
-# env_apt_5_r <- read_range(env_apt_file, sheet, range)   
+# env_apt_5 <- read_range(env_apt_file, sheet, range)   
 }
 
 # env mil
@@ -122,24 +122,24 @@ for (i in 1:length(env_mil_heading_positions)) {
   mytext <- sub("^<br>|<br>$", "", mytext)
   
   ### assign text to variable
-  assign(paste0("env_mil_", i, "_r"), paste0(mytext,collapse = ""))
+  assign(paste0("env_mil_", i, ""), paste0(mytext,collapse = ""))
 }
 
 # 
 # range <- "A3:O7"
-# env_mil_3_r <- read_range(env_mil_file, sheet, range) 
+# env_mil_3 <- read_range(env_mil_file, sheet, range) 
 # 
 # range <- "A8:O12"
-# env_mil_2_r <- read_range(env_mil_file, sheet, range) 
+# env_mil_2 <- read_range(env_mil_file, sheet, range) 
 # 
 # range <- "A30:O34"
-# env_mil_5_r <- read_range(env_mil_file, sheet, range) 
+# env_mil_5 <- read_range(env_mil_file, sheet, range) 
 # 
 # range <- "A52:O56"
-# env_mil_8_r <- read_range(env_mil_file, sheet, range) 
+# env_mil_8 <- read_range(env_mil_file, sheet, range) 
 # 
 # range <- "A74:O78"
-# env_mil_11_r <- read_range(env_mil_file, sheet, range) 
+# env_mil_11 <- read_range(env_mil_file, sheet, range) 
 
 ```
 
@@ -257,11 +257,11 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 **AXOT**
 
-`r if (exists("env_apt_2_r") == FALSE) {''} else {env_apt_2_r}`
+`r if (exists("env_apt_2") == FALSE) {''} else {env_apt_2}`
 
 **ASMA**
 
-`r if (exists("env_apt_3_r") == FALSE) {''} else {env_apt_3_r}`
+`r if (exists("env_apt_3") == FALSE) {''} else {env_apt_3}`
 
 :::
 
@@ -292,7 +292,7 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 #### NSA input
 
-`r if (exists("env_apt_4_r") == FALSE) {''} else {env_apt_4_r}`
+`r if (exists("env_apt_4") == FALSE) {''} else {env_apt_4}`
 
 :::
 
@@ -352,22 +352,22 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 **Update on Military dimension of the plan**
 
-`r env_mil_1_r`
+`r env_mil_1`
 
 **Military - related measures implemented or planned to improve capacity**
 
-`r env_mil_2_r`
+`r env_mil_2`
 
 **Initiatives implemented or planned to improve PI#6**
 
-`r env_mil_4_r`
+`r env_mil_4`
 
 **Initiatives implemented or planned to improve PI#7**
 
-`r env_mil_6_r`
+`r env_mil_6`
 
 **Initiatives implemented or planned to improve PI#8**
 
-`r env_mil_8_r`
+`r env_mil_8`
 
 :::

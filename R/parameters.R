@@ -256,7 +256,9 @@ if (country != "Network Manager" & country != "SES RP3" & country != "Home") {
   saf_eosm_file <-  paste0(data_folder_a2, "saf/", saf_eosm_file)
 } else {
   cap_file <- ''
+  cap_trm_file <- ''
   ceff_file <- ''
+  ceff_file_canarias <- ''
   env_kea_file <- ''
   env_apt_file <- ''
   env_mil_file <- ''
