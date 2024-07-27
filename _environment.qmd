@@ -3,7 +3,7 @@
 sheet <- country
 
 if (no_tcz >0) {
-range <- "A2:P8"
+range <- "A2:P80"
 env_apt_all <- read_range(env_apt_file, sheet, range) 
 env_apt_all <- env_apt_all |> 
     rename(a = 1) 
@@ -27,9 +27,9 @@ env_apt_heading_positions <- which(env_apt_all$a %in% env_apt_titles)
 
 for (i in 1:length(env_apt_heading_positions)) {
   if (i<length(env_apt_heading_positions)) {
-    mytext <- apply(env_apt_all[(env_apt_heading_positions[i]+1):(env_apt_heading_positions[i+1]-1), ], 2, function(col) paste(col, collapse = "<br>"))
+    mytext <- apply(env_apt_all[(env_apt_heading_positions[i]+1):(env_apt_heading_positions[i+1]-1), ], 1, function(col) paste(col, collapse = "<br>"))
   } else{
-    mytext <- apply(env_apt_all[(env_apt_heading_positions[i]+1):(env_apt_heading_positions[i]+1), ], 2, function(col) paste(col, collapse = "<br>"))
+    mytext <- apply(env_apt_all[(env_apt_heading_positions[i]+1):(env_apt_heading_positions[i]+1), ], 1, function(col) paste(col, collapse = "<br>"))
 
   }
   # replace repeated breaks by single  
@@ -83,11 +83,17 @@ env_mil_all[is.na(env_mil_all)] <- ""
 env_mil_titles <- c("Update on Military dimension of the plan",
                 "**Update on Military dimension of the plan**",
                 "Military - related measures implemented or planned to improve capacity", 
-                "**Military - related measures implemented or planned to improve capacity**", 
+                "**Military - related measures implemented or planned to improve capacity**",
+                "PI#6 Effective use of reserved or segregated airspace - national level",
+                "**PI#6 Effective use of reserved or segregated airspace - national level**",
                 "Initiatives implemented or planned to improve PI#6",
                 "**Initiatives implemented or planned to improve PI#6**",
+                "**PI#7 Rate of planning via available airspace structures - national level**",
+                "PI#7 Rate of planning via available airspace structures - national level**",
                 "Initiatives implemented or planned to improve PI#7",
                 "**Initiatives implemented or planned to improve PI#7**",
+                "PI#8 Rate of using available airspace structures - national level",
+                "**PI#8 Rate of using available airspace structures - national level**",
                 "Initiatives implemented or planned to improve PI#8",
                 "**Initiatives implemented or planned to improve PI#8**"
 )
@@ -96,9 +102,9 @@ env_mil_heading_positions <- which(env_mil_all$a %in% env_mil_titles)
 
 for (i in 1:length(env_mil_heading_positions)) {
   if (i<length(env_mil_heading_positions)) {
-    mytext <- apply(env_mil_all[(env_mil_heading_positions[i]+1):(env_mil_heading_positions[i+1]-1), ], 2, function(col) paste(col, collapse = "<br>"))
+    mytext <- apply(env_mil_all[(env_mil_heading_positions[i]+1):(env_mil_heading_positions[i+1]-1), ], 1, function(col) paste(col, collapse = "<br>"))
   } else{
-    mytext <- apply(env_mil_all[(env_mil_heading_positions[i]+1):(env_mil_heading_positions[i]+4), ], 2, function(col) paste(col, collapse = "<br>"))
+    mytext <- apply(env_mil_all[(env_mil_heading_positions[i]+1):(env_mil_heading_positions[i]+4), ], 1, function(col) paste(col, collapse = "<br>"))
 
   }
   # replace repeated breaks by single  
@@ -121,7 +127,7 @@ for (i in 1:length(env_mil_heading_positions)) {
 
 # 
 # range <- "A3:O7"
-# env_mil_1_r <- read_range(env_mil_file, sheet, range) 
+# env_mil_3_r <- read_range(env_mil_file, sheet, range) 
 # 
 # range <- "A8:O12"
 # env_mil_2_r <- read_range(env_mil_file, sheet, range) 
@@ -354,14 +360,14 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 **Initiatives implemented or planned to improve PI#6**
 
-`r env_mil_3_r`
+`r env_mil_4_r`
 
 **Initiatives implemented or planned to improve PI#7**
 
-`r env_mil_4_r`
+`r env_mil_6_r`
 
 **Initiatives implemented or planned to improve PI#8**
 
-`r env_mil_5_r`
+`r env_mil_8_r`
 
 :::

@@ -36,7 +36,7 @@ cap_titles <- c("Minutes of ATFM en-route delay",
 cap_heading_positions <- which(cap_er_all$a %in% cap_titles)
 
 for (i in c(2,3,4,6,7)) {
-  mytext <- apply(cap_er_all[(cap_heading_positions[i-1]+1):(cap_heading_positions[i]-1), ], 2, function(col) paste(col, collapse = "<br>"))
+  mytext <- apply(cap_er_all[(cap_heading_positions[i-1]+1):(cap_heading_positions[i]-1), ], 1, function(col) paste(col, collapse = "<br>"))
   
   # replace repeated breaks by single  
   mytext <- gsub("(<br>)+", "<br>", mytext)
@@ -168,9 +168,9 @@ cap_trm_heading_positions <- which(cap_trm_all$a %in% cap_trm_titles)
 
 for (i in 1:length(cap_trm_heading_positions)) {
   if (i<length(cap_trm_heading_positions)) {
-    mytext <- apply(cap_trm_all[(cap_trm_heading_positions[i]+1):(cap_trm_heading_positions[i+1]-1), ], 2, function(col) paste(col, collapse = "<br>"))
+    mytext <- apply(cap_trm_all[(cap_trm_heading_positions[i]+1):(cap_trm_heading_positions[i+1]-1), ], 1, function(col) paste(col, collapse = "<br>"))
   } else{
-    mytext <- apply(cap_trm_all[(cap_trm_heading_positions[i]+1):(cap_trm_heading_positions[i]+1), ], 2, function(col) paste(col, collapse = "<br>"))
+    mytext <- apply(cap_trm_all[(cap_trm_heading_positions[i]+1):(cap_trm_heading_positions[i]+1), ], 1, function(col) paste(col, collapse = "<br>"))
 
   }
   # replace repeated breaks by single  
