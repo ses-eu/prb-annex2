@@ -13,7 +13,9 @@ data_prep <- data_raw %>%
   mutate(
     xlabel = year,
     Target = round(target * 100, 0),
-    Actual = round(actual * 100, 1)
+    Actual = case_when(
+      year > year_report  ~ NA,
+      .default = round(actual * 100, 1))
   ) %>% 
   select(xlabel, Target, Actual) %>% 
   pivot_longer(-xlabel, names_to = "type", values_to = "mymetric") %>% 

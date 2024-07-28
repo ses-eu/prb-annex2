@@ -53,12 +53,19 @@ if (country == 'SES RP3') {
         type == "atc_disruptions" ~ "Disruptions",
         type == "weather" ~ "Weather",
         type == "other_non_atc" ~ "Other non-ATC"
-      ) 
+      ),
+      mymetric = case_when(
+        xlabel > year_report ~ NA,
+        .default = mymetric
+      )
     ) 
   
   data_prep_total <- data_raw_actual %>% 
     mutate(xlabel = year,
-           myothermetric = format(round(average_delay,2), digits = 2),
+           myothermetric = case_when(
+             xlabel > year_report ~ NA,
+             .default = format(round(average_delay,2), digits = 2)
+           ),
            type = "Total") %>% 
     select(xlabel, myothermetric, type)
     

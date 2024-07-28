@@ -19,8 +19,11 @@ if (country == "Network Manager") {
     ) 
   
   data_prep_actual <- data_prep %>% 
-    mutate(mymetric = round(actual * 100, 2),
-           type = "Actual") %>% 
+    mutate(mymetric = case_when(
+           year > year_report ~ NA,
+           .default = round(actual * 100, 2)),
+           type = "Actual"
+           ) %>% 
     select(xlabel, mymetric, type)
   
   data_prep_target <- data_prep %>% 
@@ -47,7 +50,10 @@ if (country == "Network Manager") {
     
     data_prep_actual <- data_prep %>% 
       filter(type == "Actual") %>% 
-      mutate(mymetric = round(kea_value * 100, 2)) %>% 
+      mutate(mymetric = case_when(
+        xlabel > year_report ~NA,
+        .default = round(kea_value * 100, 2))
+        ) %>% 
       select(xlabel, mymetric, type)
     
     data_prep_target <- data_prep %>% 

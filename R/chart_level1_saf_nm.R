@@ -1,8 +1,3 @@
-# 
-# # parameters ----
-# if (exists("data_folder") == FALSE) {
-#   source("R/parameters.R")
-# }
 
 # import data  ----
 data_raw <- read_xlsx(
@@ -25,7 +20,11 @@ data_prep_maturity <- data_raw %>%
   pivot_longer(-c(entity_name, year), names_to = "type", values_to = "score") %>% 
   mutate(type = str_replace_all(type, "actual_", ""),
          type = str_replace_all(type, "_", " "),
-         type = str_to_sentence(type)
+         type = str_to_sentence(type),
+         score = case_when(
+           year > year_report ~ NA,
+           .default = score
+         )
   ) %>% 
   mutate(
     score_text = case_when (

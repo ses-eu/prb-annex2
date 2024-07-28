@@ -12,7 +12,9 @@ data_prep <- data_raw %>%
     year_report == .env$year_report) %>% 
   mutate(
     xlabel = year,
-    mymetric = round(percent_above_15_min * 100, 1),
+    mymetric = case_when(
+      year > year_report  ~ NA,
+      .default = round(percent_above_15_min * 100, 1)),
     type = "Actual"
       ) %>% 
   select(

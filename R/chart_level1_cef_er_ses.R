@@ -27,11 +27,18 @@ data_prep_all <- data_raw %>%
 
 data_prep <- data_prep_all %>% 
   filter(status == "Actual" | status == "Determined") %>% 
-  mutate(mymetric = round(unit_cost_er,2))
+  mutate(mymetric = case_when(
+    as.numeric(str_replace(year,"-", "")) > year_report & year != "2020-2021" & status == "Actual" ~ NA ,
+    .default = round(unit_cost_er,2))
+    )
 
 data_actual_trend <- data_prep_all %>% 
   select(xlabel, type, unit_cost_er) %>% 
   filter(type %like% "Actual unit cost") %>% 
+  mutate(unit_cost_er = case_when(
+    as.numeric(str_replace(xlabel,"-", "")) > year_report & xlabel != "2020-2021" ~ NA,
+    .default = unit_cost_er
+  )) %>% 
   pivot_wider(names_from = 'type', values_from = 'unit_cost_er' ) %>% 
   clean_names()%>% 
   mutate(type = 'Actual')

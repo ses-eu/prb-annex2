@@ -34,7 +34,11 @@ data_prep <- data_raw %>%
   ) 
 
 data_prep_actual <- data_prep %>% 
-  filter(status == 'Actual')
+  filter(status == 'Actual') %>% 
+  mutate(number_of_ans_ps = case_when(
+    year > year_report ~ NA,
+    .default = number_of_ans_ps
+  ))
 
 data_prep_planned <- data_prep %>% 
   filter(status == 'Planned')
