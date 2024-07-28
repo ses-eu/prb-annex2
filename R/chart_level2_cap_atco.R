@@ -29,7 +29,7 @@ data_for_chart <- rbind(data_prep_ansp, data_prep_acc) %>%
   group_by(acc) %>% 
   mutate(min_y_axis = min(value, na.rm=T)/1.5,
          value = case_when (
-           year >= year_report & type == "Actual" ~ NA,
+           year > year_report & type == "Actual" ~ NA,
            .default = round(value, 0)
            )
          ) 

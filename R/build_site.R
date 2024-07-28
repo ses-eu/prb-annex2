@@ -2,7 +2,7 @@
 
 # clean environment and set main parameters ----
   rm(list = ls())
-  year_report <- 2021 # set your year report here
+  year_report <- 2023 # set your year report here
   out_format <- 'web' # set your output format here: 'pdf' or 'web'
   data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/data_for_web/'
   data_folder_a2 <- paste0(data_folder, "monitoring_files/", year_report, "/")
@@ -15,13 +15,13 @@
   
   ## add Home to State list
   state_list <- c(state_list, "Home")
-  # states_from <- c(26:29) # 1st number is the index of 1st state from which you want to generate
+  # states_from <- c(17:29) # 1st number is the index of 1st state from which you want to generate
   # state_list <- state_list[states_from]
 
 # build state pages ----
   
   ## set test check to TRUE to build only one state site, FALSE for all
-  test_check <- TRUE
+  test_check <- FALSE
   
   ## build pages
   if (test_check == TRUE) {
