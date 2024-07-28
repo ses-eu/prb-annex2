@@ -797,14 +797,21 @@ mygtable <-  function(df, myfont) {
     )
 }
 
+## replace links in html page ----
 replace_links <- function(filename) {
   
   tmp_text <- readLines(paste0(site_dir, "/", filename))
   
+  # strings I do not want to modify
+  not_modify <- c("https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2023/ses-rp3/", "https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2023/network-manager/")
+
+  tmp_text <- str_replace_all(tmp_text, not_modify[1], "temporary text1")  
+  tmp_text <- str_replace_all(tmp_text, not_modify[2], "temporary text2")  
+  
   # Define the pattern to match
   ## The regular expression pattern now includes - to match dashes in country names. [A-Za-z-]+ matches one or more alphabetic characters or dashes.
   
-  pattern <- paste0("(https://www\\.eurocontrol\\.int/performance/oscar/prb-monitoring-test/", year_report, "/(?!ses-rp3)(?!network-manager)[A-Za-z-]+/)")  
+  pattern <- paste0("(https://www\\.eurocontrol\\.int/performance/oscar/prb-monitoring-test/", year_report, "/[A-Za-z-]+/)")  
   
   # Replace the pattern with the same string plus "#hello"
   ## \\1 refers to the entire matched string, 
@@ -817,7 +824,12 @@ replace_links <- function(filename) {
   tmp_text <- gsub(pattern, 
                    paste0("\\1", replacement_link),
                    tmp_text)
+
+  #restore strings I didn't want modified
+  tmp_text <- str_replace_all(tmp_text, "temporary text1", not_modify[1])  
+  tmp_text <- str_replace_all(tmp_text, "temporary text2", not_modify[2])  
   
+    
   # rewrite file
   writeLines(tmp_text, paste0(site_dir, "/", filename))
 
