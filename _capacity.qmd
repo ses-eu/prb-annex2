@@ -25,6 +25,8 @@ cap_titles <- c("Minutes of ATFM en-route delay",
                 "**Capacity Planning**",
                 "ATCO in OPS (FTE)",
                 "**ATCO in OPS (FTE)**",
+                "Additional information relating to Russia's war of agression against Ukraine",
+                "**Additional information relating to Russia's war of agression against Ukraine**",
                 "Application of Corrective Measures for Capacity (if applicable)",
                 "**Application of Corrective Measures for Capacity (if applicable)**",
                 "Summary of capacity performance",
@@ -34,6 +36,7 @@ cap_titles <- c("Minutes of ATFM en-route delay",
 )
 
 cap_heading_positions <- which(cap_er_all$a %in% cap_titles)
+cap_heading_ukraine <- which(cap_er_all$a %in% c("Additional information relating to Russia's war of agression against Ukraine", "**Additional information relating to Russia's war of agression against Ukraine**"))
 
 for (i in c(2,3,4,6,7)) {
   mytext <- apply(cap_er_all[(cap_heading_positions[i-1]+1):(cap_heading_positions[i]-1), ], 1, function(col) paste(col, collapse = "<br>"))
@@ -373,7 +376,7 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 
 `r cap_er_nsa_4`
 
-**Application of Corrective Measures for Capacity (if applicable)**
+`r if_else(length(cap_heading_ukraine) == 0, "**Application of Corrective Measures for Capacity (if applicable)**", "**Additional information relating to Russia's war of agression against Ukraine**")`
 
 `r cap_er_nsa_6`
 

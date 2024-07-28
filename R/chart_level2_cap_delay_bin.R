@@ -87,4 +87,5 @@ mylocalmargin <- list(t=60)
 
 ## plot chart  ----
 mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals) %>% 
-  layout(xaxis = list(range= c(2019.5,2024.5)))
+  layout(xaxis = list(range= c(2019.5,2024.5)),
+         yaxis = list(rangemode = "tozero"))
