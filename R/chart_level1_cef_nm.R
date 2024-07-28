@@ -16,14 +16,19 @@ data_prep <- data_prep_wide %>%
   mutate(xlabel= year) %>% 
   select(xlabel, target, actual) %>% 
   pivot_longer(-xlabel, names_to = "type", values_to = "mymetric") %>% 
-  mutate(type = if_else(type == "actual", "Actual CSU", "Determined CSU"))
+  mutate(mymetric = if_else(type == "actual" & xlabel > year_report, NA, mymetric),
+    type = if_else(type == "actual", "Actual CSU", "Determined CSU"),
+         )
 
 data_prep_costs <- data_prep_wide %>%
   mutate(xlabel= year) %>% 
   select(xlabel, planned_costs, actual_costs) %>% 
   pivot_longer(-xlabel, names_to = "type", values_to = "myothermetric") %>% 
-  mutate(type = if_else(type == "actual_costs", "Actual costs", "Planned costs"),
-         myothermetric = round(myothermetric/1000, 2))
+  mutate(myothermetric = if_else(type == "actual_costs" & xlabel > year_report, 
+                                 NA, 
+                                 round(myothermetric/1000, 2)),
+    type = if_else(type == "actual_costs", "Actual costs", "Planned costs"),
+  )
 
 # chart parameters ----
 mysuffix <- ""

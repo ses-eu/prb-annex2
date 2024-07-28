@@ -88,4 +88,5 @@ myfactor <- c("VFR exempted",
               "Staff costs")
 
 # plot chart  ----
-myhbarc(mywidth, myheight, myfont, mymargin)
+myhbarc(mywidth, myheight, myfont, mymargin) %>% 
+  layout(xaxis = list(rangemode = "tozero"))

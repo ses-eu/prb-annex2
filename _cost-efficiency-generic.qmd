@@ -112,7 +112,7 @@ sheet <- if_else(cztype == "terminal",
 range <- "C11:M22"
 cef_txt_1_10  <- read_range(ceff_file, sheet, range)
 
-range <- if_else(year_report >= 2022, "C66:M71", "C65:M71")
+range <- if_else(year_report >= 2022, "C66:M71", "C64:M71")
 cef_txt_1_13  <- read_range(ceff_file, sheet, range)
 ```
 
@@ -326,6 +326,8 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 `r cef_txt_1_10[1,1]`
 
+`r if (params$year_report < 2022) "::: {.content-hidden}"`
+
 **`r cef_txt_1_13[1,1]`**
 
 `r cef_txt_1_13[2,1]`
@@ -333,5 +335,14 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 **`r cef_txt_1_13[3,1]`**
 
 `r cef_txt_1_13[4,1]`
+
+`r if (params$year_report < 2022) ":::"`
+
+`r if (params$year_report >= 2022) "::: {.content-hidden}"`
+
+`r cef_txt_1_13[1,1]`
+
+`r if (params$year_report >= 2022) ":::"`
+
 :::
 

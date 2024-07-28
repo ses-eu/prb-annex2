@@ -21,12 +21,27 @@ data_prep_reg <- data_prep_reg_all %>%
   group_by(year_text, x5_4_total_su) %>% 
   summarise(reg_res = sum(regulatory_result)) %>% 
   mutate(reg_res_per_su = reg_res * 1000 / x5_4_total_su) %>% 
-  select(year_text, reg_res, reg_res_per_su)
+  select(year_text, reg_res, reg_res_per_su) %>% 
+  mutate(
+    reg_res = case_when(
+      as.numeric(str_replace(year_text, "-", "")) > year_report & year_text != '2020-2021' ~ NA,
+      .default = reg_res
+    ),
+    reg_res_per_su = case_when(
+      as.numeric(str_replace(year_text, "-", "")) > year_report & year_text != '2020-2021' ~ NA,
+      .default = reg_res_per_su
+    )
+    
+  )
 
 # aucu
 data_prep_aucu_all <- aucu(cztype, mycz) 
 data_prep_aucu <- data_prep_aucu_all %>% 
-  select(year_text, aucu_excluding_or)
+  select(year_text, aucu_excluding_or) %>% 
+  mutate (aucu_excluding_or = case_when(
+    as.numeric(str_replace(year_text, "-", "")) > year_report & year_text != '2020-2021' ~ NA,
+    .default = aucu_excluding_or)
+  )
 
 # join tables
 data_prep <- data_prep_reg %>% 
