@@ -797,3 +797,29 @@ mygtable <-  function(df, myfont) {
     )
 }
 
+replace_links <- function(filename) {
+  
+  tmp_text <- readLines(paste0(site_dir, "/", filename))
+  
+  # Define the pattern to match
+  ## The regular expression pattern now includes - to match dashes in country names. [A-Za-z-]+ matches one or more alphabetic characters or dashes.
+  
+  pattern <- paste0("(https://www\\.eurocontrol\\.int/performance/oscar/prb-monitoring-test/", year_report, "/(?!ses-rp3)(?!network-manager)[A-Za-z-]+/)")  
+  
+  # Replace the pattern with the same string plus "#hello"
+  ## \\1 refers to the entire matched string, 
+  
+  replacement_link <- case_when(
+    filename %like% "cost-efficiency" ~ "cost-efficiency-er1-1.html", #for no terminal cases
+    .default = filename
+  )
+  
+  tmp_text <- gsub(pattern, 
+                   paste0("\\1", replacement_link),
+                   tmp_text)
+  
+  # rewrite file
+  writeLines(tmp_text, paste0(site_dir, "/", filename))
+
+}
+

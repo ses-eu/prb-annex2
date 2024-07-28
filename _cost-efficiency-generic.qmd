@@ -51,6 +51,7 @@ if (is.na(cef_txt_1_4[2,1]) == FALSE) {
   ### find beginning and end of headings
   tx <- cef_txt_1_4[1,1] |> pull()
   heading1 <- str_locate(tx, fixed('AUC vs DUC')) + 7 
+  if(is.na(heading1[1]) == TRUE) {heading1 <- str_locate(tx, fixed('AUC vs. DUC')) + 7}
   heading2 <- str_locate(tx, fixed(paste0(if_else(cztype == "terminal",
                                                            "**Terminal",
                                                            "**En route"), 
@@ -114,6 +115,12 @@ cef_txt_1_10  <- read_range(ceff_file, sheet, range)
 
 range <- if_else(year_report >= 2022, "C66:M71", "C64:M71")
 cef_txt_1_13  <- read_range(ceff_file, sheet, range)
+## the titles are already bold in the .qmd below
+if (year_report >= 2023) {
+  cef_txt_1_13 <- cef_txt_1_13 %>% 
+    mutate_all(., ~ str_replace_all(., fixed("**"),""))
+}
+
 ```
 
 [Cost-efficiency - {{< var doc.country >}}]{class="fakeh1"}
@@ -216,19 +223,19 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 **AUC vs. DUC**
 
-`r if_else(year_report >= 2022, pull(cef_txt_1_4[2,1]), cef_txt_1_4_duc)`
+`r if_else(is.na(cef_txt_1_4[2,1]) == TRUE, cef_txt_1_4_duc, pull(cef_txt_1_4[2,1]))`
 
 **En route service units**
 
-`r if_else(year_report >= 2022, pull(cef_txt_1_4[my_index_su,1]), cef_txt_1_4_su)`
+`r if_else(is.na(cef_txt_1_4[my_index_su,1]) == TRUE, cef_txt_1_4_su, pull(cef_txt_1_4[my_index_su,1]))`
 
 **En route costs by entity**
 
-`r if_else(year_report >= 2022, pull(cef_txt_1_4[my_index_cost_by_ent,1]), cef_txt_1_4_cost_all)`
+`r if_else(is.na(cef_txt_1_4[my_index_cost_by_ent,1]) == TRUE, cef_txt_1_4_cost_all, pull(cef_txt_1_4[my_index_cost_by_ent,1]))`
 
 **En route costs for the main ANSP at charging zone level**
 
-`r if_else(year_report >= 2022, pull(cef_txt_1_4[my_index_cost_main,1]), cef_txt_1_4_cost_main)`
+`r if_else(is.na(cef_txt_1_4[my_index_cost_main,1]) == TRUE, cef_txt_1_4_cost_main, pull(cef_txt_1_4[my_index_cost_main,1]))`
 
 :::
 
