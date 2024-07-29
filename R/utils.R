@@ -713,7 +713,7 @@ myhbarc <-  function(mywidth, myheight, myfont, mymargin) {
       marker = list(color = ~ifelse(mymetric>=0, mybarcolor_pos, mybarcolor_neg)),
       text = ~ mylabel,
       # text = ~ as.character(format(round(VALUE,0), big.mark = " ")),
-      # textangle = -90,
+      textangle = 0,
       textposition = "auto",
       cliponaxis = FALSE,
       orientation = 'h',

@@ -1,6 +1,6 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("cz") == FALSE) {cz = c("1", "enroute")}
+if (exists("cz") == FALSE) {cz = c("1", "terminal")}
 # ez=1
 
 # define cz ----
@@ -56,7 +56,7 @@ data_prep <- data_raw %>%
   pivot_wider(names_from = 'status', values_from = 'value') %>% 
   arrange(desc(type)) %>% 
   mutate(mymetric = (A-D)/10^6,
-         mylabel = if_else(A == 0, '-', 
+         mylabel = if_else(D == 0, '-', 
                            paste0(
                              if_else(mymetric > 0, '+', ''),
                              round((A/D-1) *100, 1), 
@@ -68,6 +68,14 @@ data_prep <- data_raw %>%
                         "Other operating costs",
                         "Staff costs"))) 
 
+# check if all values are negative or very small to fix formatting issue
+all_negative_or_zero <- all(data_prep$mymetric <= 0.05)
+
+# set x axis range to avoid labels being clipped
+myroundup <- max(floor((log10(abs(max(data_prep$mymetric, na.rm = TRUE))))), floor((log10(abs(min(data_prep$mymetric, na.rm = TRUE))))))
+range_min <- floor(min(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^myroundup - 10^myroundup/2
+range_min <- if_else(range_min >0, 0, range_min)
+range_max <- ceiling(max(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^myroundup + 10^myroundup/2
 
 # chart parameters ----
 mychart_title <- paste0("Costs by nature for main ANSP ", main_ansp," (M€<sub>2017</sub>) - ", year_report)
@@ -76,8 +84,9 @@ mybarcolor_pos <- '#A5A5A5'
 mybarcolor_neg <- '#A5A5A5'
 mytextcolor <- 'black'
 myhovertemplate <- paste0('%{y} (A-D): %{x:,.1f}<extra></extra>')
-myxaxis_tickformat <- "+0,"
-mydecimals <- 1
+# myxaxis_tickformat <- "0,.1f"
+myxaxis_tickformat <- if_else(all_negative_or_zero, "0,.1f", "+0,")
+mydecimals <- 3
 
 ###set up order of traces
 myfactor <- c("VFR exempted", 
@@ -89,4 +98,4 @@ myfactor <- c("VFR exempted",
 
 # plot chart  ----
 myhbarc(mywidth, myheight, myfont, mymargin) %>% 
-  layout(xaxis = list(rangemode = "tozero"))
+  layout(xaxis = list(range = c(range_min, range_max)))
