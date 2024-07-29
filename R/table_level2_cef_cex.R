@@ -27,7 +27,7 @@ data_raw  <-  read_xlsx(
 data_prep_t2 <- data_raw %>% 
   filter(
     entity_code == mycz,
-    year == if_else(year_report == 2021, 20202021,year_report)
+    year == if_else(year_report == 2021 | year_report == 2020, 20202021,year_report)
   ) %>% 
   select(
     year,
@@ -82,7 +82,8 @@ data_prep <- data_prep_t2 %>%
   
 # plot table ----
 mygtable(data_prep, myfont) %>% 
-  cols_label(xlabel = paste0("Cost exempt from cost sharing by item in ", year_report),
+  cols_label(xlabel = paste0("Cost exempt from cost sharing by item in ", 
+                             if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))),
              mymetric = "€'000",
              myothermetric = "€/SU") %>% 
   tab_options(column_labels.background.color = "#F2F2F2",

@@ -82,6 +82,8 @@ env_mil_all[is.na(env_mil_all)] <- ""
 
 env_mil_titles <- c("Update on Military dimension of the plan",
                 "**Update on Military dimension of the plan**",
+                "Military - related measures implemented or planned to improve environment and capacity",														
+                "**Military - related measures implemented or planned to improve environment and capacity**",											
                 "Military - related measures implemented or planned to improve capacity", 
                 "**Military - related measures implemented or planned to improve capacity**",
                 "PI#6 Effective use of reserved or segregated airspace - national level",
@@ -354,7 +356,18 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 `r env_mil_1`
 
+
+`r if (params$year_report != 2020) ":::: {.content-hidden}"`
+
+**Military - related measures implemented or planned to improve environment and capacity**														
+
+`r if (params$year_report != 2020) "::::"`
+
+`r if (params$year_report == 2020) ":::: {.content-hidden}"`
+
 **Military - related measures implemented or planned to improve capacity**
+
+`r if (params$year_report == 2020) "::::"`
 
 `r env_mil_2`
 

@@ -19,7 +19,7 @@ data_calc <- aucu(cztype, mycz)
   
 # prep data ----
 data_prep <- data_calc %>% 
-  filter(year_text == if_else(year_report == 2021, "2020-2021", as.character(year_report))) %>% 
+  filter(year_text == if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))) %>% 
   select(
     initial_duc,
     retro_ur,
@@ -57,7 +57,9 @@ data_prep <- data_calc %>%
 
 # plot chart  ----
 mygtable(data_prep, myfont*0.95) %>% 
-  cols_label(type = paste0("Components of the AUCU in ", year_report), value = "€/SU") %>% 
+  cols_label(type = paste0("Components of the AUCU in ", 
+                           if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))), 
+             value = "€/SU") %>% 
   tab_options(column_labels.background.color = "#F2F2F2",
               column_labels.font.weight = 'bold',
               container.padding.y = 0) %>% 
@@ -74,7 +76,8 @@ mygtable(data_prep, myfont*0.95) %>%
   ) %>% 
   fmt_percent(rows = 15, decimals = 1, force_sign = TRUE) |> 
   tab_header(
-    title = md(paste0("**AUCU components (€/SU) – ", year_report, "**"))
+    title = md(paste0("**AUCU components (€/SU) – ",
+                      if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report)), "**"))
   )
   
   
