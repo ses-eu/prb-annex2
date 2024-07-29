@@ -18,7 +18,7 @@ data_raw_eosm  <-  read_xlsx(
 
 data_prep_eosm <- data_raw_eosm %>% 
   filter(
-    ms == country
+    ms == country,
   ) %>% 
   select(
     ms, entity_name, year, eo_sm_score
@@ -37,7 +37,8 @@ data_prep_maturity <- data_raw_maturity %>%
   mutate(type = str_replace_all(type, "_", " "),
          type = str_to_sentence(type)
   ) %>% 
-  filter(status == "actual") %>%
+  filter(status == "actual",
+         year <= year_report) %>%
   mutate(
     score_text = case_when (
       score == 20 ~ 'A',
@@ -76,7 +77,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
     ) %>%
     add_trace(
       inherit = FALSE,
-      data = data_prep_eosm,
+      data = filter(data_prep_eosm, year<= year_report),
       x = ~ year,
       y = ~ eo_sm_score,
       yaxis = "y2",
