@@ -18,8 +18,15 @@ mycz_name <- if_else(cztype == "terminal",
 data_calc <- aucu(cztype, mycz)
   
 # prep data ----
-data_prep <- data_calc %>% 
-  mutate(year = as.numeric(str_replace_all(year_text, '2020-', ''))) |> 
+data_calc_mod <- data_calc %>% 
+  mutate(year = as.numeric(str_replace_all(year_text, '2020-', ''))) 
+
+data_calc_mod_2020 <- data_calc_mod |> 
+  filter(year == 2021) |> mutate(year = 2020)
+
+data_prep <- data_calc_mod |> 
+  rbind(data_calc_mod_2020) |> 
+  arrange(year) |> 
   select(
     year,
     year_text,

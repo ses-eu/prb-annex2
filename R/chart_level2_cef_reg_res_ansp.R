@@ -1,6 +1,6 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("cz") == FALSE) {cz = c("1", "terminal")}
+if (exists("cz") == FALSE) {cz = c("1", "enroute")}
 # ez=1
 
 # define cz ----
@@ -36,6 +36,7 @@ data_for_chart_value <- data_for_chart_wide %>%
     xlabel == 'ex_ante_roe'  ~ 'Ex-ante'),
     mymetric = mymetric/1000
   )
+
 data_for_chart_share <- data_for_chart_wide %>% 
   select(-c(regulatory_result, ex_ante_roe)) %>% 
   pivot_longer(-year_text, names_to = "xlabel", values_to = 'share') %>% 
@@ -85,7 +86,9 @@ mytitle_y <- 0.99
 #### yaxis
 myyaxis_title <- "Regulatory result (M€)"
 myyaxis_ticksuffix <- ""
-myyaxis_tickformat <- ".0f"
+myyaxis_tickformat <- if_else(max(data_prep$mymetric, na.rm = TRUE) <10, 
+                              ".1f",
+                              ".0f")
 
 #### legend
 mylegend_y <- -0.24
@@ -145,8 +148,11 @@ add_trace(
     title = 'Regulatory result\nas a % of revenues',
     overlaying = "y",
     zerolinecolor = '#E8E8E8',
-    rangemode = "nonnegative",
+    rangemode = "tozero",
     ticksuffix = '%',
+    tickformat = if_else(max(data_prep$share, na.rm = TRUE) >0.1, 
+                          ".1f",
+                          ".0f"),
     side = 'right',
     showgrid = FALSE
     ),
