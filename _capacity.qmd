@@ -119,7 +119,7 @@ for (i in c(2,3,4,6,7)) {
                        if_else(cap_er_all$a[i] == "****", 
                                "",
                                paste0(cap_er_all$a[i], ": ")),
-                               cap_er_all$b[i+1],
+                               cap_er_all$c[i+1],
                                '<br>'
                        )
     }
@@ -141,7 +141,7 @@ for (i in c(2,3,4,6,7)) {
   ### remove leading and trailing line breaks
   mytext_acc <- sub("^<br>|<br>$", "", mytext_acc)
   
-  cap_er_nsa_5 <- paste0(mytext, mytext_acc)
+  cap_er_nsa_5 <- paste0(mytext_acc)
 
 ## terminal ----------------------------------------------------------- 
 # find headings to define ranges

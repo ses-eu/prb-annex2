@@ -142,7 +142,11 @@ if (country == 'SES RP3') {
     select(xlabel, mymetric) %>% 
     group_by(xlabel) %>% 
     summarise(myothermetric = sum(mymetric)) %>%
-    mutate(myothermetric = format(round(myothermetric,2), digits = 2)) %>% 
+    mutate(myothermetric = case_when(
+      is.na(myothermetric) == TRUE ~ "",
+      .default = format(round(myothermetric,2), digits = 2)
+      )
+      ) %>% 
     mutate(type = "Total")
 }
 
