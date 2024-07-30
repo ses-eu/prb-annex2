@@ -803,7 +803,7 @@ replace_links <- function(filename) {
   tmp_text <- readLines(paste0(site_dir, "/", filename))
   
   # strings I do not want to modify
-  not_modify <- c("https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2023/ses-rp3/", "https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/2023/network-manager/")
+  not_modify <- c(paste0("https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/", year_report,"/ses-rp3/"), paste0("https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/", year_report,"/network-manager/"))
 
   tmp_text <- str_replace_all(tmp_text, not_modify[1], "temporary text1")  
   tmp_text <- str_replace_all(tmp_text, not_modify[2], "temporary text2")  

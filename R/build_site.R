@@ -2,7 +2,7 @@
 
 # clean environment and set main parameters ----
   rm(list = ls())
-  year_report <- 2023 # set your year report here
+  year_report <- 2021 # set your year report here
   out_format <- 'web' # set your output format here: 'pdf' or 'web'
   data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/data_for_web/'
   data_folder_a2 <- paste0(data_folder, "monitoring_files/", year_report, "/")
@@ -13,9 +13,10 @@
 # get data ----
   source("R/get_data.R")
   
-  ## add Home to State list
+  ## add Home to State list and remove MUAC
   state_list <- c(state_list, "Home")
-  # states_from <- c(17:29) # 1st number is the index of 1st state from which you want to generate
+  state_list <- state_list[-"MUAC"]
+  # states_from <- c(6:29) # 1st number is the index of 1st state from which you want to generate
   # state_list <- state_list[states_from]
 
 # build state pages ----
@@ -24,8 +25,8 @@
   test_check <- FALSE
   
   ## build pages
-  if (test_check == TRUE) {
-    state_list <- 'Home' # set your test country here (Home for home page)
+  if (test_check) {
+    state_list <- 'Austria' # set your test country here (Home for home page)
   } 
 
   for (i in 1:length(state_list)) {
@@ -65,6 +66,12 @@
       
     } else {
       ## Other pages/sites ----
+      ### find list of html files
+      hmtl_files <- list.files(site_dir, pattern = "\\.html$", full.names = FALSE)
+      
+      ### replace links to countries by links to country/section
+      purrr::map(hmtl_files, replace_links)
+      
       ### delete previous version
       unlink(paste0(destination_dir, country_lower), recursive = TRUE) 
       
