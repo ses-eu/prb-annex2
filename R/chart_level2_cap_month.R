@@ -5,18 +5,18 @@ if (country == 'SES RP3') {
 
   ## import data  ----
   data_raw_actual  <-  read_xlsx(
-    paste0(data_folder, "SES CAP file.xlsx"),
+    paste0(data_folder, "SES file.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
-    sheet = if_else(cztype == "enroute", "Monthly en route delay",
-                    "monthly terminal delay"),
+    sheet = if_else(cztype == "enroute", "en route monthly delay",
+                    "terminal monthly delay"),
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
   
   data_raw_target  <-  read_xlsx(
-    paste0(data_folder, "SES CAP file.xlsx"),
+    paste0(data_folder, "SES file.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
-    sheet = "Delay targets",
+    sheet = "en route delay targets",
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
