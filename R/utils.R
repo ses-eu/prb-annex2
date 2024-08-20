@@ -451,7 +451,7 @@ read_mytable <- function(file, sheet, table){
       mutate(
         atsp_gain_loss_cost_sharing = sum(dif_cost_gain_loss, x2_5_adjust_inflation, x3_8_diff_det_cost_actual_cost, na.rm = TRUE),
         total_net_gain_loss = sum(atsp_gain_loss_cost_sharing, trs, x6_4_financial_incentive, na.rm = TRUE),
-        regulatory_result_nc = total_net_gain_loss + ex_post_roe_nc,
+        regulatory_result_nc = sum(total_net_gain_loss, ex_post_roe_nc, na.rm = TRUE),
         actual_revenues_nc = sum(x4_2_cost_excl_vfr, total_net_gain_loss, na.rm = TRUE)
       ) %>% 
       select(-entity_type, -charging_zone_code, -entity_name, -entity_code) %>% 
@@ -503,34 +503,14 @@ read_mytable <- function(file, sheet, table){
              trs_nc,
              financial_incentive_nc)
     
-    ## sum 2020-2021 together
-    data_prep_202021 <- data_prep_years_split %>% 
-      filter(year_text == '2020' | year_text == '2021') |> 
-      group_by(type) %>% 
-      summarise(regulatory_result_nc = sum(regulatory_result_nc, na.rm = TRUE),
-                ex_ante_roe_nc = sum(ex_ante_roe_nc, na.rm = TRUE),
-                ex_post_roe_nc = sum(ex_post_roe_nc, na.rm = TRUE),
-                actual_revenues_nc = sum(actual_revenues_nc, na.rm = TRUE),
-                
-                atsp_gain_loss_cost_sharing_nc = sum(atsp_gain_loss_cost_sharing_nc, na.rm = TRUE),
-                trs_nc = sum(trs_nc, na.rm = TRUE),
-                financial_incentive_nc = sum(financial_incentive_nc, na.rm = TRUE)
-                ) %>% 
-      mutate(year_text = '2020-2021') %>% 
-      relocate(year_text, .before = type)
-    
-    data_prep_nat_curr <- data_prep_202021 %>% 
-      rbind(data_prep_years_split) %>% 
-      filter(year_text != '2020' & year_text != '2021') 
-    
     # get exchange rates
     yearly_xrates <- get_xrates(cztype, mycz)
     
     data_prep_xrates <- yearly_xrates %>% 
       select(-entity_code) %>% 
-      filter(year > 2020) %>% 
-      mutate(year_text = as.character(year),
-             year_text = if_else(year_text == '2021', '2020-2021', year_text)
+      # filter(year > 2020) %>% 
+      mutate(year_text = as.character(year)
+             # , year_text = if_else(year_text == '2021', '2020-2021', year_text)
       ) %>% select(-year)
     
     # get tsus 
@@ -538,12 +518,12 @@ read_mytable <- function(file, sheet, table){
       filter(entity_code == ecz_list$ecz_id[ez],
              status == 'A',
              year > 2021) %>% 
-      select(year, x5_4_total_su) %>% 
-      mutate(year_text = as.character(year),
-             year_text = if_else(year_text == '20202021', '2020-2021', year_text)
+      select(year, x5_4_total_su)  |> 
+      mutate(year_text = as.character(year)
+             , year_text = if_else(year_text == '20202021', '2020-2021', year_text)
       ) %>% select(-year)
-    
-    regulatory_result <- data_prep_nat_curr %>% 
+
+    regulatory_result_euro_split <- data_prep_years_split %>% 
       left_join(data_prep_xrates, by = "year_text") %>% 
       mutate(regulatory_result = regulatory_result_nc / pp_exchangerate,
              ex_ante_roe = ex_ante_roe_nc / pp_exchangerate,
@@ -554,11 +534,32 @@ read_mytable <- function(file, sheet, table){
              trs = trs_nc / pp_exchangerate,
              financial_incentive = financial_incentive_nc / pp_exchangerate
              
-             ) %>% 
+      ) %>% 
       select(-pp_exchangerate, -regulatory_result_nc, -ex_ante_roe_nc, -ex_post_roe_nc, -actual_revenues_nc,
-             -atsp_gain_loss_cost_sharing_nc, -trs_nc, -financial_incentive_nc) %>% 
+             -atsp_gain_loss_cost_sharing_nc, -trs_nc, -financial_incentive_nc) 
+        
+    ## sum 2020-2021 together
+    regulatory_result_euro_202021 <- regulatory_result_euro_split %>% 
+      filter(year_text == '2020' | year_text == '2021') |> 
+      group_by(type) %>% 
+      summarise(regulatory_result = sum(regulatory_result, na.rm = TRUE),
+                ex_ante_roe = sum(ex_ante_roe, na.rm = TRUE),
+                ex_post_roe = sum(ex_post_roe, na.rm = TRUE),
+                actual_revenues = sum(actual_revenues, na.rm = TRUE),
+                
+                atsp_gain_loss_cost_sharing = sum(atsp_gain_loss_cost_sharing, na.rm = TRUE),
+                trs = sum(trs, na.rm = TRUE),
+                financial_incentive = sum(financial_incentive, na.rm = TRUE)
+                ) %>% 
+      mutate(year_text = '2020-2021') %>% 
+      relocate(year_text, .before = type)
+    
+    regulatory_result <- regulatory_result_euro_202021 %>% 
+      rbind(regulatory_result_euro_split) %>% 
+      filter(year_text != '2020' & year_text != '2021') %>% 
       left_join(tsus, by = "year_text")
     
+
     return(regulatory_result)
   }
     
