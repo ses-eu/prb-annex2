@@ -21,83 +21,93 @@
     }
   }
     
-# create index pages and other adjustments ----
-  if (country == "Home") {
-    file.copy('_original_files/home_index.qmd', 'index.qmd', overwrite = TRUE, copy.mode = TRUE)
-    ###for the home page we add as well the other qmds here
-    file.copy('_original_files/home_about.qmd', 'about.qmd', overwrite = TRUE, copy.mode = TRUE)
-    file.copy('_original_files/home_disclaimer.qmd', 'disclaimer.qmd', overwrite = TRUE, copy.mode = TRUE)
-    
-    ### we also remove one line from the css file
-    tmp_text <- readLines("_original_files/full_styles.css")
-    tmp_text <- str_replace(tmp_text, fixed("  font-size: 0.9rem;"), "") 
-    writeLines(tmp_text, 'styles.css')
+# create index pages ----
 
-  } else if (country == "Network Manager") {
-    tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
-    tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/nm_index.qmd") 
-    writeLines(tmp_text, 'index.qmd')
-
-  } else if (country == "SES RP3") {
-      tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
-      if (out_format == 'pdf') {
-        tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/ses_index_pdf.qmd")
-      } else {
-        tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/ses_index.qmd")
-      }
-      writeLines(tmp_text, 'index.qmd')
-      
-  } else {
-      tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
-      tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/state_index.qmd") 
-      writeLines(tmp_text, 'index.qmd')
-      
-      # generate level 2 .qmd master files 
-      level2_files <- c("capacity.qmd",
-                           "environment.qmd",
-                           "safety.qmd")
-
-      for (i in 1:no_ecz) {
-        # add level2 cef er .qmd file name to list
-        level2_files <- append(level2_files, paste0("cost-efficiency-er",i,"-1.qmd"))
-        
-        # generate level2 _cef enroute files from generic file
-        tmp_text <- readLines("_cost-efficiency-generic.qmd")
-        tmp_text <- str_replace(tmp_text, "@@cz_index@@", as.character(i)) 
-        tmp_text <- str_replace(tmp_text, "@@cz_type@@", "enroute") 
-        tmp_text <- str_replace(tmp_text, "@@cz_type_proper@@", "En route") 
-        tmp_text <- str_replace(tmp_text, "@@cz_short@@", "ecz") 
-        writeLines(tmp_text, paste0('_cost-efficiency-er', i,'-1.qmd'))
-        
-      }
-      
-      if (no_tcz > 0) {
-        for (i in 1:no_tcz) {
-          # add level2 cef trm .qmd file name to list
-          level2_files <- append(level2_files, paste0("cost-efficiency-tz",i,"-1.qmd"))
+if (country == "Home") {
+  file.copy('_original_files/home_index.qmd', 'index.qmd', overwrite = TRUE, copy.mode = TRUE)
+  ###for the home page we add as well the other qmds here
+  file.copy('_original_files/home_about.qmd', 'about.qmd', overwrite = TRUE, copy.mode = TRUE)
+  file.copy('_original_files/home_disclaimer.qmd', 'disclaimer.qmd', overwrite = TRUE, copy.mode = TRUE)
   
-          # generate level2 _cef enroute files from generic file
-          tmp_text <- readLines("_cost-efficiency-generic.qmd")
-          tmp_text <- str_replace(tmp_text, "@@cz_index@@", as.character(i)) 
-          tmp_text <- str_replace(tmp_text, "@@cz_type@@", "terminal") 
-          tmp_text <- str_replace(tmp_text, "@@cz_type_proper@@", "Terminal") 
-          tmp_text <- str_replace(tmp_text, "@@cz_short@@", "tcz") 
-          
-          writeLines(tmp_text, paste0('_cost-efficiency-tz', i,'-1.qmd'))
-          
-          }
-      }
-      
-      level2_files <- sort(level2_files)
-      
-      # generate actual .qmd files linked to respective _.qmd files
-      for (i in 1:length(level2_files)) {
-        tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
-        tmp_text <- str_replace(tmp_text, "file-placeholder", paste0("_", level2_files[i])) 
-        writeLines(tmp_text, level2_files[i])
-      }
-    }
+  ### we also remove one line from the css file
+  tmp_text <- readLines("_original_files/full_styles.css")
+  tmp_text <- str_replace(tmp_text, fixed("  font-size: 0.9rem;"), "") 
+  writeLines(tmp_text, 'styles.css')
 
+} else if (country == "Network Manager") {
+  tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
+  tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/nm_index.qmd") 
+  writeLines(tmp_text, 'index.qmd')
+
+} else if (country == "SES RP3") {
+    tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
+    if (out_format == 'pdf') {
+      tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/ses_index_pdf.qmd")
+    } else {
+      tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/ses_index.qmd")
+    }
+    writeLines(tmp_text, 'index.qmd')
+    
+} else {
+    tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
+    tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/state_index.qmd") 
+    writeLines(tmp_text, 'index.qmd')
+}
+  
+# generate level 2 .qmd master files ----
+## set list of level 2 files depending on case
+if (country == "Home" | country == "Network Manager") {
+  level2_files <- ""
+  
+} else if (country == "SES RP3") {
+  level2_files <- c("safety.qmd")
+                    
+} else {
+  level2_files <- c("capacity.qmd",
+                    "environment.qmd",
+                    "safety.qmd")
+  
+  for (i in 1:no_ecz) {
+    # add level2 cef er .qmd file name to list
+    level2_files <- append(level2_files, paste0("cost-efficiency-er",i,"-1.qmd"))
+    
+    # generate level2 _cef enroute files from generic file
+    tmp_text <- readLines("_cost-efficiency-generic.qmd")
+    tmp_text <- str_replace(tmp_text, "@@cz_index@@", as.character(i)) 
+    tmp_text <- str_replace(tmp_text, "@@cz_type@@", "enroute") 
+    tmp_text <- str_replace(tmp_text, "@@cz_type_proper@@", "En route") 
+    tmp_text <- str_replace(tmp_text, "@@cz_short@@", "ecz") 
+    writeLines(tmp_text, paste0('_cost-efficiency-er', i,'-1.qmd'))
+    
+  }
+  
+  if (no_tcz > 0) {
+    for (i in 1:no_tcz) {
+      # add level2 cef trm .qmd file name to list
+      level2_files <- append(level2_files, paste0("cost-efficiency-tz",i,"-1.qmd"))
+      
+      # generate level2 _cef enroute files from generic file
+      tmp_text <- readLines("_cost-efficiency-generic.qmd")
+      tmp_text <- str_replace(tmp_text, "@@cz_index@@", as.character(i)) 
+      tmp_text <- str_replace(tmp_text, "@@cz_type@@", "terminal") 
+      tmp_text <- str_replace(tmp_text, "@@cz_type_proper@@", "Terminal") 
+      tmp_text <- str_replace(tmp_text, "@@cz_short@@", "tcz") 
+      
+      writeLines(tmp_text, paste0('_cost-efficiency-tz', i,'-1.qmd'))
+    }
+  }
+}
+  
+level2_files <- sort(level2_files)
+  
+# generate actual .qmd files linked to respective _.qmd files
+for (i in 1:length(level2_files)) {
+  tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
+  tmp_text <- str_replace(tmp_text, "file-placeholder", paste0("_", level2_files[i])) 
+  writeLines(tmp_text, level2_files[i])
+}
+  
+  
 # find all scripts that generate .qmd files ----
   # ## get all R scripts ----
   # rscripts <- list.files(here('R'))

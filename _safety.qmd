@@ -1,9 +1,28 @@
 ```{r saf-level2-text}
 # define ranges and import data
-sheet <- country
-
-range <- "A16:G17"
-saf_2_r <- read_range(saf_eosm_file, sheet, range) 
+if (params$country == "SES RP3") {
+  saf_text <- ""
+  
+} else {
+  sheet <- country
+  
+  range <- "A15:G30"
+  saf_all <- read_range(saf_eosm_file, sheet, range) 
+  saf_all <- saf_all |> 
+      rename(a = 1) 
+  
+  # replace NAs by empty strings
+  saf_all[is.na(saf_all)] <- ""
+  
+  #define titles to lookup
+  saf_titles <- c("Observations",
+                  "**Observations**"
+  )
+  
+  saf_heading_positions <- which(saf_all$a %in% saf_titles)
+  
+  saf_text <- saf_all[(saf_heading_positions[1]+1):(saf_heading_positions[1]+1), 1]
+}
 
 ```
 
@@ -23,27 +42,26 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 `r saf_conc1`
 ::::
-
 :::
 
 ::: {#container-saf-indicators}
 
 ## Effectiveness of Safety Management
 
+`r if (params$country != "SES RP3") "::: {.content-hidden}"`
+
 :::: {layout="[ 20, 60, 20 ]"}
 
 ::::: {#empty-div}
 :::::
 
-::::: {#chart-saf-eosm}
-```{r chart-saf-eosm}
-#| file: R/chart_level1_saf.R
+::::: {#chart-saf-ansp}
+```{r chart-saf-ansp}
+#| file: R/chart_level1_saf_ses.R
 #| out.width: "100%"
 ```
 :::::
 ::::
-
-`r if (params$country != "SES RP3") ":::: {.content-hidden}"`
 
 :::: {layout="[ 50, 50 ]"}
 
@@ -62,15 +80,36 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 :::::
 
 ::::
-`r if (params$country != "SES RP3") "::::"`
+`r if (params$country != "SES RP3") ":::"`
 
-:::
 
-::: {.callout-note collapse=true}
+`r if (params$country == "SES RP3") "::: {.content-hidden}"`
+
+:::: {layout="[ 20, 60, 20 ]"}
+
+::::: {#empty-div}
+:::::
+
+::::: {#chart-saf-eosm}
+```{r chart-saf-eosm}
+#| file: R/chart_level1_saf.R
+#| out.width: "100%"
+```
+:::::
+::::
+
+:::: {.callout-note collapse=true}
 
 #### NSA input
 
-`r saf_2_r[1,1]`
+`r saf_text`
+
+::::
+`r if (params$country == "SES RP3") ":::"`
 
 :::
+
+
+
+
 

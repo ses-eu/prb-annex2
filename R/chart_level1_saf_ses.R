@@ -108,7 +108,8 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
                    # tickcolor = 'rgb(127,127,127)',
                    # ticks = 'outside',
                    zeroline = TRUE,
-                   zerolinecolor = 'rgb(240,240,240)',
+                   zerolinecolor = myyaxis_zerolinecolor,
+                   rangemode = "tozero",
                    titlefont = list(size = myfont), tickfont = list(size = myfont)
       ),
       # showlegend = FALSE
@@ -126,7 +127,7 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
 }
 
 ## plot chart ----
-myc(mywidth, myheight, myfont, mylinewidth, mymargin)
+myc(mywidth, myheight+30, myfont, mylinewidth, mymargin)
 
 # # export to image
 # w = 1200
