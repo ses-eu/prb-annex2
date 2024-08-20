@@ -32,34 +32,57 @@ if (country == "Network Manager") {
   
 } else if (country == "SES RP3"){
     # SES case ----
-    ## import data  ----
-    data_raw  <-  read_xlsx(
-      paste0(data_folder, "SES_OLD.xlsx"),
-      sheet = "SES_KEA",
-      range = cell_limits(c(1, 1), c(NA, NA))) %>%
-      as_tibble() %>% 
-      clean_names() 
-    
-    ## prepare data ----
-    data_prep <- data_raw %>% 
-      filter(year_report == .env$year_report) %>% 
-      mutate(
-        xlabel = year,
-        type = status
-      ) 
-    
-    data_prep_actual <- data_prep %>% 
-      filter(type == "Actual") %>% 
-      mutate(mymetric = case_when(
-        xlabel > year_report ~NA,
-        .default = round(kea_value * 100, 2))
-        ) %>% 
-      select(xlabel, mymetric, type)
-    
-    data_prep_target <- data_prep %>% 
-      filter(type == "Target") %>% 
-      mutate(myothermetric = round(kea_value * 100, 2)) %>% 
-      select(xlabel, myothermetric, type)
+  ## import data  ----
+  data_raw_target  <-  read_xlsx(
+    paste0(data_folder, "SES file.xlsx"),
+    # here("data","hlsr2021_data.xlsx"),
+    sheet = "Table_KEA Targets",
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+  
+  data_raw_actual  <-  read_xlsx(
+    paste0(data_folder, "SES file.xlsx"),
+    # here("data","hlsr2021_data.xlsx"),
+    sheet = "Table_HFE",
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+  
+  ## prepare data ----
+  data_prep_target <- data_raw_target %>% 
+    # filter(
+    #   entity_name == .env$country
+    # ) %>% 
+    mutate(
+      # type = 'Target',
+      target = round(kea_reference_value_percent, 2)
+    ) %>% 
+    select(
+      year,
+      target
+    ) %>% 
+    mutate(
+      xlabel = year,
+      myothermetric = target,
+      type = "Target"
+    ) 
+  
+  data_prep_actual <- data_raw_actual %>% 
+    filter(
+      # entity_name == country
+      , year <= year_report) %>% 
+    mutate (actual = hfe_kpi_percent) %>% 
+    select(
+      year,
+      actual
+    ) %>% 
+    mutate(
+      xlabel = year,
+      mymetric = actual,
+      type = "Actual"
+    ) 
+  
 
 } else  {
   # State case ----
