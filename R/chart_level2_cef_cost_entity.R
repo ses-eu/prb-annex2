@@ -28,7 +28,7 @@ data_prep <- data_raw %>%
   filter(
     charging_zone_code == mycz,
     entity_type != if_else(cztype == "terminal", "TCZ", "ECZ"),
-    year == .env$year_report
+    year == if_else(.env$year_report == 2020 | .env$year_report == 2021, 20202021, .env$year_report)
   ) %>% 
   mutate(
     entity_group = case_when(
@@ -86,7 +86,9 @@ mybarmode <- 'group'
 mytitle_text <- paste0("Total costs per entity group at", 
                        if_else(cztype == "terminal", " TCZ", " ECZ"),
                        " level (M€<sub>2017</sub>) - ",
-                       year_report)
+                       if_else(year_report == 2020 | year_report == 2021, 
+                               '2020-2021',
+                               as.character(year_report)))
 mytitle_y <- 0.99
 
 #### xaxis

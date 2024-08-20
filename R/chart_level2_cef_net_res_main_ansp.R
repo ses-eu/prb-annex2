@@ -36,9 +36,11 @@ data_prep <- data_raw %>%
   )
   
 # chart parameters ----
-mychart_title <- paste0(main_ansp," net result from ", 
+mychart_title <- paste0(main_ansp," net result from\n", 
                         if_else(cztype == 'terminal', 'terminal', 'en route'),
-                        " activity (M€) - ", year_report)
+                        " activity (M€) - ", 
+                        if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))
+                        )
 myaxis_title <- ""
 mybarcolor_pos <- '#9ECF8D'
 mybarcolor_neg <- '#F87474'
