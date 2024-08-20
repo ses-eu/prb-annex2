@@ -13,8 +13,8 @@ saf_2_r <- read_range(saf_eosm_file, sheet, range)
 
 ## PRB assessment
 :::: {#concl-saf}
-```{r}
-saf_conc <- read_mytable("PRB_findings.xlsx", "safety", "Table_Findings_environment") %>%
+```{r concl-saf}
+saf_conc <- read_mytable("PRB_findings.xlsx", "safety", "Table_Findings_safety") %>%
   filter(Year_Report == params$year_report, State == params$country) %>%
   select(Conclusion) %>% toString() %>% paste0(., "@")
 
