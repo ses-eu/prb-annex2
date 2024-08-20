@@ -1,11 +1,28 @@
 ## import data  ----
-data_raw  <-  read_xlsx(
-  paste0(data_folder, "CAP dataset master.xlsx"),
-  # here("data","hlsr2021_data.xlsx"),
-  sheet = "ATCOs",
-  range = cell_limits(c(1, 1), c(NA, NA))) %>%
-  as_tibble() %>% 
-  clean_names() 
+if (country == 'SES RP3') {
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "SES file.xlsx"),
+    # here("data","hlsr2021_data.xlsx"),
+    sheet = "ATCOs",
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() |> 
+    #so it has the same columns as the State case
+    mutate(ansp = "ansp",
+           state = "SES RP3",
+           acc = "ZZZZ")
+    
+} else {
+  
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "CAP dataset master.xlsx"),
+    # here("data","hlsr2021_data.xlsx"),
+    sheet = "ATCOs",
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+  
+}
 
 ## prepare data ----
 
@@ -22,7 +39,7 @@ data_prep_acc <- data_raw |>
 
 data_prep_ansp <- data_prep_acc %>% group_by(type, year) %>% 
   summarise(value = sum(value)) %>% 
-  mutate(acc = main_ansp) %>% ungroup() 
+  mutate(acc = if_else(country == "SES RP3", "SES RP3", main_ansp)) %>% ungroup() 
 
 
 data_for_chart <- rbind(data_prep_ansp, data_prep_acc) %>% 
@@ -41,13 +58,13 @@ acc_list_for_chart <- unique(data_for_chart$acc)
 ## set parameters for chart ----
 mycolors <-  c('#FFC000','#5B9BD5')
 
-if (knitr::is_latex_output()) {
-  mytitle <- paste0("ATCOs in OPS")
-  mytitle_pos <- 0.99
-} else {
-  mytitle <- paste0("ATCOs in OPS")
-  mytitle_pos <- 0.99
-}
+# if (knitr::is_latex_output()) {
+#   mytitle <- paste0("ATCOs in OPS")
+#   mytitle_pos <- 0.99
+# } else {
+#   mytitle <- paste0("ATCOs in OPS")
+#   mytitle_pos <- 0.99
+# }
 
 ## define chart function ----
 myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
