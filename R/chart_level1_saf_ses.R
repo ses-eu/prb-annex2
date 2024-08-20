@@ -1,25 +1,12 @@
 
-## pdf
-# mywidth = 300
-# myheight = 220
-# myfont = 8
-# mymargin = list (t = 20, l = 10)
-# mylinewidth = 2
-
-
 # import data  ----
 data_raw  <-  read_xlsx(
-  paste0(data_folder, "SES_OLD.xlsx"),
+  paste0(data_folder, "SES file.xlsx"),
   sheet = "SES_EoSM",
-  range = cell_limits(c(1, 1), c(NA, NA))) %>%
+  range = cell_limits(c(1, 1), c(NA, 6))) %>%
   as_tibble() %>% 
   clean_names() %>% 
   mutate(management_objectives = str_replace_all(management_objectives, 'Other Mos' , 'Other MOs'))
-
-if (knitr::is_latex_output()) {
-  data_raw <- data_raw %>% 
-    mutate(management_objectives = str_replace_all( management_objectives,"management", "mgmt."))
-}
 
 
 data_prep <- data_raw %>% 
@@ -49,7 +36,7 @@ mycolors <-  c('#FFC000', '#FFC000','#5B9BD5', '#5B9BD5')
 
 ## define chart function ----
 myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
-  plotly::plot_ly(
+  plot_ly(
     width = mywidth,
     height = myheight,
     data = data_prep_planned,
@@ -70,7 +57,7 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
     hovertemplate = paste0('%{xother} %{y:.0f}'),
     showlegend = T
   ) %>% 
-    plotly::add_trace(
+    add_trace(
       data = data_prep_actual,
       x = ~ year,
       y = ~ number_of_ans_ps,
@@ -85,12 +72,12 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
       hovertemplate = paste0('%{xother} %{y:.0f}'),
       showlegend = T
     ) %>%
-    plotly::config( responsive = TRUE,
+    config( responsive = TRUE,
                     displaylogo = FALSE,
                     displayModeBar = F
                     # modeBarButtons = list(list("toImage")),
     ) %>% 
-    plotly::layout(
+    layout(
       font = list(family = "Roboto"),
       title = list(text = paste0("Number of ANSPs on or above target"),
                    y = 0.99, 

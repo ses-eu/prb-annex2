@@ -575,7 +575,88 @@ read_mytable <- function(file, sheet, table){
     invisible(image_write(cropped, paste0(fig_dir, fig_name)))
   }
 
+## universal linechart  ----
+mylinechart <-  function(df, mywidth, myheight, myfont, mymargin, mydecimals) {
+  df %>% 
+    plot_ly(
+      width = mywidth,
+      height = myheight,
+      x = ~ xlabel,
+      y = ~ mymetric,
+      yaxis = "y1",
+      # marker = list(color = mymarker_color),
+      colors = mycolors,
+      color = ~ factor(type, levels = myfactor),
+      text = ~ paste0(format(round(mymetric, mydecimals),  big.mark  = ",", nsmall = mydecimals), mysuffix),
+      # text = ~ mymetric,
+      textangle = mytextangle,
+      textposition = ~ mytextposition, 
+      textfont = list(color = mytextfont_color, size = mytextfont_size),
+      cliponaxis = FALSE,
+      type = 'scatter',  mode = 'lines+markers+text',
+      line = list(width = mylinewidth, dash = ~linedash),
+      hovertemplate = myhovertemplate,
+      # hoverinfo = "none",
+      showlegend = mytrace_showlegend
+    ) %>% 
+    config( responsive = TRUE,
+            displaylogo = FALSE,
+            displayModeBar = F
+            # modeBarButtons = list(list("toImage")),
+    ) %>% 
+    layout(
+      uniformtext=list(minsize = myminsize, mode='show'),
+      font = list(family = myfont_family),
+      title = list(text = mytitle_text,
+                   x = mytitle_x, 
+                   y = mytitle_y, 
+                   xanchor = mytitle_xanchor, 
+                   yanchor = mytitle_yanchor,
+                   font = list(size = mytitle_font_size)
+      ),
+      hovermode = myhovermode,
+      hoverlabel = list(bgcolor = myhoverlabel_bgcolor),
+      xaxis = list(title = myxaxis_title,
+                   gridcolor = myxaxis_gridcolor,
+                   showgrid = myxaxis_showgrid,
+                   showline = myxaxis_showline,
+                   showticklabels = myxaxis_showticklabels,
+                   dtick = myxaxis_dtick,
+                   tickformat = myxaxis_tickformat,
+                   # tickcolor = 'rgb(127,127,127)',
+                   # ticks = 'outside',
+                   zeroline = myxaxis_zeroline, 
+                   tickfont = list(size = myxaxis_tickfont_size)
+      ),
+      yaxis = list(title = myyaxis_title,
+                   gridcolor = myyaxis_gridcolor,
+                   showgrid = myyaxis_showgrid,
+                   showline = myyaxis_showline,
+                   tickprefix = myyaxis_tickprefix,
+                   ticksuffix = myyaxis_ticksuffix, 
+                   tickformat = myyaxis_tickformat,
+                   # showticklabels = TRUE,
+                   # tickcolor = 'rgb(127,127,127)',
+                   # ticks = 'outside',
+                   zeroline = myyaxis_zeroline,
+                   zerolinecolor = myyaxis_zerolinecolor,
+                   titlefont = list(size = myyaxis_titlefont_size), 
+                   tickfont = list(size = myyaxis_tickfont_size)
+      ),
+      legend = list(
+        traceorder= mylegend_traceorder,
+        orientation = mylegend_orientation, 
+        xanchor = mylegend_xanchor,
+        yanchor = mylegend_yanchor,
+        x = mylegend_x,  
+        y = mylegend_y, 
+        font = list(size = mylegend_font_size)
+      ),
+      margin = mymargin
+    )
+}
   
+    
 ## universal barchart  ----
 mybarchart <-  function(df, mywidth, myheight, myfont, mymargin, mydecimals) {
   df %>% 
