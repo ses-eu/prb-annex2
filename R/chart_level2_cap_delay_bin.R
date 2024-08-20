@@ -1,11 +1,26 @@
 ## import data  ----
-data_raw  <-  read_xlsx(
-  paste0(data_folder, "CAP dataset master.xlsx"),
-  # here("data","hlsr2021_data.xlsx"),
-  sheet = "DelayTimeBin",
-  range = cell_limits(c(1, 1), c(NA, NA))) %>%
-  as_tibble() %>% 
-  clean_names() 
+if (country == 'SES RP3') {
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "SES file.xlsx"),
+    # here("data","hlsr2021_data.xlsx"),
+    sheet = "DTB",
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() |> 
+    #so it has the same columns as the state case
+    mutate(ansp = "ansp",
+           state = "SES RP3")
+  
+  } else {  
+    
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "CAP dataset master.xlsx"),
+    # here("data","hlsr2021_data.xlsx"),
+    sheet = "DelayTimeBin",
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+}
 
 ## prepare data ----
 data_prep <- data_raw %>% 
