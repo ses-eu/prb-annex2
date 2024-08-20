@@ -78,7 +78,8 @@ range_min <- if_else(range_min >0, 0, range_min)
 range_max <- ceiling(max(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^myroundup + 10^myroundup/2
 
 # chart parameters ----
-mychart_title <- paste0("Costs by nature for main ANSP ", main_ansp," (M€<sub>2017</sub>) - ", year_report)
+mychart_title <- paste0("Costs by nature for main ANSP\n", main_ansp," (M€<sub>2017</sub>) - ", year_report)
+mytitle_y <- 0.95
 myaxis_title <- "Costs (M€<sub>2017</sub>)"
 mybarcolor_pos <- '#A5A5A5'
 mybarcolor_neg <- '#A5A5A5'
@@ -87,6 +88,7 @@ myhovertemplate <- paste0('%{y} (A-D): %{x:,.1f}<extra></extra>')
 # myxaxis_tickformat <- "0,.1f"
 myxaxis_tickformat <- if_else(all_negative_or_zero, "0,.1f", "+0,")
 mydecimals <- 3
+mylocalmargin = list(t=60)
 
 ###set up order of traces
 myfactor <- c("VFR exempted", 
@@ -97,5 +99,5 @@ myfactor <- c("VFR exempted",
               "Staff costs")
 
 # plot chart  ----
-myhbarc(mywidth, myheight, myfont, mymargin) %>% 
+myhbarc(mywidth, myheight + 30, myfont, mymargin) %>% 
   layout(xaxis = list(range = c(range_min, range_max)))

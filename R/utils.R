@@ -734,7 +734,7 @@ myhbarc <-  function(mywidth, myheight, myfont, mymargin) {
     layout(
       font = list(family = "Roboto"),
       title = list(text = mychart_title,
-                   y = 0.99,
+                   y = mytitle_y ,
                    x = 0,
                    xanchor = 'left',
                    yanchor =  'top',
@@ -772,7 +772,7 @@ myhbarc <-  function(mywidth, myheight, myfont, mymargin) {
                    titlefont = list(size = myfont), tickfont = list(size = myfont)
       ),
       showlegend = FALSE,
-      margin = mymargin
+      margin = mylocalmargin
 
     )
 }

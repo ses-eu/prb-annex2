@@ -41,12 +41,14 @@ mychart_title <- paste0(main_ansp," net result from\n",
                         " activity (M€) - ", 
                         if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))
                         )
+mytitle_y <- 0.95
 myaxis_title <- ""
 mybarcolor_pos <- '#9ECF8D'
 mybarcolor_neg <- '#F87474'
 mytextcolor <- 'black'
 myhovertemplate <- paste0('%{x:,.1f}<extra></extra>')
 myxaxis_tickformat <- "0,"
+mylocalmargin = list(t=60)
 
 ###set up order of traces
 myfactor <- c("Actual RoE in value",

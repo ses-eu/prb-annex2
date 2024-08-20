@@ -106,5 +106,5 @@ mylegend_y <- -0.17
 mylocalmargin = mymargin
 
 # plot chart  ----
-mybarchart(data_prep, mywidth, myheight+20, myfont, mylocalmargin, mydecimals)
+mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin, mydecimals)
 
