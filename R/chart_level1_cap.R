@@ -1,28 +1,27 @@
 
 if (country == 'SES RP3') {
   # SES case ----
-  if (exists("cztype") == FALSE) {cztype = "terminal"}
+  if (exists("cztype") == FALSE) {cztype = "enroute"}
 
   ## import data  ----
   data_raw_actual  <-  read_xlsx(
-    paste0(data_folder, "SES CAP file.xlsx"),
+    paste0(data_folder, "SES file.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
     sheet = if_else(cztype == "enroute", "Avg en-route ATFM delay",
-                    "terminal delay"),
+                    "Avg terminal ATFM delay"),
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
 
   data_raw_target  <-  read_xlsx(
-    paste0(data_folder, "SES CAP file.xlsx"),
+    paste0(data_folder, "SES file.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
-    sheet = if_else(cztype == "enroute", "Delay targets",
-                    "Delay targets"),
+    sheet = "en route delay targets",
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
   
-    ## prepare data ----
+  ## prepare data ----
   data_prep_target <- data_raw_target %>% 
     mutate(
       xlabel = year,
@@ -237,4 +236,6 @@ myat_textposition <- 'top'
 myat_textfont_color <- '#FF0000'
 myat_textfont_size <- myfont
 
-myplot %>%  add_line_trace(., data_prep_target)
+myplot %>%  add_line_trace(., data_prep_target) |> 
+  add_empty_trace(data_prep)
+
