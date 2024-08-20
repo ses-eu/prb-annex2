@@ -1,16 +1,5 @@
 # import data  ----
-
-if (country == "Network Manager") {
-  ## NM case ----
-  data_raw  <-  read_xlsx(
-    paste0(data_folder, "NM_data.xlsx"),
-    sheet = "Environment",
-    range = cell_limits(c(1, 1), c(NA, NA))) %>%
-    as_tibble() %>% 
-    clean_names() 
-  
-
-} else if (country == "SES RP3"){
+if (country == "SES RP3"){
   ## SES case ----
   data_raw_kep  <-  read_xlsx(
     paste0(data_folder, "SES file.xlsx"),
@@ -20,8 +9,7 @@ if (country == "Network Manager") {
     as_tibble() %>% 
     clean_names() |> 
     #so it has the same structure as the state case
-    mutate(state = "SES RP3") |> 
-    rename(entity_name = state)
+    mutate(entity_name = "SES RP3") 
 
   data_raw_scr  <-  read_xlsx(
     paste0(data_folder, "SES file.xlsx"),
@@ -31,8 +19,7 @@ if (country == "Network Manager") {
     as_tibble() %>% 
     clean_names()  |> 
     #so it has the same structure as the state case
-    mutate(state = "SES RP3") |> 
-    rename(entity_name = state)
+    mutate(entity_name = "SES RP3") 
     
 } else  {
   ## State case ----
