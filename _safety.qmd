@@ -1,13 +1,76 @@
-# 1 Safety - {{< var doc.country >}}
-### Effectiveness of Safety Management
+```{r saf-level2-text}
+# define ranges and import data
+sheet <- country
 
-```{r}
-#| file: R/table_saf_eosm.R
-#| out.width: "100%"
+range <- "A16:G17"
+saf_2_r <- read_range(saf_eosm_file, sheet, range) 
+
 ```
 
-Note: EoSM questionnaire has been updated in RP3 using CANSO Standard of Excellence as the basis, maturity levels of study areas and calculation of the score have been updated too. A direct comparison with  maturity levels and scoring of EoSM used RP2 is not advisable.
+# Safety - {{< var doc.country >}}
 
+::: {#container-saf-prb}
 
-### Observations															
-Maturity levels have been maintained compared with 2021. Four out of five EoSM components of the ANSP meet the RP3 target level. Only the component "Safety Risk Management" is below 2024 target level, requiring improvement of three questions during RP3.
+## PRB assessment
+:::: {#concl-saf}
+```{r}
+saf_conc <- read_mytable("PRB_findings.xlsx", "safety", "Table_Findings_environment") %>%
+  filter(Year_Report == params$year_report, State == params$country) %>%
+  select(Conclusion) %>% toString() %>% paste0(., "@")
+
+saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n')
+```
+
+`r saf_conc1`
+::::
+
+:::
+
+::: {#container-saf-indicators}
+
+## Effectiveness of Safety Management
+
+:::: {layout="[ 20, 60, 20 ]"}
+
+::::: {#empty-div}
+:::::
+
+::::: {#chart-saf-eosm}
+```{r chart-saf-eosm}
+#| file: R/chart_level1_saf.R
+#| out.width: "100%"
+```
+:::::
+::::
+
+`r if (params$country != "SES RP3") ":::: {.content-hidden}"`
+
+:::: {layout="[ 50, 50 ]"}
+
+::::: {#chart-saf-smi}
+```{r chart-saf-smi}
+#| file: R/chart_level2_saf_smi.R
+#| out.width: "100%"
+```
+:::::
+
+::::: {#chart-saf-ri}
+```{r chart-saf-ri}
+#| file: R/chart_level2_saf_ri.R
+#| out.width: "100%"
+```
+:::::
+
+::::
+`r if (params$country != "SES RP3") "::::"`
+
+:::
+
+::: {.callout-note collapse=true}
+
+#### NSA input
+
+`r saf_2_r[1,1]`
+
+:::
+
