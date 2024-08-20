@@ -17,47 +17,47 @@ if (country == "Network Manager") {
     ) %>% 
     select(year, target, actual)
   
-} else if (country == "SES RP3"){
+} else {
+  if (country == "SES RP3") {
     # SES case ----
     ## import data  ----
-    data_raw  <-  read_xlsx(
-      paste0(data_folder, "SES_OLD.xlsx"),
-      sheet = "SES_KEA",
+    data_raw_target  <-  read_xlsx(
+      paste0(data_folder, "SES file.xlsx"),
+      # here("data","hlsr2021_data.xlsx"),
+      sheet = "Table_KEA Targets",
+      range = cell_limits(c(1, 1), c(NA, NA))) %>%
+      as_tibble() %>% 
+      clean_names() |> 
+      mutate(entity_name = "SES RP3")
+    
+    data_raw_actual  <-  read_xlsx(
+      paste0(data_folder, "SES file.xlsx"),
+      # here("data","hlsr2021_data.xlsx"),
+      sheet = "Table_HFE MM",
+      range = cell_limits(c(1, 1), c(NA, NA))) %>%
+      as_tibble() %>% 
+      clean_names() |> 
+      mutate(entity_name = "SES RP3")
+    
+    } else  {
+    # State case ----
+    ## import data  ----
+    data_raw_target  <-  read_xlsx(
+      paste0(data_folder, "ENV dataset master.xlsx"),
+      # here("data","hlsr2021_data.xlsx"),
+      sheet = "Table_KEA Targets",
       range = cell_limits(c(1, 1), c(NA, NA))) %>%
       as_tibble() %>% 
       clean_names() 
     
-    ## prepare data ----
-    data_for_chart <- data_raw %>% 
-      filter(year_report == .env$year_report) %>% 
-      mutate ( status = str_to_lower(status)) %>% 
-      select (-year_report) %>% 
-      pivot_wider(names_from = status, values_from = kea_value) %>% 
-      mutate(
-        target = round(target * 100, 2),
-        actual = round(actual * 100, 2)
-      ) %>% 
-      select(year, target, actual)
-    
-} else  {
-  # State case ----
-  ## import data  ----
-  data_raw_target  <-  read_xlsx(
-    paste0(data_folder, "ENV dataset master.xlsx"),
-    # here("data","hlsr2021_data.xlsx"),
-    sheet = "Table_KEA Targets",
-    range = cell_limits(c(1, 1), c(NA, NA))) %>%
-    as_tibble() %>% 
-    clean_names() 
-  
-  data_raw_actual  <-  read_xlsx(
-    paste0(data_folder, "ENV dataset master.xlsx"),
-    # here("data","hlsr2021_data.xlsx"),
-    sheet = "Table_HFE MM",
-    range = cell_limits(c(1, 1), c(NA, NA))) %>%
-    as_tibble() %>% 
-    clean_names() 
-
+    data_raw_actual  <-  read_xlsx(
+      paste0(data_folder, "ENV dataset master.xlsx"),
+      # here("data","hlsr2021_data.xlsx"),
+      sheet = "Table_HFE MM",
+      range = cell_limits(c(1, 1), c(NA, NA))) %>%
+      as_tibble() %>% 
+      clean_names() 
+    }
     ## prepare data ----
   target_value <- data_raw_target %>%
     filter(

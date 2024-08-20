@@ -30,8 +30,9 @@ if (country == "Network Manager") {
     mutate(myothermetric = round(nm_target * 100, 2),
            type = "Target")
   
-} else if (country == "SES RP3"){
-    # SES case ----
+} else {
+  if (country == "SES RP3") {
+  # SES case ----
   ## import data  ----
   data_raw_target  <-  read_xlsx(
     paste0(data_folder, "SES file.xlsx"),
@@ -39,7 +40,8 @@ if (country == "Network Manager") {
     sheet = "Table_KEA Targets",
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
-    clean_names() 
+    clean_names() |> 
+    mutate(entity_name = "SES RP3")
   
   data_raw_actual  <-  read_xlsx(
     paste0(data_folder, "SES file.xlsx"),
@@ -47,46 +49,11 @@ if (country == "Network Manager") {
     sheet = "Table_HFE",
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
-    clean_names() 
+    clean_names() |> 
+    mutate(entity_name = "SES RP3")
   
-  ## prepare data ----
-  data_prep_target <- data_raw_target %>% 
-    # filter(
-    #   entity_name == .env$country
-    # ) %>% 
-    mutate(
-      # type = 'Target',
-      target = round(kea_reference_value_percent, 2)
-    ) %>% 
-    select(
-      year,
-      target
-    ) %>% 
-    mutate(
-      xlabel = year,
-      myothermetric = target,
-      type = "Target"
-    ) 
-  
-  data_prep_actual <- data_raw_actual %>% 
-    filter(
-      # entity_name == country
-      , year <= year_report) %>% 
-    mutate (actual = hfe_kpi_percent) %>% 
-    select(
-      year,
-      actual
-    ) %>% 
-    mutate(
-      xlabel = year,
-      mymetric = actual,
-      type = "Actual"
-    ) 
-  
-
-} else  {
+  } else  {
   # State case ----
-
   ## import data  ----
   data_raw_target  <-  read_xlsx(
     paste0(data_folder, "ENV dataset master.xlsx"),
@@ -103,6 +70,7 @@ if (country == "Network Manager") {
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
+  }
   
   ## prepare data ----
   data_prep_target <- data_raw_target %>% 
