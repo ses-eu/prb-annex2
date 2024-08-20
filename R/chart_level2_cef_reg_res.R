@@ -39,7 +39,7 @@ mytextfont_color <- 'transparent'
 
 ### layout parameters
 mybargap <- 0.25
-mybarmode <- 'stack'
+mybarmode <- 'group'
 
 #### title
 mytitle_text <- paste0("Regulatory result by entity group at ", 
