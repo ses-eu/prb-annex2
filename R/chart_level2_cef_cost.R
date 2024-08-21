@@ -15,46 +15,76 @@ mycz_name <- if_else(cztype == "terminal",
                      ecz_list$ecz_name[ez])
 
 # import data  ----
-# if(cztype == "terminal") {data_raw <- data_raw_t1_trm} else {data_raw <- data_raw_t1_ert}
 
-data_raw  <-  read_xlsx(
-  paste0(data_folder, "CEFF dataset master.xlsx"),
-  # here("data","hlsr2021_data.xlsx"),
-  sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
-  range = cell_limits(c(1, 1), c(NA, NA))) %>%
-  as_tibble() %>% 
-  clean_names() 
+# import data  ----
+if (country == "SES RP3") {
+  ## SES  ----
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "SES CEFF.xlsx"),
+    sheet = if_else(cztype == "terminal", "SES_TRM_all", "SES_ERT_all"),
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() |> 
+    # so the field name is the same as for state
+    mutate(x5_3_cost_nc2017 = costs_eur2017_cz,
+           xrate2017 = 1)
+  
+} else {
+
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "CEFF dataset master.xlsx"),
+    # here("data","hlsr2021_data.xlsx"),
+    sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+}
 
 # prepare data ----
-data_prep <- data_raw %>% 
+data_prep_split <- data_raw %>% 
   filter(
+    year != 20202021,
     entity_code == mycz) %>% 
   mutate(
-    mymetric = case_when(
-      year > year_report & status == 'A' & year != 20202021 ~ NA,
-      .default = round(x5_3_cost_nc2017/xrate2017/10^6,2)
-    )
+    mymetric = case_when (
+      status == 'A' & year > .env$year_report ~ NA,
+      .default = x5_3_cost_nc2017
+    ),
+    xlabel = as.character(year)
   ) %>%  
   select(
     year,
     status,
-    mymetric
-  ) %>%  
-  filter(year > 2021) %>% 
-  mutate(xlabel = as.character(year),
-         xlabel = str_replace(xlabel, "20202021", "2020-2021"),
+    mymetric,
+    xlabel
+  ) 
+
+data_prep2020_2021 <- data_prep_split %>% 
+  filter(
+    year < 2022) %>% 
+  group_by(status) |> 
+  summarise(mymetric = sum(mymetric, na.rm = TRUE)) |> 
+  mutate(xlabel = "2020-2021")
+
+data_prep <- data_prep_split |> 
+  filter(year > 2021) |> 
+  select(-year) |>
+  rbind(data_prep2020_2021) |> 
+  mutate(mymetric = round(mymetric/10^6, 2),
          status = str_replace(status, "A", "Actual costs"),
          status = str_replace(status, "D", "Determined costs")
   ) %>% 
   arrange(xlabel) %>% 
   rename(type = status)
 
+
+
 ### replace 0 by NAs so they are not plotted
 data_prep[data_prep == 0] <- NA
 
 # chart parameters ----
 mysuffix <- ""
-mydecimals <- 1
+mydecimals <- if_else(country == "SES RP3", 0, 1)
 
 ### trace parameters
 mycolors = c('#5B9BD5', '#FFC000')
@@ -85,7 +115,7 @@ mytitle_y <- 0.99
 myyaxis_title <- paste0(if_else(cztype == "terminal", "Terminal", "En route"),
                         " costs (M€<sub>2017</sub>)")
 myyaxis_ticksuffix <- ""
-myyaxis_tickformat <- ".0f"
+myyaxis_tickformat <- ",.0f"
 
 #### legend
 mylegend_x <- 0.5
