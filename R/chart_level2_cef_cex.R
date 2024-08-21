@@ -15,7 +15,49 @@ mycz_name <- if_else(cztype == "terminal",
                      ecz_list$ecz_name[ez])
 
 # import data  ----
-data_raw  <-  read_xlsx(
+if (country == "SES RP3") {
+  ## SES  ----
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "SES CEFF.xlsx"),
+    sheet = if_else(cztype == "terminal", "SES_TRM_all", "SES_ERT_all"),
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+
+  ### prepare data ----
+  data_prep_split <- data_raw %>% 
+    filter(status == "A") |> 
+    mutate(
+      mymetric = case_when (
+        year > .env$year_report ~ NA,
+        .default = cecs_total_eur_cz
+      ),
+      xlabel = as.character(year)
+    ) %>%  
+    select(
+      year,
+      mymetric,
+      xlabel
+    ) 
+  
+  data_prep2020_2021 <- data_prep_split %>% 
+    filter(
+      year < 2022) %>% 
+    summarise(mymetric = sum(mymetric, na.rm = TRUE)) |> 
+    mutate(xlabel = "2020-2021")
+  
+  data_prep <- data_prep_split |> 
+    filter(year > 2021) |> 
+    select(-year) |>
+    rbind(data_prep2020_2021) |> 
+    mutate(mymetric = round(mymetric/1000, 2),
+           type = 'Cost exempt') |>  
+    arrange(xlabel)
+  
+  
+} else {
+  ## State  ----
+  data_raw  <-  read_xlsx(
   paste0(data_folder, "CEFF dataset master.xlsx"),
   # here("data","hlsr2021_data.xlsx"),
   sheet = if_else(cztype == "terminal", "Terminal_T2", "Enroute_T2"),
@@ -23,67 +65,47 @@ data_raw  <-  read_xlsx(
   as_tibble() %>% 
   clean_names() 
   
-# prepare data ----
-data_prep_t2 <- data_raw %>% 
-  filter(
-    entity_code == mycz,
-  ) %>% 
-  ## to be used for the table, just kept until the table script is created
-  # select(
-  #   year,
-  #   x3_1_investment,
-  #   x3_3_cost_authority_qes,
-  #   x3_4_ectl_cost_eur,
-  #   x3_5_pension_cost,
-  #   x3_6_interest_loan,
-  #   x3_7_change_in_law
-  # ) %>% 
-  # pivot_longer(cols = -c(year),
-  #              names_to = 'type', 
-  #              values_to = 'mymetric') %>% 
-  # mutate(xlabel = rep(c("New and existing investments", 
-  #                       "Competent authorities\nand qualified entities costs",
-  #                       "Eurocontrol costs",
-  #                       "Pension costs",
-  #                       "Interest on loans",
-  #                       "Changes in law"), 4),
-  #        year_text = as.character(year),
-  #        year_text = str_replace(year_text, "20202021", "2020-2021"),
-  # )
-  select(year, x3_8_diff_det_cost_actual_cost) %>% 
-  mutate(
-    actual = case_when(
-      year > year_report & year != 20202021 ~ NA,
-      .default = round(x3_8_diff_det_cost_actual_cost/1000,2)
+  ### prepare data ----
+  data_prep_t2 <- data_raw %>% 
+    filter(
+      entity_code == mycz,
+    ) %>% 
+    select(year, x3_8_diff_det_cost_actual_cost) %>% 
+    mutate(
+      actual = case_when(
+        year > year_report & year != 20202021 ~ NA,
+        .default = round(x3_8_diff_det_cost_actual_cost/1000,2)
       ),
-    year = as.character(year),
-    year = str_replace(year, "20202021", "2020-2021")
-  )
+      year = as.character(year),
+      year = str_replace(year, "20202021", "2020-2021")
+    )
   
-# t exchange rates
-yearly_xrates <- get_xrates(cztype, mycz)
-
-data_prep_xrates <- yearly_xrates %>% 
-  filter(
-    entity_code == mycz
-  ) %>% 
-  select(-entity_code) %>% 
-  filter(year > 2020) %>% 
-  mutate(year = as.character(year),
-         year = if_else(year == '2021', '2020-2021', year)
-        ) 
-
-data_prep <- data_prep_t2 %>% 
-  left_join(data_prep_xrates, by = 'year') %>% 
-  mutate(mymetric = actual/pp_exchangerate,
-         xlabel = year,
-         type = 'Cost exempt') %>% 
-  arrange(xlabel)
-    
+  # t exchange rates
+  yearly_xrates <- get_xrates(cztype, mycz)
   
+  data_prep_xrates <- yearly_xrates %>% 
+    filter(
+      entity_code == mycz
+    ) %>% 
+    select(-entity_code) %>% 
+    filter(year > 2020) %>% 
+    mutate(year = as.character(year),
+           year = if_else(year == '2021', '2020-2021', year)
+    ) 
+  
+  data_prep <- data_prep_t2 %>% 
+    left_join(data_prep_xrates, by = 'year') %>% 
+    mutate(mymetric = actual/pp_exchangerate,
+           xlabel = year,
+           type = 'Cost exempt') %>% 
+    arrange(xlabel)
+  
+}
+
+
 # chart parameters ----
 mysuffix <- ""
-mydecimals <- 1
+mydecimals <- if_else(country == "SES RP3", 0, 1)
 
 ### trace parameters
 mycolors = c( '#8497B0')
