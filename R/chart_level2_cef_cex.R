@@ -14,9 +14,9 @@ mycz_name <- if_else(cztype == "terminal",
                      tcz_list$tcz_name[ez],
                      ecz_list$ecz_name[ez])
 
-# import data  ----
 if (country == "SES RP3") {
-  ## SES  ----
+  # SES  ----
+  ## import data  ----
   data_raw  <-  read_xlsx(
     paste0(data_folder, "SES CEFF.xlsx"),
     sheet = if_else(cztype == "terminal", "SES_TRM_all", "SES_ERT_all"),
@@ -24,7 +24,7 @@ if (country == "SES RP3") {
     as_tibble() %>% 
     clean_names() 
 
-  ### prepare data ----
+  ## prepare data ----
   data_prep_split <- data_raw %>% 
     filter(status == "A") |> 
     mutate(
@@ -54,9 +54,9 @@ if (country == "SES RP3") {
            type = 'Cost exempt') |>  
     arrange(xlabel)
   
-  
 } else {
-  ## State  ----
+  # State  ----
+  ## import data  ----
   data_raw  <-  read_xlsx(
   paste0(data_folder, "CEFF dataset master.xlsx"),
   # here("data","hlsr2021_data.xlsx"),
@@ -65,7 +65,7 @@ if (country == "SES RP3") {
   as_tibble() %>% 
   clean_names() 
   
-  ### prepare data ----
+  ## prepare data ----
   data_prep_t2 <- data_raw %>% 
     filter(
       entity_code == mycz,
