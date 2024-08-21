@@ -78,7 +78,6 @@ data_prep <- data_prep_split |>
   rename(type = status)
 
 
-
 ### replace 0 by NAs so they are not plotted
 data_prep[data_prep == 0] <- NA
 
