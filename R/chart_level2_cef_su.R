@@ -1,6 +1,6 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("cz") == FALSE) {cz = c("1", "terminal")}
+if (exists("cz") == FALSE) {cz = c("1", "enroute")}
 # ez=1
 
 # define cz ----
@@ -15,35 +15,64 @@ mycz_name <- if_else(cztype == "terminal",
                      ecz_list$ecz_name[ez])
 
 # import data  ----
-data_raw  <-  read_xlsx(
-  paste0(data_folder, "CEFF dataset master.xlsx"),
-  sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
-  range = cell_limits(c(1, 1), c(NA, NA))) %>%
-  as_tibble() %>% 
-  clean_names() 
+if (country == "SES RP3") {
+  ## SES  ----
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "SES CEFF.xlsx"),
+    sheet = if_else(cztype == "terminal", "SES_TRM_all", "SES_ERT_all"),
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() |> 
+    # so the field name is the same as for state
+    mutate(x5_4_total_su = su_cz)
+
+
+} else {
+  ## State  ----
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "CEFF dataset master.xlsx"),
+    sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+}
 
 # prepare data ----
-data_prep <- data_raw %>% 
+data_prep_split <- data_raw %>% 
   filter(
+    year != 20202021,
     entity_code == mycz) %>% 
   mutate(
     mymetric = case_when (
-      status == 'A' & year > year_report & year != 20202021 ~ NA,
-      .default = round(x5_4_total_su/1000, 0)
-    )
+      status == 'A' & year > .env$year_report ~ NA,
+      .default = x5_4_total_su
+    ),
+    year_text = as.character(year)
   ) %>%  
   select(
     year,
     status,
-    mymetric
-  ) %>%  
-  filter(year > 2021) %>% 
-  mutate(year_text = as.character(year),
-         year_text = str_replace(year_text, "20202021", "2020-2021"),
+    mymetric,
+    year_text
+  ) 
+
+data_prep2020_2021 <- data_prep_split %>% 
+  filter(
+    year < 2022) %>% 
+  group_by(status) |> 
+  summarise(mymetric = sum(mymetric, na.rm = TRUE)) |> 
+  mutate(year_text = "2020-2021")
+
+data_prep <- data_prep_split |> 
+  filter(year > 2021) |> 
+  select(-year) |>
+  rbind(data_prep2020_2021) |> 
+  mutate(mymetric = round(mymetric/1000, 0),
          status = str_replace(status, "A", "Actual SUs"),
          status = str_replace(status, "D", "Planned SUs")
-  ) %>% 
+  ) |>  
   arrange(year_text)
+
 
 ## replace 0 by NAs so they are not plotted
 data_prep[data_prep == 0] <- NA
