@@ -1,287 +1,225 @@
 ```{r cap-level2-text}
-# define ranges and import data
-sheet <- country
-
-# find headings to define ranges
-range <- "A3:O81"
-cap_er_all <- read_range(cap_file, sheet, range) 
-cap_er_all <- cap_er_all |> 
-  # rename the columns where the text I need is
-  rename(a = 1,
-         b = 10,
-         c = 11) |> 
-  select(a, b, c)
-
-# replace NAs by empty strings
-cap_er_all[is.na(cap_er_all)] <- ""
-
-cap_titles <- c("Minutes of ATFM en-route delay",
-                "**Minutes of ATFM en-route delay**",
-                "NSA's assessment of capacity performance", 
-                "**NSA's assessment of capacity performance**", 
-                "Monitoring process for capacity performance",
-                "**Monitoring process for capacity performance**",
-                "Capacity Planning",
-                "**Capacity Planning**",
-                "ATCO in OPS (FTE)",
-                "**ATCO in OPS (FTE)**",
-                "Additional information relating to Russia's war of agression against Ukraine",
-                "**Additional information relating to Russia's war of agression against Ukraine**",
-                "Additional Information Related to Russia's War of Aggression Against Ukraine",
-                "**Additional Information Related to Russia's War of Aggression Against Ukraine**",
-                "Application of Corrective Measures for Capacity (if applicable)",
-                "**Application of Corrective Measures for Capacity (if applicable)**",
-                "Summary of capacity performance",
-                "**Summary of capacity performance**",
-                "En route Capacity Incentive Scheme",
-                "**En route Capacity Incentive Scheme**"
-)
-
-cap_heading_positions <- which(cap_er_all$a %in% cap_titles)
-cap_heading_ukraine <- which(cap_er_all$a %in% c("Additional information relating to Russia's war of agression against Ukraine", "**Additional information relating to Russia's war of agression against Ukraine**", "Additional Information Related to Russia's War of Aggression Against Ukraine", "**Additional Information Related to Russia's War of Aggression Against Ukraine**"
-))
-
-for (i in c(2,3,4,6,7)) {
-  mytext <- apply(cap_er_all[(cap_heading_positions[i-1]+1):(cap_heading_positions[i]-1), ], 1, function(col) paste(col, collapse = "<br>"))
+if (country == "SES RP3") {
+  #we need to define this variables to avoid errors
+  cap_er_nsa_2 <- ''
+  cap_er_nsa_3 <- ''
+  cap_er_nsa_4 <- ''
+  cap_er_nsa_5 <- ''
+  cap_er_nsa_6 <- ''
+  cap_er_nsa_7 <- ''
+  cap_er_nsa_8 <- ''
   
-  # replace repeated breaks by single  
-  mytext <- gsub("(<br>)+", "<br>", mytext)
-
-  #remove empty elements of vector
-  mytext <- mytext[mytext != "<br>"]
+  cap_trm_nsa_1 <- ''
+  cap_trm_nsa_2 <- ''
+  cap_trm_nsa_3 <- ''
+  cap_trm_nsa_4 <- ''
+  cap_trm_nsa_5 <- ''
+  cap_trm_nsa_6 <- ''
   
-  #replace double breaks by single breaks
-  pattern <- "(<br>){2,}"
-  mytext <- str_replace_all(mytext, pattern, "<br>")
-
-  ### remove leading and trailing line breaks
-  mytext <- sub("^<br>|<br>$", "", mytext)
+  cap_heading_ukraine <- 0
   
-  ### assign text to variable
-  assign(paste0("cap_er_nsa_", i), paste0(mytext,collapse = ""))
+} else {
   
-}
-
-# incentive scheme text --------------
-  ### find observations positions
-  observations_positions <- which(cap_er_all$b %in% c("Observations", "**Observations**"))
-  observations_positions <- observations_positions[-1] # ignore first one
+  # define ranges and import data
+  sheet <- country
   
-  ### build observations text
-  mytext <- ""
-  for (i in observations_positions) {
-   # check if there is text for the observation
-    check_observation <- if_else(cap_er_all$b[i+1] == "", FALSE, TRUE)
+  # find headings to define ranges
+  range <- "A3:O81"
+  cap_er_all <- read_range(cap_file, sheet, range) 
+  cap_er_all <- cap_er_all |> 
+    # rename the columns where the text I need is
+    rename(a = 1,
+           b = 10,
+           c = 11) |> 
+    select(a, b, c)
+  
+  # replace NAs by empty strings
+  cap_er_all[is.na(cap_er_all)] <- ""
+  
+  cap_titles <- c("Minutes of ATFM en-route delay",
+                  "**Minutes of ATFM en-route delay**",
+                  "NSA's assessment of capacity performance", 
+                  "**NSA's assessment of capacity performance**", 
+                  "Monitoring process for capacity performance",
+                  "**Monitoring process for capacity performance**",
+                  "Capacity Planning",
+                  "**Capacity Planning**",
+                  "ATCO in OPS (FTE)",
+                  "**ATCO in OPS (FTE)**",
+                  "Additional information relating to Russia's war of agression against Ukraine",
+                  "**Additional information relating to Russia's war of agression against Ukraine**",
+                  "Additional Information Related to Russia's War of Aggression Against Ukraine",
+                  "**Additional Information Related to Russia's War of Aggression Against Ukraine**",
+                  "Application of Corrective Measures for Capacity (if applicable)",
+                  "**Application of Corrective Measures for Capacity (if applicable)**",
+                  "Summary of capacity performance",
+                  "**Summary of capacity performance**",
+                  "En route Capacity Incentive Scheme",
+                  "**En route Capacity Incentive Scheme**"
+  )
+  
+  cap_heading_positions <- which(cap_er_all$a %in% cap_titles)
+  cap_heading_ukraine <- which(cap_er_all$a %in% c("Additional information relating to Russia's war of agression against Ukraine", "**Additional information relating to Russia's war of agression against Ukraine**", "Additional Information Related to Russia's War of Aggression Against Ukraine", "**Additional Information Related to Russia's War of Aggression Against Ukraine**"
+  ))
+  
+  for (i in c(2,3,4,6,7)) {
+    mytext <- apply(cap_er_all[(cap_heading_positions[i-1]+1):(cap_heading_positions[i]-1), ], 1, function(col) paste(col, collapse = "<br>"))
     
-    if (check_observation) {
-      mytext <- paste0(mytext,
-                       if_else(cap_er_all$a[i] == "****", 
-                               "",
-                               paste0(cap_er_all$a[i], ": ")),
-                               cap_er_all$b[i+1],
-                               '<br>')
-    }
-  }
+    # replace repeated breaks by single  
+    mytext <- gsub("(<br>)+", "<br>", mytext)
   
-  ### add overall text at the end
-  # find the last title Actual performance
-  actual_perf_positions <- which(cap_er_all$a %in% c("Actual performance", "**Actual performance**"))
-  actual_perf_positions <- actual_perf_positions[length(actual_perf_positions)] # we only need the last
+    #remove empty elements of vector
+    mytext <- mytext[mytext != "<br>"]
+    
+    #replace double breaks by single breaks
+    pattern <- "(<br>){2,}"
+    mytext <- str_replace_all(mytext, pattern, "<br>")
   
-  mytext_inc <- apply(cap_er_all[(actual_perf_positions+1):nrow(cap_er_all), ], 2, function(col) paste(col, collapse = "<br>"))
-  
-  # replace repeated breaks by single  
-  mytext_inc <- gsub("(<br>)+", "<br>", mytext_inc)
-  
-  #remove empty elements of vector
-  mytext_inc <- mytext_inc[mytext_inc != "<br>"]
-  
-  ### remove leading and trailing line breaks
-  mytext_inc <- sub("^<br>|<br>$", "", mytext_inc)
-  
-  cap_er_nsa_8 <- paste0(mytext, mytext_inc)
-
-# ACC text --------------
-  ### find observations positions
-  observations_positions <- which(cap_er_all$c %in% c("Observations", "**Observations**"))
-
-  ### build observations text
-  mytext <- ""
-  for (i in observations_positions) {
-   # check if there is text for the observation
-    check_observation <- if_else(cap_er_all$c[i+1] == "", FALSE, TRUE)
-   # check if there is text for the acc
-    check_acc <- if_else(cap_er_all$a[i+3] == "" | cap_er_all$a[i+3] == "****", 
-                                 FALSE, TRUE)
-
-    if (check_observation) {
-      mytext <- paste0(mytext,
-                       if_else(cap_er_all$a[i] == "****", 
-                               "",
-                               paste0(cap_er_all$a[i], ": ")),
-                               cap_er_all$c[i+1],
-                               '<br>'
-                       )
-    }
-
-    if (check_acc) {
-      mytext <- paste0(mytext, cap_er_all$a[i+3],'<br>')
-    }    
+    ### remove leading and trailing line breaks
+    mytext <- sub("^<br>|<br>$", "", mytext)
+    
+    ### assign text to variable
+    assign(paste0("cap_er_nsa_", i), paste0(mytext,collapse = ""))
     
   }
   
-  mytext_acc <- mytext
+  # incentive scheme text --------------
+    ### find observations positions
+    observations_positions <- which(cap_er_all$b %in% c("Observations", "**Observations**"))
+    observations_positions <- observations_positions[-1] # ignore first one
+    
+    ### build observations text
+    mytext <- ""
+    for (i in observations_positions) {
+     # check if there is text for the observation
+      check_observation <- if_else(cap_er_all$b[i+1] == "", FALSE, TRUE)
+      
+      if (check_observation) {
+        mytext <- paste0(mytext,
+                         if_else(cap_er_all$a[i] == "****", 
+                                 "",
+                                 paste0(cap_er_all$a[i], ": ")),
+                                 cap_er_all$b[i+1],
+                                 '<br>')
+      }
+    }
+    
+    ### add overall text at the end
+    # find the last title Actual performance
+    actual_perf_positions <- which(cap_er_all$a %in% c("Actual performance", "**Actual performance**"))
+    actual_perf_positions <- actual_perf_positions[length(actual_perf_positions)] # we only need the last
+    
+    mytext_inc <- apply(cap_er_all[(actual_perf_positions+1):nrow(cap_er_all), ], 2, function(col) paste(col, collapse = "<br>"))
+    
+    # replace repeated breaks by single  
+    mytext_inc <- gsub("(<br>)+", "<br>", mytext_inc)
+    
+    #remove empty elements of vector
+    mytext_inc <- mytext_inc[mytext_inc != "<br>"]
+    
+    ### remove leading and trailing line breaks
+    mytext_inc <- sub("^<br>|<br>$", "", mytext_inc)
+    
+    cap_er_nsa_8 <- paste0(mytext, mytext_inc)
   
-  # replace repeated breaks by single  
-  mytext_acc <- gsub("(<br>)+", "<br>", mytext_acc)
+  # ACC text --------------
+    ### find observations positions
+    observations_positions <- which(cap_er_all$c %in% c("Observations", "**Observations**"))
   
-  #remove empty elements of vector
-  mytext_acc <- mytext_acc[mytext_acc != "<br>"]
+    ### build observations text
+    mytext <- ""
+    for (i in observations_positions) {
+     # check if there is text for the observation
+      check_observation <- if_else(cap_er_all$c[i+1] == "", FALSE, TRUE)
+     # check if there is text for the acc
+      check_acc <- if_else(cap_er_all$a[i+3] == "" | cap_er_all$a[i+3] == "****", 
+                                   FALSE, TRUE)
   
-  ### remove leading and trailing line breaks
-  mytext_acc <- sub("^<br>|<br>$", "", mytext_acc)
+      if (check_observation) {
+        mytext <- paste0(mytext,
+                         if_else(cap_er_all$a[i] == "****", 
+                                 "",
+                                 paste0(cap_er_all$a[i], ": ")),
+                                 cap_er_all$c[i+1],
+                                 '<br>'
+                         )
+      }
   
-  cap_er_nsa_5 <- paste0(mytext_acc)
-
-## terminal ----------------------------------------------------------- 
-# find headings to define ranges
-if (no_tcz > 0) {
-range <- "A2:U81"
-cap_trm_all <- read_range(cap_trm_file, sheet, range) 
-cap_trm_all <- cap_trm_all |> 
-    rename(a = 1) 
-
-# replace NAs by empty strings
-cap_trm_all[is.na(cap_trm_all)] <- ""
-
-cap_trm_titles <- c("1. Overview",
-                "**1. Overview**",
-                "2. Arrival ATFM Delay", 
-                "**2. Arrival ATFM Delay**", 
-                "3. Arrival ATFM Delay – National Target and Incentive Scheme",
-                "**3. Arrival ATFM Delay – National Target and Incentive Scheme**",
-                "4. ATFM Slot Adherence",
-                "**4. ATFM Slot Adherence**",
-                "5. ATC Pre-departure Delay",
-                "**5. ATC Pre-departure Delay**",
-                "6. All Causes Pre-departure Delay",
-                "**6. All Causes Pre-departure Delay**",
-                "7. Appendix",
-                "**7. Appendix**"
-)
-
-cap_trm_heading_positions <- which(cap_trm_all$a %in% cap_trm_titles)
-
-for (i in 1:length(cap_trm_heading_positions)) {
-  if (i<length(cap_trm_heading_positions)) {
-    mytext <- apply(cap_trm_all[(cap_trm_heading_positions[i]+1):(cap_trm_heading_positions[i+1]-1), ], 1, function(col) paste(col, collapse = "<br>"))
-  } else{
-    mytext <- apply(cap_trm_all[(cap_trm_heading_positions[i]+1):(cap_trm_heading_positions[i]+1), ], 1, function(col) paste(col, collapse = "<br>"))
-
+      if (check_acc) {
+        mytext <- paste0(mytext, cap_er_all$a[i+3],'<br>')
+      }    
+      
+    }
+    
+    mytext_acc <- mytext
+    
+    # replace repeated breaks by single  
+    mytext_acc <- gsub("(<br>)+", "<br>", mytext_acc)
+    
+    #remove empty elements of vector
+    mytext_acc <- mytext_acc[mytext_acc != "<br>"]
+    
+    ### remove leading and trailing line breaks
+    mytext_acc <- sub("^<br>|<br>$", "", mytext_acc)
+    
+    cap_er_nsa_5 <- paste0(mytext_acc)
+  
+  ## terminal ----------------------------------------------------------- 
+  # find headings to define ranges
+  if (no_tcz > 0) {
+  range <- "A2:U81"
+  cap_trm_all <- read_range(cap_trm_file, sheet, range) 
+  cap_trm_all <- cap_trm_all |> 
+      rename(a = 1) 
+  
+  # replace NAs by empty strings
+  cap_trm_all[is.na(cap_trm_all)] <- ""
+  
+  cap_trm_titles <- c("1. Overview",
+                  "**1. Overview**",
+                  "2. Arrival ATFM Delay", 
+                  "**2. Arrival ATFM Delay**", 
+                  "3. Arrival ATFM Delay – National Target and Incentive Scheme",
+                  "**3. Arrival ATFM Delay – National Target and Incentive Scheme**",
+                  "4. ATFM Slot Adherence",
+                  "**4. ATFM Slot Adherence**",
+                  "5. ATC Pre-departure Delay",
+                  "**5. ATC Pre-departure Delay**",
+                  "6. All Causes Pre-departure Delay",
+                  "**6. All Causes Pre-departure Delay**",
+                  "7. Appendix",
+                  "**7. Appendix**"
+  )
+  
+  cap_trm_heading_positions <- which(cap_trm_all$a %in% cap_trm_titles)
+  
+  for (i in 1:length(cap_trm_heading_positions)) {
+    if (i<length(cap_trm_heading_positions)) {
+      mytext <- apply(cap_trm_all[(cap_trm_heading_positions[i]+1):(cap_trm_heading_positions[i+1]-1), ], 1, function(col) paste(col, collapse = "<br>"))
+      } else{
+      mytext <- apply(cap_trm_all[(cap_trm_heading_positions[i]+1):(cap_trm_heading_positions[i]+1), ], 1, function(col) paste(col, collapse = "<br>"))
+      }
+    
+    # replace repeated breaks by single  
+    mytext <- gsub("(<br>)+", "<br>", mytext)
+  
+    #remove empty elements of vector
+    mytext <- mytext[mytext != "<br>"]
+    mytext <- mytext[mytext != ""]
+    
+    #replace double breaks by single breaks
+    pattern <- "(<br>){2,}"
+    mytext <- str_replace_all(mytext, pattern, "<br>")
+  
+    ### remove leading and trailing line breaks
+    mytext <- sub("^<br>|<br>$", "", mytext)
+    
+    ### assign text to variable
+    assign(paste0("cap_trm_nsa_", i), paste0(mytext,collapse = ""))
+    }
   }
-  # replace repeated breaks by single  
-  mytext <- gsub("(<br>)+", "<br>", mytext)
 
-  #remove empty elements of vector
-  mytext <- mytext[mytext != "<br>"]
-  mytext <- mytext[mytext != ""]
-  
-  #replace double breaks by single breaks
-  pattern <- "(<br>){2,}"
-  mytext <- str_replace_all(mytext, pattern, "<br>")
-
-  ### remove leading and trailing line breaks
-  mytext <- sub("^<br>|<br>$", "", mytext)
-  
-  ### assign text to variable
-  assign(paste0("cap_trm_nsa_", i), paste0(mytext,collapse = ""))
-  
 }
-}
-
-## enroute 
-#old code based on fixed positions
-# range <- "A9:O13"
-# cap_er_nsa_2 <- read_range(cap_file, sheet, range)  
-# 
-# range <- "A14:O18"
-# cap_er_nsa_3 <- read_range(cap_file, sheet, range)  
-
-# range <- "A19:O23"
-# cap_er_nsa_4 <- read_range(cap_file, sheet, range)  
-
-# range <- "A49:O53"
-# cap_er_nsa_6 <- read_range(cap_file, sheet, range)  
-
-# # cap_er_nsa_5_acc <- ''
-# cap_er_nsa_5_txt <- ''
-# cap_er_nsa_5_obs <- ''
-# cap_er_nsa_5 <- ''
-# 
-# for (i in 1:acc_no) {
-#   
-#   # range <- paste0("A", 24 + (i-1) * 4, ":D", 25 + (i-1) * 4)
-#   # cap_er_nsa_5_acc <- read_range(cap_file, sheet, range)  
-#   
-#   range <- paste0("K", 25 + (i-1) * 4, ":O", 27 + (i-1) * 4)
-#   cap_er_nsa_5_obs <- read_range(cap_file, sheet, range)  
-#   
-#   range <- paste0("A", 27 + (i-1) * 4, ":O", 28 + (i-1) * 4)
-#   cap_er_nsa_5_txt <- read_range(cap_file, sheet, range)  
-#   
-#   cap_er_nsa_5 <- if_else(is.na(cap_er_nsa_5_txt[1,1]) == TRUE & is.na(cap_er_nsa_5_obs[1,1]) == TRUE, '', 
-#                           paste0(cap_er_nsa_5_txt[1,1], 
-#                                  if_else(is.na(cap_er_nsa_5_obs[1,1]) == TRUE, '', paste0('**Observations: **', cap_er_nsa_5_obs[1,1])),
-#                                  '\n')
-#                           )
-#   
-# }
-
-# range <- "A54:O58"
-# cap_er_nsa_7 <- read_range(cap_file, sheet, range)  
-
-## terminal
-# if (no_tcz > 0) {
-# range <- "A3:U4"
-# cap_trm_nsa_1 <- read_range(cap_trm_file, sheet, range) 
-# 
-# range <- "A5:U7"
-# cap_trm_nsa_2 <- read_range(cap_trm_file, sheet, range) 
-# cap_trm_nsa_2 <- paste0(if_else(is.na(cap_trm_nsa_2[1,11]) == TRUE, '',
-#                               pull(cap_trm_nsa_2[1,11])),
-#                       if_else(is.na(cap_trm_nsa_2[2,1]) == TRUE, '',
-#                               pull(cap_trm_nsa_2[2,1]))
-#                       )
-# 
-# range <- "A8:U10"
-# cap_trm_nsa_3 <- read_range(cap_trm_file, sheet, range)  
-# cap_trm_nsa_3 <- paste0(if_else(is.na(cap_trm_nsa_3[1,10]) == TRUE, "",
-#                               pull(cap_trm_nsa_3[1,10])),
-#                       if_else(is.na(cap_trm_nsa_3[1,11]) == TRUE, "",
-#                               pull(cap_trm_nsa_3[1,11])),
-#                       if_else(is.na(cap_trm_nsa_3[2,1]) == TRUE, "",
-#                               paste0('<br/>', pull(cap_trm_nsa_3[2,1])))
-#                       )
-# 
-# range <- "A11:U13"
-# cap_trm_nsa_4 <- read_range(cap_trm_file, sheet, range) 
-# cap_trm_nsa_4 <- paste0(if_else(is.na(cap_trm_nsa_4[1,10]) == TRUE, "",
-#                               pull(cap_trm_nsa_4[1,10])),
-#                       if_else(is.na(cap_trm_nsa_4[1,11]) == TRUE, "",
-#                               pull(cap_trm_nsa_4[1,11])),
-#                       if_else(is.na(cap_trm_nsa_4[2,1]) == TRUE, "",
-#                               pull(cap_trm_nsa_4[2,1]))
-#                       )
-# 
-# range <- "A14:U15"
-# cap_trm_nsa_5 <- read_range(cap_trm_file, sheet, range)  
-# 
-# range <- "A16:U17"
-# cap_trm_nsa_6 <- read_range(cap_trm_file, sheet, range)  
-# 
-# range <- "A18:U19"
-# cap_trm_nsa_7 <- read_range(cap_trm_file, sheet, range)  
-# }
 ```
 
 
@@ -316,6 +254,7 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 `r if (params$no_tcz == 0) "::::"`
 
 :::
+
 
 ::: {#container-cap-er}
 ## En route performance
@@ -359,6 +298,7 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 ::::
 :::
 
+`r if (params$country == "SES RP3") "::: {.content-hidden}"`
 ::: {.callout-note collapse=true}
 
 #### NSA input
@@ -392,6 +332,8 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 `r if (params$year_report == 2022) "::::"`
 
 :::
+`r if (params$country == "SES RP3") ":::"`
+
 
 ::: {#container-cap-atco}
 
@@ -400,23 +342,34 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 :::: {layout="[ 50, 50 ]"}
 
 ::::: {#chart-cap-atco}
-
 ```{r chart-cap-atco}
 #| file: R/chart_level2_cap_atco.R
 #| out.width: "100%"
 ```
 :::::
 
-:::::{#chart-cap-atco-acc}
-
+::::: {#chart-cap-2}
+<!-- for ses there is no graphic per acc -->
+`r if (params$country == "SES RP3") ":::::: {.content-hidden}"`
 ```{r chart-cap-atco-acc}
 #| file: R/chart_level2_cap_atco_acc.R
 #| out.width: "100%"
 ```
+`r if (params$country == "SES RP3") "::::::"`
 
+<!-- so we replace it by thee sector opening hours -->
+`r if (params$country != "SES RP3") ":::::: {.content-hidden}"`
+```{r chart-cap-sector-opening-ses}
+#| file: R/chart_level2_cap_sector_opening.R
+#| out.width: "100%"
+```
+`r if (params$country != "SES RP3") "::::::"`
 :::::
 
 ::::
+
+<!-- for ses this chart is now above, so we hide it here -->
+`r if (params$country == "SES RP3") ":::: {.content-hidden}"`
 
 :::: {layout="[ 20, 60, 20 ]"}
 
@@ -432,8 +385,11 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 
 :::::
 ::::
+`r if (params$country == "SES RP3") "::::"`
+
 :::
 
+`r if (params$country == "SES RP3") "::: {.content-hidden}"`
 ::: {.callout-note collapse=true}
 
 #### NSA input
@@ -443,9 +399,8 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 `r cap_er_nsa_5`
 
 ::::
-
 :::
-
+`r if (params$country == "SES RP3") ":::"`
 
 
 `r if (params$no_tcz == 0) "::: {.content-hidden}"`
@@ -473,6 +428,7 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 
 ::::
 
+
 :::: {.callout-note collapse=true}
 
 #### NSA input
@@ -486,7 +442,6 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 `r if (exists("cap_trm_nsa_3") == FALSE) {''} else {cap_trm_nsa_3}`
 
 :::::
-
 ::::
 
 
@@ -509,6 +464,7 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 :::::
 
 ::::
+
 
 :::: {.callout-note collapse=true}
 
@@ -544,8 +500,29 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 `r if (exists("cap_trm_nsa_5") == FALSE) {''} else {cap_trm_nsa_5}`
 
 :::::
-
-
 ::::
 
 `r if (params$no_tcz == 0) ":::"`
+
+<!-- we need this graph for ses -->
+`r if (params$country != "SES RP3") "::: {.content-hidden}"`
+
+:::: {#container-cap-other-ses}
+### Other performance indicators 
+
+::::: {layout="[ 20, 60, 20 ]"}
+
+:::::: {#empty-div}
+::::::
+
+:::::: {#chart-cap-all-causes-delay-ses}
+
+```{r chart-cap-all-causes-delay-ses}
+#| file: R/chart_level2_cap_all_causes_delay.R
+#| out.width: "100%"
+```
+::::::
+:::::
+
+::::
+`r if (params$country != "SES RP3") ":::"`

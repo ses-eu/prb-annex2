@@ -60,7 +60,9 @@ if (country == "Home" | country == "Network Manager") {
   level2_files <- ""
   
 } else if (country == "SES RP3") {
-  level2_files <- c("safety.qmd")
+  level2_files <- c("capacity.qmd",
+                    "environment.qmd",
+                    "safety.qmd")
                     
 } else {
   level2_files <- c("capacity.qmd",

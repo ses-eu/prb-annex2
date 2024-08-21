@@ -1,3 +1,6 @@
+# to avoid error when processing the .qmd file
+if (country != "SES RP3") {
+
 ## import data  ----
 data_raw_axot  <-  read_xlsx(
   paste0(data_folder, "ENV dataset master.xlsx"),
@@ -183,4 +186,4 @@ myareachart <-  function(mywidth, myheight, myfont, mymargin) {
 
 ## plot chart  ----
 myareachart(mywidth, myheight, myfont, mylocalmargin) 
-  
+}
