@@ -15,42 +15,71 @@ mycz_name <- if_else(cztype == "terminal",
                      ecz_list$ecz_name[ez])
 
 # import data  ----
-data_raw  <-  read_xlsx(
-  paste0(data_folder, "CEFF dataset master.xlsx"),
-  # here("data","hlsr2021_data.xlsx"),
-  sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
-  range = cell_limits(c(1, 1), c(NA, NA))) %>%
-  as_tibble() %>% 
-  clean_names() 
+if (country == "SES RP3") {
+  ## SES  ----
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "SES CEFF.xlsx"),
+    sheet = if_else(cztype == "terminal", "SES_TRM_all", "SES_ERT_all"),
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+  
+  data_pre_prep <- data_raw %>% 
+    filter(
+      year == .env$year_report
+    ) %>% 
+    select(
+      year,
+      status,
+      x1_1_staff = staff_eur2017_ansp1,
+      x1_2_other_operating_cost = otheroperating_eur2017_ansp1,
+      x1_3_depreciation = depreciation_eur2017_ansp1,
+      x1_4_cost_of_capital = co_c_eur2017_ansp1,
+      x1_5_exceptional_items = exceptional_eur2017_ansp1,
+      x4_1_cost_for_vfr_exempted = vfr_eur2017_ansp1
+    )
+  
+} else {
+  ## State  ----
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "CEFF dataset master.xlsx"),
+    # here("data","hlsr2021_data.xlsx"),
+    sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+
+  data_pre_prep <- data_raw %>% 
+    filter(
+      charging_zone_code == mycz,
+      entity_type_id == "ANSP1",
+      year == .env$year_report
+    ) %>% 
+    mutate(
+      x1_1_staff = x1_1_staff / (x5_2_inflation_index_nc2017/100) /xrate2017,
+      x1_2_other_operating_cost = x1_2_other_operating_cost / (x5_2_inflation_index_nc2017/100) /xrate2017, 
+      x1_3_depreciation = x1_3_depreciation / xrate2017,
+      x1_4_cost_of_capital = x1_4_cost_of_capital / xrate2017,
+      x1_5_exceptional_items = x1_5_exceptional_items / (x5_2_inflation_index_nc2017/100) /xrate2017,
+      x4_1_cost_for_vfr_exempted =x4_1_cost_for_vfr_exempted / (x5_2_inflation_index_nc2017/100) /xrate2017
+    ) |> 
+    select(
+      year,
+      status,
+      x1_1_staff,
+      x1_2_other_operating_cost,
+      x1_3_depreciation,
+      x1_4_cost_of_capital,
+      x1_5_exceptional_items,
+      x4_1_cost_for_vfr_exempted
+    )
+  
+  }
 
 
 # prepare data ----
-data_prep <- data_raw %>% 
-  filter(
-    charging_zone_code == mycz,
-    entity_type_id == "ANSP1",
-    year == .env$year_report
-  ) %>% 
-  mutate(
-    x1_1_staff = x1_1_staff / (x5_2_inflation_index_nc2017/100) /xrate2017,
-    x1_2_other_operating_cost = x1_2_other_operating_cost / (x5_2_inflation_index_nc2017/100) /xrate2017, 
-    x1_3_depreciation = x1_3_depreciation / xrate2017,
-    x1_4_cost_of_capital = x1_4_cost_of_capital / xrate2017,
-    x1_5_exceptional_items = x1_5_exceptional_items / (x5_2_inflation_index_nc2017/100) /xrate2017,
-    x4_1_cost_for_vfr_exempted =x4_1_cost_for_vfr_exempted / (x5_2_inflation_index_nc2017/100) /xrate2017
-  ) |> 
-  select(
-    year,
-    entity_name,
-    status,
-    x1_1_staff,
-    x1_2_other_operating_cost,
-    x1_3_depreciation,
-    x1_4_cost_of_capital,
-    x1_5_exceptional_items,
-    x4_1_cost_for_vfr_exempted
-  ) %>% 
-  pivot_longer(cols = -c(year, entity_name, status),
+data_prep <- data_pre_prep |> 
+  pivot_longer(cols = -c(year, status),
     names_to = 'type', 
     values_to = 'value') %>% 
   pivot_wider(names_from = 'status', values_from = 'value') %>% 
@@ -78,8 +107,11 @@ range_min <- if_else(range_min >0, 0, range_min)
 range_max <- ceiling(max(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^myroundup + 10^myroundup/2
 
 # chart parameters ----
-mychart_title <- paste0("Costs by nature for main ANSP\n", main_ansp," (M€<sub>2017</sub>) - ", year_report)
-mytitle_y <- 0.95
+mychart_title <- if_else(country == "SES RP3", 
+                         paste0("Costs by nature for main ANSPs (M€<sub>2017</sub>) - ", year_report),
+                         paste0("Costs by nature for main ANSP\n", main_ansp," (M€<sub>2017</sub>) - ", year_report)
+  )
+mytitle_y <- if_else(country == "SES RP3", 0.99, 0.95)
 myaxis_title <- "Costs (M€<sub>2017</sub>)"
 mybarcolor_pos <- '#A5A5A5'
 mybarcolor_neg <- '#A5A5A5'
@@ -88,7 +120,7 @@ myhovertemplate <- paste0('%{y} (A-D): %{x:,.1f}<extra></extra>')
 # myxaxis_tickformat <- "0,.1f"
 myxaxis_tickformat <- if_else(all_negative_or_zero, "0,.1f", "+0,")
 mydecimals <- 3
-mylocalmargin = list(t=60)
+mylocalmargin = if_else(country == "SES RP3", mymargin, list(t=60))
 
 ###set up order of traces
 myfactor <- c("VFR exempted", 
