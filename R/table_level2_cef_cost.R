@@ -1,6 +1,6 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("cz") == FALSE) {cz = c("1", "terminal")}
+if (exists("cz") == FALSE) {cz = c("1", "enroute")}
 # ez=1
 
 # define cz ----
@@ -15,47 +15,75 @@ mycz_name <- if_else(cztype == "terminal",
                      ecz_list$ecz_name[ez])
 
 # import data  ----
-# if(cztype == "terminal") {data_raw <- data_raw_t1_trm} else {data_raw <- data_raw_t1_ert}
+if (country == "SES RP3") {
+  ## SES  ----
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "SES CEFF.xlsx"),
+    sheet = if_else(cztype == "terminal", "SES_TRM_all", "SES_ERT_all"),
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() |> 
+    # so the field name is the same as for state
+    mutate(x4_2_cost_excl_vfr = costs_eur2017nominal_cz,
+           xrate2017 = 1)
+    
+  
+} else {
+  ## State  ----
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "CEFF dataset master.xlsx"),
+    sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+}
 
-data_raw  <-  read_xlsx(
-  paste0(data_folder, "CEFF dataset master.xlsx"),
-  # here("data","hlsr2021_data.xlsx"),
-  sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
-  range = cell_limits(c(1, 1), c(NA, NA))) %>%
-  as_tibble() %>% 
-  clean_names() 
 
 # prepare data ----
-data_prep <- data_raw %>% 
+data_prep_split <- data_raw %>% 
   filter(
+    year != 20202021,
     entity_code == mycz) %>% 
   mutate(
-    mymetric = round(x4_2_cost_excl_vfr/xrate2017/10^6,2),
-    mymetric = case_when( 
-      year > year_report & year != 20202021 & status == "A" ~ NA,
-      .default = mymetric)
+    mymetric = case_when (
+      status == 'A' & year > .env$year_report ~ NA,
+      .default = x4_2_cost_excl_vfr
+    ),
+    xlabel = as.character(year)
   ) %>%  
   select(
     year,
     status,
-    mymetric
-  ) %>%  
-  filter(year > 2021) %>% 
-  mutate(year = as.character(year),
-         year = str_replace(year, "20202021", "2020-2021"),
+    mymetric,
+    xlabel
+  ) 
+
+data_prep2020_2021 <- data_prep_split %>% 
+  filter(
+    year < 2022) %>% 
+  group_by(status) |> 
+  summarise(mymetric = sum(mymetric, na.rm = TRUE)) |> 
+  mutate(xlabel = "2020-2021")
+
+data_prep <- data_prep_split |> 
+  filter(year > 2021) |> 
+  select(-year) |>
+  rbind(data_prep2020_2021) |> 
+  mutate(mymetric = round(mymetric/10^6, 2),
          status = str_replace(status, "A", "Actual costs"),
          status = str_replace(status, "D", "Determined costs")
   ) %>% 
-  arrange(year) %>% 
+  arrange(xlabel) %>% 
   pivot_wider(values_from = 'mymetric', names_from = 'status') %>% 
   mutate('Difference costs' = case_when(
-    year<= .env$year_report ~ .[[2]] - .[[3]],
+    xlabel<= .env$year_report ~ .[[2]] - .[[3]],
     .default = NA)
-    ) %>% 
+  ) %>% 
   mutate_at(c(2:4), ~round(.,0)) %>% 
-  pivot_longer(-year, names_to = "name", values_to = 'mymetric') %>% 
-  pivot_wider(values_from = 'mymetric', names_from = 'year')
+  pivot_longer(-xlabel, names_to = "name", values_to = 'mymetric') %>% 
+  pivot_wider(values_from = 'mymetric', names_from = 'xlabel')
 
+# plot table ----
 mygtable(data_prep, myfont) %>% 
   cols_label(name = html("Total costs - nominal EURO (M€)")) %>% 
   tab_options(column_labels.background.color = "#F2F2F2",
@@ -70,6 +98,11 @@ mygtable(data_prep, myfont) %>%
       columns = 1
       )
     )|> 
+  fmt_number(
+    columns = c(2:5),  # Specify the columns to format
+    decimals = 0,  # Number of decimal places
+    use_seps = TRUE  # Use thousands separator
+  ) |> 
   tab_header(
     title = md(paste0(if_else(cztype == "terminal", "**TCZ", "**ECZ"),
                       " actual and planned data**"))
