@@ -208,10 +208,13 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 #| out.width: "100%"
 ```
 
+`r if (params$country == "SES RP3") ":::::: {.content-hidden}"`
+
 ```{r table-cef-cost-infl, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/table_level2_cef_cost_infl.R
 #| out.width: "100%"
 ```
+`r if (params$country == "SES RP3") "::::::"`
 :::::
 ::::
 

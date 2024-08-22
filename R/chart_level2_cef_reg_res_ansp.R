@@ -14,18 +14,88 @@ mycz_name <- if_else(cztype == "terminal",
                      tcz_list$tcz_name[ez],
                      ecz_list$ecz_name[ez])
 
-
-# import data ----
-data_reg_res <- regulatory_result(cztype, mycz)
+if (country == "SES RP3") {
+  # SES  ----
+  ## import data  ----
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "SES CEFF.xlsx"),
+    sheet = if_else(cztype == "terminal", "SES_TRM_all", "SES_ERT_all"),
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
   
+  ## pre-prep data ----
+  data_pre_prep <- data_raw |> 
+    mutate(regulatory_result = ro_e_ansp1 + net_result_ansp) |> 
+    select(
+      year,
+      status,
+      regulatory_result,
+      revenues_ansp
+    ) |> 
+    pivot_wider( names_sep = "_", names_from = "status", values_from = c(3:4)) |> 
+    select(-revenues_ansp_D) 
+  
+  data_for_chart_wide <- data_pre_prep |> 
+    mutate(
+      regulatory_result = case_when(
+        year == 2021 ~ regulatory_result_A + pull(select(filter(data_pre_prep, year == 2020), regulatory_result_A)),
+        .default = regulatory_result_A),
+      
+      ex_ante_roe = case_when(
+        year == 2021 ~ regulatory_result_D + pull(select(filter(data_pre_prep, year == 2020), regulatory_result_D)),
+        .default = regulatory_result_D),
+      
+      actual_revenues = case_when(
+        year == 2021 ~ revenues_ansp_A + pull(select(filter(data_pre_prep, year == 2020), revenues_ansp_A)),
+        .default = revenues_ansp_A),
+      
+      share_rr_act_rev_expost = regulatory_result/actual_revenues * 100,
+      share_rr_act_rev_exante = ex_ante_roe/actual_revenues * 100,
+      
+      year_text = if_else(year == 2021, "2020-2021", as.character(year))
+    ) |>  
+    filter(year>2020) |> 
+    select(year_text, regulatory_result, ex_ante_roe, share_rr_act_rev_expost, share_rr_act_rev_exante) |> 
+    mutate(
+      regulatory_result = case_when(
+        as.numeric(str_replace(year_text, "-", "")) > year_report & year_text != '2020-2021' ~ NA,
+        .default = regulatory_result/1000
+      ),
+      
+      share_rr_act_rev_expost = case_when(
+        as.numeric(str_replace(year_text, "-", "")) > year_report & year_text != '2020-2021' ~ NA,
+        .default = share_rr_act_rev_expost
+      ),
+      
+      share_rr_act_rev_exante = case_when(
+        as.numeric(str_replace(year_text, "-", "")) > year_report & year_text != '2020-2021' ~ NA,
+        .default = share_rr_act_rev_exante
+      ),
+      
+      ex_ante_roe = case_when(
+        as.numeric(str_replace(year_text, "-", "")) > year_report & year_text != '2020-2021' ~ NA,
+        .default = ex_ante_roe/1000
+      )
+      
+    )
+  
+} else {
+  # State  ----
+  ## import data ----
+  data_reg_res <- regulatory_result(cztype, mycz)
+    
+  ## pre-prep data ----
+  data_for_chart_wide <- data_reg_res %>% 
+    filter(type == 'Main ANSP') %>% 
+    mutate(
+      share_rr_act_rev_expost = regulatory_result/actual_revenues * 100,
+      share_rr_act_rev_exante = ex_ante_roe/actual_revenues * 100
+      ) %>% 
+    select(year_text,regulatory_result, ex_ante_roe, share_rr_act_rev_expost, share_rr_act_rev_exante)
+}
+
 # prep data ----
-data_for_chart_wide <- data_reg_res %>% 
-  filter(type == 'Main ANSP') %>% 
-  mutate(
-    share_rr_act_rev_expost = regulatory_result/actual_revenues * 100,
-    share_rr_act_rev_exante = ex_ante_roe/actual_revenues * 100
-    ) %>% 
-  select(year_text,regulatory_result, ex_ante_roe, share_rr_act_rev_expost, share_rr_act_rev_exante)
 
 ## separate in two tables for pivoting 
 data_for_chart_value <- data_for_chart_wide %>% 
@@ -48,13 +118,9 @@ data_for_chart_share <- data_for_chart_wide %>%
 data_prep <- data_for_chart_value %>% 
   left_join(data_for_chart_share, by = c('year_text', 'xlabel')) %>% 
   mutate(type = xlabel,
-    xlabel = year_text,
-    # year = as.numeric(str_replace_all(xlabel, "2020-2021", '2021')),
-    # xlabel = year
-    )
-
-#
-
+         xlabel = year_text
+  )
+  
 # chart parameters ----
 mysuffix <- ""
 mydecimals <- 1
@@ -78,7 +144,11 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("Regulatory Result for main ANSP ", main_ansp, ' (M€)')
+mytitle_text <- if_else(country == "SES RP3", 
+                        "Regulatory Result for main ANSPs (M€)",
+                        paste0("Regulatory Result for main ANSP ", main_ansp, ' (M€)')
+                        )
+
 mytitle_y <- 0.99
 
 #### xaxis

@@ -40,7 +40,7 @@ if (country == "SES RP3") {
         year == 2021 ~ net_result_ansp + pull(select(filter(data_raw, year == 2020 & status =="A"), net_result_ansp)),
         .default = net_result_ansp),
       
-      reg_res = sum(ro_e_combined, net_result_ansp_combined, na.rm = TRUE),
+      reg_res = ro_e_combined + net_result_ansp_combined,
       reg_res_per_su = reg_res/su_cz_combined,
       rr_as_perc_aucu = round(reg_res_per_su/aucu_combined * 100, 2)
     ) |> 
