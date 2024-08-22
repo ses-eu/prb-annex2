@@ -14,12 +14,76 @@ mycz_name <- if_else(cztype == "terminal",
                      tcz_list$tcz_name[ez],
                      ecz_list$ecz_name[ez])
 
-# get data ----
-data_prep <- regulatory_result(cztype, mycz)
-data_prep <- data_prep %>% 
-  mutate(mymetric = regulatory_result / 1000) %>% 
-  rename(xlabel = year_text)
+if (country == "SES RP3") {
+  # SES  ----
+  ## import data & prep ----
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "SES CEFF.xlsx"),
+    sheet = if_else(cztype == "terminal", "SES_TRM_all", "SES_ERT_all"),
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
   
+  data_pre_prep <- data_raw |> 
+    filter(status == "A") |> 
+    select(
+      year,
+      ro_e_ansp1,
+      ro_e_ansp_other,
+      ro_e_ansp_met,
+      
+      net_result_ansp1,
+      net_result_other_ansp,
+      net_result_met,
+    ) |> 
+    rowwise() |> 
+    mutate(
+      regulatory_result_ansp1 = sum(ro_e_ansp1, net_result_ansp1, na.rm = TRUE)/10^6,
+      regulatory_result_ansp_other = sum(ro_e_ansp_other, net_result_other_ansp, na.rm = TRUE)/10^6,
+      regulatory_result_met = sum(ro_e_ansp_met, net_result_met, na.rm = TRUE)/10^6,
+    ) 
+    
+  data_prep <- data_pre_prep |> 
+    select(year, regulatory_result_ansp1, regulatory_result_ansp_other,  regulatory_result_met) |> 
+    mutate(
+      regulatory_result_ansp1 = case_when(
+        year == 2021 ~ regulatory_result_ansp1 + pull(select(filter(data_pre_prep, year == 2020), regulatory_result_ansp1)),
+        .default = regulatory_result_ansp1),
+      
+      regulatory_result_ansp_other = case_when(
+        year == 2021 ~ regulatory_result_ansp_other + pull(select(filter(data_pre_prep, year == 2020), regulatory_result_ansp_other)),
+        .default = regulatory_result_ansp_other),
+      
+      regulatory_result_met = case_when(
+        year == 2021 ~ regulatory_result_met + pull(select(filter(data_pre_prep, year == 2020), regulatory_result_met)),
+        .default = regulatory_result_met),
+      
+      xlabel = if_else(year == 2021, "2020-2021", as.character(year))
+    ) |> 
+    filter(year > 2020) |> 
+    select(-year) |> 
+    pivot_longer(-xlabel, names_to = "type", values_to = "mymetric") |> 
+    mutate(
+      type = case_when(
+        type == "regulatory_result_ansp1" ~ "Main ANSP",
+        type == "regulatory_result_ansp_other" ~ "Other ANSP",
+        type == "regulatory_result_met" ~ "MET"),
+      
+      mymetric = case_when(
+            as.numeric(str_replace(xlabel, "-", "")) > year_report & xlabel != '2020-2021' ~ NA,
+            .default = mymetric
+            )
+      )
+  
+} else {
+  # State ----
+  ## import data & prep ----
+  data_prep <- regulatory_result(cztype, mycz)
+  data_prep <- data_prep %>% 
+    mutate(mymetric = regulatory_result / 1000) %>% 
+    rename(xlabel = year_text)
+}
+    
 # chart parameters ----
 mysuffix <- ""
 mydecimals <- 1
@@ -50,7 +114,7 @@ mytitle_y <- 0.99
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "Regulatory result (€M)"
+myyaxis_title <- "Regulatory result (M€)"
 myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ",.0f"
 
