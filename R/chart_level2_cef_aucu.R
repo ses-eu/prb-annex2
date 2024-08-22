@@ -14,19 +14,40 @@ mycz_name <- if_else(cztype == "terminal",
                      tcz_list$tcz_name[ez],
                      ecz_list$ecz_name[ez])
 
-# import data ----
-data_calc <- aucu(cztype, mycz)
+if (country == "SES RP3") {
+  # SES  ----
+  ## import data  ----
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "SES CEFF.xlsx"),
+    sheet = if_else(cztype == "terminal", "SES_TRM_all", "SES_ERT_all"),
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
   
-# prep data ----
-data_calc_mod <- data_calc %>% 
-  mutate(year = as.numeric(str_replace_all(year_text, '2020-', ''))) 
-
-data_calc_mod_2020 <- data_calc_mod |> 
-  filter(year == 2021) |> mutate(year = 2020)
-
-data_prep <- data_calc_mod |> 
-  rbind(data_calc_mod_2020) |> 
-  arrange(year) |> 
+  data_pre_prep <- data_raw %>% 
+    filter(status == "A",
+           year >= 2021) |> 
+    mutate(year_text = if_else(year == 2021, "2020-2021", as.character(year))) |> 
+    select(
+      year,
+      year_text,
+      new_duc = new_duc_eur_combined,
+      total_adjustments_aucu = total_adjustments_su_combined,
+      aucu = aucu_combined
+    )
+  
+} else {
+  # SES  ----
+  ## import data ----
+  data_calc <- aucu(cztype, mycz)
+    
+  ## pre-prep data ----
+  data_pre_prep <- data_calc %>% 
+    mutate(year = as.numeric(str_replace_all(year_text, '2020-', ''))) 
+    arrange(year) 
+}
+  
+data_prep <- data_pre_prep |> 
   select(
     year,
     year_text,
