@@ -37,7 +37,7 @@ if (country == "SES RP3") {
     )
   
 } else {
-  # SES  ----
+  # State  ----
   ## import data ----
   data_calc <- aucu(cztype, mycz)
     
