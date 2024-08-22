@@ -1,126 +1,143 @@
 ```{r cef-level2-text}
 cz=c("@@cz_index@@", "@@cz_type@@")
-
+  
 # define cz
 ez <- as.numeric(cz[[1]])
 cztype <- cz[[2]]
 
-# define ranges and import data
-## 1st sheet
-sheet <- if_else(cztype == "terminal",
-                 if_else(ez >1, paste0("5_TRM (", ez, ")"), "5_TRM"),
-                 "1_ERT")
-ceff_file <- if_else(country == "Spain" & ez == 2, ceff_file_canarias, ceff_file)
-
-## range 1.4
-range <- "C50:M71"
-cef_txt_1_4  <- read_range(ceff_file, sheet, range) %>% rename(a = 1)
-
-### Check if the whole range is merged and apply different logic
-if (is.na(cef_txt_1_4[2,1]) == FALSE) {
-  ### find specific headings
-  my_index_su <- which(cef_txt_1_4$a %like% paste0(if_else(cztype == "terminal",
-                                                           "Terminal",
-                                                           "En route"), 
-                                                   ' service units')) + 1
+if (country == "SES RP3") {
+  # to avoid errors when processing the file
+  cef_txt_1_4_duc <- ''
+  cef_txt_1_4_su <- '' 
+  cef_txt_1_4_cost_all <- ''
+  cef_txt_1_4_cost_main <- ''
+  cef_txt_1_4 <- data.frame(a=c(NA,NA), b=c(NA,NA))
   
-  if(identical(my_index_su, numeric(0)) == TRUE) {my_index_su <- which(cef_txt_1_4$a %like% paste0("Terminal charging zone ", ez,' service units')) + 1} 
+  my_index_su <- 1
+  my_index_cost_by_ent <- 1
+  my_index_cost_main <- 1
   
-  my_index_cost_by_ent <- which(cef_txt_1_4$a %like% paste0(if_else(cztype == "terminal",
-                                                           "Terminal",
-                                                           "En route"), 
-                                                   ' costs by entity')) + 1
+  cef_txt_1_5 <- data.frame(a=c(NA,NA), b=c(NA,NA))
+  cef_txt_1_10 <- data.frame(a=c(NA,NA), b=c(NA,NA))
+  cef_txt_1_13 <- data.frame(a=c(NA,NA,NA,NA,NA), b=c(NA,NA,NA,NA,NA))
   
-  if(identical(my_index_cost_by_ent, numeric(0)) == TRUE) {my_index_cost_by_ent <- which(cef_txt_1_4$a %like% paste0("Terminal charging zone ", ez,' costs by entity')) + 1} 
-  
-  my_index_cost_main <- which(cef_txt_1_4$a %like% paste0(if_else(cztype == "terminal",
-                                                           "Terminal",
-                                                           "En route"), 
-                                                   " costs for the main ANSP")) + 1
-  
-  if(identical(my_index_cost_main, numeric(0)) == TRUE) {my_index_cost_main <- which(cef_txt_1_4$a %like% paste0("Terminal charging zone ", ez,' costs for the main ANSP')) + 1}
-  if(identical(my_index_cost_main, numeric(0)) == TRUE) {my_index_cost_main <- which(cef_txt_1_4$a %like% paste0("Terminal charging zone costs for the main ANSP")) + 1}
-  
-  ### to avoid errors if else is executed
-  cef_txt_1_4_duc <- ""
-  cef_txt_1_4_su <- ""
-  cef_txt_1_4_cost_all <- ""
-  cef_txt_1_4_cost_main <- ""
-
 } else {
-  ### find beginning and end of headings
-  tx <- cef_txt_1_4[1,1] |> pull()
-  heading1 <- str_locate(tx, fixed('AUC vs DUC')) + 7 
-  if(is.na(heading1[1]) == TRUE) {heading1 <- str_locate(tx, fixed('AUC vs. DUC')) + 7}
-  heading2 <- str_locate(tx, fixed(paste0(if_else(cztype == "terminal",
-                                                           "**Terminal",
-                                                           "**En route"), 
-                                                   " service units"))) 
-
-  heading3_1 <- str_locate(tx, fixed(paste0(if_else(cztype == "terminal",
-                                                           "**Terminal",
-                                                           "**En route"),
-                                            ' costs by entity at charging zone level**<br/>')))
-  heading3_2 <- str_locate(tx, fixed(paste0(if_else(cztype == "terminal",
-                                                           "**Terminal",
-                                                           "**En route"),
-                                            ' costs by entity**<br/>')))
-
-  heading4_beg <- str_locate(tx, fixed(paste0(if_else(cztype == "terminal",
-                                                           "**Terminal",
-                                                           "**En route"),
-                                            ' costs for the main ANSP')))
-  all_bold_locations <- str_locate_all(tx, fixed('**'))
-  heading_4 <- tail(all_bold_locations[[1]], n = 1)
-
-  cef_txt_1_4_duc <- str_replace_all(substr(tx, max(heading1)+1, min(heading2)-1), fixed("<br/><br/>"), fixed("<br/>"))
-  cef_txt_1_4_su <- str_replace_all(substr(tx, max(heading2)+1+7, min(heading3_1, heading3_2, na.rm = TRUE)-1) , fixed("<br/><br/>"), fixed("<br/>"))
-  cef_txt_1_4_cost_all <- str_replace_all(substr(tx, max(heading3_1, heading3_2, na.rm = TRUE)+1, min(heading4_beg)-1) , fixed("<br/><br/>"), fixed("<br/>"))
-  cef_txt_1_4_cost_main <- str_replace_all(substr(tx, heading_4 + 2, nchar(tx)) , fixed("<br/><br/>"), fixed("<br/>"))
+  # define ranges and import data
+  ## 1st sheet
+  sheet <- if_else(cztype == "terminal",
+                   if_else(ez >1, paste0("5_TRM (", ez, ")"), "5_TRM"),
+                   "1_ERT")
+  ceff_file <- if_else(country == "Spain" & ez == 2, ceff_file_canarias, ceff_file)
   
-  ### remove leading and trailing line breaks
-  cef_txt_1_4_duc <- sub("^<br/>|<br/>$", "", cef_txt_1_4_duc)
-  cef_txt_1_4_su <- sub("^<br/>|<br/>$", "", cef_txt_1_4_su)
-  cef_txt_1_4_cost_all <- sub("^<br/>|<br/>$", "", cef_txt_1_4_cost_all)
-  cef_txt_1_4_cost_main <- sub("^<br/>|<br/>$", "", cef_txt_1_4_cost_main)
+  ## range 1.4
+  range <- "C50:M71"
+  cef_txt_1_4  <- read_range(ceff_file, sheet, range) %>% rename(a = 1)
   
-  ### just to avoid errors
-  my_index_su <- 2
-  my_index_cost_by_ent <-2
-  my_index_cost_main <- 2
-
+  ### Check if the whole range is merged and apply different logic
+  if (is.na(cef_txt_1_4[2,1]) == FALSE) {
+    ### find specific headings
+    my_index_su <- which(cef_txt_1_4$a %like% paste0(if_else(cztype == "terminal",
+                                                             "Terminal",
+                                                             "En route"), 
+                                                     ' service units')) + 1
+    
+    if(identical(my_index_su, numeric(0)) == TRUE) {my_index_su <- which(cef_txt_1_4$a %like% paste0("Terminal charging zone ", ez,' service units')) + 1} 
+    
+    my_index_cost_by_ent <- which(cef_txt_1_4$a %like% paste0(if_else(cztype == "terminal",
+                                                             "Terminal",
+                                                             "En route"), 
+                                                     ' costs by entity')) + 1
+    
+    if(identical(my_index_cost_by_ent, numeric(0)) == TRUE) {my_index_cost_by_ent <- which(cef_txt_1_4$a %like% paste0("Terminal charging zone ", ez,' costs by entity')) + 1} 
+    
+    my_index_cost_main <- which(cef_txt_1_4$a %like% paste0(if_else(cztype == "terminal",
+                                                             "Terminal",
+                                                             "En route"), 
+                                                     " costs for the main ANSP")) + 1
+    
+    if(identical(my_index_cost_main, numeric(0)) == TRUE) {my_index_cost_main <- which(cef_txt_1_4$a %like% paste0("Terminal charging zone ", ez,' costs for the main ANSP')) + 1}
+    if(identical(my_index_cost_main, numeric(0)) == TRUE) {my_index_cost_main <- which(cef_txt_1_4$a %like% paste0("Terminal charging zone costs for the main ANSP")) + 1}
+    
+    ### to avoid errors if else is executed
+    cef_txt_1_4_duc <- ""
+    cef_txt_1_4_su <- ""
+    cef_txt_1_4_cost_all <- ""
+    cef_txt_1_4_cost_main <- ""
+  
+  } else {
+    ### find beginning and end of headings
+    tx <- cef_txt_1_4[1,1] |> pull()
+    heading1 <- str_locate(tx, fixed('AUC vs DUC')) + 7 
+    if(is.na(heading1[1]) == TRUE) {heading1 <- str_locate(tx, fixed('AUC vs. DUC')) + 7}
+    heading2 <- str_locate(tx, fixed(paste0(if_else(cztype == "terminal",
+                                                             "**Terminal",
+                                                             "**En route"), 
+                                                     " service units"))) 
+  
+    heading3_1 <- str_locate(tx, fixed(paste0(if_else(cztype == "terminal",
+                                                             "**Terminal",
+                                                             "**En route"),
+                                              ' costs by entity at charging zone level**<br/>')))
+    heading3_2 <- str_locate(tx, fixed(paste0(if_else(cztype == "terminal",
+                                                             "**Terminal",
+                                                             "**En route"),
+                                              ' costs by entity**<br/>')))
+  
+    heading4_beg <- str_locate(tx, fixed(paste0(if_else(cztype == "terminal",
+                                                             "**Terminal",
+                                                             "**En route"),
+                                              ' costs for the main ANSP')))
+    all_bold_locations <- str_locate_all(tx, fixed('**'))
+    heading_4 <- tail(all_bold_locations[[1]], n = 1)
+  
+    cef_txt_1_4_duc <- str_replace_all(substr(tx, max(heading1)+1, min(heading2)-1), fixed("<br/><br/>"), fixed("<br/>"))
+    cef_txt_1_4_su <- str_replace_all(substr(tx, max(heading2)+1+7, min(heading3_1, heading3_2, na.rm = TRUE)-1) , fixed("<br/><br/>"), fixed("<br/>"))
+    cef_txt_1_4_cost_all <- str_replace_all(substr(tx, max(heading3_1, heading3_2, na.rm = TRUE)+1, min(heading4_beg)-1) , fixed("<br/><br/>"), fixed("<br/>"))
+    cef_txt_1_4_cost_main <- str_replace_all(substr(tx, heading_4 + 2, nchar(tx)) , fixed("<br/><br/>"), fixed("<br/>"))
+    
+    ### remove leading and trailing line breaks
+    cef_txt_1_4_duc <- sub("^<br/>|<br/>$", "", cef_txt_1_4_duc)
+    cef_txt_1_4_su <- sub("^<br/>|<br/>$", "", cef_txt_1_4_su)
+    cef_txt_1_4_cost_all <- sub("^<br/>|<br/>$", "", cef_txt_1_4_cost_all)
+    cef_txt_1_4_cost_main <- sub("^<br/>|<br/>$", "", cef_txt_1_4_cost_main)
+    
+    ### just to avoid errors
+    my_index_su <- 2
+    my_index_cost_by_ent <-2
+    my_index_cost_main <- 2
+  
+    }
+    
+  ## 2nd sheet
+  sheet <- if_else(cztype == "terminal",
+                   if_else(ez >1, paste0("6_TRM (", ez, ")"), "6_TRM"),
+                   "2_ERT")
+  range <- "C11:M14"
+  cef_txt_1_5  <- read_range(ceff_file, sheet, range)
+  
+  range <- "J16:M33"
+  cef_txt_1_6  <- read_range(ceff_file, sheet, range)
+  
+  ## range 1.9
+  range <- "C63:M70"
+  cef_txt_1_9  <- read_range(ceff_file, sheet, range)
+  
+  ## 3rd sheet
+  sheet <- if_else(cztype == "terminal",
+                   if_else(ez >1, paste0("7_TRM_ATSP (", ez, ")"), "7_TRM_ATSP"),
+                   "3_ATSP")
+  
+  range <- "C11:M22"
+  cef_txt_1_10  <- read_range(ceff_file, sheet, range)
+  
+  range <- if_else(year_report >= 2022, "C66:M71", "C64:M71")
+  cef_txt_1_13  <- read_range(ceff_file, sheet, range)
+  ## the titles are already bold in the .qmd below
+  if (year_report >= 2023) {
+    cef_txt_1_13 <- cef_txt_1_13 %>% 
+      mutate_all(., ~ str_replace_all(., fixed("**"),""))
   }
-  
-## 2nd sheet
-sheet <- if_else(cztype == "terminal",
-                 if_else(ez >1, paste0("6_TRM (", ez, ")"), "6_TRM"),
-                 "2_ERT")
-range <- "C11:M14"
-cef_txt_1_5  <- read_range(ceff_file, sheet, range)
-
-range <- "J16:M33"
-cef_txt_1_6  <- read_range(ceff_file, sheet, range)
-
-## range 1.9
-range <- "C63:M70"
-cef_txt_1_9  <- read_range(ceff_file, sheet, range)
-
-## 3rd sheet
-sheet <- if_else(cztype == "terminal",
-                 if_else(ez >1, paste0("7_TRM_ATSP (", ez, ")"), "7_TRM_ATSP"),
-                 "3_ATSP")
-
-range <- "C11:M22"
-cef_txt_1_10  <- read_range(ceff_file, sheet, range)
-
-range <- if_else(year_report >= 2022, "C66:M71", "C64:M71")
-cef_txt_1_13  <- read_range(ceff_file, sheet, range)
-## the titles are already bold in the .qmd below
-if (year_report >= 2023) {
-  cef_txt_1_13 <- cef_txt_1_13 %>% 
-    mutate_all(., ~ str_replace_all(., fixed("**"),""))
 }
-
 ```
 
 [Cost-efficiency - {{< var doc.country >}}]{class="fakeh1"}
@@ -217,6 +234,7 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ::::
 :::
 
+`r if (params$country == "SES RP3") "::: {.content-hidden}"`
 ::: {.callout-note collapse=true}
 
 #### NSA input
@@ -238,6 +256,7 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 `r if_else(is.na(cef_txt_1_4[my_index_cost_main,1]) == TRUE, cef_txt_1_4_cost_main, pull(cef_txt_1_4[my_index_cost_main,1]))`
 
 :::
+`r if (params$country == "SES RP3") ":::"`
 
 
 ::: {#container-cef-aucu}
@@ -278,6 +297,7 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ::::
 :::
 
+`r if (params$country == "SES RP3") "::: {.content-hidden}"`
 ::: {.callout-note collapse=true}
 
 #### NSA input
@@ -285,6 +305,7 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 `r cef_txt_1_5[1,1]`
 
 :::
+`r if (params$country == "SES RP3") ":::"`
 
 
 ::: {#container-cef-reg-res}
@@ -325,6 +346,7 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 :::
 
+`r if (params$country == "SES RP3") "::: {.content-hidden}"`
 ::: {.callout-note collapse=true}
 
 #### NSA input
@@ -352,4 +374,5 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 `r if (params$year_report >= 2022) ":::"`
 
 :::
+`r if (params$country == "SES RP3") ":::"`
 

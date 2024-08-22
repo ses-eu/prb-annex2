@@ -59,11 +59,6 @@ if (country == "Home") {
 if (country == "Home" | country == "Network Manager") {
   level2_files <- ""
   
-} else if (country == "SES RP3") {
-  level2_files <- c("capacity.qmd",
-                    "environment.qmd",
-                    "safety.qmd")
-                    
 } else {
   level2_files <- c("capacity.qmd",
                     "environment.qmd",
@@ -139,80 +134,95 @@ for (i in 1:length(level2_files)) {
 
 # modify _quarto.yml ----
 if (out_format == 'web') {
-    tx  <- readLines("_quarto.yml")
-    ## replace string by country name as {{< var doc.country >}} gives problems in small screens
-    tx <- str_replace(tx, 'country placeholder', country)
-    ## set destination directory
-    tx <- str_replace(tx, 'destination-dir/', external_address)
-    ## set home address for other year reports
-    tx <- str_replace(tx, 'home_address', home_address)
-    tx <- str_replace(tx, 'country_lower', country_lower)  
-    ## add check box to year report
-    tx <- str_replace(tx, paste0('text: "', year_report, '"'),
-                          paste0('text: "<span style= \'color: #2151bf\'>', year_report, ' &#10003</span>"'))
+  tx  <- readLines("_quarto.yml")
+  ## replace string by country name as {{< var doc.country >}} gives problems in small screens
+  tx <- str_replace(tx, 'country placeholder', country)
+  ## set destination directory
+  tx <- str_replace(tx, 'destination-dir/', external_address)
+  ## set home address for other year reports
+  tx <- str_replace(tx, 'home_address', home_address)
+  tx <- str_replace(tx, 'country_lower', country_lower)  
+  ## add check box to year report
+  tx <- str_replace(tx, paste0('text: "', year_report, '"'),
+                        paste0('text: "<span style= \'color: #2151bf\'>', year_report, ' &#10003</span>"'))
     
-    if (country == "Home") {
+  if (country == "Home") {
     ## Home page case ----
-      ### find beginning and end of blocks to remove
-      for (i in 1:length(tx)) {
-        if (tx[i] %like% 'sidebar:') {block_beg = i}
-        if (tx[i] %like% 'block level2 end') {block_end = i}
+    ### find beginning and end of blocks to remove
+    for (i in 1:length(tx)) {
+      if (tx[i] %like% 'sidebar:') {block_beg = i}
+      if (tx[i] %like% 'block level2 end') {block_end = i}
       }
-      ### this removes the unwanted lines
-      tx <- tx[-c(block_beg:block_end)]
+    ### this removes the unwanted lines
+    tx <- tx[-c(block_beg:block_end)]
+    
+    ### write new file
+    writeLines(tx, con="_quarto.yml")
+      
+  } else if (country == "Network Manager") {
+    ## NM ----
+    ## remove bottom page navigation
+    # tx <- str_replace(tx, '  page-navigation: true', '  page-navigation: false')
+        
+    ### level 1 ----
+    ### find beginning and end of level 1 state-SES block
+    for (i in 1:length(tx)) {
+      if (tx[i] %like% 'block level1 state beginning') {block_l1_sta_beg = i}
+      if (tx[i] %like% 'block level1 ses end') {block_l1_ses_end = i}
+      # if (tx[i] %like% 'block level1 state end') {block_l1_sta_end = i}
+    }
+    
+    tx <- tx[-c(block_l1_sta_beg:block_l1_ses_end)]
   
-      ### write new file
-      writeLines(tx, con="_quarto.yml")
-      
-    } else if (country == "Network Manager" | country == "SES RP3") {
-    ## NM, SES case ----
-      ## remove bottom page navigation
-      # tx <- str_replace(tx, '  page-navigation: true', '  page-navigation: false')
-      
-      ### find beginning and end of level 1 state blocks
+    ### level 2 ----
+    ### find beginning and end of level 2 block to remove
+    for (i in 1:length(tx)) {
+      if (tx[i] %like% 'block level2 beginning') {block_l2_beg = i}
+      if (tx[i] %like% 'block level2 end') {block_l2_end = i}
+    }  
+  
+    tx <- tx[-c(block_l2_beg:block_l2_end)]
+       
+            
+    ### write new file ----
+    writeLines(tx, con="_quarto.yml")
+    
+  } 
+  else {
+    ## level 1 ----
+    if (country == "SES RP3") {
+      ### SES case ----
+      ### remove nm level 1 block
+      for (i in 1:length(tx)) {
+        if (tx[i] %like% 'block level1 nm beginning') {block_l1_nm_beg = i}
+        if (tx[i] %like% 'block level1 nm end') {block_l1_nm_end = i}
+        }
+       
+      tx <- tx[-c(block_l1_nm_beg:block_l1_nm_end)]
+       
+      ### remove state level1 block
       for (i in 1:length(tx)) {
         if (tx[i] %like% 'block level1 state beginning') {block_l1_sta_beg = i}
         if (tx[i] %like% 'block level1 state end') {block_l1_sta_end = i}
-      }
-      ### this removes the unwanted lines
+        }
+
       tx <- tx[-c(block_l1_sta_beg:block_l1_sta_end)]
-      
-      ### find beginning and end of level 1 nm,ses blocks
-      for (i in 1:length(tx)) {
-        if (tx[i] %like% 'block level1 ses beginning') {block_l1_ses_beg = i}
-        if (tx[i] %like% 'block level1 ses end') {block_l1_ses_end = i}
-        
-        if (tx[i] %like% 'block level1 nm beginning') {block_l1_nm_beg = i}
-        if (tx[i] %like% 'block level1 nm end') {block_l1_nm_end = i}
-      }
-      ### this removes the unwanted lines
-      if (country == "Network Manager") {
-        tx <- tx[-c(block_l1_ses_beg:block_l1_ses_end)]
-      } else {tx <- tx[-c(block_l1_nm_beg:block_l1_nm_end)]}
-  
-      ### find beginning and end of level 2 block to remove
-      for (i in 1:length(tx)) {
-        if (tx[i] %like% 'block level2 beginning') {block_l2_beg = i}
-        if (tx[i] %like% 'block level2 end') {block_l2_end = i}
-      }
-      ### this removes the unwanted lines
-      tx <- tx[-c(block_l2_beg:block_l2_end)]
-      
-      ### write new file
-      writeLines(tx, con="_quarto.yml")
-      
-   } else {
-    ## state case ----
-     ### find beginning and end of level 1 blocks to remove
-     for (i in 1:length(tx)) {
-       if (tx[i] %like% 'block level1 ses beginning') {block_l1_ses_beg = i}
-       if (tx[i] %like% 'block level1 nm end') {block_l1_nm_end = i}
-     }
-     ### this removes the unwanted lines
-     tx <- tx[-c(block_l1_ses_beg:block_l1_nm_end)]
      
+    } 
+    else {
+    ### state case ----
+      ### find beginning and end of level 1 blocks to remove
+      for (i in 1:length(tx)) {
+         if (tx[i] %like% 'block level1 ses beginning') {block_l1_ses_beg = i}
+         if (tx[i] %like% 'block level1 nm end') {block_l1_nm_end = i}
+       }
+      
+       tx <- tx[-c(block_l1_ses_beg:block_l1_nm_end)]
+    }
+     
+    ## level 2 ----
     if (state_type != 0) {
-    ### with terminal zone(s) ----
+      ### with terminal zone(s) ----
       
       # add text for the additional tczs and env/cap terminal
       tx_env <- readLines("_original_files/level2_env_terminal.yml")
@@ -236,8 +246,8 @@ if (out_format == 'web') {
       tx <- append(tx, tx_cap, cap_block_beg + length(tx_env)) 
       tx <- append(tx, tx_tcz, cef_block_beg + length(tx_cap) + + length(tx_env)) 
       
+      ### 2 en route cz (spain) ----
       if (state_type == 3) {
-        ### 2 en route cz (spain)
         tx <- str_replace(tx, "<b>En route CZ</b>", paste0("<b>En route CZ - ", ecz_list$ecz_name[[1]], "</b>")) 
         
         # add text for the additional eczs
@@ -255,53 +265,14 @@ if (out_format == 'web') {
         
         tx <- append(tx, tx_ecz, block_beg) 
         
-      }
-      
-      
-      
-      ### check if there are other term ATSPs ----
-        sheet <- "8_TRM_ATSP"
-        range <- "C13:M17" 
-        trm_2_14_1  <- read_range(file, sheet, range) %>% select(c(6:11)) 
-        atspcheck <- sum(is.na(trm_2_14_1) == TRUE)
-    
-      ### remove file, entry from menu and from list of pages to generate ----
-        if (atspcheck == 24) {
-          # genscripts <- genscripts[genscripts != "generate_ceff6_tz_qmd.R"]
-          # tx  <- readLines("_quarto.yml")
-          # tx <- str_replace(tx, "- cost-efficiency-tz1-3.qmd", "  # - cost-efficiency-tz1-3.qmd")
-  
-          # file.remove("cost-efficiency-tz1-3.qmd")
-          
-        } 
-      }
-  
-     writeLines(tx, con="_quarto.yml")
-     
-       
-      ## check if there are other er ATSPs ----
-      sheet <- "4_ATSP"
-      range <- range <- "C13:M17" 
-      ert_2_14_1  <- read_range(file, sheet, range) %>% select(c(6:11))
-      atspcheck <- sum(is.na(ert_2_14_1) == TRUE)
-    
-      if (atspcheck == 24) {
-        # genscripts <- genscripts[genscripts != "generate_ceff_er3_qmd.R"]
-        tx  <- readLines("_quarto.yml")
-        # tx <- str_replace(tx, "- cost-efficiency-er1-3.qmd", "  # - cost-efficiency-er1-3.qmd")
-        # writeLines(tx, con="_quarto.yml")
-        
-        # file.remove("cost-efficiency-er1-3.qmd")
-        
-      } 
-   }
+        }
 
-  # # generate new qmd files 
-  #   if (country != "Network Manager" & country != "SES RP3" & country != "Home") {
-  #     for (i in 1:length(genscripts)) {
-  #       source(here("R", genscripts[i]))
-  #     }
-  #   }
+      }
+  
+    ## write new file ----
+    writeLines(tx, con="_quarto.yml")
+
+   }
 }
     
 # render site ----
