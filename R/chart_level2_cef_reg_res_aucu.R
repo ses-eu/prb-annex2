@@ -14,49 +14,99 @@ mycz_name <- if_else(cztype == "terminal",
                      tcz_list$tcz_name[ez],
                      ecz_list$ecz_name[ez])
 
-# get data ----
-# regulatory result
-data_prep_reg_all <- regulatory_result(cztype, mycz)
-data_prep_reg <- data_prep_reg_all %>% 
-  group_by(year_text, x5_4_total_su) %>% 
-  summarise(reg_res = sum(regulatory_result)) %>% 
-  mutate(reg_res_per_su = reg_res * 1000 / x5_4_total_su) %>% 
-  select(year_text, reg_res, reg_res_per_su) %>% 
-  mutate(
-    reg_res = case_when(
-      as.numeric(str_replace(year_text, "-", "")) > year_report & year_text != '2020-2021' ~ NA,
-      .default = reg_res
-    ),
-    reg_res_per_su = case_when(
-      as.numeric(str_replace(year_text, "-", "")) > year_report & year_text != '2020-2021' ~ NA,
-      .default = reg_res_per_su
-    )
-    
-  )
-
-# aucu
-data_prep_aucu_all <- aucu(cztype, mycz) 
-data_prep_aucu <- data_prep_aucu_all %>% 
-  select(year_text, aucu_excluding_or) %>% 
-  mutate (aucu_excluding_or = case_when(
-    as.numeric(str_replace(year_text, "-", "")) > year_report & year_text != '2020-2021' ~ NA,
-    .default = aucu_excluding_or)
-  )
-
-# join tables
-data_prep <- data_prep_reg %>% 
-  left_join(data_prep_aucu, by = 'year_text') %>% 
-  select(-reg_res) %>% 
-  mutate(rr_as_perc_aucu = reg_res_per_su / aucu_excluding_or * 100) %>% 
-  pivot_longer(-c(year_text, rr_as_perc_aucu), names_to = 'type', values_to = 'mymetric') %>% 
-  mutate(type = case_when(
-    type == 'reg_res_per_su'  ~ 'Regulatory result per SU',
-    type == 'aucu_excluding_or'  ~ 'AUCU (before other revenues)'
-    ),
-    xlabel = year_text,
-    myothermetric = round(rr_as_perc_aucu, 2)
-  ) 
+if (country == "SES RP3") {
+  # SES  ----
+  ## import data  ----
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "SES CEFF.xlsx"),
+    sheet = if_else(cztype == "terminal", "SES_TRM_all", "SES_ERT_all"),
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
   
+  data_prep <- data_raw |> 
+    filter(status == "A") |> 
+    mutate(
+      su_cz_combined = case_when(
+        year == 2021 ~ su_cz + pull(select(filter(data_raw, year == 2020 & status =="A"), su_cz)),
+        .default = su_cz),
+      aucu_excluding_or = aucu_combined - other_revenues_eur_su_combined,
+      
+      ro_e_combined = case_when(
+        year == 2021 ~ ro_e_value_eur + pull(select(filter(data_raw, year == 2020 & status =="A"), ro_e_value_eur)),
+        .default = ro_e_value_eur),
+      
+      net_result_ansp_combined = case_when(
+        year == 2021 ~ net_result_ansp + pull(select(filter(data_raw, year == 2020 & status =="A"), net_result_ansp)),
+        .default = net_result_ansp),
+      
+      reg_res = sum(ro_e_combined, net_result_ansp_combined, na.rm = TRUE),
+      reg_res_per_su = reg_res/su_cz_combined,
+      rr_as_perc_aucu = round(reg_res_per_su/aucu_combined * 100, 2)
+    ) |> 
+    filter(year>=2021) |> 
+    mutate_at(c(-1), ~if_else(year > year_report, NA, .))  |> 
+    mutate(xlabel = if_else(year == 2021, "2020-2021", as.character(year))) |> 
+    select(
+      xlabel,
+      myothermetric = rr_as_perc_aucu,
+      reg_res_per_su,
+      aucu_excluding_or
+    ) |> 
+    pivot_longer(-c(xlabel, myothermetric), names_to = 'type', values_to = 'mymetric') |> 
+    mutate(type = case_when(
+      type == 'reg_res_per_su'  ~ 'Regulatory result per SU',
+      type == 'aucu_excluding_or'  ~ 'AUCU (before other revenues)'
+      ))
+    
+  
+  
+} else {
+  # State  ----
+  ## get data ----
+  # regulatory result
+  data_prep_reg_all <- regulatory_result(cztype, mycz)
+  data_prep_reg <- data_prep_reg_all %>% 
+    group_by(year_text, x5_4_total_su) %>% 
+    summarise(reg_res = sum(regulatory_result)) %>% 
+    mutate(reg_res_per_su = reg_res * 1000 / x5_4_total_su) %>% 
+    select(year_text, reg_res, reg_res_per_su) %>% 
+    mutate(
+      reg_res = case_when(
+        as.numeric(str_replace(year_text, "-", "")) > year_report & year_text != '2020-2021' ~ NA,
+        .default = reg_res
+      ),
+      reg_res_per_su = case_when(
+        as.numeric(str_replace(year_text, "-", "")) > year_report & year_text != '2020-2021' ~ NA,
+        .default = reg_res_per_su
+      )
+      
+    )
+  
+  # aucu
+  data_prep_aucu_all <- aucu(cztype, mycz) 
+  data_prep_aucu <- data_prep_aucu_all %>% 
+    select(year_text, aucu_excluding_or) %>% 
+    mutate (aucu_excluding_or = case_when(
+      as.numeric(str_replace(year_text, "-", "")) > year_report & year_text != '2020-2021' ~ NA,
+      .default = aucu_excluding_or)
+    )
+  
+  # join tables
+  data_prep <- data_prep_reg %>% 
+    left_join(data_prep_aucu, by = 'year_text') %>% 
+    select(-reg_res) %>% 
+    mutate(rr_as_perc_aucu = reg_res_per_su / aucu_excluding_or * 100) %>% 
+    pivot_longer(-c(year_text, rr_as_perc_aucu), names_to = 'type', values_to = 'mymetric') %>% 
+    mutate(type = case_when(
+      type == 'reg_res_per_su'  ~ 'Regulatory result per SU',
+      type == 'aucu_excluding_or'  ~ 'AUCU (before other revenues)'
+      ),
+      xlabel = year_text,
+      myothermetric = round(rr_as_perc_aucu, 2)
+    ) 
+}
+
 # chart parameters ----
 mysuffix <- ""
 mydecimals <- 1
