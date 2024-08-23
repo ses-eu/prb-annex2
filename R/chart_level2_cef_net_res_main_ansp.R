@@ -28,7 +28,9 @@ if (country == "SES RP3") {
     filter(status == "A") |> 
     select(
       year_text = year,
-      atsp_gain_loss_cost_sharing = cost_sharing_ansp1,
+      cost_sharing_ansp1,
+      inflation_adjustment_ansp1,
+      cost_exempt_ansp1,
       trs = trs_ansp1,
       financial_incentive = incentives_ansp1,
       ex_post_roe = ro_e_ansp1
@@ -41,7 +43,7 @@ if (country == "SES RP3") {
     ) |> 
     group_by(year_text) |> 
     summarise(
-      atsp_gain_loss_cost_sharing = sum(atsp_gain_loss_cost_sharing, na.rm = TRUE)/1000,
+      atsp_gain_loss_cost_sharing = sum(cost_sharing_ansp1, cost_sharing_ansp1, inflation_adjustment_ansp1, na.rm = TRUE)/1000,
       trs = sum(trs, na.rm = TRUE)/1000,
       financial_incentive = sum(financial_incentive, na.rm = TRUE)/1000,
       ex_post_roe = sum(ex_post_roe, na.rm = TRUE)/1000
