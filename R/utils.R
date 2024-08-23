@@ -892,12 +892,13 @@ replace_links <- function(filename) {
 
   tmp_text <- str_replace_all(tmp_text, not_modify[1], "temporary text1")  
   tmp_text <- str_replace_all(tmp_text, not_modify[2], "temporary text2")  
+  tmp_text <- str_replace_all(tmp_text, not_modify[3], "temporary text3")  
   
   # Define the pattern to match
   ## The regular expression pattern now includes - to match dashes in country names. [A-Za-z-]+ matches one or more alphabetic characters or dashes.
   
-  pattern <- paste0("(https://www\\.eurocontrol\\.int/performance/oscar/prb-monitoring-test/", year_report, "/[A-Za-z-]+/)")  
-  
+  pattern1 <- paste0("(https://www\\.eurocontrol\\.int/performance/oscar/prb-monitoring-test/", year_report, "/[A-Za-z-]+/)")  
+
   # Replace the pattern with the same string plus "#section"
   ## \\1 refers to the entire matched string, 
   
@@ -906,14 +907,18 @@ replace_links <- function(filename) {
     .default = filename
   )
   
-  tmp_text <- gsub(pattern, 
+  tmp_text <- gsub(pattern1, 
                    paste0("\\1", replacement_link),
                    tmp_text)
+
+  #replace year report links & fix side effect from previous replacement
+  tmp_text <- str_replace_all(tmp_text, paste0(replacement_link,"index.html#main"), replacement_link)  
+  tmp_text <- str_replace_all(tmp_text, "index.html#main", replacement_link)  
 
   #restore strings I didn't want modified
   tmp_text <- str_replace_all(tmp_text, "temporary text1", not_modify[1])  
   tmp_text <- str_replace_all(tmp_text, "temporary text2", not_modify[2])  
-  
+  tmp_text <- str_replace_all(tmp_text, "temporary text3", not_modify[3])  
     
   # rewrite file
   writeLines(tmp_text, paste0(site_dir, "/", filename))
