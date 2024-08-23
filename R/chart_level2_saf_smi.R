@@ -30,11 +30,11 @@ data_prep <- data_raw %>%
   select(-state, -type, -reference_period) |> 
   pivot_longer(-c(year), names_to = "type", values_to = "mymetric") |> 
   mutate(xlabel = year,
-         type = if_else(type == "rate_per_10000",
-                        "RI",
+         type = if_else(type == "rate_per_100_000",
+                        "SMI",
                         "EU Wide Average"),
          mytextposition = "top center",
-         linedash = if_else(type == "RI",
+         linedash = if_else(type == "SMI",
                             "solid",
                             if_else(country == "SES RP3",
                                     "solid",
@@ -43,7 +43,7 @@ data_prep <- data_raw %>%
   ) |> 
   select(xlabel, type, mymetric, mytextposition, linedash) |> 
   #otherwise the lindash column does not work
-  arrange(linedash)
+  arrange(desc(linedash))
 
 
 # chart parameters ----
@@ -61,13 +61,13 @@ mytextangle <- 0
 mytextfont_color <- 'black'
 
 #### title
-mytitle_text <-  paste0("SMIs per 100.000 flight hours")
+mytitle_text <-  paste0("SMIs per 100,000 flight hours")
 mytitle_y <- 0.99
 
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "SMIs per 100.000 flight hours"
+myyaxis_title <- "SMIs per 100,000 flight hours"
 myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".1f"
 

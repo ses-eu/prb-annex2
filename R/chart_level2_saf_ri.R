@@ -43,7 +43,7 @@ data_prep <- data_raw %>%
          ) |> 
   select(xlabel, type, mymetric, mytextposition, linedash) |> 
   #otherwise the lindash column does not work
-  arrange(linedash)
+  arrange(desc(linedash))
 
 
 # chart parameters ----
@@ -61,13 +61,13 @@ mytextangle <- 0
 mytextfont_color <- 'black'
 
 #### title
-mytitle_text <-  paste0("RIs per 100.000 flight hours")
+mytitle_text <-  paste0("RIs per 100,000 flight hours")
 mytitle_y <- 0.99
 
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "RIs per 100.000 flight hours"
+myyaxis_title <- "RIs per 100,000 flight hours"
 myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".1f"
 
