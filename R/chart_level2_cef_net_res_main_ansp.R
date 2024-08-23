@@ -14,34 +14,77 @@ mycz_name <- if_else(cztype == "terminal",
                      tcz_list$tcz_name[ez],
                      ecz_list$ecz_name[ez])
 
+if (country == "SES RP3") {
+  # SES  ----
+  ## import data & prep ----
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "SES CEFF.xlsx"),
+    sheet = if_else(cztype == "terminal", "SES_TRM_all", "SES_ERT_all"),
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+  
+  data_pre_prep <- data_raw |> 
+    filter(status == "A") |> 
+    select(
+      year_text = year,
+      atsp_gain_loss_cost_sharing = cost_sharing_ansp1,
+      trs = trs_ansp1,
+      financial_incentive = incentives_ansp1,
+      ex_post_roe = ro_e_ansp1
+    ) |> 
+    mutate(
+      year_text = case_when(
+        year_text == 2021 | year_text == 2020 ~ "2020-2021",
+        .default = as.character(year_text)
+        )
+    ) |> 
+    group_by(year_text) |> 
+    summarise(
+      atsp_gain_loss_cost_sharing = sum(atsp_gain_loss_cost_sharing, na.rm = TRUE)/1000,
+      trs = sum(trs, na.rm = TRUE)/1000,
+      financial_incentive = sum(financial_incentive, na.rm = TRUE)/1000,
+      ex_post_roe = sum(ex_post_roe, na.rm = TRUE)/1000
+    ) |> 
+    filter(
+      year_text == if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))
+    )
+  
+} else {
+  # State ----
+  ## import data  ----
+  data_raw  <-  regulatory_result(cztype, mycz)
+  
+  ## pre-prepare data ----
+  data_pre_prep <- data_raw %>% 
+    filter(type == "Main ANSP",
+           year_text == if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))
+           )  %>% 
+    select(year_text, atsp_gain_loss_cost_sharing, trs, financial_incentive, ex_post_roe) 
+}
 
-# import data  ----
-data_raw  <-  regulatory_result(cztype, mycz)
-
-# prepare data ----
-data_prep <- data_raw %>% 
-  filter(type == "Main ANSP",
-         year_text == if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))
-         )  %>% 
-  select(year_text, atsp_gain_loss_cost_sharing, trs, financial_incentive, ex_post_roe) %>% 
+# pre-prepare data ----
+data_prep <- data_pre_prep |> 
   pivot_longer(-year_text, names_to = "status", values_to = "mymetric") %>% 
   mutate (
     mymetric = mymetric/1000,
     ylabel = case_when (
-    status == 'atsp_gain_loss_cost_sharing' ~ "Cost sharing", 
-    status == 'trs' ~ "Traffic risk sharing",
-    status == 'financial_incentive' ~ "Incentives",
-    status == 'ex_post_roe' ~ "Actual RoE in value"),
+      status == 'atsp_gain_loss_cost_sharing' ~ "Cost sharing", 
+      status == 'trs' ~ "Traffic risk sharing",
+      status == 'financial_incentive' ~ "Incentives",
+      status == 'ex_post_roe' ~ "Actual RoE in value"),
     mylabel = format(round(mymetric,1), big.mark = ",", nsmall =1)
   )
-  
+
+
 # chart parameters ----
-mychart_title <- paste0(main_ansp," net result from\n", 
+mychart_title <- paste0(if_else(country == "SES RP3", "Main ANSPs", main_ansp),
+                        if_else(country == "SES RP3", " net result from ", " net result from\n"), 
                         if_else(cztype == 'terminal', 'terminal', 'en route'),
                         " activity (M€) - ", 
                         if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))
                         )
-mytitle_y <- 0.95
+mytitle_y <- if_else(country == "SES RP3", 0.99, 0.95) 
 myaxis_title <- ""
 mybarcolor_pos <- '#9ECF8D'
 mybarcolor_neg <- '#F87474'
