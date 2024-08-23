@@ -38,13 +38,24 @@ if (country == "SES RP3") {
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
+  
+  data_pre_prep <- data_raw %>% 
+    filter(entity_code == mycz) 
+    
+}
+
+if(country == "MUAC") {
+  data_pre_prep <- data_raw |> 
+    filter(grepl("MUAC", entity_code)) |> 
+    mutate(entity_code = NA) |> 
+    group_by(year, status, entity_code) |> 
+    summarise(x5_3_cost_nc2017 = sum(x5_3_cost_nc2017, na.rm = TRUE)) |> 
+    ungroup()
 }
 
 # prepare data ----
-data_prep_split <- data_raw %>% 
-  filter(
-    year != 20202021,
-    entity_code == mycz) %>% 
+data_prep_split <- data_pre_prep %>% 
+  filter(year != 20202021) %>% 
   mutate(
     mymetric = case_when (
       status == 'A' & year > .env$year_report ~ NA,
@@ -83,7 +94,7 @@ data_prep[data_prep == 0] <- NA
 
 # chart parameters ----
 mysuffix <- ""
-mydecimals <- if_else(country == "SES RP3", 0, 1)
+mydecimals <- if_else(country == "SES RP3" | country == "MUAC", 0, 1)
 
 ### trace parameters
 mycolors = c('#5B9BD5', '#FFC000')
