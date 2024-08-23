@@ -4,17 +4,17 @@ if (exists("cz") == FALSE) {cz = c("1", "enroute")}
 # ez=1
 
 # define cz ----
-ez <- as.numeric(cz[[1]])
-cztype <- cz[[2]]
-# cztype <- "terminal"
-mycz <- if_else(cztype == "terminal",
-                tcz_list$tcz_id[ez],
-                ecz_list$ecz_id[ez])
-mycz_name <- if_else(cztype == "terminal",
-                     tcz_list$tcz_name[ez],
-                     ecz_list$ecz_name[ez])
-
-# import data  ----
+if (country != "MUAC") {
+  ez <- as.numeric(cz[[1]])
+  cztype <- cz[[2]]
+  # cztype <- "terminal"
+  mycz <- if_else(cztype == "terminal",
+                  tcz_list$tcz_id[ez],
+                  ecz_list$ecz_id[ez])
+  mycz_name <- if_else(cztype == "terminal",
+                       tcz_list$tcz_name[ez],
+                       ecz_list$ecz_name[ez])
+}
 
 # import data  ----
 if (country == "SES RP3") {
@@ -38,12 +38,9 @@ if (country == "SES RP3") {
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
-  
-  data_pre_prep <- data_raw %>% 
-    filter(entity_code == mycz) 
-    
 }
 
+# prepare data ----
 if(country == "MUAC") {
   data_pre_prep <- data_raw |> 
     filter(grepl("MUAC", entity_code)) |> 
@@ -51,9 +48,13 @@ if(country == "MUAC") {
     group_by(year, status, entity_code) |> 
     summarise(x5_3_cost_nc2017 = sum(x5_3_cost_nc2017, na.rm = TRUE)) |> 
     ungroup()
+  
+} else {
+  
+  data_pre_prep <- data_raw %>% 
+    filter(entity_code == mycz) 
 }
 
-# prepare data ----
 data_prep_split <- data_pre_prep %>% 
   filter(year != 20202021) %>% 
   mutate(

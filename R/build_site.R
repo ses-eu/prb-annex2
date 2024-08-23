@@ -2,7 +2,7 @@
 
 # clean environment and set main parameters ----
   rm(list = ls())
-  year_report <- 2021 # set your year report here
+  year_report <- 2022 # set your year report here
   out_format <- 'web' # set your output format here: 'pdf' or 'web'
   data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/data_for_web/'
   data_folder_a2 <- paste0(data_folder, "monitoring_files/", year_report, "/")
@@ -15,18 +15,18 @@
   
   ## add Home to State list and remove MUAC
   state_list <- c(state_list, "Home")
-  state_list <- state_list[-"MUAC"]
-  # states_from <- c(6:29) # 1st number is the index of 1st state from which you want to generate
+  # state_list <- setdiff(state_list, "MUAC")
+  # states_from <- c(9:29) # 1st number is the index of 1st state from which you want to generate
   # state_list <- state_list[states_from]
 
 # build state pages ----
   
   ## set test check to TRUE to build only one state site, FALSE for all
-  test_check <- FALSE
+  test_check <- TRUE
   
   ## build pages
   if (test_check) {
-    state_list <- 'Austria' # set your test country here (Home for home page)
+    state_list <- 'MUAC' # set your test country here (Home for home page)
   } 
 
   for (i in 1:length(state_list)) {

@@ -466,19 +466,6 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 
 ::::
 
-
-:::: {.callout-note collapse=true}
-
-#### NSA input
-
-::::: {#concl-cap-cap-all-causes-delay}
-**All causes pre departure delay**
-
-`r if (exists("cap_trm_nsa_6") == FALSE) {''} else {cap_trm_nsa_6}`
-
-:::::
-::::
-
 :::: {#container-cap-table-apt-pis}
 ```{r table-cap-apt-pis}
 #| file: R/table_level2_cap_apt_pis.R

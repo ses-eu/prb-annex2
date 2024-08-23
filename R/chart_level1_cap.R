@@ -1,8 +1,8 @@
 
+if (exists("cztype") == FALSE) {cztype = "enroute"}
+
 if (country == 'SES RP3') {
   # SES case ----
-  if (exists("cztype") == FALSE) {cztype = "enroute"}
-
   ## import data  ----
   data_raw_actual  <-  read_xlsx(
     paste0(data_folder, "SES file.xlsx"),
@@ -70,9 +70,6 @@ if (country == 'SES RP3') {
     
 } else {
 # state case ----
-  ## fix ez if script not executed from qmd file ----
-  if (exists("cztype") == FALSE) {cztype = "terminal"}
-
   ## import data  ----
   data_raw_target  <-  read_xlsx(
     paste0(data_folder, "CAP dataset master.xlsx"),

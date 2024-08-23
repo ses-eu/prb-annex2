@@ -39,6 +39,11 @@ if (country == "Home") {
   tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/nm_index.qmd") 
   writeLines(tmp_text, 'index.qmd')
 
+} else if (country == "MUAC") {
+  tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
+  tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/muac_index.qmd") 
+  writeLines(tmp_text, 'index.qmd')
+  
 } else if (country == "SES RP3") {
     tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
     if (out_format == 'pdf') {
@@ -56,7 +61,7 @@ if (country == "Home") {
   
 # generate level 2 .qmd master files ----
 ## set list of level 2 files depending on case
-if (country == "Home" | country == "Network Manager") {
+if (country == "Home" | country == "Network Manager" | country == "MUAC") {
   level2_files <- ""
   
 } else {
@@ -159,11 +164,9 @@ if (out_format == 'web') {
     ### write new file
     writeLines(tx, con="_quarto.yml")
       
-  } else if (country == "Network Manager") {
+  } 
+  else if (country == "Network Manager" | country == "MUAC") {
     ## NM ----
-    ## remove bottom page navigation
-    # tx <- str_replace(tx, '  page-navigation: true', '  page-navigation: false')
-        
     ### level 1 ----
     ### find beginning and end of level 1 state-SES block
     for (i in 1:length(tx)) {
@@ -173,6 +176,12 @@ if (out_format == 'web') {
     }
     
     tx <- tx[-c(block_l1_sta_beg:block_l1_ses_end)]
+    
+    if (country == "MUAC") {
+      tx <- str_replace(tx, '- text: "Environment"', '# - text: "Environment"')
+      tx <- str_replace(tx, 'href: index.html#environment-network-manager---ses-rp3-area', '# href: index.html#environment-network-manager---ses-rp3-area')
+      tx <- str_replace_all(tx, '-network-manager---ses-rp3-area', '')
+    }
   
     ### level 2 ----
     ### find beginning and end of level 2 block to remove
