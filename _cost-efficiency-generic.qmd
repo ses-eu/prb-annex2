@@ -11,15 +11,15 @@ if (country == "SES RP3") {
   cef_txt_1_4_su <- '' 
   cef_txt_1_4_cost_all <- ''
   cef_txt_1_4_cost_main <- ''
-  cef_txt_1_4 <- data.frame(a=c(NA,NA), b=c(NA,NA))
+  cef_txt_1_4 <- data.frame(a=c(NA,NA), b=c(NA,NA)) |> as_tibble()
   
   my_index_su <- 1
   my_index_cost_by_ent <- 1
   my_index_cost_main <- 1
   
-  cef_txt_1_5 <- data.frame(a=c(NA,NA), b=c(NA,NA))
-  cef_txt_1_10 <- data.frame(a=c(NA,NA), b=c(NA,NA))
-  cef_txt_1_13 <- data.frame(a=c(NA,NA,NA,NA,NA), b=c(NA,NA,NA,NA,NA))
+  cef_txt_1_5 <- data.frame(a=c(NA,NA), b=c(NA,NA)) |> as_tibble()
+  cef_txt_1_10 <- data.frame(a=c(NA,NA), b=c(NA,NA)) |> as_tibble()
+  cef_txt_1_13 <- data.frame(a=c(NA,NA,NA,NA,NA), b=c(NA,NA,NA,NA,NA)) |> as_tibble()
   
 } else {
   # define ranges and import data
@@ -180,10 +180,20 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 :::: {layout="[ 50, 50 ]"}
 
 ::::: {#chart-cef-duc}
+`r if (params$country == "SES RP3" & cztype == "enroute") ":::::: {.content-hidden}"`
 ```{r chart-cef-duc, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level1_cef.R
 #| out.width: "100%"
 ```
+`r if (params$country == "SES RP3" & cztype == "enroute") "::::::"`
+
+`r if (cztype == "terminal") ":::::: {.content-hidden}"`
+```{r chart-cef-duc-er-ses, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+#| file: R/chart_level1_cef_er_ses.R
+#| out.width: "100%"
+```
+`r if (cztype == "terminal") "::::::"`
+
 :::::
 
 ::::: {#chart-cef-su}

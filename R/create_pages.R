@@ -222,10 +222,16 @@ if (out_format == 'web') {
      
     ## level 2 ----
     if (state_type != 0) {
+      ### remove env-mil for ses ----
+      if (country == "SES RP3") {
+        tx <- str_replace(tx, '- text: "<b>Civil-Military dimension</b>"', '# - text: "<b>Civil-Military dimension</b>"')
+        tx <- str_replace(tx, 'href: environment.html#civil-military-dimension', '# href: environment.html#civil-military-dimension')
+      }
+      
       ### with terminal zone(s) ----
       
       # add text for the additional tczs and env/cap terminal
-      tx_env <- readLines("_original_files/level2_env_terminal.yml")
+      if (country != "SES RP3") {tx_env <- readLines("_original_files/level2_env_terminal.yml")} else {tx_env = ''}
       tx_cap <- readLines("_original_files/level2_cap_terminal.yml")
       tx_tcz_initial <- readLines("_original_files/level2_cef_tcz_xy.yml")
       tx_tcz <- ''

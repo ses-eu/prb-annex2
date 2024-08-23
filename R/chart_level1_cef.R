@@ -1,6 +1,6 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("cz") == FALSE) {cz = c("1", "enroute")}
+if (exists("cz") == FALSE) {cz = c("1", "terminal")}
 # ez=1
 
 # define cz ----
@@ -15,13 +15,33 @@ mycz_name <- if_else(cztype == "terminal",
                      ecz_list$ecz_name[ez])
 
 # import data  ----
-data_raw  <-  read_xlsx(
-  paste0(data_folder, "CEFF dataset master.xlsx"),
-  # here("data","hlsr2021_data.xlsx"),
-  sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
-  range = cell_limits(c(1, 1), c(NA, NA))) %>%
-  as_tibble() %>% 
-  clean_names() 
+if (country == "SES RP3") {
+  ## SES  ----
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "SES CEFF.xlsx"),
+    sheet = if_else(cztype == "terminal", "SES_TRM_all", "SES_ERT_all"),
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() |>
+    # so it has the same structure as the state table
+    mutate(
+      x5_5_unit_cost_nc2017 = duc_2017eur_combined,
+      xrate2017 = 1,
+      year = if_else(year == 2021, 20202021, year)
+    )
+  
+} else {
+  ## State  ----
+  data_raw  <-  read_xlsx(
+    paste0(data_folder, "CEFF dataset master.xlsx"),
+    # here("data","hlsr2021_data.xlsx"),
+    sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+
+
+}
 
 # prepare data ----
 data_prep <- data_raw %>% 
@@ -46,7 +66,7 @@ data_prep <- data_raw %>%
   ) %>% 
   arrange(xlabel) %>% 
   rename(type = status)
-
+  
 ### replace 0 by NAs so they are not plotted
 data_prep[data_prep == 0] <- NA
 
