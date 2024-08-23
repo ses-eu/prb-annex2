@@ -1,5 +1,5 @@
 # to avoid quarto error when there are no airports
-if (no_tcz >0) {
+if (no_tcz >0 & country != "SES RP3") {
 
 ## import data  ----
 data_raw_axot  <-  read_xlsx(
