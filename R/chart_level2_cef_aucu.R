@@ -43,7 +43,7 @@ if (country == "SES RP3") {
     
   ## pre-prep data ----
   data_pre_prep <- data_calc %>% 
-    mutate(year = as.numeric(str_replace_all(year_text, '2020-', ''))) 
+    mutate(year = as.numeric(str_replace_all(year_text, '2020-', ''))) |> 
     arrange(year) 
 }
   

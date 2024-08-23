@@ -885,7 +885,10 @@ replace_links <- function(filename) {
   tmp_text <- readLines(paste0(site_dir, "/", filename))
   
   # strings I do not want to modify
-  not_modify <- c(paste0("https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/", year_report,"/ses-rp3/"), paste0("https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/", year_report,"/network-manager/"))
+  not_modify <- c(paste0("https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/", year_report,"/ses-rp3/"), 
+                  paste0("https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/", year_report,"/network-manager/"),
+                  paste0("https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/", year_report,"/muac/")
+  )
 
   tmp_text <- str_replace_all(tmp_text, not_modify[1], "temporary text1")  
   tmp_text <- str_replace_all(tmp_text, not_modify[2], "temporary text2")  
@@ -895,7 +898,7 @@ replace_links <- function(filename) {
   
   pattern <- paste0("(https://www\\.eurocontrol\\.int/performance/oscar/prb-monitoring-test/", year_report, "/[A-Za-z-]+/)")  
   
-  # Replace the pattern with the same string plus "#hello"
+  # Replace the pattern with the same string plus "#section"
   ## \\1 refers to the entire matched string, 
   
   replacement_link <- case_when(
