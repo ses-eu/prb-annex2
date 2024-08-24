@@ -47,7 +47,7 @@ data_prep_split <- data_raw %>%
   mutate(
     mymetric = case_when (
       status == 'A' & year > .env$year_report ~ NA,
-      .default = x4_2_cost_excl_vfr
+      .default = x4_2_cost_excl_vfr/xrate2017
     ),
     xlabel = as.character(year)
   ) %>%  
