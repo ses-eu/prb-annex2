@@ -47,7 +47,8 @@ if(country == "MUAC") {
     mutate(entity_code = NA) |> 
     group_by(year, status, entity_code) |> 
     summarise(x5_3_cost_nc2017 = sum(x5_3_cost_nc2017, na.rm = TRUE)) |> 
-    ungroup()
+    ungroup() |> 
+    mutate(xrate2017 = 1)
   
 } else {
   
@@ -60,7 +61,7 @@ data_prep_split <- data_pre_prep %>%
   mutate(
     mymetric = case_when (
       status == 'A' & year > .env$year_report ~ NA,
-      .default = x5_3_cost_nc2017
+      .default = x5_3_cost_nc2017/xrate2017
     ),
     xlabel = as.character(year)
   ) %>%  
