@@ -60,7 +60,7 @@ data_prep_split <- data_pre_prep %>%
   filter(year != 20202021) %>% 
   mutate(
     mymetric = case_when (
-      status == 'A' & year > .env$year_report ~ NA,
+      status == 'A' & year > max(.env$year_report, 2021) ~ NA,
       .default = x5_3_cost_nc2017/xrate2017
     ),
     xlabel = as.character(year)

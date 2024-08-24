@@ -25,9 +25,6 @@ if (country == "SES RP3") {
     clean_names() 
   
   data_pre_prep <- data_raw %>% 
-    filter(
-      year == .env$year_report
-    ) %>% 
     select(
       year,
       status,
@@ -52,8 +49,7 @@ if (country == "SES RP3") {
   data_pre_prep <- data_raw %>% 
     filter(
       charging_zone_code == mycz,
-      entity_type_id == "ANSP1",
-      year == .env$year_report
+      entity_type_id == "ANSP1"
     ) %>% 
     mutate(
       x1_1_staff = x1_1_staff / (x5_2_inflation_index_nc2017/100) /xrate2017,
@@ -78,10 +74,24 @@ if (country == "SES RP3") {
 
 
 # prepare data ----
-data_prep <- data_pre_prep |> 
+data_prep_split <- data_pre_prep |> 
   pivot_longer(cols = -c(year, status),
     names_to = 'type', 
-    values_to = 'value') %>% 
+    values_to = 'value') |> 
+  mutate(xlabel = as.character(year))
+
+data_prep2020_2021 <- data_prep_split %>% 
+  filter(
+    year < 2022) %>% 
+  group_by(status, type) |> 
+  summarise(value = sum(value, na.rm = TRUE)) |> 
+  mutate(xlabel = "2020-2021")
+
+data_prep <- data_prep_split |>
+  filter(year > 2021) |> 
+  select(-year) |> 
+  rbind(data_prep2020_2021) |> 
+  filter(xlabel == if_else(year_report == 2020 | year_report == 2021, "2020-2021", as.character(year_report))) |> 
   pivot_wider(names_from = 'status', values_from = 'value') %>% 
   arrange(desc(type)) %>% 
   mutate(mymetric = (A-D)/10^6,
@@ -107,10 +117,12 @@ range_min <- if_else(range_min >0, 0, range_min)
 range_max <- ceiling(max(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^myroundup + 10^myroundup/2
 
 # chart parameters ----
-mychart_title <- if_else(country == "SES RP3", 
-                         paste0("Costs by nature for main ANSPs (M€<sub>2017</sub>) - ", year_report),
-                         paste0("Costs by nature for main ANSP\n", main_ansp," (M€<sub>2017</sub>) - ", year_report)
-  )
+mychart_title <- paste0(if_else(country == "SES RP3", 
+                         "Costs by nature for main ANSPs (M€<sub>2017</sub>) - ",
+                         paste0("Costs by nature for main ANSP\n", main_ansp," (M€<sub>2017</sub>) - ")
+                         ),
+                        if_else(year_report == 2020 | year_report == 2021, "2020-2021", as.character(year_report))
+                        )
 mytitle_y <- if_else(country == "SES RP3", 0.99, 0.95)
 myaxis_title <- "Costs (M€<sub>2017</sub>)"
 mybarcolor_pos <- '#A5A5A5'
@@ -133,3 +145,4 @@ myfactor <- c("VFR exempted",
 # plot chart  ----
 myhbarc(mywidth, myheight + 30, myfont, mymargin) %>% 
   layout(xaxis = list(range = c(range_min, range_max)))
+

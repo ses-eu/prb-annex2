@@ -44,7 +44,7 @@ data_prep_split <- data_raw %>%
     entity_code == mycz) %>% 
   mutate(
     mymetric = case_when (
-      status == 'A' & year > .env$year_report ~ NA,
+      status == 'A' & year > max(.env$year_report, 2021) ~ NA,
       .default = x5_4_total_su
     ),
     year_text = as.character(year)

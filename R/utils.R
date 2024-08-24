@@ -398,11 +398,12 @@ read_mytable <- function(file, sheet, table){
         .default = x4_2_cost_excl_vfr)
       ) %>% 
       group_by(year, entity_code) %>% 
-      summarise(dif_cost_gain_loss = sum(x4_2_cost_excl_vfr)) %>% 
-      mutate(dif_cost_gain_loss = case_when(
-        year > year_report ~ 0,
-        .default = dif_cost_gain_loss)
-      )
+      summarise(dif_cost_gain_loss = sum(x4_2_cost_excl_vfr))
+    # %>% 
+    #   mutate(dif_cost_gain_loss = case_when(
+    #     year > min(2021, year_report) ~ 0,
+    #     .default = dif_cost_gain_loss)
+    #   )
     
     #subtable for the calc actual revenues
     data_prep_t1_3 <- data_filtered_t1 %>% 
@@ -472,30 +473,30 @@ read_mytable <- function(file, sheet, table){
         actual_revenues_nc = sum(actual_revenues_nc)/10^3
                 ) %>%
       ungroup() %>% 
-      mutate(
-        atsp_gain_loss_cost_sharing_nc = case_when(
-          year > year_report ~ 0,
-          .default = atsp_gain_loss_cost_sharing_nc),
-        trs_nc = case_when(
-          year > year_report ~ 0,
-          .default = trs_nc),
-        financial_incentive_nc = case_when(
-          year > year_report ~ 0,
-          .default = financial_incentive_nc),
-        
-        regulatory_result_nc = case_when(
-          year > year_report ~ 0,
-        .default = regulatory_result_nc),
-        ex_ante_roe_nc = case_when(
-          year > year_report ~ 0,
-          .default = ex_ante_roe_nc),
-        ex_post_roe_nc = case_when(
-          year > year_report ~ 0,
-          .default = ex_post_roe_nc),
-        actual_revenues_nc = case_when(
-          year > year_report ~ 0,
-          .default = actual_revenues_nc)
-        ) %>% 
+      # mutate(
+      #   atsp_gain_loss_cost_sharing_nc = case_when(
+      #     year > year_report ~ 0,
+      #     .default = atsp_gain_loss_cost_sharing_nc),
+      #   trs_nc = case_when(
+      #     year > year_report ~ 0,
+      #     .default = trs_nc),
+      #   financial_incentive_nc = case_when(
+      #     year > year_report ~ 0,
+      #     .default = financial_incentive_nc),
+      #   
+      #   regulatory_result_nc = case_when(
+      #     year > year_report ~ 0,
+      #   .default = regulatory_result_nc),
+      #   ex_ante_roe_nc = case_when(
+      #     year > year_report ~ 0,
+      #     .default = ex_ante_roe_nc),
+      #   ex_post_roe_nc = case_when(
+      #     year > year_report ~ 0,
+      #     .default = ex_post_roe_nc),
+      #   actual_revenues_nc = case_when(
+      #     year > year_report ~ 0,
+      #     .default = actual_revenues_nc)
+      #   ) %>% 
       mutate(year_text = as.character(year)
       ) %>% 
       select(year_text, type, regulatory_result_nc, ex_ante_roe_nc, ex_post_roe_nc, actual_revenues_nc,
@@ -557,7 +558,12 @@ read_mytable <- function(file, sheet, table){
     regulatory_result <- regulatory_result_euro_202021 %>% 
       rbind(regulatory_result_euro_split) %>% 
       filter(year_text != '2020' & year_text != '2021') %>% 
-      left_join(tsus, by = "year_text")
+      left_join(tsus, by = "year_text") |> 
+      mutate_if(is.numeric, 
+                ~ ifelse(as.numeric(str_replace(year_text,"-", "")) > year_report & year_text != "2020-2021", 
+                         NA,
+                         .)
+                )
     
 
     return(regulatory_result)

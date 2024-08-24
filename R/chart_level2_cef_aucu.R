@@ -55,7 +55,7 @@ data_prep <- data_pre_prep |>
     total_adjustments_aucu,
     aucu
   ) |> 
-  mutate_at(c(3:5), ~if_else(year > year_report, NA, .)) |> 
+  mutate_at(c(3:5), ~if_else(year > max(2021, year_report), NA, .)) |> 
   select(-year)
 
 
