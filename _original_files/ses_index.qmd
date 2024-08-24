@@ -221,7 +221,14 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 <div style="height: 1px"></div>
 
 :::: {#chart-cap class="mychart"}
-```{r chart-cap, options = (cztype=c("enroute"))}
+```{r chart-cap-er, options = (cztype=c("enroute"))}
+#| file: R/chart_level1_cap.R
+#| out.width: "100%"
+```
+
+<br>
+
+```{r chart-cap-trm, options = (cztype=c("terminal"))}
 #| file: R/chart_level1_cap.R
 #| out.width: "100%"
 ```
@@ -250,6 +257,13 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 :::: {#chart-cef class="mychart"}
 ```{r chart-cef}
 #| file: R/chart_level1_cef_er_ses.R
+#| out.width: "100%"
+```
+
+<br>
+
+```{r chart-cef-trm-1, options = (cz=c("1", "terminal"))}
+#| file: R/chart_level1_cef.R
 #| out.width: "100%"
 ```
 ::::
