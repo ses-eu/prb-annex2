@@ -58,7 +58,7 @@ saf_conc2 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ## Environment (Network Manager - SES RP3 area)
 
 :::: {#chart-env class="mychart"}
-```{r chart-env}
+```{r chart-env-kea, options = (doclevel=c("level1"))}
 #| file: R/chart_level1_kea.R
 #| out.width: "100%"
 ```

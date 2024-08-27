@@ -121,7 +121,7 @@ myxaxis_tickformat <- "%b"
 #### yaxis
 myyaxis_title <- paste0(if_else(country == "Network Manager", "KEP", "KEA"), " (%)")
 myyaxis_ticksuffix <- "%"
-myyaxis_tickformat <- ".1f"
+myyaxis_tickformat <- ".2f"
 
 #### legend
 mylegend_x <- 0.5

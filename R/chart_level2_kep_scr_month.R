@@ -113,7 +113,7 @@ myhovertemplate <- paste0('%{y:,.', mydecimals, 'f}', mysuffix)
 
 mytextangle <- -90
 mytextposition <- "inside"
-myinsidetextanchor <- 'top'
+myinsidetextanchor <- 'middle'
 mytextfont_color <- 'black'
 mytextfont_size <- myfont * 0.9
 
@@ -132,7 +132,7 @@ myxaxis_tickformat <- "%b"
 #### yaxis
 myyaxis_title <- "KEA, KEP and SCR (%)"
 myyaxis_ticksuffix <- "%"
-myyaxis_tickformat <- ".1f"
+myyaxis_tickformat <- ".2f"
 
 #### legend
 mylegend_x <- 0.5

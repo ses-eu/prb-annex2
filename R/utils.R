@@ -75,8 +75,8 @@ read_mytable <- function(file, sheet, table){
 
 ## aucu calculations ----
   
-  aucu <- function(cztype, mycz) {
-  ## import data  ----
+aucu <- function(cztype, mycz) {
+## import data  ----
   data_raw_t1  <-  read_xlsx(
     paste0(data_folder, "CEFF dataset master.xlsx"),
     sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),

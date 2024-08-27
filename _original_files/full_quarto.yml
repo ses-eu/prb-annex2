@@ -154,20 +154,20 @@ website:
       - text: "---"
       - section: "<b>Environment</b>"
         contents:
-          - text: "<b>PRB assessment</b>"
-            href: environment.html#prb-assessment
+          - text: "<b>PRB monitoring</b>"
+            href: environment.html#prb-monitoring
           - section: "<b>En route performance</b>"
             contents:
             - text: "Horizontal flight efficiency"
-              href: environment.html#horizontal-flight-efficiency
+              href: environment.html##horizontal-flight-efficiency-of-the-actual-trajectory-kea-kpi1-of-the-last-filed-flight-plan-kep-pi1-shortest-constrained-route-scr-pi2
 # include env_terminal block
-          - text: "<b>Civil-Military dimension</b>"
+          - text: "<b>CIV-MIL</b>"
             href: environment.html#civil-military-dimension
       - text: "---"
       - section: "<b>Capacity</b>"
         contents:
-          - text: "<b>PRB assessment</b>"
-            href: capacity.html#prb-assessment
+          - text: "<b>PRB monitoring</b>"
+            href: capacity.html#prb-monitoring
           - section: "<b>En route performance</b>"
             contents:
             - text: "En route ATFM delay"
@@ -178,8 +178,8 @@ website:
       - text: "---"
       - section: "<b>Cost-efficiency</b>"
         contents:
-          - text: "<b>PRB assessment</b>"
-            href: cost-efficiency-er1-1.html##prb-assessment
+          - text: "<b>PRB monitoring</b>"
+            href: cost-efficiency-er1-1.html##prb-monitoring
           - section: "<b>En route CZ</b>"
             contents:
             - text: "Unit cost"

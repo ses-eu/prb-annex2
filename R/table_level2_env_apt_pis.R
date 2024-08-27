@@ -36,7 +36,7 @@ data_prep_axot <- data_raw_axot  %>%
   airport_code %in% airports_table$apt_code) %>%
   mutate_at(vars(-one_of(c('year', 'airport_code'))), ~ ifelse(year > year_report, NA, .)) %>%
   left_join(airports_table, by = c("airport_code" = "apt_code")) %>% 
-  mutate(type = "Additional taxi-out time",
+  mutate(type = "Additional taxi-out time (PI#3)",
          mymetric = format(round(axot_airport_value_min_flight,2), decimals =2)
          ) %>%
   select(apt_name, year, type, mymetric)
@@ -49,7 +49,7 @@ data_prep_asma <- data_raw_asma  %>%
     airport_code %in% airports_table$apt_code) %>%
   mutate_at(vars(-one_of(c('year', 'indicator_type', 'airport_code'))), ~ ifelse(year > year_report, NA, .)) %>%
   left_join(airports_table, by = c("airport_code" = "apt_code")) %>% 
-  mutate(type = indicator_type,
+  mutate(type = "Additional ASMA time (PI#4)",
          mymetric = format(round(asma_airport_value_min_flight,2), decimals =2 )
          ) %>%
   select(apt_name, year, type, mymetric)
@@ -60,7 +60,7 @@ data_prep_cdo <- data_raw_cdo  %>%
     airport_code %in% airports_table$apt_code) %>%
   mutate_at(vars(-one_of(c('year', 'airport_code'))), ~ ifelse(year > year_report, NA, .)) %>%
   left_join(airports_table, by = c("airport_code" = "apt_code")) %>% 
-  mutate(type = "Share of arrivals applying CDO",
+  mutate(type = "Share of arrivals applying CDO (PI#5)",
          mymetric = if_else(is.na(cdo_airport_value) == TRUE, NA_character_, paste0(round(cdo_airport_value*100,0), '%'))
          ) %>%
   select(apt_name, year, type, mymetric) 
@@ -71,23 +71,23 @@ data_prep <- data_prep_axot %>%
   pivot_wider(names_from = "type", values_from = "mymetric"
               # , names_glue = "{year}_{.value}" #suffix to prefix
               ) %>%
-  pivot_wider(names_from = "year", values_from = c("Additional taxi-out time",
-                                                   "Additional ASMA time",
-                                                   "Share of arrivals applying CDO")
+  pivot_wider(names_from = "year", values_from = c("Additional taxi-out time (PI#3)",
+                                                   "Additional ASMA time (PI#4)",
+                                                   "Share of arrivals applying CDO (PI#5)")
               # , names_glue = "{year}_{.value}" #suffix to prefix
   ) %>%
   rename("Airport Name" = apt_name)
   
 
 
-## plot table
+# plot table ----
 
 mygtable(data_prep, myfont*0.9) %>% 
   tab_spanner_delim(
     delim = "_"
   ) |> 
   tab_header(
-    title = md("**Airport(s) indicators**")
+    title = md("**Airport level**")
   )
 
 }  

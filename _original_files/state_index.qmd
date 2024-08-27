@@ -191,7 +191,7 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ## Environment (Member State)
 
 :::: {#chart-env class="mychart"}
-```{r chart-env}
+```{r chart-env-kea, options = (doclevel=c("level1"))}
 #| file: R/chart_level1_kea.R
 #| out.width: "100%"
 ```

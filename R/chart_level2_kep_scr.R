@@ -88,9 +88,9 @@ myfactor <- c("KEP", "SCR")
 
 myhovertemplate <- paste0('%{y:,.', mydecimals, 'f}', mysuffix)
 
-mytextangle <- 0
-mytextposition <- "outside"
-myinsidetextanchor <- NA
+mytextangle <- -90
+mytextposition <- "inside"
+myinsidetextanchor <- 'middle'
 mytextfont_color <- 'black'
 
 ### layout 
@@ -98,22 +98,22 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <-  paste0("KEP & SCR – average horizontal flight efficiency of the last\nfiled flight plan (PI#1) & shortest constrained trajectory (PI#2)")
-mytitle_y <- 0.95
+mytitle_text <-  paste0("KEP & SCR")
+mytitle_y <- 0.99
 
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "KEP and SCR (%)"
+myyaxis_title <- "KEP & SCR (%)"
 myyaxis_ticksuffix <- "%"
-myyaxis_tickformat <- ".1f"
+myyaxis_tickformat <- ".2f"
 
 #### legend
 mylegend_x <- 0.5
 mylegend_xanchor <- 'center'
 
 #### margin
-mylocalmargin <- list(t = 70)
+mylocalmargin <- mymargin
 
 # plot chart ----
 mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin, mydecimals) %>% 

@@ -37,11 +37,11 @@
   
   #### title
   mytitle_text <- "Chart title"
-  mytitle_x <- 0
+  mytitle_x <- 0.5
   mytitle_y <- 0.99
-  mytitle_xanchor <- 'left'
+  mytitle_xanchor <- 'center'
   mytitle_yanchor <- 'top'
-  mytitle_font_size <- myfont * 18/15
+  mytitle_font_size <- myfont * 16/15
   
   #### xaxis
   myxaxis_title <- ''

@@ -1,6 +1,6 @@
           - section: "<b>Terminal performance</b>"
             contents:
             - text: "AXOT & ASMA"
-              href: environment.html#axot-asma
+              href: environment.html#additional-taxi-out-time-axot-pi3-arrival-sequencing-and-metering-area-asma-time-pi4
             - text: "CDO"
-              href: environment.html#cdo
+              href: environment.html#share-of-arrivals-applying-continuous-descent-operations-cdos-pi5

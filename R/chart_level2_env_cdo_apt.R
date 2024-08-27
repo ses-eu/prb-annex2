@@ -50,13 +50,13 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("Share of CDOs, main airport(s) - ", year_report)
+mytitle_text <- paste0("CDOs, main airport(s) - ", year_report)
 mytitle_y <- 0.99
 
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "Share of flights (%)"
+myyaxis_title <- "CDOs (%)"
 myyaxis_ticksuffix <- "%"
 myyaxis_tickformat <- ".0f"
 

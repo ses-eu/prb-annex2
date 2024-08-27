@@ -69,15 +69,15 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("Additional taxi-out time (AXOT) (PI#3)\n& ASMA time (PI#4)")
-mytitle_y <- 0.95
+mytitle_text <- paste0("ASMA & AXOT")
+mytitle_y <- 0.99
 
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "Time (min/flight)"
+myyaxis_title <- "ASMA & AXOT (min/flight)"
 myyaxis_ticksuffix <- ""
-myyaxis_tickformat <- ".1f"
+myyaxis_tickformat <- ".2f"
 myyaxis_rangemode <- NA
 myyaxis_range <- c(round(min(data_prep$mymetric, na.rm = TRUE)/5)*5, round(max(data_prep$mymetric, na.rm = TRUE)/5)*5)
 

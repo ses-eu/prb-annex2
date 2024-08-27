@@ -52,9 +52,9 @@ mytitle_y <- 0.99
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "Time (min/flight)"
+myyaxis_title <- "AXOT (min/flight)"
 myyaxis_ticksuffix <- ""
-myyaxis_tickformat <- ".1f"
+myyaxis_tickformat <- ".2f"
 
 #### legend
 mylegend_x <- 0.5

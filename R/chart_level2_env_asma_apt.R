@@ -46,15 +46,15 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("ASMA time, main airport(s) - ", year_report)
+mytitle_text <- paste0("ASMA, main airport(s) - ", year_report)
 mytitle_y <- 0.99
 
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "Time (min/flight)"
+myyaxis_title <- "ASMA (min/flight)"
 myyaxis_ticksuffix <- ""
-myyaxis_tickformat <- ".1f"
+myyaxis_tickformat <- ".2f"
 
 #### legend
 mylegend_x <- 0.5

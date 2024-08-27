@@ -45,13 +45,13 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("Share of arrivals applying\nContinuous Descent Operations (CDOs) (PI#5)")
-mytitle_y <- 0.95
+mytitle_text <- paste0("CDOs")
+mytitle_y <- 0.99
 
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "Share of flights (%)"
+myyaxis_title <- "CDOs (%)"
 myyaxis_ticksuffix <- "%"
 myyaxis_tickformat <- ".0f"
 myyaxis_rangemode <- NA
@@ -62,7 +62,7 @@ mylegend_x <- 0.5
 mylegend_xanchor <- 'center'
 
 #### margin
-mylocalmargin = list(t=60)
+mylocalmargin = mymargin
 
 ## define chart function ----
 mylinechart <-  function(df, mywidth, myheight, myfont, mymargin) {

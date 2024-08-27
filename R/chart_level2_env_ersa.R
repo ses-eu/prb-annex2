@@ -40,22 +40,22 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("ERSA - effective use of reserved or segregated airspace (PI#6)")
-mytitle_y <- 0.95
+mytitle_text <- paste0("Effective use of reserved or segregated airspace (ERSA)(PI#6)")
+mytitle_y <- 0.99
 
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "Thousands"
+myyaxis_title <- "ERSA ('000 hours)"
 myyaxis_ticksuffix <- ""
-myyaxis_tickformat <- ".0f"
+myyaxis_tickformat <- ".1f"
 
 #### legend
 mylegend_x <- 0.5
 mylegend_xanchor <- 'center'
 
 #### margin
-mylocalmargin = list(t = 70)
+mylocalmargin = mymargin
 
 ## define chart function ----
 # function moved to utils

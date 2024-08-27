@@ -1,3 +1,5 @@
+
+if (exists("doclevel") == FALSE) {doclevel = "level2"}
  
 if (country == "Network Manager") {
   # NM case ----
@@ -131,22 +133,26 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0(if_else(country == "Network Manager", "KEP", "KEA - average horizontal flight efficiency\nof the actual trajectory (KPI#1)"))
-mytitle_y <- 0.95
+mytitle_text <- paste0(if_else(country == "Network Manager", 
+                               "KEP", 
+                               if_else(doclevel == "level1",
+                                       "Average horizontal flight efficiency of the actual trajectory (KEA)",
+                                       "KEA")))
+mytitle_y <- 0.99
 
 #### xaxis
 
 #### yaxis
 myyaxis_title <- paste0(if_else(country == "Network Manager", "KEP", "KEA"), " (%)")
 myyaxis_ticksuffix <- "%"
-myyaxis_tickformat <- ".1f"
+myyaxis_tickformat <- ".2f"
 
 #### legend
 mylegend_x <- 0.5
 mylegend_xanchor <- 'center'
 
 #### margin
-mylocalmargin <- list(t=60)
+mylocalmargin <- mymargin
 
 #____additional trace parameters
 myat_name <- "Target"
