@@ -156,9 +156,7 @@ mytitle_y <- 0.99
 #### yaxis
 myyaxis_title <- "RR"
 myyaxis_ticksuffix <- ""
-myyaxis_tickformat <- if_else(max(data_prep$mymetric, na.rm = TRUE) <10, 
-                              ".1f",
-                              ".0f")
+myyaxis_tickformat <- ".1f"
 
 #### legend
 mylegend_y <- -0.24

@@ -114,7 +114,7 @@ mytitle_y <- 0.99
 #### yaxis
 myyaxis_title <- "RR (M€)"
 myyaxis_ticksuffix <- ""
-myyaxis_tickformat <- ",.0f"
+myyaxis_tickformat <- ",.1f"
 
 #### legend
 mylegend_x <- 0.5

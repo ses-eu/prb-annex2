@@ -100,7 +100,7 @@ myfactor <- c("Actual RoE in value",
               "Traffic risk sharing",
               "Cost sharing")
 
-mylocalmargin <- list (t = 30, b = 60)
+mylocalmargin <- list (t = 30, b = 70)
 mydecimals <- 1
 
 # plot chart  ----
@@ -115,7 +115,7 @@ range_max <- ceiling(max(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^my
 myplot <- myhbarc(mywidth, myheight+30, myfont, mylocalmargin) %>% 
   layout(
     xaxis = list(
-      title = "\nM€",
+      title = "",
       range = c(range_min, range_max)
       ),
     images = list(
@@ -125,7 +125,7 @@ myplot <- myhbarc(mywidth, myheight+30, myfont, mylocalmargin) %>%
         xref = "paper",  
         yref = "paper",  
         x = if_else(range_min >=0,0, abs(range_min)/(range_max-range_min)),  
-        y = -0.12,  
+        y = -0.20,  
         sizex = 0.18,  
         sizey = 0.18,  
         layer = "above",
@@ -138,7 +138,7 @@ myplot <- myhbarc(mywidth, myheight+30, myfont, mylocalmargin) %>%
         xref = "paper",  
         yref = "paper",  
         x = if_else(range_min >=0,0, abs(range_min)/(range_max-range_min)),  
-        y = -0.12,  
+        y = -0.20,  
         sizex = 0.18,  
         sizey = 0.18,  
         layer = "above",
@@ -151,7 +151,7 @@ myplot <- myhbarc(mywidth, myheight+30, myfont, mylocalmargin) %>%
       list(
       xanchor = "left",
       x = if_else(range_min >=0,0, abs(range_min)/(range_max-range_min)) + 0.05,
-      y = -0.2,
+      y = -0.28,
       text = '<b>ANSP gain</b>',
       font = list(size = myfont*0.85),
       xref = "paper",
@@ -164,9 +164,22 @@ myplot <- myhbarc(mywidth, myheight+30, myfont, mylocalmargin) %>%
     list(
       xanchor = "right",
       x = if_else(range_min >=0,0, abs(range_min)/(range_max-range_min)) -0.05,
-      y = -0.2,
+      y = -0.28,
       text = '<b>ANSP loss</b>',
       font = list(size = myfont*0.85),
+      xref = "paper",
+      yref = "paper",
+      showarrow = FALSE,
+      # arrowhead = 7,
+      ax = 0,
+      ay = 0
+    ),
+    list(
+      xanchor = "center",
+      x = 0.5,
+      y = -0.17,
+      text = 'M€',
+      font = list(size = myfont),
       xref = "paper",
       yref = "paper",
       showarrow = FALSE,
