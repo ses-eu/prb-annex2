@@ -137,11 +137,11 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
     layout(
       font = list(family = "Roboto"),
       title = list(text=paste0("EoSM - ", main_safety_ansp),
-                   y = 0.99, 
-                   x = 0, 
-                   xanchor = 'left', 
-                   yanchor =  'top',
-                   font = list(size = myfont * 20/15)
+                   y = mytitle_y, 
+                   x = mytitle_x, 
+                   xanchor = mytitle_xanchor, 
+                   yanchor = mytitle_yanchor,
+                   font = list(size = mytitle_font_size)
       ),
       bargap = 0.25,
       hovermode = "x unified",
@@ -189,8 +189,5 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
 
 myc(NA, 320, 14, 70)
 
-# export to image ----
-w = 1200
-h = 600
-export_fig(myc(w, h, 14 * w/900, 70 * w/1000),"saf_main.png", w, h)
+
 
