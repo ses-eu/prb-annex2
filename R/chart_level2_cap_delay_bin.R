@@ -83,13 +83,13 @@ mybargap <- 0.25
 mybarmode <- 'stack'
 
 #### title
-mytitle_text <- paste0("Distribution of IFR flights\nper the duration of en route ATFM delay")
-mytitle_y <- 0.95
+mytitle_text <- paste0("Distribution of IFR flights per the duration of en route ATFM delay")
+mytitle_y <- 0.99
 
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "Percentage"
+myyaxis_title <- "Share of IFR flights (%)"
 myyaxis_ticksuffix <- "%"
 myyaxis_tickformat <- ".0f"
 
@@ -98,7 +98,7 @@ mylegend_x <- 0.5
 mylegend_xanchor <- 'center'
 
 #### margin
-mylocalmargin <- list(t=60)
+mylocalmargin <- mymargin
 
 ## plot chart  ----
 mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals) %>% 

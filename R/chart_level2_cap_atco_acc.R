@@ -42,13 +42,13 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("ATCOs in OPS per ACC - ", year_report)
+mytitle_text <- paste0("ATCOs in operation per ACC - ", year_report)
 mytitle_y <- 0.99
 
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "ATCOs in OPS"
+myyaxis_title <- "ATCOs in OPS (FTEs)"
 myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".0f"
 

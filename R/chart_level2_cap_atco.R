@@ -58,7 +58,9 @@ acc_list_for_chart <- unique(data_for_chart$acc)
 ## set parameters for chart ----
 mycolors <-  c('#FFC000','#5B9BD5')
 
-mytitle <- paste0("ATCOs in OPS")
+mytitle <- paste0("ATCOs in operation",
+                  if_else(country != "SES RP3",
+                          paste0(" - ", main_ansp), ""))
 mytitle_pos <- 0.99
 
 

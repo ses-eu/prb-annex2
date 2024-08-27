@@ -1,8 +1,7 @@
+if (exists("cztype") == FALSE) {cztype = "terminal"}
 
 if (country == 'SES RP3') {
   # SES case ----
-  if (exists("cztype") == FALSE) {cztype = "terminal"}
-
   ## import data  ----
   data_raw_actual  <-  read_xlsx(
     paste0(data_folder, "SES file.xlsx"),
@@ -70,14 +69,6 @@ if (country == 'SES RP3') {
   
 } else {
   # state case ----
-  ## fix ez if script not executed from qmd file ----
-  if (exists("cz") == FALSE) {cz = c("1", "enroute")}
-  # ez=1
-  
-  ## define cz ----
-  ez <- as.numeric(cz[[1]])
-  cztype <- cz[[2]]
-  
   ## import data  ----
   data_raw_target  <-  read_xlsx(
     paste0(data_folder, "CAP dataset master.xlsx"),
@@ -177,8 +168,8 @@ mybarmode <- 'stack'
 
 #### title
 mytitle_text <- paste0("Monthly distribution of ", if_else(cztype == "enroute", "en route", "arrival"),
-                       " ATFM delay\nby delay groups  - ", year_report)
-mytitle_y <- 0.95
+                       " ATFM delay by delay groups  - ", year_report)
+mytitle_y <- 0.99
 
 #### xaxis
 myxaxis_dtick <- 'M1'
@@ -194,7 +185,7 @@ mylegend_x <- -0.1
 mylegend_xanchor <- 'left'
 
 #### margin
-mylocalmargin <- list(t=60)
+mylocalmargin <- mymargin
 
 # if (knitr::is_latex_output()) {
 #   if (country == 'SES RP3') {

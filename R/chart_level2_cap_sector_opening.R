@@ -57,7 +57,10 @@ mybargap <- 0.25
 mybarmode <- 'stack'
 
 #### title
-mytitle_text <- paste0("Sector opening hours")
+mytitle_text <- paste0("Sector opening hours",
+                       if_else(country != "SES RP3",
+                               paste0(" - ", main_ansp), "")
+                       )
 mytitle_y <- 0.99
 
 #### xaxis

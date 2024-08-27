@@ -167,9 +167,9 @@ mybarmode <- 'stack'
 
 #### title
 mytitle_text <- paste0("Average ", 
-                       if_else(cztype == "enroute", "en route", "terminal"),
-                       " ATFM delay per flight\nby delay groups")
-mytitle_y <- 0.95
+                       if_else(cztype == "enroute", "en route", "arrival"),
+                       " ATFM delay per flight by delay groups")
+mytitle_y <- 0.99
 
 #### xaxis
 
@@ -183,7 +183,7 @@ mylegend_x <- -0.1
 mylegend_xanchor <- 'left'
 
 #### margin
-mylocalmargin <- list(t = 60)
+mylocalmargin <- mymargin
 
 # if (knitr::is_latex_output()) {
 #   if (country == 'SES RP3') {

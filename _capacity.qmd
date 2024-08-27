@@ -227,7 +227,7 @@ if (country == "SES RP3") {
 
 ::: {#container-cap-prb}
 
-## PRB assessment
+## PRB monitoring
 
 ```{r cap-prb}
 cap_er_conc <- read_mytable("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity") %>%
@@ -406,6 +406,7 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 `r if (params$no_tcz == 0) "::: {.content-hidden}"`
 
 :::: {#container-cap-trm}
+## Terminal performance
 
 ### Arrival ATFM delay (KPI#2)
 
@@ -448,7 +449,7 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 
 :::: {#container-cap-other}
 
-### Other performance indicators (PI#1-3)
+### Other terminal performance indicators (PI#1-3)
 
 ::::: {layout="[ 20, 60, 20 ]"}
 
