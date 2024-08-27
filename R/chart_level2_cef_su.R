@@ -200,11 +200,11 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
     layout(
       font = list(family = "Roboto"),
       title = list(text = mychart_title,
-                   y = mytitle_pos, 
-                   x = 0.02, 
-                   xanchor = 'left', 
-                   yanchor =  'top',
-                   font = list(size = myfont * 20/15)
+                   y = mytitle_y, 
+                   x = mytitle_x, 
+                   xanchor = mytitle_xanchor, 
+                   yanchor = mytitle_yanchor,
+                   font = list(size = mytitle_font_size)
       ),
       hovermode = "x unified",
       hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
@@ -250,8 +250,7 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
 myaxis_title <- paste0(if_else(cztype == "terminal", "Terminal", "En route"),
                        " service units ('000)")
 mychart_title <- paste0(if_else(cztype == "terminal", "Terminal", "En route"),
-                        " service units ('000)")
-mytitle_pos <- 0.99
+                        " service units")
 
 mylocalmargin = list (t = 40, b = 80)
 

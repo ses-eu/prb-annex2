@@ -106,15 +106,13 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("Regulatory result by entity group at ", 
-                       if_else(cztype == 'terminal', 'TCZ', 'ECZ'),
-                       " level (M€)")
+mytitle_text <- paste0("RR by entity group")
 mytitle_y <- 0.99
 
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "Regulatory result (M€)"
+myyaxis_title <- "RR (M€)"
 myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ",.0f"
 

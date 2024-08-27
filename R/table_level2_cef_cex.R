@@ -142,7 +142,7 @@ if (country == "SES RP3") {
   
 # plot table ----
 mygtable(data_prep, myfont) %>% 
-  cols_label(xlabel = paste0("Cost exempt from cost sharing by item in ", 
+  cols_label(xlabel = paste0("Cost exempt from cost sharing by item - ", 
                              if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))),
              mymetric = "€'000",
              myothermetric = "€/SU") %>% 

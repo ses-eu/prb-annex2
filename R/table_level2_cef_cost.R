@@ -85,7 +85,7 @@ data_prep <- data_prep_split |>
 
 # plot table ----
 mygtable(data_prep, myfont) %>% 
-  cols_label(name = html("Total costs - nominal EURO (M€)")) %>% 
+  cols_label(name = html("Total costs - nominal (M€)")) %>% 
   tab_options(column_labels.background.color = "#F2F2F2",
               column_labels.font.weight = 'bold',
               container.padding.y = 0) %>% 
@@ -104,8 +104,7 @@ mygtable(data_prep, myfont) %>%
     use_seps = TRUE  # Use thousands separator
   ) |> 
   tab_header(
-    title = md(paste0(if_else(cztype == "terminal", "**TCZ", "**ECZ"),
-                      " actual and planned data**"))
+    title = md(paste0("**Actual and determined data**"))
   )
 
   

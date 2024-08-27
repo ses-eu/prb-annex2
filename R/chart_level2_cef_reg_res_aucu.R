@@ -128,13 +128,13 @@ mybargap <- 0.25
 mybarmode <- 'stack'
 
 #### title
-mytitle_text <- paste0("Share of Regulatory Result in the AUCU (€)")
+mytitle_text <- paste0("Share of RR in AUCU")
 mytitle_y <- 0.99
 
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "AUCU and Regulatory Result (€/SU)"
+myyaxis_title <- "AUCU & RR (€/SU)"
 myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".0f"
 
@@ -168,7 +168,7 @@ mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin, mydecimals) %
   layout(
     yaxis = list(rangemode = "nonnegative"),   # to force the zeros to coincide
     yaxis2 = list(
-    title = 'Regulatory result as a % of AUCU',
+    title = 'RR as % of AUCU',
     zerolinecolor = '#E8E8E8',
     rangemode = "nonnegative",
     overlaying = "y",

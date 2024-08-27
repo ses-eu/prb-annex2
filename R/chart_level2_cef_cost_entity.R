@@ -141,9 +141,7 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("Total costs per entity group at", 
-                       if_else(cztype == "terminal", " TCZ", " ECZ"),
-                       " level (M€<sub>2017</sub>) - ",
+mytitle_text <- paste0("Total costs per entity group - ",
                        if_else(year_report == 2020 | year_report == 2021, 
                                '2020-2021',
                                as.character(year_report)))

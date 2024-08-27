@@ -185,9 +185,9 @@ website:
             - text: "Unit cost"
               href: cost-efficiency-er1-1.html#unit-cost-kpi1
             - text: "AUCU"
-              href: cost-efficiency-er1-1.html#aucu-pi1
+              href: cost-efficiency-er1-1.html#actual-unit-cost-incurred-by-the-users-aucu-pi1
             - text: "Regulatory Result"
-              href: cost-efficiency-er1-1.html#regulatory-result
+              href: cost-efficiency-er1-1.html#regulatory-result-rr
 # include ECZ2 block              
 # include TCZ block              
 # block level2 end

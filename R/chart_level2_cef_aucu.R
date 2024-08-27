@@ -60,7 +60,7 @@ data_prep <- data_pre_prep |>
 
 
 # chart parameters ----
-mychart_title <- paste0("AUCU – Actual Unit Cost incurred by Users (€)")
+mychart_title <- paste0("AUCU")
 myaxis_title <- "AUCU (€/SU)"
 mybarcolor <- c( '#5B9BD5', 'transparent', '#BFBFBF', '#9DC3E6')
 mytextcolor <- 'black'
@@ -187,11 +187,11 @@ mybarc_aucu <-  function(mywidth, myheight, myfont, mymargin) {
     layout(
       font = list(family = "Roboto"),
       title = list(text = mychart_title,
-                   y = 0.99, 
-                   x = 0, 
-                   xanchor = 'left', 
-                   yanchor =  'top',
-                   font = list(size = myfont * 20/15)
+                   y = mytitle_y, 
+                   x = mytitle_x, 
+                   xanchor = mytitle_xanchor, 
+                   yanchor = mytitle_yanchor,
+                   font = list(size = mytitle_font_size)
       ),
       hovermode = "x",
       hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),

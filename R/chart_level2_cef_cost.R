@@ -116,9 +116,7 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("Total ", 
-                       if_else(cztype == "terminal", "terminal costs at TCZ level", "en route costs at ECZ level"),
-                       " (M€<sub>2017</sub>)")
+mytitle_text <- paste0("Total costs")
 mytitle_y <- 0.99
 
 #### xaxis

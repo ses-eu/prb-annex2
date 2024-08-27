@@ -30,7 +30,7 @@ if (params$country == "SES RP3") {
 
 ::: {#container-saf-prb}
 
-## PRB assessment
+## PRB monitoring
 :::: {#concl-saf}
 ```{r concl-saf}
 saf_conc <- read_mytable("PRB_findings.xlsx", "safety", "Table_Findings_safety") %>%

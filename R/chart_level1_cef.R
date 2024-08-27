@@ -1,9 +1,9 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("cz") == FALSE) {cz = c("1", "terminal")}
+if (exists("cz") == FALSE) {cz = c("1", "terminal", "level2")}
 # ez=1
 
-# define cz ----
+# define cz & level----
 ez <- as.numeric(cz[[1]])
 cztype <- cz[[2]]
 # cztype <- "terminal"
@@ -13,6 +13,8 @@ mycz <- if_else(cztype == "terminal",
 mycz_name <- if_else(cztype == "terminal",
                      tcz_list$tcz_name[ez],
                      ecz_list$ecz_name[ez])
+
+doclevel <- cz[[3]]
 
 # import data  ----
 if (country == "SES RP3") {
@@ -93,8 +95,12 @@ mybarmode <- 'group'
 myminsize <- myfont*0.95
 
 #### title
-mytitle_text <- paste0("DUC/AUC - " ,if_else(cztype == "terminal", "Terminal", "En route"),
-                        " determined/actual unit costs (€<sub>2017</sub>)")
+mytitle_text <- if_else(doclevel == "level1",
+                        paste0("DUC/AUC - " ,
+                               if_else(cztype == "terminal", "Terminal", "En route"),
+                               " determined/actual unit costs (DUC/AUC)"),
+                        "DUC/AUC")
+                        
 mytitle_y <- 0.99
 
 #### xaxis

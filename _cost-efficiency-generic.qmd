@@ -146,7 +146,7 @@ if (country == "SES RP3") {
 `r if (cztype == 'terminal' | ez == 2) "::: {.content-hidden}"`
 
 ::: {#container-cef-prb}
-## PRB assessment
+## PRB monitoring
 
 :::: {#concl-cef-duc}
 ```{r concl-cef-duc}
@@ -165,12 +165,12 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 
 `r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) "::: {.content-hidden}"`
-## @@cz_type_proper@@ Charging Zone - {{< var doc.@@cz_short@@@@cz_index@@ >}}
+## @@cz_type_proper@@ charging zone - {{< var doc.@@cz_short@@@@cz_index@@ >}}
 `r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) ":::"`
 
 
 `r if ((params$no_ecz != 1 & cztype == 'enroute') | (params$no_tcz >= 2 & cztype == 'terminal')) "::: {.content-hidden}"`
-## @@cz_type_proper@@ Charging Zone
+## @@cz_type_proper@@ charging zone
 `r if ((params$no_ecz != 1 & cztype == 'enroute') | (params$no_tcz >= 2 & cztype == 'terminal')) ":::"`
 
 ::: {#container-cef-duc}
@@ -181,7 +181,7 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ::::: {#chart-cef-duc}
 `r if (params$country == "SES RP3" & cztype == "enroute") ":::::: {.content-hidden}"`
-```{r chart-cef-duc, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+```{r chart-cef-duc, options = (cz=c("@@cz_index@@", "@@cz_type@@","level2"))}
 #| file: R/chart_level1_cef.R
 #| out.width: "100%"
 ```
@@ -274,7 +274,7 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ::: {#container-cef-aucu}
 
-### AUCU (PI#1)
+### Actual unit cost incurred by the users (AUCU) (PI#1)
 
 :::: {layout="[ 50, 50 ]"}
 ::::: {#chart-cef-aucu}
@@ -323,7 +323,7 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ::: {#container-cef-reg-res}
 
-### Regulatory result
+### Regulatory result (RR)
 
 :::: {layout="[ 50, 50 ]"}
 ::::: {#chart-cef-reg-res}

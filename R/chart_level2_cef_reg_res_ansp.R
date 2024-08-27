@@ -145,8 +145,8 @@ mybarmode <- 'group'
 
 #### title
 mytitle_text <- if_else(country == "SES RP3", 
-                        "Regulatory Result for main ANSPs (M€)",
-                        paste0("Regulatory Result for main ANSP ", main_ansp, ' (M€)')
+                        "RR - Main ANSPs",
+                        paste0("RR - ", main_ansp)
                         )
 
 mytitle_y <- 0.99
@@ -154,7 +154,7 @@ mytitle_y <- 0.99
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "Regulatory result (M€)"
+myyaxis_title <- "RR"
 myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- if_else(max(data_prep$mymetric, na.rm = TRUE) <10, 
                               ".1f",
@@ -164,7 +164,7 @@ myyaxis_tickformat <- if_else(max(data_prep$mymetric, na.rm = TRUE) <10,
 mylegend_y <- -0.24
 
 #### margin
-mylocalmargin = list(t = 60, b = 80, l = 40, r = 70)
+mylocalmargin = list(t = 60, b = 80, l = 40, r = 60)
 
 
 # plot chart  ----
@@ -215,7 +215,7 @@ add_trace(
   layout(
     yaxis = list(rangemode = "nonnegative"),
     yaxis2 = list(
-    title = 'Regulatory result\nas a % of revenues',
+    title = 'RR as % of revenues',
     overlaying = "y",
     zerolinecolor = '#E8E8E8',
     rangemode = "tozero",

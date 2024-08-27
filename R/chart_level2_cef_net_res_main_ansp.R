@@ -80,20 +80,19 @@ data_prep <- data_pre_prep |>
 
 
 # chart parameters ----
-mychart_title <- paste0(if_else(country == "SES RP3", "Main ANSPs", main_ansp),
-                        if_else(country == "SES RP3", " net result from ", " net result from\n"), 
+mychart_title <- paste0("Net result from ", 
                         if_else(cztype == 'terminal', 'terminal', 'en route'),
-                        " activity (M€) - ", 
+                        " activity - ", 
+                        if_else(country == "SES RP3", "Main ANSPs ", paste0(main_ansp," ")),
                         if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))
                         )
-mytitle_y <- if_else(country == "SES RP3", 0.99, 0.95) 
+mytitle_y <- 0.99
 myaxis_title <- ""
 mybarcolor_pos <- '#9ECF8D'
 mybarcolor_neg <- '#F87474'
 mytextcolor <- 'black'
 myhovertemplate <- paste0('%{x:,.1f}<extra></extra>')
-myxaxis_tickformat <- "0,"
-mylocalmargin = list(t=60)
+myxaxis_tickformat <- "0,.1f"
 
 ###set up order of traces
 myfactor <- c("Actual RoE in value",
@@ -101,7 +100,7 @@ myfactor <- c("Actual RoE in value",
               "Traffic risk sharing",
               "Cost sharing")
 
-mylocalmargin <- list (t = 40, b = 60)
+mylocalmargin <- list (t = 30, b = 60)
 mydecimals <- 1
 
 # plot chart  ----
@@ -116,6 +115,7 @@ range_max <- ceiling(max(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^my
 myplot <- myhbarc(mywidth, myheight+30, myfont, mylocalmargin) %>% 
   layout(
     xaxis = list(
+      title = "\nM€",
       range = c(range_min, range_max)
       ),
     images = list(

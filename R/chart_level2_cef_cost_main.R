@@ -118,12 +118,12 @@ range_max <- ceiling(max(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^my
 
 # chart parameters ----
 mychart_title <- paste0(if_else(country == "SES RP3", 
-                         "Costs by nature for main ANSPs (M€<sub>2017</sub>) - ",
-                         paste0("Costs by nature for main ANSP\n", main_ansp," (M€<sub>2017</sub>) - ")
+                         "Costs by nature for main ANSPs - ",
+                         paste0("Costs by nature - ", main_ansp," ")
                          ),
                         if_else(year_report == 2020 | year_report == 2021, "2020-2021", as.character(year_report))
                         )
-mytitle_y <- if_else(country == "SES RP3", 0.99, 0.95)
+mytitle_y <- if_else(country == "SES RP3", 0.99, 0.99)
 myaxis_title <- "Costs (M€<sub>2017</sub>)"
 mybarcolor_pos <- '#A5A5A5'
 mybarcolor_neg <- '#A5A5A5'
@@ -132,7 +132,7 @@ myhovertemplate <- paste0('%{y} (A-D): %{x:,.1f}<extra></extra>')
 # myxaxis_tickformat <- "0,.1f"
 myxaxis_tickformat <- if_else(all_negative_or_zero, "0,.1f", "+0,")
 mydecimals <- 3
-mylocalmargin = if_else(country == "SES RP3", mymargin, list(t=60))
+mylocalmargin = mymargin
 
 ###set up order of traces
 myfactor <- c("VFR exempted", 

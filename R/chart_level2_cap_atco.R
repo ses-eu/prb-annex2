@@ -61,8 +61,6 @@ mycolors <-  c('#FFC000','#5B9BD5')
 mytitle <- paste0("ATCOs in operation",
                   if_else(country != "SES RP3",
                           paste0(" - ", main_ansp), ""))
-mytitle_pos <- 0.99
-
 
 # if (knitr::is_latex_output()) {
 #   mytitle <- paste0("ATCOs in OPS")
@@ -153,11 +151,11 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
       # updatemenus = updatemenus,  # in the end we don't use the menu
       font = list(family = "Roboto"),
       title = list(text = mytitle,
-                   y = mytitle_pos, 
-                   x = 0, 
-                   xanchor = 'left', 
-                   yanchor =  'top',
-                   font = list(size = myfont * 18/15)
+                   y = mytitle_y, 
+                   x = mytitle_x, 
+                   xanchor = mytitle_xanchor, 
+                   yanchor = mytitle_yanchor,
+                   font = list(size = mytitle_font_size)
       ),
       hovermode = "x unified",
       hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),

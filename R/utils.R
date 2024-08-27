@@ -822,9 +822,9 @@ myhbarc <-  function(mywidth, myheight, myfont, mymargin) {
       font = list(family = "Roboto"),
       title = list(text = mychart_title,
                    y = mytitle_y ,
-                   x = 0,
-                   xanchor = 'left',
-                   yanchor =  'top',
+                   x = mytitle_x,
+                   xanchor = mytitle_xanchor,
+                   yanchor =  mytitle_yanchor,
                    font = list(size = mytitle_font_size)
       ),
       bargap = 0.25,

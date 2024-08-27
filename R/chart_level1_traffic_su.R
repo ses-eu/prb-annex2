@@ -88,20 +88,19 @@ if (country == 'SES RP3') {
     mytitle <- paste0("En route service units - ", forecast, " -\n",
                       if_else(country == "Spain",
                               country, ecz_list$ecz_name[1]))
-    mytitle_pos <- 0.95
-    mymargin = list (t = 40, l = 0)
-    mylegend_x_pos <- -0.1
+    mytitle_y <- 0.95
+    mylocalmargin = list (t = 40, l = 0)
+    mylegend_x <- -0.1
   } else {
     mytitle <- paste0("En route service units - ", forecast, " - ", 
                       if_else(country == "Spain", 
                               country, ecz_list$ecz_name[1]))
-    mytitle_pos <- 0.99
-    mylegend_x_pos <- 0
+    mylegend_x <- 0
   }
 
 ## define chart function ----
   myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
-    plotly::plot_ly(
+    plot_ly(
       width = mywidth,
       height = myheight,
       data = data_prep_forecast,
@@ -118,7 +117,7 @@ if (country == 'SES RP3') {
     opacity = 1,
     showlegend = T
   ) %>% 
-    plotly::add_trace(
+    add_trace(
       data = data_prep_planned,
       inherit = FALSE,
       x = ~ year,
@@ -133,7 +132,7 @@ if (country == 'SES RP3') {
       opacity = 1,
       showlegend = T
     ) %>%
-    plotly::add_trace(
+    add_trace(
       data = data_prep_actual,
      inherit = FALSE,
      x = ~ year,
@@ -148,19 +147,19 @@ if (country == 'SES RP3') {
      opacity = 1,
      showlegend = T
     ) %>%
-    plotly::config( responsive = TRUE,
+    config( responsive = TRUE,
             displaylogo = FALSE,
             displayModeBar = F
             # modeBarButtons = list(list("toImage")),
     ) %>% 
-    plotly::layout(
+    layout(
       font = list(family = "Roboto"),
       title = list(text = mytitle,
-                   y = mytitle_pos, 
-                   x = 0, 
-                   xanchor = 'left', 
-                   yanchor =  'top',
-                   font = list(size = myfont * 20/15)
+                   y = mytitle_y, 
+                   x = mytitle_x, 
+                   xanchor = mytitle_xanchor, 
+                   yanchor = mytitle_yanchor,
+                   font = list(size = mytitle_font_size)
                    ),
       hovermode = "x unified",
       hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
@@ -192,7 +191,7 @@ if (country == 'SES RP3') {
       legend = list(
         orientation = 'h', 
         xanchor = "left",
-        x = mylegend_x_pos, 
+        x = mylegend_x, 
         y = -0.1,
         font = list(size = myfont)
         ),

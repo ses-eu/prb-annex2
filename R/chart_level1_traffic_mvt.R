@@ -75,17 +75,17 @@ if (knitr::is_latex_output()) {
   mytitle <- paste0("IFR movements - ", forecast, " -\n",
                     if_else(country == "Spain",
                             country, ecz_list$ecz_name[1]))
-  mytitle_pos <- 0.95
+  mytitle_y <- 0.95
 } else {
   mytitle <- paste0("IFR movements - ", forecast, " - ", 
                     if_else(country == "Spain", 
                             country, ecz_list$ecz_name[1]))
-  mytitle_pos <- 0.99
+  mytitle_y <- 0.99
 }
 
 ## define chart function ----
 myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
-  plotly::plot_ly(
+  plot_ly(
     width = mywidth,
     height = myheight,
     data = data_prep_forecast,
@@ -104,7 +104,7 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
     # hoverinfo = "none",
     showlegend = T
   ) %>% 
-    plotly::add_trace(
+    add_trace(
       data = data_prep_planned,
       inherit = FALSE,
       x = ~ year,
@@ -119,7 +119,7 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
       opacity = 1,
       showlegend = T
     ) %>%
-    plotly::add_trace(
+    add_trace(
       data = data_prep_actual,
       inherit = FALSE,
       x = ~ yr,
@@ -136,19 +136,19 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
       # hoverinfo = "none",
       showlegend = T
     ) %>%
-    plotly::config( responsive = TRUE,
+    config( responsive = TRUE,
                     displaylogo = FALSE,
                     displayModeBar = F
                     # modeBarButtons = list(list("toImage")),
     ) %>% 
-    plotly::layout(
+    layout(
       font = list(family = "Roboto"),
       title = list(text = mytitle,
-                   y = mytitle_pos, 
-                   x = 0, 
-                   xanchor = 'left', 
-                   yanchor =  'top',
-                   font = list(size = myfont * 20/15)
+                   y = mytitle_y, 
+                   x = mytitle_x, 
+                   xanchor = mytitle_xanchor, 
+                   yanchor = mytitle_yanchor,
+                   font = list(size = mytitle_font_size)
       ),
       hovermode = "x unified",
       hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
