@@ -1,6 +1,6 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("cz") == FALSE) {cz = c("1", "terminal")}
+if (exists("cz") == FALSE) {cz = c("1", "enroute")}
 # ez=1
 
 # define cz ----
@@ -105,7 +105,11 @@ data_prep <- data_prep_split |>
                         "Cost of capital",
                         "Depreciation costs",
                         "Other operating costs",
-                        "Staff costs"))) 
+                        "Staff costs"))) |> 
+  mutate(mymetric = case_when(
+    ylabel == "VFR exempted" ~ -mymetric,
+    .default = mymetric
+  ))
 
 # check if all values are negative or very small to fix formatting issue
 all_negative_or_zero <- all(data_prep$mymetric <= 0.05)
