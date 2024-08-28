@@ -214,15 +214,15 @@ aucu <- function(cztype, mycz) {
   
   tsu_2020 <- data_prep_t1 %>% 
     filter(year == 2020) %>% 
-    select(d_x5_4_total_su) %>% pull()
+    select(a_x5_4_total_su) %>% pull()
   
   tsu_2021 <- data_prep_t1 %>% 
     filter(year == 2021) %>% 
-    select(d_x5_4_total_su) %>% pull()  
+    select(a_x5_4_total_su) %>% pull()  
   
   tsu_20202021 <- data_prep_t1 %>% 
     filter(year == 20202021) %>% 
-    select(d_x5_4_total_su) %>% pull() 
+    select(a_x5_4_total_su) %>% pull() 
   
   # create table with forecast sus and format it so it can be used in calcs
   data_prep_forecast_su <- data_prep_all %>% 
