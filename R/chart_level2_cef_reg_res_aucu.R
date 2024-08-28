@@ -1,6 +1,6 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("cz") == FALSE) {cz = c("1", "enroute")}
+if (exists("cz") == FALSE) {cz = c("1", "terminal")}
 # ez=1
 
 # define cz ----

@@ -516,7 +516,7 @@ aucu <- function(cztype, mycz) {
     
     # get tsus 
     tsus <- data_raw_t1 %>% 
-      filter(entity_code == ecz_list$ecz_id[ez],
+      filter(entity_code == if_else(cztype == "enroute", ecz_list$ecz_id[ez], tcz_list$tcz_id[ez]),
              status == 'A',
              year > 2021) %>% 
       select(year, x5_4_total_su)  |> 
