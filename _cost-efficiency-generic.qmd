@@ -374,8 +374,6 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 #### NSA input
 
-**Monitoring of the en route ANSPs regulatory results (RR)**
-
 `r if (params$year_report < 2022) "::: {.content-hidden}"`
 
 **`r cef_txt_1_13[1,1]`**

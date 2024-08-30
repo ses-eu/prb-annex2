@@ -227,6 +227,12 @@ if (out_format == 'web') {
        }
       
        tx <- tx[-c(block_l1_ses_beg:block_l1_nm_end)]
+       
+       ### remove env/cap for luxembourg ----
+       if (country == "Luxembourg") {
+         tx <- str_replace(tx, '- text: "Environment"', '# - text: "Environment""')
+         tx <- str_replace(tx, 'href: index.html#environment-member-state', '# href: index.html#environment-member-state')
+       }
     }
      
     ## level 2 ----

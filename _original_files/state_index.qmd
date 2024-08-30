@@ -195,6 +195,8 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ::::
 :::
 
+
+`r if (params$country == "Luxembourg") "::: {.content-hidden}"`
 ::: {#container-env style="clear: both"}
 
 <!-- empty line to ensure next heading leaves enough space -->
@@ -221,6 +223,8 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 `r env_conc1`
 ::::
 :::
+`r if (params$country == "Luxembourg") ":::"`
+
 
 ::: {#container-cap style="clear: both"}
 
@@ -228,11 +232,14 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 <!-- empty line to ensure next heading leaves enough space -->
 <div style="height: 1px"></div>
 
+`r if (params$country == "Luxembourg") ":::: {.content-hidden}"`
 :::: {#chart-cap class="mychart"}
 ```{r chart-cap-er, options = (cztype=c("enroute"))}
 #| file: R/chart_level1_cap.R
 #| out.width: "100%"
 ```
+`r if (params$country == "Luxembourg") "::::"`
+
 
 `r if (params$no_tcz == 0) "::::: {.content-hidden}"`
 <br>
