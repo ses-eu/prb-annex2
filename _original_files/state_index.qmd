@@ -1,3 +1,14 @@
+```{r saf-level2-text}
+# get yearly xrates
+
+xrate <- get_xrates("enroute", ecz_list$ecz_id[1]) |> 
+  filter(year == year_report) |> 
+  select(pp_exchangerate)
+
+xrate_year_report <- if_else(country == "Luxembourg", 1, pull(xrate))
+
+```
+  
 [Annual Monitoring Report {{< var doc.year_report >}} - {{< var doc.country >}}]{.fakeh1}
 
 ## Contextual information
@@ -37,7 +48,7 @@
 
 :::::: {.column width="50%"}
 `r paste0("2017: ", xrate2017, " ", nat_curr)`\
-`r paste0(year_report, ": ", xrate2017, " ", nat_curr)`
+`r paste0(year_report, ": ", xrate_year_report, " ", nat_curr)`
 ::::::
 :::::
 
@@ -195,12 +206,11 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ::::
 :::
 
+<!-- empty line to ensure next heading leaves enough space -->
+<div style="height: 1px"></div>
 
 `r if (params$country == "Luxembourg") "::: {.content-hidden}"`
 ::: {#container-env style="clear: both"}
-
-<!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
 
 ## Environment (Member State)
 
@@ -230,19 +240,21 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ## Capacity (Member State)
 <!-- empty line to ensure next heading leaves enough space -->
-<div style="height: 1px"></div>
+<!-- <div style="height: 1px"></div> -->
 
-`r if (params$country == "Luxembourg") ":::: {.content-hidden}"`
 :::: {#chart-cap class="mychart"}
+`r if (params$country == "Luxembourg") "::::: {.content-hidden}"`
 ```{r chart-cap-er, options = (cztype=c("enroute"))}
 #| file: R/chart_level1_cap.R
 #| out.width: "100%"
 ```
-`r if (params$country == "Luxembourg") "::::"`
+
+<br>
+
+`r if (params$country == "Luxembourg") ":::::"`
 
 
 `r if (params$no_tcz == 0) "::::: {.content-hidden}"`
-<br>
 
 ```{r chart-cap-trm, options = (cztype=c("terminal"))}
 #| file: R/chart_level1_cap.R

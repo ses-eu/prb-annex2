@@ -158,9 +158,9 @@ website:
         contents:
           - text: "<b>PRB monitoring</b>"
             href: environment.html#prb-monitoring
-          - section: "<b>En route performance</b>"
+          - section: "<b>En route performance</b>" #environment
             href: environment.html#en-route-performance
-            contents:
+            contents: #environment
             - text: "Horizontal flight efficiency"
               href: environment.html##horizontal-flight-efficiency-of-the-actual-trajectory-kea-kpi1-of-the-last-filed-flight-plan-kep-pi1-shortest-constrained-route-scr-pi2
 # include env_terminal block
@@ -172,9 +172,9 @@ website:
         contents:
           - text: "<b>PRB monitoring</b>"
             href: capacity.html#prb-monitoring
-          - section: "<b>En route performance</b>"
+          - section: "<b>En route performance</b>" #capacity
             href: capacity.html#en-route-performance
-            contents:
+            contents: #capacity
             - text: "En route ATFM delay"
               href: capacity.html#en-route-atfm-delay-kpi1
             - text: "Other indicators"

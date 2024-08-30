@@ -237,10 +237,34 @@ if (out_format == 'web') {
      
     ## level 2 ----
     if (state_type != 0) {
-      ### remove env-mil for ses ----
-      if (country == "SES RP3") {
+      ### remove env-mil for ses/luxembourg ----
+      if (country == "SES RP3" | country == "Luxembourg") {
         tx <- str_replace(tx, '- text: "<b>CIV-MIL</b>"', '# - text: "<b>CIV-MIL</b>"')
         tx <- str_replace(tx, 'href: environment.html#civil-military-dimension', '# href: environment.html#civil-military-dimension')
+      }
+
+      ### remove other elements for luxembourg ----
+      if (country == "Luxembourg") {
+        lines_to_comment <- c(
+          '- section: "<b>En route performance</b>" #environment',
+          'href: environment.html#en-route-performance',
+          'contents: #environment',
+          '- text: "Horizontal flight efficiency"',
+          'href: environment.html##horizontal-flight-efficiency-of-the-actual-trajectory-kea-kpi1-of-the-last-filed-flight-plan-kep-pi1-shortest-constrained-route-scr-pi2',
+          '- section: "<b>En route performance</b>" #capacity',
+          'href: capacity.html#en-route-performance',
+          'contents: #capacity',
+          '- text: "En route ATFM delay"',
+          'href: capacity.html#en-route-atfm-delay-kpi1',
+          '- text: "Other indicators"',
+          'href: capacity.html#other-indicators'
+        )
+        
+        for (i in 1:length(lines_to_comment)) {
+          tx <- str_replace(tx, lines_to_comment[i],
+                            paste0("# ", lines_to_comment[i]))
+          }
+        
       }
       
       ### with terminal zone(s) ----

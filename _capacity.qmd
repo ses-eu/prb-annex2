@@ -256,6 +256,7 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 :::
 
 
+`r if (params$country == "Luxembourg") "::: {.content-hidden}"`
 ::: {#container-cap-er}
 ## En route performance
 
@@ -297,6 +298,7 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 
 ::::
 :::
+
 
 `r if (params$country == "SES RP3") "::: {.content-hidden}"`
 ::: {.callout-note collapse=true}
@@ -401,6 +403,7 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 ::::
 :::
 `r if (params$country == "SES RP3") ":::"`
+`r if (params$country == "Luxembourg") ":::"`
 
 
 `r if (params$no_tcz == 0) "::: {.content-hidden}"`

@@ -18,8 +18,8 @@
   source("R/get_data.R")
   
   ## add Home to State list and remove MUAC
-  state_list <- c(state_list, "Home")
-  state_list <- setdiff(state_list, "Luxembourg")
+  # state_list <- c(state_list, "Home")
+  # state_list <- setdiff(state_list, "Luxembourg")
   # states_from <- c(9:32) # 1st number is the index of 1st state from which you want to generate
   # state_list <- state_list[states_from]
 
@@ -30,7 +30,7 @@
   
   ## build pages
   if (all_states == FALSE) {
-    state_list <- 'SES RP3' # set your one country/stakeholder here (Home for home page)
+    state_list <- 'Luxembourg' # set your one country/stakeholder here (Home for home page)
   } 
 
   for (i in 1:length(state_list)) {

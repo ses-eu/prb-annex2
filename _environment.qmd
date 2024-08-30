@@ -178,6 +178,7 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 :::
 
+`r if (params$country == "Luxembourg") "::: {.content-hidden}"`
 ::: {#container-kea}
 
 ## En route performance
@@ -225,6 +226,8 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ::::
 :::
+`r if (params$country == "Luxembourg") ":::"`
+
 
 `r if (params$country == "SES RP3") "::: {.content-hidden}"`
 
@@ -327,6 +330,8 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 `r if (params$no_tcz == 0) ":::"`
 
+
+`r if (params$country == "Luxembourg") "::: {.content-hidden}"`
 ::: {#container-mil-pi}
 
 ## Civil-Military dimension 
@@ -399,5 +404,5 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 `r env_mil_8`
 
 :::
-
+`r if (params$country == "Luxembourg") ":::"`
 `r if (params$country == "SES RP3") ":::"`
