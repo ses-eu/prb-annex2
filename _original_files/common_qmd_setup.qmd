@@ -11,6 +11,7 @@ params:
   tcz_list:       $tcz_list
   no_tcz:         $no_tcz
   nat_curr:       $nat_curr
+  xrate2017:      $xrate2017
   pp_version:     $pp_version
   acc_no:         $acc_no
   acc_list:       $acc_list
@@ -124,6 +125,7 @@ no_ecz <- params$no_ecz
 tcz_list <- params$tcz_list
 no_tcz <- params$no_tcz
 nat_curr <- params$nat_curr
+xrate2017 <- params$xrate2017
 pp_version <- params$pp_version
 acc_no <- params$acc_no
 acc_list <- params$acc_list

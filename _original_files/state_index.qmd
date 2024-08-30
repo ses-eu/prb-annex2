@@ -29,6 +29,18 @@
 
 <!-- ******************* 2nd column -->
 :::: {.column width="38%"}
+
+::::: columns
+:::::: {.column width="50%"}
+**Exchange rate (1 EUR=) **
+::::::
+
+:::::: {.column width="50%"}
+`r paste0("2017: ", xrate2017, " ", nat_curr)`\
+`r paste0(year_report, ": ", xrate2017, " ", nat_curr)`
+::::::
+:::::
+
 <p style="margin-bottom: 0.5rem"> **Share of Union-wide traffic (TSUs) `r year_report` **  `r tsu_share` </p>
 
 <p style="margin-bottom: 0.5rem"> **Share of Union-wide en route costs `r year_report` ** `r ert_cost_share` </p>
@@ -37,7 +49,7 @@
 
 ::::: columns
 :::::: {.column width="50%"}
-**En route charging zone(s)**
+<p style="margin-bottom: 0.5rem">**En route charging zone(s)**</p>
 ::::::
 
 :::::: {.column width="50%"}
@@ -48,7 +60,7 @@ ecz_list_string <- paste0(
 )
 ```
 
-`r ecz_list_string`
+<p style="margin-bottom: 0.5rem">`r ecz_list_string`</p>
 
 ::::::
 :::::

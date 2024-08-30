@@ -233,7 +233,7 @@ if (out_format == 'web') {
     if (state_type != 0) {
       ### remove env-mil for ses ----
       if (country == "SES RP3") {
-        tx <- str_replace(tx, '- text: "<b>Civil-Military dimension</b>"', '# - text: "<b>Civil-Military dimension</b>"')
+        tx <- str_replace(tx, '- text: "<b>CIV-MIL</b>"', '# - text: "<b>CIV-MIL</b>"')
         tx <- str_replace(tx, 'href: environment.html#civil-military-dimension', '# href: environment.html#civil-military-dimension')
       }
       
@@ -303,6 +303,7 @@ if (out_format == 'web') {
                                               tcz_list = tcz_list,
                                               no_tcz = no_tcz,
                                               nat_curr = nat_curr,
+                                              xrate2017 = xrate2017,
                                               pp_version = pp_version,
                                               acc_no = acc_no,
                                               acc_list = acc_list,

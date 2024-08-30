@@ -144,6 +144,9 @@
     tsu_share <- paste0(format(round(as.numeric(context_data$tsu_share) *100,1), nsmall=1),'%')
     ert_cost_share <- paste0(format(round(as.numeric(context_data$ert_cost_share) *100,1), nsmall=1),'%')
     ert_trm_share <- context_data$ert_trm_share
+    
+    xrate2017 <- context_data$xrate2017
+    
     no_apt_big <- context_data$no_apts_big
     no_apt_small <- context_data$no_apts_small
 
