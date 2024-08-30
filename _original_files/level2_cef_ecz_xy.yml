@@ -1,4 +1,5 @@
           - section: "<b>En route CZ@@cz_name@@</b>"
+            href: cost-efficiency-er@@cz_index@@-1.html#en-route-charging-zone
             contents:
             - text: "Unit cost"
               href: cost-efficiency-er@@cz_index@@-1.html#unit-cost-kpi1

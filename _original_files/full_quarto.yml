@@ -103,7 +103,8 @@ website:
       - text: "---"
       - text: '<b style= "font-size: 1.2rem">country placeholder</b>'
         href: index.html
-      - section: "<b>Overview</b>"
+      - text: "<b>Overview</b>"
+        href: index.html
         contents:
 # block level1 state beginning
           - text: "Contextual information"
@@ -153,10 +154,12 @@ website:
         href: safety.html
       - text: "---"
       - section: "<b>Environment</b>"
+        href: environment.html
         contents:
           - text: "<b>PRB monitoring</b>"
             href: environment.html#prb-monitoring
           - section: "<b>En route performance</b>"
+            href: environment.html#en-route-performance
             contents:
             - text: "Horizontal flight efficiency"
               href: environment.html##horizontal-flight-efficiency-of-the-actual-trajectory-kea-kpi1-of-the-last-filed-flight-plan-kep-pi1-shortest-constrained-route-scr-pi2
@@ -165,10 +168,12 @@ website:
             href: environment.html#civil-military-dimension
       - text: "---"
       - section: "<b>Capacity</b>"
+        href: capacity.html
         contents:
           - text: "<b>PRB monitoring</b>"
             href: capacity.html#prb-monitoring
           - section: "<b>En route performance</b>"
+            href: capacity.html#en-route-performance
             contents:
             - text: "En route ATFM delay"
               href: capacity.html#en-route-atfm-delay-kpi1
@@ -177,10 +182,12 @@ website:
 # include cap_terminal block
       - text: "---"
       - section: "<b>Cost-efficiency</b>"
+        href: cost-efficiency-er1-1.html
         contents:
           - text: "<b>PRB monitoring</b>"
-            href: cost-efficiency-er1-1.html##prb-monitoring
+            href: cost-efficiency-er1-1.html#prb-monitoring
           - section: "<b>En route CZ</b>"
+            href: cost-efficiency-er1-1.html#en-route-charging-zone
             contents:
             - text: "Unit cost"
               href: cost-efficiency-er1-1.html#unit-cost-kpi1

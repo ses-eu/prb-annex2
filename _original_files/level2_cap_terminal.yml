@@ -1,4 +1,5 @@
           - section: "<b>Terminal performance</b>"
+            href: capacity.html#terminal-performance
             contents:
             - text: "Arrival ATFM delay"
               href: capacity.html#arrival-atfm-delay-kpi2
