@@ -46,8 +46,7 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ::: {#container-saf-indicators}
 
-## Effectiveness of Safety Management
-
+## Effectiveness of Safety Management (EoSM) (KPI#1)
 
 :::: {layout="[ 20, 60, 20 ]"}
 
@@ -70,6 +69,8 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 `r if (params$country == "SES RP3") ":::::"`
 :::::
 ::::
+
+## Occurrences - Rate of runway incursions (RIs) (PI#1) & Rate of separation minima infringements (SMIs) (PI#2)
 
 :::: {layout="[ 50, 50 ]"}
 
