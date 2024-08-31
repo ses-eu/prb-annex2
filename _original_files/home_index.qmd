@@ -54,31 +54,37 @@ A review of this, and earlier RP3 monitoring reports will provide useful insight
 :::: {.column width="50%"}
 SES Regulation covers:
 
--   29 States
-
--   29 En route charging zones
-
+-   29 States\
+-   29 En route charging zones\
 -   26 Terminal charging zones
 ::::
 
 :::: {.column width="50%"}
 <br>
 
--   49 ACCs
-
+-   49 ACCs\
 -   145 Airports
 ::::
 :::
 
-:::
-```{r map-ses}
-#| file: R/plot-ses-map.R
-#| out.width: "100%"
-```
-:::
+test ACE map
+<!-- #| file: R/plot-ses-map.R -->
+<!-- #| out.width: "100%" -->
+<div style="width: 100%;border: 1px solid black;" id="observablehq-mlowerap-aa7c0a21"></div>
+<div id="observablehq-style-aa7c0a21"></div>
+
 
 ## PRB Annual Monitoring Report
 
 Under Commission Implementing Regulation (EU) 2019/317 (herein referred to as the Regulation), monitoring is one of the primary tasks of the Performance Review Body (PRB). It ensures that Member States, the European Commission, and stakeholders are informed about how Air Navigation Service Providers (ANSPs) perform in relation to their performance targets.
 
 The legal basis for monitoring the performance of air traffic management in the SES area is defined in Article 11 of Regulation (EC) 549/2004 (the Framework Regulation) and in Article 3 of the Regulation.
+
+<script type="module">
+  import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+  import define from "https://api.observablehq.com/d/3146482a65da21fc.js?v=3";
+	new Runtime().module(define, name => {
+	if (name === "mlowerap") return new Inspector(document.querySelector("#observablehq-mlowerap-aa7c0a21"));
+	if (name === "style") return new Inspector(document.querySelector("#observablehq-style-aa7c0a21"));
+});
+</script>
