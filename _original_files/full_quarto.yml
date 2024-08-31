@@ -112,13 +112,13 @@ website:
           - text: "Traffic"
             href: index.html#traffic-en-route-traffic-zone
           - text: "Safety"
-            href: index.html#safety-main-ansp
+            href: index.html#safety-main-ansp #tag
           - text: "Environment"
-            href: index.html#environment-member-state
+            href: index.html#environment-member-state #tag
           - text: "Capacity"
-            href: index.html#capacity-member-state
+            href: index.html#capacity-member-state #tag
           - text: "Cost-efficiency"
-            href: index.html#cost-efficiency-en-routeterminal-charging-zones
+            href: index.html#cost-efficiency-en-routeterminal-charging-zones #tag
       - text: "---"
 # block level1 state end
 # block level1 ses beginning

@@ -245,6 +245,17 @@ if (out_format == 'web') {
     ### MUAC, remove elements ----
     if (country == "MUAC") {
       
+      ### replace some links 
+      lines_to_replace <- c(
+        '-main-ansp #tag',
+        '-member-state #tag',
+        '-en-routeterminal-charging-zones #tag'
+      )
+
+      for (i in 1:length(lines_to_replace)) {
+        tx <- str_replace(tx, lines_to_replace[i], '')
+      }
+      
       ### find beginning and end of level2 environment to remove
       for (i in 1:length(tx)) {
         if (tx[i] %like%  'environment level2 beginning') {block_l2_env_beg = i}

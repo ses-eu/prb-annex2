@@ -51,7 +51,7 @@ A review of this, and earlier RP3 monitoring reports will provide useful insight
 ## SES geographical scope
 
 ::: columns
-::: {.column width="50%"}
+:::: {.column width="50%"}
 SES Regulation covers:
 
 -   29 States
@@ -59,19 +59,22 @@ SES Regulation covers:
 -   29 En route charging zones
 
 -   26 Terminal charging zones
+::::
+
+:::: {.column width="50%"}
+<br>
 
 -   49 ACCs
 
 -   145 Airports
+::::
 :::
 
-::: {.column width="50%"}
-```{r}
+:::
+```{r map-ses}
 #| file: R/plot-ses-map.R
-#| out.height: "100%"
 #| out.width: "100%"
 ```
-:::
 :::
 
 ## PRB Annual Monitoring Report
