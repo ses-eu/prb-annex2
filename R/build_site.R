@@ -2,7 +2,7 @@
 
 # clean environment and set main parameters ----
   rm(list = ls())
-  year_report <- 2023 # set your year report here
+  year_report <- 2020 # set your year report here
   out_format <- 'web' # set your output format here: 'pdf' or 'web'
   data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/data_for_web/'
   data_folder_a2 <- paste0(data_folder, "monitoring_files/", year_report, "/")
@@ -26,11 +26,11 @@
 # build state pages ----
   
   ## set all_states to FALSE to build only one state site, TRUE for all
-  all_states <- FALSE
+  all_states <- TRUE
   
   ## build pages
   if (all_states == FALSE) {
-    state_list <- 'Luxembourg' # set your one country/stakeholder here (Home for home page)
+    state_list <- 'MUAC' # set your one country/stakeholder here (Home for home page)
   } 
 
   for (i in 1:length(state_list)) {

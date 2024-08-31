@@ -61,9 +61,14 @@ if (country == "Home") {
   
 # generate level 2 .qmd master files ----
 ## set list of level 2 files depending on case
-if (country == "Home" | country == "Network Manager" | country == "MUAC") {
+if (country == "Home" | country == "Network Manager") {
   level2_files <- ""
   
+} else if(country == "MUAC") {
+  level2_files <- c("capacity.qmd",
+                    "cost-efficiency-muac.qmd",
+                    "safety.qmd")
+
 } else {
   level2_files <- c("capacity.qmd",
                     "environment.qmd",
@@ -165,7 +170,7 @@ if (out_format == 'web') {
     writeLines(tx, con="_quarto.yml")
       
   } 
-  else if (country == "Network Manager" | country == "MUAC") {
+  else if (country == "Network Manager") {
     ## NM ----
     ### level 1 ----
     ### find beginning and end of level 1 state-SES block
@@ -177,12 +182,6 @@ if (out_format == 'web') {
     
     tx <- tx[-c(block_l1_sta_beg:block_l1_ses_end)]
     
-    if (country == "MUAC") {
-      tx <- str_replace(tx, '- text: "Environment"', '# - text: "Environment"')
-      tx <- str_replace(tx, 'href: index.html#environment-network-manager---ses-rp3-area', '# href: index.html#environment-network-manager---ses-rp3-area')
-      tx <- str_replace_all(tx, '-network-manager---ses-rp3-area', '')
-    }
-  
     ### level 2 ----
     ### find beginning and end of level 2 block to remove
     for (i in 1:length(tx)) {
@@ -228,22 +227,50 @@ if (out_format == 'web') {
       
        tx <- tx[-c(block_l1_ses_beg:block_l1_nm_end)]
        
-       ### remove env/cap for luxembourg ----
-       if (country == "Luxembourg") {
+       ### remove env for luxembourg, MUAC ----
+       if (country == "Luxembourg" | country == "MUAC") {
          tx <- str_replace(tx, '- text: "Environment"', '# - text: "Environment""')
          tx <- str_replace(tx, 'href: index.html#environment-member-state', '# href: index.html#environment-member-state')
+       }
+       
+       ### remove traffic for MUAC ----
+       if (country == "MUAC") {
+         tx <- str_replace(tx, '- text: "Traffic"', '# - text: "Traffic""')
+         tx <- str_replace(tx, 'href: index.html#traffic-en-route-traffic-zone', 
+                           '# href: index.html#traffic-en-route-traffic-zone')
        }
     }
      
     ## level 2 ----
+    ### MUAC, remove elements ----
+    if (country == "MUAC") {
+      
+      ### find beginning and end of level2 environment to remove
+      for (i in 1:length(tx)) {
+        if (tx[i] %like%  'environment level2 beginning') {block_l2_env_beg = i}
+        if (tx[i] %like%  'environment level2 end') {block_l2_env_end = i}
+      }
+      
+      tx <- tx[-c(block_l2_env_beg:block_l2_env_end)]
+      
+      ### find beginning and end of level2 ceff to remove
+      for (i in 1:length(tx)) {
+        if (tx[i] %like% 'cost-efficiency level2 beginning') {block_l2_cef_beg = i}
+        if (tx[i] %like% 'block level2 end') {block_l2_cef_end = i}
+      }
+      
+      tx <- tx[-c(block_l2_cef_beg:block_l2_cef_end)]
+      
+    }
+    
     if (state_type != 0) {
-      ### remove env-mil for ses/luxembourg ----
+      ### SES/luxembourg, remove env-mil ----
       if (country == "SES RP3" | country == "Luxembourg") {
         tx <- str_replace(tx, '- text: "<b>CIV-MIL</b>"', '# - text: "<b>CIV-MIL</b>"')
         tx <- str_replace(tx, 'href: environment.html#civil-military-dimension', '# href: environment.html#civil-military-dimension')
       }
 
-      ### remove other elements for luxembourg ----
+      ### luxembourg, remove other elements ----
       if (country == "Luxembourg") {
         lines_to_comment <- c(
           '- section: "<b>En route performance</b>" #environment',
@@ -263,8 +290,7 @@ if (out_format == 'web') {
         for (i in 1:length(lines_to_comment)) {
           tx <- str_replace(tx, lines_to_comment[i],
                             paste0("# ", lines_to_comment[i]))
-          }
-        
+        }
       }
       
       ### with terminal zone(s) ----

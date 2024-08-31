@@ -5,7 +5,7 @@ cz=c("@@cz_index@@", "@@cz_type@@")
 ez <- as.numeric(cz[[1]])
 cztype <- cz[[2]]
 
-if (country == "SES RP3") {
+if (country == "SES RP3" | country == "MUAC") {
   # to avoid errors when processing the file
   cef_txt_1_4_duc <- ''
   cef_txt_1_4_su <- '' 

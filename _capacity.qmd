@@ -1,5 +1,5 @@
 ```{r cap-level2-text}
-if (country == "SES RP3") {
+if (country == "SES RP3" | country == "MUAC") {
   #we need to define this variables to avoid errors
   cap_er_nsa_2 <- ''
   cap_er_nsa_3 <- ''
@@ -263,7 +263,6 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 ### En route ATFM delay (KPI#1)
 
 :::: {layout="[ 50, 50 ]"}
-
 ::::: {#chart-cap-er}
 ```{r chart-cap-er, options = (cztype=c("enroute"))}
 #| file: R/chart_level1_cap.R
@@ -271,18 +270,15 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 ```
 :::::
 
-
 ::::: {#chart-cap-er-month}
-
 ```{r chart-cap-er-month, options = (cztype=c("enroute"))}
 #| file: R/chart_level2_cap_month.R
 #| out.width: "100%"
 ```
-
 :::::
-
 ::::
 
+`r if (country == "MUAC") ":::: {.content-hidden}"`
 :::: {layout="[ 20, 60, 20 ]"}
 
 ::::: {#empty-div}
@@ -297,10 +293,12 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 :::::
 
 ::::
+`r if (country == "MUAC") "::::"`
+
 :::
 
 
-`r if (params$country == "SES RP3") "::: {.content-hidden}"`
+`r if (params$country == "SES RP3" | params$country == "MUAC") "::: {.content-hidden}"`
 ::: {.callout-note collapse=true}
 
 #### NSA input
@@ -334,7 +332,7 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 `r if (params$year_report == 2022) "::::"`
 
 :::
-`r if (params$country == "SES RP3") ":::"`
+`r if (params$country == "SES RP3" | params$country == "MUAC") ":::"`
 
 
 ::: {#container-cap-atco}
@@ -391,7 +389,7 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 
 :::
 
-`r if (params$country == "SES RP3") "::: {.content-hidden}"`
+`r if (params$country == "SES RP3" | params$country == "MUAC") "::: {.content-hidden}"`
 ::: {.callout-note collapse=true}
 
 #### NSA input
@@ -402,7 +400,7 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 
 ::::
 :::
-`r if (params$country == "SES RP3") ":::"`
+`r if (params$country == "SES RP3" | params$country == "MUAC") ":::"`
 `r if (params$country == "Luxembourg") ":::"`
 
 

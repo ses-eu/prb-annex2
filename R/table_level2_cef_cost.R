@@ -1,18 +1,19 @@
 
 # fix ez if script not executed from qmd file ----
 if (exists("cz") == FALSE) {cz = c("1", "enroute")}
-# ez=1
-
-# define cz ----
 ez <- as.numeric(cz[[1]])
 cztype <- cz[[2]]
-# cztype <- "terminal"
-mycz <- if_else(cztype == "terminal",
-                tcz_list$tcz_id[ez],
-                ecz_list$ecz_id[ez])
-mycz_name <- if_else(cztype == "terminal",
-                     tcz_list$tcz_name[ez],
-                     ecz_list$ecz_name[ez])
+
+# define cz ----
+if (country != "MUAC") {
+  # cztype <- "terminal"
+  mycz <- if_else(cztype == "terminal",
+                  tcz_list$tcz_id[ez],
+                  ecz_list$ecz_id[ez])
+  mycz_name <- if_else(cztype == "terminal",
+                       tcz_list$tcz_name[ez],
+                       ecz_list$ecz_name[ez])
+}
 
 # import data  ----
 if (country == "SES RP3") {
@@ -38,12 +39,26 @@ if (country == "SES RP3") {
     clean_names() 
 }
 
+# pre-prepare data ----
+if (country == "MUAC") {
+  data_pre_prep <- data_raw |> 
+    filter(grepl("MUAC", entity_code)) |> 
+    mutate(entity_code = NA) |> 
+    group_by(year, status, entity_code) |> 
+    summarise(x4_2_cost_excl_vfr = sum(x4_2_cost_excl_vfr, na.rm = TRUE)) |> 
+    ungroup() |> 
+    mutate(xrate2017 = 1)
+  
+} else {
+  data_pre_prep <- data_raw |> 
+    filter(
+      entity_code == mycz)
+}
 
 # prepare data ----
-data_prep_split <- data_raw %>% 
+data_prep_split <- data_pre_prep %>% 
   filter(
-    year != 20202021,
-    entity_code == mycz) %>% 
+    year != 20202021) %>% 
   mutate(
     mymetric = case_when (
       status == 'A' & year > max(.env$year_report, 2021) ~ NA,

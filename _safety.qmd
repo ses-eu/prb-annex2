@@ -70,6 +70,8 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 :::::
 ::::
 
+`r if (params$country == "MUAC") ":::: {.content-hidden}"`
+
 ## Occurrences - Rate of runway incursions (RIs) (PI#1) & Rate of separation minima infringements (SMIs) (PI#2)
 
 :::: {layout="[ 50, 50 ]"}
@@ -99,6 +101,7 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ::::
 `r if (params$country == "SES RP3") "::::"`
+`r if (params$country == "MUAC") "::::"`
 
 :::
 
