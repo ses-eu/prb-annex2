@@ -103,7 +103,7 @@ if (country == "SES RP3") {
       type == 'aucu_excluding_or'  ~ 'AUCU (before other revenues)'
       ),
       xlabel = year_text,
-      myothermetric = round(rr_as_perc_aucu, 2)
+      myothermetric = abs(round(rr_as_perc_aucu, 2))
     ) 
 }
 
