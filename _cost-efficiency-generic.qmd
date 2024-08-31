@@ -119,7 +119,7 @@ if (country == "SES RP3" | country == "MUAC") {
   cef_txt_1_6  <- read_range(ceff_file, sheet, range)
   
   ## range 1.9
-  range <- "C63:M71"
+  range <- if_else(year_report == 2020, "C62:M71", "C63:M71")
   cef_txt_1_9  <- read_range(ceff_file, sheet, range)
   
   ## 3rd sheet
@@ -266,15 +266,15 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 `r if_else(is.na(cef_txt_1_4[2,1]) == TRUE, cef_txt_1_4_duc, pull(cef_txt_1_4[2,1]))`
 
-**En route service units**
+`r if_else(cztype == "enroute", "**En route service units**", "**Terminal service units**")`
 
 `r if_else(is.na(cef_txt_1_4[my_index_su,1]) == TRUE, cef_txt_1_4_su, pull(cef_txt_1_4[my_index_su,1]))`
 
-**En route costs by entity**
+`r if_else(cztype == "enroute", "**En route costs by entity**", "**Terminal costs by entity**")`
 
 `r if_else(is.na(cef_txt_1_4[my_index_cost_by_ent,1]) == TRUE, cef_txt_1_4_cost_all, pull(cef_txt_1_4[my_index_cost_by_ent,1]))`
 
-**En route costs for the main ANSP at charging zone level**
+`r if_else(cztype == "enroute", "**En route costs for the main ANSP at charging zone level**", "**Terminal costs for the main ANSP at charging zone level**")`
 
 `r if_else(is.na(cef_txt_1_4[my_index_cost_main,1]) == TRUE, cef_txt_1_4_cost_main, pull(cef_txt_1_4[my_index_cost_main,1]))`
 

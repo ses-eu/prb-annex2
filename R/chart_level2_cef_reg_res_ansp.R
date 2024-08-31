@@ -1,6 +1,6 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("cz") == FALSE) {cz = c("1", "enroute")}
+if (exists("cz") == FALSE) {cz = c("1", "terminal")}
 # ez=1
 
 # define cz ----
@@ -164,6 +164,20 @@ mylegend_y <- -0.24
 #### margin
 mylocalmargin = list(t = 60, b = 80, l = 40, r = 60)
 
+# setup ranges to ensure zero line at same height
+# https://stackoverflow.com/questions/76289470/plotly-barplot-with-two-y-axis-aligned-at-zero
+y1_max <- max(data_prep$mymetric, na.rm = TRUE)
+y1_min <- min(data_prep$mymetric, na.rm = TRUE)
+y2_max <- max(data_prep$share, na.rm = TRUE)
+y2_min <- min(data_prep$share, na.rm = TRUE)
+
+# calculate standard plotly padding
+y1_padding = (y1_max - y1_min)/16
+y1_range = c(y1_min - y1_padding, y1_max + y1_padding)
+y1_relative_zero = (0 - y1_range[1]) / (y1_range[2] - y1_range[1])
+
+y2_padding = (y1_relative_zero * (y2_max - y2_min) + y2_min) / (1 - 2*y1_relative_zero)
+y2_range = c(y2_min - y2_padding, y2_max + y2_padding)
 
 # plot chart  ----
 myplot<- mybarchart(data_prep, mywidth, myheight + 30, myfont, mylocalmargin, mydecimals) %>%  
@@ -211,18 +225,24 @@ add_trace(
     showlegend = F
   )  %>%     
   layout(
-    yaxis = list(rangemode = "nonnegative"),
+    yaxis = list(
+      # rangemode = "tozero",
+      range = y1_range,
+      secondary_y= TRUE
+    ),
     yaxis2 = list(
-    title = 'RR as % of revenues',
-    overlaying = "y",
-    zerolinecolor = '#E8E8E8',
-    rangemode = "tozero",
-    ticksuffix = '%',
-    tickformat = if_else(max(data_prep$share, na.rm = TRUE) >0.1, 
-                          ".1f",
-                          ".0f"),
-    side = 'right',
-    showgrid = FALSE
+      title = 'RR as % of revenues',
+      overlaying = "y",
+      zerolinecolor = '#E8E8E8',
+      # rangemode = "tozero",
+      range = y2_range,
+      secondary_y= FALSE,
+      ticksuffix = '%',
+      tickformat = if_else(max(data_prep$share, na.rm = TRUE) >0.1, 
+                            ".1f",
+                            ".0f"),
+      side = 'right',
+      showgrid = FALSE
     ),
   boxmode = "group", bargroupgap = 0.1, boxgroupgap = 0.4, 
   boxgap = mybargap,
