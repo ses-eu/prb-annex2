@@ -90,10 +90,7 @@ data_prep <- data_prep_split |>
   ) %>% 
   arrange(xlabel) %>% 
   pivot_wider(values_from = 'mymetric', names_from = 'status') %>% 
-  mutate('Difference costs' = case_when(
-    xlabel<= .env$year_report ~ .[[2]] - .[[3]],
-    .default = NA)
-  ) %>% 
+  mutate('Difference costs' = .[[2]] - .[[3]]) %>% 
   mutate_at(c(2:4), ~round(.,0)) %>% 
   pivot_longer(-xlabel, names_to = "name", values_to = 'mymetric') %>% 
   pivot_wider(values_from = 'mymetric', names_from = 'xlabel')

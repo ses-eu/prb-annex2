@@ -261,6 +261,10 @@ if (out_format == 'web') {
       
       tx <- tx[-c(block_l2_cef_beg:block_l2_cef_end)]
       
+      ### add specific muac ceff
+      tx_cef_muac <- readLines("_original_files/level2_cef_muac.yml")
+      tx <- append(tx, tx_cef_muac, block_l2_cef_beg)
+      
     }
     
     if (state_type != 0) {

@@ -1,0 +1,7 @@
+      - section: "<b>Cost-efficiency</b>"
+        href: cost-efficiency-muac.html
+        contents:
+          - text: "<b>PRB monitoring</b>"
+            href: cost-efficiency-muac#prb-monitoring
+          - text: "<b>Total costs</b>"
+            href: cost-efficiency-muac.html#total-costs
