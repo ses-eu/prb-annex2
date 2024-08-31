@@ -105,7 +105,7 @@
   ## acc list for context section  ----
   acc_list <- acc_list_table %>% filter(state == .env$country)
     acc_no <- nrow(acc_list)
-    acc1 <- acc_list$acc_full_name[1]
+    acc1 <- if_else(acc_no <1, '', acc_list$acc_full_name[1])
     acc2 <- if_else(acc_no <2, '', acc_list$acc_full_name[2])
     acc3 <- if_else(acc_no <3, '', acc_list$acc_full_name[3])
     acc4 <- if_else(acc_no <4, '', acc_list$acc_full_name[4])
