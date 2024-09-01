@@ -335,6 +335,29 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 `r if (params$country == "SES RP3" | params$country == "MUAC") ":::"`
 
 
+`r if (params$country != "SES RP3") "::: {.content-hidden}"`
+### Summary of performance at local level
+
+:::: {layout="[ 20, 60, 20 ]"}
+
+::::: {#empty-div}
+:::::
+
+::::: {#table-erdelay-summary}
+```{r table-erdelay-summary}
+#| file: R/table_cap_erdelay_all_states.R
+#| out.width: "100%"
+```
+:::::
+
+::::: {#empty-div}
+:::::
+
+::::
+
+`r if (params$country != "SES RP3") ":::"`
+
+
 ::: {#container-cap-atco}
 
 ### Other indicators
@@ -429,6 +452,29 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 :::::
 
 ::::
+
+
+`r if (params$country != "SES RP3") ":::: {.content-hidden}"`
+### Summary of performance at local level
+
+:::: {layout="[ 20, 60, 20 ]"}
+
+::::: {#empty-div}
+:::::
+
+::::: {#table-arrdelay-summary}
+```{r table-arrdelay-summary}
+#| file: R/table_cap_arrdelay_all_states.R
+#| out.width: "100%"
+```
+:::::
+
+::::: {#empty-div}
+:::::
+
+::::
+
+`r if (params$country != "SES RP3") "::::"`
 
 
 `r if (params$country == "SES RP3") ":::: {.content-hidden}"`
