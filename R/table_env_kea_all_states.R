@@ -45,13 +45,14 @@ data_prep_actual <- data_raw_actual %>%
 data_prep <- state_table |> 
   left_join(data_prep_target, by = "State") |> 
   left_join(data_prep_actual, by = "State") |> 
-  mutate(Actual =paste0("<span>",
-                        Actual,
+  mutate(Actual = paste0("<span style='font-size:0.8rem;'>",
+                        format(Actual, nsmall = 2),
                         "</span>",
                         if_else(Actual <= Target,
-                                "<span style='color:green; font-weight:bold'>&nbsp;&nbsp;&#10003;</span>",
-                                "<span style='color:red'>&nbsp;&nbsp;&#10008;</span>")
+                                "<span style='color:green; font-weight:bold; font-size:0.8rem;'>&nbsp;&nbsp;&#10003;</span>",
+                                "<span style='color:red; font-size:0.8rem;'>&nbsp;&nbsp;&#10008;</span>")
                         )
+         
          )
   
 # plot table ----
@@ -60,4 +61,4 @@ mygtable(data_prep, myfont)|>
   tab_header(
     title = md("KEA (%)")
   ) |> 
-  fmt_markdown(columns = Actual)
+  fmt_markdown(columns = Actual) 

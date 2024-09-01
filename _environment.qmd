@@ -406,3 +406,26 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 :::
 `r if (params$country == "Luxembourg") ":::"`
 `r if (params$country == "SES RP3") ":::"`
+
+
+`r if (params$country != "SES RP3") "::: {.content-hidden}"`
+### Summary of performance at local level
+
+:::: {layout="[ 20, 60, 20 ]"}
+
+::::: {#empty-div}
+:::::
+
+::::: {#table-kea-summary}
+```{r table-kea-summary}
+#| file: R/table_env_kea_all_states.R
+#| out.width: "100%"
+```
+:::::
+
+::::: {#empty-div}
+:::::
+
+::::
+
+`r if (params$country != "SES RP3") ":::"`

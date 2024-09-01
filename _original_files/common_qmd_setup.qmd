@@ -1,5 +1,6 @@
 ---
 params:
+  state_list:     $state_list
   country:        $country
   year_report:    $year_report
   data_folder:    $data_folder
@@ -116,6 +117,7 @@ params:
 ```{r, eval=TRUE}
 data_folder <- params$data_folder
 year_report <- params$year_report
+state_list <- params$state_list
 country <- params$country
 forecast <- params$forecast
 forecast_id <- params$forecast_id
