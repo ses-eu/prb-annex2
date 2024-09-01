@@ -1,7 +1,13 @@
+
+if (exists("cztype") == FALSE) {cztype = "terminal"}
+
 # import data  ----
 ## dimension table ----
-ecz_table <- read_mytable("Lists.xlsx", "Lists", "Table_ECZ") %>% clean_names() |> 
-  select(State = state, ecz_id)
+cz_table <- read_mytable("Lists.xlsx", "Lists", 
+                          if_else(cztype == "terminal", "Table_TCZ", "Table_ECZ")) %>% 
+  clean_names() |> 
+  select(State = state, 
+         cz_id = if_else(cztype == "terminal", "tcz_id", "ecz_id"))
 
 state_table <- state_list |> as_tibble() |> 
   filter(value != "MUAC", 
@@ -9,21 +15,20 @@ state_table <- state_list |> as_tibble() |>
          value != "SES RP3", 
          value != "Network Manager") |> 
   select(State = value) |> 
-  left_join(ecz_table, by = "State")
+  left_join(cz_table, by = "State")
 
 ## ses ----
 data_raw_ses  <-  read_xlsx(
   paste0(data_folder, "SES CEFF.xlsx"),
-  sheet = "SES_ERT_all",
+  sheet = if_else(cztype == "terminal", "SES_TRM_all", "SES_ERT_all"),
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
   clean_names() 
 
-## ECZ  ----
-data_raw_ecz  <-  read_xlsx(
+## CZ  ----
+data_raw_cz  <-  read_xlsx(
   paste0(data_folder, "CEFF dataset master.xlsx"),
-  # here("data","hlsr2021_data.xlsx"),
-  sheet =  "Enroute_T1",
+  sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
   clean_names()
@@ -57,9 +62,9 @@ data_prep_ses <- data_prep_ses_split |>
   rbind(data_prep_ses_20202021)
 
 ## state ----
-data_prep_ecz <- data_raw_ecz |> 
+data_prep_cz <- data_raw_cz |> 
   filter(year > 2021,
-         entity_subtype == "ECZ") |> 
+         entity_type == if_else(cztype == "terminal", "TCZ", "ECZ")) |> 
   select(
     entity_name, 
     year,
@@ -70,7 +75,7 @@ data_prep_ecz <- data_raw_ecz |>
     duc = x5_5_unit_cost_nc2017
   )
 
-data_prep <- data_prep_ecz |> 
+data_prep <- data_prep_cz |> 
   rbind(data_prep_ses) |> 
   filter(year == if_else(year_report == 2020 | year_report == 2021, 20202021, year_report)) |> 
   select(-year)
@@ -121,7 +126,7 @@ cef_plot <- function(df, xtitle) {
       title = xtitle,
       showticklabels = FALSE,
       showgrid = FALSE,
-      range = c(floor((min(df$mymetric)-5)/10)*10-5, ceiling((max(df$mymetric)+5)/10)*10+5)
+      range = c(floor((min(df$mymetric)-5)/10)*10-10, ceiling((max(df$mymetric)+5)/10)*10+10)
       ), 
     yaxis = list(
       title = '', 

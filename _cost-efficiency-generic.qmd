@@ -259,8 +259,10 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 
 `r if (params$country != "SES RP3") "::: {.content-hidden}"`
+### Summary of performance at local level
+
 :::: {#table-cef-summary}
-```{r table-cef-summary}
+```{r table-cef-summary, options = (cztype="@@cz_type@@")}
 #| file: R/table_cef_summary.R
 #| out.width: "100%"
 ```
