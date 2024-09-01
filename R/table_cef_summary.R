@@ -1,5 +1,5 @@
 
-if (exists("cztype") == FALSE) {cztype = "terminal"}
+if (exists("cztype") == FALSE) {cztype = "enroute"}
 
 # import data  ----
 ## dimension table ----
@@ -126,7 +126,7 @@ cef_plot <- function(df, xtitle) {
       title = xtitle,
       showticklabels = FALSE,
       showgrid = FALSE,
-      range = c(floor((min(df$mymetric)-5)/10)*10-10, ceiling((max(df$mymetric)+5)/10)*10+10)
+      range = c(floor((min(df$mymetric)-5)/10)*10-5, ceiling((max(df$mymetric)+5)/10)*10+5)
       ), 
     yaxis = list(
       title = '', 
@@ -141,7 +141,10 @@ cef_plot <- function(df, xtitle) {
   )
 }
 
-p1 <- cef_plot(data_prep_su, '% difference service units') 
+p1 <- cef_plot(data_prep_su, '% difference service units') |> 
+  layout(xaxis=list(range = c(floor((min(data_prep_su$mymetric)-5)/10)*10-20, 
+                              ceiling((max(data_prep_su$mymetric)+5)/10)*10+10)
+))
 p2 <- cef_plot(data_prep_costs, '% difference total costs nominal €')
 p3 <- cef_plot(data_prep_costs2017, '% difference total costs €<sub>2017</sub>')
 p4 <- cef_plot(data_prep_duc, '% difference AUC/DUC')
