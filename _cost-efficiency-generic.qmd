@@ -248,7 +248,7 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 ```
 :::::
 
-::::: {#chart-cef-cost-main class="mychart"}
+::::: {#chart-cef-cost-main}
 ```{r chart-cef-cost-main, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_cost_main.R
 #| out.width: "100%"
@@ -256,6 +256,17 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 :::::
 ::::
 :::
+
+
+`r if (params$country != "SES RP3") "::: {.content-hidden}"`
+:::: {#table-cef-summary}
+```{r table-cef-summary}
+#| file: R/table_cef_summary.R
+#| out.width: "100%"
+```
+::::
+`r if (params$country != "SES RP3") ":::"`
+
 
 `r if (params$country == "SES RP3") "::: {.content-hidden}"`
 ::: {.callout-note collapse=true}

@@ -864,7 +864,7 @@ myhbarc <-  function(mywidth, myheight, myfont, mymargin) {
     )
 }
 
-## plot horizontal barchart  ----
+## gt table  ----
 mygtable <-  function(df, myfont) {
   gt(df) %>% 
   tab_options(
