@@ -107,13 +107,14 @@ mydecimals <- 1
 
 ### calculate x range, and annotation and image position
 myroundup <- max(floor((log10(abs(max(data_prep$mymetric, na.rm = TRUE))))), floor((log10(abs(min(data_prep$mymetric, na.rm = TRUE))))))
-range_min <- floor(min(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^myroundup - 10^myroundup/2
+range_min <- floor(min(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^myroundup - 10^myroundup/1.2
 range_min <- if_else(range_min >0, 0, range_min)
 range_max <- ceiling(max(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^myroundup + 10^myroundup/2
 
 ### plot chart and add annotations
 myplot <- myhbarc(mywidth, myheight+30, myfont, mylocalmargin) %>% 
   layout(
+    uniformtext=list(minsize = 14, mode='show'),
     xaxis = list(
       title = "",
       range = c(range_min, range_max)
