@@ -140,6 +140,12 @@ aucu <- function(cztype, mycz) {
       entity_code == mycz
     ) 
   
+  if (cztype == "terminal") {
+    data_prep_t2_ini <- data_prep_t2_ini |> 
+      mutate(x8_1_temp_unit_rate = x8_1_temp_unit_rate/1000)
+  
+  }
+  
   #temp table with values for 2020 and 2021 separated that I'll need later for aucu calculations
   #first I need the 10.5 and 4.7 value separated also for the calculations 
   
@@ -432,6 +438,7 @@ aucu <- function(cztype, mycz) {
       # the values for the combined year are 2021
       mutate(
         year = if_else(year == 20202021, 2021, year),
+        
         # trs = case_when (
         #   (x4_7_total_su / x4_6_total_su_forecast -1) >=0 ~ (x4_7_total_su / x4_6_total_su_forecast -1) * x4_1_det_cost_traffic_risk - x4_9_adjust_traffic_risk_art_27_2,
         # .default = (x4_7_total_su / x4_6_total_su_forecast -1) * x4_1_det_cost_traffic_risk + x4_9_adjust_traffic_risk_art_27_2
