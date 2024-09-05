@@ -119,9 +119,18 @@ if (country == "SES RP3" | country == "MUAC") {
   cef_txt_1_6  <- read_range(ceff_file, sheet, range)
   
   ## range 1.9
-  range <- if_else(year_report == 2020 | year_report == 2023, "C62:M71", "C63:M71")
+  range <- "C62:M71"
   cef_txt_1_9  <- read_range(ceff_file, sheet, range)
   
+  ### check if title in the right spot
+  mycolnames <- colnames(cef_txt_1_9)
+  if (mycolnames[1] != "9. Focus on en route AUCU monitoring at charging zone level") {
+    range <- "C63:M71"
+    cef_txt_1_9  <- read_range(ceff_file, sheet, range)
+  }
+  
+  # range <- if_else(year_report == 2020 | year_report == 2023, "C62:M71", "C63:M71")
+
   ## 3rd sheet
   sheet <- if_else(cztype == "terminal",
                    if_else(ez >1, paste0("7_TRM_ATSP (", ez, ")"), "7_TRM_ATSP"),
