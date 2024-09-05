@@ -1,6 +1,6 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("cz") == FALSE) {cz = c("1", "terminal")}
+if (exists("cz") == FALSE) {cz = c("1", "enroute")}
 # ez=1
 
 # define cz ----
@@ -104,7 +104,7 @@ data_for_chart_value <- data_for_chart_wide %>%
   mutate(xlabel = case_when(
     xlabel == 'regulatory_result'  ~ 'Ex-post',
     xlabel == 'ex_ante_roe'  ~ 'Ex-ante'),
-    mymetric = mymetric/1000
+    mymetric = if_else(xlabel == "Ex-post" & as.numeric(str_sub(year_text, 1,4) > min (2021, year_report)), NA, mymetric/1000)
   )
 
 data_for_chart_share <- data_for_chart_wide %>% 
@@ -112,7 +112,8 @@ data_for_chart_share <- data_for_chart_wide %>%
   pivot_longer(-year_text, names_to = "xlabel", values_to = 'share') %>% 
   mutate(xlabel = case_when(
     xlabel == 'share_rr_act_rev_expost'  ~ 'Ex-post',
-    xlabel == 'share_rr_act_rev_exante'  ~ 'Ex-ante')
+    xlabel == 'share_rr_act_rev_exante'  ~ 'Ex-ante'),
+    share = if_else(xlabel == "Ex-post" & as.numeric(str_sub(year_text, 1,4) > min (2021, year_report)), NA, share)
   )
 
 data_prep <- data_for_chart_value %>% 

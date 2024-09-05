@@ -81,7 +81,13 @@ if (country == "SES RP3") {
   data_prep <- regulatory_result(cztype, mycz)
   data_prep <- data_prep %>% 
     mutate(mymetric = regulatory_result / 1000) %>% 
-    rename(xlabel = year_text)
+    mutate_if(is.numeric, 
+              ~ ifelse(as.numeric(str_replace(year_text,"-", "")) > year_report & year_text != "2020-2021", 
+                       NA,
+                       .)
+    ) |> 
+    rename(xlabel = year_text) 
+
 }
     
 # chart parameters ----

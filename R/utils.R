@@ -565,12 +565,7 @@ aucu <- function(cztype, mycz) {
     regulatory_result <- regulatory_result_euro_202021 %>% 
       rbind(regulatory_result_euro_split) %>% 
       filter(year_text != '2020' & year_text != '2021') %>% 
-      left_join(tsus, by = "year_text") |> 
-      mutate_if(is.numeric, 
-                ~ ifelse(as.numeric(str_replace(year_text,"-", "")) > year_report & year_text != "2020-2021", 
-                         NA,
-                         .)
-                )
+      left_join(tsus, by = "year_text") 
     
 
     return(regulatory_result)
