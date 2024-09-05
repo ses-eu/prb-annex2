@@ -106,9 +106,9 @@ invisible(as.list(myfactor$type))
 myfactor <- sort(myfactor$type, decreasing = TRUE)
 myhovertemplate <- paste0('%{y:,.', mydecimals, 'f}', mysuffix)
 
-mytextangle <- 0
-mytextposition <- "outside"
-myinsidetextanchor <- NA
+mytextangle <- -90
+mytextposition <- "inside"
+myinsidetextanchor <- "middle"
 mytextfont_color <- 'black'
 
 ### layout parameters
