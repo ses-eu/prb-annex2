@@ -124,7 +124,7 @@ if (country == "SES RP3" | country == "MUAC") {
   
   ### check if title in the right spot
   mycolnames <- colnames(cef_txt_1_9)
-  if (mycolnames[1] != "9. Focus on en route AUCU monitoring at charging zone level") {
+  if (is.na(max(str_locate(mycolnames[1], "9. Focus"))) == TRUE) {
     range <- "C63:M71"
     cef_txt_1_9  <- read_range(ceff_file, sheet, range)
   }
