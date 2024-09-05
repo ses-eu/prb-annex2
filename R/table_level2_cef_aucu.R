@@ -59,6 +59,23 @@ if (country == "SES RP3") {
     filter(year == if_else(year_report == 2020 | year_report == 2021, "2020-2021", as.character(year_report))) |> 
     select(-year) |> 
     mutate(value = round(value, 2),
+           type = factor(type, levels = c("duc_initially_charged_eur_combined",
+                                    "retroactive_application_of_unit_rate_combined",
+                                    "new_duc_eur_combined",
+                                    "inflation_adjustment_eur_su",
+                                    "cecs_total_eur_su",
+                                    "trs_eur_su",
+                                    "traffic_adjustment_eur_su",
+                                    "incentives_eur_su",
+                                    "modulation_eur_su",
+                                    "cross_financing_eur_su",
+                                    "other_revenues_eur_su_combined",
+                                    "unit_rate_reduction_su",
+                                    "total_adjustments_su_combined",
+                                    "aucu_combined",
+                              "AUCU vs. DUC"))) |> 
+  arrange(type) |> 
+    mutate(
            type = c('Initial DUC charged',
                       'DUC to be charged retroactively',
                       'DUC',
