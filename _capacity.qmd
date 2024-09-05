@@ -8,6 +8,7 @@ if (country == "SES RP3" | country == "MUAC") {
   cap_er_nsa_6 <- ''
   cap_er_nsa_7 <- ''
   cap_er_nsa_8 <- ''
+  cap_er_nsa_incentive  <- '' 
   
   cap_trm_nsa_1 <- ''
   cap_trm_nsa_2 <- ''
@@ -17,7 +18,6 @@ if (country == "SES RP3" | country == "MUAC") {
   cap_trm_nsa_6 <- ''
   
   cap_heading_ukraine <- 0
-  
 } else {
   
   # define ranges and import data
