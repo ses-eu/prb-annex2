@@ -69,21 +69,21 @@ if (country == "SES RP3" | country == "MUAC") {
     tx <- cef_txt_1_4[1,1] |> pull()
     heading1 <- str_locate(tx, fixed('AUC vs DUC')) + 7 
     if(is.na(heading1[1]) == TRUE) {heading1 <- str_locate(tx, fixed('AUC vs. DUC')) + 7}
-    heading2 <- str_locate(tx, fixed(paste0(if_else(cztype == "terminal",
+    heading2 <- str_locate(str_replace_all(tx, "-", " "), fixed(paste0(if_else(cztype == "terminal",
                                                              "**Terminal",
                                                              "**En route"), 
                                                      " service units"))) 
   
-    heading3_1 <- str_locate(tx, fixed(paste0(if_else(cztype == "terminal",
+    heading3_1 <- str_locate(str_replace_all(tx, "-", " "), fixed(paste0(if_else(cztype == "terminal",
                                                              "**Terminal",
                                                              "**En route"),
                                               ' costs by entity at charging zone level**<br/>')))
-    heading3_2 <- str_locate(tx, fixed(paste0(if_else(cztype == "terminal",
+    heading3_2 <- str_locate(str_replace_all(tx, "-", " "), fixed(paste0(if_else(cztype == "terminal",
                                                              "**Terminal",
                                                              "**En route"),
                                               ' costs by entity**<br/>')))
   
-    heading4_beg <- str_locate(tx, fixed(paste0(if_else(cztype == "terminal",
+    heading4_beg <- str_locate(str_replace_all(tx, "-", " "), fixed(paste0(if_else(cztype == "terminal",
                                                              "**Terminal",
                                                              "**En route"),
                                               ' costs for the main ANSP')))
