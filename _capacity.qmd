@@ -59,7 +59,10 @@ if (country == "SES RP3" | country == "MUAC") {
   )
   
   cap_heading_positions <- which(cap_er_all$a %in% cap_titles)
-  cap_heading_ukraine <- which(cap_er_all$a %in% c("Additional information relating to Russia's war of agression against Ukraine", "**Additional information relating to Russia's war of agression against Ukraine**", "Additional Information Related to Russia's War of Aggression Against Ukraine", "**Additional Information Related to Russia's War of Aggression Against Ukraine**"
+  cap_heading_ukraine <- which(cap_er_all$a %in% c("Additional information relating to Russia's war of agression against Ukraine", 
+                                                   "**Additional information relating to Russia's war of agression against Ukraine**", 
+                                                   "Additional Information Related to Russia's War of Aggression Against Ukraine",
+                                                   "**Additional Information Related to Russia's War of Aggression Against Ukraine**"
   ))
   
   for (i in c(2,3,4,6,7)) {

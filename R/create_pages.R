@@ -363,7 +363,8 @@ if (out_format == 'web') {
     
 # render site ----
   quarto::quarto_render(as_job = FALSE,
-                        execute_params = list(country = country, 
+                        execute_params = list(state_list = state_list, 
+                                              country = country, 
                                               year_report = year_report,
                                               data_folder = data_folder,
                                               forecast = forecast,
