@@ -150,8 +150,15 @@ website:
       - text: "---"
 # block level1 nm end
 # block level2 beginning
-      - text: "<b>Safety</b>"
+      - section: "<b>Safety</b>"
         href: safety.html
+        contents:
+          - text: "<b>PRB monitoring</b>"
+            href: safety.html#prb-monitoring
+          - text: "<b>EoSM</b>"
+            href: safety.html#effectiveness-of-safety-management-eosm-kpi1
+          - text: "<b>Occurrences</b>"
+            href: safety.html#occurrences---rate-of-runway-incursions-ris-pi1-rate-of-separation-minima-infringements-smis-pi2
       - text: "---"
 # environment level2 beginning
       - section: "<b>Environment</b>"
