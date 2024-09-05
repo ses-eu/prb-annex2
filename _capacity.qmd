@@ -22,6 +22,7 @@ if (country == "SES RP3" | country == "MUAC") {
   
   # define ranges and import data
   sheet <- country
+  # sheet <- "Czech Republic"
   
   # find headings to define ranges
   range <- "A3:O81"
@@ -65,7 +66,7 @@ if (country == "SES RP3" | country == "MUAC") {
                                                    "**Additional Information Related to Russia's War of Aggression Against Ukraine**"
   ))
   
-  for (i in c(2,3,4,6,7)) {
+  for (i in 2:length(cap_heading_positions)) {
     mytext <- apply(cap_er_all[(cap_heading_positions[i-1]+1):(cap_heading_positions[i]-1), ], 1, function(col) paste(col, collapse = "<br>"))
     
     # replace repeated breaks by single  
@@ -85,6 +86,10 @@ if (country == "SES RP3" | country == "MUAC") {
     assign(paste0("cap_er_nsa_", i), paste0(mytext,collapse = ""))
     
   }
+  
+  if (length(cap_heading_positions) == 7) {cap_er_nsa_8 = ""}
+  
+  # cap_er_nsa_9
   
   # incentive scheme text --------------
     ### find observations positions
@@ -123,7 +128,7 @@ if (country == "SES RP3" | country == "MUAC") {
     ### remove leading and trailing line breaks
     mytext_inc <- sub("^<br>|<br>$", "", mytext_inc)
     
-    cap_er_nsa_8 <- paste0(mytext, mytext_inc)
+    cap_er_nsa_incentive <- paste0(mytext, mytext_inc)
   
   # ACC text --------------
     ### find observations positions
@@ -308,7 +313,7 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 
 **Summary of capacity performance**
 
-`r cap_er_nsa_7`
+`r if_else(length(cap_heading_ukraine) == 0, cap_er_nsa_7, cap_er_nsa_8)`
 
 **NSA's assessment of capacity performance**
 
@@ -322,17 +327,19 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 
 `r cap_er_nsa_4`
 
-`r if_else(length(cap_heading_ukraine) == 0, "**Application of Corrective Measures for Capacity (if applicable)**", "**Additional Information Related to Russia's War of Aggression Against Ukraine**")`
+**Application of Corrective Measures for Capacity (if applicable)**
 
 `r cap_er_nsa_6`
 
-`r if (params$year_report == 2022) ":::: {.content-hidden}"`
+`r if_else(length(cap_heading_ukraine) == 0, "", paste0("**Additional Information Related to Russia's War of Aggression Against Ukraine**<br><br>", cap_er_nsa_7))`
+
+`r if (params$year_report <= 2022) ":::: {.content-hidden}"`
 
 **En route Capacity Incentive Scheme**														
 
-`r cap_er_nsa_8`
+`r cap_er_nsa_incentive`
 
-`r if (params$year_report == 2022) "::::"`
+`r if (params$year_report <= 2022) "::::"`
 
 :::
 `r if (params$country == "SES RP3" | params$country == "MUAC") ":::"`
