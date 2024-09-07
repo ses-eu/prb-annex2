@@ -438,11 +438,6 @@ aucu <- function(cztype, mycz) {
       # the values for the combined year are 2021
       mutate(
         year = if_else(year == 20202021, 2021, year),
-        
-        # trs = case_when (
-        #   (x4_7_total_su / x4_6_total_su_forecast -1) >=0 ~ (x4_7_total_su / x4_6_total_su_forecast -1) * x4_1_det_cost_traffic_risk - x4_9_adjust_traffic_risk_art_27_2,
-        # .default = (x4_7_total_su / x4_6_total_su_forecast -1) * x4_1_det_cost_traffic_risk + x4_9_adjust_traffic_risk_art_27_2
-        # )
         trs = (x4_7_total_su / x4_6_total_su_forecast -1) * x4_1_det_cost_traffic_risk + x4_9_adjust_traffic_risk_art_27_2
         ) %>% 
       select(year,
@@ -480,30 +475,6 @@ aucu <- function(cztype, mycz) {
         actual_revenues_nc = sum(actual_revenues_nc)/10^3
                 ) %>%
       ungroup() %>% 
-      # mutate(
-      #   atsp_gain_loss_cost_sharing_nc = case_when(
-      #     year > year_report ~ 0,
-      #     .default = atsp_gain_loss_cost_sharing_nc),
-      #   trs_nc = case_when(
-      #     year > year_report ~ 0,
-      #     .default = trs_nc),
-      #   financial_incentive_nc = case_when(
-      #     year > year_report ~ 0,
-      #     .default = financial_incentive_nc),
-      #   
-      #   regulatory_result_nc = case_when(
-      #     year > year_report ~ 0,
-      #   .default = regulatory_result_nc),
-      #   ex_ante_roe_nc = case_when(
-      #     year > year_report ~ 0,
-      #     .default = ex_ante_roe_nc),
-      #   ex_post_roe_nc = case_when(
-      #     year > year_report ~ 0,
-      #     .default = ex_post_roe_nc),
-      #   actual_revenues_nc = case_when(
-      #     year > year_report ~ 0,
-      #     .default = actual_revenues_nc)
-      #   ) %>% 
       mutate(year_text = as.character(year)
       ) %>% 
       select(year_text, type, regulatory_result_nc, ex_ante_roe_nc, ex_post_roe_nc, actual_revenues_nc,

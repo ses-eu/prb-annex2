@@ -1,6 +1,6 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("cz") == FALSE) {cz = c("1", "terminal")}
+if (exists("cz") == FALSE) {cz = c("1", "enroute")}
 # ez=1
 
 # define cz ----
@@ -29,8 +29,8 @@ if (country == "SES RP3") {
     mutate(year = as.character(year)) |> 
     select(
       year,
-      duc_initially_charged_eur_combined,
-      retroactive_application_of_unit_rate_combined,
+      # duc_initially_charged_eur_combined,
+      # retroactive_application_of_unit_rate_combined,
       new_duc_eur_combined,
       inflation_adjustment_eur_su,
       cecs_total_eur_su,
@@ -59,8 +59,9 @@ if (country == "SES RP3") {
     filter(year == if_else(year_report == 2020 | year_report == 2021, "2020-2021", as.character(year_report))) |> 
     select(-year) |> 
     mutate(value = round(value, 2),
-           type = factor(type, levels = c("duc_initially_charged_eur_combined",
-                                    "retroactive_application_of_unit_rate_combined",
+           type = factor(type, levels = c(
+                                    # "duc_initially_charged_eur_combined",
+                                    # "retroactive_application_of_unit_rate_combined",
                                     "new_duc_eur_combined",
                                     "inflation_adjustment_eur_su",
                                     "cecs_total_eur_su",
@@ -76,8 +77,9 @@ if (country == "SES RP3") {
                               "AUCU vs. DUC"))) |> 
   arrange(type) |> 
     mutate(
-           type = c('Initial DUC charged',
-                      'DUC to be charged retroactively',
+           type = c( 
+             # 'Initial DUC charged',
+                      # 'DUC to be charged retroactively',
                       'DUC',
                       'Inflation adjustment',
                       'Cost exempt from cost-sharing',
@@ -103,8 +105,8 @@ if (country == "SES RP3") {
   data_prep <- data_calc %>% 
     filter(year_text == if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))) %>% 
     select(
-      initial_duc,
-      retro_ur,
+      # initial_duc,
+      # retro_ur,
       new_duc,
       infl_adj,
       dif_a_d_costs,
@@ -119,8 +121,8 @@ if (country == "SES RP3") {
       aucu
     ) %>% 
     rename(
-      'Initial DUC charged' = initial_duc,
-      'DUC to be charged retroactively' = retro_ur,
+      # 'Initial DUC charged' = initial_duc,
+      # 'DUC to be charged retroactively' = retro_ur,
       DUC = new_duc,
       'Inflation adjustment' = infl_adj,
       'Cost exempt from cost-sharing' = dif_a_d_costs,
@@ -155,10 +157,10 @@ mygtable(data_prep, myfont*0.95) %>%
       cell_text(weight = "bold")
     ),
     locations = cells_body(
-      rows = c(3,14, 15)
+      rows = c(1,12, 13)
     )
   ) %>% 
-  fmt_percent(rows = 15, decimals = 1, force_sign = TRUE) |> 
+  fmt_percent(rows = 13, decimals = 1, force_sign = TRUE) |> 
   tab_header(
     title = md(paste0("**AUCU components (€/SU) – ",
                       if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report)), "**"))
