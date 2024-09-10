@@ -273,7 +273,7 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ::: {.callout-note collapse=true}
 
-#### NSA input
+#### Focus on ASMA & AXOT
 
 **AXOT**
 
@@ -310,7 +310,7 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ::: {.callout-note collapse=true}
 
-#### NSA input
+#### Focus CDOs
 
 `r if (exists("env_apt_4") == FALSE) {''} else {env_apt_4}`
 
@@ -370,7 +370,7 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 ::: {.callout-note collapse=true}
 
-#### NSA input
+#### Focus on Civil-Military dimension
 
 **Update on Military dimension of the plan**
 

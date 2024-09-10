@@ -95,7 +95,7 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 `r if (params$country == "SES RP3") ":::: {.content-hidden}"`
 :::: {.callout-note collapse=true}
 
-#### NSA input
+#### Focus on EoSM
 
 `r saf_text`
 
