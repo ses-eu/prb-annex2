@@ -226,9 +226,13 @@ aucu <- function(cztype, mycz) {
     filter(year == 2021) %>% 
     select(a_x5_4_total_su) %>% pull()  
   
-  tsu_20202021 <- data_prep_t1 %>% 
+  tsu_20202021_a <- data_prep_t1 %>% 
     filter(year == 20202021) %>% 
     select(a_x5_4_total_su) %>% pull() 
+  
+  tsu_20202021_d <- data_prep_t1 %>% 
+    filter(year == 20202021) %>% 
+    select(d_x5_4_total_su) %>% pull() 
   
   # create table with forecast sus and format it so it can be used in calcs
   data_prep_forecast_su <- data_prep_all %>% 
@@ -268,7 +272,7 @@ aucu <- function(cztype, mycz) {
       ),
       initial_duc = initial_duc / pp_exchangerate,
       new_duc = case_when(
-        year == 2020 | year == 2021 ~ d_x4_2_cost_excl_vfr / tsu_20202021 / pp_exchangerate,
+        year == 2020 | year == 2021 ~ d_x4_2_cost_excl_vfr / tsu_20202021_d / pp_exchangerate,
         .default = d_x4_2_cost_excl_vfr / d_x5_4_total_su / pp_exchangerate
       ),
       retro_ur = new_duc - initial_duc,
@@ -281,7 +285,7 @@ aucu <- function(cztype, mycz) {
       rev_c_mod = x7_1_adj_revenue_charge_modulation / x4_7_total_su / pp_exchangerate,
       cross_fin = x9_1_cross_financing_other / x4_7_total_su / pp_exchangerate,
       other_rev = case_when(
-        year == 2020 | year == 2021 ~ x10_5_other_revenue * d_x5_4_total_su / tsu_20202021 / x4_7_total_su / pp_exchangerate,
+        year == 2020 | year == 2021 ~ x10_5_other_revenue * d_x5_4_total_su / tsu_20202021_d / x4_7_total_su / pp_exchangerate,
         .default = x10_5_other_revenue / x4_7_total_su / pp_exchangerate
       ),
       loss_rev = x11_1_loss_revenue_lower_unit_rate / x4_7_total_su / pp_exchangerate,
