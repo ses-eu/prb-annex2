@@ -43,7 +43,7 @@ data_prep_forecast <-  data_prep %>%
 
 data_prep_actual <-  data_prep %>%
   filter(
-    forecast_id == 6,
+    forecast_id == max(forecast_id),
     rank == 'Base forecast'
   ) %>%
   mutate(

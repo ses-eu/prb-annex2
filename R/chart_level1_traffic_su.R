@@ -83,7 +83,7 @@ data_prep_actual_rts <- data_prep_rts |>
 ## but we need 2019 from statfor
 data_prep_actual_statfor <-  data_prep %>%
   filter(
-    forecast_id == 6,
+    forecast_id == max(forecast_id),
     rank == 'Base forecast'
   ) %>%
   mutate(
