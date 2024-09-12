@@ -1,8 +1,3 @@
-# 
-# # parameters
-# if (exists("data_folder") == FALSE) {
-#   source("R/parameters.R")
-# }
 
 # import data  ----
 data_raw  <-  read_xlsx(
@@ -12,6 +7,14 @@ data_raw  <-  read_xlsx(
   as_tibble() %>% 
   clean_names() 
 
+data_raw_rts  <- read_xlsx(
+  paste0(data_folder, "CEFF dataset master.xlsx"),
+  # here("data","hlsr2021_data.xlsx"),
+  sheet = "Enroute_T1",
+  range = cell_limits(c(1, 1), c(NA, NA))) %>%
+  as_tibble() %>% 
+  clean_names()
+
 data_raw_planned  <-  read_xlsx(
   paste0(data_folder, "targets.xlsx"),
   sheet = "IFR_MVTS",
@@ -20,6 +23,25 @@ data_raw_planned  <-  read_xlsx(
   clean_names() 
 
 # prepare data ----
+## rts data
+data_prep_rts <- data_raw_rts |> 
+  filter(entity_code == ecz_list$ecz_id[1],
+         year != 20202021) |> 
+  select(year, status, x5_4_total_su)
+
+if (country == "Spain") {
+  data_canarias_rts <- data_raw_rts |> 
+    filter(entity_code == ecz_list$ecz_id[2],
+           year != 20202021) |> 
+    select(year, status, x5_4_total_su) 
+    
+  data_prep_rts <- data_prep_rts |> 
+    rbind(data_canarias_rts) |> 
+    group_by(year, status) |> 
+    summarise(x5_4_total_su = sum(x5_4_total_su, na.rm = TRUE))
+}
+  
+## statfor data
 max_actual_year <- as.numeric(substrRight(forecast, 4))-1
 
 data_spain <- data_raw %>% 
@@ -49,19 +71,35 @@ data_prep_forecast <-  data_prep %>%
     )
   )
 
-data_prep_actual <-  data_prep %>%
+## we take the actuals from the rts
+data_prep_actual_rts <- data_prep_rts |>
+  filter(status == "A") |>
+  mutate(tsu = case_when(
+    year > year_report ~ NA,
+    .default = x5_4_total_su
+  )) |> 
+  select(year, tsu)
+
+## but we need 2019 from statfor
+data_prep_actual_statfor <-  data_prep %>%
   filter(
-    forecast_id == 5,
+    forecast_id == 6,
     rank == 'Base forecast'
   ) %>%
   mutate(
     forecast_id = .env$forecast_id,
-    rank = 'Actual',
-    tsu = case_when (
-    year <= year_report ~ tsu,
-    TRUE ~ NA
-    )
-  )
+    rank = 'Actual'
+    # , tsu = case_when (
+    # year <= year_report ~ tsu,
+    # TRUE ~ NA
+    # )
+  ) |> 
+  filter(year == 2019) |> 
+  select(year, tsu)
+
+## merge actual tables
+data_prep_actual <- data_prep_actual_rts |> rbind(data_prep_actual_statfor) |> 
+  arrange(year)
 
 data_prep_planned <- data_raw_planned %>% 
   filter(state == country,
@@ -143,7 +181,7 @@ if (country == 'SES RP3') {
      type = 'scatter',  mode = 'lines+markers',
      line = list(width = mylinewidth, dash = 'solid', color = '#FFC000'),
      marker = list(size = mylinewidth * 3, color = '#FFC000'),
-     color = ~ rank,
+     # color = ~ rank,
      opacity = 1,
      showlegend = T
     ) %>%
