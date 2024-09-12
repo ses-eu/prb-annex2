@@ -1,6 +1,6 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("cz") == FALSE) {cz = c("1", "terminal")}
+if (exists("cz") == FALSE) {cz = c("1", "enroute")}
 # ez=1
 
 # define cz ----
@@ -62,7 +62,7 @@ if (country == "SES RP3") {
     left_join(data_prep_cecs_su, by = "xlabel") |> 
     mutate(
       mymetric = mymetric/1000,
-      myothermetric = myothermetric/1000,
+      myothermetric = myothermetric,
       xlabel = c("New and existing investments",
                    "Competent authorities and qualified entities costs",
                    "Eurocontrol costs",
