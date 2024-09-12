@@ -1,8 +1,3 @@
-# 
-# # parameters
-# if (exists("data_folder") == FALSE) {
-#   source("R/parameters.R")
-# }
 
 # import data  ----
 data_raw  <-  read_xlsx(
@@ -10,7 +5,12 @@ data_raw  <-  read_xlsx(
   sheet = "data",
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
-  clean_names() 
+  clean_names() |> 
+  arrange(desc(forecast_id))
+
+# 
+# test <- data_raw |> 
+#   filter(forecast_id == 6)
 
 data_raw_planned  <-  read_xlsx(
   paste0(data_folder, "targets.xlsx"),
@@ -43,7 +43,7 @@ data_prep_forecast <-  data_prep %>%
 
 data_prep_actual <-  data_prep %>%
   filter(
-    forecast_id == 5,
+    forecast_id == 6,
     rank == 'Base forecast'
   ) %>%
   mutate(
