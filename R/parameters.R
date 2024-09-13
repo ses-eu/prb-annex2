@@ -1,9 +1,21 @@
 # set site parameters ----
   site_dir <- here("_site")
-  root_dir <- '//ihx-vdm05/LIVE_var_www_performance$/oscar/prb-monitoring-test/'
+  root_dir <- if_else(test_check == TRUE, 
+                      '//ihx-vdm05/LIVE_var_www_performance$/oscar/prb-monitoring-test/',
+                      '//ihx-vdm05/LIVE_var_www_performance$/oscar/prb-monitoring-prod/'
+                      )
   destination_dir <- paste0(root_dir, year_report, '/')
-  home_address <- 'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test'
-  external_address <- str_replace(destination_dir, fixed('//ihx-vdm05/LIVE_var_www_performance$'), 'https://www.eurocontrol.int/performance')
+  home_address <- if_else(test_check == TRUE, 
+                          'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test',
+                          'https://www.sesperformance.eu'
+                          )
+  external_address <- str_replace(destination_dir, 
+                                  fixed('//ihx-vdm05/LIVE_var_www_performance$'), 
+                                  if_else(test_check == TRUE, 
+                                          'https://www.eurocontrol.int/performance',
+                                           home_address
+                                          )
+                                  )
 
 # set graphs parameters ----
   ## web

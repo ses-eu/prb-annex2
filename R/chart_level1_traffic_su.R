@@ -56,7 +56,6 @@ data_prep <- rbind(data_raw, data_spain) %>%
     tz_id == statfor_zone, 
     year < 2025,
     year >= 2019
-    
   ) %>% 
   mutate(rank = paste0(rank, ' forecast'))
 
@@ -77,8 +76,10 @@ data_prep_actual_rts <- data_prep_rts |>
   mutate(tsu = case_when(
     year > year_report ~ NA,
     .default = x5_4_total_su
-  )) |> 
-  select(year, tsu)
+    ),
+    rank = 'Actual'
+    ) |> 
+  select(year, rank, tsu)
 
 ## but we need 2019 from statfor
 data_prep_actual_statfor <-  data_prep %>%
@@ -95,7 +96,7 @@ data_prep_actual_statfor <-  data_prep %>%
     # )
   ) |> 
   filter(year == 2019) |> 
-  select(year, tsu)
+  select(year, rank, tsu)
 
 ## merge actual tables
 data_prep_actual <- data_prep_actual_rts |> rbind(data_prep_actual_statfor) |> 
@@ -181,7 +182,7 @@ if (country == 'SES RP3') {
      type = 'scatter',  mode = 'lines+markers',
      line = list(width = mylinewidth, dash = 'solid', color = '#FFC000'),
      marker = list(size = mylinewidth * 3, color = '#FFC000'),
-     # color = ~ rank,
+     color = ~ rank,
      opacity = 1,
      showlegend = T
     ) %>%

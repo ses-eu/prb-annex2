@@ -13,11 +13,23 @@ airports_table <- read_mytable("Lists.xlsx", "Lists", "Table_TCZs_RP3") %>%  cle
 airports_country <- airports_table %>% 
   filter(country_name == .env$country) 
 
-data_prep <- data_raw %>% 
+### filter CDO table on country and year_report
+data_filtered <- data_raw %>% 
   filter(
     entity_name == .env$country,
-    year == .env$year_report,
-    airport_code %in% airports_table$apt_code) %>%
+    year == .env$year_report
+    )
+
+### We take the top 15 airports for France
+if (country == "France") {
+  data_filtered <- data_filtered |> 
+    filter(is.na(arrivals) == FALSE) |> 
+    arrange(desc(arrivals)) |> 
+    slice_head(n = 15)
+}
+
+data_prep <- data_filtered %>% 
+  filter(airport_code %in% airports_table$apt_code) %>%
   left_join(airports_table, by = c("airport_code" = "apt_code")) %>% 
   mutate(
     xlabel = apt_name,

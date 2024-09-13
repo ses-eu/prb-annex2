@@ -247,7 +247,7 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 
 `r cap_er_conc1`
 
-`r if (params$no_tcz == 0) ":::: {.content-hidden}"`
+`r if (params$no_tcz == 0 | params$year_report != 2023) ":::: {.content-hidden}"`
 
 ```{r cap-trm-prb}
 cap_trm_conc <- read_mytable("PRB_findings.xlsx", "TRM_capacity", "Table_Findings_TRM_capacity") %>%
@@ -544,6 +544,10 @@ cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '
 **ATC pre-departure delay**
 
 `r if (exists("cap_trm_nsa_5") == FALSE) {''} else {cap_trm_nsa_5}`
+
+**All causes pre-departure delay**
+
+`r if (exists("cap_trm_nsa_6") == FALSE) {''} else {cap_trm_nsa_6}`
 
 :::::
 ::::

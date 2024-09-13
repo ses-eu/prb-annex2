@@ -868,9 +868,9 @@ replace_links <- function(filename) {
   tmp_text <- readLines(paste0(site_dir, "/", filename))
   
   # strings I do not want to modify
-  not_modify <- c(paste0("https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/", year_report,"/ses-rp3/"), 
-                  paste0("https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/", year_report,"/network-manager/"),
-                  paste0("https://www.eurocontrol.int/performance/oscar/prb-monitoring-test/", year_report,"/muac/")
+  not_modify <- c(paste0(home_address, "/", year_report,"/ses-rp3/"), 
+                  paste0(home_address, "/", year_report,"/network-manager/"),
+                  paste0(home_address, "/", year_report,"/muac/")
   )
 
   tmp_text <- str_replace_all(tmp_text, not_modify[1], "temporary text1")  
@@ -878,9 +878,9 @@ replace_links <- function(filename) {
   tmp_text <- str_replace_all(tmp_text, not_modify[3], "temporary text3")  
   
   # Define the pattern to match
-  ## The regular expression pattern now includes - to match dashes in country names. [A-Za-z-]+ matches one or more alphabetic characters or dashes.
+  ## The regular expression pattern now includes - to match dashes in country names. [A-Za-z-]+ matches one or more alphabetic characters or dashes. the double \\ escapes the .
   
-  pattern1 <- paste0("(https://www\\.eurocontrol\\.int/performance/oscar/prb-monitoring-test/", year_report, "/[A-Za-z-]+/)")  
+  pattern1 <- paste0("(", str_replace_all(home_address, ".", "\\."), "/", year_report, "/[A-Za-z-]+/)")  
 
   # Replace the pattern with the same string plus "#section"
   ## \\1 refers to the entire matched string, 
