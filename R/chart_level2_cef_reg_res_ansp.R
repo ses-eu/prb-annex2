@@ -167,9 +167,9 @@ mylocalmargin = list(t = 60, b = 80, l = 40, r = 60)
 
 # setup ranges to ensure zero line at same height
 # https://stackoverflow.com/questions/76289470/plotly-barplot-with-two-y-axis-aligned-at-zero
-y1_max <- max(data_prep$mymetric, na.rm = TRUE)
+y1_max <- max(max(data_prep$mymetric, na.rm = TRUE), 0)
 y1_min <- min(min(data_prep$mymetric, na.rm = TRUE), 0)
-y2_max <- max(data_prep$share, na.rm = TRUE)
+y2_max <- max(max(data_prep$share, na.rm = TRUE), 0)
 y2_min <- min(min(data_prep$share, na.rm = TRUE), 0)
 
 # calculate standard plotly padding
