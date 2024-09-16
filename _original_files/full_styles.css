@@ -99,6 +99,12 @@ h3 {
     margin-right: 20px;
     width: 50%;
   }
+  
+   .equal-column-right {
+    float: right; 
+    margin-right: 0px;
+    width: 48%;
+  }
 
 }
 
@@ -113,6 +119,10 @@ h3 {
     width: 100%;
   }
 
+  .equal-column-right {
+    float: right; 
+    width: 100%;
+  }
 
 }
 

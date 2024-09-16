@@ -92,25 +92,28 @@ PRB Chair
 
 ### SINGLE EUROPEAN SKY – GEOGRAPHICAL SCOPE{style="margin-bottom: 1.1rem;"} 
 
-::: columns
-:::: {.column width="49%"}
+::: {#container-scope}
+:::: {#scope-desctiption class="equal-column"}
 The Single European Sky (SES) framework covers the provision of Air Navigation Servies in the airspace of 29 European States (27 members of the European Union, Norway, and Switzerland). 
 
 Over 70 different entities are involved, at national level, in the provision of air traffic, communication, navigation and surveillance and/or meteorological services in this area.
 
 Air traffic services are delivered to airspace users through 49 Area Control Centres (ACCs) and 145 airports. 
 
-The costs related to the provision of these services is financed directly by the users though a system of charges, which is organised on the basis of 29 en route and 26 terminal charging zones
+The costs related to the provision of these services is financed directly by the users though a system of charges, which is organised on the basis of 29 en route and 26 terminal charging zones.  
 ::::
 
-:::: {.column width="1%"}
-::::
+:::: {#scope-map class="equal-column-right"}
+::::: {#observablehq-mlowerap-aa7c0a21 style="width: 100%;border: 1px solid black;"}
+:::::
+:::::{#observablehq-style-aa7c0a21 style="width: 100%;border: 1px solid black;"}
+:::::
 
-:::: {.column width="50%"}
-<div style="width: 100%;border: 1px solid black;" id="observablehq-mlowerap-aa7c0a21"></div>
-<div id="observablehq-style-aa7c0a21"></div>
 ::::
 :::
+
+
+
 
 
 
