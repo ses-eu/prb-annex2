@@ -1,84 +1,119 @@
-## 2022 Performance - High Level Results
+## PRB Annual Monitoring Report (AMR) digital dashboard (detailed analysis per Member State)
 
-::: grid
-::: {.g-col-lg-6 .g-col-12}
-::: {.grid style="gap: 0rem"}
-::: {.g-col-6 .text-center .text-pad-top style="border: 1px solid black"}
-**IFR movements** <br>8,345 ('000) flights <br>(+52% vs 2021) <br>[-]{style="color:white;"}
+::: {#container-su style="clear: both"}
+:::: {#summary-kpi-table class="equal-column"}
+### 2023 PERFORMANCE IN A NUTSHELL{style="margin-top: 0rem; margin-bottom: 1rem;"} 
+::::: grid
+:::::: {.g-col-12}
+
+::::::: {.grid style="gap: 0rem"}
+:::::::: {.g-col-3 .text-center .text-pad-top style="border: 1px solid black"}
+[{{< fa solid plane >}}]{style="color: #0F9ED5; font-size: 2.5rem;"}
+::::::::
+
+:::::::: {.g-col-9  style="border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; padding-left: 1rem; padding-top: 1.5rem;"}
+[**TRAFFIC**]{style="color: #0F9ED5; line-height: 1.5; font-size: 1.1rem;"}\
+9.2 million flights controlled in the SES airspace
+::::::::
+:::::::
+
+::::::: {.grid style="gap: 0rem"}
+:::::::: {.g-col-3 .text-center .text-pad-top style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;"}
+[{{< fa solid helmet-safety >}}]{style="color: #0F9ED5; font-size: 2.5rem;"}
+::::::::
+
+:::::::: {.g-col-9  style="border-bottom: 1px solid black; border-right: 1px solid black; padding-left: 1rem; padding-top: 0.9rem;"}
+[**SAFETY**]{style="color: #0F9ED5; line-height: 1.5; font-size: 1.1rem;"}\
+Safety performance by service providers continued to improve from already high levels
+::::::::
+:::::::
+
+::::::: {.grid style="gap: 0rem"}
+:::::::: {.g-col-3 .text-center .text-pad-top style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;"}
+[{{< fa solid seedling >}}]{style="color: #0F9ED5; font-size: 2.5rem;"}
+::::::::
+
+:::::::: {.g-col-9  style="border-bottom: 1px solid black; border-right: 1px solid black; padding-left: 1rem; padding-top: 0.9rem;"}
+[**ENVIRONMENT**]{style="color: #0F9ED5; line-height: 1.5; font-size: 1.1rem;"}\
+Average air route +20% longer than the targeted distance 
+::::::::
+:::::::
+
+::::::: {.grid style="gap: 0rem"}
+:::::::: {.g-col-3 .text-center .text-pad-top style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;"}
+[{{< fa solid clock >}}]{style="color: #0F9ED5; font-size: 2.5rem;"}
+::::::::
+
+:::::::: {.g-col-9  style="border-bottom: 1px solid black; border-right: 1px solid black; padding-left: 1rem; padding-top: 1.5rem;"}
+[**CAPACITY**]{style="color: #0F9ED5; line-height: 1.5; font-size: 1.1rem;"}\
+Average delay of 1.81 minutes per flight 
+::::::::
+:::::::
+
+::::::: {.grid style="gap: 0rem"}
+:::::::: {.g-col-3 .text-center .text-pad-top style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;"}
+[{{< fa solid coins >}}]{style="color: #0F9ED5; font-size: 2.5rem;"}
+::::::::
+
+:::::::: {.g-col-9  style="border-bottom: 1px solid black; border-right: 1px solid black; padding-left: 1rem; padding-top: 0.9rem;"}
+[**COST-EFFICIENCY**]{style="color: #0F9ED5; line-height: 1.5; font-size: 1.1rem;"}\
+The unitary cost of providing air navigation services amounts to 50.11€ 
+::::::::
+:::::::
+
+::::::
+:::::
+::::
+
+### REMARKS FROM THE CHAIR
+
+Traffic in Europe increased in 2023 reaching 91% of 2019 levels. Despite the lower levels of traffic compared to pre-COVID-19, there continues to be a deterioration in Union-wide capacity performance. As highlighted in previous monitoring reports, there is a pattern of a small number of Member States not providing the necessary capacity to effectively manage the rapid return of traffic post COVID-19 and this has impacted on the network as a whole.
+
+Some ANSPs continue to underinvest in staff and in capacity projects, despite having funds available in their performance plans. At the same time, it is important to acknowledge that COVID-19 did impact on the ability of ANSPs to undertake their ATCO training plans. In addition, due to the impact of Russia’s war of aggression against Ukraine, there has been significant shifts in traffic with some Member States experiencing considerably higher levels of traffic than expected; presenting a challenge to affected ANSPs in terms of capacity planning. The PRB accepts that this has impacted on an ANSP’s ability to effectively manage operations and meet performance targets and should be taken into consideration when reflecting on an individual ANSP’s performance in meeting capacity and environmental targets.
+
+However, in order to improve performance, it remains of the utmost importance that ANSPs realise their ATCO training plans as soon as possible, utilise new ATCOs, look at ways to improve rostering schemes and increase sector capacities. These actions will allow ANSPs efficiently open more sectors, offer more sector-opening hours, and enable higher throughput; all in a timely manner.  
+
+Given the interdependency between capacity and environment, it is unsurprising to find that the poor Union-wide capacity performance translates into a poor environmental performance. As for 2022, the environmental target was missed by a substantial amount. The PRB’s standalone traffic light system report highlights the varying performance of Member States and notes that the continued decline in performance is likely due to the factors including the impact of Russia’s war of aggression against Ukraine and issues resulting from a lack of capacity. 
+
+Despite the mixed performance of Member States in relation to capacity, environment, and cost-efficiency, safety performance as measured under the performance and charging scheme remains positive. While most ANSPs can still meet targets by the end of RP3, the PRB encourages all ANSPs to focus on ensuring that all necessary measures are implemented in a timely manner. 
+
+As we near the end of RP3, Member States will be preparing performance plans to cover the period 2025 to 2029 (RP4). The PRB urges Member States to reflect on the past mixed performance of ANSPs, as highlighted in the various PRB reports, when preparing their forward-looking plans. This is the opportunity to put in place robust performance plans that include a sufficient level of ambition to ensure delivery of the necessary level of services required by airspace users in a cost effective and timely manner, together with adequate measures to incentivise their delivery.
+  
+On behalf of all the PRB members, I would like to thank our colleagues from Eurocontrol, namely the Network Management Directorate and the Performance Review Unit, our colleagues from the European Aviation Safety Agency (EASA), and the PRB Support Team for their invaluable contributions to this report.  
+
+ 
+![](images/prb_chair_signature.png){width=25%}\
+Cathy Mannion\
+PRB Chair
+
 :::
 
-::: {.g-col-6 .text-center .text-pad-top style="border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black"}
-**En route service units (SUs)** <br>108,380 ('000) SUs <br>(+3.8% vs plan) [{{< fa solid arrow-up >}}]{style="color: #92d050;"} <br>(+62% vs 2021)
-:::
-:::
 
-::: {.grid style="gap: 0rem"}
-::: {.g-col-6 .text-pad-top .text-center style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black"}
-**Safety KPA** <br>EoSM (ANSPs on/above the target): <br>Risk management: 18 (+7 vs plan) [{{< fa solid arrow-up >}}]{style="color: #92d050;"} <br>Other MOs: 27 (-3 vs plan) [{{< fa solid arrow-down >}}]{style="color: #FF0000;"}
-:::
 
-::: {.g-col-6 .text-pad-top .text-center style="border-bottom: 1px solid black; border-right: 1px solid black"}
-**Environment KPA** <br>KEA: 2.96% <br>(+0.59p.p. vs target) [{{< fa solid arrow-up >}}]{style="color: #FF0000;"}
-:::
-:::
-
-::: {.grid style="gap: 0rem"}
-::: {.g-col-6 .text-center .text-pad-top style="border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black"}
-**Capacity KPA** <br>En route ATFM delay: 1.69 min/flt <br>(+1.19 min/flt vs target) [{{< fa solid arrow-up >}}]{style="color: #FF0000;"}
-:::
-
-::: {.g-col-6 .text-center .text-pad-top style="border-bottom: 1px solid black; border-right: 1px solid black"}
-**Cost-Efficiency KPA** <br>AUC trend: -43.9% <br>(-5.4p.p. vs DUC trend) [{{< fa solid arrow-down >}}]{style="color: #92d050;"}
-:::
-:::
-:::
-
-<!-- empy column for space -->
-
-::: {.g-col-lg-6 .g-col-12}
-2022 saw traffic in many parts of Europe rebound. The lack of capacity observed in 2018 and 2019 reappeared as traffic increased, with some Member States not able to provide the capacity required to keep delay at or below the target.
-
-This lack of capacity also resulted in poorer horizontal flight efficiency and contributed to missing the the Union-wide targets for KEA by a substantial amount. This was exacerbated by a shift in traffic flows caused by Russia's war of aggression against Ukraine the avoidance of the airspace of Belorussia, Russia and Ukraine.
-
-This dashboard, and the 2022 monitoring report, highlight a considerable variation in performance across Member States. Some ANSPs rose to the challenges of the recovery of traffic and the shift in traffic flows. For others, performance deteriorated. This deterioration, for some, resulted from issues outside of the control of the ANSP. For others, the deterioration stems from a lack of investment in capacity, which must be a focus for the coming years.
-:::
-:::
-
-Despite the mixed environment, capacity, and cost-efficiency performance, safety measured under the performance and charging scheme has remained positive throughout 2022.
-
-A review of this, and earlier RP3 monitoring reports will provide useful insights for ongoing Member State discussions about possible regulatory arrangements to support the achievement of future KPA objectives.
-
-## SES geographical scope
+### SINGLE EUROPEAN SKY – GEOGRAPHICAL SCOPE{style="margin-bottom: 1.1rem;"} 
 
 ::: columns
-:::: {.column width="50%"}
-SES Regulation covers:
+:::: {.column width="49%"}
+The Single European Sky (SES) framework covers the provision of Air Navigation Servies in the airspace of 29 European States (27 members of the European Union, Norway, and Switzerland). 
 
--   29 States\
--   29 En route charging zones\
--   26 Terminal charging zones
+Over 70 different entities are involved, at national level, in the provision of air traffic, communication, navigation and surveillance and/or meteorological services in this area.
+
+Air traffic services are delivered to airspace users through 49 Area Control Centres (ACCs) and 145 airports. 
+
+The costs related to the provision of these services is financed directly by the users though a system of charges, which is organised on the basis of 29 en route and 26 terminal charging zones
+::::
+
+:::: {.column width="1%"}
 ::::
 
 :::: {.column width="50%"}
-<br>
-
--   49 ACCs\
--   145 Airports
+<div style="width: 100%;border: 1px solid black;" id="observablehq-mlowerap-aa7c0a21"></div>
+<div id="observablehq-style-aa7c0a21"></div>
 ::::
 :::
 
-test ACE map
-<!-- #| file: R/plot-ses-map.R -->
-<!-- #| out.width: "100%" -->
-<div style="width: 100%;border: 1px solid black;" id="observablehq-mlowerap-aa7c0a21"></div>
-<div id="observablehq-style-aa7c0a21"></div>
 
 
-## PRB Annual Monitoring Report
-
-Under Commission Implementing Regulation (EU) 2019/317 (herein referred to as the Regulation), monitoring is one of the primary tasks of the Performance Review Body (PRB). It ensures that Member States, the European Commission, and stakeholders are informed about how Air Navigation Service Providers (ANSPs) perform in relation to their performance targets.
-
-The legal basis for monitoring the performance of air traffic management in the SES area is defined in Article 11 of Regulation (EC) 549/2004 (the Framework Regulation) and in Article 3 of the Regulation.
 
 <script type="module">
   import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";

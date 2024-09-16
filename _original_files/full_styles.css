@@ -52,7 +52,7 @@ h3 {
 }
 
 .text-pad-top {
-  padding-top: 1rem;
+  padding-top: 1.5rem;
 }  
 
 .title{
@@ -93,6 +93,13 @@ h3 {
     margin-right: 10px;
     width: 60%;
   }
+  
+  .equal-column {
+    float: left; 
+    margin-right: 20px;
+    width: 50%;
+  }
+
 }
 
 @media screen and (width < 768px) {
@@ -100,6 +107,13 @@ h3 {
     float: left; 
     width: 100%;
   }
+  
+  .equal-column {
+    float: left; 
+    width: 100%;
+  }
+
+
 }
 
 .gt_table {
