@@ -87,16 +87,16 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 :::: {layout="[ 50, 50 ]"}
 
-::::: {#chart-saf-smi}
-```{r chart-saf-smi}
-#| file: R/chart_level2_saf_smi.R
+::::: {#chart-saf-ri}
+```{r chart-saf-ri}
+#| file: R/chart_level2_saf_ri.R
 #| out.width: "100%"
 ```
 :::::
 
-::::: {#chart-saf-ri}
-```{r chart-saf-ri}
-#| file: R/chart_level2_saf_ri.R
+::::: {#chart-saf-smi}
+```{r chart-saf-smi}
+#| file: R/chart_level2_saf_smi.R
 #| out.width: "100%"
 ```
 :::::

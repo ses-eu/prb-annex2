@@ -61,13 +61,13 @@ mytextangle <- 0
 mytextfont_color <- 'black'
 
 #### title
-mytitle_text <-  paste0("RIs per 100,000 flight hours")
+mytitle_text <-  paste0("RIs per 100,000 movements")
 mytitle_y <- 0.99
 
 #### xaxis
 
 #### yaxis
-myyaxis_title <- "RIs per 100,000 flight hours"
+myyaxis_title <- "RIs per 100,000 movements"
 myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".1f"
 
