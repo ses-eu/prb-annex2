@@ -38,8 +38,7 @@ data_prep_rts_ses <- data_raw_rts_ses |>
 data_prep_rts <- data_raw_rts |> 
   filter(entity_code == ecz_list$ecz_id[1],
          year != 20202021) |> 
-  select(year, status, x5_4_total_su) |> 
-  rbind(data_prep_rts_ses)
+  select(year, status, x5_4_total_su)
 
 if (country == "Spain") {
   data_canarias_rts <- data_raw_rts |> 
@@ -51,7 +50,10 @@ if (country == "Spain") {
     rbind(data_canarias_rts) |> 
     group_by(year, status) |> 
     summarise(x5_4_total_su = sum(x5_4_total_su, na.rm = TRUE))
-}
+} else if (country == "SES RP3") {
+  
+  data_prep_rts <- data_prep_rts_ses
+} 
   
 ## statfor data
 max_actual_year <- as.numeric(substrRight(forecast, 4))-1
