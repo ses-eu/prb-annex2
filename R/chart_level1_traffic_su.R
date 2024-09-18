@@ -9,11 +9,17 @@ data_raw  <-  read_xlsx(
 
 data_raw_rts  <- read_xlsx(
   paste0(data_folder, "CEFF dataset master.xlsx"),
-  # here("data","hlsr2021_data.xlsx"),
   sheet = "Enroute_T1",
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
   clean_names()
+
+data_raw_rts_ses  <- read_xlsx(
+  paste0(data_folder, "SES CEFF.xlsx"),
+  sheet = "SES_ERT_all",
+  range = cell_limits(c(1, 1), c(NA, NA))) %>%
+  as_tibble() %>% 
+  clean_names() 
 
 data_raw_planned  <-  read_xlsx(
   paste0(data_folder, "targets.xlsx"),
@@ -23,11 +29,17 @@ data_raw_planned  <-  read_xlsx(
   clean_names() 
 
 # prepare data ----
+
 ## rts data
+data_prep_rts_ses <- data_raw_rts_ses |> 
+  mutate(x5_4_total_su = su_cz) |> 
+  select(year, status, x5_4_total_su)
+
 data_prep_rts <- data_raw_rts |> 
   filter(entity_code == ecz_list$ecz_id[1],
          year != 20202021) |> 
-  select(year, status, x5_4_total_su)
+  select(year, status, x5_4_total_su) |> 
+  rbind(data_prep_rts_ses)
 
 if (country == "Spain") {
   data_canarias_rts <- data_raw_rts |> 
