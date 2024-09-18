@@ -74,7 +74,7 @@ Netherlands
 ::::::
 
 :::::: {.column width="30%"}
-`r share_EBEL``<br>
+`r share_EBEL`<br>
 `r share_ED`<br>
 `r share_EH`
 ::::::
