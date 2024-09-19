@@ -95,8 +95,8 @@ PRB Chair
 ::: {.cell}
 <div class="equal-column-right">
 
-<div id="observablehq-mlowerap-aa7c0a21"></div>
-<div id="observablehq-style-aa7c0a21"></div>
+<div id="observablehq-mmm-99842944"></div>
+<div id="observablehq-link-99842944"></div>
 
 </div>
 
@@ -114,17 +114,12 @@ The costs related to the provision of these services is financed directly by the
 :::
 
 
-
-
-
-
-
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
 <script type="module">
-  import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
-  import define from "https://api.observablehq.com/d/3146482a65da21fc.js?v=3";
-	new Runtime().module(define, name => {
-	if (name === "mlowerap") return new Inspector(document.querySelector("#observablehq-mlowerap-aa7c0a21"));
-	if (name === "style") return new Inspector(document.querySelector("#observablehq-style-aa7c0a21"));
+import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+import define from "https://api.observablehq.com/@espinielli/prb-dashboard-map.js?v=4";
+new Runtime().module(define, name => {
+  if (name === "mmm") return new Inspector(document.querySelector("#observablehq-mmm-99842944"));
+  if (name === "link") return new Inspector(document.querySelector("#observablehq-link-99842944"));
 });
 </script>

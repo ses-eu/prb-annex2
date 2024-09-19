@@ -173,9 +173,7 @@ myat_textfont_size <- myfont
 
 # plot chart ----
 ## function moved to utils  
-mybarchart(data_prep_actual, mywidth, 
-           if_else(doclevel == "level1" & country == "SES RP3", myheight+40, myheight+30),
-           myfont, mylocalmargin, mydecimals) %>% 
+mybarchart(data_prep_actual, mywidth, myheight+30, myfont, mylocalmargin, mydecimals) %>% 
   add_line_trace(., data_prep_target)
 
 # %>% 

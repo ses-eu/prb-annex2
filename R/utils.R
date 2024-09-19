@@ -897,7 +897,10 @@ replace_links <- function(filename) {
   #replace year report links & fix side effect from previous replacement
   tmp_text <- str_replace_all(tmp_text, paste0(replacement_link,"index.html#main"), replacement_link)  
   tmp_text <- str_replace_all(tmp_text, "index.html#main", replacement_link)  
-
+  tmp_text <- str_replace_all(tmp_text, 
+                              fixed("-prb-findings--"), 
+                              fixed("#main-prb-findings--"))  
+  
   #restore strings I didn't want modified
   tmp_text <- str_replace_all(tmp_text, "temporary text1", not_modify[1])  
   tmp_text <- str_replace_all(tmp_text, "temporary text2", not_modify[2])  
