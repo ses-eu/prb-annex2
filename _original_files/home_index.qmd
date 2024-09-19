@@ -71,15 +71,15 @@ Traffic in Europe increased in 2023 reaching 91% of 2019 levels. Despite the low
 
 Some ANSPs continue to underinvest in staff and in capacity projects, despite having funds available in their performance plans. At the same time, it is important to acknowledge that COVID-19 did impact on the ability of ANSPs to undertake their ATCO training plans. In addition, due to the impact of Russia’s war of aggression against Ukraine, there has been significant shifts in traffic with some Member States experiencing considerably higher levels of traffic than expected; presenting a challenge to affected ANSPs in terms of capacity planning. The PRB accepts that this has impacted on an ANSP’s ability to effectively manage operations and meet performance targets and should be taken into consideration when reflecting on an individual ANSP’s performance in meeting capacity and environmental targets.
 
-However, in order to improve performance, it remains of the utmost importance that ANSPs realise their ATCO training plans as soon as possible, utilise new ATCOs, look at ways to improve rostering schemes and increase sector capacities. These actions will allow ANSPs efficiently open more sectors, offer more sector-opening hours, and enable higher throughput; all in a timely manner.  
+However, it remains the fact that performance needs to quickly improve. It is important that ANSPs focus on delivering their planned investment programmes on time and to cost, in order to unlock much needed capacity. It is equally important that ANSPs focus on realising their ATCO training plans as soon as possible, utilise new ATCOs, look at ways to improve rostering schemes and increase sector capacities. These actions will allow ANSPs efficiently open more sectors, offer more sector-opening hours, and enable higher throughput in the shorter term.
 
-Given the interdependency between capacity and environment, it is unsurprising to find that the poor Union-wide capacity performance translates into a poor environmental performance. As for 2022, the environmental target was missed by a substantial amount. The PRB’s standalone traffic light system report highlights the varying performance of Member States and notes that the continued decline in performance is likely due to the factors including the impact of Russia’s war of aggression against Ukraine and issues resulting from a lack of capacity. 
+Given the interdependency between capacity and environment, it is unsurprising to find that the poor Union-wide capacity performance translates into a poor environmental performance. As for 2022, the environmental target was missed by a substantial amount. The PRB’s standalone traffic light system report highlights the varying performance of Member States and notes that the continued decline in performance is due to the factors including the impact of Russia’s war of aggression against Ukraine and issues resulting from a lack of capacity. 
 
 Despite the mixed performance of Member States in relation to capacity, environment, and cost-efficiency, safety performance as measured under the performance and charging scheme remains positive. While most ANSPs can still meet targets by the end of RP3, the PRB encourages all ANSPs to focus on ensuring that all necessary measures are implemented in a timely manner. 
 
 As we near the end of RP3, Member States will be preparing performance plans to cover the period 2025 to 2029 (RP4). The PRB urges Member States to reflect on the past mixed performance of ANSPs, as highlighted in the various PRB reports, when preparing their forward-looking plans. This is the opportunity to put in place robust performance plans that include a sufficient level of ambition to ensure delivery of the necessary level of services required by airspace users in a cost effective and timely manner, together with adequate measures to incentivise their delivery.
   
-On behalf of all the PRB members, I would like to thank our colleagues from Eurocontrol, namely the Network Management Directorate and the Performance Review Unit, our colleagues from the European Aviation Safety Agency (EASA), and the PRB Support Team for their invaluable contributions to this report.  
+On behalf of all the PRB members, I would like to thank the PRB Support Team for its invaluable help in preparing this report. I would also like to thank our colleagues from European Aviation Safety Agency (EASA) and from Eurocontrol, namely the Network Management Directorate and the Performance Review Unit for their contributions. 
 
  
 ![](images/prb_chair_signature.png){width=25%}\
@@ -107,7 +107,7 @@ Over 70 different entities are involved, at national level, in the provision of 
 
 Air traffic services are delivered to airspace users through 49 Area Control Centres (ACCs) and 145 airports. 
 
-The costs related to the provision of these services is financed directly by the users though a system of charges, which is organised on the basis of 29 en route and 26 terminal charging zones.  
+The costs related to the provision of these services are financed directly by the users though a system of charges, which is organised on the basis of 29 en route and 26 terminal charging zones.
 </p>
 
 
