@@ -175,6 +175,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
                    yanchor =  mytitle_yanchor,
                    font = list(size = mytitle_font_size)
       ),
+      dragmode = FALSE,
       bargap = 0.25,
       hovermode = "x unified",
       hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),

@@ -597,6 +597,7 @@ mylinechart <-  function(df, mywidth, myheight, myfont, mymargin, mydecimals) {
                    yanchor = mytitle_yanchor,
                    font = list(size = mytitle_font_size)
       ),
+      dragmode = FALSE,
       hovermode = myhovermode,
       hoverlabel = list(bgcolor = myhoverlabel_bgcolor),
       xaxis = list(title = myxaxis_title,
@@ -679,6 +680,7 @@ mybarchart <-  function(df, mywidth, myheight, myfont, mymargin, mydecimals) {
                    yanchor = mytitle_yanchor,
                    font = list(size = mytitle_font_size)
       ),
+      dragmode = FALSE,
       bargap = mybargap,
       barmode = mybarmode,
       hovermode = myhovermode,
@@ -804,6 +806,7 @@ myhbarc <-  function(mywidth, myheight, myfont, mymargin) {
                    yanchor =  mytitle_yanchor,
                    font = list(size = mytitle_font_size)
       ),
+      dragmode = FALSE,
       bargap = 0.25,
       barmode = 'stack',
       hovermode = "y",

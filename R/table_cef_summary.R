@@ -122,6 +122,7 @@ cef_plot <- function(df, xtitle) {
     showlegend = FALSE,
     uniformtext=list(minsize = myminsize, mode='show'),
     font = list(family = myfont_family),
+    dragmode = FALSE,
     xaxis = list(
       title = xtitle,
       showticklabels = FALSE,

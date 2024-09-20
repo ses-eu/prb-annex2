@@ -193,6 +193,7 @@ mybarc_aucu <-  function(mywidth, myheight, myfont, mymargin) {
                    yanchor = mytitle_yanchor,
                    font = list(size = mytitle_font_size)
       ),
+      dragmode = FALSE,
       hovermode = "x",
       hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
       # uniformtext = list(minsize = myfont, mode='show'),

@@ -107,6 +107,7 @@ mylinechart <-  function(df, mywidth, myheight, myfont, mymargin) {
                    yanchor = mytitle_yanchor,
                    font = list(size = mytitle_font_size)
       ),
+      dragmode = FALSE,
       bargap = mybargap,
       barmode = mybarmode,
       hovermode = myhovermode,
