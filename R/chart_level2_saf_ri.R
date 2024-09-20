@@ -79,7 +79,37 @@ mylegend_xanchor <- 'center'
 mylocalmargin <- mymargin
 
 # plot chart ----
-mylinechart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals) |> 
+##I had to do it this way because when there are NA values the dash doesn't work
+data_prep_s1 <- data_prep |> filter(type == "EU Wide Average")
+data_prep_s2 <- data_prep |> filter(type == "RI") |> 
+  mutate(myothermetric = mymetric)
+
+
+p1 <- mylinechart(data_prep_s1, mywidth, myheight, myfont, mylocalmargin, mydecimals) |> 
   layout(yaxis = list(rangemode = "tozero"),
          xaxis = list(range = c(2019.5, 2024.5)))
 
+## additional target trace
+myat_name <- "RI"
+myat_mode <- "line+markers"
+myat_yaxis <- "y1"
+myat_symbol <- NA
+myat_marker_color <- '#00B0F0'
+myat_line_color <- '#00B0F0'
+myat_line_width <- mylinewidth
+myat_showlegend <- T
+
+myat_textbold <- FALSE
+myat_textangle <- 0
+myat_textposition <- 'top'
+myat_textfont_color <- 'black'
+myat_textfont_size <- myfont
+
+p1 %>%  add_line_trace(., data_prep_s2) |> 
+  layout(legend=list(
+    traceorder= "reversed"))
+
+
+
+
+  
