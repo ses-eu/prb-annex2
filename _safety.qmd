@@ -42,7 +42,7 @@ saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_
 
 ::: {#container-saf-indicators}
 
-## Effectiveness of Safety Management (EoSM) (KPI#1)
+`r if_else(params$country == "SES RP3", "## Actual versus planned number of ANSPs achieving the level of the EoSM targets for RP3 ahead of 2024", "## Effectiveness of Safety Management (EoSM) (KPI#1)")`
 
 :::: {layout="[ 20, 60, 20 ]"}
 
