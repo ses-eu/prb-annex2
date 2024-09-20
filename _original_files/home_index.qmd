@@ -46,7 +46,7 @@ Average air route +20% longer than the targeted distance
 
 :::::::: {.g-col-9  style="border-bottom: 1px solid black; border-right: 1px solid black; padding-left: 1rem; padding-top: 1.5rem;"}
 [**CAPACITY**]{style="color: #0F9ED5; line-height: 1.5; font-size: 1.1rem;"}\
-Average delay of 1.81 minutes per flight 
+Average delay of 1.84 minutes per flight 
 ::::::::
 :::::::
 

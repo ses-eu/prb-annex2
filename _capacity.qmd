@@ -238,11 +238,11 @@ if (country == "SES RP3" | country == "MUAC") {
 ## PRB monitoring
 
 ```{r cap-prb}
-cap_er_conc <- read_mytable("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity") %>%
-  filter(Year_Report == params$year_report, State == params$country) %>%
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n')
+if (params$country == "Luxembourg") {
+  cap_er_conc1 <- ""
+  } else {
+  cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity")
+}
 ```
 
 `r cap_er_conc1`
@@ -250,11 +250,7 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 `r if (params$no_tcz == 0 | params$year_report != 2023) ":::: {.content-hidden}"`
 
 ```{r cap-trm-prb}
-cap_trm_conc <- read_mytable("PRB_findings.xlsx", "TRM_capacity", "Table_Findings_TRM_capacity") %>%
-  filter(Year_Report == params$year_report, State == params$country) %>%
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-cap_trm_conc1 <- cap_trm_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n')
+cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table_Findings_TRM_capacity")
 ```
 
 `r cap_trm_conc1`

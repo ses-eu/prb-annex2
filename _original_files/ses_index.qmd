@@ -105,11 +105,7 @@ met_ansp <- data_context %>% select(met_providers) %>% pull()
 ## Main PRB findings - {{< var doc.year_report >}}
 
 ```{r main-concl}
-tsu_conc <- read_mytable("PRB_findings.xlsx", "main", "Table_Findings_main") %>% 
-  filter(Year_Report == year_report, State == country) %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-main_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '') %>%  str_replace_all('@', '') 
+main_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "main", "Table_Findings_main")
 ```
 
 `r main_conc1`
@@ -126,11 +122,7 @@ main_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n'
 
 :::: {#concl-mvt}
 ```{r concl-mvt}
-mvt_conc <- read_mytable("PRB_findings.xlsx", "traffic_IFR", "Table_Findings_traffic_IFR") %>% 
-  filter(Year_Report == year_report, State == country) %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-mvt_conc1 <- mvt_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '') 
+mvt_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "traffic_IFR", "Table_Findings_traffic_IFR")
 ```
 
 `r mvt_conc1`
@@ -150,11 +142,7 @@ mvt_conc1 <- mvt_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 :::: {#concl-su}
 ```{r concl-su}
-tsu_conc <- read_mytable("PRB_findings.xlsx", "traffic_SUs", "Table_Findings_traffic_TSU") %>% 
-  filter(Year_Report == year_report, State == country) %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-tsu_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '') 
+tsu_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "traffic_SUs", "Table_Findings_traffic_TSU")
 ```
 
 `r tsu_conc1`
@@ -176,11 +164,7 @@ tsu_conc1 <- tsu_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 :::: {#concl-saf}
 ```{r concl-saf}
-saf_conc <- read_mytable("PRB_findings.xlsx", "safety", "Table_Findings_safety") %>% 
-  filter(Year_Report == year_report, State == country) %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_safety")
 ```
 
 `r saf_conc1`
@@ -203,11 +187,7 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 :::: {#concl-env}
 ```{r concl-env}
-env_conc <- read_mytable("PRB_findings.xlsx", "environment", "Table_Findings_environment") %>% 
-  filter(Year_Report == year_report, State == country) %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Findings_environment")
 ```
 
 `r env_conc1`
@@ -236,11 +216,7 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 :::: {#concl-cap}
 ```{r concl-cap}
-cap_er_conc <- read_mytable("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity") %>% 
-  filter(Year_Report == year_report, State == country) %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity")
 ```
 
 `r cap_er_conc1`
@@ -270,11 +246,7 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 
 :::: {#concl-cef}
 ```{r concl-cef}
-cef_conc <- read_mytable("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF") %>% 
-  filter(Year_Report == year_report, State == country) %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF")
 ```
 
 `r cef_conc1`

@@ -166,11 +166,7 @@ if (country == "SES RP3") {
 ## PRB monitoring
 :::: {#concl-kea}
 ```{r}
-env_conc <- read_mytable("PRB_findings.xlsx", "environment", "Table_Findings_environment") %>%
-  filter(Year_Report == params$year_report, State == params$country) %>%
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n')
+env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Findings_environment")
 ```
 
 `r env_conc1`

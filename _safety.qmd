@@ -33,11 +33,7 @@ if (params$country == "SES RP3") {
 ## PRB monitoring
 :::: {#concl-saf}
 ```{r concl-saf}
-saf_conc <- read_mytable("PRB_findings.xlsx", "safety", "Table_Findings_safety") %>%
-  filter(Year_Report == params$year_report, State == params$country) %>%
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n')
+saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_safety")
 ```
 
 `r saf_conc1`

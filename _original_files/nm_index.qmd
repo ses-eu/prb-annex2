@@ -16,11 +16,7 @@
 
 :::: {#concl-eosm}
 ```{r concl-eosm}
-saf_conc <- read_mytable("NM findings.xlsx", "NM_findings_EoSM", "NM_findings_EoSM") %>% 
-  filter(Year_Report == params$year_report) %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') %>%  str_replace(fixed('.@'), '.\n')  
+saf_conc1 <- get_prb_conclusions("NM findings.xlsx", "NM_findings_EoSM", "NM_findings_EoSM")
 ```
 
 `r saf_conc1`
@@ -40,11 +36,7 @@ saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 :::: {#concl-deliveries}
 ```{r concl-deliveries}
-saf_conc <- read_mytable("NM findings.xlsx", "NM_findings_over", "NM_findings_over") %>% 
-  filter(Year_Report == params$year_report) %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-saf_conc2 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+saf_conc2 <- get_prb_conclusions("NM findings.xlsx", "NM_findings_over", "NM_findings_over")
 ```
 
 `r saf_conc2`
@@ -66,11 +58,7 @@ saf_conc2 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 :::: {#concl-env}
 ```{r concl-env}
-env_conc <- read_mytable("NM findings.xlsx", "NM_findings_KEP", "NM_findings_KEP") %>% 
-  filter(Year_Report == params$year_report) %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+env_conc1 <- get_prb_conclusions("NM findings.xlsx", "NM_findings_KEP", "NM_findings_KEP")
 ```
 
 `r env_conc1`
@@ -106,11 +94,7 @@ env_conc1 <- env_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 :::: {#concl-cap}
 ```{r concl-cap}
-cap_er_conc <- read_mytable("NM findings.xlsx", "NM_findings_CAP", "NM_findings_CAP") %>% 
-  filter(Year_Report == params$year_report) %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+cap_er_conc1 <- get_prb_conclusions("NM findings.xlsx", "NM_findings_CAP", "NM_findings_CAP")
 ```
 
 `r cap_er_conc1`
@@ -132,11 +116,7 @@ cap_er_conc1 <- cap_er_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n
 
 :::: {#concl-cef}
 ```{r concl-cef}
-cef_conc <- read_mytable("NM findings.xlsx", "NM_findings_CEFF", "NM_findings_CEFF") %>% 
-  filter(Year_Report == params$year_report) %>% 
-  select(Conclusion) %>% toString() %>% paste0(., "@")
-
-cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+cef_conc1 <- get_prb_conclusions("NM findings.xlsx", "NM_findings_CEFF", "NM_findings_CEFF")
 ```
 
 `r cef_conc1`

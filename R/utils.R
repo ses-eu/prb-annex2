@@ -911,3 +911,23 @@ replace_links <- function(filename) {
 
 }
 
+## get PRB conclusions  ----
+get_prb_conclusions <- function(filename, kpi, table) {
+  
+  if (country == 'Network Manager') {
+    conc <- read_mytable(filename, kpi, table) %>%
+      filter(Year_Report == year_report) %>%
+      select(Conclusion)
+  } else {
+    conc <- read_mytable(filename, kpi, table) %>%
+      filter(Year_Report == year_report, State == country) %>%
+      select(Conclusion)
+  }
+  
+  conc_string <- conc %>% 
+    toString() %>% paste0(., if_else(nrow(conc) == 1, "", "@"))
+  
+  prb_conc <- conc_string %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n')
+  
+  return(prb_conc)
+}
