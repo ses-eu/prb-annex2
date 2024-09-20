@@ -9,8 +9,11 @@
 
   # set test_check to TRUE to create test pages with hyperlinks functional within the test site (defined in parameters script)
   # set test_check to FALSE to create production-ready pages with hyperlinks functional within the sesperformance.eu site
-  test_check <- TRUE       
-    
+  test_check <- FALSE       
+  
+  ## set all_states to FALSE to build only one state site, TRUE for all
+  all_states <- TRUE
+  
 # get functions ----
   source("R/utils.R")
   
@@ -20,18 +23,15 @@
   ## modify state list as required
   state_list_prod <- state_list
   # state_list_prod <- c(state_list, "Home")  #add home to list
-  # state_list_prod <- setdiff(state_list_prod, "Luxembourg")  #remove state
-  # states_from <- c(29:32) # 1st number is the index of 1st state from which you want to generate
+  # state_list_prod <- setdiff(state_list_prod, "Belgium")  #remove state
+  # states_from <- c(4:32) # 1st number is the index of 1st state from which you want to generate
   # state_list_prod <- state_list_prod[states_from]
 
 # build state pages ----
   
-  ## set all_states to FALSE to build only one state site, TRUE for all
-  all_states <- FALSE
-  
   ## build pages
   if (all_states == FALSE) {
-    state_list_prod <- 'Home' # set your one country/stakeholder here (Home for home page)
+    state_list_prod <- 'SES RP3' # set your one country/stakeholder here (Home for home page)
   } 
 
   for (i in 1:length(state_list)) {
