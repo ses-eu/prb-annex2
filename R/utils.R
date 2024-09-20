@@ -901,6 +901,13 @@ replace_links <- function(filename) {
                               fixed("-prb-findings--"), 
                               fixed("#main-prb-findings--"))  
   
+  # last minute fix to avoid complicating the issue
+  if (country == "SES RP3") {
+   tmp_text <- str_replace_all(tmp_text, 
+                              fixed("#effectiveness-of-safety-management-eosm-kpi1"), 
+                              fixed("#actual-versus-planned-number-of-ansps-achieving-the-level-of-the-eosm-targets-for-rp3-ahead-of-2024"))  
+  }
+  
   #restore strings I didn't want modified
   tmp_text <- str_replace_all(tmp_text, "temporary text1", not_modify[1])  
   tmp_text <- str_replace_all(tmp_text, "temporary text2", not_modify[2])  
