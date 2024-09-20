@@ -64,7 +64,7 @@ Two additional performance indicators are defined by Implementing Regulation (EU
 
 The rate of runway incursions at airports located in a Member State, calculated as the total number of runway incursions with a safety impact that occurred at those airports divided by the total number of IFR and VFR movements at those airports.’ The RIs included in the indicator are those that occur at the airports included by the Member States in their performance plans, where the airports to be considered are specified by Article 1(3) of Commission Implementing Regulation (EU) 2019/317.
 
-The rate of separation minima infringements within the airspace of all controlling air traffic services units in a Member State, calculated as the total number of separation minima infringements with a safety impact that occurred in that airspace divided by the total number of controlled flight hours within that airspace.’ This indicator captures all SMIs that occur within the geographical boundary of a Member State, irrespective of which ANSP is providing the ATC service.
+The rate of separation minima infringements within the airspace of all controlling air traffic services units in a Member State, calculated as the total number of separation minima infringements with a safety impact that occurred in that airspace divided by the total number of controlled flight hours within that airspace. This indicator captures all SMIs that occur within the geographical boundary of a Member State, irrespective of which ANSP is providing the ATC service.
 
 ## Environment - Horizontal flight efficiency of the actual trajectory (KEA) (KPI#1), of the last filed flight plan (KEP) (PI#1) & shortest constrained route (SCR) (PI#2)
 

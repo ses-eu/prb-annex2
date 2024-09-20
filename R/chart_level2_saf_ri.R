@@ -30,7 +30,7 @@ data_prep <- data_raw %>%
   select(-state, -type, -reference_period) |> 
   pivot_longer(-c(year), names_to = "type", values_to = "mymetric") |> 
   mutate(xlabel = year,
-         type = if_else(type == "rate_per_10000",
+         type = if_else(type == "rate_per_100_000",
                         "RI",
                         "EU Wide Average"),
          mytextposition = "top center",

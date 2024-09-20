@@ -40,7 +40,7 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("RAI & RAU via available restricted\nand segregated airspace (#PIs 7-8)")
+mytitle_text <- paste0("RAI & RAU via available restricted\nand segregated airspace (PIs#7 & 8)")
 mytitle_y <- 0.95
 
 #### xaxis

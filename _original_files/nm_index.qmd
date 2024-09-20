@@ -20,7 +20,7 @@ saf_conc <- read_mytable("NM findings.xlsx", "NM_findings_EoSM", "NM_findings_Eo
   filter(Year_Report == params$year_report) %>% 
   select(Conclusion) %>% toString() %>% paste0(., "@")
 
-saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') 
+saf_conc1 <- saf_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n') %>%  str_replace(fixed('.@'), '.\n')  
 ```
 
 `r saf_conc1`

@@ -49,7 +49,8 @@ data_prep_maturity <- data_raw_maturity %>%
      )
   )
   
-  main_safety_ansp <- data_prep_maturity %>% select(entity_name) %>% unique() %>% pull()   
+  main_safety_ansp <- data_prep_maturity %>% filter(year == year_report) |> 
+    select(entity_name) |>  unique() %>% pull()   
 
 # plot chart ----
 myc <-  function(mywidth, myheight, myfont, mymargin) {

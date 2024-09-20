@@ -95,8 +95,8 @@ PRB Chair
 ::: {.cell}
 <div class="equal-column-right">
 
-<div id="observablehq-mmm-99842944"></div>
-<div id="observablehq-link-99842944"></div>
+<div id="observablehq-mmm-a2de41c4"></div>
+<div id="observablehq-link-a2de41c4"></div>
 
 </div>
 
@@ -119,7 +119,7 @@ The costs related to the provision of these services are financed directly by th
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
 import define from "https://api.observablehq.com/@espinielli/prb-dashboard-map.js?v=4";
 new Runtime().module(define, name => {
-  if (name === "mmm") return new Inspector(document.querySelector("#observablehq-mmm-99842944"));
-  if (name === "link") return new Inspector(document.querySelector("#observablehq-link-99842944"));
+  if (name === "mmm") return new Inspector(document.querySelector("#observablehq-mmm-a2de41c4"));
+  if (name === "link") return new Inspector(document.querySelector("#observablehq-link-a2de41c4"));
 });
 </script>
