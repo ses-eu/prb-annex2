@@ -2,14 +2,14 @@
 
 # clean environment and set main parameters ----
   rm(list = ls())
-  year_report <- 2023 # set your year report here
+  year_report <- 2020 # set your year report here
   out_format <- 'web' # set your output format here: 'pdf' or 'web'
   data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/data_for_web/'
   data_folder_a2 <- paste0(data_folder, "monitoring_files/", year_report, "/")
 
   # set test_check to TRUE to create test pages with hyperlinks functional within the test site (defined in parameters script)
   # set test_check to FALSE to create production-ready pages with hyperlinks functional within the sesperformance.eu site
-  test_check <- FALSE       
+  test_check <- TRUE       
   
   ## set all_states to FALSE to build only one state site, TRUE for all
   all_states <- TRUE
@@ -27,11 +27,11 @@
   # states_from <- c(4:32) # 1st number is the index of 1st state from which you want to generate
   # state_list_prod <- state_list_prod[states_from]
 
-# build state pages ----
+# build pages ----
   
   ## build pages
   if (all_states == FALSE) {
-    state_list_prod <- 'SES RP3' # set your one country/stakeholder here (Home for home page)
+    state_list_prod <- 'Austria' # set your one country/stakeholder here (Home for home page)
   } 
 
   for (i in 1:length(state_list)) {
@@ -41,28 +41,35 @@
     source("R/create_pages.R")
   
   
-  ## copy site to test folder ----
+  ## copy site to test/prod folder ----
   if (out_format == 'web') {
     if (country == 'Home') {
       ## Home page ----
       ### delete previous files except country folders
+      #### list all files/dirs in root dir
       files_to_be_deleted <- list.files(root_dir) 
-      files_to_be_deleted <- files_to_be_deleted[files_to_be_deleted %like% c("202") == FALSE]
+      #### remove year folders from list of files to be deleted keeping only the files in root dir
+      files_to_be_deleted <- files_to_be_deleted[files_to_be_deleted %like% c("202") == FALSE] 
       
-      ## otherwise it deletes everything
+      ### otherwise it deletes everything
       if (length(files_to_be_deleted) != 0) { 
         fs::file_delete(paste0(root_dir, files_to_be_deleted)) 
       }
       
       ### copy files to folder
+      #### make list of files and dirs in _site dir
       files_to_be_copied <- list.files(site_dir) 
+      #### make list of dirs in _site dir
       dirs_to_be_copied <- list.dirs(site_dir, full.names = FALSE, recursive = FALSE)
+      #### remove dirs from list of files to be copied
       files_to_be_copied <- files_to_be_copied[files_to_be_copied %in% dirs_to_be_copied == FALSE]
       
+      #### copy files to folder
       fs::file_copy(paste0(site_dir,'/', files_to_be_copied),
                     paste0(root_dir, files_to_be_copied), 
                     overwrite = TRUE)
       
+      #### copy dirs to folder
       for (i in 1:length(dirs_to_be_copied)) {
         fs::dir_copy(paste0(site_dir,'/', dirs_to_be_copied[i]),
                      paste0(root_dir, dirs_to_be_copied[i]), 
