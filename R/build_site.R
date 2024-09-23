@@ -9,7 +9,7 @@
 
   # set test_check to TRUE to create test pages with hyperlinks functional within the test site (defined in parameters script)
   # set test_check to FALSE to create production-ready pages with hyperlinks functional within the sesperformance.eu site
-  test_check <- FALSE       
+  test_check <- TRUE       
   
   ## set all_states to FALSE to build only one state site, TRUE for all
   all_states <- TRUE
