@@ -49,7 +49,7 @@ if (country == "Spain") {
   data_prep_rts <- data_prep_rts |> 
     rbind(data_canarias_rts) |> 
     group_by(year, status) |> 
-    summarise(x5_4_total_su = sum(x5_4_total_su, na.rm = TRUE))
+    summarise(x5_4_total_su = sum(x5_4_total_su, na.rm = TRUE)) 
 } else if (country == "SES RP3") {
   
   data_prep_rts <- data_prep_rts_ses
@@ -193,7 +193,7 @@ if (country == 'SES RP3') {
      yaxis = "y1",
      cliponaxis = FALSE,
      yaxis = "y1",
-     type = 'scatter',  mode = 'lines+markers',
+     type = 'scatter',  mode = 'markers',
      line = list(width = mylinewidth, dash = 'solid', color = '#FFC000'),
      marker = list(size = mylinewidth * 3, color = '#FFC000'),
      color = ~ rank,

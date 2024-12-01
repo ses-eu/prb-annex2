@@ -1,5 +1,6 @@
+# library(magick)
 
-if (exists("cztype") == FALSE) {cztype = "enroute"}
+if (exists("cztype") == FALSE) {cztype = "terminal"}
 
 if (country == 'SES RP3') {
   # SES case ----
@@ -144,6 +145,25 @@ if (country == 'SES RP3') {
 # chart ----
 
 ## chart parameters ----
+# if (knitr::is_latex_output()) {
+# # I need the charts to be bigger as they are going to be in a latex minipage
+#   mywidth <- 1500
+#   myheight <- 1000
+#   myfont <- 40
+#   
+#   mytextfont_size <- myfont
+#   mytitle_font_size <- myfont*1.2
+#   myminsize <- 35
+#   
+#   myxaxis_tickfont_size <- myfont
+#   myxaxis_titlefont_size <- myfont
+#   
+#   myyaxis_titlefont_size <- myfont
+#   myyaxis_tickfont_size <- myfont
+#   
+#   mylegend_font_size <- myfont
+#   }
+
 mysuffix <- ""
 mydecimals <- 2
 
@@ -217,6 +237,10 @@ myat_textfont_size <- myfont
 myplot <- mybarchart(data_prep, mywidth, myheight + 20, myfont, mylocalmargin, mydecimals) %>% 
   add_line_trace(., data_prep_total)
 
+# myplot_pdf <- mybarchart(data_prep, mywidth_pdf*1.5, (myheight_pdf + 20)*1.5, myfont, mylocalmargin, mydecimals) %>% 
+#   add_line_trace(., data_prep_total)
+
+
 ## additional target trace
 myat_name <- "Target"
 myat_mode <- "line+markers"
@@ -233,6 +257,23 @@ myat_textposition <- 'top'
 myat_textfont_color <- '#FF0000'
 myat_textfont_size <- myfont
 
-myplot %>%  add_line_trace(., data_prep_target) |> 
-  add_empty_trace(data_prep)
+myplot %>%  add_line_trace(., data_prep_target) %>%  
+  layout(xaxis = list(
+    range = c(2019.5, 2024.5)
+  ))
+
+# p1 <- myplot_pdf %>%  add_line_trace(., data_prep_target) %>%  
+#   layout(xaxis = list(
+#     range = c(2019.5, 2024.5)
+#   ))
+
+# img_dir <- here::here("images", year_report, country)
+# img_name <- paste0("chart_level1_cap_", cztype, ".png")
+# 
+# invisible(export(p1, here(img_dir,img_name)))
+# 
+# invisible(figure <- image_read(here(img_dir,img_name)))
+# invisible(cropped <- image_crop(figure, "450x360"))
+# invisible(image_write(cropped, here(img_dir,img_name)))
+
 
