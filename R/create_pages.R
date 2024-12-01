@@ -473,6 +473,7 @@ if (out_format == 'web') {
                                               mywidth_pdf = mywidth_pdf,
                                               myheight_pdf = myheight_pdf,
                                               myfont_pdf = myfont_pdf,
+                                              mytitle_font_size_pdf = mytitle_font_size_pdf,
                                               mymargin_pdf = mymargin_pdf,
                                               mylinewidth_pdf = mylinewidth_pdf,
 

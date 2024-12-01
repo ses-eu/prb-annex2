@@ -97,7 +97,8 @@
   mywidth_pdf = 300
   myheight_pdf = 220
   myfont_pdf = 8
-  mymargin_pdf = list (t = 20, l = 0)
+  mytitle_font_size_pdf <- 10
+  mymargin_pdf = list (t = 30, l = 0)
   mylinewidth_pdf = 2
     
 # set state parameters  ----
