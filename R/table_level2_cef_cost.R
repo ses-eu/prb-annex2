@@ -95,6 +95,14 @@ data_prep <- data_prep_split |>
   pivot_longer(-xlabel, names_to = "name", values_to = 'mymetric') %>% 
   pivot_wider(values_from = 'mymetric', names_from = 'xlabel')
 
+if (knitr::is_latex_output()) {
+  mytablefontsize <- "8pt"
+  mytitletablefontsize <- "9pt"
+}else{
+  mytablefontsize <- NULL
+  mytitletablefontsize <- NULL
+}
+
 # plot table ----
 mygtable(data_prep, myfont) %>% 
   cols_label(name = html("Total costs - nominal (M€)")) %>% 
@@ -103,13 +111,12 @@ mygtable(data_prep, myfont) %>%
               container.padding.y = 0) %>% 
   cols_align(columns = 1, align = "left") %>%
   tab_style(
-    style = list(
-      # cell_text(weight = "bold")
-    ),
-    locations = cells_body(
-      columns = 1
-      )
-    )|> 
+    style = cell_text(size = mytablefontsize),  # Set font size
+    locations = list(
+      cells_body(),                    # Apply to the table content
+      cells_column_labels()         # Apply to column labels
+    )
+  )|> 
   fmt_number(
     columns = c(2:5),  # Specify the columns to format
     decimals = 0,  # Number of decimal places
@@ -117,6 +124,10 @@ mygtable(data_prep, myfont) %>%
   ) |> 
   tab_header(
     title = md(paste0("**Actual and determined data**"))
+  )|> 
+  tab_style(
+    style = cell_text(size = mytitletablefontsize),  # Set font size to 8pt
+    locations = list(
+      cells_title(groups = "title")   # Apply to the title
+    )
   )
-
-  
