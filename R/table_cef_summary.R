@@ -124,14 +124,18 @@ cef_plot <- function(df, xtitle) {
     font = list(family = myfont_family),
     dragmode = FALSE,
     xaxis = list(
-      title = xtitle,
+      title =  list(text = xtitle,
+                    font = list(
+                      size = myxtitlefontsize
+                      )
+                    ),
       showticklabels = FALSE,
       showgrid = FALSE,
       range = c(floor((min(df$mymetric)-5)/10)*10-5, ceiling((max(df$mymetric)+5)/10)*10+5)
       ), 
     yaxis = list(
       title = '', 
-      tickfont = list(size=myfont*0.93),
+      tickfont = list(size=mytickfontsize),
       showgrid = FALSE
       )
     ) |> 
@@ -142,13 +146,31 @@ cef_plot <- function(df, xtitle) {
   )
 }
 
-p1 <- cef_plot(data_prep_su, '% difference service units') |> 
+if (knitr::is_latex_output()) {
+  myminsize <- 7
+  mytickfontsize <- myminsize
+  myxtitlefontsize <- myminsize +1
+  mytitle1 <- '% difference\nservice units'
+  mytitle2 <- '% difference total\ncosts nominal €'
+  mytitle3 <- '% difference total\ncosts €<sub>2017</sub>'
+  mytitle4 <- '% difference\nAUC/DUC'
+}else{
+  mytickfontsize <- myfont*0.93
+  myxtitlefontsize <- myfont
+  mytitle1<- '% difference service units'
+  mytitle2 <- '% difference total costs nominal €'
+  mytitle3 <- '% difference total costs €<sub>2017</sub>'
+  mytitle4 <- '% difference AUC/DUC'
+}
+
+
+p1 <- cef_plot(data_prep_su, mytitle1) |> 
   layout(xaxis=list(range = c(floor((min(data_prep_su$mymetric)-5)/10)*10-20, 
                               ceiling((max(data_prep_su$mymetric)+5)/10)*10+10)
 ))
-p2 <- cef_plot(data_prep_costs, '% difference total costs nominal €')
-p3 <- cef_plot(data_prep_costs2017, '% difference total costs €<sub>2017</sub>')
-p4 <- cef_plot(data_prep_duc, '% difference AUC/DUC')
+p2 <- cef_plot(data_prep_costs, mytitle2)
+p3 <- cef_plot(data_prep_costs2017, mytitle3)
+p4 <- cef_plot(data_prep_duc, mytitle4)
 
 
 subplot(p1, p2, p3, p4, nrows = 1, shareY = TRUE, titleX = TRUE) |> 

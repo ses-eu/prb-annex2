@@ -1,5 +1,3 @@
-# library(magick)
-
 if (exists("cztype") == FALSE) {cztype = "terminal"}
 
 if (country == 'SES RP3') {
@@ -237,7 +235,7 @@ myat_textfont_size <- myfont
 myplot <- mybarchart(data_prep, mywidth, myheight + 20, myfont, mylocalmargin, mydecimals) %>% 
   add_line_trace(., data_prep_total)
 
-# myplot_pdf <- mybarchart(data_prep, mywidth_pdf*1.5, (myheight_pdf + 20)*1.5, myfont, mylocalmargin, mydecimals) %>% 
+# myplot_pdf <- mybarchart(data_prep, mywidth_pdf, myheight_pdf, myfont_pdf, mylocalmargin, mydecimals) %>%
 #   add_line_trace(., data_prep_total)
 
 
@@ -266,14 +264,15 @@ myplot %>%  add_line_trace(., data_prep_target) %>%
 #   layout(xaxis = list(
 #     range = c(2019.5, 2024.5)
 #   ))
-
+# 
 # img_dir <- here::here("images", year_report, country)
 # img_name <- paste0("chart_level1_cap_", cztype, ".png")
 # 
 # invisible(export(p1, here(img_dir,img_name)))
 # 
 # invisible(figure <- image_read(here(img_dir,img_name)))
-# invisible(cropped <- image_crop(figure, "450x360"))
+# fig_size <- paste0(mywidth_pdf, "x", myheight_pdf)
+# invisible(cropped <- image_crop(figure, fig_size))
 # invisible(image_write(cropped, here(img_dir,img_name)))
 
 
