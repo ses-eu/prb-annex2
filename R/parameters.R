@@ -94,12 +94,12 @@
   mylocalmargin = mymargin
   
   ## pdf
-  mywidth_pdf = 300
-  myheight_pdf = 220
-  myfont_pdf = 8
-  mytitle_font_size_pdf <- 10
-  mymargin_pdf = list (t = 30, l = 0)
-  mylinewidth_pdf = 2
+  mywidth_pdf = 300 *4
+  myheight_pdf = 220 *4
+  myfont_pdf = 64
+  mytitle_font_size_pdf <- 10 *4
+  mymargin_pdf = list (t = 30)
+  mylinewidth_pdf = 3
     
 # set state parameters  ----
 
