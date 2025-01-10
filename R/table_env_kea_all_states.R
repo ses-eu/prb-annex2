@@ -66,7 +66,8 @@ table1 <- mygtable(data_prep, myfont)|>
 
 # create latex table
 if (knitr::is_latex_output()) {
-  table_env_kea_all_states <- table1 %>% mylatex_crosses ()
+  table_env_kea_all_states <- table1 %>% 
+    mylatex(NA) 
   
 } else {
   table1

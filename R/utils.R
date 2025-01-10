@@ -955,6 +955,9 @@ mylatex <- function(gttable, firstcolumn = 2.7) {
     stringr::str_replace(
       "\\\\large",  # Match \large
       "\\\\fontsize{9pt}{10.8pt}\\\\selectfont"  # Replace with 9pt font size
+    ) %>% 
+    stringr::str_replace_all(
+      c("✓" = "\\\\tick", "✘" = "\\\\cross")
     )
   
   # ensure the table fontsize is 8 pt

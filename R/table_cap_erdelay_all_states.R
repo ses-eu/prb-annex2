@@ -60,7 +60,8 @@ table1 <- mygtable(data_prep, myfont)|>
 
 # create latex table
 if (knitr::is_latex_output()) {
-  table_cap_erdelay_all_states <- table1 %>% mylatex_crosses()
+  table_cap_erdelay_all_states <- table1 %>% 
+    mylatex(NA) 
   
 } else {
   table1
