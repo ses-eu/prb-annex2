@@ -947,18 +947,49 @@ get_prb_conclusions <- function(filename, kpi, table) {
 }
 
 ## latex tables for pdf  ----
-mylatex <- function(gttable) {
+mylatex <- function(gttable, firstcolumn = 2.7) {
+  # latex_string <- table_level2_cef_aucu
   latex_string <- gttable|> as_latex() %>%
     stringr::str_replace_all(fixed("{10.5pt}{12.6pt}"), 
                              fixed("{8pt}{9.6pt}")) %>% 
     stringr::str_replace(
       "\\\\large",  # Match \large
       "\\\\fontsize{9pt}{10.8pt}\\\\selectfont"  # Replace with 9pt font size
+    )
+  
+  # ensure the table fontsize is 8 pt
+  if (!str_detect(latex_string, fixed("{8pt}{9.6pt}"))) {
+    latex_string <- latex_string %>% 
+      str_replace(
+        "(\\\\begin\\{tabular\\*\\}[\\s\\S]*?\\\\end\\{tabular\\*\\})",  # Match the entire tabular environment
+        "\\\\fontsize{8pt}{9.6pt}\\\\selectfont\n\\1"  # Wrap with font size commands
+      )
+  }
+
+  if (!is.na(firstcolumn)) {
+    latex_string <- latex_string %>% 
+      str_replace(
+        "\\\\begin\\{tabular\\*\\}\\{1\\\\linewidth\\}\\{@\\{\\\\extracolsep\\{\\\\fill\\}\\}lrrrr\\}",  # Match the original tabular definition
+       paste0("\\\\begin{tabular*}{1\\\\linewidth}{@{\\\\extracolsep{\\\\fill\\}}P{",
+              firstcolumn,
+              "cm}rrrr}")   # Use P column type for the first column
     ) %>% 
     str_replace(
-      "\\\\begin\\{tabular\\*\\}\\{1\\\\linewidth\\}\\{@\\{\\\\extracolsep\\{\\\\fill\\}\\}lrrrr\\}",  # Match the original tabular definition
-      "\\\\begin{tabular*}{1\\\\linewidth}{@{\\\\extracolsep{\\\\fill\\}}P{2.7cm}rrrr}"  # Use P column type for the first column
-    ) 
+      "\\{@\\{\\\\extracolsep\\{\\\\fill\\}\\}lrr\\}",  # Match the column definition
+      paste0("{@{\\\\extracolsep{\\\\fill}}P{",
+        firstcolumn,
+        "cm}rr}")        # Replace `l` with `P{2.5cm}`
+      )
+  }
   
+  return(latex_string)
+}
+
+## latex tables crosses and checks  ----
+mylatex_crosses <- function(gttable) {
+  latex_string <- gttable %>% as_latex() %>% 
+    stringr::str_replace_all(
+      c("✓" = "\\\\tick", "✘" = "\\\\cross")
+    )
   return(latex_string)
 }
