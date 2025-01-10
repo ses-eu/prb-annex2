@@ -57,8 +57,17 @@ data_prep <- state_table |>
   
 # plot table ----
 
-mygtable(data_prep, myfont)|> 
+table1 <- mygtable(data_prep, myfont)|> 
   tab_header(
     title = md("KEA (%)")
   ) |> 
   fmt_markdown(columns = Actual) 
+
+
+# create latex table
+if (knitr::is_latex_output()) {
+  table_env_kea_all_states <- table1 %>% mylatex_crosses ()
+  
+} else {
+  table1
+}
