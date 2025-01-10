@@ -1,6 +1,6 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("cz") == FALSE) {cz = c("1", "terminal", "level2")}
+if (exists("cz") == FALSE) {cz = c("1", "terminal", "level1")}
 # ez=1
 
 # define cz & level----
@@ -95,13 +95,24 @@ mybarmode <- 'group'
 myminsize <- myfont*0.95
 
 #### title
+if (knitr::is_latex_output()) {
+  mylevel1_title <- " determined/actual\nunit costs (DUC/AUC)"
+  mytitle_y <- 0.95
+  mylocalmargin <- list(t = 50)
+  
+} else {
+  mylevel1_title <- " determined/actual unit costs (DUC/AUC)"
+  mytitle_y <- 0.99
+  mylocalmargin <- mymargin
+  
+}
+
 mytitle_text <- if_else(doclevel == "level1",
                         paste0("DUC/AUC - " ,
                                if_else(cztype == "terminal", "Terminal", "En route"),
-                               " determined/actual unit costs (DUC/AUC)"),
+                               mylevel1_title),
                         "DUC/AUC")
                         
-mytitle_y <- 0.99
 
 #### xaxis
 
@@ -116,7 +127,7 @@ mylegend_x <- 0.5
 mylegend_xanchor <- 'center'
 
 #### margin
-mylocalmargin = mymargin
+
 
 # plot chart  ----
 mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals)

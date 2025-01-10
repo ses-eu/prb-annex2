@@ -83,8 +83,16 @@ myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".0f"
 
 #### legend
-mylegend_x <- 0.5
-mylegend_xanchor <- 'center'
+if (knitr::is_latex_output()) {
+  mylegend_x <- -0.1
+  mylegend_xanchor <- 'left'
+  
+} else {
+  mylegend_x <- 0.5
+  mylegend_xanchor <- 'center'
+  
+}
+
 
 #### margin
 mylocalmargin = mymargin
