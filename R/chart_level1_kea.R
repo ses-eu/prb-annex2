@@ -1,5 +1,5 @@
 
-if (exists("doclevel") == FALSE) {doclevel = "level2"}
+if (!exists("doclevel")) {doclevel = "level1"}
  
 if (country == "Network Manager") {
   # NM case ----
@@ -133,12 +133,23 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
+if (!knitr::is_latex_output()) {
+  mylevel1_title <- "Average horizontal flight efficiency\nof the actual trajectory (KEA)"
+  mytitle_y <- 0.95
+  mylocalmargin <- list(t = 50)
+  
+} else {
+  mylevel1_title <- "Average horizontal flight efficiency of the actual trajectory (KEA)"
+  mytitle_y <- 0.99
+  mylocalmargin <- mymargin
+  
+}
+
 mytitle_text <- paste0(if_else(country == "Network Manager", 
                                "KEP", 
                                if_else(doclevel == "level1",
-                                       "Average horizontal flight efficiency of the actual trajectory (KEA)",
+                                       mylevel1_title,
                                        "KEA")))
-mytitle_y <- 0.99
 
 #### xaxis
 
@@ -150,9 +161,6 @@ myyaxis_tickformat <- ".2f"
 #### legend
 mylegend_x <- 0.5
 mylegend_xanchor <- 'center'
-
-#### margin
-mylocalmargin <- mymargin
 
 #____additional trace parameters
 myat_name <- "Target"
@@ -176,6 +184,4 @@ myat_textfont_size <- myfont
 mybarchart(data_prep_actual, mywidth, myheight+30, myfont, mylocalmargin, mydecimals) %>% 
   add_line_trace(., data_prep_target)
 
-# %>% 
-#   add_empty_trace(., data_prep) 
 
