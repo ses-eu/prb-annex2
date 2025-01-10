@@ -143,25 +143,6 @@ if (country == 'SES RP3') {
 # chart ----
 
 ## chart parameters ----
-# if (knitr::is_latex_output()) {
-# # I need the charts to be bigger as they are going to be in a latex minipage
-#   mywidth <- 1500
-#   myheight <- 1000
-#   myfont <- 40
-#   
-#   mytextfont_size <- myfont
-#   mytitle_font_size <- myfont*1.2
-#   myminsize <- 35
-#   
-#   myxaxis_tickfont_size <- myfont
-#   myxaxis_titlefont_size <- myfont
-#   
-#   myyaxis_titlefont_size <- myfont
-#   myyaxis_tickfont_size <- myfont
-#   
-#   mylegend_font_size <- myfont
-#   }
-
 mysuffix <- ""
 mydecimals <- 2
 
@@ -202,16 +183,6 @@ mylegend_xanchor <- 'left'
 
 #### margin
 mylocalmargin <- mymargin
-
-# if (knitr::is_latex_output()) {
-#   if (country == 'SES RP3') {
-#     mylocalmargin <- list (t = 20, r = 0, l = 30)
-#   } else {
-#     mylocalmargin <- list (t = 20, r = 50, l = 10)
-#   }
-# } else {
-#   mylocalmargin <- list (t = 40, r = 70)
-# }
 
 #____additional trace parameters
 ## additional trace with text totals
