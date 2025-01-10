@@ -1,3 +1,5 @@
+if (!exists("country") | is.na(country)) {country = "SES RP3"}
+
 # import data  ---- 
 if (country == "SES RP3"){
   ## SES case ----
@@ -138,6 +140,14 @@ myyaxis_tickformat <- ".2f"
 mylegend_x <- 0.5
 mylegend_xanchor <- 'center'
 
+if (knitr::is_latex_output()) {
+  mylocallegend_y <- -0.18
+  
+} else {
+  mylocallegend_y <- mylegend_y
+  
+}
+
 #### margin
 mylocalmargin = mymargin
 
@@ -159,5 +169,6 @@ myat_textfont_size <- myfont
 
 # plot chart ----
 ## function moved to utils  
-mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin, mydecimals) %>% 
+mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin, 
+           mydecimals, mylocallegend_y) %>% 
   add_line_trace(., data_prep_kea)
