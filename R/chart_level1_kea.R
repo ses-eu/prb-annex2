@@ -133,7 +133,7 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-if (!knitr::is_latex_output()) {
+if (knitr::is_latex_output()) {
   mylevel1_title <- "Average horizontal flight efficiency\nof the actual trajectory (KEA)"
   mytitle_y <- 0.95
   mylocalmargin <- list(t = 50)
