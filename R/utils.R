@@ -642,7 +642,7 @@ mylinechart <-  function(df, mywidth, myheight, myfont, mymargin, mydecimals) {
   
     
 ## universal barchart  ----
-mybarchart <-  function(df, mywidth, myheight, myfont, mymargin, mydecimals) {
+mybarchart <-  function(df, mywidth, myheight, myfont, mymargin, mydecimals, mylegendy = mylegend_y) {
   df %>% 
     plot_ly(
       width = mywidth,
@@ -718,7 +718,7 @@ mybarchart <-  function(df, mywidth, myheight, myfont, mymargin, mydecimals) {
         xanchor = mylegend_xanchor,
         yanchor = mylegend_yanchor,
         x = mylegend_x,  
-        y = mylegend_y, 
+        y = mylegendy,  # this is on purpose
         font = list(size = mylegend_font_size)
       ),
       margin = mymargin

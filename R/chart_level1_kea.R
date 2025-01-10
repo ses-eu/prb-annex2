@@ -160,6 +160,7 @@ myyaxis_tickformat <- ".2f"
 
 #### legend
 mylegend_x <- 0.5
+mylocallegend_y <- mylegend_y
 mylegend_xanchor <- 'center'
 
 #____additional trace parameters

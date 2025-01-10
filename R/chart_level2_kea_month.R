@@ -1,3 +1,5 @@
+if (!exists("country") | is.na(country)) {country = "SES RP3"}
+
 if (country == "Network Manager") {
   # NM case ----
   ## import data  ----
@@ -128,7 +130,16 @@ mylegend_x <- 0.5
 mylegend_xanchor <- 'center'
 
 #### margin
-mylocalmargin = mymargin
+if (knitr::is_latex_output()) {
+  mylocallegend_y <- -0.18
+
+} else {
+  mylocallegend_y <- mylegend_y
+  
+}
+
+mylocalmargin <- mymargin
+
 
 #____additional trace parameters
 myat_name <- "Target"
@@ -148,5 +159,6 @@ myat_textfont_size <- myfont
 
 # plot chart ----
 ## function moved to utils  
-mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin, mydecimals) %>% 
+mybarchart(data_prep, mywidth, myheight+30, myfont, 
+           mylocalmargin, mydecimals, mylocallegend_y) %>% 
   add_line_trace(., data_prep)
