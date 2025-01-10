@@ -945,3 +945,20 @@ get_prb_conclusions <- function(filename, kpi, table) {
   
   return(prb_conc)
 }
+
+## latex tables for pdf  ----
+mylatex <- function(gttable) {
+  latex_string <- gttable|> as_latex() %>%
+    stringr::str_replace_all(fixed("{10.5pt}{12.6pt}"), 
+                             fixed("{8pt}{9.6pt}")) %>% 
+    stringr::str_replace(
+      "\\\\large",  # Match \large
+      "\\\\fontsize{9pt}{10.8pt}\\\\selectfont"  # Replace with 9pt font size
+    ) %>% 
+    str_replace(
+      "\\\\begin\\{tabular\\*\\}\\{1\\\\linewidth\\}\\{@\\{\\\\extracolsep\\{\\\\fill\\}\\}lrrrr\\}",  # Match the original tabular definition
+      "\\\\begin{tabular*}{1\\\\linewidth}{@{\\\\extracolsep{\\\\fill\\}}P{2.7cm}rrrr}"  # Use P column type for the first column
+    ) 
+  
+  return(latex_string)
+}
