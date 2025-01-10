@@ -9,8 +9,16 @@ execute:
 
 format:
   pdf: 
+    fig-crop: true
+    fig-pos: "H"
+    fig-asp: 1.75
+    keep-tex: false
     toc: true
     lof: false
+    # fig-format: "pdf"
+    # fig-dpi: 300
+    # fig-width: 6
+    # fig-height: 6
     geometry:
       - a4paper
       # - showframe
@@ -22,28 +30,91 @@ format:
       - right=2.2cm
       - footskip=0.7cm
     mainfont: "Roboto"
-    fig-pos: 'h'
     include-in-header:
       - text: |
+          \usepackage[section]{placeins} % Prevent floats from crossing section boundaries
+      
+          \usepackage{array} % Add advanced table formatting
+          \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}} % Left-aligned column without word breaking          
+          
+          \usepackage{float} % Allows [H] placement option
+          \makeatletter
+          \setlength{\@fptop}{0pt} % Place floats at the top of the page
+          \makeatother
+
           \usepackage{xcolor}
           \usepackage{ragged2e} % for justifying text in multiple column layout
           \usepackage{wrapfig}
-          % \usepackage{floatflt}
-
-          \RedeclareSectionCommand[
-            beforeskip=0pt,
-            afterskip=2pt]{chapter} %so to remove the word chapter and the space before
-          
+          \usepackage{subfig}
+       
           \setsansfont{Roboto}
           
+          % Define chapter style
+          \RedeclareSectionCommand[
+            beforeskip=0pt, % No extra space before the chapter heading
+            afterskip=4pt   % 4pt space after the chapter text
+          ]{chapter}
+    
+          % Set chapter font properties
+          \addtokomafont{chapter}{
+            \fontsize{20pt}{22pt}\selectfont % Font size 20pt with line spacing 22pt
+            \color[HTML]{0F4761} % Font color #0F4761
+            \normalfont % Remove bold styling from chapter headings
+          }
+    
+          % Remove chapter numbering
+          \setkomafont{chapterprefix}{} % Disable "Chapter" prefix
+          \renewcommand*{\thechapter}{} % Remove chapter numbering
+          \renewcommand*{\chapterformat}{} % No numbering or formatting for chapters
+          
           \definecolor{MyBlue}{RGB}{54,95,145}
-          \addtokomafont{chapter}{\color{MyBlue}}
-          \addtokomafont{chapterprefix}{\color{MyBlue}}
-          \addtokomafont{chapter}{\fontsize{14pt}{14pt}\selectfont}
-          \addtokomafont{chapterprefix}{\fontsize{14pt}{14pt}\selectfont}
 
-          \addtokomafont{section}{\color{MyBlue}}
-          \addtokomafont{section}{\fontsize{12pt}{12pt}\selectfont}
+          % Define custom section styling
+          \addtokomafont{section}{
+            \fontsize{16pt}{18pt}\selectfont % Font size 16pt with 18pt line spacing
+            \color[HTML]{0F4761} % Font color same as chapter (#0F4761)
+            \bfseries % Bold text
+          }
+          % Adjust spacing for level 1 sections
+          \RedeclareSectionCommand[
+            beforeskip=8pt, % 8pt space before the section
+            afterskip=4pt   % 4pt space after the section
+          ]{section}
+          % Reset section numbering to use '1., 2., etc.'
+          \renewcommand{\thesection}{\arabic{section}.}
+
+           % Define custom subsection styling      
+           \addtokomafont{subsection}{
+            \fontsize{14pt}{16pt}\selectfont % Font size 14pt with 16pt line spacing
+            \normalfont % Non-bold text
+            \color[HTML]{0F4761} % Ensure the color is #0F4761
+          }
+          % Adjust spacing for subsections
+          \RedeclareSectionCommand[
+            beforeskip=8pt, % 8pt space before the subsection
+            afterskip=4pt   % 4pt space after the subsection
+          ]{subsection}
+          % Reset subsection numbering to use '1.1., 1.2., etc.'
+          \renewcommand{\thesubsection}{\thesection\arabic{subsection}.}
+          
+          
+          % Define custom sub-subsection styling
+          \addtokomafont{subsubsection}{
+            \fontsize{11pt}{13pt}\selectfont % Font size 11pt with 13pt line spacing
+            \color[HTML]{0F4761} % Font color same as chapter (#0F4761)
+            \normalfont % Non-bold text
+            \itshape % Italic text
+          }
+    
+          % Adjust spacing for sub-subsections
+          \RedeclareSectionCommand[
+            beforeskip=4pt, % 4pt space before the sub-subsection
+            afterskip=2pt   % 2pt space after the sub-subsection
+          ]{subsubsection}
+    
+          % Reset sub-subsection numbering to use '1.1.1., 1.1.2., etc.'
+          \renewcommand{\thesubsubsection}{\thesubsection\arabic{subsubsection}.}
+          
 
           \newenvironment{tightcenter}{%
             \setlength\topsep{5pt}
