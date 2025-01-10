@@ -1,3 +1,6 @@
+if (!exists("country") | is.na(country)) {country = "SES RP3"
+source("R/parameters.R")
+}
 
 # fix ez if script not executed from qmd file ----
 if (exists("cz") == FALSE) {cz = c("1", "enroute")}
@@ -141,8 +144,8 @@ if (country == "SES RP3") {
 }
   
 
-# plot chart  ----
-mygtable(data_prep, myfont*0.95) %>% 
+# plot table  ----
+table1 <- mygtable(data_prep, myfont*0.95) %>% 
   cols_label(type = paste0("Components of the AUCU in ", 
                            if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))), 
              value = "€/SU") %>% 
@@ -166,4 +169,10 @@ mygtable(data_prep, myfont*0.95) %>%
                       if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report)), "**"))
   )
   
+# create latex table
+if (knitr::is_latex_output()) {
+  table_level2_cef_aucu <- mylatex(table1, NA) 
   
+} else {
+  table1
+}

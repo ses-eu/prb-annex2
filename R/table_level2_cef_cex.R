@@ -1,3 +1,6 @@
+if (!exists("country") | is.na(country)) {country = "SES RP3"
+source("R/parameters.R")
+}
 
 # fix ez if script not executed from qmd file ----
 if (exists("cz") == FALSE) {cz = c("1", "enroute")}
@@ -141,7 +144,7 @@ if (country == "SES RP3") {
 }      
   
 # plot table ----
-mygtable(data_prep, myfont) %>% 
+table1 <- mygtable(data_prep, myfont) %>% 
   cols_label(xlabel = paste0("Cost exempt from cost sharing by item - ", 
                              if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))),
              mymetric = "€'000",
@@ -167,4 +170,11 @@ mygtable(data_prep, myfont) %>%
     ))
 
 
+# create latex table
+if (knitr::is_latex_output()) {
+  table_level2_cef_cex <- mylatex(table1, 4.5)
+  
+} else {
+  table1
+}
 

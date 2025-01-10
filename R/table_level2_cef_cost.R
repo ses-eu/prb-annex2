@@ -1,3 +1,6 @@
+if (!exists("country") | is.na(country)) {country = "SES RP3"
+source("R/parameters.R")
+}
 
 # fix ez if script not executed from qmd file ----
 if (exists("cz") == FALSE) {cz = c("1", "enroute")}
@@ -95,6 +98,7 @@ data_prep <- data_prep_split |>
   pivot_longer(-xlabel, names_to = "name", values_to = 'mymetric') %>% 
   pivot_wider(values_from = 'mymetric', names_from = 'xlabel')
 
+# this is not working at the moment
 if (knitr::is_latex_output()) {
   mytablefontsize <- "8pt"
   mytitletablefontsize <- "9pt"
@@ -104,7 +108,7 @@ if (knitr::is_latex_output()) {
 }
 
 # plot table ----
-mygtable(data_prep, myfont) %>% 
+table1 <- mygtable(data_prep, myfont) %>% 
   cols_label(name = html("Total costs - nominal (M€)")) %>% 
   tab_options(column_labels.background.color = "#F2F2F2",
               column_labels.font.weight = 'bold',
@@ -130,4 +134,13 @@ mygtable(data_prep, myfont) %>%
     locations = list(
       cells_title(groups = "title")   # Apply to the title
     )
-  )
+  ) 
+
+
+# create latex table
+if (knitr::is_latex_output()) {
+  table_level2_cef_cost <- mylatex(table1)
+
+} else {
+  table1
+  }
