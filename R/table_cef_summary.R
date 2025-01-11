@@ -151,7 +151,7 @@ if (knitr::is_latex_output()) {
   myminsize <- 7
   mytickfontsize <- myminsize
   myxtitlefontsize <- myminsize +1
-  mystandoff <- 10
+  mystandoff <- 0
   mytitle1 <- '% difference\nservice units'
   mytitle2 <- '% difference total\ncosts nominal €'
   mytitle3 <- '% difference total\ncosts €<sub>2017</sub>'

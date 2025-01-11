@@ -1,3 +1,6 @@
+if (!exists("country") | is.na(country)) {country <- "SES RP3"
+source("R/parameters.R")
+}
 
 # fix ez if script not executed from qmd file ----
 if (exists("cz") == FALSE) {cz = c("1", "enroute")}
@@ -80,6 +83,13 @@ data_prep <- data_pre_prep |>
 
 
 # chart parameters ----
+if (knitr::is_latex_output()) {
+  mylocalheight <- myheight
+  
+}else{
+  mylocalheight <- myheight+30
+}
+
 mychart_title <- paste0("Net result from ", 
                         if_else(cztype == 'terminal', 'terminal', 'en route'),
                         " activity - ", 
@@ -112,7 +122,7 @@ range_min <- if_else(range_min >0, 0, range_min)
 range_max <- ceiling(max(data_prep$mymetric, na.rm = TRUE)/10^myroundup) * 10^myroundup + 10^myroundup/2
 
 ### plot chart and add annotations
-myplot <- myhbarc(mywidth, myheight+30, myfont, mylocalmargin) %>% 
+myplot <- myhbarc(mywidth, mylocalheight, myfont, mylocalmargin) %>% 
   layout(
     uniformtext=list(minsize = 14, mode='show'),
     xaxis = list(

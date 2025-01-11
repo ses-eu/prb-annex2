@@ -1,3 +1,6 @@
+if (!exists("country") | is.na(country)) {country <- "SES RP3"
+source("R/parameters.R")
+}
 
 # fix ez if script not executed from qmd file ----
 if (exists("cz") == FALSE) {cz = c("1", "enroute")}
@@ -147,6 +150,6 @@ myfactor <- c("VFR exempted",
               "Staff costs")
 
 # plot chart  ----
-myhbarc(mywidth, myheight + 30, myfont, mymargin) %>% 
+myhbarc(mywidth, myheight, myfont, mymargin) %>% 
   layout(xaxis = list(range = c(range_min, range_max)))
 
