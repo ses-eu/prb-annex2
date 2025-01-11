@@ -127,7 +127,8 @@ cef_plot <- function(df, xtitle) {
       title =  list(text = xtitle,
                     font = list(
                       size = myxtitlefontsize
-                      )
+                      ),
+                    standoff = mystandoff # Adjust this value to control spacing
                     ),
       showticklabels = FALSE,
       showgrid = FALSE,
@@ -150,6 +151,7 @@ if (knitr::is_latex_output()) {
   myminsize <- 7
   mytickfontsize <- myminsize
   myxtitlefontsize <- myminsize +1
+  mystandoff <- 10
   mytitle1 <- '% difference\nservice units'
   mytitle2 <- '% difference total\ncosts nominal €'
   mytitle3 <- '% difference total\ncosts €<sub>2017</sub>'
@@ -157,6 +159,7 @@ if (knitr::is_latex_output()) {
 }else{
   mytickfontsize <- myfont*0.93
   myxtitlefontsize <- myfont
+  mystandoff <- NULL
   mytitle1<- '% difference service units'
   mytitle2 <- '% difference total costs nominal €'
   mytitle3 <- '% difference total costs €<sub>2017</sub>'
