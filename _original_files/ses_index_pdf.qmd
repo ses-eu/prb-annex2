@@ -1,16 +1,85 @@
-```{r, eval=TRUE}
-if (knitr::is_latex_output()) {
-  mywidth <- params$mywidth_pdf
-  myheight <- params$myheight_pdf
-  myfont <- params$myfont_pdf
-  mylinewidth <- params$mylinewidth_pdf
-  mymargin <- params$mymargin_pdf
-}
+# Annual Monitoring Report {{< var doc.year_report >}} - SES RP3
+
+## Overview
+
+### Contextual information
+```{r fetch-data-ses, eval=TRUE}
+data_context <-read_xlsx(
+  paste0(data_folder, "SES file.xlsx"),
+  sheet = "Context",
+  range = cell_limits(c(1, 1), c(NA, NA))) %>%
+  as_tibble() %>% 
+  clean_names() %>% 
+  filter(year_report == .env$year_report & year == .env$year_report)
+
+acc_no_context <- data_context %>% select(number_of_acc) %>% pull()
+no_apt_big_context <- data_context %>% select(no_apts_big) %>% pull()
+no_apt_small_context <- data_context %>% select(no_apts_small) %>% pull()
+
+ert_trm_share_context <- data_context %>% select(ert_trm_share) %>% pull()
+ert_cz_context <- data_context %>% select(ert_cz) %>% pull()
+trm_cz_context <- data_context %>% select(trm_cz) %>% pull()
+
+main_ansp_context <- data_context %>% select(main_ans_ps_ert) %>% pull()
+other_ansp_context <- data_context %>% select(other_ans_ps_ert) %>% pull()
+met_ansp_context <- data_context %>% select(met_providers) %>% pull()
 ```
 
-# SES View
+::: {layout="[ 34, 38, 28 ]"}
 
-## Main PRB findings - {{< var doc.year_report >}}
+::::{#1st-column}
+**No of ACCs   ** `r acc_no_context`  
+```{=tex}
+\par\vspace{1em}
+```
+
+**No of airports in the scope**
+```{=tex}
+```
+**of the performance plan:**
+
+- **≥80'K     ** `r no_apt_big_context`
+- **<80'K     ** `r no_apt_small_context`
+
+::::
+
+::::{#2nd-column}
+```{=tex}
+\vspace*{-\baselineskip} % Adjust vertical alignment to the top
+```
+**Share en route / terminal**
+```{=tex}
+```
+**costs `r year_report`                 ** `r ert_trm_share_context`
+```{=tex}
+\par\vspace{1em}
+```
+**En route charging zone(s)     ** `r ert_cz_context`
+```{=tex}
+\par\vspace{1em}
+```
+**Terminal charging zone(s)    ** `r trm_cz_context`
+::::
+
+::::{#3rd-column}
+```{=tex}
+\vspace*{-\baselineskip} % Adjust vertical alignment to the top
+\vspace{-1.5em}
+```
+**No of main ANSPs     ** `r main_ansp_context`
+```{=tex}
+\par\vspace{1em}
+```
+**No of other ANSPs    ** `r other_ansp_context`
+```{=tex}
+\par\vspace{1em}
+```
+**No of MET Providers ** `r met_ansp_context`
+::::
+
+:::
+
+### Main PRB findings - {{< var doc.year_report >}}
 
 ```{r main-concl}
 main_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "main", "Table_Findings_main")
@@ -18,7 +87,7 @@ main_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "main", "Table_Findings_m
 
 `r main_conc1`
 
-## Traffic (SES RP3 area)
+### Traffic (SES RP3 area)
 <!-- https://tex.stackexchange.com/questions/215442/is-there-a-way-to-set-a-parbox-to-a-minimum-height -->
 
 ```{=tex}
@@ -26,11 +95,11 @@ main_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "main", "Table_Findings_m
 \setlength{\fboxsep}{0pt} % Remove padding
 \sbox{0}{\parbox{1\textwidth}{
 
-\begin{wrapfigure}[14]{l}{0.58\linewidth}
+\begin{wrapfigure}[12]{l}{0.5\linewidth}
 \vspace{-15pt}
 ```
 
-```{r}
+```{r chart-level1-traffic-mvt}
 #| file: R/chart_level1_traffic_mvt.R
 #| out.width: "100%"
 ```
@@ -40,8 +109,7 @@ main_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "main", "Table_Findings_m
 \setlength\parskip{1em plus 0.8em} % Space between paragraphs
 ```
 
-
-```{r}
+```{r mvt-conc1}
 mvt_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "traffic_IFR", "Table_Findings_traffic_IFR")
 ```
 
@@ -53,14 +121,17 @@ mvt_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "traffic_IFR", "Table_Find
 \dp0\dimexpr7.0cm-\ht0\fi
 
 \fbox{\usebox{0}}
+```
 
+```{=tex}
+\vspace{10pt}
 \sbox{0}{\parbox{1\textwidth}{
 
-\begin{wrapfigure}[14]{l}{0.58\linewidth}
+\begin{wrapfigure}[12]{l}{0.5\linewidth}
 \vspace{-15pt}
 ```
 
-```{r}
+```{r chart-level1-traffic-su}
 #| file: R/chart_level1_traffic_su.R
 #| out.width: "100%"
 ```
@@ -84,20 +155,17 @@ tsu_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "traffic_SUs", "Table_Find
 \fbox{\usebox{0}}
 ```
 
-```{=tex}
-{
-```
 
-## Safety (SES RP3 area)
+### Safety (SES RP3 area)
 
 ```{=tex}
 \sbox{0}{\parbox{1\textwidth}{
 
-\begin{wrapfigure}[14]{l}{0.58\linewidth}
+\begin{wrapfigure}[13]{l}{0.5\linewidth}
 \vspace{-15pt}
 ```
 
-```{r}
+```{r chart-level1-saf-ses}
 #| file: R/chart_level1_saf_ses.R
 #| out.width: "100%"
 ```
@@ -112,6 +180,7 @@ saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_
 ```
 
 `r saf_conc1`
+
 ```{=tex}
 }}
 \ifdim\dimexpr\ht0+\dp0<7.0cm 
@@ -120,12 +189,12 @@ saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_
 \fbox{\usebox{0}}
 ```
 
-## Environment (SES RP3 area)
+### Environment (SES RP3 area)
 
 ```{=tex}
 \sbox{0}{\parbox{1\textwidth}{
 
-\begin{wrapfigure}[14]{l}{0.58\linewidth}
+\begin{wrapfigure}[13]{l}{0.5\linewidth}
 \vspace{-15pt}
 
 ```
@@ -154,12 +223,12 @@ env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Find
 \fbox{\usebox{0}}
 ```
 
-## Capacity (SES RP3 area)
+### Capacity (SES RP3 area)
 
 ```{=tex}
 \sbox{0}{\parbox{1\textwidth}{
 
-\begin{wrapfigure}[14]{l}{0.58\linewidth}
+\begin{wrapfigure}[26]{l}{0.5\linewidth}
 \vspace{-15pt}
 
 ```
@@ -167,6 +236,10 @@ env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Find
 ```{r chart-cap-er, options = (cztype=c("enroute"))}
 #| file: R/chart_level1_cap.R
 #| out.width: "100%"
+```
+
+```{=tex}
+\vspace{10pt} % vertical space between charts
 ```
 
 ```{r chart-cap-trm, options = (cztype=c("terminal"))}
@@ -193,12 +266,12 @@ cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_F
 \fbox{\usebox{0}}
 ```
 
-## Cost-efficiency (SES RP3 area)
+### Cost-efficiency (SES RP3 area)
 
 ```{=tex}
 \sbox{0}{\parbox{1\textwidth}{
 
-\begin{wrapfigure}[14]{l}{0.58\linewidth}
+\begin{wrapfigure}[27]{l}{0.5\linewidth}
 \vspace{-15pt}
 
 ```
@@ -206,6 +279,10 @@ cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_F
 ```{r}
 #| file: R/chart_level1_cef_er_ses.R
 #| out.width: "100%"
+```
+
+```{=tex}
+\vspace{10pt} % vertical space between charts
 ```
 
 ```{r chart-cef-trm-1, options = (cz=c("1", "terminal", "level1"))}
@@ -224,10 +301,581 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 ```
 
 `r cef_conc1`
+
 ```{=tex}
 }}
 \ifdim\dimexpr\ht0+\dp0<7.0cm 
 \dp0\dimexpr7.0cm-\ht0\fi
 
 \fbox{\usebox{0}}
+
+\clearpage
+```
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+## Safety - SES RP3
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+### PRB monitoring
+```{r}
+# saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_safety")
+```
+
+`r saf_conc1`
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+### Actual versus planned number of ANSPs achieving the level of the EoSM targets for RP3 ahead of 2024
+
+```{r chart-saf-ansp}
+#| file: R/chart_level1_saf_ses.R
+#| out.width: "52%"
+#| fig.align: "center"
+```
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+### Occurrences - Rate of runway incursions (RIs) (PI#1) & Rate of separation minima infringements (SMIs) (PI#2)
+
+:::: {layout="[ 50, 50 ]"}
+
+::::: {#chart-saf-ri}
+```{r chart-saf-ri}
+#| file: R/chart_level2_saf_ri.R
+#| out.width: "100%"
+```
+:::::
+
+::::: {#chart-saf-smi}
+```{r chart-saf-smi}
+#| file: R/chart_level2_saf_smi.R
+#| out.width: "100%"
+```
+:::::
+
+::::
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+## Environment - SES RP3
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+### PRB monitoring
+```{r}
+env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Findings_environment")
+```
+
+`r env_conc1`
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+### En route performance
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+#### Horizontal flight efficiency of the actual trajectory (KEA) (KPI#1), of the last filed flight plan (KEP) (PI#1) & shortest constrained route (SCR) (PI#2)
+
+:::: {layout="[ 50, 50 ]"}
+
+::::: {#chart-env-kea}
+```{r chart-env-kea-l2, options = (doclevel=c("level2"))}
+#| file: R/chart_level1_kea.R
+#| out.width: "100%"
+```
+:::::
+
+::::: {#chart-env-kea-month}
+```{r chart-env-kea-month}
+#| file: R/chart_level2_kea_month.R
+#| out.width: "100%"
+```
+:::::
+
+::::
+
+:::: {layout="[ 50, 50 ]"}
+
+::::: {#chart-kep-scr}
+```{r chart-env-kep-scr}
+#| file: R/chart_level2_kep_scr.R
+#| out.width: "100%"
+```
+:::::
+
+::::: {#chart-kep-scr-month}
+```{r chart-env-kep-scr-month}
+#| file: R/chart_level2_kep_scr_month.R
+#| out.width: "100%"
+```
+:::::
+
+::::
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+#### Summary of performance at local level
+
+:::: {layout="[ 10, 80, 10 ]"}
+
+:::::{#empty-div}
+```{=tex}
+\hspace*{2cm}
+```
+:::::
+
+::::: {#table-kea-summary}
+```{r table-kea-summary}
+#| file: R/table_env_kea_all_states.R
+```
+
+```{=tex}
+```
+
+`r table_env_kea_all_states`
+
+```{=tex}
+```
+:::::
+
+:::::{#empty-div}
+```{=tex}
+\hspace*{2cm}
+```
+:::::
+::::
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+## Capacity - SES RP3
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+### PRB monitoring
+
+```{r cap-prb}
+  cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity")
+```
+
+`r cap_er_conc1`
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+### En route performance
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+#### En route ATFM delay (KPI#1)
+
+:::: {layout="[ 50, 50 ]"}
+::::: {#chart-cap-er-l2}
+```{r chart-cap-er-l2, options = (cztype=c("enroute"))}
+#| file: R/chart_level1_cap.R
+#| out.width: "100%"
+```
+:::::
+
+::::: {#chart-cap-er-month}
+```{r chart-cap-er-month, options = (cztype=c("enroute"))}
+#| file: R/chart_level2_cap_month.R
+#| out.width: "100%"
+```
+:::::
+::::
+
+```{r chart-cap-delay-bin}
+#| file: R/chart_level2_cap_delay_bin.R
+#| out.width: "52%"
+#| fig.align: "center"
+```
+
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+#### Summary of performance at local level
+
+:::: {layout="[ 10, 80, 10 ]"}
+
+:::::{#empty-div}
+```{=tex}
+\hspace*{2cm}
+```
+:::::
+
+::::: {#table-cap-erdelay-summary}
+```{r table-cap-erdelay-summary}
+#| file: R/table_cap_erdelay_all_states.R
+```
+
+```{=tex}
+```
+
+`r table_cap_erdelay_all_states`
+
+```{=tex}
+```
+:::::
+
+:::::{#empty-div}
+```{=tex}
+\hspace*{2cm}
+```
+:::::
+::::
+
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+#### Other indicators
+
+:::: {layout="[ 50, 50 ]"}
+::::: {#chart-cap-atco}
+```{r chart-cap-atco}
+#| file: R/chart_level2_cap_atco.R
+#| out.width: "100%"
+```
+:::::
+
+::::: {#chart-cap-er-month}
+```{r chart-cap-sector-opening-ses}
+#| file: R/chart_level2_cap_sector_opening.R
+#| out.width: "100%"
+```
+:::::
+::::
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+### Terminal performance
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+#### Arrival ATFM delay (KPI#2)
+
+::::: {layout="[ 50, 50 ]"}
+
+:::::: {#chart-cap-trm-l2}
+```{r chart-cap-trm-l2, options = (cztype=c("terminal"))}
+#| file: R/chart_level1_cap.R
+#| out.width: "100%"
+```
+::::::
+
+:::::: {#chart-cap-trm-month}
+```{r chart-cap-trm-month, options = (cztype=c("terminal"))}
+#| file: R/chart_level2_cap_month.R
+#| out.width: "100%"
+```
+::::::
+:::::
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+#### Summary of performance at local level
+
+:::: {layout="[ 10, 80, 10 ]"}
+
+:::::{#empty-div}
+```{=tex}
+\hspace*{2cm}
+```
+:::::
+
+::::: {#table-cap-arrdelay-summary}
+```{r table-cap-arrdelay-summary}
+#| file: R/table_cap_arrdelay_all_states.R
+```
+
+```{=tex}
+```
+
+`r table_cap_arrdelay_all_states`
+
+```{=tex}
+```
+:::::
+
+:::::{#empty-div}
+```{=tex}
+\hspace*{2cm}
+```
+:::::
+::::
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+#### Other terminal performance indicators (PI#1-3)
+
+```{r chart-cap-all-causes-delay-ses}
+#| file: R/chart_level2_cap_all_causes_delay.R
+#| out.width: "52%"
+#| fig.align: "center"
+```
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+## Cost-efficiency - SES RP3
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+### PRB monitoring
+
+:::: {#concl-cef-duc}
+```{r concl-cef-duc}
+cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF")
+```
+::::
+
+`r cef_conc1`
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+### En route charging zone
+
+:::: {layout="[ 50, 50 ]"}
+::::: {#chart-cef-duc}
+```{r chart-cef-duc-er-ses, options = (cz=c("1", "enroute"))}
+#| file: R/chart_level1_cef_er_ses.R
+#| out.width: "100%"
+```
+:::::
+
+::::: {#chart-cef-su}
+```{r chart-cef-su, options = (cz=c("1", "enroute"))}
+#| file: R/chart_level2_cef_su.R
+#| out.width: "100%"
+```
+:::::
+::::
+
+:::: {layout="[ 50, 1, 49 ]"}
+::::: {#chart-cef-cost}
+```{r chart-cef-cost, options = (cz=c("1", "enroute"))}
+#| file: R/chart_level2_cef_cost.R
+#| out.width: "100%"
+```
+:::::
+
+:::::{#empty-div}
+```{=tex}
+\hspace*{0.1cm}
+```
+:::::
+
+::::: {#table-costs}
+```{r table-cef-cost, options = (cz=c("1", "enroute"))}
+#| file: R/table_level2_cef_cost.R
+```
+
+```{=tex}
+\vspace*{-3.8cm}
+```
+
+`r table_level2_cef_cost`
+
+:::::
+::::
+
+:::: {layout="[ 50, 50 ]"}
+::::: {#chart-cef-cost-entity}
+```{r chart-cef-cost-entity, options = (cz=c("1", "enroute"))}
+#| file: R/chart_level2_cef_cost_entity.R
+#| out.width: "100%"
+```
+:::::
+
+::::: {#chart-cef-cost-main}
+```{r chart-cef-cost-main, options = (cz=c("1", "enroute"))}
+#| file: R/chart_level2_cef_cost_main.R
+#| out.width: "100%"
+```
+:::::
+::::
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+#### Summary of performance at local level
+
+:::: {#table-cef-summary}
+```{r table-cef-summary, options = (cztype="enroute")}
+#| file: R/table_cef_summary.R
+#| out.width: "100%"
+#| fig-asp: 1
+```
+::::
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+```
+
+#### Actual unit cost incurred by the users (AUCU) (PI#1)
+
+:::: {layout="[ 50, 2, 48 ]"}
+::::: {#chart-cef-aucu}
+```{r chart-cef-aucu, options = (cz=c("1", "enroute"))}
+#| file: R/chart_level2_cef_aucu.R
+#| out.width: "100%"
+```
+:::::
+
+:::::{#empty-div}
+```{=tex}
+\hspace*{0.2cm}
+```
+:::::
+
+::::: {#table-cef-aucu}
+```{r table-cef-aucu, options = (cz=c("1", "enroute"))}
+#| file: R/table_level2_cef_aucu.R
+```
+
+```{=tex}
+\vspace*{-1.5cm}
+```
+
+`r table_level2_cef_aucu`
+
+:::::
+::::
+
+
+:::: {layout="[ 50, 2, 48 ]"}
+::::: {#chart-cef-er-cex}
+```{r chart-cef-cex, R.options = (cz=c("1", "enroute"))}
+#| file: R/chart_level2_cef_cex.R
+#| out.width: "100%"
+```
+:::::
+
+:::::{#empty-div}
+```{=tex}
+\hspace*{0.2cm}
+```
+:::::
+
+::::: {#table-cef-er-cex}
+```{r table-cef-cex, R.options = (cz=c("1", "enroute"))}
+#| file: R/table_level2_cef_cex.R
+```
+
+```{=tex}
+\vspace*{-2cm}
+```
+
+`r table_level2_cef_cex`
+
+:::::
+::::
+
+#### Regulatory result (RR)
+
+```{=tex}
+\begin{figure}[H]
+\begin{minipage}{0.50\linewidth}
+```
+
+```{r chart-cef-reg-res, options = (cz=c("1", "enroute"))}
+#| file: R/chart_level2_cef_reg_res.R
+#| out.width: "100%"
+```
+
+```{=tex}
+\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
+```
+
+```{r chart-cef-reg-res_aucu,  options = (cz=c("1", "enroute"))}
+#| file: R/chart_level2_cef_reg_res_aucu.R
+#| out.width: "100%"
+```
+
+```{=tex}
+\end{minipage}%
+\end{figure}%
+```
+
+```{=tex}
+\begin{figure}[H]
+\begin{minipage}{0.50\linewidth}
+```
+
+```{r chart-cef-reg-res-ansp, options = (cz=c("1", "enroute"))}
+#| file: R/chart_level2_cef_reg_res_ansp.R
+#| out.width: "100%"
+```
+
+```{=tex}
+\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
+```
+
+```{r chart-cef-net-res-main-ansp, options = (cz=c("1", "enroute"))}
+#| file: R/chart_level2_cef_net_res_main_ansp.R
+#| out.width: "100%"
+```
+
+```{=tex}
+\end{minipage}%
+\end{figure}%
+```
+
+```{=tex}
+\FloatBarrier % Prevent figures from moving beyond this point
+\clearpage
+\thispagestyle{empty} % Remove headers and footers from the final page
+\begin{center}
+\vspace*{\fill} % Center the text vertically
+{\fontsize{20pt}{24pt}\selectfont \textbf{End of document}}
+\vspace*{\fill}
+\end{center}
 ```

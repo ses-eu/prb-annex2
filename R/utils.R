@@ -969,10 +969,10 @@ mylatex <- function(gttable, firstcolumn = 2.7) {
       )
     
   #change border colours
-  latex_string %>% latex_string %>% 
+  latex_string <- latex_string %>% 
     str_replace(
       "\\\\begin\\{tabular\\*",
-      "\\\\arrayrulecolor[gray]{0.7}\\\\begin{tabular*"
+      "\\\\arrayrulecolor[gray]{0.5}\\\\begin{tabular*"
     )
   }
 

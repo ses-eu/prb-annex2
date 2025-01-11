@@ -10,15 +10,11 @@ execute:
 format:
   pdf: 
     fig-crop: true
-    fig-pos: "H"
-    fig-asp: 1.75
-    keep-tex: false
+    fig-pos: 'H'
+    keep-tex: true
     toc: true
     lof: false
     # fig-format: "pdf"
-    # fig-dpi: 300
-    # fig-width: 6
-    # fig-height: 6
     geometry:
       - a4paper
       # - showframe
@@ -32,6 +28,14 @@ format:
     mainfont: "Roboto"
     include-in-header:
       - text: |
+          \usepackage{scrlayer-scrpage} % For adding logo in header
+          \clearpairofpagestyles
+          % Add the logo on the left side of all pages starting from page 2
+          \ihead*{\makebox[0pt][l]{\includegraphics[height=1.2cm]{images/prb_logo.png}}} % Insert logo aligned to the left
+          \pagestyle{scrheadings} % Activate the new header
+          % Add page numbers in the footer
+          \cfoot*{\pagemark} % Centered page number in the footer
+
           \usepackage[section]{placeins} % Prevent floats from crossing section boundaries
       
           \usepackage{array} % Add advanced table formatting
@@ -40,15 +44,27 @@ format:
           \usepackage{float} % Allows [H] placement option
           \makeatletter
           \setlength{\@fptop}{0pt} % Place floats at the top of the page
+          \setlength{\@fpsep}{\textheight} % Avoid stacking other floats below
           \makeatother
 
-          \usepackage{xcolor}
+          \usepackage[table, dvipsnames]{xcolor}
+
           \usepackage{ragged2e} % for justifying text in multiple column layout
           \usepackage{wrapfig}
           \usepackage{subfig}
        
-          \setsansfont{Roboto}
-          
+          \usepackage[utf8]{inputenc} % Ensure UTF-8 support for character encoding
+          \usepackage{textcomp}       % Additional text symbols
+          \usepackage{amssymb}        % Enable ✓ and ✘ symbols
+          \usepackage{fontspec}       % Allow custom fonts for LaTeX
+          \setmainfont{Roboto}        % Set Roboto as the main font  
+          \newfontfamily{\symbolfont}{Segoe UI Symbol} % Set fallback for symbols
+          \DeclareTextFontCommand{\textsymbol}{\symbolfont} % Define fallback symbol command          
+
+          % Define commands for green ticks and red crosses
+          \newcommand{\tick}{\textcolor{green}{\textsymbol{✓}}}
+          \newcommand{\cross}{\textcolor{red}{\textsymbol{✘}}}          
+
           % Define chapter style
           \RedeclareSectionCommand[
             beforeskip=0pt, % No extra space before the chapter heading
@@ -115,16 +131,6 @@ format:
           % Reset sub-subsection numbering to use '1.1.1., 1.1.2., etc.'
           \renewcommand{\thesubsubsection}{\thesubsection\arabic{subsubsection}.}
           
-
-          \newenvironment{tightcenter}{%
-            \setlength\topsep{5pt}
-            \setlength\parskip{0pt}
-            \bfseries
-            \begin{center}
-          }{%
-            \end{center}
-          }
-
 book:
   title: "PRB Annual Monitoring Report"
   author: "Performance Review Body"
