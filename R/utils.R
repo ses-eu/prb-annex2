@@ -967,6 +967,13 @@ mylatex <- function(gttable, firstcolumn = 2.7) {
         "(\\\\begin\\{tabular\\*\\}[\\s\\S]*?\\\\end\\{tabular\\*\\})",  # Match the entire tabular environment
         "\\\\fontsize{8pt}{9.6pt}\\\\selectfont\n\\1"  # Wrap with font size commands
       )
+    
+  #change border colours
+  latex_string %>% latex_string %>% 
+    str_replace(
+      "\\\\begin\\{tabular\\*",
+      "\\\\arrayrulecolor[gray]{0.7}\\\\begin{tabular*"
+    )
   }
 
   if (!is.na(firstcolumn)) {

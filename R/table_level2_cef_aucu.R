@@ -172,10 +172,6 @@ table1 <- mygtable(data_prep, myfont*0.95) %>%
 # create latex table
 if (knitr::is_latex_output()) {
   table_level2_cef_aucu <- mylatex(table1, NA) 
-  # %>%   
-  #   str_remove(fixed("\\begin{table}[!t]\n")) %>% 
-  #   str_remove(fixed("\n\\end{table}\n"))
-  # 
 } else {
   table1
 }
