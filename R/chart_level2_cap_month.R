@@ -1,3 +1,4 @@
+if (!exists("country") | is.na(country)) {country = "SES RP3"}
 if (exists("cztype") == FALSE) {cztype = "terminal"}
 
 if (country == 'SES RP3') {
@@ -167,9 +168,28 @@ mybargap <- 0.25
 mybarmode <- 'stack'
 
 #### title
+if (knitr::is_latex_output()) {
+  mylevel1_title <- " ATFM delay\nby delay groups  - "
+  mytitle_y <- 0.95
+  mylocallegend_y <- -0.2
+  mylegend_x <- -0.18
+  mylegend_xanchor <- 'left'
+  mylocallegend_fontsize <- myfont-1
+  mylocalmargin <- list(t = 50)
+  
+} else {
+  mylevel1_title <- " ATFM delay by delay groups  - "
+  mytitle_y <- 0.99
+  mylocallegend_y <- mylegend_y
+  mylegend_x <- -0.1
+  mylegend_xanchor <- 'left'
+  mylocallegend_fontsize <- myfont
+  mylocalmargin <- mymargin
+  
+}
+
 mytitle_text <- paste0("Monthly distribution of ", if_else(cztype == "enroute", "en route", "arrival"),
-                       " ATFM delay by delay groups  - ", year_report)
-mytitle_y <- 0.99
+                       mylevel1_title, year_report)
 
 #### xaxis
 myxaxis_dtick <- 'M1'
@@ -181,21 +201,8 @@ myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".2f"
 
 #### legend
-mylegend_x <- -0.1
-mylegend_xanchor <- 'left'
 
 #### margin
-mylocalmargin <- mymargin
-
-# if (knitr::is_latex_output()) {
-#   if (country == 'SES RP3') {
-#     mylocalmargin <- list (t = 20, r = 0, l = 30)
-#   } else {
-#     mylocalmargin <- list (t = 20, r = 50, l = 10)
-#   }
-# } else {
-#   mylocalmargin <- list (t = 40, r = 70)
-# }
 
 #____additional trace parameters
 ## additional trace with text totals
@@ -216,7 +223,8 @@ myat_textfont_size <- myfont
 
 # plot chart ----
 ## function moved to utils  
-mybarchart(data_prep_actual, mywidth, myheight + 20, myfont, mylocalmargin, mydecimals) %>% 
+mybarchart(data_prep_actual, mywidth, myheight + 20, myfont, mylocalmargin, 
+           mydecimals, mylocallegend_y, mylocallegend_fontsize) %>% 
   add_line_trace(., data_prep_total) %>% 
   layout(yaxis = list(rangemode = "tozero"))
 

@@ -178,8 +178,19 @@ myyaxis_ticksuffix <- ""
 myyaxis_tickformat <- ".2f"
 
 #### legend
-mylegend_x <- -0.1
-mylegend_xanchor <- 'left'
+if (knitr::is_latex_output()) {
+  mylocallegend_y <- mylegend_y
+  mylegend_x <- -0.18
+  mylegend_xanchor <- 'left'
+  mylocallegend_fontsize <- myfont-1
+
+} else {
+  mylocallegend_y <- mylegend_y
+  mylegend_x <- -0.1
+  mylegend_xanchor <- 'left'
+  mylocallegend_fontsize <- myfont
+
+}
 
 #### margin
 mylocalmargin <- mymargin
@@ -203,7 +214,8 @@ myat_textfont_size <- myfont
 
 # plot chart ----
 ## function moved to utils  
-myplot <- mybarchart(data_prep, mywidth, myheight + 20, myfont, mylocalmargin, mydecimals) %>% 
+myplot <- mybarchart(data_prep, mywidth, myheight + 20, myfont, mylocalmargin,
+                     mydecimals, mylocallegend_y, mylocallegend_fontsize) %>% 
   add_line_trace(., data_prep_total)
 
 # myplot_pdf <- mybarchart(data_prep, mywidth_pdf, myheight_pdf, myfont_pdf, mylocalmargin, mydecimals) %>%

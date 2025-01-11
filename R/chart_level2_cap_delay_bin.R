@@ -1,3 +1,5 @@
+if (!exists("country") | is.na(country)) {country = "SES RP3"}
+
 ## import data  ----
 if (country == 'SES RP3') {
   data_raw  <-  read_xlsx(
@@ -83,8 +85,25 @@ mybargap <- 0.25
 mybarmode <- 'stack'
 
 #### title
-mytitle_text <- paste0("Distribution of IFR flights per the duration of en route ATFM delay")
-mytitle_y <- 0.99
+if (knitr::is_latex_output()) {
+  mytitle_text <- "Distribution of IFR flights per\nthe duration of en route ATFM delay"
+  mytitle_y <- 0.95
+  mylocallegend_y <- -0.2
+  mylegend_x <- -0.1
+  mylegend_xanchor <- 'left'
+  # mylocallegend_fontsize <- myfont-1
+  mylocalmargin <- list(t = 50)
+  
+} else {
+  mytitle_text <- "Distribution of IFR flights per the duration of en route ATFM delay"
+  mytitle_y <- 0.99
+  mylocallegend_y <- mylegend_y
+  mylegend_x <- 0.5
+  mylegend_xanchor <- 'center'
+  # mylocallegend_fontsize <- myfont
+  mylocalmargin <- mymargin
+  
+}
 
 #### xaxis
 
@@ -94,13 +113,11 @@ myyaxis_ticksuffix <- "%"
 myyaxis_tickformat <- ".0f"
 
 #### legend
-mylegend_x <- 0.5
-mylegend_xanchor <- 'center'
 
 #### margin
-mylocalmargin <- mymargin
 
 ## plot chart  ----
-mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals) %>% 
+mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, 
+           mydecimals, mylocallegend_y) %>% 
   layout(xaxis = list(range= c(2019.5,2024.5)),
          yaxis = list(rangemode = "tozero"))
