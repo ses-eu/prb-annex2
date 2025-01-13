@@ -59,6 +59,7 @@ myhovertemplate <- paste0('%{y:,.', mydecimals, 'f}', mysuffix)
 
 mytextangle <- 0
 mytextfont_color <- 'black'
+mytextfont_size <- myfont
 
 #### title
 mytitle_text <-  paste0("SMIs per 100,000 flight hours")

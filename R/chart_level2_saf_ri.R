@@ -1,3 +1,7 @@
+if (!exists("country") | is.na(country)) {country = "SES RP3"
+source("R/parameters.R")
+}
+
 # import data  ----
 if (country == "SES RP3"){
   ## SES case ----
@@ -59,6 +63,7 @@ myhovertemplate <- paste0('%{y:,.', mydecimals, 'f}', mysuffix)
 
 mytextangle <- 0
 mytextfont_color <- 'black'
+mytextfont_size <- myfont
 
 #### title
 mytitle_text <-  paste0("RIs per 100,000 movements")
