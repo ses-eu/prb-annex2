@@ -995,11 +995,100 @@ mylatex <- function(gttable, firstcolumn = 2.7) {
   return(latex_string)
 }
 
-## latex tables crosses and checks  ----
-mylatex_crosses <- function(gttable) {
-  latex_string <- gttable %>% as_latex() %>% 
-    stringr::str_replace_all(
-      c("✓" = "\\\\tick", "✘" = "\\\\cross")
+## latex layout 2 figures side by side  ----
+layout_2fig <- function(chart1, chart2) {
+  
+  layout_string <- paste0('
+```{=tex}
+\\begin{figure}[H]
+\\begin{minipage}{0.50\\linewidth}
+%
+\\includegraphics[width=1\\linewidth,height=\\textheight,keepaspectratio]{index_files/figure-pdf/',chart1,'-1.pdf}
+%
+\\end{minipage}%
+%
+\\begin{minipage}{0.50\\linewidth}
+%
+\\includegraphics[width=1\\linewidth,height=\\textheight,keepaspectratio]{index_files/figure-pdf/',chart2,'-1.pdf}
+%
+\\end{minipage}%
+\\end{figure}%
+```
+')
+  return(layout_string)
+}
+
+## setup gt latex output  ----
+setup_latex_table <- function(table1) {
+  # table1 <- table_level2_cef_cex
+  # remove the table env incompatible with the minipage we need
+  tablestring <- table1 %>% 
+    stringr::str_replace_all("\\\\begin\\{table\\}\\[!t\\]\\n",
+                             "") %>% 
+    stringr::str_replace_all("\\\\ \n",
+                             "\\\\\n") %>%
+    stringr::str_replace_all("\\\\end\\{table\\}\n",
+                             "") 
+  
+  # remove this line that quarto adds to gt latex output
+  layout_string <- fixed(tablestring)%>% 
+    str_replace_all(fixed("\\begin{table}\n"),"")
+
+  return(layout_string)
+}
+
+## latex layout figure table side by side----
+layout_fig_table <- function(chart1, table1, vspace) {
+  
+  layout_string <-paste0(
+    "```{=tex}\n\\begin{figure}[H]
+\\begin{minipage}{0.50\\linewidth}
+%
+\\includegraphics[width=1\\linewidth,height=\\textheight,keepaspectratio]{index_files/figure-pdf/",chart1,"-1.pdf}
+%
+\\end{minipage}%
+%
+\\begin{minipage}{0.02\\linewidth}
+
+\\hspace*{0.2cm}
+
+\\end{minipage}%
+%
+\\begin{minipage}{0.48\\linewidth}\n",
+"\\vspace*{", vspace, "cm}\n",
+table1,
+"%
+\\end{minipage}%\n
+\\end{figure}%\n```\n"
     )
-  return(latex_string)
+  
+  return(layout_string)
+}
+
+## latex layout summary table----
+layout_summary_table <- function(table1) {
+  
+  layout_string <-paste0(
+    "```{=tex}\n\\begin{figure}[H]
+\\begin{minipage}{0.1\\linewidth}
+
+\\hspace*{2cm}
+
+\\end{minipage}%
+%
+\\begin{minipage}{0.80\\linewidth}\n",
+    table1,
+    "%
+\\end{minipage}%
+%
+\\begin{minipage}{0.1\\linewidth}
+
+\\hspace*{2cm}
+
+\\end{minipage}%
+%
+\\end{figure}%\n```\n"
+  )
+  
+  return(layout_string)
 }
