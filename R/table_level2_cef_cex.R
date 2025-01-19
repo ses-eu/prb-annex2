@@ -172,9 +172,10 @@ table1 <- mygtable(data_prep, myfont) %>%
 
 # create latex table
 if (knitr::is_latex_output()) {
-  table_level2_cef_cex <- mylatex(table1, 4.5)
+  table_level2_cef_cex <- mylatex(table1, 4.5) 
   
 } else {
+  table_level2_cef_cex <- mylatex(table1, 4.5) 
   table1
 }
 
