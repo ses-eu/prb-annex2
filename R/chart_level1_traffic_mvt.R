@@ -191,4 +191,6 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
 }
 
 ## plot chart ----
-myc(mywidth, myheight, myfont, mylinewidth, mymargin)
+p <- myc(mywidth, myheight, myfont, mylinewidth, mymargin)
+
+p
