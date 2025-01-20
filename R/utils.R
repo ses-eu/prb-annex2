@@ -1092,3 +1092,37 @@ layout_summary_table <- function(table1) {
   
   return(layout_string)
 }
+
+## latex wrap text around figure ----
+layout_wrap_figure <- function(chart1, chart2 = NULL, text, vspace) {
+  
+  layout_string <-paste0(
+    "```{=tex}\n\\sbox{0}{\\parbox{1\\textwidth}{
+
+\\begin{wrapfigure}[", vspace ,"]{l}{0.5\\linewidth}
+\\vspace{-15pt}
+
+\\includegraphics[width=1\\linewidth,height=\\textheight,keepaspectratio]{index_files/figure-pdf/",chart1,"-1.pdf}
+
+", if_else(is.NULL(chart2), "", "\\vspace{10pt} % vertical space between charts,
+
+\\includegraphics[width=1\\linewidth,height=\\textheight,keepaspectratio]{index_files/figure-pdf/",chart2,"-1.pdf}
+
+"),
+"\\end{wrapfigure}
+
+\\setlength\\parskip{1em plus 0.8em} % Space between paragraphs
+
+", text,"
+
+}}
+\\ifdim\\dimexpr\\ht0+\\dp0<7.0cm 
+\\dp0\\dimexpr7.0cm-\\ht0\\fi
+
+\\fbox{\\usebox{0}}
+
+```\n"
+  )
+  
+  return(layout_string)
+}
