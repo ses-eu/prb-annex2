@@ -1,0 +1,314 @@
+<!-- ### Traffic L1 -->
+
+```{r chart_level1_traffic_mvt, include=FALSE}
+#| file: R/chart_level1_traffic_mvt.R
+#| out.width: "100%"
+```
+
+```{r chart_level1_traffic_su, include=FALSE}
+#| file: R/chart_level1_traffic_su.R
+#| out.width: "100%"
+```
+
+<!-- ### Safety L1 -->
+
+```{r chart_saf_l1, include=FALSE}
+#| file: R/chart_level1_saf.R
+#| out.width: "100%"
+```
+
+<!-- ## Environment L1 -->
+
+```{r chart_env_kea_l1, options = (doclevel=c("level1")), include=FALSE}
+#| file: R/chart_level1_kea.R
+#| out.width: "100%"
+```
+
+<!-- ## Capacity L1 -->
+
+```{r chart_cap_er, options = (cztype=c("enroute")), include=FALSE}
+#| file: R/chart_level1_cap.R
+#| out.width: "100%"
+```
+
+```{r chart_cap_trm, options = (cztype=c("terminal")), include=FALSE}
+#| file: R/chart_level1_cap.R
+#| out.width: "100%"
+```
+
+<!-- ## Cost-efficiency L1-->
+
+```{r chart_cef_er_1, options = (cz=c("1", "enroute", "level1")), include=FALSE}
+#| file: R/chart_level1_cef.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_er_2, options = (cz=c("2", "enroute", "level1")), include=FALSE}
+#| file: R/chart_level1_cef.R
+#| out.width: "100%"
+```
+
+
+```{r chart_cef_trm_1, options = (cz=c("1", "terminal", "level1")), include=FALSE}
+#| file: R/chart_level1_cef.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_trm_2, options = (cz=c("2", "terminal", "level1")), include=FALSE}
+#| file: R/chart_level1_cef.R
+#| out.width: "100%"
+```
+
+
+```{r yearly_xrates}
+# get yearly xrates
+
+xrate <- get_xrates("enroute", ecz_list$ecz_id[1]) |> 
+  filter(year == year_report) |> 
+  select(pp_exchangerate)
+
+xrate_year_report <- if_else(country == "Luxembourg", 1, pull(xrate))
+
+```
+
+<!-- ## Safety L2-->
+<!-- ### Occurrences - Rate of runway incursions (RIs) (PI#1) & Rate of separation minima infringements (SMIs) (PI#2) -->
+
+```{r chart_saf_ri, include=FALSE}
+#| file: R/chart_level2_saf_ri.R
+#| out.width: "100%"
+```
+
+```{r chart_saf_smi, include=FALSE}
+#| file: R/chart_level2_saf_smi.R
+#| out.width: "100%"
+```
+  
+<!-- ## Environment L2-->
+<!-- ### En route performance -->
+<!-- ##### Horizontal flight efficiency of the actual trajectory (KEA) (KPI#1), of the last filed flight plan (KEP) (PI#1) & shortest constrained route (SCR) (PI#2) -->
+
+```{r chart_env_kea_l2, options = (doclevel=c("level2")), include=FALSE}
+#| file: R/chart_level1_kea.R
+#| out.width: "100%"
+```
+
+```{r chart_env_kea_month, include=FALSE}
+#| file: R/chart_level2_kea_month.R
+#| out.width: "100%"
+```
+
+```{r chart_env_kep_scr, include=FALSE}
+#| file: R/chart_level2_kep_scr.R
+#| out.width: "100%"
+```
+
+```{r chart_env_kep_scr_month, include=FALSE}
+#| file: R/chart_level2_kep_scr_month.R
+#| out.width: "100%"
+```
+
+<!-- ### Terminal performance -->
+<!-- #### Additional taxi-out time (AXOT) (PI#3) & Arrival Sequencing and Metering Area (ASMA) time (PI#4) -->
+
+```{r chart_axot_apt, include=FALSE}
+#| file: R/chart_level2_env_axot_apt.R
+#| out.width: "100%"
+```
+
+```{r chart_asma_apt, include=FALSE}
+#| file: R/chart_level2_env_asma_apt.R
+#| out.width: "100%"
+```
+  
+<!-- #### Share of arrivals applying continuous descent operations (CDOs) (PI#5) -->
+```{r chart_cdo_country, include=FALSE}
+#| file: R/chart_level2_env_cdo_country.R
+#| out.width: "100%"
+```
+
+```{r chart_cdo_apt, include=FALSE}
+#| file: R/chart_level2_env_cdo_apt.R
+#| out.width: "100%"
+```
+
+  
+<!-- Level2 text -->
+```{r level_2_text}
+source(here("R","get_level2_text.R"))
+```
+
+
+# Annual Monitoring Report `r params$year_report` - `r params$country`
+<!-- quarto  playing tricks and all of a sudden this doesnt work -->
+<!-- {{< var doc.year_report >}} - {{< var doc.country >}} -->
+
+## Overview
+
+### Contextual information
+
+### Traffic (En route traffic zone)
+```{=tex}
+\setlength{\fboxrule}{0pt} % Set the border width to 0pt (no border)
+\setlength{\fboxsep}{0pt} % Remove padding
+```
+
+```{r mvt_conc1}
+mvt_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "traffic_IFR", "Table_Findings_traffic_IFR")
+```
+
+`r layout_wrap_figure("chart_level1_traffic_mvt", NULL, mvt_conc1, 12)`
+
+```{r su_conc1}
+tsu_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "traffic_SUs", "Table_Findings_traffic_TSU")
+```
+
+`r layout_wrap_figure("chart_level1_traffic_su", NULL, tsu_conc1, 12)`
+
+### Safety (Main ANSP)
+
+```{r saf_conc1}
+saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_safety")
+```
+
+`r layout_wrap_figure("chart_saf_l1", NULL, tsu_conc1, 12)`
+
+
+<!-- exception for luxembourg -->
+`r if (params$country == "Luxembourg") "::: {.content-hidden}"`
+
+### Environment (Member State)
+
+```{r concl_env}
+env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Findings_environment")
+```
+
+`r layout_wrap_figure("chart_env_kea_l1", NULL, env_conc1, 12)`
+
+`r if (params$country == "Luxembourg") ":::"`
+
+
+### Capacity (Member State)
+
+```{r concl_cap}
+if (params$country == "Luxembourg") {
+  cap_er_conc1 <- if_else(params$year == 2023, 
+                    get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table_Findings_TRM_capacity"),
+                    "")
+  } else {
+  cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity")
+}
+```
+
+`r if_else(params$country == "Luxembourg", layout_wrap_figure("chart_cap_trm", NULL, cap_er_conc1, 13), "")` 
+
+`r if_else (params$no_tcz == 0, layout_wrap_figure("chart_cap_er", NULL, cap_er_conc1, 13), "")`
+
+`r if_else (params$no_tcz != 0 & params$country != "Luxembourg", layout_wrap_figure("chart_cap_er", "chart_cap_trm", cap_er_conc1, 27), "")`
+
+### Cost-efficiency (En route/Terminal charging zone(s))
+
+```{r concl-cef}
+cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF")
+```
+
+`r if_else (params$no_ecz == 2, layout_wrap_figure("chart_cef_er_1", "chart_cef_er_2", cef_conc1, 40, "chart_cef_trm_1"), "")`
+
+`r if_else (params$no_tcz == 2, layout_wrap_figure("chart_cef_er_1", "chart_cef_trm_1", cef_conc1, 40, "chart_cef_trm_2"), "")`
+
+`r if_else (params$no_ecz == 1 & params$no_tcz == 1, layout_wrap_figure("chart_cef_er_1", "chart_cef_trm_1", cef_conc1, 27), "")`
+
+`r if_else (params$no_ecz == 1 & params$no_tcz == 0, layout_wrap_figure("chart_cef_er_1", NULL, cef_conc1, 12), "")`
+
+```{=tex}
+\clearpage
+```
+
+## Safety - `r params$country`
+
+### PRB monitoring
+
+`r saf_conc1`
+
+### Effectiveness of Safety Management (EoSM) (KPI#1)
+
+```{r chart_saf_eosm}
+#| file: R/chart_level1_saf.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+**Focus on EoSM**
+
+`r saf_text`
+
+
+`r if (params$country == "MUAC") "::: {.content-hidden}"`
+
+### Occurrences - Rate of runway incursions (RIs) (PI#1) & Rate of separation minima infringements (SMIs) (PI#2)
+
+`r layout_2fig("chart_saf_ri", "chart_saf_smi")`
+
+`r if (params$country == "MUAC") ":::"`
+
+## Environment - `r params$country`
+
+### PRB monitoring
+
+`r env_conc1`
+
+`r if (params$country == "Luxembourg") "::: {.content-hidden}"`
+
+### En route performance
+
+##### Horizontal flight efficiency of the actual trajectory (KEA) (KPI#1), of the last filed flight plan (KEP) (PI#1) & shortest constrained route (SCR) (PI#2)
+
+`r layout_2fig("chart_env_kea_l2", "chart_env_kea_month")`
+
+`r layout_2fig("chart_env_kep_scr", "chart_env_kep_scr_month")`
+
+`r if (params$country == "Luxembourg") ":::"`
+
+
+`r if (params$no_tcz == 0) "::: {.content-hidden}"`
+
+### Terminal performance
+
+#### Additional taxi-out time (AXOT) (PI#3) & Arrival Sequencing and Metering Area (ASMA) time (PI#4)
+
+```{r chart_axot_asma_country}
+#| file: R/chart_level2_env_axot_asma_country.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+`r layout_2fig("chart_axot_apt", "chart_asma_apt")`
+
+##### Focus on ASMA & AXOT
+
+**AXOT**
+
+`r if (exists("env_apt_2") == FALSE) {''} else {env_apt_2}`
+
+**ASMA**
+
+`r if (exists("env_apt_3") == FALSE) {''} else {env_apt_3}`
+
+#### Share of arrivals applying continuous descent operations (CDOs) (PI#5)
+
+`r layout_2fig("chart_cdo_country", "chart_cdo_apt")`
+
+##### Focus CDOs
+
+`r if (exists("env_apt_4") == FALSE) {''} else {env_apt_4}`
+
+```{r table_env_apt_pis}
+#| file: R/table_level2_env_apt_pis.R
+#| out.width: "100%"
+```
+
+`r if (params$no_tcz == 0) ":::"`
+
+
