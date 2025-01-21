@@ -1,4 +1,4 @@
-```{r saf-level2-text}
+```{r saf_level2_text}
 # get yearly xrates
 
 xrate <- get_xrates("enroute", ecz_list$ecz_id[1]) |> 

@@ -1,3 +1,65 @@
+<!-- ### Traffic (SES RP3 area) L1 -->
+
+```{r chart_level1_traffic_mvt, include=FALSE}
+#| file: R/chart_level1_traffic_mvt.R
+#| out.width: "100%"
+```
+
+```{r chart_level1_traffic_su, include=FALSE}
+#| file: R/chart_level1_traffic_su.R
+#| out.width: "100%"
+```
+
+<!-- ### Safety (SES RP3 area) L1 -->
+
+```{r chart_level1_saf_ses, include=FALSE}
+#| file: R/chart_level1_saf_ses.R
+#| out.width: "100%"
+```
+
+<!-- ### Environment (SES RP3 area) L1 -->
+
+```{r chart_env_kea, options = (doclevel=c("level1")), include=FALSE}
+#| file: R/chart_level1_kea.R
+#| out.width: "100%"
+```
+<!-- ### Capacity (SES RP3 area) L1 -->
+
+```{r chart_cap_er, options = (cztype=c("enroute")), include=FALSE}
+#| file: R/chart_level1_cap.R
+#| out.width: "100%"
+```
+
+```{r chart_cap_trm, options = (cztype=c("terminal")), include=FALSE}
+#| file: R/chart_level1_cap.R
+#| out.width: "100%"
+```
+
+<!-- ### Cost-efficiency (SES RP3 area) L1-->
+
+```{r chart_level1_cef_er_ses, include=FALSE}
+#| file: R/chart_level1_cef_er_ses.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_trm_1, options = (cz=c("1", "terminal", "level1")), include=FALSE}
+#| file: R/chart_level1_cef.R
+#| out.width: "100%"
+```
+
+<!-- ### Occurrences - Rate of runway incursions (RIs) (PI#1) & Rate of separation minima infringements (SMIs) (PI#2) -->
+
+```{r chart_saf_ri, include=FALSE}
+#| file: R/chart_level2_saf_ri.R
+#| out.width: "100%"
+```
+
+```{r chart_saf_smi, include=FALSE}
+#| file: R/chart_level2_saf_smi.R
+#| out.width: "100%"
+```
+
+
 <!-- ### En route performance -->
 <!-- #### Horizontal flight efficiency of the actual trajectory (KEA) (KPI#1), of the last filed flight plan (KEP) (PI#1) & shortest constrained route (SCR) (PI#2) -->
 
@@ -121,6 +183,176 @@ assign(mytable, setup_latex_table(get(mytable)))
 #| file: R/chart_level2_cef_net_res_main_ansp.R
 #| out.width: "100%"
 ```
+
+
+# Annual Monitoring Report {{< var doc.year_report >}} - SES RP3
+
+## Overview
+
+### Contextual information
+```{r fetch-data-ses, eval=TRUE}
+data_context <-read_xlsx(
+  paste0(data_folder, "SES file.xlsx"),
+  sheet = "Context",
+  range = cell_limits(c(1, 1), c(NA, NA))) %>%
+  as_tibble() %>% 
+  clean_names() %>% 
+  filter(year_report == .env$year_report & year == .env$year_report)
+
+acc_no_context <- data_context %>% select(number_of_acc) %>% pull()
+no_apt_big_context <- data_context %>% select(no_apts_big) %>% pull()
+no_apt_small_context <- data_context %>% select(no_apts_small) %>% pull()
+
+ert_trm_share_context <- data_context %>% select(ert_trm_share) %>% pull()
+ert_cz_context <- data_context %>% select(ert_cz) %>% pull()
+trm_cz_context <- data_context %>% select(trm_cz) %>% pull()
+
+main_ansp_context <- data_context %>% select(main_ans_ps_ert) %>% pull()
+other_ansp_context <- data_context %>% select(other_ans_ps_ert) %>% pull()
+met_ansp_context <- data_context %>% select(met_providers) %>% pull()
+```
+
+::: {layout="[ 34, 38, 28 ]"}
+
+::::{#1st-column}
+**No of ACCs   ** `r acc_no_context`  
+```{=tex}
+\par\vspace{1em}
+```
+
+**No of airports in the scope**
+```{=tex}
+```
+**of the performance plan:**
+
+- **≥80'K     ** `r no_apt_big_context`
+- **<80'K     ** `r no_apt_small_context`
+
+::::
+
+::::{#2nd-column}
+```{=tex}
+\vspace*{-\baselineskip} % Adjust vertical alignment to the top
+```
+**Share en route / terminal**
+```{=tex}
+```
+**costs `r year_report`                 ** `r ert_trm_share_context`
+```{=tex}
+\par\vspace{1em}
+```
+**En route charging zone(s)     ** `r ert_cz_context`
+```{=tex}
+\par\vspace{1em}
+```
+**Terminal charging zone(s)    ** `r trm_cz_context`
+::::
+
+::::{#3rd-column}
+```{=tex}
+\vspace*{-\baselineskip} % Adjust vertical alignment to the top
+\vspace{-1.5em}
+```
+**No of main ANSPs     ** `r main_ansp_context`
+```{=tex}
+\par\vspace{1em}
+```
+**No of other ANSPs    ** `r other_ansp_context`
+```{=tex}
+\par\vspace{1em}
+```
+**No of MET Providers ** `r met_ansp_context`
+::::
+
+:::
+
+
+### Main PRB findings - {{< var doc.year_report >}}
+
+```{r main-concl}
+main_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "main", "Table_Findings_main")
+```
+
+`r main_conc1`
+
+
+### Traffic (SES RP3 area)
+```{=tex}
+\setlength{\fboxrule}{0pt} % Set the border width to 0pt (no border)
+\setlength{\fboxsep}{0pt} % Remove padding
+```
+
+```{r mvt_conc1}
+mvt_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "traffic_IFR", "Table_Findings_traffic_IFR")
+```
+
+`r layout_wrap_figure("chart_level1_traffic_mvt", NULL, mvt_conc1, 12)`
+
+```{r su_conc1}
+tsu_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "traffic_SUs", "Table_Findings_traffic_TSU")
+```
+
+`r layout_wrap_figure("chart_level1_traffic_su", NULL, tsu_conc1, 12)`
+
+
+### Safety (SES RP3 area)
+
+```{r saf_conc1}
+saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_safety")
+```
+
+`r layout_wrap_figure("chart_level1_saf_ses", NULL, saf_conc1, 13)`
+
+
+### Environment (SES RP3 area)
+
+```{r env_conc1}
+env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Findings_environment")
+```
+
+`r layout_wrap_figure("chart_env_kea", NULL, env_conc1, 13)`
+
+
+### Capacity (SES RP3 area)
+
+```{r cap_er_conc1}
+cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity")
+```
+
+`r layout_wrap_figure("chart_cap_er", "chart_cap_trm", cap_er_conc1, 27)`
+
+
+### Cost-efficiency (SES RP3 area)
+
+```{r cef_conc_l1}
+cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF")
+```
+
+`r layout_wrap_figure("chart_level1_cef_er_ses", "chart_cef_trm_1", cef_conc1, 27)`
+
+
+## Safety - SES RP3
+
+### PRB monitoring
+```{r}
+# saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_safety")
+```
+
+`r saf_conc1`
+
+### Actual versus planned number of ANSPs achieving the level of the EoSM targets for RP3 ahead of 2024
+
+```{r chart_saf_ansp}
+#| file: R/chart_level1_saf_ses.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+### Occurrences - Rate of runway incursions (RIs) (PI#1) & Rate of separation minima infringements (SMIs) (PI#2)
+
+`r layout_2fig("chart_saf_ri", "chart_saf_smi")`
+
 
 ## Environment - SES RP3
 
