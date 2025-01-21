@@ -1094,7 +1094,7 @@ layout_summary_table <- function(table1) {
 }
 
 ## latex wrap text around figure ----
-layout_wrap_figure <- function(chart1, chart2 = NULL, text, vspace) {
+layout_wrap_figure <- function(chart1, chart2 = NULL, text, vspace, chart3 = NULL) {
   
   layout_string <-paste0(
     "```{=tex}\n\\sbox{0}{\\parbox{1\\textwidth}{
@@ -1104,11 +1104,16 @@ layout_wrap_figure <- function(chart1, chart2 = NULL, text, vspace) {
 
 \\includegraphics[width=1\\linewidth,height=\\textheight,keepaspectratio]{index_files/figure-pdf/",chart1,"-1.pdf}
 
-", if_else(is.NULL(chart2), "", "\\vspace{10pt} % vertical space between charts,
+", if_else(is.null(chart2), "", paste0("\\vspace{10pt} % vertical space between charts,
 
 \\includegraphics[width=1\\linewidth,height=\\textheight,keepaspectratio]{index_files/figure-pdf/",chart2,"-1.pdf}
 
-"),
+")),
+    if_else(is.null(chart3), "", paste0("\\vspace{10pt} % vertical space between charts,
+
+\\includegraphics[width=1\\linewidth,height=\\textheight,keepaspectratio]{index_files/figure-pdf/",chart3,"-1.pdf}
+
+")),
 "\\end{wrapfigure}
 
 \\setlength\\parskip{1em plus 0.8em} % Space between paragraphs
