@@ -55,7 +55,11 @@ if (country == "Home") {
     
 } else {
     tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
-    tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/state_index.qmd") 
+    if (out_format == 'pdf') {
+      tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/state_index_pdf.qmd")
+    } else {
+      tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/state_index.qmd") 
+    }
     writeLines(tmp_text, 'index.qmd')
 }
   
@@ -485,6 +489,7 @@ if (out_format == 'web') {
                                               env_kea_file = env_kea_file,
                                               env_apt_file = env_apt_file,
                                               env_mil_file = env_mil_file,
-                                              saf_eosm_file = saf_eosm_file)
+                                              saf_eosm_file = saf_eosm_file
+                                              )
                         )
 
