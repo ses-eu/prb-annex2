@@ -1038,7 +1038,7 @@ setup_latex_table <- function(table1) {
 }
 
 ## latex layout figure table side by side----
-layout_fig_table <- function(chart1, table1, vspace) {
+layout_fig_table <- function(chart1, table1, vspace, table2 = NULL) {
   
   layout_string <-paste0(
     "```{=tex}\n\\begin{figure}[H]
@@ -1057,6 +1057,9 @@ layout_fig_table <- function(chart1, table1, vspace) {
 \\begin{minipage}{0.48\\linewidth}\n",
 "\\vspace*{", vspace, "cm}\n",
 table1,
+if_else(is.null(table2), "",paste0("
+
+", table2)),
 "%
 \\end{minipage}%\n
 \\end{figure}%\n```\n"
@@ -1066,24 +1069,21 @@ table1,
 }
 
 ## latex layout summary table----
-layout_summary_table <- function(table1) {
+layout_summary_table <- function(table1, hspace = 0.1, left_margin = 0, width = 1) {
   
   layout_string <-paste0(
     "```{=tex}\n\\begin{figure}[H]
-\\begin{minipage}{0.1\\linewidth}
-
-\\hspace*{2cm}
+\\hspace*{", left_margin, "cm}
+\\begin{minipage}{", hspace, "\\linewidth}
 
 \\end{minipage}%
 %
-\\begin{minipage}{0.80\\linewidth}\n",
-    table1,
+\\begin{minipage}{", (1-2*hspace)*width , "\\linewidth}\n",
+table1,
     "%
 \\end{minipage}%
 %
-\\begin{minipage}{0.1\\linewidth}
-
-\\hspace*{2cm}
+\\begin{minipage}{", hspace, "\\linewidth}
 
 \\end{minipage}%
 %
