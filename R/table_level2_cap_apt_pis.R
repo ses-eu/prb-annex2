@@ -45,7 +45,7 @@ if (country != "SES RP3") {
   
   ## plot table
   
-  mygtable(data_prep, myfont*0.9) %>% 
+  table1 <- mygtable(data_prep, myfont*0.9) %>% 
     tab_spanner_delim(
       delim = "_"
     )|> 
@@ -55,3 +55,10 @@ if (country != "SES RP3") {
 }    
   
   
+# create latex table
+if (knitr::is_latex_output()) {
+  table_level2_cap_apt_pis <- mylatex(table1)
+  
+} else {
+  table1
+}

@@ -3,7 +3,7 @@ source("R/parameters.R")
 }
 
 # fix ez if script not executed from qmd file ----
-if (exists("cz") == FALSE) {cz = c("1", "enroute")}
+if (exists("cztype") == FALSE) {cz = c("1", "enroute")}
 ez <- as.numeric(cz[[1]])
 cztype <- cz[[2]]
 

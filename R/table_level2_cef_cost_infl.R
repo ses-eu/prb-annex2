@@ -1,6 +1,6 @@
 
 # fix ez if script not executed from qmd file ----
-if (exists("cz") == FALSE) {cz = c("1", "enroute")}
+if (exists("cztype") == FALSE) {cz = c("1", "enroute")}
 # ez=1
 
 # define cz ----
@@ -94,7 +94,7 @@ if (country != "SES RP3") {
     
   
   
-  mygtable(data_prep, myfont) %>% 
+  table1 <- mygtable(data_prep, myfont) %>% 
     tab_options(column_labels.background.color = "#F2F2F2",
                 column_labels.font.weight = 'bold',
                 container.padding.y = 0) %>% 
@@ -107,3 +107,11 @@ if (country != "SES RP3") {
         columns = 1
       ))
 }    
+
+# create latex table
+if (knitr::is_latex_output()) {
+  table_level2_cef_cost_infl <- mylatex(table1)
+  
+} else {
+  table1
+}

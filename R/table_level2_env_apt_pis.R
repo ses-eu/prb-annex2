@@ -82,7 +82,7 @@ data_prep <- data_prep_axot %>%
 
 # plot table ----
 
-mygtable(data_prep, myfont*0.9) %>% 
+table1 <-mygtable(data_prep, myfont*0.9) %>% 
   tab_spanner_delim(
     delim = "_"
   ) |> 
@@ -93,3 +93,10 @@ mygtable(data_prep, myfont*0.9) %>%
 }  
 
 
+# create latex table
+if (knitr::is_latex_output()) {
+  table_level2_env_apt_pis <- mylatex(table1)
+  
+} else {
+  table1
+}
