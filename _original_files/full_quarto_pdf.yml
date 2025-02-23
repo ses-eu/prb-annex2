@@ -29,17 +29,87 @@ format:
     mainfont: "Roboto"
     include-in-header:
       - text: |
+          % cover page, header and footer
+          \usepackage{graphicx}  % Allows inserting images
+          \usepackage{eso-pic}   % Enables full-page backgrounds
+          \usepackage{everypage} % Alternative package for first-page modifications
+          \usepackage{hyperref}  % Enables hyperlinks
+          \hypersetup{colorlinks=true, urlcolor=blue} % Set hyperlinks to be blue and underlined
+          
+          \usepackage{xcolor}    % Enables text color customization
+          \definecolor{PRBBlue}{HTML}{2F5496} % Define PRB blue color
+          
+          \newcommand\CoverImage{images/background_cover_page.png} % Background image path
+    
+          % Add background to the first page
+          \AddToShipoutPictureBG*{%
+            \AtPageLowerLeft{\includegraphics[width=\paperwidth,height=\paperheight]{\CoverImage}}
+          }
+    
           \usepackage{scrlayer-scrpage} % For customizing headers/footers
           \clearpairofpagestyles
-
+    
           % Ensure the last page reference is available
           \usepackage{lastpage}
-          
+    
           % Add the logo in the center of the header
           \chead*{\raisebox{10mm}{\includegraphics[height=0.18cm]{images/header_top.png}}}
     
-          % Move page numbering to the right-hand side of the header
-          \ohead*{\makebox[0pt][r]{\raisebox{-10mm}{\thepage/\pageref{LastPage}}}}
+          % Move page numbering to the right-hand side of the header with new font style
+          \ohead*{\makebox[0pt][r]{\raisebox{-10mm}{\textcolor{black}{\robotoLight\normalfont\fontsize{8pt}{10pt}\selectfont \thepage/\pageref*{LastPage}}}}}
+          
+          \usepackage{titling}   % Allows title repositioning
+          \usepackage{fontspec}  % Custom fonts
+          \newfontfamily\robotoLight{Roboto Light} % Define Roboto Light for title
+
+           % Apply color and keep the existing formatting
+          \pretitle{\vspace*{-2cm} % Moves title
+                    \begin{flushleft} % Align title left
+                    \color{PRBBlue} % Apply color
+                    \robotoLight\fontsize{24pt}{26pt}\selectfont} % Custom font size
+          \posttitle{\\[2mm] % Add small space after title
+                    \robotoLight\fontsize{24pt}{26pt}\selectfont Monitoring Report % Hardcoded subtitle
+                    \end{flushleft}}
+    
+          % Apply color to the author (keeps spacing and format)
+          \preauthor{\vspace*{6mm} % Extra spacing between title and author
+                     \begin{flushleft} % Align left
+                     \color{PRBBlue} % Apply color
+                     \robotoLight\fontsize{21pt}{23pt}\selectfont} % Set font size for author
+          \postauthor{\end{flushleft}}
+    
+          % Apply color to the date
+          \predate{\vspace*{5mm} \begin{flushleft}\color{PRBBlue}\small} % Moves date down slightly
+          \postdate{\end{flushleft}}
+      
+          % Add text "This report is automatically generated from: sesperformance.eu"
+          % Position it lower on the cover page
+          \AddToShipoutPictureBG*{%
+            \AtPageLowerLeft{%
+              \hspace{24mm} % Move right slightly
+              \raisebox{40mm}{ % Move up from bottom of page
+                {\robotoLight\fontsize{10pt}{12pt}\selectfont % Set font size
+                \textcolor{black}{This report is automatically generated from: } 
+                \href{https://sesperformance.eu}{sesperformance.eu} % Default hyperlink (blue, underlined)
+                }
+              }
+            }
+          }
+
+          % Add disclaimer in the footer of the first page only (full-width, 6pt font)
+          \AddToShipoutPictureBG*{%
+            \ifnum\value{page}=1
+              \AtPageLowerLeft{\hspace{24mm}\raisebox{10mm}{ % Move right by 10mm, up by 10mm
+                \fontsize{7pt}{9pt}\selectfont % Set font size to 6pt with 8pt line spacing
+                \parbox{\linewidth}{ % Full width of the text area
+                  \raggedright % Left-align text
+                  Performance Review Body of the Single European Sky \textbar\ Rue de la Fusée 96, Office 50.659, 1130 Brussels \\[2pt]
+                  Office Telephone: +32 (0)2 234 7824 \textbar\ cathy.mannion@prb.eusinglesky.eu \textbar\ prb-office@prb.eusinglesky.eu \textbar\ eu-single-sky.transport.ec.europa.eu
+                }
+              }}
+            \fi
+          }
+          
 
           \usepackage[section]{placeins} % Prevent floats from crossing section boundaries
       
@@ -137,9 +207,9 @@ format:
           \renewcommand{\thesubsubsection}{\thesubsection\arabic{subsubsection}.}
           
 book:
-  title: "PRB Annual Monitoring Report"
-  author: "Performance Review Body"
-  date: "2023-12-15"
+  title: "Performance Review Body"
+  subtitle: "Monitoring Report" 
+  author: "{{< var doc.country >}} - {{< var doc.year_report >}}"
   chapters:
     - index.qmd
 
