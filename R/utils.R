@@ -940,7 +940,8 @@ get_prb_conclusions <- function(filename, kpi, table) {
   prb_conc <- conc_string %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' = '\n\n')) %>% str_replace(fixed('c('), '') %>%  str_replace(fixed(')@'), '\n')
   
   if (knitr::is_latex_output()) {
-    prb_conc <- prb_conc %>% str_replace_all(c('▪' = '•'))
+    prb_conc <- prb_conc %>%
+      str_replace_all(c('▪' = '•', '%' = '\\\\%'))  # Escape `%` for LaTeX
   }
   
   return(prb_conc)
