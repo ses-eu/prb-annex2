@@ -6,6 +6,7 @@ execute:
   freeze: false
   echo: false
   warning: false
+  fig-process: pdfcrop
 
 format:
   pdf: 
@@ -28,13 +29,17 @@ format:
     mainfont: "Roboto"
     include-in-header:
       - text: |
-          \usepackage{scrlayer-scrpage} % For adding logo in header
+          \usepackage{scrlayer-scrpage} % For customizing headers/footers
           \clearpairofpagestyles
-          % Add the logo on the left side of all pages starting from page 2
-          \ihead*{\makebox[0pt][l]{\includegraphics[height=1.2cm]{images/prb_logo.png}}} % Insert logo aligned to the left
-          \pagestyle{scrheadings} % Activate the new header
-          % Add page numbers in the footer
-          \cfoot*{\pagemark} % Centered page number in the footer
+
+          % Ensure the last page reference is available
+          \usepackage{lastpage}
+          
+          % Add the logo in the center of the header
+          \chead*{\raisebox{10mm}{\includegraphics[height=0.18cm]{images/header_top.png}}}
+    
+          % Move page numbering to the right-hand side of the header
+          \ohead*{\makebox[0pt][r]{\raisebox{-10mm}{\thepage/\pageref{LastPage}}}}
 
           \usepackage[section]{placeins} % Prevent floats from crossing section boundaries
       
