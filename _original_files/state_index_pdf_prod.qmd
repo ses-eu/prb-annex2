@@ -1,7 +1,7 @@
 ::: {.content-hidden}
 <!-- This section is hidden and creates all charts and tables before using them in the doc. They need to be ahead of the headings so quarto does not add the heading number to the chart name-->
 
-# Charts and tables
+<!-- # Charts and tables -->
 <!-- ## Level1 -->
 <!-- ## Cost-efficiency L1-->
 
@@ -56,8 +56,8 @@ source(here("R","get_level2_text.R"))
 #| out.width: "100%"
 ```
   
-## Environment L2
-### En route performance
+<!-- ## Environment L2 -->
+<!-- ### En route performance -->
 <!-- ##### Horizontal flight efficiency of the actual trajectory (KEA) (KPI#1), of the last filed flight plan (KEP) (PI#1) & shortest constrained route (SCR) (PI#2) -->
 
 ```{r chart_env_kea_l2, options = (doclevel=c("level2")), include=FALSE}
@@ -80,7 +80,7 @@ source(here("R","get_level2_text.R"))
 #| out.width: "100%"
 ```
 
-### Terminal performance
+<!-- ### Terminal performance -->
 <!-- #### Additional taxi-out time (AXOT) (PI#3) & Arrival Sequencing and Metering Area (ASMA) time (PI#4) -->
 
 ```{r chart_axot_apt, include=FALSE}
@@ -150,7 +150,7 @@ table_level2_env_apt_pis <-""
 #| out.width: "100%"
 ```
 
-### Terminal performance
+<!-- ### Terminal performance -->
 <!-- #### Arrival ATFM delay (KPI#2) -->
 ```{r chart_cap_trm_l2, options = (cztype=c("terminal")), eval=(params$no_tcz != 0), include=FALSE}
 #| file: R/chart_level1_cap.R
