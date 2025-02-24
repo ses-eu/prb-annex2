@@ -76,11 +76,15 @@ if (knitr::is_latex_output()) {
                     if_else(country == "Spain",
                             country, ecz_list$ecz_name[1]))
   mytitle_y <- 0.95
+  mylocalmargin = list (t = 40, l = 0)
+  mylegend_x <- -0.1
+  
 } else {
   mytitle <- paste0("IFR movements - ", forecast, " - ", 
                     if_else(country == "Spain", 
                             country, ecz_list$ecz_name[1]))
   mytitle_y <- 0.99
+  mylegend_x <- 0
 }
 
 ## define chart function ----
