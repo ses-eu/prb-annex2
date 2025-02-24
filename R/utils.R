@@ -755,7 +755,7 @@ add_line_trace <- function(myplot, df){
       type = 'scatter',
       name = myat_name,
       text = ~ paste0(if_else(myat_textbold == TRUE, "<b>",""),
-        format(myothermetric,  big.mark  = ",", nsmall = mydecimals), mysuffix,
+        format(round(myothermetric, mydecimals),  big.mark  = ",", nsmall = mydecimals), mysuffix,
         if_else(myat_textbold == TRUE, "</b>","")),
       textangle = myat_textangle,
       textposition = myat_textposition,
