@@ -37,7 +37,7 @@ format:
           \hypersetup{colorlinks=true, urlcolor=blue} % Set hyperlinks to be blue and underlined
           
           \usepackage{xcolor}    % Enables text color customization
-          \definecolor{PRBBlue}{HTML}{2F5496} % Define PRB blue color
+          \definecolor{PRBBlue}{HTML}{0563C1} % Define PRB blue color
           
           \newcommand\CoverImage{images/background_cover_page.png} % Background image path
     
@@ -143,13 +143,13 @@ format:
           % Define chapter style
           \RedeclareSectionCommand[
             beforeskip=0pt, % No extra space before the chapter heading
-            afterskip=4pt   % 4pt space after the chapter text
+            afterskip=6pt   % 6pt space after the chapter text
           ]{chapter}
     
           % Set chapter font properties
           \addtokomafont{chapter}{
-            \fontsize{20pt}{22pt}\selectfont % Font size 20pt with line spacing 22pt
-            \color[HTML]{0F4761} % Font color #0F4761
+            \fontsize{16pt}{18pt}\selectfont % Font size and line spacing
+            \color[HTML]{0563C1} % Font color 
             \normalfont % Remove bold styling from chapter headings
           }
     
@@ -158,32 +158,32 @@ format:
           \renewcommand*{\thechapter}{} % Remove chapter numbering
           \renewcommand*{\chapterformat}{} % No numbering or formatting for chapters
           
-          \definecolor{MyBlue}{RGB}{54,95,145}
-
           % Define custom section styling
           \addtokomafont{section}{
-            \fontsize{16pt}{18pt}\selectfont % Font size 16pt with 18pt line spacing
-            \color[HTML]{0F4761} % Font color same as chapter (#0F4761)
+            \fontsize{12pt}{14pt}\selectfont % Font size and line spacing
+            \color[HTML]{0563C1} % Font color 
             \bfseries % Bold text
+            \MakeUppercase % Force all section headings to be uppercase
           }
+          
           % Adjust spacing for level 1 sections
           \RedeclareSectionCommand[
-            beforeskip=8pt, % 8pt space before the section
-            afterskip=4pt   % 4pt space after the section
+            beforeskip=6pt, % 6pt space before the section
+            afterskip=12pt   % 6pt space after the section
           ]{section}
           % Reset section numbering to use '1., 2., etc.'
           \renewcommand{\thesection}{\arabic{section}.}
 
            % Define custom subsection styling      
            \addtokomafont{subsection}{
-            \fontsize{14pt}{16pt}\selectfont % Font size 14pt with 16pt line spacing
+            \fontsize{12pt}{14pt}\selectfont % Font size and line spacing
             \normalfont % Non-bold text
-            \color[HTML]{0F4761} % Ensure the color is #0F4761
+            \color[HTML]{0563C1} 
           }
           % Adjust spacing for subsections
           \RedeclareSectionCommand[
-            beforeskip=8pt, % 8pt space before the subsection
-            afterskip=4pt   % 4pt space after the subsection
+            beforeskip=6pt, % 6pt space before the subsection
+            afterskip=6pt   % 6pt space after the subsection
           ]{subsection}
           % Reset subsection numbering to use '1.1., 1.2., etc.'
           \renewcommand{\thesubsection}{\thesection\arabic{subsection}.}
@@ -192,19 +192,22 @@ format:
           % Define custom sub-subsection styling
           \addtokomafont{subsubsection}{
             \fontsize{11pt}{13pt}\selectfont % Font size 11pt with 13pt line spacing
-            \color[HTML]{0F4761} % Font color same as chapter (#0F4761)
+            \color[HTML]{0563C1} 
             \normalfont % Non-bold text
             \itshape % Italic text
           }
     
           % Adjust spacing for sub-subsections
           \RedeclareSectionCommand[
-            beforeskip=4pt, % 4pt space before the sub-subsection
-            afterskip=2pt   % 2pt space after the sub-subsection
+            beforeskip=6pt, % 6pt space before the sub-subsection
+            afterskip= 6pt   % 6pt space after the sub-subsection
           ]{subsubsection}
     
           % Reset sub-subsection numbering to use '1.1.1., 1.1.2., etc.'
           \renewcommand{\thesubsubsection}{\thesubsection\arabic{subsubsection}.}
+          
+          % fontsize bigger for focus headings
+          \newcommand{\biggertext}[1]{{\bfseries\fontsize{12pt}{14pt}\selectfont #1}}
           
 book:
   title: "Performance Review Body"
