@@ -1002,18 +1002,17 @@ layout_2fig <- function(chart1, chart2) {
   layout_string <- paste0('
 ```{=tex}
 \\begin{figure}[H]
-\\begin{minipage}{0.50\\linewidth}
-%
-\\includegraphics[width=1\\linewidth,height=\\textheight,keepaspectratio]{index_files/figure-pdf/',chart1,'-1.pdf}
-%
+\\centering
+\\begin{minipage}{0.48\\linewidth}
+    \\centering
+    \\includegraphics[width=1\\linewidth,height=\\textheight,keepaspectratio]{index_files/figure-pdf/', chart1, '-1.pdf}
 \\end{minipage}%
-%
-\\begin{minipage}{0.50\\linewidth}
-%
-\\includegraphics[width=1\\linewidth,height=\\textheight,keepaspectratio]{index_files/figure-pdf/',chart2,'-1.pdf}
-%
+\\hspace{0.015\\linewidth} % Adds a small empty space (2% of linewidth)
+\\begin{minipage}{0.48\\linewidth}
+    \\centering
+    \\includegraphics[width=1\\linewidth,height=\\textheight,keepaspectratio]{index_files/figure-pdf/', chart2, '-1.pdf}
 \\end{minipage}%
-\\end{figure}%
+\\end{figure}
 ```
 ')
   return(layout_string)
