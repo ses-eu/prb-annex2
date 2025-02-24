@@ -158,7 +158,19 @@ myat_textfont_color <- 'transparent'
 myat_textfont_size <- myfont
 
 # plot chart ----
-## function moved to utils  
-mybarchart(data_prep, mywidth, myheight+30, myfont, 
+p1 <- mybarchart(data_prep, mywidth, myheight+30, myfont, 
            mylocalmargin, mydecimals, mylocallegend_y) %>% 
   add_line_trace(., data_prep)
+
+
+if (knitr::is_latex_output()) {
+  p1 <- p1 %>% layout(xaxis = list(
+                        tickangle = -90  # Rotate x-axis tick labels to -90 degrees
+                      )) 
+    p1
+  
+} else {
+  # p1 <- p1 %>% layout(bargap = 0.05) 
+  p1
+  
+}

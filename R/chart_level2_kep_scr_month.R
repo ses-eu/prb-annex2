@@ -117,7 +117,6 @@ mytextangle <- -90
 mytextposition <- "inside"
 myinsidetextanchor <- 'middle'
 mytextfont_color <- 'black'
-mytextfont_size <- myfont * 0.9
 
 ### layout parameters
 mybargap <- 0.25
@@ -141,10 +140,13 @@ mylegend_x <- 0.5
 mylegend_xanchor <- 'center'
 
 if (knitr::is_latex_output()) {
+  mytextfont_size <- myfont * 0.8
   mylocallegend_y <- -0.18
+  
   
 } else {
   mylocallegend_y <- mylegend_y
+  mytextfont_size <- myfont * 0.9
   
 }
 
@@ -169,6 +171,21 @@ myat_textfont_size <- myfont
 
 # plot chart ----
 ## function moved to utils  
-mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin, 
+p1 <- mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin, 
            mydecimals, mylocallegend_y) %>% 
   add_line_trace(., data_prep_kea)
+
+
+
+if (knitr::is_latex_output()) {
+  p1 <- p1 %>% layout(bargap = 0.05,
+                      xaxis = list(
+                        tickangle = -90  # Rotate x-axis tick labels to -90 degrees
+                      ))  
+  p1
+  
+} else {
+  # p1 <- p1 %>% layout(bargap = 0.05) 
+  p1
+  
+}

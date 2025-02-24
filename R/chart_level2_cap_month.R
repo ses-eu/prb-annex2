@@ -222,9 +222,20 @@ myat_textfont_color <- 'black'
 myat_textfont_size <- myfont
 
 # plot chart ----
-## function moved to utils  
-mybarchart(data_prep_actual, mywidth, myheight + 20, myfont, mylocalmargin, 
+p1 <- mybarchart(data_prep_actual, mywidth, myheight + 20, myfont, mylocalmargin, 
            mydecimals, mylocallegend_y, mylocallegend_fontsize) %>% 
   add_line_trace(., data_prep_total) %>% 
   layout(yaxis = list(rangemode = "tozero"))
 
+
+if (knitr::is_latex_output()) {
+  p1 <- p1 %>% layout(xaxis = list(
+    tickangle = -90  # Rotate x-axis tick labels to -90 degrees
+  )) 
+  p1
+  
+} else {
+  # p1 <- p1 %>% layout(bargap = 0.05) 
+  p1
+  
+}
