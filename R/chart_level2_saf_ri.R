@@ -87,7 +87,7 @@ mylocalmargin <- mymargin
 ##I had to do it this way because when there are NA values the dash doesn't work
 data_prep_s1 <- data_prep |> filter(type == "EU Wide Average")
 data_prep_s2 <- data_prep |> filter(type == "RI") |> 
-  mutate(myothermetric = mymetric)
+  mutate(myothermetric = round(mymetric, mydecimals))
 
 
 p1 <- mylinechart(data_prep_s1, mywidth, myheight, myfont, mylocalmargin, mydecimals) |> 
