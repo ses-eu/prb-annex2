@@ -79,4 +79,4 @@ mylocalmargin = mymargin
 
 ## plot chart  ----
 mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals) %>% 
-  layout(xaxis = list(range= c(2019.5,2024.5)))
+  layout(xaxis = list(range= c(2019.5,2024.5), tickformat = '.0f'))

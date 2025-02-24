@@ -40,8 +40,15 @@ mybargap <- 0.25
 mybarmode <- 'group'
 
 #### title
-mytitle_text <- paste0("Effective use of reserved or segregated airspace (ERSA)(PI#6)")
-mytitle_y <- 0.99
+if (knitr::is_latex_output()) {
+  mytitle_text <- paste0("Effective use of reserved or segregated\nairspace (ERSA)(PI#6)")
+  mytitle_y <- 0.95
+  mylocalmargin = list(t = 60)
+  
+} else {
+  mytitle_text <- paste0("Effective use of reserved or segregated airspace (ERSA)(PI#6)")
+  mytitle_y <- 0.99
+}
 
 #### xaxis
 
@@ -61,8 +68,9 @@ mylocalmargin = mymargin
 # function moved to utils
 
 ## plot chart  ----
-mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin, mydecimals) %>% 
+mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, mydecimals) %>% 
   layout(bargroupgap = 0.15,
          yaxis=list(rangemode = "tozero"),
-         xaxis=list(range = c(2019.5, 2024.5))
+         xaxis=list(range = c(2019.5, 2024.5),
+                    tickformat = '.0f')
   ) 

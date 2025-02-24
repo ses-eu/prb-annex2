@@ -119,5 +119,6 @@ myyaxis_tickformat <- ".0f"
 ## plot chart  ----
 mybarchart(data_prep, mywidth, myheight, myfont, mylocalmargin, 
            mydecimals, mylocallegend_y) %>% 
-  layout(xaxis = list(range= c(2019.5,2024.5)),
+  layout(xaxis = list(range= c(2019.5,2024.5),
+                      tickformat = '.0f'),
          yaxis = list(rangemode = "tozero"))
