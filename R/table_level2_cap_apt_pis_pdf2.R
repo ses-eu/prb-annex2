@@ -26,16 +26,18 @@ if (country != "SES RP3") {
     ) %>% 
     select(
       year,
-      "Airport name",
-      "Avg arrival\nATFM delay (KPI#2)",
-      "Slot adherence (PI#1)",
-      "ATC pre departure\ndelay (PI#2)",
-      "All causes pre departure\ndelay (PI#3)"
+      "Airport name"
+      # , "Avg arrival\nATFM delay (KPI#2)"
+      # , "Slot adherence (PI#1)"
+      , "ATC pre departure\ndelay (PI#2)"
+      , "All causes pre departure\ndelay (PI#3)"
     ) %>% 
-    pivot_wider(names_from = "year", values_from = c(    "Avg arrival\nATFM delay (KPI#2)",
-                                                         "Slot adherence (PI#1)",
-                                                         "ATC pre departure\ndelay (PI#2)",
-                                                         "All causes pre departure\ndelay (PI#3)")
+    pivot_wider(names_from = "year", values_from = c(    
+      # "Avg arrival\nATFM delay (KPI#2)"
+      # , "Slot adherence (PI#1)"
+      "ATC pre departure\ndelay (PI#2)"
+      , "All causes pre departure\ndelay (PI#3)"
+      )
                 # , names_glue = "{year}_{.value}" #suffix to prefix
                 ) 
     ## order columns alphabetically 
@@ -48,30 +50,11 @@ if (country != "SES RP3") {
   table1 <- mygtable(data_prep, myfont*0.9) %>% 
     tab_spanner_delim(
       delim = "_"
-    )|> 
-    tab_header(
-      title = md("**Airport level**")
     )
 }    
   
   
 # create latex table
-if (knitr::is_latex_output()) {
-  table_level2_cap_apt_pis <- mylatex(table1)  
+table_level2_cap_apt_pis_pdf2 <- mylatex(table1)  
   
-  # Step 1: Replace "\n" inside column headers with "\newline"
-  table_level2_cap_apt_pis <- table_level2_cap_apt_pis %>% 
-    str_replace_all(
-    fixed("Avg arrival\nATFM delay (KPI\\#2)"), 
-    "\\makecell{Avg arrival \\\\ ATFM delay (KPI\\#2)}") %>% 
-    str_replace_all(
-      fixed("ATC pre departure\ndelay (PI\\#2)"), 
-      "\\makecell{ATC pre departure \\\\ delay (PI\\#2)}") %>% 
-    str_replace_all(
-      fixed("All causes pre departure\ndelay (PI\\#3)"), 
-      "\\makecell{All causes pre departure \\\\ delay (PI\\#3)}")
-    
-  # "\\1\\makecell{\\2 \\\\ \\3}\\4"
-} else {
-  table1
-}
+ 
