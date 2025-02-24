@@ -185,7 +185,7 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
       legend = list(
         orientation = 'h', 
         xanchor = "left",
-        x = 0, 
+        x = mylegend_x, 
         y =-0.1,
         font = list(size = myfont)
       ),
