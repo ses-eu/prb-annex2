@@ -8,6 +8,7 @@
 /_freeze/
 /_site/
 /_book/
+/pdf_docs/
 
 _quarto.yml
 _variables.yml
