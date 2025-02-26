@@ -1131,3 +1131,16 @@ layout_wrap_figure <- function(chart1, chart2 = NULL, text, vspace, chart3 = NUL
   
   return(layout_string)
 }
+
+## setup latex line breaks ----
+latex_linebreaks <- function(mystring) {
+  mystring_list <- str_split(mystring, "<br/>")[[1]] %>%
+    discard(~ .x == "")
+  
+  latex_string <- reduce(mystring_list, ~ paste(.x, .y, sep = fixed('`\\\\`{=tex}')))
+
+  return(latex_string)
+    
+  }
+
+

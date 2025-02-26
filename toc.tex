@@ -28,15 +28,17 @@ $endif$
 % Define TOC title format 
 \renewcommand{\cfttoctitlefont}{\calibriLight\color{PRBBlue}\fontsize{16pt}{12pt}\selectfont\bfseries\MakeUppercase}
 \setlength{\cftbeforetoctitleskip}{0pt}  % Ensure no extra space before title
-\setlength{\cftaftertoctitleskip}{3pt}  % Add 12pt space after title
+\setlength{\cftaftertoctitleskip}{12pt}  % Add 12pt space after title
 
 % Define Chapter level (Normal Calibri, bold, PRBBlue)
 \renewcommand{\cftchapfont}{\calibriRegular\bfseries\fontsize{12pt}{14pt}\selectfont\color{PRBBlue}}
 \renewcommand{\cftchappagefont}{\color{PRBBlue}}
+\setlength{\cftbeforechapskip}{0pt}  % Space before chapter entries
 
 % Define Level 1 sections in TOC (fontsize 12pt, PRBBlue, bold)
 \renewcommand{\cftsecfont}{\calibriLight\itshape\fontsize{11pt}{13pt}\selectfont\color{PRBBlue}}
 \renewcommand{\cftsecpagefont}{\color{PRBBlue}}
+\setlength{\cftbeforesecskip}{0pt}   % Adjust space after section entries if needed
 
 \makeatother
 

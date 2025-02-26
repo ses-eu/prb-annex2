@@ -94,25 +94,7 @@ if (country == "SES RP3") {
       assign(paste0("env_apt_", i, ""), paste0(mytext,collapse = ""))
     }
     
-    
-    # # env apt old code based on ranges
-    # range <- "A3:P4"
-    # env_apt_1 <- read_range(env_apt_file, sheet, range)  
-    # 
-    # range <- "A5:P7"
-    # env_apt_2 <- read_range(env_apt_file, sheet, range) 
-    # env_apt_2 <- if_else(is.na(env_apt_2[2,1]) == FALSE, pull(env_apt_2[2,1]), pull(env_apt_2[1,8]))
-    # 
-    # range <- "A8:P10"
-    # env_apt_3 <- read_range(env_apt_file, sheet, range) 
-    # env_apt_3 <- if_else(is.na(env_apt_3[2,1]) == FALSE, pull(env_apt_3[2,1]), pull(env_apt_3[1,8]))
-    # 
-    # range <- "A11:P13"
-    # env_apt_4 <- read_range(env_apt_file, sheet, range) 
-    # env_apt_4 <- if_else(is.na(env_apt_4[2,1]) == FALSE, pull(env_apt_4[2,1]), pull(env_apt_4[1,8])) 
-    # 
-    # range <- "A14:P15"
-    # env_apt_5 <- read_range(env_apt_file, sheet, range)   
+  
   }
   
   # env mil
