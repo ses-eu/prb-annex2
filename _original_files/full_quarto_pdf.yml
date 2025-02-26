@@ -14,6 +14,7 @@ format:
     fig-pos: 'H'
     keep-tex: true
     toc: true
+    toc-depth: 2 
     lof: false
     # fig-format: "pdf"
     geometry:
@@ -26,18 +27,29 @@ format:
       - left=2.5cm
       - right=2.2cm
       - footskip=0.7cm
-    mainfont: "Roboto"
+    mainfont: "Calibri Light"
+    
+    template-partials:
+      - toc.tex
+    
     include-in-header:
       - text: |
+      
+          \usepackage{xcolor}    % Enables text color customization
+          \definecolor{PRBBlue}{HTML}{0563C1} % Define PRB blue color
+
+          % Load tocloft package for TOC customization
+          \usepackage{tocloft}
+
+          % custom toc moved to toc.tex
+          
           % cover page, header and footer
           \usepackage{graphicx}  % Allows inserting images
           \usepackage{eso-pic}   % Enables full-page backgrounds
           \usepackage{everypage} % Alternative package for first-page modifications
-          \usepackage{hyperref}  % Enables hyperlinks
-          \hypersetup{colorlinks=true, urlcolor=blue} % Set hyperlinks to be blue and underlined
+          % \usepackage{hyperref}  % Enables hyperlinks
+          % \hypersetup{colorlinks=true, urlcolor=blue} % Set hyperlinks to be blue and underlined
           
-          \usepackage{xcolor}    % Enables text color customization
-          \definecolor{PRBBlue}{HTML}{0563C1} % Define PRB blue color
           
           \newcommand\CoverImage{images/background_cover_page.png} % Background image path
     
@@ -56,26 +68,26 @@ format:
           \chead*{\raisebox{10mm}{\includegraphics[height=0.18cm]{images/header_top.png}}}
     
           % Move page numbering to the right-hand side of the header with new font style
-          \ohead*{\makebox[0pt][r]{\raisebox{-10mm}{\textcolor{black}{\robotoLight\normalfont\fontsize{8pt}{10pt}\selectfont \thepage/\pageref*{LastPage}}}}}
+          \ohead*{\makebox[0pt][r]{\raisebox{-10mm}{\textcolor{black}{\calibriLight\normalfont\fontsize{8pt}{10pt}\selectfont \thepage/\pageref*{LastPage}}}}}
           
           \usepackage{titling}   % Allows title repositioning
           \usepackage{fontspec}  % Custom fonts
-          \newfontfamily\robotoLight{Roboto Light} % Define Roboto Light for title
+          \newfontfamily\calibriLight{Calibri Light} % Define Roboto Light for title
 
            % Apply color and keep the existing formatting
           \pretitle{\vspace*{-2cm} % Moves title
                     \begin{flushleft} % Align title left
                     \color{PRBBlue} % Apply color
-                    \robotoLight\fontsize{24pt}{26pt}\selectfont} % Custom font size
+                    \calibriLight\fontsize{26pt}{31pt}\selectfont} % Custom font size
           \posttitle{\\[2mm] % Add small space after title
-                    \robotoLight\fontsize{24pt}{26pt}\selectfont Monitoring Report % Hardcoded subtitle
+                    \calibriLight\fontsize{26pt}{31pt}\selectfont Monitoring Report % Hardcoded subtitle
                     \end{flushleft}}
     
           % Apply color to the author (keeps spacing and format)
           \preauthor{\vspace*{6mm} % Extra spacing between title and author
                      \begin{flushleft} % Align left
                      \color{PRBBlue} % Apply color
-                     \robotoLight\fontsize{21pt}{23pt}\selectfont} % Set font size for author
+                     \calibriLight\fontsize{22pt}{26pt}\selectfont} % Set font size for author
           \postauthor{\end{flushleft}}
     
           % Apply color to the date
@@ -88,7 +100,7 @@ format:
             \AtPageLowerLeft{%
               \hspace{24mm} % Move right slightly
               \raisebox{40mm}{ % Move up from bottom of page
-                {\robotoLight\fontsize{10pt}{12pt}\selectfont % Set font size
+                {\calibriLight\fontsize{11pt}{13pt}\selectfont % Set font size
                 \textcolor{black}{This report is automatically generated from: } 
                 \href{https://sesperformance.eu}{sesperformance.eu} % Default hyperlink (blue, underlined)
                 }
@@ -96,10 +108,10 @@ format:
             }
           }
 
-          % Add disclaimer in the footer of the first page only (full-width, 6pt font)
+          % Add disclaimer in the footer of the first page only (full-width)
           \AddToShipoutPictureBG*{%
             \ifnum\value{page}=1
-              \AtPageLowerLeft{\hspace{24mm}\raisebox{10mm}{ % Move right by 10mm, up by 10mm
+              \AtPageLowerLeft{\hspace{24mm}\raisebox{10mm}{ % Move  
                 \fontsize{7pt}{9pt}\selectfont % Set font size to 6pt with 8pt line spacing
                 \parbox{\linewidth}{ % Full width of the text area
                   \raggedright % Left-align text
@@ -110,9 +122,18 @@ format:
             \fi
           }
           
-
+          
           \usepackage[section]{placeins} % Prevent floats from crossing section boundaries
       
+          \usepackage{array} % Add advanced table formatting
+          \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}} % Left-aligned column without word breaking          
+          
+          \usepackage{float} % Allows [H] placement option
+          \makeatletter
+          \setlength{\@fptop}{0pt} % Place floats at the top of the page
+          \setlength{\@fpsep}{\textheight} % Avoid stacking other floats below
+          \makeatother
+
           \usepackage{array} % Add advanced table formatting
           \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}} % Left-aligned column without word breaking          
           
@@ -131,8 +152,7 @@ format:
           \usepackage[utf8]{inputenc} % Ensure UTF-8 support for character encoding
           \usepackage{textcomp}       % Additional text symbols
           \usepackage{amssymb}        % Enable ✓ and ✘ symbols
-          \usepackage{fontspec}       % Allow custom fonts for LaTeX
-          \setmainfont{Roboto}        % Set Roboto as the main font  
+          \setmainfont{Calibri Light}        % Set Calibri as the main font  
           \newfontfamily{\symbolfont}{Segoe UI Symbol} % Set fallback for symbols
           \DeclareTextFontCommand{\textsymbol}{\symbolfont} % Define fallback symbol command          
 
@@ -140,75 +160,67 @@ format:
           \newcommand{\tick}{\textcolor{green}{\textsymbol{✓}}}
           \newcommand{\cross}{\textcolor{red}{\textsymbol{✘}}}          
 
-          % Define chapter style
-          \RedeclareSectionCommand[
-            beforeskip=0pt, % No extra space before the chapter heading
-            afterskip=6pt   % 6pt space after the chapter text
-          ]{chapter}
-    
-          % Set chapter font properties
-          \addtokomafont{chapter}{
-            \fontsize{16pt}{18pt}\selectfont % Font size and line spacing
-            \color[HTML]{0563C1} % Font color 
-            \normalfont % Remove bold styling from chapter headings
-          }
-    
-          % Remove chapter numbering
-          \setkomafont{chapterprefix}{} % Disable "Chapter" prefix
-          \renewcommand*{\thechapter}{} % Remove chapter numbering
-          \renewcommand*{\chapterformat}{} % No numbering or formatting for chapters
           
-          % Define custom section styling
-          \addtokomafont{section}{
-            \fontsize{12pt}{14pt}\selectfont % Font size and line spacing
-            \color[HTML]{0563C1} % Font color 
-            \bfseries % Bold text
-            \MakeUppercase % Force all section headings to be uppercase
-          }
+          % Load titlesec package for section formatting
+          \usepackage{titlesec}
           
-          % Adjust spacing for level 1 sections
-          \RedeclareSectionCommand[
-            beforeskip=6pt, % 6pt space before the section
-            afterskip=12pt   % 6pt space after the section
-          ]{section}
-          % Reset section numbering to use '1., 2., etc.'
-          \renewcommand{\thesection}{\arabic{section}.}
+          % --------------------- CHAPTER STYLING ---------------------
+          
+          \titleformat{\chapter} % Chapter title format
+            {\normalfont\bfseries\color{PRBBlue}\fontsize{12pt}{14pt}\selectfont\fontspec{Calibri Bold}} % Style
+            {\thechapter} % Chapter number
+            {1em} % Spacing between number and text
+            {} % Additional formatting
+          
+          \titlespacing*{\chapter} % Adjust spacing before/after
+            {0pt} % Left margin
+            {0pt} % Space before chapter
+            {6pt} % Space after chapter
+          
+          % --------------------- SECTION STYLING ---------------------
+          
+          \titleformat{\section} % Section title format
+            {\normalfont\color{PRBBlue}\fontsize{12pt}{14pt}\selectfont} % Style
+            {\thesection} % Section number
+            {1em} % Spacing between number and text
+            {} % Additional formatting
+          
+          \titlespacing*{\section} % Adjust section spacing
+            {0pt} % Left margin
+            {12pt} % Space before section
+            {6pt} % Space after section
+          
+          % --------------------- SUBSECTION STYLING ---------------------
+          
+          \titleformat{\subsection} % Subsection title format
+            {\normalfont\color{PRBBlue}\fontsize{12pt}{14pt}\selectfont} % Style
+            {\thesubsection} % Subsection number
+            {1em} % Spacing between number and text
+            {} % Additional formatting
+          
+          \titlespacing*{\subsection} % Adjust subsection spacing
+            {0pt} % Left margin
+            {6pt} % Space before subsection
+            {6pt} % Space after subsection
+          
+          % --------------------- SUB-SUBSECTION STYLING ---------------------
+          
+          \titleformat{\subsubsection} % Sub-subsection title format
+            {\normalfont\itshape\color{PRBBlue}\fontsize{12pt}{14pt}\selectfont} % Style
+            {\thesubsubsection} % Sub-subsection number
+            {1em} % Spacing between number and text
+            {} % Additional formatting
+          
+          \titlespacing*{\subsubsection} % Adjust sub-subsection spacing
+            {0pt} % Left margin
+            {6pt} % Space before sub-subsection
+            {6pt} % Space after sub-subsection
+          
+          % --------------------- BIGGER TEXT COMMAND ---------------------
+          \newcommand{\biggertext}[1]{{\bfseries\fontsize{11pt}{13pt}\selectfont #1}}
+          
+          \usepackage{makecell} % Enables multiline table headers
 
-           % Define custom subsection styling      
-           \addtokomafont{subsection}{
-            \fontsize{12pt}{14pt}\selectfont % Font size and line spacing
-            \normalfont % Non-bold text
-            \color[HTML]{0563C1} 
-          }
-          % Adjust spacing for subsections
-          \RedeclareSectionCommand[
-            beforeskip=6pt, % 6pt space before the subsection
-            afterskip=6pt   % 6pt space after the subsection
-          ]{subsection}
-          % Reset subsection numbering to use '1.1., 1.2., etc.'
-          \renewcommand{\thesubsection}{\thesection\arabic{subsection}.}
-          
-          
-          % Define custom sub-subsection styling
-          \addtokomafont{subsubsection}{
-            \fontsize{11pt}{13pt}\selectfont % Font size 11pt with 13pt line spacing
-            \color[HTML]{0563C1} 
-            \normalfont % Non-bold text
-            \itshape % Italic text
-          }
-    
-          % Adjust spacing for sub-subsections
-          \RedeclareSectionCommand[
-            beforeskip=6pt, % 6pt space before the sub-subsection
-            afterskip= 6pt   % 6pt space after the sub-subsection
-          ]{subsubsection}
-    
-          % Reset sub-subsection numbering to use '1.1.1., 1.1.2., etc.'
-          \renewcommand{\thesubsubsection}{\thesubsection\arabic{subsubsection}.}
-          
-          % fontsize bigger for focus headings
-          \newcommand{\biggertext}[1]{{\bfseries\fontsize{12pt}{14pt}\selectfont #1}}
-          
 book:
   title: "Performance Review Body"
   subtitle: "Monitoring Report" 

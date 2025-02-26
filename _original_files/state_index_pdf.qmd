@@ -1,3 +1,8 @@
+::: {.content-hidden}
+<!-- This section is hidden and creates all charts and tables before using them in the doc. They need to be ahead of the headings so quarto does not add the heading number to the chart name-->
+
+<!-- # Charts and tables -->
+<!-- ## Level1 -->
 <!-- ### Traffic L1 -->
 
 ```{r chart_level1_traffic_mvt, include=FALSE}
@@ -48,7 +53,6 @@
 #| out.width: "100%"
 ```
 
-
 ```{r chart_cef_trm_1, options = (cz=c("1", "terminal", "level1")), include=FALSE}
 #| file: R/chart_level1_cef.R
 #| out.width: "100%"
@@ -60,15 +64,9 @@
 ```
 
 
-```{r yearly_xrates}
-# get yearly xrates
-
-xrate <- get_xrates("enroute", ecz_list$ecz_id[1]) |> 
-  filter(year == year_report) |> 
-  select(pp_exchangerate)
-
-xrate_year_report <- if_else(country == "Luxembourg", 1, pull(xrate))
-
+<!-- Level2 text -->
+```{r level_2_text}
+source(here("R","get_level2_text.R"))
 ```
 
 <!-- ## Safety L2-->
@@ -84,7 +82,7 @@ xrate_year_report <- if_else(country == "Luxembourg", 1, pull(xrate))
 #| out.width: "100%"
 ```
   
-<!-- ## Environment L2-->
+<!-- ## Environment L2 -->
 <!-- ### En route performance -->
 <!-- ##### Horizontal flight efficiency of the actual trajectory (KEA) (KPI#1), of the last filed flight plan (KEP) (PI#1) & shortest constrained route (SCR) (PI#2) -->
 
@@ -132,22 +130,601 @@ xrate_year_report <- if_else(country == "Luxembourg", 1, pull(xrate))
 #| out.width: "100%"
 ```
 
-  
-<!-- Level2 text -->
-```{r level_2_text}
-source(here("R","get_level2_text.R"))
+```{r table_level2_env_apt_pis, eval=(params$no_tcz != 0)}
+mytable <-"table_level2_env_apt_pis"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(mytable, setup_latex_table(get(mytable))) 
+```
+
+```{r table_level2_env_apt_pis_notcz, eval=(params$no_tcz == 0)}
+table_level2_env_apt_pis <-"" 
+```
+
+<!-- ### Civil-Military dimension  -->
+
+```{r chart_cdr, include=FALSE}
+#| file: R/chart_level2_env_cdr.R
+#| out.width: "100%"
+```
+
+```{r chart_rsa, include=FALSE}
+#| file: R/chart_level2_env_rsa.R
+#| out.width: "100%"
+```
+
+<!-- ## Capacity L2-->
+<!-- ### En route performance -->
+<!-- ### En route ATFM delay (KPI#1) -->
+```{r chart_cap_er_l2, options = (cztype=c("enroute")), include=FALSE}
+#| file: R/chart_level1_cap.R
+#| out.width: "100%"
+```
+
+```{r chart_cap_er_month, options = (cztype=c("enroute")), include=FALSE}
+#| file: R/chart_level2_cap_month.R
+#| out.width: "100%"
+```
+
+<!-- #### Other indicators -->
+```{r chart_cap_atco, include=FALSE}
+#| file: R/chart_level2_cap_atco.R
+#| out.width: "100%"
+```
+
+```{r chart_cap_atco_acc, include=FALSE}
+#| file: R/chart_level2_cap_atco_acc.R
+#| out.width: "100%"
+```
+
+<!-- ### Terminal performance -->
+<!-- #### Arrival ATFM delay (KPI#2) -->
+```{r chart_cap_trm_l2, options = (cztype=c("terminal")), eval=(params$no_tcz != 0), include=FALSE}
+#| file: R/chart_level1_cap.R
+#| out.width: "100%"
+```
+
+```{r chart_cap_trm_month, options = (cztype=c("terminal")), eval=(params$no_tcz != 0), include=FALSE}
+#| file: R/chart_level2_cap_month.R
+#| out.width: "100%"
+```
+
+```{r table_level2_cap_apt_pis_pdf1, eval=(params$no_tcz != 0)}
+mytable <-"table_level2_cap_apt_pis_pdf1"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(mytable, setup_latex_table(get(mytable))) 
+```
+
+```{r table_level2_cap_apt_pis_pdf2, eval=(params$no_tcz != 0)}
+mytable <-"table_level2_cap_apt_pis_pdf2"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(mytable, setup_latex_table(get(mytable))) 
 ```
 
 
-# Annual Monitoring Report `r params$year_report` - `r params$country`
-<!-- quarto  playing tricks and all of a sudden this doesnt work -->
-<!-- {{< var doc.year_report >}} - {{< var doc.country >}} -->
+```{r table_level2_cap_apt_pis_notcz, eval=(params$no_tcz == 0)}
+table_level2_cap_apt_pis_pdf1 <-"" 
+table_level2_cap_apt_pis_pdf2 <-"" 
+```
 
-## Overview
+<!-- ## Cost-efficiency  -->
+<!-- ### ECZ 1 -->
+<!-- #### Unit cost (KPI#1) -->
 
-### Contextual information
+```{r cz_def_ez1}
+cztype <- "enroute"
+czindex <- 1
+no_cz <- params$no_ecz
+```
 
-### Traffic (En route traffic zone)
+```{r chart_cef_duc_l2_enroute1, options = (cz=c(czindex, cztype,"level2")), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level1_cef.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_su_l2_enroute1, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_su.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_cost_enroute1, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_cost.R
+#| out.width: "100%"
+```  
+
+```{r table_level2_cef_cost_enroute1, options = (cz=c(czindex, cztype)), eval = no_cz >= czindex}
+mytable <-"table_level2_cef_cost"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(paste0(mytable, "_", cztype, czindex), setup_latex_table(get(mytable))) 
+```
+
+```{r table_level2_cef_cost_infl_enroute1, options = (cz=c(czindex, cztype)), eval = no_cz >= czindex}
+mytable <-"table_level2_cef_cost_infl"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(paste0(mytable, "_", cztype, czindex), setup_latex_table(get(mytable))) 
+```
+
+```{r chart_cef_cost_entity_enroute1, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_cost_entity.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_cost_main_enroute1, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_cost_main.R
+#| out.width: "100%"
+```
+
+<!-- #### Actual unit cost incurred by the users (AUCU) (PI#1) -->
+
+```{r chart_cef_aucu_enroute1, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_aucu.R
+#| out.width: "100%"
+```
+
+```{r table_level2_cef_aucu_enroute1, options = (cz=c(czindex, cztype)), eval = no_cz >= czindex}
+mytable <-"table_level2_cef_aucu"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(paste0(mytable, "_", cztype, czindex), setup_latex_table(get(mytable))) 
+```
+
+```{r chart_cef_cex_enroute1, R.options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_cex.R
+#| out.width: "100%"
+```
+
+```{r table_level2_cef_cex_enroute1, options = (cz=c(czindex, cztype)), eval = no_cz >= czindex}
+mytable <-"table_level2_cef_cex"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(paste0(mytable, "_", cztype, czindex), setup_latex_table(get(mytable))) 
+```
+
+<!-- #### Regulatory result (RR) -->
+
+```{r chart_cef_reg_res_enroute1, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_reg_res.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_reg_res_aucu_enroute1, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_reg_res_aucu.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_reg_res_ansp_enroute1, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_reg_res_ansp.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_net_res_main_ansp_enroute1, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_net_res_main_ansp.R
+#| out.width: "100%"
+```
+
+<!-- ### ECZ 2 -->
+<!-- #### Unit cost (KPI#1) -->
+
+```{r cz_def_ez2}
+cztype <- "enroute"
+czindex <- 2
+no_cz <- params$no_ecz
+```
+
+```{r chart_cef_duc_l2_enroute2, options = (cz=c(czindex, cztype,"level2")), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level1_cef.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_su_l2_enroute2, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_su.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_cost_enroute2, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_cost.R
+#| out.width: "100%"
+```  
+
+```{r table_level2_cef_cost_enroute2, options = (cz=c(czindex, cztype)), eval = no_cz >= czindex}
+mytable <-"table_level2_cef_cost"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(paste0(mytable, "_", cztype, czindex), setup_latex_table(get(mytable))) 
+```
+
+```{r table_level2_cef_cost_infl_enroute2, options = (cz=c(czindex, cztype)), eval = no_cz >= czindex}
+mytable <-"table_level2_cef_cost_infl"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(paste0(mytable, "_", cztype, czindex), setup_latex_table(get(mytable))) 
+```
+
+```{r chart_cef_cost_entity_enroute2, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_cost_entity.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_cost_main_enroute2, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_cost_main.R
+#| out.width: "100%"
+```
+
+<!-- #### Actual unit cost incurred by the users (AUCU) (PI#1) -->
+
+```{r chart_cef_aucu_enroute2, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_aucu.R
+#| out.width: "100%"
+```
+
+```{r table_level2_cef_aucu_enroute2, options = (cz=c(czindex, cztype)), eval = no_cz >= czindex}
+mytable <-"table_level2_cef_aucu"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(paste0(mytable, "_", cztype, czindex), setup_latex_table(get(mytable))) 
+```
+
+```{r chart_cef_cex_enroute2, R.options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_cex.R
+#| out.width: "100%"
+```
+
+```{r table_level2_cef_cex_enroute2, options = (cz=c(czindex, cztype)), eval = no_cz >= czindex}
+mytable <-"table_level2_cef_cex"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(paste0(mytable, "_", cztype, czindex), setup_latex_table(get(mytable))) 
+```
+
+<!-- #### Regulatory result (RR) -->
+
+```{r chart_cef_reg_res_enroute2, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_reg_res.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_reg_res_aucu_enroute2, options = (cz=c(czindex, cztype)), include=FALSE, eval = params$no_ecz >= czindex}
+#| file: R/chart_level2_cef_reg_res_aucu.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_reg_res_ansp_enroute2, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_reg_res_ansp.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_net_res_main_ansp_enroute2, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_net_res_main_ansp.R
+#| out.width: "100%"
+```
+
+
+<!-- ### TCZ 1 -->
+<!-- #### Unit cost (KPI#1) -->
+
+```{r cz_def_tz1}
+cztype <- "terminal"
+czindex <- 1
+no_cz <- params$no_tcz
+```
+
+```{r chart_cef_duc_l2_terminal1, options = (cz=c(czindex, cztype,"level2")), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level1_cef.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_su_l2_terminal1, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_su.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_cost_terminal1, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_cost.R
+#| out.width: "100%"
+```  
+
+```{r table_level2_cef_cost_terminal1, options = (cz=c(czindex, cztype)), eval = no_cz >= czindex}
+mytable <-"table_level2_cef_cost"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(paste0(mytable, "_", cztype, czindex), setup_latex_table(get(mytable))) 
+```
+
+```{r table_level2_cef_cost_infl_terminal1, options = (cz=c(czindex, cztype)), eval = no_cz >= czindex}
+mytable <-"table_level2_cef_cost_infl"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(paste0(mytable, "_", cztype, czindex), setup_latex_table(get(mytable))) 
+```
+
+```{r chart_cef_cost_entity_terminal1, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_cost_entity.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_cost_main_terminal1, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_cost_main.R
+#| out.width: "100%"
+```
+
+<!-- #### Actual unit cost incurred by the users (AUCU) (PI#1) -->
+
+```{r chart_cef_aucu_terminal1, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_aucu.R
+#| out.width: "100%"
+```
+
+```{r table_level2_cef_aucu_terminal1, options = (cz=c(czindex, cztype)), eval = no_cz >= czindex}
+mytable <-"table_level2_cef_aucu"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(paste0(mytable, "_", cztype, czindex), setup_latex_table(get(mytable))) 
+```
+
+```{r chart_cef_cex_terminal1, R.options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_cex.R
+#| out.width: "100%"
+```
+
+```{r table_level2_cef_cex_terminal1, options = (cz=c(czindex, cztype)), eval = no_cz >= czindex}
+mytable <-"table_level2_cef_cex"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(paste0(mytable, "_", cztype, czindex), setup_latex_table(get(mytable))) 
+```
+
+<!-- #### Regulatory result (RR) -->
+
+```{r chart_cef_reg_res_terminal1, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_reg_res.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_reg_res_aucu_terminal1, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_reg_res_aucu.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_reg_res_ansp_terminal1, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_reg_res_ansp.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_net_res_main_ansp_terminal1, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_net_res_main_ansp.R
+#| out.width: "100%"
+```
+
+<!-- ### TCZ 2 -->
+<!-- #### Unit cost (KPI#1) -->
+
+```{r cz_def_tz2}
+cztype <- "terminal"
+czindex <- 2
+no_cz <- params$no_tcz
+```
+
+```{r chart_cef_duc_l2_terminal2, options = (cz=c(czindex, cztype,"level2")), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level1_cef.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_su_l2_terminal2, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_su.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_cost_terminal2, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_cost.R
+#| out.width: "100%"
+```  
+
+```{r table_level2_cef_cost_terminal2, options = (cz=c(czindex, cztype)), eval = no_cz >= czindex}
+mytable <-"table_level2_cef_cost"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(paste0(mytable, "_", cztype, czindex), setup_latex_table(get(mytable))) 
+```
+
+```{r table_level2_cef_cost_infl_terminal2, options = (cz=c(czindex, cztype)), eval = no_cz >= czindex}
+mytable <-"table_level2_cef_cost_infl"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(paste0(mytable, "_", cztype, czindex), setup_latex_table(get(mytable))) 
+```
+
+```{r chart_cef_cost_entity_terminal2, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_cost_entity.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_cost_main_terminal2, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_cost_main.R
+#| out.width: "100%"
+```
+
+<!-- #### Actual unit cost incurred by the users (AUCU) (PI#1) -->
+
+```{r chart_cef_aucu_terminal2, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_aucu.R
+#| out.width: "100%"
+```
+
+```{r table_level2_cef_aucu_terminal2, options = (cz=c(czindex, cztype)), eval = no_cz >= czindex}
+mytable <-"table_level2_cef_aucu"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(paste0(mytable, "_", cztype, czindex), setup_latex_table(get(mytable))) 
+```
+
+```{r chart_cef_cex_terminal2, R.options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_cex.R
+#| out.width: "100%"
+```
+
+```{r table_level2_cef_cex_terminal2, options = (cz=c(czindex, cztype)), eval = no_cz >= czindex}
+mytable <-"table_level2_cef_cex"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(paste0(mytable, "_", cztype, czindex), setup_latex_table(get(mytable))) 
+```
+
+<!-- #### Regulatory result (RR) -->
+
+```{r chart_cef_reg_res_terminal2, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_reg_res.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_reg_res_aucu_terminal2, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_reg_res_aucu.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_reg_res_ansp_terminal2, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_reg_res_ansp.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_net_res_main_ansp_terminal2, options = (cz=c(czindex, cztype)), include=FALSE, eval = no_cz >= czindex}
+#| file: R/chart_level2_cef_net_res_main_ansp.R
+#| out.width: "100%"
+```
+
+<!-- # End of charts and tables -->
+:::
+
+```{r fetch-data-state, eval=TRUE}
+pp_version <- params$pp_version
+acc_no <- params$acc_no
+acc_list <- params$acc_list
+acc1 <- params$acc1
+acc2 <- params$acc2
+acc3 <- params$acc3
+acc4 <- params$acc4
+acc5 <- params$acc5
+no_apt_big <- params$no_apt_big
+no_apt_small <- params$no_apt_small
+
+nat_curr <- params$nat_curr
+xrate2017 <- params$xrate2017
+tsu_share <- params$tsu_share
+ert_cost_share <- params$ert_cost_share
+ert_trm_share <- params$ert_trm_share
+
+main_ansp <- params$main_ansp
+other_ansps_str <- params$other_ansps_str
+other_met_str <- params$other_met_str
+
+```
+
+```{r yearly_xrates}
+# get yearly xrates
+
+xrate <- get_xrates("enroute", ecz_list$ecz_id[1]) |> 
+  filter(year == year_report) |> 
+  select(pp_exchangerate)
+
+xrate_year_report <- if_else(country == "Luxembourg", 1, pull(xrate))
+
+```
+
+
+# OVERVIEW
+
+# Contextual information
+
+*`r pp_version`*
+
+```{=latex}
+
+\begin{figure}
+
+\small
+
+\begin{minipage}[t]{0.31\linewidth}
+```
+
+**List of ACCs     ** `r acc_no`  
+\hspace*{2em} `r acc1` `r ifelse(acc2 != "", "  ", "")`
+`r ifelse(acc2 != "", "\\hspace*{2em}", "")` `r acc2` `r ifelse(acc3 != "", "  ", "")`
+`r ifelse(acc3 != "", "\\hspace*{2em}", "")` `r acc3` `r ifelse(acc4 != "", "  ", "")`
+`r ifelse(acc4 != "", "\\hspace*{2em}", "")` `r acc4` `r ifelse(acc5 != "", "  ", "")`
+`r ifelse(acc5 != "", "\\hspace*{2em}", "")` `r paste0(acc5, "  ")` 
+
+\vspace*{1em}
+**No of airports in the scope**  
+**of the performance plan:**  
+\hspace*{2em} • **≥80'K     ** `r no_apt_big`  
+\hspace*{2em} • **<80'K     ** `r no_apt_small`
+
+```{=latex}
+\end{minipage}%
+%
+\begin{minipage}[t]{0.38\linewidth}
+```
+
+**Exchange rate (1 EUR=)**  
+\hspace*{2em} `r paste0("2017: ", xrate2017, " ", nat_curr, "  ")` 
+\hspace*{2em} `r paste0(year_report, ": ", xrate_year_report, " ", nat_curr, "  ")`
+
+\vspace*{0.5em}**Share of Union-wide:**  
+\hspace*{2em} • **traffic (TSUs) `r year_report`  **  `r paste0(tsu_share, "  ")` 
+\hspace*{2em} • **en route costs `r year_report` ** `r paste0(ert_cost_share, "  ")` 
+**Share en route / terminal**  
+**costs `r year_report`                    ** `r paste0(ert_trm_share, "  ")` 
+
+\vspace*{0.5em}**En route charging zone(s)**
+```{r ecz_list_string}
+ecz_list_string <- paste0(
+  fixed('`\\hspace*{2em}`{=tex}'),
+  ecz_list$ecz_name[1],
+  if_else(is.na(ecz_list$ecz_name[2]), '' ,  paste0(fixed('` \\\\ \\hspace*{2em}`{=tex}'), ecz_list$ecz_name[2])
+          )
+)
+```
+`r paste0(ecz_list_string, "  ")` 
+
+**Terminal charging zone(s)**  
+```{r tcz_list_string}
+tcz_list_string <- if_else(no_tcz == 0, '`\\hspace*{2em}`{=tex} --',
+paste0(
+  fixed('`\\hspace*{2em}`{=tex}'),
+  tcz_list$tcz_name[1],
+  if_else(is.na(tcz_list$tcz_name[2]), '' , paste0(fixed('`\\\\ \\hspace*{2em}`{=tex}'), tcz_list$tcz_name[2])
+  )
+  ))
+```
+
+`r tcz_list_string`
+
+```{=latex}
+\end{minipage}%
+%
+\begin{minipage}[t]{0.31\linewidth}
+```
+
+```{r ansp_list_strings}
+# this is very convoluted but I couldnt find any other way
+other_ansps_list <- str_split(other_ansps_str, "<br/>")[[1]] %>%
+  discard(~ .x == "")
+
+other_ansps_str_1 <- reduce(other_ansps_list, ~ paste(.x, .y, sep = fixed('`\\\\`{=tex}\\hspace*{1.2em}')))
+
+other_met_list <- str_split(other_met_str, "<br/>")[[1]] %>%
+  discard(~ .x == "")
+
+other_met_str_1 <- reduce(other_met_list, ~ paste(.x, .y, sep = fixed('`\\\\`{=tex}\\hspace*{1.2em}')))
+
+```
+
+
+**Main ANSP**  
+\hspace*{1em} • `r paste0(main_ansp, "  ")`  
+
+\vspace*{1em}**Other ANSPs**
+`\begin{flushleft}`{=tex}
+\vspace*{-1em}\hspace*{1em} `r paste0(other_ansps_str_1, "  ")` 
+`\end{flushleft}`{=tex}
+
+**MET Providers**
+`\begin{flushleft}`{=tex}
+\vspace*{-1em}\hspace*{1em} `r other_met_str_1`
+`\end{flushleft}`{=tex}
+
+```{=latex}
+\end{minipage}%
+
+\end{figure}%
+```
+
+
+## Traffic (En route traffic zone)
 ```{=tex}
 \setlength{\fboxrule}{0pt} % Set the border width to 0pt (no border)
 \setlength{\fboxsep}{0pt} % Remove padding
@@ -165,7 +742,7 @@ tsu_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "traffic_SUs", "Table_Find
 
 `r layout_wrap_figure("chart_level1_traffic_su", NULL, tsu_conc1, 12)`
 
-### Safety (Main ANSP)
+## Safety (Main ANSP)
 
 ```{r saf_conc1}
 saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_safety")
@@ -177,7 +754,7 @@ saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_
 <!-- exception for luxembourg -->
 `r if (params$country == "Luxembourg") "::: {.content-hidden}"`
 
-### Environment (Member State)
+## Environment (Member State)
 
 ```{r concl_env}
 env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Findings_environment")
@@ -188,7 +765,7 @@ env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Find
 `r if (params$country == "Luxembourg") ":::"`
 
 
-### Capacity (Member State)
+## Capacity (Member State)
 
 ```{r concl_cap}
 if (params$country == "Luxembourg") {
@@ -206,7 +783,7 @@ if (params$country == "Luxembourg") {
 
 `r if_else (params$no_tcz != 0 & params$country != "Luxembourg", layout_wrap_figure("chart_cap_er", "chart_cap_trm", cap_er_conc1, 27), "")`
 
-### Cost-efficiency (En route/Terminal charging zone(s))
+## Cost-efficiency (En route/Terminal charging zone(s))
 
 ```{r concl-cef}
 cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF")
@@ -224,13 +801,13 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 \clearpage
 ```
 
-## Safety - `r params$country`
+# SAFETY - `r toupper(params$country)`
 
-### PRB monitoring
+## PRB monitoring
 
 `r saf_conc1`
 
-### Effectiveness of Safety Management (EoSM) (KPI#1)
+## Effectiveness of Safety Management (EoSM) (KPI#1)
 
 ```{r chart_saf_eosm}
 #| file: R/chart_level1_saf.R
@@ -239,30 +816,30 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 #| fig-pos: "H"
 ```
 
-**Focus on EoSM**
+`\biggertext{Focus on EoSM}`{=latex}
 
 `r saf_text`
 
 
 `r if (params$country == "MUAC") "::: {.content-hidden}"`
 
-### Occurrences - Rate of runway incursions (RIs) (PI#1) & Rate of separation minima infringements (SMIs) (PI#2)
+## Occurrences - Rate of runway incursions (RIs) (PI#1) & Rate of separation minima infringements (SMIs) (PI#2)
 
 `r layout_2fig("chart_saf_ri", "chart_saf_smi")`
 
 `r if (params$country == "MUAC") ":::"`
 
-## Environment - `r params$country`
+# ENVIRONMENT - `r toupper(params$country)`
 
-### PRB monitoring
+## PRB monitoring
 
 `r env_conc1`
 
 `r if (params$country == "Luxembourg") "::: {.content-hidden}"`
 
-### En route performance
+## En route performance
 
-##### Horizontal flight efficiency of the actual trajectory (KEA) (KPI#1), of the last filed flight plan (KEP) (PI#1) & shortest constrained route (SCR) (PI#2)
+### Horizontal flight efficiency of the actual trajectory (KEA) (KPI#1), of the last filed flight plan (KEP) (PI#1) & shortest constrained route (SCR) (PI#2)
 
 `r layout_2fig("chart_env_kea_l2", "chart_env_kea_month")`
 
@@ -273,9 +850,9 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 `r if (params$no_tcz == 0) "::: {.content-hidden}"`
 
-### Terminal performance
+## Terminal performance
 
-#### Additional taxi-out time (AXOT) (PI#3) & Arrival Sequencing and Metering Area (ASMA) time (PI#4)
+### Additional taxi-out time (AXOT) (PI#3) & Arrival Sequencing and Metering Area (ASMA) time (PI#4)
 
 ```{r chart_axot_asma_country}
 #| file: R/chart_level2_env_axot_asma_country.R
@@ -286,7 +863,7 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 `r layout_2fig("chart_axot_apt", "chart_asma_apt")`
 
-##### Focus on ASMA & AXOT
+`\biggertext{Focus on ASMA \& AXOT}`{=latex}
 
 **AXOT**
 
@@ -296,19 +873,638 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 `r if (exists("env_apt_3") == FALSE) {''} else {env_apt_3}`
 
-#### Share of arrivals applying continuous descent operations (CDOs) (PI#5)
+### Share of arrivals applying continuous descent operations (CDOs) (PI#5)
 
 `r layout_2fig("chart_cdo_country", "chart_cdo_apt")`
 
-##### Focus CDOs
+
+`\biggertext{Focus CDOs}`{=latex}
 
 `r if (exists("env_apt_4") == FALSE) {''} else {env_apt_4}`
 
-```{r table_env_apt_pis}
-#| file: R/table_level2_env_apt_pis.R
-#| out.width: "100%"
-```
+`r layout_summary_table(table_level2_env_apt_pis, hspace = 0, left_margin = -0.8, width = 1.1)`
+
 
 `r if (params$no_tcz == 0) ":::"`
 
 
+`r if (params$country == "Luxembourg") "::: {.content-hidden}"`
+
+## Civil-Military dimension 
+
+```{r chart_ersa}
+#| file: R/chart_level2_env_ersa.R
+#| out.width: "60%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+`r layout_2fig("chart_cdr", "chart_rsa")`
+
+`\biggertext{Focus on Civil-Military dimension}`{=latex}
+
+**Update on Military dimension of the plan**
+
+`r env_mil_1`
+
+
+`r if (params$year_report != 2020) ":::: {.content-hidden}"`
+
+**Military - related measures implemented or planned to improve environment and capacity**														
+
+`r if (params$year_report != 2020) "::::"`
+
+`r if (params$year_report == 2020) ":::: {.content-hidden}"`
+
+**Military - related measures implemented or planned to improve capacity**
+
+`r if (params$year_report == 2020) "::::"`
+
+`r env_mil_2`
+
+**Initiatives implemented or planned to improve PI#6**
+
+`r env_mil_4`
+
+**Initiatives implemented or planned to improve PI#7**
+
+`r env_mil_6`
+
+**Initiatives implemented or planned to improve PI#8**
+
+`r env_mil_8`
+
+`r if (params$country == "Luxembourg") ":::"`
+
+
+# CAPACITY - `r toupper(params$country)`
+
+## PRB monitoring
+
+```{r cap-prb}
+if (params$country == "Luxembourg") {
+  cap_er_conc1 <- ""
+  } else {
+  cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity")
+}
+```
+
+`r cap_er_conc1`
+
+`r if (params$no_tcz == 0 | params$year_report != 2023) "::: {.content-hidden}"`
+
+```{r cap-trm-prb}
+cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table_Findings_TRM_capacity")
+```
+
+`r cap_trm_conc1`
+
+`r if (params$no_tcz == 0 | params$year_report != 2023) ":::"`
+
+
+
+`r if (params$country == "Luxembourg") "::: {.content-hidden}"`
+
+## En route performance
+
+### En route ATFM delay (KPI#1)
+
+`r layout_2fig("chart_cap_er_l2", "chart_cap_er_month")`
+
+`r if (country == "MUAC") ":::: {.content-hidden}"`
+
+```{r chart_cap_delay_bin}
+#| file: R/chart_level2_cap_delay_bin.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+`\biggertext{Focus on en route ATFM delay}`{=latex}
+
+**Summary of capacity performance**
+
+`r if_else(length(cap_heading_ukraine) == 0, cap_er_nsa_7, cap_er_nsa_8)`
+
+**NSA's assessment of capacity performance**
+
+`r cap_er_nsa_2`
+
+**Monitoring process for capacity performance**
+
+`r cap_er_nsa_3`
+
+**Capacity planning**
+
+`r cap_er_nsa_4`
+
+**Application of Corrective Measures for Capacity (if applicable)**
+
+`r cap_er_nsa_6`
+
+`r if_else(length(cap_heading_ukraine) == 0, "", paste0("**Additional Information Related to Russia's War of Aggression Against Ukraine**<br><br>", cap_er_nsa_7))`
+
+`r if (params$year_report <= 2022) "::::: {.content-hidden}"`
+
+**En route Capacity Incentive Scheme**														
+
+`r cap_er_nsa_incentive`
+
+`r if (params$year_report <= 2022) ":::::"`
+
+
+`r if (params$country == "MUAC") "::::"`
+
+
+### Other indicators
+
+`r layout_2fig("chart_cap_atco", "chart_cap_atco_acc")`
+
+```{r chart_cap_sector_opening}
+#| file: R/chart_level2_cap_sector_opening.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+
+`r if (params$country == "MUAC") ":::: {.content-hidden}"`
+
+
+`\biggertext{Focus on ATCOs in operations}`{=latex}
+
+`r cap_er_nsa_5`
+
+`r if (params$country == "SES RP3" | params$country == "MUAC") "::::"`
+
+`r if (params$country == "Luxembourg") ":::"`
+
+
+`r if (params$no_tcz == 0) "::: {.content-hidden}"`
+
+
+## Terminal performance
+
+### Arrival ATFM delay (KPI#2)
+
+`r layout_2fig("chart_cap_trm_l2", "chart_cap_trm_month")`
+
+
+`\biggertext{Focus on arrival ATFM delay}`{=latex}
+
+`r if (exists("cap_trm_nsa_1") == FALSE) {''} else {cap_trm_nsa_1}`
+
+`r if (exists("cap_trm_nsa_2") == FALSE) {''} else {cap_trm_nsa_2}`
+
+`r if (exists("cap_trm_nsa_3") == FALSE) {''} else {cap_trm_nsa_3}`
+
+
+### Other terminal performance indicators (PI#1-3)
+
+```{r chart_cap_all_causes_delay}
+#| file: R/chart_level2_cap_all_causes_delay.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+`r layout_summary_table(table_level2_cap_apt_pis_pdf1, hspace = 0, left_margin = 0, width = 1)`
+
+`\vspace*{-0.5cm}`{=latex}
+
+`r layout_summary_table(table_level2_cap_apt_pis_pdf2, hspace = 0, left_margin = 0, width = 1)`
+
+
+`\biggertext{Focus on performance indicators at airport level}`{=latex}
+
+**ATFM slot adherence**
+
+`r if (exists("cap_trm_nsa_4") == FALSE) {''} else {cap_trm_nsa_4}`
+
+
+**ATC pre-departure delay**
+
+`r if (exists("cap_trm_nsa_5") == FALSE) {''} else {cap_trm_nsa_5}`
+
+**All causes pre-departure delay**
+
+`r if (exists("cap_trm_nsa_6") == FALSE) {''} else {cap_trm_nsa_6}`
+
+`r if (params$no_tcz == 0) ":::"`
+
+
+# COST-EFFIENCY - `r toupper(params$country)`
+
+## PRB monitoring
+
+```{r concl_cef_duc_e1}
+cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF")
+```
+
+`r cef_conc1`
+
+
+::: {.content-hidden}
+## ECZ 1
+:::
+
+```{r cef_level2_setup_ecz1}
+cztype <- "enroute"
+czindex <- 1
+cztype_proper <- "En route"
+if (czindex > no_tcz) {czname <- NA} else {czname <- ecz_list$ecz_name[[czindex]]}
+no_cz <- params$no_ecz
+
+cef_level2_text <- get_cef_level2_text(czindex, cztype)
+```
+
+`r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) "::: {.content-hidden}"`
+## `r cztype_proper` charging zone - `r czname`
+`r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) ":::"`
+
+
+`r if ((params$no_ecz > 1 & cztype == 'enroute') | (params$no_tcz > 1 & cztype == 'terminal')) "::: {.content-hidden}"`
+## `r cztype_proper` charging zone 
+`r if ((params$no_ecz > 1 & cztype == 'enroute') | (params$no_tcz > 1 & cztype == 'terminal')) ":::"`
+
+### Unit cost (KPI#1)
+
+```{r}
+# to prevent objects not found
+if (no_cz < czindex) {
+  assign(paste0("table_level2_cef_cost_", cztype, czindex), "")
+  assign(paste0("table_level2_cef_cost_infl_", cztype, czindex), "")
+  assign(paste0("table_level2_cef_aucu_", cztype, czindex), "")
+  assign(paste0("table_level2_cef_cex_", cztype, czindex), "")
+}
+```
+
+`r layout_2fig(paste0("chart_cef_duc_l2_", cztype, czindex), paste0("chart_cef_su_l2_", cztype, czindex))`
+
+`r layout_fig_table(paste0("chart_cef_cost_", cztype, czindex), get(paste0("table_level2_cef_cost_", cztype, czindex)), vspace = 0, get(paste0("table_level2_cef_cost_infl_", cztype, czindex)))`
+
+`r layout_2fig(paste0("chart_cef_cost_entity_", cztype, czindex), paste0("chart_cef_cost_main_", cztype, czindex))`
+
+
+`\biggertext{Focus on unit cost}`{=latex}
+
+**AUC vs. DUC**
+
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[2,1]) == TRUE, cef_level2_text$cef_txt_1_4_duc, pull(cef_level2_text$cef_txt_1_4[2,1]))`
+
+**`r cztype_proper` service units**
+
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]) == TRUE, cef_level2_text$cef_txt_1_4_su, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]))`
+
+**`r cztype_proper` costs by entity**
+
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]) == TRUE, cef_level2_text$cef_txt_1_4_cost_all, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]))`
+
+**`r cztype_proper` costs for the main ANSP at charging zone level**
+
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]) == TRUE, cef_level2_text$cef_txt_1_4_cost_main, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]))`
+
+### Actual unit cost incurred by the users (AUCU) (PI#1)
+
+`r layout_fig_table(paste0("chart_cef_aucu_", cztype, czindex), get(paste0("table_level2_cef_aucu_", cztype, czindex)), vspace = -1.5)`
+
+`r layout_fig_table(paste0("chart_cef_cex_", cztype, czindex), get(paste0("table_level2_cef_cex_", cztype, czindex)) , vspace = -2)`
+
+
+### Regulatory result (RR)
+
+`r layout_2fig(paste0("chart_cef_reg_res_", cztype, czindex), paste0("chart_cef_reg_res_aucu_", cztype, czindex))`
+
+`r layout_2fig(paste0("chart_cef_reg_res_ansp_", cztype, czindex), paste0("chart_cef_net_res_main_ansp_", cztype, czindex))`
+
+
+`\biggertext{Focus on regulatory result}`{=latex}
+
+`r if (params$year_report < 2022) "::: {.content-hidden}"`
+
+**`r cef_level2_text$cef_txt_1_13[1,1]`**
+
+`r cef_level2_text$cef_txt_1_13[2,1]`
+
+**`r cef_level2_text$cef_txt_1_13[3,1]`**
+
+`r cef_level2_text$cef_txt_1_13[4,1]`
+
+`r cef_level2_text$cef_txt_1_10_txt`
+
+`r if (params$year_report < 2022) ":::"`
+
+`r if (params$year_report >= 2022) "::: {.content-hidden}"`
+
+`r cef_level2_text$cef_txt_1_13[1,1]`
+
+`r cef_level2_text$cef_txt_1_10_txt`
+
+`r if (params$year_report >= 2022) ":::"`
+
+`r if (params$no_ecz < 2) "::: {.content-hidden}"`
+
+::: {.content-hidden}
+## ECZ 2
+:::
+
+```{r cef_level2_setup_ecz2}
+cztype <- "enroute"
+czindex <- 2
+cztype_proper <- "En route"
+if (czindex > no_ecz) {czname <- NA} else {czname <- ecz_list$ecz_name[[czindex]]}
+no_cz <- params$no_ecz
+
+cef_level2_text <- get_cef_level2_text(czindex, cztype)
+```
+
+`r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) "::: {.content-hidden}"`
+## `r cztype_proper` charging zone - `r czname`
+`r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) ":::"`
+
+
+`r if ((params$no_ecz > 1 & cztype == 'enroute') | (params$no_tcz > 1 & cztype == 'terminal')) "::: {.content-hidden}"`
+## `r cztype_proper` charging zone 
+`r if ((params$no_ecz > 1 & cztype == 'enroute') | (params$no_tcz > 1 & cztype == 'terminal')) ":::"`
+
+### Unit cost (KPI#1)
+
+```{r}
+# to prevent objects not found
+if (no_cz < czindex) {
+  assign(paste0("table_level2_cef_cost_", cztype, czindex), "")
+  assign(paste0("table_level2_cef_cost_infl_", cztype, czindex), "")
+  assign(paste0("table_level2_cef_aucu_", cztype, czindex), "")
+  assign(paste0("table_level2_cef_cex_", cztype, czindex), "")
+}
+```
+
+`r layout_2fig(paste0("chart_cef_duc_l2_", cztype, czindex), paste0("chart_cef_su_l2_", cztype, czindex))`
+
+`r layout_fig_table(paste0("chart_cef_cost_", cztype, czindex), get(paste0("table_level2_cef_cost_", cztype, czindex)), vspace = 0, get(paste0("table_level2_cef_cost_infl_", cztype, czindex)))`
+
+`r layout_2fig(paste0("chart_cef_cost_entity_", cztype, czindex), paste0("chart_cef_cost_main_", cztype, czindex))`
+
+
+`\biggertext{Focus on unit cost}`{=latex}
+
+**AUC vs. DUC**
+
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[2,1]) == TRUE, cef_level2_text$cef_txt_1_4_duc, pull(cef_level2_text$cef_txt_1_4[2,1]))`
+
+**`r cztype_proper` service units**
+
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]) == TRUE, cef_level2_text$cef_txt_1_4_su, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]))`
+
+**`r cztype_proper` costs by entity**
+
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]) == TRUE, cef_level2_text$cef_txt_1_4_cost_all, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]))`
+
+**`r cztype_proper` costs for the main ANSP at charging zone level**
+
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]) == TRUE, cef_level2_text$cef_txt_1_4_cost_main, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]))`
+
+### Actual unit cost incurred by the users (AUCU) (PI#1)
+
+`r layout_fig_table(paste0("chart_cef_aucu_", cztype, czindex), get(paste0("table_level2_cef_aucu_", cztype, czindex)), vspace = -1.5)`
+
+`r layout_fig_table(paste0("chart_cef_cex_", cztype, czindex), get(paste0("table_level2_cef_cex_", cztype, czindex)) , vspace = -2)`
+
+
+### Regulatory result (RR)
+
+`r layout_2fig(paste0("chart_cef_reg_res_", cztype, czindex), paste0("chart_cef_reg_res_aucu_", cztype, czindex))`
+
+`r layout_2fig(paste0("chart_cef_reg_res_ansp_", cztype, czindex), paste0("chart_cef_net_res_main_ansp_", cztype, czindex))`
+
+
+`\biggertext{Focus on regulatory result}`{=latex}
+
+`r if (params$year_report < 2022) "::: {.content-hidden}"`
+
+**`r cef_level2_text$cef_txt_1_13[1,1]`**
+
+`r cef_level2_text$cef_txt_1_13[2,1]`
+
+**`r cef_level2_text$cef_txt_1_13[3,1]`**
+
+`r cef_level2_text$cef_txt_1_13[4,1]`
+
+`r cef_level2_text$cef_txt_1_10_txt`
+
+`r if (params$year_report < 2022) ":::"`
+
+`r if (params$year_report >= 2022) "::: {.content-hidden}"`
+
+`r cef_level2_text$cef_txt_1_13[1,1]`
+
+`r cef_level2_text$cef_txt_1_10_txt`
+
+`r if (params$year_report >= 2022) ":::"`
+
+`r if (params$no_ecz < 2) ":::"`
+
+
+
+`r if (params$no_tcz == 0) "::: {.content-hidden}"`
+
+::: {.content-hidden}
+## TCZ 1
+:::
+
+```{r cef_level2_setup_tcz1}
+cztype <- "terminal"
+czindex <- 1
+cztype_proper <- "Terminal"
+if (czindex > no_tcz) {czname <- NA} else {czname <- tcz_list$tcz_name[[czindex]]}
+no_cz <- params$no_tcz
+
+cef_level2_text <- get_cef_level2_text(czindex, cztype)
+```
+
+`r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) "::: {.content-hidden}"`
+## `r cztype_proper` charging zone - `r czname`
+`r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) ":::"`
+
+
+`r if ((params$no_ecz > 1 & cztype == 'enroute') | (params$no_tcz > 1 & cztype == 'terminal')) "::: {.content-hidden}"`
+## `r cztype_proper` charging zone 
+`r if ((params$no_ecz > 1 & cztype == 'enroute') | (params$no_tcz > 1 & cztype == 'terminal')) ":::"`
+
+### Unit cost (KPI#1)
+
+```{r}
+# to prevent objects not found
+if (no_cz < czindex) {
+  assign(paste0("table_level2_cef_cost_", cztype, czindex), "")
+  assign(paste0("table_level2_cef_cost_infl_", cztype, czindex), "")
+  assign(paste0("table_level2_cef_aucu_", cztype, czindex), "")
+  assign(paste0("table_level2_cef_cex_", cztype, czindex), "")
+}
+```
+
+`r layout_2fig(paste0("chart_cef_duc_l2_", cztype, czindex), paste0("chart_cef_su_l2_", cztype, czindex))`
+
+`r layout_fig_table(paste0("chart_cef_cost_", cztype, czindex), get(paste0("table_level2_cef_cost_", cztype, czindex)), vspace = 0, get(paste0("table_level2_cef_cost_infl_", cztype, czindex)))`
+
+`r layout_2fig(paste0("chart_cef_cost_entity_", cztype, czindex), paste0("chart_cef_cost_main_", cztype, czindex))`
+
+`\biggertext{Focus on unit cost}`{=latex}
+
+**AUC vs. DUC**
+
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[2,1]) == TRUE, cef_level2_text$cef_txt_1_4_duc, pull(cef_level2_text$cef_txt_1_4[2,1]))`
+
+**`r cztype_proper` service units**
+
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]) == TRUE, cef_level2_text$cef_txt_1_4_su, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]))`
+
+**`r cztype_proper` costs by entity**
+
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]) == TRUE, cef_level2_text$cef_txt_1_4_cost_all, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]))`
+
+**`r cztype_proper` costs for the main ANSP at charging zone level**
+
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]) == TRUE, cef_level2_text$cef_txt_1_4_cost_main, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]))`
+
+### Actual unit cost incurred by the users (AUCU) (PI#1)
+
+`r layout_fig_table(paste0("chart_cef_aucu_", cztype, czindex), get(paste0("table_level2_cef_aucu_", cztype, czindex)), vspace = -1.5)`
+
+`r layout_fig_table(paste0("chart_cef_cex_", cztype, czindex), get(paste0("table_level2_cef_cex_", cztype, czindex)) , vspace = -2)`
+
+
+### Regulatory result (RR)
+
+`r layout_2fig(paste0("chart_cef_reg_res_", cztype, czindex), paste0("chart_cef_reg_res_aucu_", cztype, czindex))`
+
+`r layout_2fig(paste0("chart_cef_reg_res_ansp_", cztype, czindex), paste0("chart_cef_net_res_main_ansp_", cztype, czindex))`
+
+
+`\biggertext{Focus on regulatory result}`{=latex}
+
+`r if (params$year_report < 2022) "::: {.content-hidden}"`
+
+**`r cef_level2_text$cef_txt_1_13[1,1]`**
+
+`r cef_level2_text$cef_txt_1_13[2,1]`
+
+**`r cef_level2_text$cef_txt_1_13[3,1]`**
+
+`r cef_level2_text$cef_txt_1_13[4,1]`
+
+`r cef_level2_text$cef_txt_1_10_txt`
+
+`r if (params$year_report < 2022) ":::"`
+
+`r if (params$year_report >= 2022) "::: {.content-hidden}"`
+
+`r cef_level2_text$cef_txt_1_13[1,1]`
+
+`r cef_level2_text$cef_txt_1_10_txt`
+
+`r if (params$year_report >= 2022) ":::"`
+
+
+`r if (params$no_tcz < 2) "::: {.content-hidden}"`
+
+::: {.content-hidden}
+## TCZ 2
+:::
+
+```{r cef_level2_setup_tcz2}
+cztype <- "terminal"
+czindex <- 2
+cztype_proper <- "Terminal"
+if (czindex > no_tcz) {czname <- NA} else {czname <- tcz_list$tcz_name[[czindex]]}
+no_cz <- params$no_tcz
+
+cef_level2_text <- get_cef_level2_text(czindex, cztype)
+```
+
+`r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) "::: {.content-hidden}"`
+## `r cztype_proper` charging zone - `r czname`
+`r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) ":::"`
+
+
+`r if ((params$no_ecz > 1 & cztype == 'enroute') | (params$no_tcz > 1 & cztype == 'terminal')) "::: {.content-hidden}"`
+## `r cztype_proper` charging zone 
+`r if ((params$no_ecz > 1 & cztype == 'enroute') | (params$no_tcz > 1 & cztype == 'terminal')) ":::"`
+
+### Unit cost (KPI#1)
+
+```{r}
+# to prevent objects not found
+if (no_cz < czindex) {
+  assign(paste0("table_level2_cef_cost_", cztype, czindex), "")
+  assign(paste0("table_level2_cef_cost_infl_", cztype, czindex), "")
+  assign(paste0("table_level2_cef_aucu_", cztype, czindex), "")
+  assign(paste0("table_level2_cef_cex_", cztype, czindex), "")
+}
+```
+
+`r layout_2fig(paste0("chart_cef_duc_l2_", cztype, czindex), paste0("chart_cef_su_l2_", cztype, czindex))`
+
+`r layout_fig_table(paste0("chart_cef_cost_", cztype, czindex), get(paste0("table_level2_cef_cost_", cztype, czindex)), vspace = 0, get(paste0("table_level2_cef_cost_infl_", cztype, czindex)))`
+
+`r layout_2fig(paste0("chart_cef_cost_entity_", cztype, czindex), paste0("chart_cef_cost_main_", cztype, czindex))`
+
+`\biggertext{Focus on unit cost}`{=latex}
+
+**AUC vs. DUC**
+
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[2,1]) == TRUE, cef_level2_text$cef_txt_1_4_duc, pull(cef_level2_text$cef_txt_1_4[2,1]))`
+
+**`r cztype_proper` service units**
+
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]) == TRUE, cef_level2_text$cef_txt_1_4_su, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]))`
+
+**`r cztype_proper` costs by entity**
+
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]) == TRUE, cef_level2_text$cef_txt_1_4_cost_all, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]))`
+
+**`r cztype_proper` costs for the main ANSP at charging zone level**
+
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]) == TRUE, cef_level2_text$cef_txt_1_4_cost_main, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]))`
+
+### Actual unit cost incurred by the users (AUCU) (PI#1)
+
+`r layout_fig_table(paste0("chart_cef_aucu_", cztype, czindex), get(paste0("table_level2_cef_aucu_", cztype, czindex)), vspace = -1.5)`
+
+`r layout_fig_table(paste0("chart_cef_cex_", cztype, czindex), get(paste0("table_level2_cef_cex_", cztype, czindex)) , vspace = -2)`
+
+
+### Regulatory result (RR)
+
+`r layout_2fig(paste0("chart_cef_reg_res_", cztype, czindex), paste0("chart_cef_reg_res_aucu_", cztype, czindex))`
+
+`r layout_2fig(paste0("chart_cef_reg_res_ansp_", cztype, czindex), paste0("chart_cef_net_res_main_ansp_", cztype, czindex))`
+
+
+`\biggertext{Focus on regulatory result}`{=latex}
+
+`r if (params$year_report < 2022) "::: {.content-hidden}"`
+
+**`r cef_level2_text$cef_txt_1_13[1,1]`**
+
+`r cef_level2_text$cef_txt_1_13[2,1]`
+
+**`r cef_level2_text$cef_txt_1_13[3,1]`**
+
+`r cef_level2_text$cef_txt_1_13[4,1]`
+
+`r cef_level2_text$cef_txt_1_10_txt`
+
+`r if (params$year_report < 2022) ":::"`
+
+`r if (params$year_report >= 2022) "::: {.content-hidden}"`
+
+`r cef_level2_text$cef_txt_1_13[1,1]`
+
+`r cef_level2_text$cef_txt_1_10_txt`
+
+`r if (params$year_report >= 2022) ":::"`
+
+`r if (params$no_tcz < 2) ":::"`
+
+`r if (params$no_tcz == 0) ":::"`
