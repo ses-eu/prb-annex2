@@ -1134,13 +1134,59 @@ layout_wrap_figure <- function(chart1, chart2 = NULL, text, vspace, chart3 = NUL
 
 ## setup latex line breaks ----
 latex_linebreaks <- function(mystring) {
-  mystring_list <- str_split(mystring, "<br/>")[[1]] %>%
-    discard(~ .x == "")
-  
-  latex_string <- reduce(mystring_list, ~ paste(.x, .y, sep = fixed('`\\\\`{=tex}')))
 
-  return(latex_string)
+  tryCatch({
+    mystring_list <- str_split(mystring, "<br/>")[[1]] %>%
+      discard(~ .x == "")
+    
+    latex_string <- reduce(mystring_list, ~ paste(.x, .y, sep = fixed('`\\\\`{=tex}')))
+    
+    return(latex_string)
+  }, error = function(e) {
+    return("")  # Return empty string on error
+  }
+)
+    
+}
+
+## break level 1 text  ----
+break_l1_text <- function(mystring) {
+  
+  mylength <- nchar(mystring)
+  no_bullets <- str_count(mystring, fixed("\n\n")) 
+  pos_bullets <- str_locate_all(mystring, fixed("\n\n"))[[1]]
+  mytotal_length <- mylength + no_bullets * 100
+
+  if (mytotal_length < 900) {
+    level1_text1 <- mystring
+    level1_text2 <- ''
+  } else {
+    
+    break_point_check <- numeric(no_bullets)
+    
+    for (i in 1:no_bullets) {
+      if (i == 1) {
+        # Handle first iteration separately (to avoid pos_bullets[i-1] issue)
+        break_point_check[i] <- pos_bullets[i]
+      } else {
+        break_point_check[i] <- pos_bullets[i] + (i)*100
+      }
+    }
+    
+    break_point <- which(break_point_check > 900)[1] 
+    
+    if (is.na(break_point)) {
+      level1_text1 <- mystring
+      level1_text2 <- ''} 
+    else {
+      level1_text1 <- substr(mystring, 1, pos_bullets[break_point]+1)
+      level1_text2 <- substr(mystring, pos_bullets[break_point]+2, mylength)        
+      }
     
   }
+  
 
+  return((list(text1 = level1_text1, text2 =level1_text2)))
+  
+}
 
