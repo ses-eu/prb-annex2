@@ -27,7 +27,7 @@ format:
       - left=2.5cm
       - right=2.2cm
       - footskip=0.7cm
-    mainfont: "Calibri Light"
+    mainfont: "Calibri"
     
     template-partials:
       - toc.tex
@@ -72,7 +72,7 @@ format:
           
           \usepackage{titling}   % Allows title repositioning
           \usepackage{fontspec}  % Custom fonts
-          \newfontfamily\calibriLight{Calibri Light} % Define Roboto Light for title
+          \newfontfamily\calibriLight{Calibri Light} % Define font for title
 
            % Apply color and keep the existing formatting
           \pretitle{\vspace*{-2cm} % Moves title
@@ -152,7 +152,7 @@ format:
           \usepackage[utf8]{inputenc} % Ensure UTF-8 support for character encoding
           \usepackage{textcomp}       % Additional text symbols
           \usepackage{amssymb}        % Enable ✓ and ✘ symbols
-          \setmainfont{Calibri Light}        % Set Calibri as the main font  
+          \setmainfont{Calibri}        % Set Calibri as the main font  
           \newfontfamily{\symbolfont}{Segoe UI Symbol} % Set fallback for symbols
           \DeclareTextFontCommand{\textsymbol}{\symbolfont} % Define fallback symbol command          
 
@@ -164,18 +164,34 @@ format:
           % Load titlesec package for section formatting
           \usepackage{titlesec}
           
+
           % --------------------- CHAPTER STYLING ---------------------
           
-          \titleformat{\chapter} % Chapter title format
+          \titleformat{\chapter}[block] % Chapter formatting without forced page break
             {\normalfont\bfseries\color{PRBBlue}\fontsize{12pt}{14pt}\selectfont\fontspec{Calibri Bold}} % Style
             {\thechapter} % Chapter number
-            {1em} % Spacing between number and text
-            {} % Additional formatting
+            {1em} % Space between number and text
+            {} % No extra formatting
           
-          \titlespacing*{\chapter} % Adjust spacing before/after
+          \titlespacing*{\chapter} % Adjust chapter spacing
             {0pt} % Left margin
-            {0pt} % Space before chapter
-            {6pt} % Space after chapter
+            {6pt} % Space before chapter
+            {12pt} % Space after chapter
+          
+          % ENSURE FIRST CHAPTER STARTS ON A NEW PAGE, OTHERS DO NOT
+          \makeatletter
+          \newif\iffirstchapter
+          \firstchaptertrue % Mark that the first chapter is coming
+          
+          \renewcommand{\chapter}{%
+            \iffirstchapter
+              \firstchapterfalse % First chapter: Start on new page
+              \clearpage
+            \else
+              % Not the first chapter: Do NOT start on new page
+            \fi
+            \secdef\@chapter\@schapter}
+          \makeatother
           
           % --------------------- SECTION STYLING ---------------------
           
@@ -217,9 +233,11 @@ format:
             {6pt} % Space after sub-subsection
           
           % --------------------- BIGGER TEXT COMMAND ---------------------
-          \newcommand{\biggertext}[1]{{\bfseries\fontsize{11pt}{13pt}\selectfont #1}}
+          \newcommand{\biggertext}[1]{{\bfseries\fontsize{12pt}{14pt}\selectfont #1}}
           
           \usepackage{makecell} % Enables multiline table headers
+          
+          \usepackage{needspace} % to avoid orphan titles
 
 book:
   title: "Performance Review Body"
