@@ -760,7 +760,7 @@ saf_text1 <- saf_text$text1
 saf_text2 <- saf_text$text2
 ```
 
-`r paste0(layout_wrap_figure("chart_saf_l1", NULL, saf_text1, 12), saf_text2)`
+`r paste0(layout_wrap_figure("chart_saf_l1", NULL, saf_text1, 13), saf_text2)`
 
 
 <!-- exception for luxembourg -->
@@ -812,11 +812,11 @@ cef_text1 <- cef_text$text1
 cef_text2 <- cef_text$text2
 ```
 
-`r if_else (params$no_ecz == 2, layout_wrap_figure("chart_cef_er_1", "chart_cef_er_2", cef_conc1, 40, "chart_cef_trm_1"), "")`
+`r if_else (params$no_ecz == 2, layout_wrap_figure("chart_cef_er_1", "chart_cef_er_2", cef_conc1, 38, "chart_cef_trm_1"), "")`
 
-`r if_else (params$no_tcz == 2, layout_wrap_figure("chart_cef_er_1", "chart_cef_trm_1", cef_conc1, 40, "chart_cef_trm_2"), "")`
+`r if_else (params$no_tcz == 2, layout_wrap_figure("chart_cef_er_1", "chart_cef_trm_1", cef_conc1, 38, "chart_cef_trm_2"), "")`
 
-`r if_else (params$no_ecz == 1 & params$no_tcz == 1, layout_wrap_figure("chart_cef_er_1", "chart_cef_trm_1", cef_conc1, 27), "")`
+`r if_else (params$no_ecz == 1 & params$no_tcz == 1, layout_wrap_figure("chart_cef_er_1", "chart_cef_trm_1", cef_conc1, 25), "")`
 
 `r if_else (params$no_ecz == 1 & params$no_tcz == 0, paste0(layout_wrap_figure("chart_cef_er_1", NULL, cef_text1, 12), cef_text2), "")`
 
@@ -832,6 +832,8 @@ cef_text2 <- cef_text$text2
 
 `r saf_conc1`
 
+\needspace{2\baselineskip}
+
 ## Effectiveness of Safety Management (EoSM) (KPI#1)
 
 ```{r chart_saf_eosm}
@@ -841,12 +843,16 @@ cef_text2 <- cef_text$text2
 #| fig-pos: "H"
 ```
 
+\needspace{3\baselineskip}
+
 `\biggertext{Focus on EoSM}`{=latex}
 
 `r latex_linebreaks(saf_text)`
 
 
 `r if (params$country == "MUAC") "::: {.content-hidden}"`
+
+\needspace{2\baselineskip}
 
 ## Occurrences - Rate of runway incursions (RIs) (PI#1) & Rate of separation minima infringements (SMIs) (PI#2)
 
@@ -864,6 +870,8 @@ cef_text2 <- cef_text$text2
 
 `r if (params$country == "Luxembourg") "::: {.content-hidden}"`
 
+\needspace{3\baselineskip}
+
 ## En route performance
 
 ### Horizontal flight efficiency of the actual trajectory (KEA) (KPI#1), of the last filed flight plan (KEP) (PI#1) & shortest constrained route (SCR) (PI#2)
@@ -876,6 +884,8 @@ cef_text2 <- cef_text$text2
 
 
 `r if (params$no_tcz == 0) "::: {.content-hidden}"`
+
+\needspace{3\baselineskip}
 
 ## Terminal performance
 
@@ -890,9 +900,9 @@ cef_text2 <- cef_text$text2
 
 `r layout_2fig("chart_axot_apt", "chart_asma_apt")`
 
-`\biggertext{Focus on ASMA \& AXOT}`{=latex}
+\needspace{3\baselineskip}
 
-\needspace{2\baselineskip}
+`\biggertext{Focus on ASMA \& AXOT}`{=latex}
 
 **AXOT**
 
@@ -908,6 +918,8 @@ cef_text2 <- cef_text$text2
 
 `r layout_2fig("chart_cdo_country", "chart_cdo_apt")`
 
+
+\needspace{2\baselineskip}
 
 `\biggertext{Focus CDOs}`{=latex}
 
@@ -932,9 +944,9 @@ cef_text2 <- cef_text$text2
 
 `r layout_2fig("chart_cdr", "chart_rsa")`
 
-`\biggertext{Focus on Civil-Military dimension}`{=latex}
+\needspace{3\baselineskip}
 
-\needspace{2\baselineskip}
+`\biggertext{Focus on Civil-Military dimension}`{=latex}
 
 **Update on Military dimension of the plan**
 
@@ -1010,6 +1022,8 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 
 `r if (params$country == "Luxembourg") "::: {.content-hidden}"`
 
+\needspace{3\baselineskip}
+
 ## En route performance
 
 ### En route ATFM delay (KPI#1)
@@ -1025,9 +1039,9 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 #| fig-pos: "H"
 ```
 
-`\biggertext{Focus on en route ATFM delay}`{=latex}
+\needspace{3\baselineskip}
 
-\needspace{2\baselineskip}
+`\biggertext{Focus on en route ATFM delay}`{=latex}
 
 **Summary of capacity performance**
 
@@ -1100,6 +1114,8 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 `r if (params$no_tcz == 0) "::: {.content-hidden}"`
 
 
+\needspace{3\baselineskip}
+
 ## Terminal performance
 
 ### Arrival ATFM delay (KPI#2)
@@ -1131,10 +1147,9 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 
 `r layout_summary_table(table_level2_cap_apt_pis_pdf2, hspace = 0, left_margin = 0, width = 1)`
 
+\needspace{3\baselineskip}
 
 `\biggertext{Focus on performance indicators at airport level}`{=latex}
-
-\needspace{2\baselineskip}
 
 **ATFM slot adherence**
 
@@ -1183,6 +1198,8 @@ no_cz <- params$no_ecz
 cef_level2_text <- get_cef_level2_text(czindex, cztype)
 ```
 
+\needspace{3\baselineskip}
+
 `r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) "::: {.content-hidden}"`
 ## `r cztype_proper` charging zone - `r czname`
 `r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) ":::"`
@@ -1211,9 +1228,9 @@ if (no_cz < czindex) {
 `r layout_2fig(paste0("chart_cef_cost_entity_", cztype, czindex), paste0("chart_cef_cost_main_", cztype, czindex))`
 
 
-`\biggertext{Focus on unit cost}`{=latex}
+\needspace{3\baselineskip}
 
-\needspace{2\baselineskip}
+`\biggertext{Focus on unit cost}`{=latex}
 
 **AUC vs. DUC**
 
@@ -1295,6 +1312,8 @@ no_cz <- params$no_ecz
 cef_level2_text <- get_cef_level2_text(czindex, cztype)
 ```
 
+\needspace{3\baselineskip}
+
 `r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) "::: {.content-hidden}"`
 ## `r cztype_proper` charging zone - `r czname`
 `r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) ":::"`
@@ -1323,9 +1342,9 @@ if (no_cz < czindex) {
 `r layout_2fig(paste0("chart_cef_cost_entity_", cztype, czindex), paste0("chart_cef_cost_main_", cztype, czindex))`
 
 
-`\biggertext{Focus on unit cost}`{=latex}
+\needspace{3\baselineskip}
 
-\needspace{2\baselineskip}
+`\biggertext{Focus on unit cost}`{=latex}
 
 **AUC vs. DUC**
 
@@ -1411,6 +1430,8 @@ no_cz <- params$no_tcz
 cef_level2_text <- get_cef_level2_text(czindex, cztype)
 ```
 
+\needspace{3\baselineskip}
+
 `r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) "::: {.content-hidden}"`
 ## `r cztype_proper` charging zone - `r czname`
 `r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) ":::"`
@@ -1438,9 +1459,9 @@ if (no_cz < czindex) {
 
 `r layout_2fig(paste0("chart_cef_cost_entity_", cztype, czindex), paste0("chart_cef_cost_main_", cztype, czindex))`
 
-`\biggertext{Focus on unit cost}`{=latex}
+\needspace{3\baselineskip}
 
-\needspace{2\baselineskip}
+`\biggertext{Focus on unit cost}`{=latex}
 
 **AUC vs. DUC**
 
@@ -1523,6 +1544,8 @@ no_cz <- params$no_tcz
 cef_level2_text <- get_cef_level2_text(czindex, cztype)
 ```
 
+\needspace{3\baselineskip}
+
 `r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) "::: {.content-hidden}"`
 ## `r cztype_proper` charging zone - `r czname`
 `r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) ":::"`
@@ -1550,9 +1573,9 @@ if (no_cz < czindex) {
 
 `r layout_2fig(paste0("chart_cef_cost_entity_", cztype, czindex), paste0("chart_cef_cost_main_", cztype, czindex))`
 
-`\biggertext{Focus on unit cost}`{=latex}
+\needspace{3\baselineskip}
 
-\needspace{2\baselineskip}
+`\biggertext{Focus on unit cost}`{=latex}
 
 **AUC vs. DUC**
 

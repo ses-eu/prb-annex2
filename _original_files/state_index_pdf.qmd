@@ -617,7 +617,7 @@ xrate_year_report <- if_else(country == "Luxembourg", 1, pull(xrate))
 
 # OVERVIEW
 
-# Contextual information
+## Contextual information
 
 *`r pp_version`*
 
@@ -732,23 +732,35 @@ other_met_str_1 <- reduce(other_met_list, ~ paste(.x, .y, sep = fixed('`\\\\`{=t
 
 ```{r mvt_conc1}
 mvt_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "traffic_IFR", "Table_Findings_traffic_IFR")
+
+mvt_text <- break_l1_text(mvt_conc1) 
+mvt_text1 <- mvt_text$text1
+mvt_text2 <- mvt_text$text2
 ```
 
-`r layout_wrap_figure("chart_level1_traffic_mvt", NULL, mvt_conc1, 12)`
+`r paste0(layout_wrap_figure("chart_level1_traffic_mvt", NULL, mvt_text1, 12), mvt_text2)`
 
 ```{r su_conc1}
 tsu_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "traffic_SUs", "Table_Findings_traffic_TSU")
+
+tsu_text <- break_l1_text(tsu_conc1) 
+tsu_text1 <- tsu_text$text1
+tsu_text2 <- tsu_text$text2
 ```
 
-`r layout_wrap_figure("chart_level1_traffic_su", NULL, tsu_conc1, 12)`
+`r paste0(layout_wrap_figure("chart_level1_traffic_su", NULL, tsu_text1, 12), tsu_text2)`
 
 ## Safety (Main ANSP)
 
 ```{r saf_conc1}
 saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_safety")
+
+saf_text <- break_l1_text(saf_conc1) 
+saf_text1 <- saf_text$text1
+saf_text2 <- saf_text$text2
 ```
 
-`r layout_wrap_figure("chart_saf_l1", NULL, tsu_conc1, 12)`
+`r paste0(layout_wrap_figure("chart_saf_l1", NULL, saf_text1, 13), saf_text2)`
 
 
 <!-- exception for luxembourg -->
@@ -758,12 +770,15 @@ saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_
 
 ```{r concl_env}
 env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Findings_environment")
+
+env_text <- break_l1_text(env_conc1) 
+env_text1 <- env_text$text1
+env_text2 <- env_text$text2
 ```
 
-`r layout_wrap_figure("chart_env_kea_l1", NULL, env_conc1, 12)`
+`r paste0(layout_wrap_figure("chart_env_kea_l1", NULL, env_text1, 12), env_text2)`
 
 `r if (params$country == "Luxembourg") ":::"`
-
 
 ## Capacity (Member State)
 
@@ -774,38 +789,50 @@ if (params$country == "Luxembourg") {
                     "")
   } else {
   cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity")
-}
+  }
+
+cap_text <- break_l1_text(cap_er_conc1) 
+cap_text1 <- cap_text$text1
+cap_text2 <- cap_text$text2
 ```
 
-`r if_else(params$country == "Luxembourg", layout_wrap_figure("chart_cap_trm", NULL, cap_er_conc1, 13), "")` 
+`r if_else(params$country == "Luxembourg", paste0(layout_wrap_figure("chart_cap_trm", NULL, cap_text1, 12), cap_text2), "")` 
 
-`r if_else (params$no_tcz == 0, layout_wrap_figure("chart_cap_er", NULL, cap_er_conc1, 13), "")`
+`r if_else (params$no_tcz == 0, paste0(layout_wrap_figure("chart_cap_er", NULL, cap_text1, 12), cap_text2), "")`
 
-`r if_else (params$no_tcz != 0 & params$country != "Luxembourg", layout_wrap_figure("chart_cap_er", "chart_cap_trm", cap_er_conc1, 27), "")`
+`r if_else (params$no_tcz != 0 & params$country != "Luxembourg", layout_wrap_figure("chart_cap_er", "chart_cap_trm", cap_er_conc1, 25), "")`
 
 ## Cost-efficiency (En route/Terminal charging zone(s))
 
 ```{r concl-cef}
 cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF")
+
+cef_text <- break_l1_text(cef_conc1) 
+cef_text1 <- cef_text$text1
+cef_text2 <- cef_text$text2
 ```
 
-`r if_else (params$no_ecz == 2, layout_wrap_figure("chart_cef_er_1", "chart_cef_er_2", cef_conc1, 40, "chart_cef_trm_1"), "")`
+`r if_else (params$no_ecz == 2, layout_wrap_figure("chart_cef_er_1", "chart_cef_er_2", cef_conc1, 38, "chart_cef_trm_1"), "")`
 
-`r if_else (params$no_tcz == 2, layout_wrap_figure("chart_cef_er_1", "chart_cef_trm_1", cef_conc1, 40, "chart_cef_trm_2"), "")`
+`r if_else (params$no_tcz == 2, layout_wrap_figure("chart_cef_er_1", "chart_cef_trm_1", cef_conc1, 38, "chart_cef_trm_2"), "")`
 
-`r if_else (params$no_ecz == 1 & params$no_tcz == 1, layout_wrap_figure("chart_cef_er_1", "chart_cef_trm_1", cef_conc1, 27), "")`
+`r if_else (params$no_ecz == 1 & params$no_tcz == 1, layout_wrap_figure("chart_cef_er_1", "chart_cef_trm_1", cef_conc1, 25), "")`
 
-`r if_else (params$no_ecz == 1 & params$no_tcz == 0, layout_wrap_figure("chart_cef_er_1", NULL, cef_conc1, 12), "")`
+`r if_else (params$no_ecz == 1 & params$no_tcz == 0, paste0(layout_wrap_figure("chart_cef_er_1", NULL, cef_text1, 12), cef_text2), "")`
 
 ```{=tex}
 \clearpage
 ```
+
+\needspace{3\baselineskip}
 
 # SAFETY - `r toupper(params$country)`
 
 ## PRB monitoring
 
 `r saf_conc1`
+
+\needspace{2\baselineskip}
 
 ## Effectiveness of Safety Management (EoSM) (KPI#1)
 
@@ -816,18 +843,24 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 #| fig-pos: "H"
 ```
 
+\needspace{3\baselineskip}
+
 `\biggertext{Focus on EoSM}`{=latex}
 
-`r saf_text`
+`r latex_linebreaks(saf_text)`
 
 
 `r if (params$country == "MUAC") "::: {.content-hidden}"`
+
+\needspace{2\baselineskip}
 
 ## Occurrences - Rate of runway incursions (RIs) (PI#1) & Rate of separation minima infringements (SMIs) (PI#2)
 
 `r layout_2fig("chart_saf_ri", "chart_saf_smi")`
 
 `r if (params$country == "MUAC") ":::"`
+
+\needspace{3\baselineskip}
 
 # ENVIRONMENT - `r toupper(params$country)`
 
@@ -836,6 +869,8 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 `r env_conc1`
 
 `r if (params$country == "Luxembourg") "::: {.content-hidden}"`
+
+\needspace{3\baselineskip}
 
 ## En route performance
 
@@ -850,6 +885,8 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 `r if (params$no_tcz == 0) "::: {.content-hidden}"`
 
+\needspace{3\baselineskip}
+
 ## Terminal performance
 
 ### Additional taxi-out time (AXOT) (PI#3) & Arrival Sequencing and Metering Area (ASMA) time (PI#4)
@@ -863,24 +900,30 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 `r layout_2fig("chart_axot_apt", "chart_asma_apt")`
 
+\needspace{3\baselineskip}
+
 `\biggertext{Focus on ASMA \& AXOT}`{=latex}
 
 **AXOT**
 
-`r if (exists("env_apt_2") == FALSE) {''} else {env_apt_2}`
+`r if (exists("env_apt_2") == FALSE) {''} else {latex_linebreaks(env_apt_2)}`
+
+\needspace{2\baselineskip}
 
 **ASMA**
 
-`r if (exists("env_apt_3") == FALSE) {''} else {env_apt_3}`
+`r if (exists("env_apt_3") == FALSE) {''} else {latex_linebreaks(env_apt_3)}`
 
 ### Share of arrivals applying continuous descent operations (CDOs) (PI#5)
 
 `r layout_2fig("chart_cdo_country", "chart_cdo_apt")`
 
 
+\needspace{2\baselineskip}
+
 `\biggertext{Focus CDOs}`{=latex}
 
-`r if (exists("env_apt_4") == FALSE) {''} else {env_apt_4}`
+`r if (exists("env_apt_4") == FALSE) {''} else {latex_linebreaks(env_apt_4)}`
 
 `r layout_summary_table(table_level2_env_apt_pis, hspace = 0, left_margin = -0.8, width = 1.1)`
 
@@ -901,14 +944,18 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 `r layout_2fig("chart_cdr", "chart_rsa")`
 
+\needspace{3\baselineskip}
+
 `\biggertext{Focus on Civil-Military dimension}`{=latex}
 
 **Update on Military dimension of the plan**
 
-`r env_mil_1`
+`r latex_linebreaks(env_mil_1)`
 
 
 `r if (params$year_report != 2020) ":::: {.content-hidden}"`
+
+\needspace{2\baselineskip}
 
 **Military - related measures implemented or planned to improve environment and capacity**														
 
@@ -916,26 +963,36 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 `r if (params$year_report == 2020) ":::: {.content-hidden}"`
 
+\needspace{2\baselineskip}
+
 **Military - related measures implemented or planned to improve capacity**
 
 `r if (params$year_report == 2020) "::::"`
 
-`r env_mil_2`
+`r latex_linebreaks(env_mil_2)`
+
+\needspace{2\baselineskip}
 
 **Initiatives implemented or planned to improve PI#6**
 
-`r env_mil_4`
+`r latex_linebreaks(env_mil_4)`
+
+\needspace{2\baselineskip}
 
 **Initiatives implemented or planned to improve PI#7**
 
-`r env_mil_6`
+`r latex_linebreaks(env_mil_6)`
+
+\needspace{2\baselineskip}
 
 **Initiatives implemented or planned to improve PI#8**
 
-`r env_mil_8`
+`r latex_linebreaks(env_mil_8)`
 
 `r if (params$country == "Luxembourg") ":::"`
 
+
+\needspace{3\baselineskip}
 
 # CAPACITY - `r toupper(params$country)`
 
@@ -965,6 +1022,8 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 
 `r if (params$country == "Luxembourg") "::: {.content-hidden}"`
 
+\needspace{3\baselineskip}
+
 ## En route performance
 
 ### En route ATFM delay (KPI#1)
@@ -980,35 +1039,47 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 #| fig-pos: "H"
 ```
 
+\needspace{3\baselineskip}
+
 `\biggertext{Focus on en route ATFM delay}`{=latex}
 
 **Summary of capacity performance**
 
-`r if_else(length(cap_heading_ukraine) == 0, cap_er_nsa_7, cap_er_nsa_8)`
+`r if_else(length(cap_heading_ukraine) == 0, latex_linebreaks(cap_er_nsa_7), latex_linebreaks(cap_er_nsa_8))`
+
+\needspace{2\baselineskip}
 
 **NSA's assessment of capacity performance**
 
-`r cap_er_nsa_2`
+`r latex_linebreaks(cap_er_nsa_2)`
+
+\needspace{2\baselineskip}
 
 **Monitoring process for capacity performance**
 
-`r cap_er_nsa_3`
+`r latex_linebreaks(cap_er_nsa_3)`
+
+\needspace{2\baselineskip}
 
 **Capacity planning**
 
-`r cap_er_nsa_4`
+`r latex_linebreaks(cap_er_nsa_4)`
+
+\needspace{2\baselineskip}
 
 **Application of Corrective Measures for Capacity (if applicable)**
 
-`r cap_er_nsa_6`
+`r latex_linebreaks(cap_er_nsa_6)`
 
-`r if_else(length(cap_heading_ukraine) == 0, "", paste0("**Additional Information Related to Russia's War of Aggression Against Ukraine**<br><br>", cap_er_nsa_7))`
+`r if_else(length(cap_heading_ukraine) == 0, "", paste0("**Additional Information Related to Russia's War of Aggression Against Ukraine**<br><br>", latex_linebreaks(cap_er_nsa_7)))`
 
 `r if (params$year_report <= 2022) "::::: {.content-hidden}"`
 
+\needspace{2\baselineskip}
+
 **En route Capacity Incentive Scheme**														
 
-`r cap_er_nsa_incentive`
+`r latex_linebreaks(cap_er_nsa_incentive)`
 
 `r if (params$year_report <= 2022) ":::::"`
 
@@ -1033,7 +1104,7 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 
 `\biggertext{Focus on ATCOs in operations}`{=latex}
 
-`r cap_er_nsa_5`
+`r latex_linebreaks(cap_er_nsa_5)`
 
 `r if (params$country == "SES RP3" | params$country == "MUAC") "::::"`
 
@@ -1042,6 +1113,8 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 
 `r if (params$no_tcz == 0) "::: {.content-hidden}"`
 
+
+\needspace{3\baselineskip}
 
 ## Terminal performance
 
@@ -1052,11 +1125,11 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 
 `\biggertext{Focus on arrival ATFM delay}`{=latex}
 
-`r if (exists("cap_trm_nsa_1") == FALSE) {''} else {cap_trm_nsa_1}`
+`r if (exists("cap_trm_nsa_1") == FALSE) {''} else {latex_linebreaks(cap_trm_nsa_1)}`
 
-`r if (exists("cap_trm_nsa_2") == FALSE) {''} else {cap_trm_nsa_2}`
+`r if (exists("cap_trm_nsa_2") == FALSE) {''} else {latex_linebreaks(cap_trm_nsa_2)}`
 
-`r if (exists("cap_trm_nsa_3") == FALSE) {''} else {cap_trm_nsa_3}`
+`r if (exists("cap_trm_nsa_3") == FALSE) {''} else {latex_linebreaks(cap_trm_nsa_3)}`
 
 
 ### Other terminal performance indicators (PI#1-3)
@@ -1074,24 +1147,31 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 
 `r layout_summary_table(table_level2_cap_apt_pis_pdf2, hspace = 0, left_margin = 0, width = 1)`
 
+\needspace{3\baselineskip}
 
 `\biggertext{Focus on performance indicators at airport level}`{=latex}
 
 **ATFM slot adherence**
 
-`r if (exists("cap_trm_nsa_4") == FALSE) {''} else {cap_trm_nsa_4}`
+`r if (exists("cap_trm_nsa_4") == FALSE) {''} else {latex_linebreaks(cap_trm_nsa_4)}`
 
+
+\needspace{2\baselineskip}
 
 **ATC pre-departure delay**
 
-`r if (exists("cap_trm_nsa_5") == FALSE) {''} else {cap_trm_nsa_5}`
+`r if (exists("cap_trm_nsa_5") == FALSE) {''} else {latex_linebreaks(cap_trm_nsa_5)}`
+
+\needspace{2\baselineskip}
 
 **All causes pre-departure delay**
 
-`r if (exists("cap_trm_nsa_6") == FALSE) {''} else {cap_trm_nsa_6}`
+`r if (exists("cap_trm_nsa_6") == FALSE) {''} else {latex_linebreaks(cap_trm_nsa_6)}`
 
 `r if (params$no_tcz == 0) ":::"`
 
+
+\needspace{3\baselineskip}
 
 # COST-EFFIENCY - `r toupper(params$country)`
 
@@ -1117,6 +1197,8 @@ no_cz <- params$no_ecz
 
 cef_level2_text <- get_cef_level2_text(czindex, cztype)
 ```
+
+\needspace{3\baselineskip}
 
 `r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) "::: {.content-hidden}"`
 ## `r cztype_proper` charging zone - `r czname`
@@ -1146,19 +1228,27 @@ if (no_cz < czindex) {
 `r layout_2fig(paste0("chart_cef_cost_entity_", cztype, czindex), paste0("chart_cef_cost_main_", cztype, czindex))`
 
 
+\needspace{3\baselineskip}
+
 `\biggertext{Focus on unit cost}`{=latex}
 
 **AUC vs. DUC**
 
 `r if_else(is.na(cef_level2_text$cef_txt_1_4[2,1]) == TRUE, cef_level2_text$cef_txt_1_4_duc, pull(cef_level2_text$cef_txt_1_4[2,1]))`
 
+\needspace{2\baselineskip}
+
 **`r cztype_proper` service units**
 
 `r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]) == TRUE, cef_level2_text$cef_txt_1_4_su, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]))`
 
+\needspace{2\baselineskip}
+
 **`r cztype_proper` costs by entity**
 
 `r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]) == TRUE, cef_level2_text$cef_txt_1_4_cost_all, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]))`
+
+\needspace{2\baselineskip}
 
 **`r cztype_proper` costs for the main ANSP at charging zone level**
 
@@ -1182,9 +1272,13 @@ if (no_cz < czindex) {
 
 `r if (params$year_report < 2022) "::: {.content-hidden}"`
 
+\needspace{2\baselineskip}
+
 **`r cef_level2_text$cef_txt_1_13[1,1]`**
 
 `r cef_level2_text$cef_txt_1_13[2,1]`
+
+\needspace{2\baselineskip}
 
 **`r cef_level2_text$cef_txt_1_13[3,1]`**
 
@@ -1218,6 +1312,8 @@ no_cz <- params$no_ecz
 cef_level2_text <- get_cef_level2_text(czindex, cztype)
 ```
 
+\needspace{3\baselineskip}
+
 `r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) "::: {.content-hidden}"`
 ## `r cztype_proper` charging zone - `r czname`
 `r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) ":::"`
@@ -1246,19 +1342,27 @@ if (no_cz < czindex) {
 `r layout_2fig(paste0("chart_cef_cost_entity_", cztype, czindex), paste0("chart_cef_cost_main_", cztype, czindex))`
 
 
+\needspace{3\baselineskip}
+
 `\biggertext{Focus on unit cost}`{=latex}
 
 **AUC vs. DUC**
 
 `r if_else(is.na(cef_level2_text$cef_txt_1_4[2,1]) == TRUE, cef_level2_text$cef_txt_1_4_duc, pull(cef_level2_text$cef_txt_1_4[2,1]))`
 
+\needspace{2\baselineskip}
+
 **`r cztype_proper` service units**
 
 `r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]) == TRUE, cef_level2_text$cef_txt_1_4_su, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]))`
 
+\needspace{2\baselineskip}
+
 **`r cztype_proper` costs by entity**
 
 `r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]) == TRUE, cef_level2_text$cef_txt_1_4_cost_all, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]))`
+
+\needspace{2\baselineskip}
 
 **`r cztype_proper` costs for the main ANSP at charging zone level**
 
@@ -1282,9 +1386,13 @@ if (no_cz < czindex) {
 
 `r if (params$year_report < 2022) "::: {.content-hidden}"`
 
+\needspace{2\baselineskip}
+
 **`r cef_level2_text$cef_txt_1_13[1,1]`**
 
 `r cef_level2_text$cef_txt_1_13[2,1]`
+
+\needspace{2\baselineskip}
 
 **`r cef_level2_text$cef_txt_1_13[3,1]`**
 
@@ -1322,6 +1430,8 @@ no_cz <- params$no_tcz
 cef_level2_text <- get_cef_level2_text(czindex, cztype)
 ```
 
+\needspace{3\baselineskip}
+
 `r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) "::: {.content-hidden}"`
 ## `r cztype_proper` charging zone - `r czname`
 `r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) ":::"`
@@ -1349,19 +1459,27 @@ if (no_cz < czindex) {
 
 `r layout_2fig(paste0("chart_cef_cost_entity_", cztype, czindex), paste0("chart_cef_cost_main_", cztype, czindex))`
 
+\needspace{3\baselineskip}
+
 `\biggertext{Focus on unit cost}`{=latex}
 
 **AUC vs. DUC**
 
 `r if_else(is.na(cef_level2_text$cef_txt_1_4[2,1]) == TRUE, cef_level2_text$cef_txt_1_4_duc, pull(cef_level2_text$cef_txt_1_4[2,1]))`
 
+\needspace{2\baselineskip}
+
 **`r cztype_proper` service units**
 
 `r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]) == TRUE, cef_level2_text$cef_txt_1_4_su, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]))`
 
+\needspace{2\baselineskip}
+
 **`r cztype_proper` costs by entity**
 
 `r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]) == TRUE, cef_level2_text$cef_txt_1_4_cost_all, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]))`
+
+\needspace{2\baselineskip}
 
 **`r cztype_proper` costs for the main ANSP at charging zone level**
 
@@ -1385,9 +1503,13 @@ if (no_cz < czindex) {
 
 `r if (params$year_report < 2022) "::: {.content-hidden}"`
 
+\needspace{2\baselineskip}
+
 **`r cef_level2_text$cef_txt_1_13[1,1]`**
 
 `r cef_level2_text$cef_txt_1_13[2,1]`
+
+\needspace{2\baselineskip}
 
 **`r cef_level2_text$cef_txt_1_13[3,1]`**
 
@@ -1422,6 +1544,8 @@ no_cz <- params$no_tcz
 cef_level2_text <- get_cef_level2_text(czindex, cztype)
 ```
 
+\needspace{3\baselineskip}
+
 `r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) "::: {.content-hidden}"`
 ## `r cztype_proper` charging zone - `r czname`
 `r if ((params$no_ecz == 1 & cztype == 'enroute') | (params$no_tcz == 1 & cztype == 'terminal')) ":::"`
@@ -1449,19 +1573,27 @@ if (no_cz < czindex) {
 
 `r layout_2fig(paste0("chart_cef_cost_entity_", cztype, czindex), paste0("chart_cef_cost_main_", cztype, czindex))`
 
+\needspace{3\baselineskip}
+
 `\biggertext{Focus on unit cost}`{=latex}
 
 **AUC vs. DUC**
 
 `r if_else(is.na(cef_level2_text$cef_txt_1_4[2,1]) == TRUE, cef_level2_text$cef_txt_1_4_duc, pull(cef_level2_text$cef_txt_1_4[2,1]))`
 
+\needspace{2\baselineskip}
+
 **`r cztype_proper` service units**
 
 `r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]) == TRUE, cef_level2_text$cef_txt_1_4_su, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]))`
 
+\needspace{2\baselineskip}
+
 **`r cztype_proper` costs by entity**
 
 `r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]) == TRUE, cef_level2_text$cef_txt_1_4_cost_all, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]))`
+
+\needspace{2\baselineskip}
 
 **`r cztype_proper` costs for the main ANSP at charging zone level**
 
@@ -1485,9 +1617,13 @@ if (no_cz < czindex) {
 
 `r if (params$year_report < 2022) "::: {.content-hidden}"`
 
+\needspace{2\baselineskip}
+
 **`r cef_level2_text$cef_txt_1_13[1,1]`**
 
 `r cef_level2_text$cef_txt_1_13[2,1]`
+
+\needspace{2\baselineskip}
 
 **`r cef_level2_text$cef_txt_1_13[3,1]`**
 

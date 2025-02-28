@@ -185,11 +185,9 @@ assign(mytable, setup_latex_table(get(mytable)))
 ```
 
 
-# Annual Monitoring Report {{< var doc.year_report >}} - SES RP3
+# OVERVIEW
 
-## Overview
-
-### Contextual information
+## Contextual information
 ```{r fetch-data-ses, eval=TRUE}
 data_context <-read_xlsx(
   paste0(data_folder, "SES file.xlsx"),
@@ -267,7 +265,7 @@ met_ansp_context <- data_context %>% select(met_providers) %>% pull()
 :::
 
 
-### Main PRB findings - {{< var doc.year_report >}}
+## Main PRB findings - {{< var doc.year_report >}}
 
 ```{r main-concl}
 main_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "main", "Table_Findings_main")
@@ -276,7 +274,7 @@ main_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "main", "Table_Findings_m
 `r main_conc1`
 
 
-### Traffic (SES RP3 area)
+## Traffic (SES RP3 area)
 ```{=tex}
 \setlength{\fboxrule}{0pt} % Set the border width to 0pt (no border)
 \setlength{\fboxsep}{0pt} % Remove padding
@@ -295,7 +293,7 @@ tsu_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "traffic_SUs", "Table_Find
 `r layout_wrap_figure("chart_level1_traffic_su", NULL, tsu_conc1, 12)`
 
 
-### Safety (SES RP3 area)
+## Safety (SES RP3 area)
 
 ```{r saf_conc1}
 saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_safety")
@@ -304,7 +302,7 @@ saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_
 `r layout_wrap_figure("chart_level1_saf_ses", NULL, saf_conc1, 13)`
 
 
-### Environment (SES RP3 area)
+## Environment (SES RP3 area)
 
 ```{r env_conc1}
 env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Findings_environment")
@@ -313,7 +311,7 @@ env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Find
 `r layout_wrap_figure("chart_env_kea", NULL, env_conc1, 13)`
 
 
-### Capacity (SES RP3 area)
+## Capacity (SES RP3 area)
 
 ```{r cap_er_conc1}
 cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity")
@@ -322,7 +320,7 @@ cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_F
 `r layout_wrap_figure("chart_cap_er", "chart_cap_trm", cap_er_conc1, 27)`
 
 
-### Cost-efficiency (SES RP3 area)
+## Cost-efficiency (SES RP3 area)
 
 ```{r cef_conc_l1}
 cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF")
@@ -330,17 +328,24 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 `r layout_wrap_figure("chart_level1_cef_er_ses", "chart_cef_trm_1", cef_conc1, 27)`
 
+\clearpage
 
-## Safety - SES RP3
+\needspace{2\baselineskip}
 
-### PRB monitoring
+# SAFETY - SES RP3
+
+\needspace{2\baselineskip}
+
+## PRB monitoring
 ```{r}
 # saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_safety")
 ```
 
 `r saf_conc1`
 
-### Actual versus planned number of ANSPs achieving the level of the EoSM targets for RP3 ahead of 2024
+\needspace{2\baselineskip}
+
+## Actual versus planned number of ANSPs achieving the level of the EoSM targets for RP3 ahead of 2024
 
 ```{r chart_saf_ansp}
 #| file: R/chart_level1_saf_ses.R
@@ -349,29 +354,41 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 #| fig-pos: "H"
 ```
 
-### Occurrences - Rate of runway incursions (RIs) (PI#1) & Rate of separation minima infringements (SMIs) (PI#2)
+\needspace{2\baselineskip}
+
+## Occurrences - Rate of runway incursions (RIs) (PI#1) & Rate of separation minima infringements (SMIs) (PI#2)
 
 `r layout_2fig("chart_saf_ri", "chart_saf_smi")`
 
 
-## Environment - SES RP3
+\needspace{2\baselineskip}
 
-### PRB monitoring
+# ENVIRONMENT - SES RP3
+
+\needspace{2\baselineskip}
+
+## PRB monitoring
 ```{r}
 env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Findings_environment")
 ```
 
 `r env_conc1`
 
-### En route performance
+\needspace{2\baselineskip}
 
-#### Horizontal flight efficiency of the actual trajectory (KEA) (KPI#1), of the last filed flight plan (KEP) (PI#1) & shortest constrained route (SCR) (PI#2)
+## En route performance
+
+\needspace{2\baselineskip}
+
+### Horizontal flight efficiency of the actual trajectory (KEA) (KPI#1), of the last filed flight plan (KEP) (PI#1) & shortest constrained route (SCR) (PI#2)
 
 `r layout_2fig("chart_env_kea_l2", "chart_env_kea_month")`
 
 `r layout_2fig("chart_env_kep_scr", "chart_env_kep_scr_month")`
 
-#### Summary of performance at local level
+\needspace{2\baselineskip}
+
+### Summary of performance at local level
 
 ```{r table_kea_summary}
 mytable <-"table_env_kea_all_states"
@@ -379,12 +396,16 @@ table_string <- source(here("R", paste0(mytable,".R")))
 assign(mytable, setup_latex_table(get(mytable))) 
 ```
 
-`r layout_summary_table(table_env_kea_all_states)`
+`r layout_summary_table(table_env_kea_all_states, left_margin = 1.7)`
 
 
-## Capacity - SES RP3
+\needspace{2\baselineskip}
 
-### PRB monitoring
+# CAPACITY - SES RP3
+
+\needspace{2\baselineskip}
+
+## PRB monitoring
 
 ```{r cap_prb}
   cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity")
@@ -392,9 +413,13 @@ assign(mytable, setup_latex_table(get(mytable)))
 
 `r cap_er_conc1`
 
-### En route performance
+\needspace{2\baselineskip}
 
-#### En route ATFM delay (KPI#1)
+## En route performance
+
+\needspace{2\baselineskip}
+
+### En route ATFM delay (KPI#1)
 
 `r layout_2fig("chart_cap_er_l2", "chart_cap_er_month")`
 
@@ -405,7 +430,9 @@ assign(mytable, setup_latex_table(get(mytable)))
 #| fig-pos: "H"
 ```
 
-#### Summary of performance at local level
+\needspace{2\baselineskip}
+
+### Summary of performance at local level
 
 ```{r table_cap_erdelay_summary}
 mytable <-"table_cap_erdelay_all_states"
@@ -413,19 +440,27 @@ table_string <- source(here("R", paste0(mytable,".R")))
 assign(mytable, setup_latex_table(get(mytable))) 
 ```
 
-`r layout_summary_table(table_cap_erdelay_all_states)`
+`r layout_summary_table(table_cap_erdelay_all_states, left_margin = 1.7)`
 
-#### Other indicators
+\needspace{2\baselineskip}
+
+### Other indicators
 
 `r layout_2fig("chart_cap_atco", "chart_cap_sector_opening_ses")`
 
-### Terminal performance
+\needspace{2\baselineskip}
 
-#### Arrival ATFM delay (KPI#2)
+## Terminal performance
+
+\needspace{2\baselineskip}
+
+### Arrival ATFM delay (KPI#2)
 
 `r layout_2fig("chart_cap_trm_l2", "chart_cap_trm_month")`
 
-#### Summary of performance at local level
+\needspace{2\baselineskip}
+
+### Summary of performance at local level
 
 ```{r table_cap_arrdelay_summary}
 mytable <-"table_cap_arrdelay_all_states"
@@ -433,9 +468,11 @@ table_string <- source(here("R", paste0(mytable,".R")))
 assign(mytable, setup_latex_table(get(mytable))) 
 ```
 
-`r layout_summary_table(table_cap_arrdelay_all_states)`
+`r layout_summary_table(table_cap_arrdelay_all_states, left_margin = 1.7)`
 
-#### Other terminal performance indicators (PI#1-3)
+\needspace{2\baselineskip}
+
+### Other terminal performance indicators (PI#1-3)
 
 ```{r chart_cap_all_causes_delay_ses}
 #| file: R/chart_level2_cap_all_causes_delay.R
@@ -444,9 +481,13 @@ assign(mytable, setup_latex_table(get(mytable)))
 #| fig-pos: "H"
 ```
 
-## Cost-efficiency - SES RP3
+\needspace{2\baselineskip}
 
-### PRB monitoring
+# COST-EFFICIENCY - SES RP3
+
+\needspace{2\baselineskip}
+
+## PRB monitoring
 
 :::: {#concl-cef-duc}
 ```{r concl_cef_duc}
@@ -456,14 +497,17 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 `r cef_conc1`
 
-### En route charging zone
+\needspace{2\baselineskip}
+
+## En route charging zone
 
 `r layout_2fig("chart_cef_duc_er_ses", "chart_cef_su")`
 
 `r layout_fig_table("chart_cef_cost", table_level2_cef_cost, vspace = -3.8)`
 
+\needspace{2\baselineskip}
 
-#### Summary of performance at local level
+### Summary of performance at local level
 
 :::: {#table-cef-summary}
 ```{r table_cef_summary, options = (cztype="enroute")}
@@ -473,26 +517,19 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 ```
 ::::
 
+\needspace{2\baselineskip}
 
-#### Actual unit cost incurred by the users (AUCU) (PI#1)
+### Actual unit cost incurred by the users (AUCU) (PI#1)
 
 `r layout_fig_table("chart_cef_aucu", table_level2_cef_aucu, vspace = -1.5)`
 
 `r layout_fig_table("chart_cef_cex", table_level2_cef_cex, vspace = -2)`
 
-#### Regulatory result (RR)
+\needspace{2\baselineskip}
+
+### Regulatory result (RR)
 
 `r layout_2fig("chart_cef_reg_res", "chart_cef_reg_res_aucu")`
 
 `r layout_2fig("chart_cef_reg_res_ansp", "chart_cef_net_res_main_ansp")`
 
-```{=tex}
-\FloatBarrier % Prevent figures from moving beyond this point
-\clearpage
-\thispagestyle{empty} % Remove headers and footers from the final page
-\begin{center}
-\vspace*{\fill} % Center the text vertically
-{\fontsize{20pt}{24pt}\selectfont \textbf{End of document}}
-\vspace*{\fill}
-\end{center}
-```
