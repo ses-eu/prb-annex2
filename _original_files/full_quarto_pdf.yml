@@ -166,7 +166,7 @@ format:
           
 
           % --------------------- CHAPTER STYLING ---------------------
-
+          
           \titleformat{\chapter}[block] % Chapter formatting without forced page break
             {\normalfont\bfseries\color{PRBBlue}\fontsize{12pt}{14pt}\selectfont\fontspec{Calibri Bold}} % Style
             {\thechapter} % Chapter number
@@ -176,10 +176,10 @@ format:
           % CONDITIONAL SPACING: Remove top space only if the chapter starts on a new page
           \makeatletter
           \newcommand{\customchapterskip}{%
-            \if@openright
-              \vspace*{-20pt} % Apply negative space ONLY when on a new page
+            \ifdim\pagetotal=0pt % If the page is empty (new page)
+              \vspace*{-20pt}
             \else
-              \vspace*{6pt} % Normal spacing when mid-page
+              \vspace*{6pt}
             \fi
           }
           \makeatother
@@ -202,6 +202,7 @@ format:
             \customchapterskip % Apply conditional spacing based on page position
             \secdef\@chapter\@schapter}
           \makeatother
+
           
           % --------------------- SECTION STYLING ---------------------
           
