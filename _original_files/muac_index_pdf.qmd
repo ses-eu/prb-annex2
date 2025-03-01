@@ -57,7 +57,55 @@ share_EH <- paste0(round(pull(select(filter(data_muac, entity_code == "EH_MUAC")
 
 # OVERVIEW
 
-*`r pp_version`*
+## Contextual information
+
+```{=latex}
+\begin{figure}
+
+\small
+
+\begin{minipage}[t]{0.35\linewidth}
+
+\textbf{Provision of ATC services in the upper}  \\
+\textbf{airspace across four States}
+\\
+\\
+
+\textbf{ACC}\hspace*{1cm} Maastricht UAC
+
+\end{minipage}%
+\begin{minipage}[t]{0.25\linewidth}
+
+Belgium/Luxembourg  \\
+Germany  \\
+Netherlands
+
+\end{minipage}%
+\begin{minipage}[t]{0.40\linewidth}
+
+\textbf{Allocation of actual en route costs} \\
+
+\begin{minipage}[t]{0.70\linewidth}
+
+• Belgium/Luxembourg  \\
+• Germany  \\
+• Netherlands
+
+\end{minipage}%
+\begin{minipage}[t]{0.30\linewidth}
+```
+
+`r share_EBEL`  
+`r share_ED`  
+`r share_EH`
+
+```{=latex}
+\end{minipage}%
+
+\end{minipage}%
+
+\end{figure}
+```
 
 ## Safety
 
