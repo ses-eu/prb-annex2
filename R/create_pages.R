@@ -28,6 +28,7 @@ if (country == "Home") {
   ###for the home page we add as well the other qmds here
   file.copy('_original_files/home_about.qmd', 'about.qmd', overwrite = TRUE, copy.mode = TRUE)
   file.copy('_original_files/home_disclaimer.qmd', 'disclaimer.qmd', overwrite = TRUE, copy.mode = TRUE)
+  file.copy('_original_files/home_download.qmd', 'download.qmd', overwrite = TRUE, copy.mode = TRUE)
   
   ### we also remove one line from the css file
   tmp_text <- readLines("_original_files/full_styles.css")
@@ -36,12 +37,24 @@ if (country == "Home") {
 
 } else if (country == "Network Manager") {
   tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
-  tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/nm_index.qmd") 
+
+  if (out_format == 'pdf') {
+    tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/nm_index_pdf.qmd")
+  } else {
+    tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/nm_index.qmd") 
+  }
+  
   writeLines(tmp_text, 'index.qmd')
 
 } else if (country == "MUAC") {
   tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
-  tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/muac_index.qmd") 
+  
+  if (out_format == 'pdf') {
+    tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/muac_index_pdf.qmd")
+  } else {
+    tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/muac_index.qmd") 
+  }
+  
   writeLines(tmp_text, 'index.qmd')
   
 } else if (country == "SES RP3") {
