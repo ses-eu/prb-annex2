@@ -43,7 +43,8 @@ format:
 
           % custom toc moved to toc.tex
           
-          % cover page, header and footer
+          % --------------------- COVER PAGE ---------------------
+
           \usepackage{graphicx}  % Allows inserting images
           \usepackage{eso-pic}   % Enables full-page backgrounds
           \usepackage{everypage} % Alternative package for first-page modifications
@@ -58,18 +59,6 @@ format:
             \AtPageLowerLeft{\includegraphics[width=\paperwidth,height=\paperheight]{\CoverImage}}
           }
     
-          \usepackage{scrlayer-scrpage} % For customizing headers/footers
-          \clearpairofpagestyles
-    
-          % Ensure the last page reference is available
-          \usepackage{lastpage}
-    
-          % Add the logo in the center of the header
-          \chead*{\raisebox{10mm}{\includegraphics[height=0.18cm]{images/header_top.png}}}
-    
-          % Move page numbering to the right-hand side of the header with new font style
-          \ohead*{\makebox[0pt][r]{\raisebox{-10mm}{\textcolor{black}{\calibriLight\normalfont\fontsize{8pt}{10pt}\selectfont \thepage/\pageref*{LastPage}}}}}
-          
           \usepackage{titling}   % Allows title repositioning
           \usepackage{fontspec}  % Custom fonts
           \newfontfamily\calibriLight{Calibri Light} % Define font for title
@@ -93,13 +82,41 @@ format:
           % Apply color to the date
           \predate{\vspace*{5mm} \begin{flushleft}\color{PRBBlue}\small} % Moves date down slightly
           \postdate{\end{flushleft}}
+
+          % --------------------- DISCLAIMER BOX ---------------------
+          
+          \AddToShipoutPictureBG*{%
+            \ifnum\value{page}=1
+              \AtPageLowerLeft{\hspace{24mm}\raisebox{40mm}{ % Adjust position
+                \fontsize{9pt}{11pt}\selectfont % Font size
+                \calibriLight % Apply Calibri Light font
+                \fbox{% Draw a border around the entire box
+                  \begin{minipage}{0.83\linewidth} % Full-width container
+                    \begin{minipage}[t]{0.20\linewidth} % Left column (Adjust width)
+                      \textbf{COPYRIGHT NOTICE} \\[2pt] % Bold title
+                      \textbf{AND DISCLAIMER} 
+                    \end{minipage}%
+                    \begin{minipage}{0.02\linewidth} % Small space between columns
+                      \hfill
+                    \end{minipage}%
+                    \begin{minipage}[t]{0.78\linewidth} % Right column (Text content)
+                      {\textcopyright\ European Union, 2025} \\[4pt]
+                      This report has been prepared for the European Commission by the Performance Review Body of the Single European Sky (PRB). \\[4pt]
+                      Reproduction is authorised provided the source is acknowledged. However, neither the European Commission, nor any person acting on its behalf, may be held responsible for the use which may be made of the information contained in this publication, or for any errors which may appear, despite careful preparation and checking.
+                    \end{minipage}
+                  \end{minipage}
+                }
+              }}
+            \fi
+          }
+
       
           % Add text "This report is automatically generated from: sesperformance.eu"
           % Position it lower on the cover page
           \AddToShipoutPictureBG*{%
             \AtPageLowerLeft{%
               \hspace{24mm} % Move right slightly
-              \raisebox{40mm}{ % Move up from bottom of page
+              \raisebox{80mm}{ % Move up from bottom of page
                 {\calibriLight\fontsize{11pt}{13pt}\selectfont % Set font size
                 \textcolor{black}{This report is automatically generated from: } 
                 \href{https://sesperformance.eu}{sesperformance.eu} % Default hyperlink (blue, underlined)
@@ -122,7 +139,23 @@ format:
             \fi
           }
           
+          % --------------------- HEADER ---------------------
+
+          \usepackage{scrlayer-scrpage} % For customizing headers/footers
+          \clearpairofpagestyles
+    
+          % Ensure the last page reference is available
+          \usepackage{lastpage}
+    
+          % Add the logo in the center of the header
+          \chead*{\raisebox{10mm}{\includegraphics[height=0.18cm]{images/header_top.png}}}
+    
+          % Move page numbering to the right-hand side of the header with new font style
+          \ohead*{\makebox[0pt][r]{\raisebox{-10mm}{\textcolor{black}{\calibriLight\normalfont\fontsize{8pt}{10pt}\selectfont \thepage/\pageref*{LastPage}}}}}
           
+          
+          % --------------------- BODY ---------------------
+
           \usepackage[section]{placeins} % Prevent floats from crossing section boundaries
       
           \usepackage{array} % Add advanced table formatting
