@@ -1,0 +1,87 @@
+```{r context-data, eval=TRUE}
+cztype = "enroute"
+cz = c("1", "enroute")
+
+data_muac  <-  read_xlsx(
+  paste0(data_folder, "CEFF dataset master.xlsx"),
+  sheet = "Enroute_T1",
+  range = cell_limits(c(1, 1), c(NA, NA))) %>%
+  as_tibble() %>% 
+  clean_names() |> 
+  filter(grepl("MUAC", entity_code), status == "A", year == year_report) |> 
+  mutate(
+    entity_code = str_replace_all(entity_code, "_EB", ""),
+    entity_code = str_replace_all(entity_code, "_EL", "")
+    ) |> 
+  group_by(year, entity_code) |> 
+  summarise(x5_3_cost_nc2017 = sum(x5_3_cost_nc2017, na.rm = TRUE)) |> 
+  ungroup()
+
+total_muac_costs <- sum(data_muac$x5_3_cost_nc2017, na.rm = TRUE)
+
+share_EBEL <- paste0(round(pull(select(filter(data_muac, entity_code == "EBEL_MUAC"), x5_3_cost_nc2017)) / total_muac_costs *100,0), "%")
+share_ED <- paste0(round(pull(select(filter(data_muac, entity_code == "ED_MUAC"), x5_3_cost_nc2017)) / total_muac_costs *100,0), "%")
+share_EH <- paste0(round(pull(select(filter(data_muac, entity_code == "EH_MUAC"), x5_3_cost_nc2017)) / total_muac_costs *100,0), "%")
+
+```
+
+
+<!-- ## Safety -->
+
+```{r chart_eosm, include=FALSE}
+#| file: R/chart_level1_saf.R
+#| out.width: "100%"
+```
+
+<!-- ## Capacity -->
+
+```{r chart_cap_er, include=FALSE}
+#| file: R/chart_level1_cap.R
+#| out.width: "100%"
+```
+
+<!-- ## Cost-efficiency -->
+
+```{r chart_cef, include=FALSE}
+#| file: R/chart_level2_cef_cost.R
+#| out.width: "100%"
+```
+
+<!-- END OF CHARTS AND TABLES -->
+
+
+```{=tex}
+\setlength{\fboxrule}{0pt} % Set the border width to 0pt (no border)
+\setlength{\fboxsep}{0pt} % Remove padding
+```
+
+# OVERVIEW
+
+*`r pp_version`*
+
+## Safety
+
+```{r concl-eosm}
+saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_safety")
+```
+
+`r layout_wrap_figure("chart_eosm", NULL, saf_conc1, 12)`
+
+
+## Capacity
+
+```{r concl-cap}
+cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity")
+```
+
+`r layout_wrap_figure("chart_cap_er", NULL, cap_er_conc1, 12)`
+
+
+## Cost-efficiency
+
+```{r concl-cef}
+cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF")
+```
+
+`r layout_wrap_figure("chart_cef", NULL, cef_conc1, 12)`
+
