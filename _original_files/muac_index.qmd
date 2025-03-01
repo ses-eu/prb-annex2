@@ -1,6 +1,13 @@
-::: {#main}
-[Annual Monitoring Report {{< var doc.year_report >}} - MUAC]{.fakeh1}
+::: {.grid .align-items-center}
+:::: {.g-col-9}
+[Annual Monitoring Report {{< var doc.year_report >}} - {{< var doc.country >}}]{.fakeh1}
+::::
+
+:::: {.g-col-3}
+[<i class="fa fa-download"></i> Download Report](../../download/2023/PRB-Annual-Monitoring-Report_{{< var doc.country >}}_{{< var doc.year_report >}}.pdf){.btn .btn-light .text-dark .border .bg-secondary-subtle .rounded}
+::::
 :::
+
 
 ```{r context-data, eval=TRUE}
 cztype = "enroute"
