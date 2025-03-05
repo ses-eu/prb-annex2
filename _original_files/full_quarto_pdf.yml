@@ -36,7 +36,7 @@ format:
       - text: |
       
           \usepackage{xcolor}    % Enables text color customization
-          \definecolor{PRBBlue}{HTML}{0563C1} % Define PRB blue color
+          \definecolor{PRBBlue}{HTML}{2F5496} % Define PRB blue color
 
           % Load tocloft package for TOC customization
           \usepackage{tocloft}
