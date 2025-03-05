@@ -755,9 +755,9 @@ tsu_text2 <- tsu_text$text2
 ```{r saf_conc1}
 saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_safety")
 
-saf_text <- break_l1_text(saf_conc1) 
-saf_text1 <- saf_text$text1
-saf_text2 <- saf_text$text2
+saf_text_conc <- break_l1_text(saf_conc1) 
+saf_text1 <- saf_text_conc$text1
+saf_text2 <- saf_text_conc$text2
 ```
 
 `r paste0(layout_wrap_figure("chart_saf_l1", NULL, saf_text1, 13), saf_text2)`
