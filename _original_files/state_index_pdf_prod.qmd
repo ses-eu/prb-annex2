@@ -838,7 +838,7 @@ cef_text2 <- cef_text$text2
 
 ```{r chart_saf_eosm}
 #| file: R/chart_level1_saf.R
-#| out.width: "52%"
+#| out.width: "62%"
 #| fig.align: "center"
 #| fig-pos: "H"
 ```
