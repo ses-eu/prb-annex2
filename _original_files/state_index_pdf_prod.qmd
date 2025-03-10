@@ -17,7 +17,7 @@
 
 <!-- ### Safety L1 -->
 
-```{r chart_saf_l1, include=FALSE}
+```{r chart_saf_l1, include=FALSE, options = (doclevel=c("level1"))}
 #| file: R/chart_level1_saf.R
 #| out.width: "100%"
 ```
@@ -836,7 +836,7 @@ cef_text2 <- cef_text$text2
 
 ## Effectiveness of Safety Management (EoSM) (KPI#1)
 
-```{r chart_saf_eosm}
+```{r chart_saf_eosm, options = (doclevel=c("level2"))}
 #| file: R/chart_level1_saf.R
 #| out.width: "62%"
 #| fig.align: "center"
@@ -1252,7 +1252,7 @@ if (no_cz < czindex) {
 
 **`r cztype_proper` costs for the main ANSP at charging zone level**
 
-`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]) == TRUE, latex_linebreaks(pull(cef_level2_text$cef_txt_1_4_cost_main)), latex_linebreaks(pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1])))`
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]) == TRUE, latex_linebreaks(cef_level2_text$cef_txt_1_4_cost_main), latex_linebreaks(pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1])))`
 
 ### Actual unit cost incurred by the users (AUCU) (PI#1)
 
@@ -1366,7 +1366,7 @@ if (no_cz < czindex) {
 
 **`r cztype_proper` costs for the main ANSP at charging zone level**
 
-`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]) == TRUE, latex_linebreaks(pull(cef_level2_text$cef_txt_1_4_cost_main)), latex_linebreaks(pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1])))`
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]) == TRUE, latex_linebreaks(cef_level2_text$cef_txt_1_4_cost_main), latex_linebreaks(pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1])))`
 
 ### Actual unit cost incurred by the users (AUCU) (PI#1)
 
@@ -1483,7 +1483,7 @@ if (no_cz < czindex) {
 
 **`r cztype_proper` costs for the main ANSP at charging zone level**
 
-`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]) == TRUE, latex_linebreaks(pull(cef_level2_text$cef_txt_1_4_cost_main)), latex_linebreaks(pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1])))`
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]) == TRUE, latex_linebreaks(cef_level2_text$cef_txt_1_4_cost_main), latex_linebreaks(pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1])))`
 
 ### Actual unit cost incurred by the users (AUCU) (PI#1)
 
@@ -1597,7 +1597,7 @@ if (no_cz < czindex) {
 
 **`r cztype_proper` costs for the main ANSP at charging zone level**
 
-`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]) == TRUE, latex_linebreaks(pull(cef_level2_text$cef_txt_1_4_cost_main)), latex_linebreaks(pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1])))`
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]) == TRUE, latex_linebreaks(cef_level2_text$cef_txt_1_4_cost_main), latex_linebreaks(pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1])))`
 
 ### Actual unit cost incurred by the users (AUCU) (PI#1)
 

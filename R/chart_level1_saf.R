@@ -1,3 +1,4 @@
+if (!exists("doclevel")) {doclevel = "level1"}
 
 # import data  ----
 data_raw_maturity  <-  read_xlsx(
@@ -233,6 +234,14 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
   
 }
 
-myc(NA, 320, 14, 70)
-
+if (doclevel == "level1") {
+  myc(NA, 320, 14, 70)
+} else {
+  if (knitr::is_latex_output()) {
+    myc(NA, 290, 13, 70)
+    
+    } else {
+    myc(NA, 320, 14, 70)
+  }
+}
 
