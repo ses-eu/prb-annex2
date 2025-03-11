@@ -238,7 +238,7 @@ if (doclevel == "level1") {
   myc(NA, 320, 14, 70)
 } else {
   if (knitr::is_latex_output()) {
-    myc(NA, 290, 13, 70)
+    myc(NA, 290, 12.5, 70)
     
     } else {
     myc(NA, 320, 14, 70)
