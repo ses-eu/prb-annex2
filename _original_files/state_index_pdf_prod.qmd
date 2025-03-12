@@ -750,6 +750,8 @@ tsu_text2 <- tsu_text$text2
 
 `r paste0(layout_wrap_figure("chart_level1_traffic_su", NULL, tsu_text1, 12), tsu_text2)`
 
+\afterpage{\clearpage} 
+
 ## Safety (Main ANSP)
 
 ```{r saf_conc1}
@@ -766,6 +768,8 @@ saf_text2 <- saf_text_conc$text2
 <!-- exception for luxembourg -->
 `r if (params$country == "Luxembourg") "::: {.content-hidden}"`
 
+\afterpage{\clearpage} 
+
 ## Environment (Member State)
 
 ```{r concl_env}
@@ -779,6 +783,8 @@ env_text2 <- env_text$text2
 `r paste0(layout_wrap_figure("chart_env_kea_l1", NULL, env_text1, 12), env_text2)`
 
 `r if (params$country == "Luxembourg") ":::"`
+
+\afterpage{\clearpage} 
 
 ## Capacity (Member State)
 
@@ -800,7 +806,7 @@ cap_text2 <- cap_text$text2
 
 `r if_else (params$no_tcz == 0, paste0(layout_wrap_figure("chart_cap_er", NULL, cap_text1, 12), cap_text2), "")`
 
-`r if_else (params$no_tcz != 0 & params$country != "Luxembourg", layout_wrap_figure("chart_cap_er", "chart_cap_trm", cap_er_conc1, 25), "")`
+`r if_else (params$no_tcz != 0 & params$country != "Luxembourg", layout_wrap_figure("chart_cap_er", "chart_cap_trm", cap_er_conc1, 25, boxsize = 13.5), "")`
 
 ## Cost-efficiency (En route/Terminal charging zone(s))
 
@@ -812,17 +818,13 @@ cef_text1 <- cef_text$text1
 cef_text2 <- cef_text$text2
 ```
 
-`r if_else (params$no_ecz == 2, layout_wrap_figure("chart_cef_er_1", "chart_cef_er_2", cef_conc1, 38, "chart_cef_trm_1"), "")`
+`r if_else (params$no_ecz == 2, layout_wrap_figure("chart_cef_er_1", "chart_cef_er_2", cef_conc1, 38, "chart_cef_trm_1", boxsize = 19.5), "")`
 
-`r if_else (params$no_tcz == 2, layout_wrap_figure("chart_cef_er_1", "chart_cef_trm_1", cef_conc1, 38, "chart_cef_trm_2"), "")`
+`r if_else (params$no_tcz == 2, layout_wrap_figure("chart_cef_er_1", "chart_cef_trm_1", cef_conc1, 38, "chart_cef_trm_2", boxsize = 19.5), "")`
 
-`r if_else (params$no_ecz == 1 & params$no_tcz == 1, layout_wrap_figure("chart_cef_er_1", "chart_cef_trm_1", cef_conc1, 25), "")`
+`r if_else (params$no_ecz == 1 & params$no_tcz == 1, layout_wrap_figure("chart_cef_er_1", "chart_cef_trm_1", cef_conc1, 25, boxsize = 13.5), "")`
 
 `r if_else (params$no_ecz == 1 & params$no_tcz == 0, paste0(layout_wrap_figure("chart_cef_er_1", NULL, cef_text1, 12), cef_text2), "")`
-
-```{=tex}
-\clearpage
-```
 
 \needspace{3\baselineskip}
 
@@ -1193,11 +1195,12 @@ cztype <- "enroute"
 czindex <- 1
 cztype_proper <- "En route"
 no_cz <- params$no_ecz
+
 if (czindex > no_ecz) {
-czname <- NA
-cef_level2_text <- ''
+# do nothing
 
 } else {
+
 czname <- ecz_list$ecz_name[[czindex]]
 cef_level2_text <- get_cef_level2_text(czindex, cztype)
 }
@@ -1311,17 +1314,16 @@ if (no_cz < czindex) {
 cztype <- "enroute"
 czindex <- 2
 cztype_proper <- "En route"
-
 no_cz <- params$no_ecz
+
 if (czindex > no_ecz) {
-czname <- NA
-cef_level2_text <- ''
+# do nothing
 
 } else {
+
 czname <- ecz_list$ecz_name[[czindex]]
 cef_level2_text <- get_cef_level2_text(czindex, cztype)
 }
-
 ```
 
 \needspace{3\baselineskip}
@@ -1437,14 +1439,16 @@ cztype <- "terminal"
 czindex <- 1
 cztype_proper <- "Terminal"
 no_cz <- params$no_tcz
+
 if (czindex > no_tcz) {
-czname <- NA
-cef_level2_text <- ''
+# do nothing
 
 } else {
+
 czname <- tcz_list$tcz_name[[czindex]]
 cef_level2_text <- get_cef_level2_text(czindex, cztype)
 }
+
 ```
 
 \needspace{3\baselineskip}
@@ -1556,11 +1560,12 @@ cztype <- "terminal"
 czindex <- 2
 cztype_proper <- "Terminal"
 no_cz <- params$no_tcz
+
 if (czindex > no_tcz) {
-czname <- NA
-cef_level2_text <- ''
+# do nothing
 
 } else {
+
 czname <- tcz_list$tcz_name[[czindex]]
 cef_level2_text <- get_cef_level2_text(czindex, cztype)
 }
