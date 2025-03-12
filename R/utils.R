@@ -1094,7 +1094,7 @@ table1,
 }
 
 ## latex wrap text around figure ----
-layout_wrap_figure <- function(chart1, chart2 = NULL, text, vspace, chart3 = NULL) {
+layout_wrap_figure <- function(chart1, chart2 = NULL, text, vspace, chart3 = NULL, boxsize = 7) {
   
   layout_string <-paste0(
     "```{=tex}\n\\sbox{0}{\\parbox{1\\textwidth}{
@@ -1121,8 +1121,8 @@ layout_wrap_figure <- function(chart1, chart2 = NULL, text, vspace, chart3 = NUL
 ", text,"
 
 }}
-\\ifdim\\dimexpr\\ht0+\\dp0<7.0cm 
-\\dp0\\dimexpr7.0cm-\\ht0\\fi
+\\ifdim\\dimexpr\\ht0+\\dp0<",boxsize,"cm 
+\\dp0\\dimexpr",boxsize,"cm-\\ht0\\fi
 
 \\fbox{\\usebox{0}}
 
