@@ -159,8 +159,10 @@ website:
             href: safety.html#prb-monitoring
           - text: "<b>EoSM</b>"
             href: safety.html#effectiveness-of-safety-management-eosm-kpi1
+# block muac beginning
           - text: "<b>Occurrences</b>"
             href: safety.html#occurrences---rate-of-runway-incursions-ris-pi1-rate-of-separation-minima-infringements-smis-pi2
+# block muac end
       - text: "---"
 # environment level2 beginning
       - section: "<b>Environment</b>"
