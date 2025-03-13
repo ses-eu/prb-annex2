@@ -59,26 +59,40 @@
 
 ```{r concl-eosm}
 saf_conc1 <- get_prb_conclusions("NM findings.xlsx", "NM_findings_EoSM", "NM_findings_EoSM")
+
+saf_text_conc <- break_l1_text(saf_conc1) 
+saf_text1 <- saf_text_conc$text1
+saf_text2 <- saf_text_conc$text2
 ```
 
-`r layout_wrap_figure("chart_eosm", NULL, saf_conc1, 12)`
+`r paste0(layout_wrap_figure("chart_eosm", NULL, saf_text1, 15), saf_text2)`
 
+\vspace{10pt}
 
 ```{r concl-deliveries}
 saf_conc2 <- get_prb_conclusions("NM findings.xlsx", "NM_findings_over", "NM_findings_over")
+
+saf_text_conc2 <- break_l1_text(saf_conc2) 
+saf_text3 <- saf_text_conc$text1
+saf_text4 <- saf_text_conc$text2
 ```
 
-`r layout_wrap_figure("chart_deliveries", NULL, saf_conc2, 12)`
+`r paste0(layout_wrap_figure("chart_deliveries", NULL, saf_text3, 12), saf_text4)`
 
 
 ## Environment (Network Manager - SES RP3 area)
 
 ```{r concl-env}
 env_conc1 <- get_prb_conclusions("NM findings.xlsx", "NM_findings_KEP", "NM_findings_KEP")
+
+env_text <- break_l1_text(env_conc1) 
+env_text1 <- env_text$text1
+env_text2 <- env_text$text2
 ```
 
-`r layout_wrap_figure("chart_env_kea", NULL, env_conc1, 12)`
+`r paste0(layout_wrap_figure("chart_env_kea", NULL, env_text1, 12), env_text2)`
 
+\clearpage
 
 ## Capacity (Network Manager - SES RP3 area)
 
@@ -86,14 +100,18 @@ env_conc1 <- get_prb_conclusions("NM findings.xlsx", "NM_findings_KEP", "NM_find
 cap_er_conc1 <- get_prb_conclusions("NM findings.xlsx", "NM_findings_CAP", "NM_findings_CAP")
 ```
 
-`r layout_wrap_figure("chart_cap_er", "chart_cap_trm", cap_er_conc1, 38, "chart_cap_15m")`
+`r layout_wrap_figure("chart_cap_er", "chart_cap_trm", cap_er_conc1, 38, "chart_cap_15m", boxsize = 19.5)`
 
 
 ## Cost-efficiency (Network Manager - SES RP3 area)
 
 ```{r concl-cef}
 cef_conc1 <- get_prb_conclusions("NM findings.xlsx", "NM_findings_CEFF", "NM_findings_CEFF")
+
+cef_text <- break_l1_text(cef_conc1) 
+cef_text1 <- cef_text$text1
+cef_text2 <- cef_text$text2
 ```
 
-`r layout_wrap_figure("chart_cef", NULL, cef_conc1, 12)`
+`r paste0(layout_wrap_figure("chart_cef", NULL, cef_text1, 12), cef_text2)`
 

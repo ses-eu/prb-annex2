@@ -282,34 +282,43 @@ main_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "main", "Table_Findings_m
 
 ```{r mvt_conc1}
 mvt_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "traffic_IFR", "Table_Findings_traffic_IFR")
+mvt_text <- break_l1_text(mvt_conc1) 
+mvt_text1 <- mvt_text$text1
+mvt_text2 <- mvt_text$text2
 ```
 
-`r layout_wrap_figure("chart_level1_traffic_mvt", NULL, mvt_conc1, 12)`
+`r paste0(layout_wrap_figure("chart_level1_traffic_mvt", NULL, mvt_text1, 12), mvt_text2)`
 
 ```{r su_conc1}
 tsu_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "traffic_SUs", "Table_Findings_traffic_TSU")
+tsu_text <- break_l1_text(tsu_conc1) 
+tsu_text1 <- tsu_text$text1
+tsu_text2 <- tsu_text$text2
 ```
 
-`r layout_wrap_figure("chart_level1_traffic_su", NULL, tsu_conc1, 12)`
-
+`r paste0(layout_wrap_figure("chart_level1_traffic_su", NULL, tsu_text1, 12), tsu_text2)`
 
 ## Safety (SES RP3 area)
 
 ```{r saf_conc1}
 saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_safety")
+saf_text_conc <- break_l1_text(saf_conc1) 
+saf_text1 <- saf_text_conc$text1
+saf_text2 <- saf_text_conc$text2
 ```
 
-`r layout_wrap_figure("chart_level1_saf_ses", NULL, saf_conc1, 13)`
-
+`r paste0(layout_wrap_figure("chart_level1_saf_ses", NULL, saf_text1, 13), saf_text2)`
 
 ## Environment (SES RP3 area)
 
 ```{r env_conc1}
 env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Findings_environment")
+env_text <- break_l1_text(env_conc1) 
+env_text1 <- env_text$text1
+env_text2 <- env_text$text2
 ```
 
-`r layout_wrap_figure("chart_env_kea", NULL, env_conc1, 13)`
-
+`r paste0(layout_wrap_figure("chart_env_kea", NULL, env_text1, 13), env_text2)`
 
 ## Capacity (SES RP3 area)
 
@@ -317,7 +326,7 @@ env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Find
 cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity")
 ```
 
-`r layout_wrap_figure("chart_cap_er", "chart_cap_trm", cap_er_conc1, 27)`
+`r layout_wrap_figure("chart_cap_er", "chart_cap_trm", cap_er_conc1, 25, boxsize = 13.5)`
 
 
 ## Cost-efficiency (SES RP3 area)
@@ -326,9 +335,7 @@ cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_F
 cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF")
 ```
 
-`r layout_wrap_figure("chart_level1_cef_er_ses", "chart_cef_trm_1", cef_conc1, 27)`
-
-\clearpage
+`r layout_wrap_figure("chart_level1_cef_er_ses", "chart_cef_trm_1", cef_conc1, 25, boxsize = 13.5)`
 
 \needspace{3\baselineskip}
 
