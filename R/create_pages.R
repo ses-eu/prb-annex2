@@ -46,16 +46,16 @@ if (country == "Home") {
   
   writeLines(tmp_text, 'index.qmd')
 
-} else if (country == "MUAC") {
-  tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
-  
-  if (out_format == 'pdf') {
-    tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/muac_index_pdf.qmd")
-  } else {
-    tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/muac_index.qmd") 
-  }
-  
-  writeLines(tmp_text, 'index.qmd')
+# } else if (country == "MUAC") {
+#   tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
+#   
+#   if (out_format == 'pdf') {
+#     tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/muac_index_pdf.qmd")
+#   } else {
+#     tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/muac_index.qmd") 
+#   }
+#   
+#   writeLines(tmp_text, 'index.qmd')
   
 } else if (country == "SES RP3") {
     tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
@@ -272,6 +272,14 @@ if (out_format == 'web') {
       for (i in 1:length(lines_to_replace)) {
         tx <- str_replace(tx, lines_to_replace[i], '')
       }
+      
+      ### find beginning and end of safety occurrences to remove
+      for (i in 1:length(tx)) {
+        if (tx[i] %like% 'block muac beginning') {block_muac_beg = i}
+        if (tx[i] %like% 'block muac end') {block_muac_end = i}
+      }
+      
+      tx <- tx[-c(block_muac_beg:block_muac_end)]
       
       ### find beginning and end of level2 environment to remove
       for (i in 1:length(tx)) {
