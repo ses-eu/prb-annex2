@@ -1,5 +1,11 @@
-::: {#main}
+::: {.grid .align-items-center}
+:::: {.g-col-9}
 [Annual Monitoring Report {{< var doc.year_report >}} - Network Manager]{.fakeh1}
+::::
+
+:::: {.g-col-3}
+[<i class="fa fa-download"></i> Download Report](`r params$home_address`/download/{{< var doc.year_report >}}/PRB-Annual-Monitoring-Report_{{< var doc.country >}}_{{< var doc.year_report >}}.pdf){.btn .btn-light .text-dark .border .bg-secondary-subtle .rounded}
+::::
 :::
 
 *`r pp_version`*

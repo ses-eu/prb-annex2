@@ -1,4 +1,12 @@
-[Annual Monitoring Report {{< var doc.year_report >}} - SES RP3]{.fakeh1}
+::: {.grid .align-items-center}
+:::: {.g-col-9}
+[Annual Monitoring Report {{< var doc.year_report >}} - {{< var doc.country >}}]{.fakeh1}
+::::
+
+:::: {.g-col-3}
+[<i class="fa fa-download"></i> Download Report](`r params$home_address`/download/{{< var doc.year_report >}}/PRB-Annual-Monitoring-Report_{{< var doc.country >}}_{{< var doc.year_report >}}.pdf){.btn .btn-light .text-dark .border .bg-secondary-subtle .rounded}
+::::
+:::
 
 ## Contextual information
 ```{r fetch-data-ses, eval=TRUE}
