@@ -28,7 +28,7 @@ share_EH <- paste0(round(pull(select(filter(data_muac, entity_code == "EH_MUAC")
 
 <!-- ## Safety -->
 
-```{r chart_eosm, include=FALSE}
+```{r chart_eosm, include=FALSE, options = (doclevel=c("level1"))}
 #| file: R/chart_level1_saf.R
 #| out.width: "100%"
 ```
@@ -45,6 +45,43 @@ share_EH <- paste0(round(pull(select(filter(data_muac, entity_code == "EH_MUAC")
 ```{r chart_cef, include=FALSE}
 #| file: R/chart_level2_cef_cost.R
 #| out.width: "100%"
+```
+
+<!-- Level2 -->
+<!-- ## Capacity L2-->
+<!-- ### En route performance -->
+```{r chart_cap_er_l2, options = (cztype=c("enroute")), include=FALSE}
+#| file: R/chart_level1_cap.R
+#| out.width: "100%"
+```
+
+```{r chart_cap_er_month, options = (cztype=c("enroute")), include=FALSE}
+#| file: R/chart_level2_cap_month.R
+#| out.width: "100%"
+```
+
+<!-- #### Other indicators -->
+```{r chart_cap_atco, include=FALSE}
+#| file: R/chart_level2_cap_atco.R
+#| out.width: "100%"
+```
+
+```{r chart_cap_atco_acc, include=FALSE}
+#| file: R/chart_level2_cap_atco_acc.R
+#| out.width: "100%"
+```
+
+<!-- ## Cost-efficiency -->
+
+```{r chart_cef_cost_muac, options = (cz=c("1", "enroute")), include=FALSE}
+#| file: R/chart_level2_cef_cost.R
+#| out.width: "100%"
+```
+
+```{r table_cef_cost_muac, options = (cz=c("1", "enroute"))}
+mytable <-"table_level2_cef_cost"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(mytable, setup_latex_table(get(mytable))) 
 ```
 
 <!-- END OF CHARTS AND TABLES -->
@@ -111,25 +148,100 @@ Netherlands
 
 ```{r concl-eosm}
 saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_safety")
+saf_text_conc <- break_l1_text(saf_conc1) 
+saf_text1 <- saf_text_conc$text1
+saf_text2 <- saf_text_conc$text2
 ```
 
-`r layout_wrap_figure("chart_eosm", NULL, saf_conc1, 12)`
-
+`r paste0(layout_wrap_figure("chart_eosm", NULL, saf_text1, 15), saf_text2)`
 
 ## Capacity
 
 ```{r concl-cap}
 cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity")
+cap_er_text_conc <- break_l1_text(cap_er_conc1) 
+cap_er_text1 <- cap_er_text_conc$text1
+cap_er_text2 <- cap_er_text_conc$text2
 ```
 
-`r layout_wrap_figure("chart_cap_er", NULL, cap_er_conc1, 12)`
+`r paste0(layout_wrap_figure("chart_cap_er", NULL, cap_er_text1, 13), cap_er_text2)`
 
 
 ## Cost-efficiency
 
 ```{r concl-cef}
 cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF")
+cef_text <- break_l1_text(cef_conc1) 
+cef_text1 <- cef_text$text1
+cef_text2 <- cef_text$text2
 ```
 
-`r layout_wrap_figure("chart_cef", NULL, cef_conc1, 12)`
+`r paste0(layout_wrap_figure("chart_cef", NULL, cef_text1, 12), cef_text2)`
 
+\needspace{3\baselineskip}
+
+# SAFETY - `r toupper(params$country)`
+
+## PRB monitoring
+
+`r saf_conc1`
+
+\needspace{2\baselineskip}
+
+## Effectiveness of Safety Management (EoSM) (KPI#1)
+
+```{r chart_saf_eosm, options = (doclevel=c("level2"))}
+#| file: R/chart_level1_saf.R
+#| out.width: "62%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+\needspace{3\baselineskip}
+
+`\biggertext{Focus on EoSM}`{=latex}
+
+`r latex_linebreaks(saf_text)`
+
+\needspace{3\baselineskip}
+
+# CAPACITY - `r toupper(params$country)`
+
+## PRB monitoring
+
+`r cap_er_conc1`
+
+\needspace{3\baselineskip}
+
+## En route performance
+
+### En route ATFM delay (KPI#1)
+
+`r layout_2fig("chart_cap_er_l2", "chart_cap_er_month")`
+
+\needspace{3\baselineskip}
+
+### Other indicators
+
+`r layout_2fig("chart_cap_atco", "chart_cap_atco_acc")`
+
+```{r chart_cap_sector_opening}
+#| file: R/chart_level2_cap_sector_opening.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+\needspace{3\baselineskip}
+
+# COST-EFFIENCY - `r toupper(params$country)`
+
+## PRB monitoring
+
+`r cef_conc1`
+
+\needspace{3\baselineskip}
+
+## Total costs
+
+`r layout_fig_table("chart_cef_cost_muac", table_level2_cef_cost, vspace = -3.8)`
