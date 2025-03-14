@@ -1026,8 +1026,6 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 
 `r layout_2fig("chart_cap_er_l2", "chart_cap_er_month")`
 
-`r if (country == "MUAC") ":::: {.content-hidden}"`
-
 ```{r chart_cap_delay_bin}
 #| file: R/chart_level2_cap_delay_bin.R
 #| out.width: "52%"
@@ -1080,9 +1078,6 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 `r if (params$year_report <= 2022) ":::::"`
 
 
-`r if (params$country == "MUAC") "::::"`
-
-
 ### Other indicators
 
 `r layout_2fig("chart_cap_atco", "chart_cap_atco_acc")`
@@ -1095,14 +1090,10 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 ```
 
 
-`r if (params$country == "MUAC") ":::: {.content-hidden}"`
-
-
 `\biggertext{Focus on ATCOs in operations}`{=latex}
 
 `r latex_linebreaks(cap_er_nsa_5)`
 
-`r if (params$country == "SES RP3" | params$country == "MUAC") "::::"`
 
 `r if (params$country == "Luxembourg") ":::"`
 
@@ -1293,9 +1284,9 @@ if (no_cz < czindex) {
 
 `r if (params$year_report >= 2022) "::: {.content-hidden}"`
 
-`r cef_level2_text$cef_txt_1_13[1,1]`
+`r latex_linebreaks(cef_level2_text$cef_txt_1_13[1,1])`
 
-`r cef_level2_text$cef_txt_1_10_txt`
+`r latex_linebreaks(cef_level2_text$cef_txt_1_10_txt)`
 
 `r if (params$year_report >= 2022) ":::"`
 
@@ -1413,9 +1404,9 @@ if (no_cz < czindex) {
 
 `r if (params$year_report >= 2022) "::: {.content-hidden}"`
 
-`r cef_level2_text$cef_txt_1_13[1,1]`
+`r latex_linebreaks(cef_level2_text$cef_txt_1_13[1,1])`
 
-`r cef_level2_text$cef_txt_1_10_txt`
+`r latex_linebreaks(cef_level2_text$cef_txt_1_10_txt)`
 
 `r if (params$year_report >= 2022) ":::"`
 
@@ -1537,9 +1528,9 @@ if (no_cz < czindex) {
 
 `r if (params$year_report >= 2022) "::: {.content-hidden}"`
 
-`r cef_level2_text$cef_txt_1_13[1,1]`
+`r latex_linebreaks(cef_level2_text$cef_txt_1_13[1,1])`
 
-`r cef_level2_text$cef_txt_1_10_txt`
+`r latex_linebreaks(cef_level2_text$cef_txt_1_10_txt)`
 
 `r if (params$year_report >= 2022) ":::"`
 
@@ -1658,9 +1649,9 @@ if (no_cz < czindex) {
 
 `r if (params$year_report >= 2022) "::: {.content-hidden}"`
 
-`r cef_level2_text$cef_txt_1_13[1,1]`
+`r latex_linebreaks(cef_level2_text$cef_txt_1_13[1,1])`
 
-`r cef_level2_text$cef_txt_1_10_txt`
+`r latex_linebreaks(cef_level2_text$cef_txt_1_10_txt)`
 
 `r if (params$year_report >= 2022) ":::"`
 

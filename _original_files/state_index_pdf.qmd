@@ -750,8 +750,6 @@ tsu_text2 <- tsu_text$text2
 
 `r paste0(layout_wrap_figure("chart_level1_traffic_su", NULL, tsu_text1, 12), tsu_text2)`
 
-\afterpage{\clearpage} 
-
 ## Safety (Main ANSP)
 
 ```{r saf_conc1}
@@ -768,8 +766,6 @@ saf_text2 <- saf_text_conc$text2
 <!-- exception for luxembourg -->
 `r if (params$country == "Luxembourg") "::: {.content-hidden}"`
 
-\afterpage{\clearpage} 
-
 ## Environment (Member State)
 
 ```{r concl_env}
@@ -780,11 +776,9 @@ env_text1 <- env_text$text1
 env_text2 <- env_text$text2
 ```
 
-`r paste0(layout_wrap_figure("chart_env_kea_l1", NULL, env_text1, 12), env_text2)`
+`r paste0(layout_wrap_figure("chart_env_kea_l1", NULL, env_text1, 14), env_text2)`
 
 `r if (params$country == "Luxembourg") ":::"`
-
-\afterpage{\clearpage} 
 
 ## Capacity (Member State)
 
@@ -1032,8 +1026,6 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 
 `r layout_2fig("chart_cap_er_l2", "chart_cap_er_month")`
 
-`r if (country == "MUAC") ":::: {.content-hidden}"`
-
 ```{r chart_cap_delay_bin}
 #| file: R/chart_level2_cap_delay_bin.R
 #| out.width: "52%"
@@ -1086,9 +1078,6 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 `r if (params$year_report <= 2022) ":::::"`
 
 
-`r if (params$country == "MUAC") "::::"`
-
-
 ### Other indicators
 
 `r layout_2fig("chart_cap_atco", "chart_cap_atco_acc")`
@@ -1101,14 +1090,10 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 ```
 
 
-`r if (params$country == "MUAC") ":::: {.content-hidden}"`
-
-
 `\biggertext{Focus on ATCOs in operations}`{=latex}
 
 `r latex_linebreaks(cap_er_nsa_5)`
 
-`r if (params$country == "SES RP3" | params$country == "MUAC") "::::"`
 
 `r if (params$country == "Luxembourg") ":::"`
 
@@ -1124,6 +1109,7 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 
 `r layout_2fig("chart_cap_trm_l2", "chart_cap_trm_month")`
 
+\needspace{3\baselineskip}
 
 `\biggertext{Focus on arrival ATFM delay}`{=latex}
 
@@ -1298,9 +1284,9 @@ if (no_cz < czindex) {
 
 `r if (params$year_report >= 2022) "::: {.content-hidden}"`
 
-`r cef_level2_text$cef_txt_1_13[1,1]`
+`r latex_linebreaks(cef_level2_text$cef_txt_1_13[1,1])`
 
-`r cef_level2_text$cef_txt_1_10_txt`
+`r latex_linebreaks(cef_level2_text$cef_txt_1_10_txt)`
 
 `r if (params$year_report >= 2022) ":::"`
 
@@ -1418,9 +1404,9 @@ if (no_cz < czindex) {
 
 `r if (params$year_report >= 2022) "::: {.content-hidden}"`
 
-`r cef_level2_text$cef_txt_1_13[1,1]`
+`r latex_linebreaks(cef_level2_text$cef_txt_1_13[1,1])`
 
-`r cef_level2_text$cef_txt_1_10_txt`
+`r latex_linebreaks(cef_level2_text$cef_txt_1_10_txt)`
 
 `r if (params$year_report >= 2022) ":::"`
 
@@ -1542,9 +1528,9 @@ if (no_cz < czindex) {
 
 `r if (params$year_report >= 2022) "::: {.content-hidden}"`
 
-`r cef_level2_text$cef_txt_1_13[1,1]`
+`r latex_linebreaks(cef_level2_text$cef_txt_1_13[1,1])`
 
-`r cef_level2_text$cef_txt_1_10_txt`
+`r latex_linebreaks(cef_level2_text$cef_txt_1_10_txt)`
 
 `r if (params$year_report >= 2022) ":::"`
 
@@ -1663,9 +1649,9 @@ if (no_cz < czindex) {
 
 `r if (params$year_report >= 2022) "::: {.content-hidden}"`
 
-`r cef_level2_text$cef_txt_1_13[1,1]`
+`r latex_linebreaks(cef_level2_text$cef_txt_1_13[1,1])`
 
-`r cef_level2_text$cef_txt_1_10_txt`
+`r latex_linebreaks(cef_level2_text$cef_txt_1_10_txt)`
 
 `r if (params$year_report >= 2022) ":::"`
 

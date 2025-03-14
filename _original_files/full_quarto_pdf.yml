@@ -196,6 +196,7 @@ format:
           
           % Load titlesec package for section formatting
           \usepackage{titlesec}
+          \usepackage{needspace} % to avoid orphan titles
           
 
           % --------------------- CHAPTER STYLING ---------------------
@@ -209,10 +210,14 @@ format:
           % CONDITIONAL SPACING: Remove top space only if the chapter starts on a new page
           \makeatletter
           \newcommand{\customchapterskip}{%
-            \ifdim\pagetotal=0pt % If the page is empty (new page)
-              \vspace*{-20pt}
+            \ifnum\value{page}=1 % First page always removes extra space
+              \vspace*{-20pt}%
             \else
-              \vspace*{6pt}
+              \if@openright % If the chapter starts on a new page
+                \vspace*{-20pt}%
+              \else
+                \vspace*{6pt}%
+              \fi
             \fi
           }
           \makeatother
@@ -281,8 +286,7 @@ format:
           
           \usepackage{makecell} % Enables multiline table headers
           
-          \usepackage{needspace} % to avoid orphan titles
-
+ 
 book:
   title: "Performance Review Body"
   subtitle: "Monitoring Report" 
