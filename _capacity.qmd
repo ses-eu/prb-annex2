@@ -240,8 +240,6 @@ if (country == "SES RP3" | country == "MUAC") {
 ::::
 :::
 
-::: {#container-cap-prb}
-
 ## PRB monitoring
 
 ```{r cap-prb}
@@ -263,8 +261,6 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 `r cap_trm_conc1`
 
 `r if (params$no_tcz == 0 | params$year_report != 2023) "::::"`
-
-:::
 
 
 `r if (params$country == "Luxembourg") "::: {.content-hidden}"`

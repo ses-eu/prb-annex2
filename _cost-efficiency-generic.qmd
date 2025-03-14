@@ -171,18 +171,14 @@ if (country == "SES RP3" | country == "MUAC") {
 
 `r if (cztype == 'terminal' | ez == 2) "::: {.content-hidden}"`
 
-::: {#container-cef-prb}
 ## PRB monitoring
 
-:::: {#concl-cef-duc}
 ```{r concl-cef-duc}
 cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF")
 ```
 
 `r cef_conc1`
 
-::::
-:::
 `r if (cztype == 'terminal' | ez == 2) ":::"`
 
 
