@@ -46,17 +46,17 @@ if (country == "Home") {
   
   writeLines(tmp_text, 'index.qmd')
 
-# } else if (country == "MUAC") {
-#   tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
-#   
-#   if (out_format == 'pdf') {
-#     tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/muac_index_pdf.qmd")
-#   } else {
-#     tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/muac_index.qmd") 
-#   }
-#   
-#   writeLines(tmp_text, 'index.qmd')
-  
+} else if (country == "MUAC") {
+  tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
+
+  if (out_format == 'pdf') {
+    tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/muac_index_pdf.qmd")
+  } else {
+    tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/muac_index.qmd")
+  }
+
+  writeLines(tmp_text, 'index.qmd')
+
 } else if (country == "SES RP3") {
     tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
     if (out_format == 'pdf') {
@@ -388,7 +388,8 @@ if (out_format == 'web') {
     
 # render site ----
   quarto::quarto_render(as_job = FALSE,
-                        execute_params = list(state_list = state_list, 
+                        execute_params = list(home_address = home_address,
+                                              state_list = state_list, 
                                               country = country, 
                                               year_report = year_report,
                                               data_folder = data_folder,

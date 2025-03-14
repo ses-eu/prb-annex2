@@ -1,5 +1,6 @@
 ---
 params:
+  home_address:   $home_address
   state_list:     $state_list
   country:        $country
   year_report:    $year_report
@@ -116,6 +117,7 @@ params:
 ---
 
 ```{r, eval=TRUE}
+home_address <- params$home_address
 data_folder <- params$data_folder
 year_report <- params$year_report
 state_list <- params$state_list

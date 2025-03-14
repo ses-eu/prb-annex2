@@ -25,8 +25,16 @@ if (params$country == "SES RP3") {
 }
 
 ```
+::: {.grid .align-items-center}
+:::: {.g-col-9}
+[Safety - {{< var doc.country >}}]{.fakeh1}
+::::
 
-# Safety - {{< var doc.country >}}
+:::: {.g-col-3}
+[<i class="fa fa-download"></i> Download Report](`r params$home_address`/download/{{< var doc.year_report >}}/PRB-Annual-Monitoring-Report_{{< var doc.country >}}_{{< var doc.year_report >}}.pdf){.btn .btn-light .text-dark .border .bg-secondary-subtle .rounded}
+::::
+:::
+
 
 ::: {#container-saf-prb}
 

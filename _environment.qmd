@@ -158,8 +158,15 @@ if (country == "SES RP3") {
 }
 
 ```
+::: {.grid .align-items-center}
+:::: {.g-col-9}
+[Environment - {{< var doc.country >}}]{.fakeh1}
+::::
 
-[Environment - {{< var doc.country >}}]{class="fakeh1"}
+:::: {.g-col-3}
+[<i class="fa fa-download"></i> Download Report](`r params$home_address`/download/{{< var doc.year_report >}}/PRB-Annual-Monitoring-Report_{{< var doc.country >}}_{{< var doc.year_report >}}.pdf){.btn .btn-light .text-dark .border .bg-secondary-subtle .rounded}
+::::
+:::
 
 ::: {#container-env-prb}
 
