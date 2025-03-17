@@ -129,3 +129,7 @@ h3 {
 .gt_table {
 background-color: white;
 }
+
+.no-external-icon a.external::after {
+  content: none !important;
+}
