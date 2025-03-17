@@ -60,3 +60,6 @@ The data and the text are stored in the folders defined in the `build_site.R` sc
 Note that if the folder 2. were to be moved to another location, the structure and names of its subfolders for the different years and KPAs should be kept so as the code can find them. 
 
 
+# Publication
+Go to [app.netlify.com](app.netlify.com) and login with email with the user performancereviewunit@gmail.com. Enrico and Oscar have the password.
+Select 'sesperformance.eu' in the list of sites, go to 'deploys' and in the 'drag & drop' section just drop the production folder, typically `r fixed('\\ihx-vdm05\LIVE_var_www_performance$\oscar\prb-monitoring-prod')`.
