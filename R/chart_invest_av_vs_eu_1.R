@@ -5,47 +5,54 @@ source("R/parameters.R")
 # import data  ----
 if (country != 'SES RP3') {
   ## State case ----
-  data_raw <-  read_xlsx(
+  data_raw_ansp <-  read_xlsx(
     paste0(data_folder, "INVESTMNENTS DATA_master.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
     sheet = "CAPEX per Main ANSP",
     range = cell_limits(c(2, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
-}  
+
+  data_raw_uw <-  read_xlsx(
+    paste0(data_folder, "INVESTMNENTS DATA_master.xlsx"),
+    # here("data","hlsr2021_data.xlsx"),
+    sheet = "Union-wide median",
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+  
+  }  
 
 # process data  ----
-data_prep <- data_raw %>% 
+data_uw_median <- data_raw_uw %>% 
+  filter(variable == "New major investments" | variable == "Other new investments") %>% 
+  mutate(mymetric = round(percent*100, 0)) %>% 
+  select(
+    xlabel = union_wide_median,
+    type = variable,
+    mymetric
+  )
+
+
+data_prep_ansp <- data_raw_ansp %>% 
   filter(member_state == .env$country) %>% 
   mutate(
-    pp_new_major_share = new_major_investments_as_per_pp / total * 100,
-    pp_other_new_share = other_new_investments_as_per_pp / total * 100,
-    add_new_major_share = additional_new_major_investments / total * 100,
-    add_other_new_share = 0
+    share_new_major_inv = total_new_major_investments / total,
+    share_other_new_inv = other_new_investments_as_per_pp / total
   ) %>% 
-  select(
-    pp_new_major_share,
-    pp_other_new_share,
-    add_new_major_share,
-    add_other_new_share
-  ) %>% 
+  select(share_new_major_inv, share_other_new_inv) %>% 
   gather() %>% 
-  mutate(category = ifelse(grepl("^pp", key), "pp", "add"),  # Extract category
-         share_type = sub("^(pp_|add_)", "", key)) %>%  # Remove category prefix
-  mutate(
-    type = case_when(
-      share_type == "new_major_share" ~ "New major investments",
-      share_type == "other_new_share" ~ "Other new investments"
-    ),
-    xlabel = case_when(
-      category == "pp" ~ "Included in\nthe performance plan",
-      category == "add" ~ "Additional"
-    ),
-    xlabel = factor(xlabel, levels = c("Included in\nthe performance plan", "Additional")),
-    mymetric = value
-  ) %>% 
-  arrange(desc(xlabel)) %>% 
-  select(xlabel, type, mymetric) 
+  mutate(xlabel = "ANSP",
+         type = case_when(
+           key == "share_new_major_inv" ~ "New major investments",
+           key == "share_other_new_inv" ~ "Other new investments"),
+         mymetric = round(value*100,0)
+         ) %>% 
+  select(xlabel, type, mymetric)
+
+data_prep <- rbind(data_uw_median, data_prep_ansp) %>% 
+  mutate(xlabel = factor(xlabel, levels = c("Union-wide median", "ANSP")))
+
 
 # chart ----
 ## chart parameters ----
@@ -63,7 +70,7 @@ if (knitr::is_latex_output()) {
   local_legend_fontsize <- myfont-1
   
 } else {
-  local_legend_y <- -0.2
+  local_legend_y <- -0.12
   local_legend_x <- 0.5
   local_legend_xanchor <- 'center'
   local_legend_fontsize <- myfont
@@ -73,8 +80,9 @@ if (knitr::is_latex_output()) {
 # plot chart ----
 myplot <- mybarchart2(data_prep, 
                       height = myheight + 20,
-                      colors = c('#044598', '#22A0DD'),
+                      colors = c('#FFF000', '#22A0E7' ),
                       local_factor = c("Other new investments", "New major investments"),
+                      shape = c("/", "", "/", ""),
                       
                       suffix = local_suffix,
                       decimals = local_mydecimals,
@@ -84,23 +92,22 @@ myplot <- mybarchart2(data_prep,
                       
                       textangle = 0,
                       textposition = "inside",
+                      textfont_color = 'black',
                       insidetextanchor = 'middle',
-                      textfont_color = 'white',
-
+ 
                       bargap = 0.25,
                       barmode = 'stack',
                       
-                      title_text = "Asset value by investment category",
+                      title_text = "",
                       title_y = 0.99,
                       
-                      yaxis_title = "Total new asset value (%)",
+                      yaxis_title = "Asset value for new investment for RP3",
                       yaxis_ticksuffix = "%",
                       yaxis_tickformat = ".0f",
                       
                       legend_y = local_legend_y, 
                       legend_x = local_legend_x,
                       legend_xanchor = local_legend_xanchor,
-                      legend_fontsize = local_legend_fontsize,
-                      margin = list (t = 40, b= 60))
+                      legend_fontsize = local_legend_fontsize)
 
 myplot
