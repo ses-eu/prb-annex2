@@ -15,7 +15,7 @@ xrate_year_report <- if_else(country == "Luxembourg", 1, pull(xrate))
 ::::
 
 :::: {.g-col-3}
-[<i class="fa fa-download"></i> Download Report](`r params$home_address`/download/{{< var doc.year_report >}}/PRB-Annual-Monitoring-Report_{{< var doc.country >}}_{{< var doc.year_report >}}.pdf){.btn .btn-light .text-dark .border .bg-secondary-subtle .rounded}
+<span class="no-external-icon">[<i class="fa fa-download"></i> Download Report](`r params$home_address`/download/{{< var doc.year_report >}}/PRB-Annual-Monitoring-Report_{{< var doc.country >}}_{{< var doc.year_report >}}.pdf){.btn .btn-light .text-dark .border .bg-secondary-subtle .rounded}</span>
 ::::
 :::
 

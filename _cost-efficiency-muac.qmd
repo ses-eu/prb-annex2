@@ -9,10 +9,8 @@ cztype <- cz[[2]]
 
 [Cost-efficiency - {{< var doc.country >}}]{class="fakeh1"}
 
-::: {#container-cef-prb}
 ## PRB monitoring
 
-:::: {#concl-cef-duc}
 ```{r concl-cef-duc}
 cef_conc <- read_mytable("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF") %>%
   filter(Year_Report == params$year_report, State == params$country) %>%
@@ -23,8 +21,6 @@ cef_conc1 <- cef_conc %>% str_replace_all(c('", ' = '\n\n', '\"' = '', '\n\n\n' 
 
 `r cef_conc1`
 
-::::
-:::
 
 ::: {#cef-cost-muac}
 ## Total costs
