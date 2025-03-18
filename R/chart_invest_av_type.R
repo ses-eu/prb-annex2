@@ -12,32 +12,10 @@ if (country != 'SES RP3') {
     range = cell_limits(c(2, NA), c(180, NA))) %>%
     as_tibble() %>% 
     clean_names() 
-  
-  data_raw_uw <-  read_xlsx(
-    paste0(data_folder, "INVESTMNENTS DATA_master.xlsx"),
-    # here("data","hlsr2021_data.xlsx"),
-    sheet = "Union-wide median",
-    range = cell_limits(c(1, 1), c(NA, NA))) %>%
-    as_tibble() %>% 
-    clean_names() 
 }  
 
 # process data  ----
-data_prep_uw <- data_raw_uw %>% 
-  filter(variable == "ATM systems" | 
-           variable == "CNS systems" |
-           variable == "Infrastructure" |
-           variable == "Other" |
-           variable == "Unknown"
-           ) %>% 
-  mutate(mymetric = round(percent*100, 0)) %>% 
-  select(
-    xlabel = union_wide_median,
-    type = variable,
-    mymetric
-  )
-
-data_prep_ansp <- data_raw_ansp %>% 
+data_prep <- data_raw_ansp %>% 
   filter(member_state_1 == .env$country) %>% 
   select(atm, cns, infra, ancillary, unknown, other) %>% 
   summarise (atm = sum(atm, na.rm=TRUE),
@@ -67,77 +45,33 @@ data_prep_ansp <- data_raw_ansp %>%
     ),
     xlabel = "ANSP",
     mymetric = round(value,0),
-    NULL
-    
+    textposition = if_else(mymetric == 0 | mymetric > 2, "inside", "outside"),
+    textlabel = if_else(mymetric == 0, " ", paste0(format(round(mymetric,0), nsmall = 0), "%"))
   )  %>% 
-  select(xlabel, type, mymetric)   
-  
-data_prep <- rbind(data_prep_uw, data_prep_ansp) %>% 
-  mutate(xlabel = factor(xlabel, levels = c("Union-wide median", "ANSP")))
+  select(type, mymetric, textlabel, textposition) 
 
 
 # chart ----
-## chart parameters ----
-local_suffix <- "%"
-local_decimals <- 0
-
-###set up order of traces
-local_hovertemplate <- paste0('%{y:,.', local_mydecimals, 'f}', local_suffix)
-
-#### legend
+## legend
 if (knitr::is_latex_output()) {
-  local_legend_y <- mylegend_y
-  local_legend_x <- -0.18
-  local_legend_xanchor <- 'left'
-  local_legend_fontsize <- myfont-1
-  
+  local_legend_x <- 1
+  local_legend_y <- 0.5  
 } else {
-  local_legend_y <- -0.12
-  local_legend_x <- 0.5
-  local_legend_xanchor <- 'center'
-  local_legend_fontsize <- myfont
-  
+  local_legend_x <- 0.82
+  local_legend_y <- 0.5
+  local_legend_xanchor <- 'left'
 }
 
+
+
 # plot chart ----
-myplot <- mybarchart2(data_prep, 
-                      height = myheight + 20,
-                      colors = c( '#044598', '#22A0DD', '#58595B', '#FFF000', '#7030A0'),
-                      local_factor = c("ATM systems",
-                                       "CNS systems",
-                                       "Infrastructure",
-                                       "Other",
-                                       "Unknown"),
-                      shape = c("/", "", "/", "", "/", "", "/", "", "/", ""),
-                      
-                      suffix = local_suffix,
-                      decimals = local_decimals,
-                      
-                      hovertemplate = local_hovertemplate,
-                      hovermode = "x unified",
-                      
-                      textangle = 0,
-                      textposition = "inside",
-                      textfont_color = 'black',
-                      insidetextanchor = 'middle',
-                      
-                      bargap = 0.25,
-                      barmode = 'stack',
-                      
-                      title_text = "",
-                      title_y = 0.99,
-                      
-                      yaxis_title = "Asset value for new investments for RP3 (%)",
-                      yaxis_ticksuffix = "%",
-                      yaxis_tickformat = ".0f",
-                      
-                      legend_y = local_legend_y, 
-                      legend_x = local_legend_x,
-                      legend_xanchor = local_legend_xanchor,
-                      legend_fontsize = local_legend_fontsize)
-
-myplot
-
-
-
+mydonutchart(data_prep, 
+             colors = c( '#044598', '#22A0DD', '#58595B', '#FFF000', '#7030A0'),
+             hovertemplate = "%{label}: %{value}%<extra></extra>",
+             title_text = "Asset value by type of investment",
+             minsize = 14,
+             legend_x = local_legend_x,
+             legend_y = local_legend_y,
+             legend_xanchor = local_legend_xanchor,
+             legend_orientation = "v")
 

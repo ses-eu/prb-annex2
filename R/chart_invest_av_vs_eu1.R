@@ -92,7 +92,7 @@ myplot <- mybarchart2(data_prep,
                       
                       textangle = 0,
                       textposition = "inside",
-                      textfont_color = 'black',
+                      textfont_color = NULL,
                       insidetextanchor = 'middle',
  
                       bargap = 0.25,

@@ -51,7 +51,7 @@ if (knitr::is_latex_output()) {
 mydonutchart(data_prep, 
              colors = c('#FFF000', '#22A0DD'),
              shape = c("/", ""), # not supported by plotly on donut charts
-             hovertemplate = "%{label}: %{value}%",
+             hovertemplate = "%{label}: %{value}%<extra></extra>",
              title_text = "Asset value of new investments RP3 (%)",
              minsize = 14,
              legend_x = local_legend_x,
