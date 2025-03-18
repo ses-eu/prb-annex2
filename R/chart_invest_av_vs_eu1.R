@@ -24,7 +24,7 @@ if (country != 'SES RP3') {
   }  
 
 # process data  ----
-data_uw_median <- data_raw_uw %>% 
+data_prep_uw <- data_raw_uw %>% 
   filter(variable == "New major investments" | variable == "Other new investments") %>% 
   mutate(mymetric = round(percent*100, 0)) %>% 
   select(
@@ -50,14 +50,14 @@ data_prep_ansp <- data_raw_ansp %>%
          ) %>% 
   select(xlabel, type, mymetric)
 
-data_prep <- rbind(data_uw_median, data_prep_ansp) %>% 
+data_prep <- rbind(data_prep_uw, data_prep_ansp) %>% 
   mutate(xlabel = factor(xlabel, levels = c("Union-wide median", "ANSP")))
 
 
 # chart ----
 ## chart parameters ----
 local_suffix <- "%"
-local_mydecimals <- 0
+local_decimals <- 0
 
 ###set up order of traces
 local_hovertemplate <- paste0('%{y:,.', local_mydecimals, 'f}', local_suffix)
@@ -85,7 +85,7 @@ myplot <- mybarchart2(data_prep,
                       shape = c("/", "", "/", ""),
                       
                       suffix = local_suffix,
-                      decimals = local_mydecimals,
+                      decimals = local_decimals,
                       
                       hovertemplate = local_hovertemplate,
                       hovermode = "x unified",

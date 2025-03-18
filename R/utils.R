@@ -557,6 +557,89 @@ aucu <- function(cztype, mycz) {
     invisible(cropped <- image_crop(figure, paste0(width, "x", height)))
     invisible(image_write(cropped, paste0(fig_dir, fig_name)))
   }
+  
+## universal donut chart  ----
+mydonutchart <-  function(df, 
+                          width = mywidth, 
+                          height = myheight, 
+                          font = myfont,
+                          margin = mymargin, 
+                          decimals = mydecimals,
+                          hole = 0.6,
+                          textinfo = "percent",
+                          insidetextorientation = "horizontal",
+                          colors = mycolors,
+                          shape = c(''),
+                          hovertemplate = myhovertemplate,
+                          
+                          minsize = myminsize,
+                          font_family = myfont_family,
+                          title_text = "Chart title",
+                          title_x = mytitle_x,
+                          title_xanchor = mytitle_xanchor,
+                          title_y = mytitle_y,
+                          title_yanchor = mytitle_yanchor,
+                          title_font_size = mytitle_font_size,
+                          hovermode = myhovermode,
+                          hoverlabel_bgcolor = myhoverlabel_bgcolor,
+                          legend_traceorder = mylegend_traceorder,
+                          legend_orientation = mylegend_orientation,
+                          legend_x = mylegend_x,
+                          legend_xanchor = mylegend_xanchor,
+                          legend_y = mylegend_y,
+                          legend_yanchor = mylegend_xanchor,
+                          legend_font_size = mylegend_font_size
+                          ) {
+    plot_ly(
+      data = df,
+      width = width,
+      height = height,
+      labels = ~ type,
+      values = ~ mymetric,
+      texttemplate = "%{customdata}",
+      customdata = ~textlabel,
+      insidetextorientation = insidetextorientation,
+      type = "pie",
+      hole = hole,
+      hovertemplate = hovertemplate,
+      textinfo = textinfo,
+      textposition = ~ textposition,
+      marker = list(colors = colors, pattern = list(shape = shape))
+      ) %>% 
+    config( responsive = TRUE,
+            displaylogo = FALSE,
+            displayModeBar = F
+            # modeBarButtons = list(list("toImage")),
+    ) %>% 
+    layout(
+      uniformtext=list(minsize = minsize, mode='show'),
+      font = list(family = font_family),
+      title = list(text = title_text,
+                   x = title_x, 
+                   y = title_y, 
+                   xanchor = title_xanchor, 
+                   yanchor = title_yanchor,
+                   font = list(size = title_font_size)
+      ),
+      dragmode = FALSE,
+      hovermode = hovermode,
+      hoverlabel = list(bgcolor = hoverlabel_bgcolor),
+      
+      legend = list(
+        traceorder= legend_traceorder,
+        orientation = legend_orientation, 
+        xanchor = legend_xanchor,
+        yanchor = legend_yanchor,
+        x = legend_x,  
+        y = legend_y, 
+        font = list(size = legend_font_size),
+        orientation = legend_orientation
+      ),
+      margin = margin
+    )
+    
+}
+
 
 ## universal linechart  ----
 mylinechart <-  function(df, mywidth, myheight, myfont, mymargin, mydecimals) {
@@ -724,6 +807,150 @@ mybarchart <-  function(df, mywidth, myheight, myfont, mymargin, mydecimals, myl
       margin = mymargin
     )
 }
+
+## better universal barchart  ----
+mybarchart2 <-  function(df, 
+                        width = mywidth,
+                        height = myheight, 
+                        colors = mycolors,
+                        font = myfont,
+                        decimals = mydecimals,
+                        suffix = mysuffix,
+                        local_factor = c(""),
+                        shape = c(""),
+                        
+                        textangle = mytextangle,
+                        textposition = mytextposition, 
+                        insidetextanchor = myinsidetextanchor,                        
+                        textfont_color = mytextfont_color,
+                        textfont_size = mytextfont_size,
+                        
+                        hovertemplate = myhovertemplate,
+                        showlegend = mytrace_showlegend,
+                        
+                        minsize = myminsize,
+                        family = myfont_family,
+                        
+                        title_text = "Chart title",
+                        title_x = mytitle_x,
+                        title_y = mytitle_y,
+                        title_xanchor = mytitle_xanchor, 
+                        title_yanchor = mytitle_yanchor,
+                        title_font_size = mytitle_font_size,
+                        
+                        bargap = mybargap,
+                        barmode = mybarmode,
+                        hovermode = myhovermode,
+                        hoverlabel_bgcolor = myhoverlabel_bgcolor,
+                        trace_showlegend = TRUE,
+                        
+                        xaxis_title = "",
+                        xaxis_gridcolor = myxaxis_gridcolor,
+                        xaxis_showgrid = myxaxis_showgrid,
+                        xaxis_showline = myxaxis_showline,
+                        xaxis_showticklabels = myxaxis_showticklabels,
+                        xaxis_dtick = myxaxis_dtick,
+                        xaxis_tickformat = myxaxis_tickformat,
+                        xaxis_zeroline = myxaxis_zeroline, 
+                        xaxis_tickfont_size = myxaxis_tickfont_size,
+
+                        yaxis_title = "",
+                        yaxis_gridcolor = myyaxis_gridcolor,
+                        yaxis_showgrid = myyaxis_showgrid,
+                        yaxis_showline = myyaxis_showline,
+                        yaxis_tickprefix = myyaxis_tickprefix,
+                        yaxis_ticksuffix = myyaxis_ticksuffix, 
+                        yaxis_tickformat = myyaxis_tickformat,
+                        yaxis_zeroline = myyaxis_zeroline,
+                        yaxis_zerolinecolor = myyaxis_zerolinecolor,
+                        yaxis_titlefont_size = myyaxis_titlefont_size, 
+                        yaxis_tickfont_size = myyaxis_tickfont_size,                        
+                        
+                        legend_traceorder = mylegend_traceorder,
+                        legend_orientation = mylegend_orientation, 
+                        legend_xanchor = mylegend_xanchor,
+                        legend_yanchor = mylegend_yanchor,
+                        legend_x = mylegend_x,  
+                        legend_y = mylegend_y,  
+                        legend_fontsize = myfont,
+                        
+                        margin = mymargin) {
+  df %>% 
+    plot_ly(
+      width = width,
+      height = height,
+      x = ~ xlabel,
+      y = ~ mymetric,
+      yaxis = "y1",
+      marker = list(pattern = list(shape = shape)),
+      colors = colors,
+      color = ~ factor(type, levels = local_factor),
+      text = ~ paste0(format(round(mymetric, decimals),  big.mark  = ",", nsmall = decimals), suffix),
+      # text = ~ mymetric,
+      textangle = textangle,
+      textposition = textposition, 
+      insidetextanchor = insidetextanchor,
+      textfont = list(color = textfont_color, size = textfont_size),
+      cliponaxis = FALSE,
+      type = "bar",
+      hovertemplate = hovertemplate,
+      showlegend = trace_showlegend
+    ) %>% 
+    config( responsive = TRUE,
+            displaylogo = FALSE,
+            displayModeBar = F
+            # modeBarButtons = list(list("toImage")),
+    ) %>% 
+    layout(
+      uniformtext=list(minsize = minsize, mode='show'),
+      font = list(family = family),
+      title = list(text = title_text,
+                   x = title_x, 
+                   y = title_y, 
+                   xanchor = title_xanchor, 
+                   yanchor = title_yanchor,
+                   font = list(size = title_font_size)
+      ),
+      dragmode = FALSE,
+      bargap = bargap,
+      barmode = barmode,
+      hovermode = hovermode,
+      hoverlabel = list(bgcolor = hoverlabel_bgcolor),
+      xaxis = list(title = xaxis_title,
+                   gridcolor = xaxis_gridcolor,
+                   showgrid = xaxis_showgrid,
+                   showline = xaxis_showline,
+                   showticklabels = xaxis_showticklabels,
+                   dtick = xaxis_dtick,
+                   tickformat = xaxis_tickformat,
+                   zeroline = xaxis_zeroline, 
+                   tickfont = list(size = xaxis_tickfont_size)
+      ),
+      yaxis = list(title = yaxis_title,
+                   gridcolor = yaxis_gridcolor,
+                   showgrid = yaxis_showgrid,
+                   showline = yaxis_showline,
+                   tickprefix = yaxis_tickprefix,
+                   ticksuffix = yaxis_ticksuffix, 
+                   tickformat = yaxis_tickformat,
+                   zeroline = yaxis_zeroline,
+                   zerolinecolor = yaxis_zerolinecolor,
+                   titlefont = list(size = yaxis_titlefont_size), 
+                   tickfont = list(size = yaxis_tickfont_size)
+      ),
+      legend = list(
+        traceorder= legend_traceorder,
+        orientation = legend_orientation, 
+        xanchor = legend_xanchor,
+        yanchor = legend_yanchor,
+        x = legend_x,  
+        y = legend_y,  # this is on purpose
+        font = list(size = legend_fontsize)
+      ),
+      margin = margin
+    )
+}
+
 
 ## add empty trace to force year series  ----
 add_empty_trace <- function(myplot, df){

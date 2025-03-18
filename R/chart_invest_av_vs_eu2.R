@@ -8,37 +8,31 @@ if (country != 'SES RP3') {
   data_raw <-  read_xlsx(
     paste0(data_folder, "INVESTMNENTS DATA_master.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
-    sheet = "New Major Inv pivot",
-    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    sheet = "CAPEX per Main ANSP",
+    range = cell_limits(c(2, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
 }  
 
 # process data  ----
 data_prep <- data_raw %>% 
-  filter(member_state == .env$country) %>% 
-  mutate(
-    enroute_share = total_value_of_the_asset_nominal_euros_en_route / total_value_of_the_asset_nominal_euros * 100,
-    terminal_share = total_value_of_the_asset_nominal_euros_terminal / total_value_of_the_asset_nominal_euros * 100,
-    NULL
-    ) %>% 
-  select(
-    enroute_share,
-    terminal_share,
-    NULL
-  ) %>% 
-  gather() %>% 
+  filter(member_state == .env$country | member_state == "SES RP3") %>% 
+  select(member_state, total) %>% 
   mutate(
     type = case_when(
-      key == "enroute_share" ~ "En route",
-      key == "terminal_share" ~ "Terminal"
-    ),
-    xlabel = "Asset value",
-    mymetric = round(value,0),
+      member_state == .env$country ~ "ANSP",
+      member_state == "SES RP3" ~ "Union-wide median"),
+    mymetric = total / lead(total, 1)*100,
+    mymetric = case_when(
+      type == "Union-wide median" ~ 100-lag(mymetric,1),
+      .default = mymetric
+      ),
     textposition = if_else(mymetric == 0 | mymetric > 2, "inside", "outside"),
-    textlabel = if_else(mymetric == 0, " ", paste0(format(mymetric, nsmall = 0), "%"))
+    textlabel = if_else(mymetric == 0, " ", paste0(format(round(mymetric,0), nsmall = 0), "%"))
   )  %>% 
-  select(xlabel, type, mymetric, textlabel, textposition) 
+  select(type, mymetric, textlabel, textposition) 
+
+  
 
 # chart ----
 ## legend
@@ -46,7 +40,7 @@ if (knitr::is_latex_output()) {
   local_legend_x <- 1
   local_legend_y <- 0.5  
 } else {
-  local_legend_x <- 0.82
+  local_legend_x <- 0.9
   local_legend_y <- 0.5
   local_legend_xanchor <- 'left'
 }
@@ -55,9 +49,10 @@ if (knitr::is_latex_output()) {
 
 # plot chart ----
 mydonutchart(data_prep, 
-             colors = c( '#22A0DD', '#044598'),
+             colors = c('#FFF000', '#22A0DD'),
+             shape = c("/", ""), # not supported by plotly on donut charts
              hovertemplate = "%{label}: %{value}%",
-             title_text = "Asset value: en route and terminal",
+             title_text = "Asset value of new investments RP3 (%)",
              minsize = 14,
              legend_x = local_legend_x,
              legend_y = local_legend_y,
