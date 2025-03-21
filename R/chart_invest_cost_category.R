@@ -12,7 +12,7 @@ if (country != 'SES RP3') {
     range = cell_limits(c(3, NA), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
-
+  
 }  
 
 # process data  ----
@@ -21,31 +21,38 @@ data_prep <- data_raw_ansp %>%
   select(nm_d_2020, nm_d_2021, nm_d_2022, nm_d_2023, nm_d_2024,
          on_d_2020, on_d_2021, on_d_2022, on_d_2023, on_d_2024,
          e_d_2020, e_d_2021, e_d_2022, e_d_2023, e_d_2024,
-
+         
          nm_a_2020, nm_a_2021, nm_a_2022, nm_a_2023, nm_a_2024,
          on_a_2020, on_a_2021, on_a_2022, on_a_2023, on_a_2024,
          e_a_2020, e_a_2021, e_a_2022, e_a_2023, e_d_2024,
-         ) %>% 
+  ) %>% 
   pivot_longer(
     cols = everything(),  # Pivot all columns
-    names_to = c("type", "year"),  # Create "type" and "year" columns
+    names_to = c("xlabel", "year"),  # Create "type" and "year" columns
     names_pattern = "(.+?)_(\\d{4})",  # Regex: Extract "type" + 4-digit year
     values_to = "value"  # Store values in "value" column
   ) %>% 
-  mutate(type = if_else(str_detect(type,"_d"), "Determined", "Actual")) %>% 
-  group_by(type, year) %>% 
+  mutate(
+    type = if_else(str_detect(xlabel,"_d"), "Determined", "Actual"),
+    xlabel = factor(case_when(
+      str_detect(xlabel,"nm_") ~ "New major\ninvestments",
+      str_detect(xlabel,"on_") ~ "Other major\ninvestments",
+      str_detect(xlabel,"e_") ~ "Existing\ninvestments"
+      ), levels = c("New major\ninvestments", "Other new\ninvestments", "Existing\ninvestments"))
+    ) %>%
+  group_by(xlabel, type) %>% 
   summarise(total = sum(value, na.rm = TRUE)/10^6) %>% 
   ungroup() %>% 
   mutate(total = if_else(total == 0, NA, total)) %>% 
   select(
-    xlabel = year,
+    xlabel,
     type,
     mymetric = total)   
 
 # chart ----
 ## chart parameters ----
 local_suffix <- ""
-local_decimals <- 0
+local_decimals <- 1
 
 ###set up order of traces
 local_hovertemplate <- paste0('%{y:,.', local_decimals, 'f}', local_suffix)
@@ -58,7 +65,7 @@ if (knitr::is_latex_output()) {
   local_legend_fontsize <- myfont-1
   
 } else {
-  local_legend_y <- -0.12
+  local_legend_y <- -0.2
   local_legend_x <- 0.5
   local_legend_xanchor <- 'center'
   local_legend_fontsize <- myfont
@@ -71,7 +78,7 @@ myplot <- mybarchart2(data_prep,
                       colors = c('#5B9BD5', '#FFC000'),
                       local_factor = c("Determined",
                                        "Actual",
-                                        NULL),
+                                       NULL),
                       # shape = c("/", "", "/", "", "/", "", "/", "", "/", ""),
                       
                       suffix = local_suffix,
@@ -88,12 +95,13 @@ myplot <- mybarchart2(data_prep,
                       bargap = 0.25,
                       barmode = 'group',
                       
-                      title_text = "Total costs of investments",
+                      title_text = "Total costs of investments by category - RP3",
                       title_y = 0.99,
                       
-                      yaxis_title = "Total costs of investments (M€<sub>2017</sub>)",
+                      yaxis_title = "Total costs of investments in RP3 (M€<sub>2017</sub>)",
                       yaxis_ticksuffix = local_suffix,
                       yaxis_tickformat = ".0f",
+                      yaxis_titlefont_size = myyaxis_titlefont_size -1,
                       
                       legend_y = local_legend_y, 
                       legend_x = local_legend_x,
