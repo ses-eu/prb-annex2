@@ -85,7 +85,7 @@ website:
         text: About
       - href: home_address/download.html
         text: Download
-      - href: https://transport.ec.europa.eu/transport-modes/air/single-european-sky/ses-performance-and-charging/publications_en
+      - href: https://eu-single-sky.transport.ec.europa.eu/index_en
         text: Publications {{< fa external-link-alt >}}
         target: "_blank"
 
