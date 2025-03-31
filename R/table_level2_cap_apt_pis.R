@@ -19,7 +19,8 @@ if (country != "SES RP3") {
     left_join(airports_table, by = c("airport_icao" = "apt_code")) %>% 
     arrange(apt_name) %>% 
     rename("Airport name" = apt_name) %>% 
-    mutate("Avg arrival\nATFM delay (KPI#2)" = format(round(terminal_delay, 2), decimals = 2),
+    mutate(year = factor(year, levels = 2020:2024),
+           "Avg arrival\nATFM delay (KPI#2)" = format(round(terminal_delay, 2), decimals = 2),
            "Slot adherence (PI#1)" = paste0(format(round(slot_adherence*100, 1), decimals = 1), "%"),
            "ATC pre departure\ndelay (PI#2)" = format(round(atc_predep_dly, 2), decimals = 2),
            "All causes pre departure\ndelay (PI#3)" = format(round(all_cause_predep_dly, 1), decimals = 1),
