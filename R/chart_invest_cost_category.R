@@ -3,20 +3,13 @@ if (exists("country") == FALSE) {country <- "Bulgaria"}
 source("R/parameters.R")
 
 # import data  ----
-if (country != 'SES RP3') {
-  ## State case ----
-  data_raw_ansp <-  read_xlsx(
-    paste0(data_folder, "INVESTMNENTS DATA_master.xlsx"),
-    # here("data","hlsr2021_data.xlsx"),
-    sheet = "Costs of inv main ANSP (MR)",
-    range = cell_limits(c(3, NA), c(NA, NA))) %>%
-    as_tibble() %>% 
-    clean_names() 
-  
-}  
+if (!exists("data_cost_inv")) {
+  source("R/get_investment_data.R")
+}
+
 
 # process data  ----
-data_prep <- data_raw_ansp %>% 
+data_prep <- data_cost_inv %>% 
   filter(member_state == .env$country) %>% 
   select(nm_d_2020, nm_d_2021, nm_d_2022, nm_d_2023, nm_d_2024,
          on_d_2020, on_d_2021, on_d_2022, on_d_2023, on_d_2024,

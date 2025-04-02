@@ -3,19 +3,12 @@ if (exists("country") == FALSE) {country <- "Belgium"}
 source("R/parameters.R")
 
 # import data  ----
-if (country != 'SES RP3') {
-  ## State case ----
-  data_raw <-  read_xlsx(
-    paste0(data_folder, "INVESTMNENTS DATA_master.xlsx"),
-    # here("data","hlsr2021_data.xlsx"),
-    sheet = "CAPEX per Main ANSP",
-    range = cell_limits(c(2, 1), c(NA, NA))) %>%
-    as_tibble() %>% 
-    clean_names() 
-}  
+if (!exists("data_capex")) {
+  source("R/get_investment_data.R")
+}
 
 # process data  ----
-data_prep <- data_raw %>% 
+data_prep <- data_capex %>% 
   filter(member_state == .env$country | member_state == "SES RP3") %>% 
   select(member_state, total) %>% 
   mutate(
@@ -40,9 +33,9 @@ if (knitr::is_latex_output()) {
   local_legend_x <- 1
   local_legend_y <- 0.5  
 } else {
-  local_legend_x <- 0.9
-  local_legend_y <- 0.5
-  local_legend_xanchor <- 'left'
+  local_legend_x <- 0.5
+  local_legend_y <- -0.05
+  local_legend_xanchor <- 'center'
 }
 
 
@@ -57,6 +50,6 @@ mydonutchart(data_prep,
              legend_x = local_legend_x,
              legend_y = local_legend_y,
              legend_xanchor = local_legend_xanchor,
-             legend_orientation = "v")
+             legend_orientation = "h")
 
 

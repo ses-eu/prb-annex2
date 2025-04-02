@@ -3,19 +3,12 @@ if (exists("country") == FALSE) {country <- "France"}
 source("R/parameters.R")
 
 # import data  ----
-if (country != 'SES RP3') {
-  ## State case ----
-  data_raw <-  read_xlsx(
-    paste0(data_folder, "INVESTMNENTS DATA_master.xlsx"),
-    # here("data","hlsr2021_data.xlsx"),
-    sheet = "CAPEX per Main ANSP",
-    range = cell_limits(c(2, 1), c(NA, NA))) %>%
-    as_tibble() %>% 
-    clean_names() 
-}  
+if (!exists("data_capex")) {
+  source("R/get_investment_data.R")
+}
 
 # process data  ----
-data_prep <- data_raw %>% 
+data_prep <- data_capex %>% 
   filter(member_state == .env$country) %>% 
   mutate(
     pp_new_major_share = new_major_investments_as_per_pp / total * 100,

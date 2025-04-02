@@ -3,19 +3,13 @@ if (exists("country") == FALSE) {country <- "Bulgaria"}
 source("R/parameters.R")
 
 # import data  ----
-if (country != 'SES RP3') {
-  ## State case ----
-  data_raw_ansp <-  read_xlsx(
-    paste0(data_folder, "INVESTMNENTS DATA_master.xlsx"),
-    # here("data","hlsr2021_data.xlsx"),
-    sheet = "Benefits | Investment category",
-    range = cell_limits(c(2, NA), c(180, NA))) %>%
-    as_tibble() %>% 
-    clean_names() 
-}  
+if (!exists("data_category")) {
+  source("R/get_investment_data.R")
+}
+
 
 # process data  ----
-data_prep <- data_raw_ansp %>% 
+data_prep <- data_category %>% 
   filter(member_state_1 == .env$country) %>% 
   select(atm, cns, infra, ancillary, unknown, other) %>% 
   summarise (atm = sum(atm, na.rm=TRUE),
@@ -57,9 +51,9 @@ if (knitr::is_latex_output()) {
   local_legend_x <- 1
   local_legend_y <- 0.5  
 } else {
-  local_legend_x <- 0.82
-  local_legend_y <- 0.5
-  local_legend_xanchor <- 'left'
+  local_legend_x <- 0.5
+  local_legend_y <- -0.05
+  local_legend_xanchor <- 'center'
 }
 
 
@@ -73,5 +67,5 @@ mydonutchart(data_prep,
              legend_x = local_legend_x,
              legend_y = local_legend_y,
              legend_xanchor = local_legend_xanchor,
-             legend_orientation = "v")
+             legend_orientation = "h")
 

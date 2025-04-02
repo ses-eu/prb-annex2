@@ -819,6 +819,8 @@ mybarchart2 <-  function(df,
                         local_factor = c(""),
                         shape = c(""),
                         
+                        text = ~ paste0(format(round(mymetric, decimals),  big.mark  = ",", nsmall = decimals), suffix),
+                        meta = ~type,
                         textangle = mytextangle,
                         textposition = mytextposition, 
                         insidetextanchor = myinsidetextanchor,                        
@@ -885,7 +887,8 @@ mybarchart2 <-  function(df,
       marker = list(pattern = list(shape = shape)),
       colors = colors,
       color = ~ factor(type, levels = local_factor),
-      text = ~ paste0(format(round(mymetric, decimals),  big.mark  = ",", nsmall = decimals), suffix),
+      text = text,
+      meta = meta,
       # text = ~ mymetric,
       textangle = textangle,
       textposition = textposition, 
@@ -992,6 +995,55 @@ add_line_trace <- function(myplot, df){
                     color = myat_marker_color,
                     symbol = myat_symbol),
       showlegend = myat_showlegend
+    )
+}
+
+add_line_trace2 <- function(
+    myplot, 
+    df,
+    mode = "markers",
+    name = "Target",
+    suffix = "",
+    decimals = 0,
+    myat_textbold = TRUE,
+    yaxis = 1,
+
+    textangle = 0,
+    textposition = "top",
+    textfontcolor = "black",
+    textfontsize = myfont,
+    hovertemplate = NULL,
+    
+    linecolor = '#FF0000',
+    linewidth = 3,
+    linedash = "solid",
+    markercolor = '#FF0000',
+    markersymbol = "",
+    
+    showlegend = TRUE
+){
+  myplot %>%   
+    add_trace(
+      data = df,
+      x = ~ xlabel,
+      y = ~ myothermetric,
+      yaxis = yaxis,
+      mode = mode, 
+      type = 'scatter',
+      name = name,
+      hovertemplate = hovertemplate,
+      text = ~ paste0(if_else(myat_textbold == TRUE, "<b>",""),
+                      format(myothermetric,  big.mark  = ",", nsmall = decimals), suffix,
+                      if_else(myat_textbold == TRUE, "</b>","")),
+      textangle = textangle,
+      textposition = textposition,
+      textfont = list(color = textfontcolor, size = textfontsize),
+      line = list(color = linecolor, width = linewidth, dash=linedash),
+      marker = list(size = linewidth * 3, 
+                    color = markercolor,
+                    symbol = markersymbol),
+      visible = "legendonly",
+      showlegend = showlegend
     )
 }
 

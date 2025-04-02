@@ -3,27 +3,12 @@ if (exists("country") == FALSE) {country <- "Bulgaria"}
 source("R/parameters.R")
 
 # import data  ----
-if (country != 'SES RP3') {
-  ## State case ----
-  data_raw_ansp <-  read_xlsx(
-    paste0(data_folder, "INVESTMNENTS DATA_master.xlsx"),
-    # here("data","hlsr2021_data.xlsx"),
-    sheet = "Benefits | Investment category",
-    range = cell_limits(c(2, NA), c(180, NA))) %>%
-    as_tibble() %>% 
-    clean_names() 
-  
-  data_raw_uw <-  read_xlsx(
-    paste0(data_folder, "INVESTMNENTS DATA_master.xlsx"),
-    # here("data","hlsr2021_data.xlsx"),
-    sheet = "Union-wide median",
-    range = cell_limits(c(1, 1), c(NA, NA))) %>%
-    as_tibble() %>% 
-    clean_names() 
-}  
+if (!exists("data_union_wide") | !exists("data_category")) {
+  source("R/get_investment_data.R")
+}
 
 # process data  ----
-data_prep_uw <- data_raw_uw %>% 
+data_prep_uw <- data_union_wide %>% 
   filter(variable == "ATM systems" | 
            variable == "CNS systems" |
            variable == "Infrastructure" |
@@ -37,7 +22,7 @@ data_prep_uw <- data_raw_uw %>%
     mymetric
   )
 
-data_prep_ansp <- data_raw_ansp %>% 
+data_prep_ansp <- data_category %>% 
   filter(member_state_1 == .env$country) %>% 
   select(atm, cns, infra, ancillary, unknown, other) %>% 
   summarise (atm = sum(atm, na.rm=TRUE),

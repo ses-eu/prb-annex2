@@ -3,28 +3,12 @@ if (exists("country") == FALSE) {country <- "France"}
 source("R/parameters.R")
 
 # import data  ----
-if (country != 'SES RP3') {
-  ## State case ----
-  data_raw_ansp <-  read_xlsx(
-    paste0(data_folder, "INVESTMNENTS DATA_master.xlsx"),
-    # here("data","hlsr2021_data.xlsx"),
-    sheet = "CAPEX per Main ANSP",
-    range = cell_limits(c(2, 1), c(NA, NA))) %>%
-    as_tibble() %>% 
-    clean_names() 
-
-  data_raw_uw <-  read_xlsx(
-    paste0(data_folder, "INVESTMNENTS DATA_master.xlsx"),
-    # here("data","hlsr2021_data.xlsx"),
-    sheet = "Union-wide median",
-    range = cell_limits(c(1, 1), c(NA, NA))) %>%
-    as_tibble() %>% 
-    clean_names() 
-  
-  }  
+if (!exists("data_capex") | !exists("data_union_wide")) {
+  source("R/get_investment_data.R")
+}
 
 # process data  ----
-data_prep_uw <- data_raw_uw %>% 
+data_prep_uw <- data_union_wide %>% 
   filter(variable == "New major investments" | variable == "Other new investments") %>% 
   mutate(mymetric = round(percent*100, 0)) %>% 
   select(
@@ -34,7 +18,7 @@ data_prep_uw <- data_raw_uw %>%
   )
 
 
-data_prep_ansp <- data_raw_ansp %>% 
+data_prep_ansp <- data_capex %>% 
   filter(member_state == .env$country) %>% 
   mutate(
     share_new_major_inv = total_new_major_investments / total,
