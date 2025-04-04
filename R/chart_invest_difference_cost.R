@@ -1,4 +1,5 @@
-if (exists("country") == FALSE) {country <- "Bulgaria"}
+if (!exists("country")) {country <- "Bulgaria"}
+if (!exists("cost_type")) {cost_type <- "terminal"}
 
 source("R/parameters.R")
 
@@ -8,25 +9,54 @@ if (!exists("data_cost_inv")) {
 }
 
 # process data  ----
-data_prep_year <- data_cost_inv_rt %>% 
-  filter(member_state == .env$country) %>% 
-  select(member_state,
-    d_enr_2020, d_enr_2021, d_enr_2022, d_enr_2023, d_enr_2024,
-    a_enr_2020, a_enr_2021, a_enr_2022, a_enr_2023, a_enr_2024
-    ) %>% 
+if (cost_type == "en route") {
+  data_filtered <- data_cost_inv_rt %>% 
+    filter(member_state == .env$country) %>% 
+    select(member_state,
+           d_2020 = d_enr_2020,
+           d_2021 = d_enr_2021,
+           d_2022 = d_enr_2022,
+           d_2023 = d_enr_2023,
+           d_2024 = d_enr_2024,
+
+           a_2020 = a_enr_2020,
+           a_2021 = a_enr_2021,
+           a_2022 = a_enr_2022,
+           a_2023 = a_enr_2023,
+           a_2024 = a_enr_2024
+    )
+} else {
+  data_filtered <- data_cost_inv_rt %>% 
+    filter(member_state == .env$country) %>% 
+    select(member_state,
+           d_2020 = d_ter_2020,
+           d_2021 = d_ter_2021,
+           d_2022 = d_ter_2022,
+           d_2023 = d_ter_2023,
+           d_2024 = d_ter_2024,
+           
+           a_2020 = a_ter_2020,
+           a_2021 = a_ter_2021,
+           a_2022 = a_ter_2022,
+           a_2023 = a_ter_2023,
+           a_2024 = a_ter_2024
+    )
+}
+
+data_prep_year <- data_filtered %>% 
   group_by(member_state) %>% 
   summarise(
-    d_enr_2020 = sum(d_enr_2020, na.rm = TRUE),
-    d_enr_2021 = sum(d_enr_2021, na.rm = TRUE),
-    d_enr_2022 = sum(d_enr_2022, na.rm = TRUE),
-    d_enr_2023 = sum(d_enr_2023, na.rm = TRUE),
-    d_enr_2024 = sum(d_enr_2024, na.rm = TRUE),
+    d_2020 = sum(d_2020, na.rm = TRUE),
+    d_2021 = sum(d_2021, na.rm = TRUE),
+    d_2022 = sum(d_2022, na.rm = TRUE),
+    d_2023 = sum(d_2023, na.rm = TRUE),
+    d_2024 = sum(d_2024, na.rm = TRUE),
 
-    a_enr_2020 = sum(a_enr_2020, na.rm = TRUE),
-    a_enr_2021 = sum(a_enr_2021, na.rm = TRUE),
-    a_enr_2022 = sum(a_enr_2022, na.rm = TRUE),
-    a_enr_2023 = sum(a_enr_2023, na.rm = TRUE),
-    a_enr_2024 = sum(a_enr_2024, na.rm = TRUE)
+    a_2020 = sum(a_2020, na.rm = TRUE),
+    a_2021 = sum(a_2021, na.rm = TRUE),
+    a_2022 = sum(a_2022, na.rm = TRUE),
+    a_2023 = sum(a_2023, na.rm = TRUE),
+    a_2024 = sum(a_2024, na.rm = TRUE)
   )%>% 
   select(-member_state) %>% 
   pivot_longer(
@@ -46,7 +76,7 @@ data_prep_total <- data_prep_year %>%
 data_prep <- rbind(data_prep_year, data_prep_total) %>%
   pivot_wider( names_from = "type", values_from = "value" ) %>% 
   mutate(
-    value = if_else(a_enr == 0, 0, a_enr/d_enr-1)
+    value = if_else(a == 0, 0, a/d-1)
   ) %>% 
   select(year, value) %>% 
   mutate(
@@ -61,7 +91,7 @@ data_prep <- rbind(data_prep_year, data_prep_total) %>%
   mutate(
     type = case_when(
       value > 0.05 ~ "Overspending > 5%",
-      value <= 0.05 & value >=0 ~ "Overspending ≤ 5%",
+      value <= 0.05 & value >=0 ~ "Overspending < 5%",
       value < 0 ~ "Underspending"
     ),
     mymetric = round(value*100,1),
@@ -99,14 +129,18 @@ if (knitr::is_latex_output()) {
   
 }
 
+mylocalfactor <- c("Underspending",
+  "Overspending < 5%",
+  "Overspending > 5%"
+  )
+
+mylocalcolors <- c('#044598', '#22A0DD', '#58595B')
+
 # plot chart ----
 myplot <- mybarchart2(data_prep, 
                       height = myheight+20,
-                      colors = c('#044598', '#22A0DD', '#58595B'),
-                      local_factor = c("Underspending",
-                                       "Overspending ≤ 5%",
-                                       "Overspending > 5%",
-                                        NULL),
+                      colors = mylocalcolors,
+                      local_factor = mylocalfactor,
 
                       suffix = local_suffix,
                       decimals = local_decimals,
@@ -123,7 +157,7 @@ myplot <- mybarchart2(data_prep,
                       bargap = 0.25,
                       barmode = 'stack',
                       
-                      title_text = "Difference in investment costs - en route",
+                      title_text = paste0("Difference in investment costs - ", cost_type),
                       title_y = 0.99,
                       
                       yaxis_title = "",
@@ -133,7 +167,18 @@ myplot <- mybarchart2(data_prep,
                       legend_y = local_legend_y, 
                       legend_x = local_legend_x,
                       legend_xanchor = local_legend_xanchor,
-                      legend_fontsize = local_legend_fontsize) %>% 
+                      legend_fontsize = local_legend_fontsize,
+                      trace_showlegend = FALSE,
+                      margin = list(t = 40, b= 60)
+                      
+                      ) %>% 
+  layout(
+      yaxis = list(
+        zeroline = TRUE,
+        zerolinecolor = "#808080",   # darker line at 0
+        zerolinewidth = 1
+    )
+  ) %>% 
   add_trace(
     data = data_prep,
     x = ~xlabel,
@@ -157,7 +202,37 @@ myplot <- mybarchart2(data_prep,
     inherit = FALSE
   )
 
-myplot 
 
+# force all legend items to appear
 
+add_fake_legend_split <- function(p, labels, colors, x = 0.07, y = -0.17, spacing = 0.28, font_size = myfont) {
+  for (i in seq_along(labels)) {
+    # Colored square
+    p <- p %>%
+      add_annotations(
+        x = x + (i - 1) * spacing, y = y,
+        text = "▇",
+        xref = "paper", yref = "paper",
+        xanchor = "left", yanchor = "middle",
+        showarrow = FALSE,
+        font = list(size = font_size, color = colors[i])
+      ) %>%
+      # Text label (default Plotly font color)
+      add_annotations(
+        x = x + (i - 1) * spacing + 0.04,
+        y = y,
+        text = labels[i],
+        xref = "paper", yref = "paper",
+        xanchor = "left", yanchor = "middle",
+        showarrow = FALSE,
+        font = list(size = font_size, color = "#444")
+      )
+  }
+  p
+}
+
+p <- myplot %>%
+  layout(showlegend = FALSE) %>%  # hide real legend
+  add_fake_legend_split(labels = mylocalfactor, colors = mylocalcolors)
+p
 
