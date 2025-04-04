@@ -62,11 +62,11 @@ if (country != 'SES RP3') {
     as_tibble() %>% 
     clean_names() 
   
-  data_funding_er <-  read_xlsx(
+  data_impact <-  read_xlsx(
     paste0(data_folder, "INVESTMNENTS DATA_master.xlsx"),
     # here("data","hlsr2021_data.xlsx"),
-    sheet = "Funding (2)",
-    range = cell_limits(c(3, 7), c(NA, NA))) %>%
+    sheet = "IMPACT ANSP",
+    range = cell_limits(c(2, 1), c(NA, NA))) %>%
     as_tibble() %>% 
     clean_names() 
   

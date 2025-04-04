@@ -866,7 +866,8 @@ mybarchart2 <-  function(df,
                         yaxis_zeroline = myyaxis_zeroline,
                         yaxis_zerolinecolor = myyaxis_zerolinecolor,
                         yaxis_titlefont_size = myyaxis_titlefont_size, 
-                        yaxis_tickfont_size = myyaxis_tickfont_size,                        
+                        yaxis_tickfont_size = myyaxis_tickfont_size, 
+                        yaxis_standoff = NA,
                         
                         legend_traceorder = mylegend_traceorder,
                         legend_orientation = mylegend_orientation, 
@@ -929,7 +930,8 @@ mybarchart2 <-  function(df,
                    zeroline = xaxis_zeroline, 
                    tickfont = list(size = xaxis_tickfont_size)
       ),
-      yaxis = list(title = yaxis_title,
+      yaxis = list(title = list(text = yaxis_title,
+                                standoff = yaxis_standoff),
                    gridcolor = yaxis_gridcolor,
                    showgrid = yaxis_showgrid,
                    showline = yaxis_showline,
@@ -940,6 +942,7 @@ mybarchart2 <-  function(df,
                    zerolinecolor = yaxis_zerolinecolor,
                    titlefont = list(size = yaxis_titlefont_size), 
                    tickfont = list(size = yaxis_tickfont_size)
+
       ),
       legend = list(
         traceorder= legend_traceorder,
