@@ -809,6 +809,8 @@ mybarchart <-  function(df, mywidth, myheight, myfont, mymargin, mydecimals, myl
 }
 
 ## better universal barchart  ----
+### this function is an improvement over the previous one. 
+### when I have time I'll replace the prev by this one in all charts
 mybarchart2 <-  function(df, 
                         width = mywidth,
                         height = myheight, 
@@ -1001,6 +1003,8 @@ add_line_trace <- function(myplot, df){
     )
 }
 
+### this function is an improvement over the previous one. 
+### when I have time I'll replace the prev by this one in all charts
 add_line_trace2 <- function(
     myplot, 
     df,

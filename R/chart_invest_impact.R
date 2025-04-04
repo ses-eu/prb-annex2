@@ -10,8 +10,8 @@ if (!exists("data_cost_inv")) {
 
 # process data  ----
 data_prep_uw <- data_union_wide %>% 
-  filter(variable == "SAF" | variable == "ENV" |
-           variable == "CAP" | variable == "CEF") %>% 
+  filter(variable == "SES mandated" | variable == "Partnership" |
+           variable == "CP/MP investment") %>% 
   mutate(mymetric =percent *100) %>% 
   select(type = union_wide_median,
          xlabel = variable,
@@ -21,16 +21,15 @@ data_prep_ansp <- data_impact %>%
   filter(state == .env$country) %>% 
   mutate(
     type = "ANSP",
-    SAF = if_else(nmajor_rp3 == 0, 0, saf_rp3/nmajor_rp3)*100,
-    ENV = if_else(nmajor_rp3 == 0, 0, env_rp3/nmajor_rp3)*100,
-    CAP = if_else(nmajor_rp3 == 0, 0, cap_rp3/nmajor_rp3)*100,
-    CEF = if_else(nmajor_rp3 == 0, 0, cef_rp3/nmajor_rp3)*100
+    "SES mandated" = if_else(nmajor_rp3 == 0, 0, nw_rp3/nmajor_rp3)*100,
+    "Partnership" = if_else(nmajor_rp3 == 0, 0, local_rp3/nmajor_rp3)*100,
+    "CP/MP investment" = if_else(nmajor_rp3 == 0, 0, np_rp3/nmajor_rp3)*100
     ) %>% 
-  select(type, SAF, ENV, CAP, CEF) %>% 
+  select(type, "SES mandated", "Partnership", "CP/MP investment") %>% 
   pivot_longer(-c(type), names_to = "xlabel", values_to = "mymetric")
 
 data_prep <- rbind(data_prep_uw, data_prep_ansp) %>% 
-  mutate(xlabel = factor(xlabel, levels = c("SAF", "ENV", "CAP", "CEF")))
+  mutate(xlabel = factor(xlabel, levels = c("SES mandated", "Partnership", "CP/MP investment")))
 
 # chart ----
 ## chart parameters ----
@@ -62,7 +61,7 @@ myplot <- mybarchart2(data_prep,
                       local_factor = c("Union-wide median",
                                        "ANSP",
                                         NULL),
-                      shape = c("/", "/", "/", "/", "", "", "", ""),
+                      shape = c("/", "/", "/", "", "", ""),
                       
                       suffix = local_suffix,
                       decimals = local_decimals,
@@ -78,10 +77,10 @@ myplot <- mybarchart2(data_prep,
                       bargap = 0.25,
                       barmode = 'group',
                       
-                      title_text = "Expected benefits of investments by KPA - RP3",
+                      title_text = "Costs by type of investments - impact",
                       title_y = 0.99,
                       
-                      yaxis_title = "% of RP3 actual costs of investments\nwith expected benefits per KPA",
+                      yaxis_title = "% of RP3 actual costs of new\ninvestments by type of investment",
                       yaxis_titlefont_size = myfont,
                       yaxis_ticksuffix = local_suffix,
                       yaxis_tickformat = ".0f",
