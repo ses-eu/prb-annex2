@@ -1476,3 +1476,9 @@ break_l1_text <- function(mystring) {
   
 }
 
+# Custom formatting function ----
+format_parens <- function(x) {
+  ifelse(x < 0,
+         paste0("(", format(abs(round(x, 2)), nsmall = 2), ")"),
+         format(round(x, 2), nsmall = 2))
+}

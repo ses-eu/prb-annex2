@@ -72,13 +72,6 @@ data_prep2 <- data_prep %>% filter(type == "Actual") %>%
   select(-type) %>% 
   mutate(category = purrr::map(category, gt::html))
 
-# Custom formatting function
-format_parens <- function(x) {
-  ifelse(x < 0,
-         paste0("(", format(abs(round(x, 2)), nsmall = 2), ")"),
-         format(round(x, 2), nsmall = 2))
-}
-
 data_prep3 <- data_prep %>% filter(type == "Difference") %>% 
   summarise(across(-c(category, type), ~sum(.x, na.rm = FALSE))) %>%
   mutate(category = "Total difference (M€<sub>2017</sub>)") %>%
