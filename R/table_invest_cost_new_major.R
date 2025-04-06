@@ -1,5 +1,4 @@
 if (exists("country") == FALSE) {country <- "Belgium"}
-if (!exists("cost_type")) {cost_type <- "en route"}
 
 source("R/parameters.R")
 
@@ -9,59 +8,34 @@ if (!exists("data_new_major")) {
 }
 
 # process data  ----
-if (cost_type == "en route") {
-  data_filtered <- data_cost_inv_rt %>% 
-    filter(member_state == .env$country) %>% 
-    select(member_state, cost_type,
-           d_2020 = d_enr_2020,
-           d_2021 = d_enr_2021,
-           d_2022 = d_enr_2022,
-           d_2023 = d_enr_2023,
-           d_2024 = d_enr_2024,
-           
-           a_2020 = a_enr_2020,
-           a_2021 = a_enr_2021,
-           a_2022 = a_enr_2022,
-           a_2023 = a_enr_2023,
-           a_2024 = a_enr_2024
-    )
-} else {
-  data_filtered <- data_cost_inv_rt %>% 
-    filter(member_state == .env$country) %>% 
-    select(member_state, cost_type,
-           d_2020 = d_ter_2020,
-           d_2021 = d_ter_2021,
-           d_2022 = d_ter_2022,
-           d_2023 = d_ter_2023,
-           d_2024 = d_ter_2024,
-           
-           a_2020 = a_ter_2020,
-           a_2021 = a_ter_2021,
-           a_2022 = a_ter_2022,
-           a_2023 = a_ter_2023,
-           a_2024 = a_ter_2024
-    )
-}
-
-data_calc <- data_filtered %>% 
-  select(-member_state) %>% 
+data_calc <- data_new_major_detail %>% 
+  filter(member_state == .env$country) %>% 
+  select(category = investment_name,
+         d_2020 = x2020_13,
+         d_2021 = x2021_14,
+         d_2022 = x2022_15,
+         d_2023 = x2023_16,
+         d_2024 = x2024_17,
+         
+         a_2020 = x2020_19,
+         a_2021 = x2021_20,
+         a_2022 = x2022_21,
+         a_2023 = x2023_22,
+         a_2024 = x2024_23
+  ) %>% 
   pivot_longer(
-    cols = -cost_type,  
+    cols = -category,  # Pivot all columns
     names_to = c("type", "year"),  # Create "type" and "year" columns
     names_pattern = "(.+?)_(\\d{4})",  # Regex: Extract "type" + 4-digit year
     values_to = "value"  # Store values in "value" column
   ) %>% 
   mutate(
-    value = value/10^6,
-    type = if_else(type == "d", "Determined", "Actual")
+    type = if_else(type == "d", "Determined", "Actual"),
+    value = if_else(type == "Actual" & as.numeric(year) > year_report, NA, value/10^6)
   ) %>% 
-  group_by(cost_type, type, year) %>% 
-  summarise(value = sum(value, na.rm = TRUE), .groups = "drop") %>% 
-  mutate(value = if_else(type == "Actual" & as.numeric(year) > year_report, NA, value)) %>% 
-  rename(category = cost_type) %>% 
   pivot_wider(id_cols = c(category, year), names_from ="type", values_from = "value") %>% 
-  mutate (
-    Difference = Actual - Determined
+ mutate (
+    Difference = Actual - Determined,
     ) %>% 
   pivot_longer(-c(category, year), names_to = "type", values_to = "value") 
 
@@ -75,11 +49,7 @@ data_calc_summary <- data_calc %>%
 
 data_prep <- rbind(data_calc, data_calc_summary) %>% 
   arrange(year) %>% 
-  pivot_wider(id_cols = c(category, type), names_from = "year", values_from = "value") %>% 
-  mutate(category = factor(category, levels = c("Depreciation",
-                                                "Cost of capital",
-                                                "Cost of leasing"))) %>% 
-  arrange(category)
+  pivot_wider(id_cols = c(category, type), names_from = "year", values_from = "value")
 
 data_prep1 <- data_prep %>% filter(type == "Determined") %>% 
       summarise(across(-c(category, type), ~sum(.x, na.rm = FALSE))) %>%
@@ -113,14 +83,19 @@ data_prep3 <- data_prep %>% filter(type == "Difference") %>%
   mutate(category = "Total difference (M€<sub>2017</sub>)") %>%
   select(colnames(data_prep1)) %>%  
   bind_rows(
-    data_prep %>% filter(type == "Difference") 
+    data_prep %>% filter(str_detect(type,"Difference")) 
   ) %>% 
+  mutate(
+    category = if_else(type == "Difference_perc" & !is.na(type), 
+                       "% change of actual with respect to determined", category)
+  ) %>% 
+  rowwise() %>%
   mutate(across(2:7, ~ if_else(
     type == "Difference_perc" & !is.na(type),
     paste0(if_else(.x >0, "+", ""), round(.x, 0), "%"),
     format_parens(.x)
   ))) %>%
-  ungroup() %>%   
+  ungroup() %>% 
   select(-type) %>% 
   mutate(across(2:7, ~ if_else(str_detect(.x, "NA%"), NA, .x))) %>% 
   mutate(category = purrr::map(category, gt::html))

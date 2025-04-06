@@ -144,7 +144,7 @@ table1 <- mygtable(data_prep1, myfont) %>%
     style = cell_text(indent = px(20)),
     locations = cells_body(
       columns = 1,
-      rows = 2:4
+      rows = 2:nrow(data_prep1)
     )
   ) 
   
@@ -189,7 +189,7 @@ table2 <- mygtable(data_prep2, myfont) %>%
     style = cell_text(indent = px(20)),
     locations = cells_body(
       columns = 1,
-      rows = 2:4
+      rows = 2:nrow(data_prep2)
     )
   ) 
 
@@ -218,7 +218,7 @@ table3 <- mygtable(data_prep3, myfont) %>%
     style = cell_text(indent = px(20)),
     locations = cells_body(
       columns = 1,
-      rows = 2:7
+      rows = 2:nrow(data_prep3)
     )
   ) %>% 
   tab_style(
