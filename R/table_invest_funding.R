@@ -65,7 +65,28 @@ table1 <- mygtable(data_prep, myfont) %>%
       columns = 1,
       rows = 2:nrow(data_prep)
     )
-  ) 
+  ) %>%
+  tab_style(
+    style = cell_borders(
+      sides = "left",
+      color = "#E5E5E5",
+      weight = px(2)
+    ),
+    locations = cells_body(
+      columns = "RP3"
+    )
+  ) %>%
+  tab_style(
+    style = cell_borders(
+      sides = "left",
+      color = "#E5E5E5",
+      weight = px(2)
+    ),
+    locations = cells_column_labels(
+      columns = "RP3"
+    )
+  )
+
   
 
 # create latex table

@@ -139,7 +139,28 @@ table1 <- mygtable(data_prep1, myfont) %>%
       columns = 1,
       rows = 2:nrow(data_prep1)
     )
-  ) 
+  ) %>%
+  tab_style(
+    style = cell_borders(
+      sides = "left",
+      color = "#E5E5E5",
+      weight = px(2)
+    ),
+    locations = cells_body(
+      columns = "RP3"
+    )
+  ) %>%
+  tab_style(
+    style = cell_borders(
+      sides = "left",
+      color = "#E5E5E5",
+      weight = px(2)
+    ),
+    locations = cells_column_labels(
+      columns = "RP3"
+    )
+  )
+
   
 ## table2 -----
 table2 <- mygtable(data_prep2, myfont) %>% 
@@ -184,7 +205,28 @@ table2 <- mygtable(data_prep2, myfont) %>%
       columns = 1,
       rows = 2:nrow(data_prep2)
     )
-  ) 
+  ) %>%
+  tab_style(
+    style = cell_borders(
+      sides = "left",
+      color = "#E5E5E5",
+      weight = px(2)
+    ),
+    locations = cells_body(
+      columns = "RP3"
+    )
+  ) %>%
+  tab_style(
+    style = cell_borders(
+      sides = "left",
+      color = "#E5E5E5",
+      weight = px(2)
+    ),
+    locations = cells_column_labels(
+      columns = "RP3"
+    )
+  )
+
 
 ## table3 -----
 table3 <- mygtable(data_prep3, myfont) %>% 
@@ -217,7 +259,28 @@ table3 <- mygtable(data_prep3, myfont) %>%
   tab_style(
     style = cell_text(style = "italic"),
     locations = cells_body(rows = c(3, 5, 7))
+  )%>%
+  tab_style(
+    style = cell_borders(
+      sides = "left",
+      color = "#E5E5E5",
+      weight = px(2)
+    ),
+    locations = cells_body(
+      columns = "RP3"
+    )
+  ) %>%
+  tab_style(
+    style = cell_borders(
+      sides = "left",
+      color = "#E5E5E5",
+      weight = px(2)
+    ),
+    locations = cells_column_labels(
+      columns = "RP3"
+    )
   )
+
 
 
 # create latex table
