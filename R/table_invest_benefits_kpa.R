@@ -29,6 +29,14 @@ table1 <- mygtable(data_prep, myfont) %>%
     investment_name = "New major investments",
     empty_col = "Expected benefit per KPA"
   ) %>% 
+  cols_align(
+    align = "center",
+    columns = 3:ncol(data_prep)  # center all except first column
+  ) %>%
+  tab_style(
+    style = cell_text(align = "center"),
+    locations = cells_column_labels(columns = 3:ncol(data_prep))
+  ) %>% 
   tab_style(
     style = list(
       # cell_text(weight = "bold")
