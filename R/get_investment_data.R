@@ -1,6 +1,6 @@
 if (exists("country") == FALSE) {country <- "Belgium"}
 
-source("R/parameters.R")
+# source("R/parameters.R")
 
 # import data  ----
 if (country != 'SES RP3') {

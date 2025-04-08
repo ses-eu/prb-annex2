@@ -22,8 +22,18 @@
   }
     
 # create index pages ----
+if (investments) {
+  tmp_text <- readLines("_original_files/common_qmd_setup.qmd")
+  
+  if (out_format == 'pdf') {
+    # tmp_text <- str_replace(tmp_text, "file-placeholder", "_original_files/nm_index_pdf.qmd")
+  } else {
+    tmp_text <- str_replace(tmp_text, "file-placeholder", "_investments.qmd") 
+  }
+  
+  writeLines(tmp_text, 'index.qmd')
 
-if (country == "Home") {
+} else if (country == "Home") {
   file.copy('_original_files/home_index.qmd', 'index.qmd', overwrite = TRUE, copy.mode = TRUE)
   ###for the home page we add as well the other qmds here
   file.copy('_original_files/home_about.qmd', 'about.qmd', overwrite = TRUE, copy.mode = TRUE)
@@ -78,7 +88,7 @@ if (country == "Home") {
   
 # generate level 2 .qmd master files ----
 ## set list of level 2 files depending on case
-if (country == "Home" | country == "Network Manager") {
+if (investments | country == "Home" | country == "Network Manager") {
   level2_files <- ""
   
 } else if(country == "MUAC") {
@@ -131,19 +141,6 @@ for (i in 1:length(level2_files)) {
   writeLines(tmp_text, level2_files[i])
 }
   
-  
-# find all scripts that generate .qmd files ----
-  # ## get all R scripts ----
-  # rscripts <- list.files(here('R'))
-  # 
-  # ## get only 'generate' scripts 
-  # genscripts <- list()
-  # for (i in 1:length(rscripts)) {
-  #   if (grepl('generate', rscripts[i], fixed = TRUE) == TRUE) {
-  #     genscripts <- append(genscripts, rscripts[i])
-  #   }
-  # }
-
 # remove and regenerate variables ----
   file.remove('_variables.yml')
   newvariables <- paste0("doc:
@@ -173,7 +170,7 @@ if (out_format == 'web') {
   tx <- str_replace(tx, paste0('text: "', year_report, '"'),
                         paste0('text: "<span style= \'color: #2151bf\'>', year_report, ' &#10003</span>"'))
     
-  if (country == "Home") {
+  if (investments | country == "Home") {
     ## Home page case ----
     ### find beginning and end of blocks to remove
     for (i in 1:length(tx)) {

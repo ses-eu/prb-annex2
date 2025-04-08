@@ -1,6 +1,6 @@
 if (exists("country") == FALSE) {country <- "France"}
 
-source("R/parameters.R")
+# source("R/parameters.R")
 
 # import data  ----
 if (!exists("data_capex")) {
@@ -56,16 +56,16 @@ if (knitr::is_latex_output()) {
   local_legend_fontsize <- myfont-1
   
 } else {
-  local_legend_y <- -0.2
-  local_legend_x <- 0.5
-  local_legend_xanchor <- 'center'
+  local_legend_y <- -0.27
+  local_legend_x <- -0.1
+  local_legend_xanchor <- 'left'
   local_legend_fontsize <- myfont
   
 }
 
 # plot chart ----
 myplot <- mybarchart2(data_prep, 
-                      height = myheight + 20,
+                      height = myheight - 50,
                       colors = c('#044598', '#22A0DD'),
                       local_factor = c("Other new investments", "New major investments"),
                       
@@ -93,7 +93,8 @@ myplot <- mybarchart2(data_prep,
                       legend_y = local_legend_y, 
                       legend_x = local_legend_x,
                       legend_xanchor = local_legend_xanchor,
-                      legend_fontsize = local_legend_fontsize,
-                      margin = list (t = 40, b= 60))
+                      legend_fontsize = local_legend_fontsize -1,
+                      legend_orientation = "h",
+                      margin = list (t = 40))
 
 myplot

@@ -17,7 +17,9 @@
                                           fixed(root_dir),
                                           paste0(home_address, '/'))
                                   )
-
+  
+  destination_dir_investments <- paste0(root_dir, "investments/", "rp3/" )
+  
 # set graphs parameters ----
   ## web
   mywidth = NULL
