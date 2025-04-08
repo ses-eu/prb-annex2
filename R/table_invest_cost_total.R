@@ -1,6 +1,6 @@
 if (exists("country") == FALSE) {country <- "Belgium"}
 
-source("R/parameters.R")
+# source("R/parameters.R")
 
 # import data  ----
 if (!exists("data_new_major")) {
@@ -55,7 +55,7 @@ data_prep <- rbind(data_calc, data_calc_summary) %>%
 data_prep1 <- data_prep %>% filter(type == "Determined") %>% 
       summarise(across(-c(category, type), ~sum(.x, na.rm = FALSE))) %>%
       mutate(category = "Total costs of new and existing investments (M€<sub>2017</sub>)") %>%
-      select(colnames(data_prep1)) %>%  
+      select(colnames(select(data_prep, -type))) %>%
   bind_rows(
     data_prep %>% filter(type == "Determined") 
   ) %>% 
@@ -288,8 +288,8 @@ if (knitr::is_latex_output()) {
   table_level2_cef_cost_infl <- mylatex(table1)
   
 } else {
-  table1
-  table2
-  table3
+  # table1
+  # table2
+  # table3
 }
 

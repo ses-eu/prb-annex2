@@ -1,6 +1,6 @@
 if (exists("country") == FALSE) {country <- "France"}
 
-source("R/parameters.R")
+# source("R/parameters.R")
 
 # import data  ----
 if (!exists("data_capex") | !exists("data_union_wide")) {

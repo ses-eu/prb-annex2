@@ -1,6 +1,6 @@
 if (exists("country") == FALSE) {country <- "Bulgaria"}
 
-source("R/parameters.R")
+# source("R/parameters.R")
 
 # import data  ----
 if (!exists("data_union_wide") | !exists("data_category")) {
@@ -115,6 +115,7 @@ myplot <- mybarchart2(data_prep,
                       yaxis_title = "Asset value for new investments for RP3 (%)",
                       yaxis_ticksuffix = "%",
                       yaxis_tickformat = ".0f",
+                      yaxis_titlefont_size = myfont-1,
                       
                       legend_y = local_legend_y, 
                       legend_x = local_legend_x,

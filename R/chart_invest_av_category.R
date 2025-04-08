@@ -1,6 +1,6 @@
 if (exists("country") == FALSE) {country <- "Bulgaria"}
 
-source("R/parameters.R")
+# source("R/parameters.R")
 
 # import data  ----
 if (!exists("data_category")) {
@@ -51,21 +51,25 @@ if (knitr::is_latex_output()) {
   local_legend_x <- 1
   local_legend_y <- 0.5  
 } else {
-  local_legend_x <- 0.5
-  local_legend_y <- -0.05
-  local_legend_xanchor <- 'center'
+  local_legend_x <- -0.1
+  local_legend_y <- -0.15
+  local_legend_xanchor <- 'left'
 }
 
 
 
 # plot chart ----
 mydonutchart(data_prep, 
+             height = myheight  - 90,
              colors = c( '#044598', '#22A0DD', '#58595B', '#FFF000', '#7030A0'),
              hovertemplate = "%{label}: %{value}%<extra></extra>",
              title_text = "Asset value by type of investment",
-             minsize = 14,
+             minsize = 13,
+             textfont_size = myfont-1,
              legend_x = local_legend_x,
              legend_y = local_legend_y,
              legend_xanchor = local_legend_xanchor,
-             legend_orientation = "h")
+             legend_orientation = "h",
+             legend_font_size = myfont-1,
+             margin = list(t=20))
 
