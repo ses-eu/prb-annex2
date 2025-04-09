@@ -1,7 +1,7 @@
 if (!exists("country")) {country <- "Bulgaria"}
 if (!exists("cost_type")) {cost_type <- "terminal"}
 
-source("R/parameters.R")
+# source("R/parameters.R")
 
 # import data  ----
 if (!exists("data_cost_inv")) {

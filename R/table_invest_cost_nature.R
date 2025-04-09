@@ -52,7 +52,7 @@ data_calc <- data_filtered %>%
     values_to = "value"  # Store values in "value" column
   ) %>% 
   mutate(
-    value = value/10^6,
+    value = value/10^3,
     type = if_else(type == "d", "Determined", "Actual")
   ) %>% 
   group_by(cost_type, type, year) %>% 
@@ -183,6 +183,10 @@ table1 <- mygtable(data_prep1, myfont) %>%
     locations = cells_column_labels(
       columns = "RP3"
     )
+  )%>% 
+  cols_width(
+    category ~ pct(50),
+    c(2:7) ~ pct(50 / 6)  # ≈8.33% each
   )
 
   
@@ -249,6 +253,10 @@ table2 <- mygtable(data_prep2, myfont) %>%
     locations = cells_column_labels(
       columns = "RP3"
     )
+  )%>% 
+  cols_width(
+    category ~ pct(50),
+    c(2:7) ~ pct(50 / 6)  # ≈8.33% each
   )
 
 
@@ -299,6 +307,10 @@ table3 <- mygtable(data_prep3, myfont) %>%
     locations = cells_column_labels(
       columns = "RP3"
     )
+  )%>% 
+  cols_width(
+    category ~ pct(50),
+    c(2:7) ~ pct(50 / 6)  # ≈8.33% each
   )
 
 

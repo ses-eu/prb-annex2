@@ -1,6 +1,6 @@
 if (exists("country") == FALSE) {country <- "Belgium"}
 
-source("R/parameters.R")
+# source("R/parameters.R")
 
 # import data  ----
 if (!exists("data_new_major")) {
@@ -11,7 +11,7 @@ if (!exists("data_new_major")) {
 data_prep <- data_funding %>% 
   filter(member_state == .env$country) %>% 
   mutate(
-    value = value/10^6
+    value = if_else(as.numeric(year) > year_report & year != "RP3", NA, value/10^6)
   ) %>% 
   pivot_wider(id_cols = c(year), names_from ="type", values_from = "value") %>% 
  mutate (
@@ -60,12 +60,18 @@ table1 <- mygtable(data_prep, myfont) %>%
     locations = cells_body(columns = 7)
   ) %>% 
   tab_style(
-    style = cell_text(indent = px(20)),
-    locations = cells_body(
-      columns = 1,
-      rows = 2:nrow(data_prep)
-    )
-  ) %>%
+    style = list(
+      cell_text(weight = "bold")
+    ),
+    locations = cells_body(rows = nrow(data_prep))
+  ) %>% 
+  # tab_style(
+  #   style = cell_text(indent = px(20)),
+  #   locations = cells_body(
+  #     columns = 1,
+  #     rows = 2:nrow(data_prep)
+  #   )
+  # ) %>%
   tab_style(
     style = cell_borders(
       sides = "left",
