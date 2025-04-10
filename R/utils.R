@@ -1489,12 +1489,13 @@ format_parens <- function(x) {
 
 ## wrap long labels -----
 wrap_label <- function(label, width = 30) {
+  if (is.na(label)) return(NA_character_)
+  
   words <- strsplit(label, " ")[[1]]
   lines <- c()
   current_line <- ""
   
   for (word in words) {
-    # Check if adding the word would exceed the width
     if (nchar(current_line) + nchar(word) + 1 > width) {
       lines <- c(lines, current_line)
       current_line <- word
@@ -1504,8 +1505,6 @@ wrap_label <- function(label, width = 30) {
     }
   }
   
-  # Add the last line
   lines <- c(lines, current_line)
-  
   paste(lines, collapse = "<br>")
 }

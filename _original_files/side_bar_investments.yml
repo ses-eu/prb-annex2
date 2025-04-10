@@ -7,10 +7,34 @@
         href: index.html#prb-monitoring
       - text: "<b>Value of assets</b>"
         href: index.html#value-of-the-assets-for-new-investments-included-in-the-performance-plan_countryansp
+        contents:
+          - text: "By category"
+            href: index.html#determined-and-additional-asset-value-by-investment-category
+          - text: "En route and terminal"
+            href: index.html#determined-asset-value-en-route-and-terminal
+          - text: "By type"
+            href: index.html#determined-asset-value-by-type-of-investment
+          - text: "Compared to Union-wide"
+            href: index.html#asset-value-for-new-investments-ansp-compared-to-union-wide
+      - text: "---"
       - text: "<b>Costs</b>"
         href: index.html#costs-related-to-investments-included-in-the-performance-plan_countryansp
+        contents:
+          - text: "New and existing investments"
+            href: index.html#new-and-existing-investments
+          - text: "En route"
+            href: index.html#costs-of-investments-by-nature---en-route
+          - text: "Terminal"
+            href: index.html#costs-of-investments-by-nature---terminal
+          - text: "New major investments"
+            href: index.html#costs-by-new-major-investments
+      - text: "---"
       - text: "<b>Expected benefit and impact</b>"
         href: index.html#expected-benefit-and-impact-per-new-major-investment_countryansp
+      - text: "---"
       - text: "<b>Public funding</b>"
         href: index.html#public-funding-granted-for-total-capex-ceften-t #tag
-      # - text: "---"
+        contents:
+          - text: "New and existing investments"
+            href: index.html#actual-funding-declaration-vs-payments
+      - text: "---"
