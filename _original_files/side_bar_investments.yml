@@ -1,7 +1,7 @@
   sidebar:
     collapse-level: 3
     contents:
-      - text: '<b style= "font-size: 1.2rem">Investments</b>'
+      - text: '<b style= "font-size: 1.2rem">Investments - country placeholder</b>'
         href: index.html
       - text: "<b>PRB monitoring</b>"
         href: index.html#prb-monitoring
