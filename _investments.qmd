@@ -1,0 +1,366 @@
+[Investments - {{< var doc.country >}}]{.fakeh1}
+
+## PRB monitoring
+[Placeholder for text]												
+
+## Value of the assets for New Investments included in the Performance Plan `r country` | `r main_ansp`
+
+### Determined and additional asset value by investment category
+
+::: {layout="[ 62, 0, 38 ]"}
+:::: {#table_invest_av_type}
+```{r table_invest_av_type}
+#| file: R/table_invest_av_type.R
+#| out.width: "100%"
+```
+::::
+
+::::{#empty_div}
+::::
+
+:::: {#chart_invest_av_type}
+```{r chart_invest_av_type}
+#| file: R/chart_invest_av_type.R
+#| out.width: "100%"
+```
+::::
+:::
+
+### Determined asset value: en route and terminal
+
+::: {layout="[ 62, 0, 38 ]"}
+:::: {#table_invest_av_er_trm}
+```{r table_invest_av_er_trm}
+#| file: R/table_invest_av_er_trm.R
+#| out.width: "100%"
+```
+::::
+
+::::{#empty_div}
+::::
+
+:::: {#chart_invest_av_er_trm}
+```{r chart_invest_av_er_trm}
+#| file: R/chart_invest_av_er_trm.R
+#| out.width: "100%"
+```
+::::
+:::
+
+### Determined asset value by type of investment
+
+::: {layout="[ 62, 0, 38 ]"}
+:::: {#table_invest_av_category}
+```{r table_invest_av_category}
+#| file: R/table_invest_av_category.R
+#| out.width: "100%"
+```
+::::
+
+::::{#empty_div}
+::::
+
+:::: {#chart_invest_av_category}
+```{r chart_invest_av_category}
+#| file: R/chart_invest_av_category.R
+#| out.width: "100%"
+```
+::::
+:::
+
+### Asset value for new investments: ANSP compared to Union-wide
+
+::: {layout="[ 33, 33, 33 ]"}
+:::: {#chart_invest_av_vs_eu1}
+```{r chart_invest_av_vs_eu1}
+#| file: R/chart_invest_av_vs_eu1.R
+#| out.width: "100%"
+```
+::::
+
+::::{#chart_invest_av_vs_eu2}
+```{r chart_invest_av_vs_eu2}
+#| file: R/chart_invest_av_vs_eu2.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#chart_invest_av_vs_eu3}
+```{r chart_invest_av_vs_eu3}
+#| file: R/chart_invest_av_vs_eu3.R
+#| out.width: "100%"
+```
+::::
+:::
+
+
+## Costs related to investments included in the Performance Plan `r country` | `r main_ansp`
+
+### New and existing investments 
+
+```{r}
+#| label: table_invest_cost_total
+#| out.width: "100%"
+#| echo: false
+
+source("R/table_invest_cost_total.R")
+table1
+```
+
+```{r}
+#| echo: false
+table2
+```
+
+```{r}
+#| echo: false
+table3
+```
+
+<br>
+
+::: {layout="[ 50, 0, 50 ]"}
+:::: {#chart_invest_cost_total}
+```{r chart_invest_cost_total}
+#| file: R/chart_invest_cost_total.R
+#| out.width: "100%"
+```
+::::
+
+::::{#empty_div}
+::::
+
+:::: {#chart_invest_cost_category}
+```{r chart_invest_cost_category}
+#| file: R/chart_invest_cost_category.R
+#| out.width: "100%"
+```
+::::
+:::
+
+### Costs of investments by nature - En route
+
+```{r, options= (cost_type = "en route")}
+#| label: table_invest_cost_nature_er
+#| out.width: "100%"
+#| echo: false
+
+source("R/table_invest_cost_nature.R")
+table1
+```
+
+```{r}
+#| echo: false
+table2
+```
+
+```{r}
+#| echo: false
+table3
+```
+
+<br>
+
+
+::: {layout="[ 20, 60, 20 ]"}
+:::: {#empty_div}
+::::
+
+::::{#empty_div}
+```{r chart_invest_difference_cost_er, options= (cost_type = "en route")}
+#| file: R/chart_invest_difference_cost.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#empty_div}
+::::
+:::
+
+`r if (params$no_tcz == 0) "::: {.content-hidden}"`
+
+### Costs of investments by nature - Terminal
+
+```{r, eval=(params$no_tcz != 0), options= (cost_type = "terminal")}
+#| label: table_invest_cost_nature_trm
+#| out.width: "100%"
+#| echo: false
+
+source("R/table_invest_cost_nature.R")
+table1
+```
+
+```{r, eval=(params$no_tcz != 0)}
+#| echo: false
+table2
+```
+
+```{r, eval=(params$no_tcz != 0)}
+#| echo: false
+table3
+```
+
+<br>
+
+
+::: {layout="[ 20, 60, 20 ]"}
+:::: {#empty_div}
+::::
+
+::::{#empty_div}
+```{r chart_invest_difference_cost_trm, eval=(params$no_tcz != 0), options= (cost_type = "terminal")}
+#| file: R/chart_invest_difference_cost.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#empty_div}
+::::
+:::
+
+`r if (params$no_tcz == 0) ":::"`
+
+### Costs by new major investments
+
+```{r}
+#| label: table_invest_cost_new_major
+#| out.width: "100%"
+#| echo: false
+
+source("R/table_invest_cost_new_major.R")
+table1
+```
+
+```{r}
+#| echo: false
+table2
+```
+
+```{r}
+#| echo: false
+table3
+```
+
+<br>
+
+```{r no_investment, include=FALSE}
+source("R/chart_invest_cost_new_major.R")
+no_investments <- no_investments
+```
+
+`r if (no_investments <= 6)"::: {.content-hidden}"`
+```{r chart_invest_cost_new_major_many, eval=(no_investments > 6)}
+#| file: R/chart_invest_cost_new_major.R
+#| out.width: "100%"
+```
+`r if (no_investments <= 6)":::"`
+
+
+
+`r if (no_investments > 6)"::: {.content-hidden}"`
+::: {layout="[ 10, 80, 10 ]"}
+:::: {#empty_div}
+::::
+
+::::{#chart_invest_cost_new_major}
+```{r chart_invest_cost_new_major_few, eval=(no_investments <= 6)}
+#| file: R/chart_invest_cost_new_major.R
+#| out.width: "100%"
+```
+::::
+
+:::: {#empty_div}
+::::
+:::
+`r if (no_investments > 6)":::"`
+
+## Expected benefit and impact per new major investment `r country` | `r main_ansp`
+
+```{r table_invest_benefits_kpa}
+#| file: R/table_invest_benefits_kpa.R
+#| out.width: "100%"
+```
+
+```{r table_invest_benefits}
+#| file: R/table_invest_benefits.R
+#| out.width: "100%"
+```
+
+<br>
+
+::: {layout="[ 50, 0, 50 ]"}
+:::: {#chart_invest_benefits_kpa}
+```{r chart_invest_benefits_kpa}
+#| file: R/chart_invest_benefits_kpa.R
+#| out.width: "100%"
+```
+::::
+
+::::{#empty_div}
+::::
+
+:::: {#chart_invest_benefits}
+```{r chart_invest_benefits}
+#| file: R/chart_invest_benefits.R
+#| out.width: "100%"
+```
+::::
+:::
+
+
+```{r table_invest_type}
+#| file: R/table_invest_type.R
+#| out.width: "100%"
+```
+
+<br>
+
+::: {layout="[ 50, 0, 50 ]"}
+:::: {#chart_invest_type_eu}
+```{r chart_invest_type_eu}
+#| file: R/chart_invest_type_eu.R
+#| out.width: "100%"
+```
+::::
+
+::::{#empty_div}
+::::
+
+:::: {#chart_invest_type}
+```{r chart_invest_type}
+#| file: R/chart_invest_type.R
+#| out.width: "100%"
+```
+::::
+:::
+
+
+## Public funding granted for total CAPEX (CEF/TEN-T) 
+
+### Actual funding declaration vs payments
+
+```{r table_invest_funding}
+#| file: R/table_invest_funding.R
+#| out.width: "100%"
+```
+
+<br>
+
+::: {layout="[ 50, 0, 50 ]"}
+:::: {#chart_invest_funding_year}
+```{r chart_invest_funding_year}
+#| file: R/chart_invest_funding_year.R
+#| out.width: "100%"
+```
+::::
+
+::::{#empty_div}
+::::
+
+:::: {#chart_invest_funding_vs_eu}
+```{r chart_invest_funding_vs_eu}
+#| file: R/chart_invest_funding_vs_eu.R
+#| out.width: "100%"
+```
+::::
+:::
