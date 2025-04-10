@@ -48,7 +48,7 @@ if (knitr::is_latex_output()) {
 
 # plot chart ----
 mydonutchart(data_prep, 
-             height = myheight-110,
+             height = myheight-95,
              colors = c( '#22A0DD', '#044598'),
              hovertemplate = "%{label}: %{value}%",
              title_text = "Asset value: en route and terminal",
@@ -57,6 +57,6 @@ mydonutchart(data_prep,
              legend_y = local_legend_y,
              legend_xanchor = local_legend_xanchor,
              legend_orientation = "h",
-             margin = list(t = 25))
+             margin = list(t = 40))
 
 

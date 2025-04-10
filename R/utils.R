@@ -859,6 +859,7 @@ mybarchart2 <-  function(df,
                         xaxis_tickformat = myxaxis_tickformat,
                         xaxis_zeroline = myxaxis_zeroline, 
                         xaxis_tickfont_size = myxaxis_tickfont_size,
+                        xaxis_tickangle = NULL,
 
                         yaxis_title = "",
                         yaxis_gridcolor = myyaxis_gridcolor,
@@ -932,7 +933,8 @@ mybarchart2 <-  function(df,
                    dtick = xaxis_dtick,
                    tickformat = xaxis_tickformat,
                    zeroline = xaxis_zeroline, 
-                   tickfont = list(size = xaxis_tickfont_size)
+                   tickfont = list(size = xaxis_tickfont_size),
+                   tickangle = xaxis_tickangle
       ),
       yaxis = list(title = list(text = yaxis_title,
                                 standoff = yaxis_standoff),
@@ -1478,9 +1480,32 @@ break_l1_text <- function(mystring) {
   
 }
 
-# Custom formatting function ----
+## Custom formatting function ----
 format_parens <- function(x) {
   ifelse(x < 0,
          paste0("(", format(abs(round(x, 2)), nsmall = 2), ")"),
          format(round(x, 2), nsmall = 2))
+}
+
+## wrap long labels -----
+wrap_label <- function(label, width = 30) {
+  words <- strsplit(label, " ")[[1]]
+  lines <- c()
+  current_line <- ""
+  
+  for (word in words) {
+    # Check if adding the word would exceed the width
+    if (nchar(current_line) + nchar(word) + 1 > width) {
+      lines <- c(lines, current_line)
+      current_line <- word
+    } else {
+      current_line <- paste(current_line, word)
+      current_line <- trimws(current_line)
+    }
+  }
+  
+  # Add the last line
+  lines <- c(lines, current_line)
+  
+  paste(lines, collapse = "<br>")
 }

@@ -10,11 +10,15 @@ if (!exists("data_cost_inv")) {
 
 # process data  ----
 data_prep <- data_new_major_detail %>% 
-  filter(member_state == .env$country) %>% 
-  select(investment_name,
-    determined = total_rp3_18,
-    actual = total_rp3_24
+  select(member_state,
+         investment_name,
+         determined = total_rp3_18,
+         actual = total_rp3_24
   ) %>% 
+  right_join(as_tibble(state_list), by = c("member_state" ="value")) %>% 
+  mutate(across(-c(member_state, investment_name), .fns = ~ if_else(is.na(.), 0, .))) %>% 
+  filter(member_state == .env$country) %>% 
+  select(-member_state) %>% 
   pivot_longer(
     cols = -c(investment_name),  # Pivot all columns
     names_to = c("type"),  # Create "type" and "year" columns
@@ -29,7 +33,11 @@ data_prep <- data_new_major_detail %>%
   select(
     xlabel,
     type,
-    mymetric)   
+    mymetric) %>%
+  mutate(xlabel = sapply(xlabel, wrap_label))
+
+## find number of investments
+no_investments <- data_prep %>% nrow()/2
 
 # chart ----
 ## chart parameters ----
@@ -81,12 +89,14 @@ myplot <- mybarchart2(data_prep,
                       title_y = 0.99,
                       
                       textfont_size = myfont-2,
-                      xaxis_tickfont_size = myfont -1,
+                      xaxis_tickfont_size = myfont -2,
+                      xaxis_tickangle = -90,
                       
-                      yaxis_title = "Total costs of investments in RP3 (M€<sub>2017</sub>)",
+                      yaxis_title = "Total costs of investments\nin RP3 (M€<sub>2017</sub>)",
                       yaxis_ticksuffix = local_suffix,
                       yaxis_tickformat = ".0f",
                       yaxis_titlefont_size = myyaxis_titlefont_size -1,
+                      yaxis_standoff = 5,
                       
                       legend_y = local_legend_y, 
                       legend_x = local_legend_x,

@@ -11,7 +11,9 @@ if (country != 'SES RP3') {
     sheet = "New Major Inv pivot",
     range = cell_limits(c(1, 1), c(NA, NA))) %>%
     as_tibble() %>% 
-    clean_names() 
+    clean_names() %>% 
+    right_join(as_tibble(state_list), by = c("member_state" ="value")) %>% 
+    mutate(across(-member_state, .fns = ~ if_else(is.na(.), 0, .)))
   
   data_new_major_detail <-  read_xlsx(
     paste0(data_folder, "INVESTMNENTS DATA_master.xlsx"),

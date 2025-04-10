@@ -9,8 +9,8 @@ if (!exists("data_new_major")) {
 
 # process data  ----
 data_calc <- data_new_major_detail %>% 
-  filter(member_state == .env$country) %>% 
-  select(category = investment_name,
+  select(member_state,
+         category = investment_name,
          d_2020 = x2020_13,
          d_2021 = x2021_14,
          d_2022 = x2022_15,
@@ -23,6 +23,10 @@ data_calc <- data_new_major_detail %>%
          a_2023 = x2023_22,
          a_2024 = x2024_23
   ) %>% 
+  right_join(as_tibble(state_list), by = c("member_state" ="value")) %>% 
+  mutate(across(-c(member_state, category), .fns = ~ if_else(is.na(.), 0, .))) %>% 
+  filter(member_state == .env$country) %>% 
+  select(-member_state) %>% 
   pivot_longer(
     cols = -category,  # Pivot all columns
     names_to = c("type", "year"),  # Create "type" and "year" columns
