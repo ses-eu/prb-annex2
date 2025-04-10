@@ -180,6 +180,24 @@ if (out_format == 'web') {
     ### this removes the unwanted lines
     tx <- tx[-c(block_beg:block_end)]
     
+    if (investments) {
+      ### add investments sidebar
+      sidebar_text <- readLines("_original_files/side_bar_investments.yml")
+      ### modify tags
+      sidebar_text <- str_replace(sidebar_text, 
+                                  '_countryansp', 
+                                  paste0(
+                                    "-",
+                                    country_lower,
+                                    "-",
+                                    str_replace_all(tolower(main_ansp),
+                                                    " ",
+                                                    "-"))
+                                  )  
+
+      tx <- append(tx, sidebar_text, after = block_beg - 1)
+    }
+    
     ### write new file
     writeLines(tx, con="_quarto.yml")
       

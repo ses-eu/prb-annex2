@@ -1,0 +1,16 @@
+  sidebar:
+    collapse-level: 3
+    contents:
+      - text: '<b style= "font-size: 1.2rem">Investments</b>'
+        href: index.html
+      - text: "<b>PRB monitoring</b>"
+        href: index.html#prb-monitoring
+      - text: "<b>Value of assets</b>"
+        href: index.html#value-of-the-assets-for-new-investments-included-in-the-performance-plan_countryansp
+      - text: "<b>Costs</b>"
+        href: index.html#costs-related-to-investments-included-in-the-performance-plan_countryansp
+      - text: "<b>Expected benefit and impact</b>"
+        href: index.html#expected-benefit-and-impact-per-new-major-investment_countryansp
+      - text: "<b>Public funding</b>"
+        href: index.html#public-funding-granted-for-total-capex-ceften-t #tag
+      # - text: "---"
