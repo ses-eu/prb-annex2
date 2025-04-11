@@ -10,13 +10,13 @@ if (!exists("data_capex")) {
 
 # process data  ----
 data_prep <- data_funding %>% 
-  filter(member_state == .env$country | member_state == "TOTAL") %>% 
+  filter(member_state == .env$country | member_state == "SES RP3") %>% 
   filter(type != "SDM data" & year == "RP3") %>% 
   select(member_state, value) %>% 
   mutate(
     type = case_when(
       member_state == .env$country ~ "ANSP",
-      member_state == "TOTAL" ~ "Union-wide"),
+      member_state == "SES RP3" ~ "Union-wide"),
     mymetric = value / lead(value, 1)*100,
     mymetric = case_when(
       type == "Union-wide" ~ 100-lag(mymetric,1),
