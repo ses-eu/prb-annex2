@@ -9,39 +9,47 @@ if (!exists("data_cost_inv")) {
 
 
 # process data  ----
-data_prep <- data_cost_inv %>% 
-  filter(member_state == .env$country) %>% 
-  select(nm_d_2020, nm_d_2021, nm_d_2022, nm_d_2023, nm_d_2024,
-         on_d_2020, on_d_2021, on_d_2022, on_d_2023, on_d_2024,
-         e_d_2020, e_d_2021, e_d_2022, e_d_2023, e_d_2024,
-
-         nm_a_2020, nm_a_2021, nm_a_2022, nm_a_2023, nm_a_2024,
-         on_a_2020, on_a_2021, on_a_2022, on_a_2023, on_a_2024,
-         e_a_2020, e_a_2021, e_a_2022, e_a_2023, e_d_2024,
-         ) %>% 
-  pivot_longer(
-    cols = everything(),  # Pivot all columns
-    names_to = c("type", "year"),  # Create "type" and "year" columns
-    names_pattern = "(.+?)_(\\d{4})",  # Regex: Extract "type" + 4-digit year
-    values_to = "value"  # Store values in "value" column
+data_prep_state <- data_cost_inv %>% 
+  mutate(
+    Determined = nm_d_total_rp3 + on_d_total_rp3 + e_d_total_rp3,
+    Actual = nm_a_total_rp3 + on_a_total_rp3 + e_a_total_rp3,
   ) %>% 
-  mutate(type = if_else(str_detect(type,"_d"), "Determined", "Actual")) %>% 
-  group_by(type, year) %>% 
-  summarise(total = sum(value, na.rm = TRUE)/10^6) %>% 
-  ungroup() %>% 
-  mutate(total = if_else(total == 0, NA, total)) %>% 
   select(
-    xlabel = year,
-    type,
-    mymetric = total)   
+    member_state, Determined, Actual
+  ) %>% 
+  pivot_longer(
+    -member_state, names_to = "type", values_to = "value"
+  )
+
+data_prep_ses <- data_prep_state %>% filter(member_state == "SES RP3") %>% 
+  select(type,
+         value_ses = value)
+
+data_prep1 <- data_prep_state %>% 
+  left_join(data_prep_ses, by = "type") %>% 
+  mutate(
+    mymetric = value/value_ses * 100
+  ) %>% 
+  select(
+    xlabel = member_state,
+    type, 
+    mymetric
+  ) %>% 
+  arrange(desc(mymetric)) %>% 
+  filter(xlabel != "SES RP3") 
+
+states_factor <- unique(data_prep1$xlabel)
+
+data_prep <- data_prep1 %>% 
+    mutate(xlabel = factor(xlabel, levels = states_factor ))
 
 # chart ----
 ## chart parameters ----
-local_suffix <- ""
-local_decimals <- 0
+local_suffix <- "%"
+local_decimals <- 1
 
 ###set up order of traces
-local_hovertemplate <- paste0('%{y:,.', local_decimals, 'f}', local_suffix)
+local_hovertemplate <- paste0('%{y:.', local_decimals, 'f}', local_suffix)
 
 #### legend
 if (knitr::is_latex_output()) {
@@ -51,20 +59,20 @@ if (knitr::is_latex_output()) {
   local_legend_fontsize <- myfont-1
   
 } else {
-  local_legend_y <- -0.12
-  local_legend_x <- 0.5
-  local_legend_xanchor <- 'center'
-  local_legend_fontsize <- myfont
+  local_legend_y <- 1
+  local_legend_x <- 1
+  local_legend_xanchor <- 'right'
+  local_legend_fontsize <- myfont-2
   
 }
 
 # plot chart ----
 myplot <- mybarchart2(data_prep, 
-                      height = myheight,
-                      colors = c('#5B9BD5', '#FFC000'),
+                      height = myheight+40,
+                      colors = c('#5B9BD5','#FFC000'),
                       local_factor = c("Determined",
                                        "Actual",
-                                        NULL),
+                                       NULL),
                       # shape = c("/", "", "/", "", "/", "", "/", "", "/", ""),
                       
                       suffix = local_suffix,
@@ -74,20 +82,25 @@ myplot <- mybarchart2(data_prep,
                       hovermode = "x unified",
                       
                       textangle = 0,
-                      textposition = "outside",
+                      textposition = "none",
                       textfont_color = 'black',
                       insidetextanchor = 'middle',
                       
                       bargap = 0.25,
                       barmode = 'group',
                       
-                      title_text = "Total costs of investments",
+                      title_text = "",
                       title_y = 0.99,
                       
-                      yaxis_title = "Total costs of investments (M€<sub>2017</sub>)",
+                      xaxis_tickfont_size = myfont,
+                      
+                      yaxis_title = "Share of costs of investments\nin total costs (%)",
+                      yaxis_standoff = 5,
                       yaxis_ticksuffix = local_suffix,
                       yaxis_tickformat = ",.0f",
+                      yaxis_tickfont_size = myfont,
                       
+                      legend_orientation = "v",
                       legend_y = local_legend_y, 
                       legend_x = local_legend_x,
                       legend_xanchor = local_legend_xanchor,

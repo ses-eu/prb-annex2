@@ -11,7 +11,6 @@ if (!exists("data_new_major")) {
 # process data  ----
 if (cost_type == "en route") {
   data_filtered <- data_cost_inv_rt %>% 
-    filter(member_state == .env$country) %>% 
     select(member_state, cost_type,
            d_2020 = d_enr_2020,
            d_2021 = d_enr_2021,
@@ -27,7 +26,6 @@ if (cost_type == "en route") {
     )
 } else {
   data_filtered <- data_cost_inv_rt %>% 
-    filter(member_state == .env$country) %>% 
     select(member_state, cost_type,
            d_2020 = d_ter_2020,
            d_2021 = d_ter_2021,
@@ -42,6 +40,30 @@ if (cost_type == "en route") {
            a_2024 = a_ter_2024
     )
 }
+
+if(country == "SES RP3") {
+  data_filtered <- data_filtered %>% 
+    group_by(cost_type) %>% 
+    summarise(
+      d_2020 = sum(d_2020, na.rm = TRUE),
+      d_2021 = sum(d_2021, na.rm = TRUE),
+      d_2022 = sum(d_2022, na.rm = TRUE),
+      d_2023 = sum(d_2023, na.rm = TRUE),
+      d_2024 = sum(d_2024, na.rm = TRUE),
+      
+      a_2020 = sum(a_2020, na.rm = TRUE),
+      a_2021 = sum(a_2021, na.rm = TRUE),
+      a_2022 = sum(a_2022, na.rm = TRUE),
+      a_2023 = sum(a_2023, na.rm = TRUE),
+      a_2024 = sum(a_2024, na.rm = TRUE)
+      
+    ) %>% 
+    mutate(member_state = "SES RPr")
+} else {
+  data_filtered <- data_filtered %>% 
+    filter(member_state == .env$country)
+  }
+
 
 data_calc <- data_filtered %>% 
   select(-member_state) %>% 
@@ -136,7 +158,7 @@ table1 <- mygtable(data_prep1, myfont) %>%
   ) %>%
   fmt_number(
     columns = 2:7,   
-    decimals = 2,
+    decimals = if_else(country == "SES RP3", 1, 2),
     use_seps = TRUE,
     sep_mark = ",",
     dec_mark = "."
@@ -206,7 +228,7 @@ table2 <- mygtable(data_prep2, myfont) %>%
   ) %>%
   fmt_number(
     columns = 2:7,   
-    decimals = 2,
+    decimals = if_else(country == "SES RP3", 1, 2),
     use_seps = TRUE,
     sep_mark = ",",
     dec_mark = "."

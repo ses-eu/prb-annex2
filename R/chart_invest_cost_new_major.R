@@ -26,8 +26,8 @@ data_prep <- data_new_major_detail %>%
   ) %>% 
   mutate(
     xlabel = investment_name,
-    type = if_else(type == "determined", "Determined\ncosts", "Actual\ncosts"),
-    type = factor(type, levels = c("Determined\ncosts", "Actual\ncosts")),
+    type = if_else(type == "determined", "Determined", "Actual"),
+    type = factor(type, levels = c("Determined", "Actual")),
     mymetric = round(value/10^6, 2)
   ) %>%
   select(
@@ -66,8 +66,8 @@ if (knitr::is_latex_output()) {
 myplot <- mybarchart2(data_prep, 
                       height = myheight+100,
                       colors = c('#5B9BD5', '#FFC000'),
-                      local_factor = c("Determined\ncosts",
-                                       "Actual\ncosts",
+                      local_factor = c("Determined",
+                                       "Actual",
                                        NULL),
                       # shape = c("/", "", "/", "", "/", "", "/", "", "/", ""),
                       

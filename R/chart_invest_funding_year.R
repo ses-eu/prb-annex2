@@ -9,14 +9,19 @@ if (!exists("data_cost_inv")) {
 
 
 # process data  ----
-data_prep <- data_funding %>% 
+data_prep1 <- data_funding %>% 
   filter(member_state == .env$country) %>% 
-  mutate(mymetric = value/10^6) %>% 
+  mutate(mymetric = if_else(as.numeric(year) > year_report & year != "RP3", NA, value/10^6)) %>% 
   arrange(year) %>% 
   select(
     xlabel = year,
     type,
     mymetric)   
+
+myx_levels <- unique(data_prep1$xlabel)
+
+data_prep <- data_prep1 %>% 
+  mutate(xlabel = factor(xlabel, levels = myx_levels))
 
 # chart ----
 ## chart parameters ----

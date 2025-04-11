@@ -185,6 +185,9 @@ if (out_format == 'web') {
       sidebar_text <- readLines("_original_files/side_bar_investments.yml")
       ### modify tags
       sidebar_text <- str_replace(sidebar_text, 
+                                  'country placeholder', 
+                                  country)
+      sidebar_text <- str_replace(sidebar_text, 
                                   '_countryansp', 
                                   paste0(
                                     "-",
@@ -194,7 +197,40 @@ if (out_format == 'web') {
                                                     " ",
                                                     "-"))
                                   )  
+      
+      ## remove terminal entry
+      if(no_tcz == 0) {
+        sidebar_text <- str_replace(sidebar_text,
+                                    '- text: "Terminal"',
+                                    '# - text: "Terminal"')
+        sidebar_text <- str_replace(sidebar_text,
+                                    'href: index.html#costs-of-investments-by-nature---terminal', 
+                                    '# href: index.html#costs-of-investments-by-nature---terminal' 
+                                  )  
+        
+      }
+      
+      ## SES case
+      if(country == "SES RP3") {
+        sidebar_text <- str_replace(sidebar_text,
+                                    '- text: "Compared to Union-wide"',
+                                    '# - text: "Compared to Union-wide"')
+        sidebar_text <- str_replace(sidebar_text,
+                                    'href: index.html#asset-value-for-new-investments-ansp-compared-to-union-wide', 
+                                    '# href: index.html#asset-value-for-new-investments-ansp-compared-to-union-wide' 
+        )  
 
+        sidebar_text <- str_replace(sidebar_text,
+                                    '- text: "New major investments"',
+                                    '# - text: "New major investments"')
+        sidebar_text <- str_replace(sidebar_text,
+                                    'href: index.html#costs-by-new-major-investments', 
+                                    '# href: index.html#costs-by-new-major-investments' 
+        )  
+        
+      }
+      
+      
       tx <- append(tx, sidebar_text, after = block_beg - 1)
     }
     

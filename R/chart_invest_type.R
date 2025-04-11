@@ -21,7 +21,7 @@ data_prep <- data_impact %>%
   ) %>% 
   pivot_longer(everything(), names_to = "xlabel", values_to = "mymetric") %>% 
   mutate(
-    type = if_else(str_detect(xlabel, "det"), "Determined costs", "Actual costs"),
+    type = if_else(str_detect(xlabel, "det"), "Determined", "Actual"),
     xlabel = str_replace_all(xlabel, "det", ""),
     xlabel = case_when(
       xlabel == "ses_rp3" ~ "SES mandated",
@@ -59,8 +59,8 @@ if (knitr::is_latex_output()) {
 myplot <- mybarchart2(data_prep, 
                       height = myheight,
                       colors = c('#22A0E7', '#FFC000'),
-                      local_factor = c("Determined costs",
-                                       "Actual costs",
+                      local_factor = c("Determined",
+                                       "Actual",
                                         NULL),
                       # shape = c("/", "/", "/", "/", "", "", "", ""),
                       

@@ -78,9 +78,9 @@ if (knitr::is_latex_output()) {
   
 } else {
   local_legend_y <- -0.12
-  local_legend_x <- 0.5
-  local_legend_xanchor <- 'center'
-  local_legend_fontsize <- myfont
+  local_legend_x <- -0.1
+  local_legend_xanchor <- 'left'
+  local_legend_fontsize <- myfont-1
   
 }
 

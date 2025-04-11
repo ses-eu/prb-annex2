@@ -57,7 +57,7 @@ if (knitr::is_latex_output()) {
   
 } else {
   local_legend_y <- -0.27
-  local_legend_x <- -0.1
+  local_legend_x <- -0.2
   local_legend_xanchor <- 'left'
   local_legend_fontsize <- myfont
   
@@ -97,4 +97,4 @@ myplot <- mybarchart2(data_prep,
                       legend_orientation = "h",
                       margin = list (t = 40))
 
-myplot
+myplot 

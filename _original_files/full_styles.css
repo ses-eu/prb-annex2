@@ -134,3 +134,6 @@ background-color: white;
   content: none !important;
 }
 
+#table_invest_av_category, #table_invest_av_er_trm, #table_invest_av_type {
+  margin-right: 10px !important; /* Force override if something else is setting it */
+}

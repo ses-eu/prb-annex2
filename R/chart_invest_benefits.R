@@ -19,6 +19,7 @@ data_prep_uw <- data_union_wide %>%
     
 data_prep_ansp <- data_impact %>% 
   filter(state == .env$country) %>% 
+  filter(state != "SES RP3") %>% 
   mutate(
     type = "ANSP",
     Network = if_else(nmajor_rp3 == 0, 0, nw_rp3/nmajor_rp3)*100,
