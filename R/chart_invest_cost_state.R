@@ -92,7 +92,7 @@ myplot <- mybarchart2(data_prep,
                       title_text = "",
                       title_y = 0.99,
                       
-                      xaxis_tickfont_size = myfont,
+                      xaxis_tickangle = -90,
                       
                       yaxis_title = "Share of costs of investments\nin total costs (%)",
                       yaxis_standoff = 5,

@@ -91,7 +91,7 @@ myplot <- mybarchart2(data_prep,
                       title_text = "",
                       title_y = 0.99,
                       
-                      xaxis_tickfont_size = myfont,
+                      xaxis_tickangle = -90,
                       
                       yaxis_title = "CAPEX per Member State (M€<sub>2017</sub>)",
                       yaxis_ticksuffix = local_suffix,

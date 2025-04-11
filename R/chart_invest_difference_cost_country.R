@@ -95,7 +95,7 @@ myplot <- mybarchart2(data_prep,
                       title_text = "",
                       title_y = 0.99,
                       
-                      xaxis_tickfont_size = myfont,
+                      xaxis_tickangle = -90,
                       
                       yaxis_title = paste0("Difference between ", 
                                            cost_type,
