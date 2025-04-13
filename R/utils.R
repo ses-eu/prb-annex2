@@ -1152,6 +1152,14 @@ mygtable <-  function(df, myfont) {
     cols_align(
       align = "right",
       columns = c(-1)
+    ) %>%
+    opt_css(
+      css = "
+      td {
+        white-space: normal !important;
+        word-break: break-word;
+      }
+    "
     )
 }
 
