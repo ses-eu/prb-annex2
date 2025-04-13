@@ -15,7 +15,8 @@
 ```
 ::::
 
-:::: {#chart_invest_av_type}
+<!-- class created in the css file for phone compatibility -->
+:::: {.chart-container}  
 ```{r chart_invest_av_type}
 #| file: R/chart_invest_av_type.R
 #| out.width: "100%"
@@ -33,7 +34,7 @@
 ```
 ::::
 
-:::: {#chart_invest_av_er_trm}
+:::: {.chart-container}
 ```{r chart_invest_av_er_trm}
 #| file: R/chart_invest_av_er_trm.R
 #| out.width: "100%"
@@ -51,7 +52,7 @@
 ```
 ::::
 
-:::: {#chart_invest_av_category}
+:::: {.chart-container}
 ```{r chart_invest_av_category}
 #| file: R/chart_invest_av_category.R
 #| out.width: "100%"
@@ -65,21 +66,21 @@
 ### Asset value for new investments: ANSP compared to Union-wide
 
 ::: {layout="[ 33, 33, 33 ]"}
-:::: {#chart_invest_av_vs_eu1}
+:::: {.chart-container}  
 ```{r chart_invest_av_vs_eu1, eval=(params$country != "SES RP3")}
 #| file: R/chart_invest_av_vs_eu1.R
 #| out.width: "100%"
 ```
 ::::
 
-::::{#chart_invest_av_vs_eu2}
+:::: {.chart-container}  
 ```{r chart_invest_av_vs_eu2, eval=(params$country != "SES RP3")}
 #| file: R/chart_invest_av_vs_eu2.R
 #| out.width: "100%"
 ```
 ::::
 
-:::: {#chart_invest_av_vs_eu3}
+:::: {.chart-container}  
 ```{r chart_invest_av_vs_eu3, eval=(params$country != "SES RP3")}
 #| file: R/chart_invest_av_vs_eu3.R
 #| out.width: "100%"
@@ -126,7 +127,7 @@ table3
 <br>
 
 ::: {layout="[ 50, 0, 50 ]"}
-:::: {#chart_invest_cost_total}
+:::: {.chart-container}  
 ```{r chart_invest_cost_total}
 #| file: R/chart_invest_cost_total.R
 #| out.width: "100%"
@@ -136,7 +137,7 @@ table3
 ::::{#empty_div}
 ::::
 
-:::: {#chart_invest_cost_category}
+:::: {.chart-container}  
 ```{r chart_invest_cost_category}
 #| file: R/chart_invest_cost_category.R
 #| out.width: "100%"
@@ -183,7 +184,7 @@ table3
 :::: {#empty_div}
 ::::
 
-::::{#empty_div}
+:::: {.chart-container}  
 ```{r chart_invest_difference_cost_er, eval=(params$country != "SES RP3"), options= (cost_type = "en route")}
 #| file: R/chart_invest_difference_cost.R
 #| out.width: "100%"
@@ -236,7 +237,7 @@ table3
 :::: {#empty_div}
 ::::
 
-::::{#empty_div}
+:::: {.chart-container}  
 ```{r chart_invest_difference_cost_trm, eval=(params$no_tcz != 0 & params$country != "SES RP3"), options= (cost_type = "terminal")}
 #| file: R/chart_invest_difference_cost.R
 #| out.width: "100%"
@@ -304,7 +305,7 @@ no_investments <- no_investments
 :::: {#empty_div}
 ::::
 
-::::{#chart_invest_cost_new_major}
+:::: {.chart-container}  
 ```{r chart_invest_cost_new_major_few, eval=(no_investments <= 6)}
 #| file: R/chart_invest_cost_new_major.R
 #| out.width: "100%"
@@ -333,7 +334,7 @@ no_investments <- no_investments
 <br>
 
 ::: {layout="[ 50, 0, 50 ]"}
-:::: {#chart_invest_benefits_kpa}
+:::: {.chart-container}  
 ```{r chart_invest_benefits_kpa}
 #| file: R/chart_invest_benefits_kpa.R
 #| out.width: "100%"
@@ -343,7 +344,7 @@ no_investments <- no_investments
 ::::{#empty_div}
 ::::
 
-:::: {#chart_invest_benefits}
+:::: {.chart-container}  
 ```{r chart_invest_benefits}
 #| file: R/chart_invest_benefits.R
 #| out.width: "100%"
@@ -360,7 +361,7 @@ no_investments <- no_investments
 <br>
 
 ::: {layout="[ 50, 0, 50 ]"}
-:::: {#chart_invest_type_eu}
+:::: {.chart-container}  
 ```{r chart_invest_type_eu}
 #| file: R/chart_invest_type_eu.R
 #| out.width: "100%"
@@ -370,7 +371,7 @@ no_investments <- no_investments
 ::::{#empty_div}
 ::::
 
-:::: {#chart_invest_type}
+:::: {.chart-container}  
 ```{r chart_invest_type}
 #| file: R/chart_invest_type.R
 #| out.width: "100%"
@@ -392,7 +393,7 @@ no_investments <- no_investments
 
 `r if (params$country == "SES RP3") "::: {.content-hidden}"`
 ::: {layout="[ 50, 0, 50 ]"}
-:::: {#chart_invest_funding_year}
+:::: {.chart-container}  
 ```{r chart_invest_funding_year}
 #| file: R/chart_invest_funding_year.R
 #| out.width: "100%"
@@ -402,7 +403,7 @@ no_investments <- no_investments
 ::::{#empty_div}
 ::::
 
-:::: {#chart_invest_funding_vs_eu}
+:::: {.chart-container}  
 ```{r chart_invest_funding_vs_eu}
 #| file: R/chart_invest_funding_vs_eu.R
 #| out.width: "100%"
@@ -418,7 +419,7 @@ no_investments <- no_investments
 ::::{#empty_div}
 ::::
 
-:::: {#chart_invest_funding_year_ses}
+:::: {.chart-container}  
 ```{r chart_invest_funding_year_ses}
 #| file: R/chart_invest_funding_year.R
 #| out.width: "100%"

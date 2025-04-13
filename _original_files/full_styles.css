@@ -137,3 +137,9 @@ background-color: white;
 #table_invest_av_category, #table_invest_av_er_trm, #table_invest_av_type {
   margin-right: 10px !important; /* Force override if something else is setting it */
 }
+
+.chart-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
