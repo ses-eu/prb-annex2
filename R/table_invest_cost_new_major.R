@@ -99,6 +99,8 @@ data_prep3 <- data_prep %>% filter(type == "Difference") %>%
 
 
 # render tables ----
+first_column_width <- 40
+
 ## table1 -----
 table1 <- mygtable(data_prep1, myfont) %>% 
   tab_options(column_labels.background.color = "#F2F2F2",
@@ -164,8 +166,8 @@ table1 <- mygtable(data_prep1, myfont) %>%
     )
   )%>% 
   cols_width(
-    category ~ pct(50),
-    c(2:7) ~ pct(50 / 6)  # ≈8.33% each
+    category ~ pct(first_column_width),
+    c(2:7) ~ pct((100-first_column_width) / 6)
   )
 
   
@@ -234,8 +236,8 @@ table2 <- mygtable(data_prep2, myfont) %>%
     )
   )%>% 
   cols_width(
-    category ~ pct(50),
-    c(2:7) ~ pct(50 / 6)  # ≈8.33% each
+    category ~ pct(first_column_width),
+    c(2:7) ~ pct((100-first_column_width) / 6)
   )
 
 
@@ -288,8 +290,8 @@ table3 <- mygtable(data_prep3, myfont) %>%
     )
   ) %>% 
   cols_width(
-    category ~ pct(50),
-    c(2:7) ~ pct(50 / 6)  # ≈8.33% each
+    category ~ pct(first_column_width),
+    c(2:7) ~ pct((100-first_column_width) / 6)
   )
 
 

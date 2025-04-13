@@ -15,8 +15,7 @@
 ```
 ::::
 
-<!-- class created in the css file for phone compatibility -->
-:::: {.chart-container}  
+:::: {.chart-container}
 ```{r chart_invest_av_type}
 #| file: R/chart_invest_av_type.R
 #| out.width: "100%"
