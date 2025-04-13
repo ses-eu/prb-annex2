@@ -351,8 +351,8 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 ::::: {#empty-div}
 :::::
 
-::::: {#table-erdelay-summary}
-```{r table-erdelay-summary}
+::::: {.chart-container}  
+```{r table_erdelay_summary}
 #| file: R/table_cap_erdelay_all_states.R
 #| out.width: "100%"
 ```
@@ -467,8 +467,8 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 ::::: {#empty-div}
 :::::
 
-::::: {#table-arrdelay-summary}
-```{r table-arrdelay-summary}
+::::: {.chart-container}  
+```{r table_arrdelay_summary}
 #| file: R/table_cap_arrdelay_all_states.R
 #| out.width: "100%"
 ```
