@@ -270,15 +270,15 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 ### En route ATFM delay (KPI#1)
 
 :::: {layout="[ 50, 50 ]"}
-::::: {#chart-cap-er}
-```{r chart-cap-er, options = (cztype=c("enroute"))}
+::::: {.chart-container}  
+```{r chart_cap_er, options = (cztype=c("enroute"))}
 #| file: R/chart_level1_cap.R
 #| out.width: "100%"
 ```
 :::::
 
-::::: {#chart-cap-er-month}
-```{r chart-cap-er-month, options = (cztype=c("enroute"))}
+::::: {.chart-container}  
+```{r chart_cap_er_month, options = (cztype=c("enroute"))}
 #| file: R/chart_level2_cap_month.R
 #| out.width: "100%"
 ```
@@ -291,9 +291,8 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 ::::: {#empty-div}
 :::::
 
-::::: {#chart-cap-delay-bin}
-
-```{r chart-cap-delay-bin}
+::::: {.chart-container}  
+```{r chart_level2_cap_delay_bin}
 #| file: R/chart_level2_cap_delay_bin.R
 #| out.width: "100%"
 ```
@@ -373,17 +372,17 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 
 :::: {layout="[ 50, 50 ]"}
 
-::::: {#chart-cap-atco}
-```{r chart-cap-atco}
+::::: {.chart-container}  
+```{r chart_cap_atco}
 #| file: R/chart_level2_cap_atco.R
 #| out.width: "100%"
 ```
 :::::
 
-::::: {#chart-cap-2}
+::::: {.chart-container}  
 <!-- for ses there is no graphic per acc -->
 `r if (params$country == "SES RP3") ":::::: {.content-hidden}"`
-```{r chart-cap-atco-acc}
+```{r chart_cap_atco_acc}
 #| file: R/chart_level2_cap_atco_acc.R
 #| out.width: "100%"
 ```
@@ -391,13 +390,12 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 
 <!-- so we replace it by thee sector opening hours -->
 `r if (params$country != "SES RP3") ":::::: {.content-hidden}"`
-```{r chart-cap-sector-opening-ses}
+```{r chart_cap-sector_opening_ses}
 #| file: R/chart_level2_cap_sector_opening.R
 #| out.width: "100%"
 ```
 `r if (params$country != "SES RP3") "::::::"`
 :::::
-
 ::::
 
 <!-- for ses this chart is now above, so we hide it here -->
@@ -408,13 +406,11 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 ::::: {#empty-div}
 :::::
 
-::::: {#chart-cap-sector-opening class="mychart"}
-
-```{r chart-cap-sector-opening}
+::::: {.chart-container}  
+```{r chart_cap_sector_opening}
 #| file: R/chart_level2_cap_sector_opening.R
 #| out.width: "100%"
 ```
-
 :::::
 ::::
 `r if (params$country == "SES RP3") "::::"`
@@ -445,15 +441,15 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 
 ::::: {layout="[ 50, 50 ]"}
 
-:::::: {#chart-cap-trm}
-```{r chart-cap-trm, options = (cztype=c("terminal"))}
+:::::: {.chart-container}  
+```{r chart_cap_trm, options = (cztype=c("terminal"))}
 #| file: R/chart_level1_cap.R
 #| out.width: "100%"
 ```
 ::::::
 
-:::::: {#chart-cap-trm-month}
-```{r chart-cap-trm-month, options = (cztype=c("terminal"))}
+:::::: {.chart-container}  
+```{r chart_cap_trm_month, options = (cztype=c("terminal"))}
 #| file: R/chart_level2_cap_month.R
 #| out.width: "100%"
 ```
@@ -512,9 +508,8 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 :::::: {#empty-div}
 ::::::
 
-:::::: {#chart-cap-all-causes-delay}
-
-```{r chart-cap-all-causes-delay}
+:::::: {.chart-container}  
+```{r chart_level2_cap_all_causes_delay}
 #| file: R/chart_level2_cap_all_causes_delay.R
 #| out.width: "100%"
 ```
@@ -566,9 +561,8 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 :::::: {#empty-div}
 ::::::
 
-:::::: {#chart-cap-all-causes-delay-ses}
-
-```{r chart-cap-all-causes-delay-ses}
+:::::: {.chart-container}  
+```{r chart_cap_all_causes_delay_ses}
 #| file: R/chart_level2_cap_all_causes_delay.R
 #| out.width: "100%"
 ```

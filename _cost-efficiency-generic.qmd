@@ -197,16 +197,16 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 :::: {layout="[ 50, 50 ]"}
 
-::::: {#chart-cef-duc}
+::::: {.chart-container}  
 `r if (params$country == "SES RP3" & cztype == "enroute") ":::::: {.content-hidden}"`
-```{r chart-cef-duc, options = (cz=c("@@cz_index@@", "@@cz_type@@","level2"))}
+```{r chart_cef_duc, options = (cz=c("@@cz_index@@", "@@cz_type@@","level2"))}
 #| file: R/chart_level1_cef.R
 #| out.width: "100%"
 ```
 `r if (params$country == "SES RP3" & cztype == "enroute") "::::::"`
 
 `r if (params$country != "SES RP3" | cztype == "terminal") ":::::: {.content-hidden}"`
-```{r chart-cef-duc-er-ses, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+```{r chart_cef_duc_er_ses, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level1_cef_er_ses.R
 #| out.width: "100%"
 ```
@@ -214,8 +214,8 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 :::::
 
-::::: {#chart-cef-su}
-```{r chart-cef-su, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+::::: {.chart-container}  
+```{r chart_cef_su, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_su.R
 #| out.width: "100%"
 ```
@@ -223,8 +223,8 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 ::::
 
 :::: {layout="[ 50, 50 ]"}
-::::: {#chart-cef-cost}
-```{r chart-cef-cost, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+::::: {.chart-container}  
+```{r chart_cef_cost, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_cost.R
 #| out.width: "100%"
 ```
@@ -248,16 +248,15 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 
 :::: {layout="[ 50, 50 ]"}
-
-::::: {#chart-cef-cost-entity}
-```{r chart-cef-cost-entity, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+::::: {.chart-container}  
+```{r chart_cef_cost_entity, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_cost_entity.R
 #| out.width: "100%"
 ```
 :::::
 
-::::: {#chart-cef-cost-main}
-```{r chart-cef-cost-main, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+::::: {.chart-container}  
+```{r chart_cef_cost_main, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_cost_main.R
 #| out.width: "100%"
 ```
@@ -308,32 +307,32 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 ### Actual unit cost incurred by the users (AUCU) (PI#1)
 
 :::: {layout="[ 50, 50 ]"}
-::::: {#chart-cef-aucu}
-```{r chart-cef-aucu, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+::::: {.chart-container}  
+```{r chart_cef_aucu, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_aucu.R
 #| out.width: "100%"
 ```
 :::::
 
 ::::: {#table-cef-aucu}
-```{r table-cef-aucu, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+```{r table_cef_aucu, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/table_level2_cef_aucu.R
 #| out.width: "100%"
 ```
 :::::
 ::::
 
-:::: {layout="[ 50, 50 ]"}
 
-::::: {#chart-cef-er-cex}
-```{r chart-cef-cex, R.options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+:::: {layout="[ 50, 50 ]"}
+::::: {.chart-container}  
+```{r chart_cef_cex, R.options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_cex.R
 #| out.width: "100%"
 ```
 :::::
 
-::::: {#table-cef-er-cex}
-```{r table-cef-cex, R.options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+::::: {#table_cef_er_cex}
+```{r table_cef_cex, R.options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/table_level2_cef_cex.R
 #| out.width: "100%"
 ```
@@ -357,15 +356,15 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 ### Regulatory result (RR)
 
 :::: {layout="[ 50, 50 ]"}
-::::: {#chart-cef-reg-res}
-```{r chart-cef-reg-res, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+::::: {.chart-container}  
+```{r chart_cef_reg_res, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_reg_res.R
 #| out.width: "100%"
 ```
 :::::
 
-::::: {#chart-cef-reg-res-aucu}
-```{r chart-cef-reg-res_aucu,  options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+::::: {.chart-container}  
+```{r chart_cef_reg_res_aucu,  options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_reg_res_aucu.R
 #| out.width: "100%"
 ```
@@ -373,15 +372,15 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 ::::
 
 :::: {layout="[ 50, 50 ]"}
-::::: {#chart-cef-reg-res-ansp}
-```{r chart-cef-reg-res-ansp, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+::::: {.chart-container}  
+```{r chart_cef_reg_res_ansp, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_reg_res_ansp.R
 #| out.width: "100%"
 ```
 :::::
 
-::::: {#chart-cef-reg-res-main-ansp}
-```{r chart-cef-net-res-main-ansp, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+::::: {.chart-container}  
+```{r chart_cef_net_res_main_ansp, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
 #| file: R/chart_level2_cef_net_res_main_ansp.R
 #| out.width: "100%"
 ```

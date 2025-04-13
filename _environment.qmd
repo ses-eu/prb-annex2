@@ -187,37 +187,32 @@ env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Find
 
 :::: {layout="[ 50, 50 ]"}
 
-::::: {#chart-env-kea}
-
+::::: {.chart-container}  
 ```{r chart-env-kea, options = (doclevel=c("level2"))}
 #| file: R/chart_level1_kea.R
 #| out.width: "50%"
 ```
 :::::
 
-::::: {#chart-env-kea-month}
-
+::::: {.chart-container}  
 ```{r chart-env-kea-month}
 #| file: R/chart_level2_kea_month.R
 #| out.width: "50%"
 ```
-
 :::::
 
 ::::
 
 :::: {layout="[ 50, 50 ]"}
 
-::::: {#chart-kep-scr}
+::::: {.chart-container}  
 ```{r chart-env-kep-scr}
 #| file: R/chart_level2_kep_scr.R
 #| out.width: "100%"
 ```
-
 :::::
 
-::::: {#chart-kep-scr-month}
-
+::::: {.chart-container}  
 ```{r chart-env-kep-scr-month}
 #| file: R/chart_level2_kep_scr_month.R
 #| out.width: "100%"
@@ -244,7 +239,7 @@ env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Find
 ::::: {#empty-div}
 :::::
 
-::::: {#chart-axot-asma}
+::::: {.chart-container}  
 ```{r chart-axot-asma-country}
 #| file: R/chart_level2_env_axot_asma_country.R
 #| out.width: "100%"
@@ -254,14 +249,14 @@ env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Find
 
 :::: {layout="[ 50, 50 ]"}
 
-::::: {#chart-axot}
+::::: {.chart-container}  
 ```{r chart-axot-apt}
 #| file: R/chart_level2_env_axot_apt.R
 #| out.width: "100%"
 ```
 :::::
 
-::::: {#chart-asma}
+::::: {.chart-container}  
 ```{r chart-asma-apt}
 #| file: R/chart_level2_env_asma_apt.R
 #| out.width: "100%"
@@ -291,14 +286,14 @@ env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Find
 
 :::: {layout="[ 50, 50 ]"}
 
-::::: {#chart-cdo-country}
+::::: {.chart-container}  
 ```{r chart-cdo-country}
 #| file: R/chart_level2_env_cdo_country.R
 #| out.width: "100%"
 ```
 :::::
 
-::::: {#chart-cdo-apt}
+::::: {.chart-container}  
 ```{r chart-cdo-apt}
 #| file: R/chart_level2_env_cdo_apt.R
 #| out.width: "100%"
@@ -341,7 +336,7 @@ env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Find
 ::::: {#empty-div}
 :::::
 
-::::: {#chart-ersa}
+::::: {.chart-container}  
 ```{r chart-ersa}
 #| file: R/chart_level2_env_ersa.R
 #| out.width: "100%"
@@ -351,14 +346,14 @@ env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Find
 
 :::: {layout="[ 50, 50 ]"}
 
-::::: {#chart-cdr}
+::::: {.chart-container}  
 ```{r chart-cdr}
 #| file: R/chart_level2_env_cdr.R
 #| out.width: "100%"
 ```
 :::::
 
-::::: {#chart-rsa}
+::::: {.chart-container}  
 ```{r chart-rsa}
 #| file: R/chart_level2_env_rsa.R
 #| out.width: "100%"

@@ -53,7 +53,7 @@ saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_
 ::::: {#empty-div}
 :::::
 
-::::: {#chart-saf}
+::::: {.chart-container}  
 `r if (params$country != "SES RP3") "::::: {.content-hidden}"`
 ```{r chart-saf-ansp}
 #| file: R/chart_level1_saf_ses.R
@@ -86,16 +86,15 @@ saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_
 ## Occurrences - Rate of runway incursions (RIs) (PI#1) & Rate of separation minima infringements (SMIs) (PI#2)
 
 :::: {layout="[ 50, 50 ]"}
-
-::::: {#chart-saf-ri}
-```{r chart-saf-ri}
+::::: {.chart-container}  
+```{r chart_saf_ri}
 #| file: R/chart_level2_saf_ri.R
 #| out.width: "100%"
 ```
 :::::
 
-::::: {#chart-saf-smi}
-```{r chart-saf-smi}
+::::: {.chart-container}  
+```{r chart_saf_smi}
 #| file: R/chart_level2_saf_smi.R
 #| out.width: "100%"
 ```
