@@ -85,15 +85,16 @@ data_prep <- rbind(data_prep_year, data_prep_total) %>%
   mutate(weights = if_else(is.na(split_flag), 1L, if_else(split_flag, 2L, 1L))) %>%
   uncount(weights) %>%
   group_by(year) %>%
-  mutate(value = if (n() == 2) c(0.05, first(value) - 0.05) else first(value)) %>%
+  mutate(value = if (n() == 2) c(0.05, first(value) - 0.05) else first(value)) %>% 
+  mutate(type = case_when(
+           row_number() == 1 & value >0 ~ "Overspending < 5%",
+           row_number() > 1 & value > 0 ~ "Overspending > 5%",
+           value < 0 ~ "Underspending"
+         )
+  ) %>%
   ungroup() %>%
   select(-split_flag) %>% 
   mutate(
-    type = case_when(
-      value > 0.05 ~ "Overspending > 5%",
-      value <= 0.05 & value >=0 ~ "Overspending < 5%",
-      value < 0 ~ "Underspending"
-    ),
     mymetric = round(value*100,1),
     myothermetric = 5,
     textlabel = if_else(mymetric == 0, "", paste0(format(mymetric, nsmall = 0), "%"))
