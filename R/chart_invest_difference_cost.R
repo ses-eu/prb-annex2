@@ -1,5 +1,5 @@
 if (!exists("country")) {country <- "Bulgaria"}
-if (!exists("cost_type")) {cost_type <- "terminal"}
+if (!exists("cost_type")) {cost_type <- "enroute"}
 
 # source("R/parameters.R")
 
@@ -180,13 +180,56 @@ myplot <- mybarchart2(data_prep,
         zerolinewidth = 1
     )
   ) %>% 
+  ## to force the legend
+  add_trace(
+    data = data_prep,
+    x = ~xlabel,
+    y = 0,
+    # mode = "lines+markers",
+    type = "bar",
+    name = "Underspending",                   
+    hoverinfo = "skip",
+    marker = list(color = '#044598'),
+    textposition = "none",
+    # textfont = list(color = "transparent", size = 1),
+    showlegend = TRUE,
+    inherit = FALSE
+  ) %>% 
+  add_trace(
+    data = data_prep,
+    x = ~xlabel,
+    y = 0,
+    # mode = "lines+markers",
+    type = "bar",
+    name = "Overspending < 5%",                   
+    hoverinfo = "skip",
+    marker = list(color = '#22A0DD'),
+    textposition = "none",
+    # textfont = list(color = "transparent", size = 1),
+    showlegend = TRUE,
+    inherit = FALSE
+  ) %>% 
+  add_trace(
+    data = data_prep,
+    x = ~xlabel,
+    y = 0,
+    # mode = "lines+markers",
+    type = "bar",
+    name = "Overspending > 5%",                   
+    hoverinfo = "skip",
+    marker = list(color = '#58595B'),
+    textposition = "none",
+    # textfont = list(color = "transparent", size = 1),
+    showlegend = TRUE,
+    inherit = FALSE
+  ) %>% 
   add_trace(
     data = data_prep,
     x = ~xlabel,
     y = ~myothermetric,
     mode = "lines+markers",
     type = "scatter",
-    name = " ",                   # Suppresses label row
+    name = "Threshold",                  
     hoverinfo = "skip",
     line = list(
       color = '#FF0000',
@@ -199,41 +242,43 @@ myplot <- mybarchart2(data_prep,
     ),
     textposition = "none",
     textfont = list(color = "transparent", size = 1),
-    showlegend = FALSE,
+    showlegend = TRUE,
     inherit = FALSE
   )
+
+myplot
 
 
 # force all legend items to appear
 
-add_fake_legend_split <- function(p, labels, colors, x = 0.07, y = -0.17, spacing = 0.28, font_size = myfont) {
-  for (i in seq_along(labels)) {
-    # Colored square
-    p <- p %>%
-      add_annotations(
-        x = x + (i - 1) * spacing, y = y,
-        text = "▇",
-        xref = "paper", yref = "paper",
-        xanchor = "left", yanchor = "middle",
-        showarrow = FALSE,
-        font = list(size = font_size, color = colors[i])
-      ) %>%
-      # Text label (default Plotly font color)
-      add_annotations(
-        x = x + (i - 1) * spacing + 0.04,
-        y = y,
-        text = labels[i],
-        xref = "paper", yref = "paper",
-        xanchor = "left", yanchor = "middle",
-        showarrow = FALSE,
-        font = list(size = font_size, color = "#444")
-      )
-  }
-  p
-}
-
-p <- myplot %>%
-  layout(showlegend = FALSE) %>%  # hide real legend
-  add_fake_legend_split(labels = mylocalfactor, colors = mylocalcolors)
-p
+# add_fake_legend_split <- function(p, labels, colors, x = 0.07, y = -0.17, spacing = 0.28, font_size = myfont) {
+#   for (i in seq_along(labels)) {
+#     # Colored square
+#     p <- p %>%
+#       add_annotations(
+#         x = x + (i - 1) * spacing, y = y,
+#         text = "▇",
+#         xref = "paper", yref = "paper",
+#         xanchor = "left", yanchor = "middle",
+#         showarrow = FALSE,
+#         font = list(size = font_size, color = colors[i])
+#       ) %>%
+#       # Text label (default Plotly font color)
+#       add_annotations(
+#         x = x + (i - 1) * spacing + 0.04,
+#         y = y,
+#         text = labels[i],
+#         xref = "paper", yref = "paper",
+#         xanchor = "left", yanchor = "middle",
+#         showarrow = FALSE,
+#         font = list(size = font_size, color = "#444")
+#       )
+#   }
+#   p
+# }
+# 
+# p <- myplot %>%
+#   layout(showlegend = FALSE) %>%  # hide real legend
+#   add_fake_legend_split(labels = mylocalfactor, colors = mylocalcolors)
+# p
 
