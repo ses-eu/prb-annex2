@@ -31,6 +31,9 @@ params:
   main_ansp_aua:  $main_ansp_aua
   other_ansps_str: $other_ansps_str
   other_met_str:  $other_met_str
+  no_saf_ansps:   $no_saf_ansps
+  main_safety_ansp: $main_safety_ansp
+
   # yearly_xrates:  $yearly_xrates
   
   mywidth:        $mywidth
@@ -148,6 +151,9 @@ main_ansp <- params$main_ansp
 main_ansp_aua <- params$main_ansp_aua
 other_ansps_str <- params$other_ansps_str
 other_met_str <- params$other_met_str
+no_saf_ansps <- params$no_saf_ansps
+main_safety_ansp <- params$main_safety_ansp
+
 # yearly_xrates <- params$yearly_xrates
 
 cap_file <- params$cap_file

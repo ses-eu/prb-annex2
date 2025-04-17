@@ -16,14 +16,16 @@ data_raw_eosm  <-  read_xlsx(
   clean_names() 
 
 # prepare data ----
-
 data_prep_eosm <- data_raw_eosm %>% 
   filter(
     ms == country,
   ) %>% 
   select(
     ms, entity_name, year, eo_sm_score
-  ) 
+  ) %>% 
+  arrange(
+    entity_name, year
+  )
 
 data_prep_maturity <- data_raw_maturity %>% 
   filter(
@@ -49,16 +51,15 @@ data_prep_maturity <- data_raw_maturity %>%
       .default = as.character(score)
      )
   )
-  
-  main_safety_ansp <- data_prep_maturity %>% filter(year == year_report) |> 
-    select(entity_name) |>  unique() %>% pull()   
+
+ansp_name <- saf_ansps[2,1]
 
 # plot chart ----
-myc <-  function(mywidth, myheight, myfont, mymargin) {
+myc <-  function(width = NA, height, fontsize = myfont, margin = 70, ansp_name = main_safety_ansp) {
     plot_ly(
-      data = data_prep_maturity,
-      width = mywidth,
-      height = myheight,
+      data = filter(data_prep_maturity, tolower(entity_name) == tolower(ansp_name)),
+      width = width,
+      height = height,
       x = ~ year,
       y = ~ score,
       yaxis = "y1",
@@ -79,7 +80,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
     ) %>%
     add_trace(
       inherit = FALSE,
-      data = filter(data_prep_eosm, year<= year_report),
+      data = filter(data_prep_eosm, year<= year_report & tolower(entity_name) == tolower(ansp_name)),
       x = ~ year,
       y = ~ eo_sm_score,
       yaxis = "y2",
@@ -96,7 +97,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
     ) %>%
     add_trace(
       inherit = FALSE,
-      data = data_prep_eosm,
+      data = filter(data_prep_eosm, tolower(entity_name) == tolower(ansp_name)),
       x = ~ year,
       y = 60,
       yaxis = "y1",
@@ -109,7 +110,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
     ) %>%
     add_trace(
       inherit = FALSE,
-      data = data_prep_eosm,
+      data = filter(data_prep_eosm, tolower(entity_name) == tolower(ansp_name)),
       x = ~ year,
       y = 80,
       yaxis = "y1",
@@ -137,7 +138,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
     ) %>%
     add_trace (
       inherit = FALSE,
-      data = data_prep_eosm,
+      data = filter(data_prep_eosm, tolower(entity_name) == tolower(ansp_name)),
       x =  ~ year,
       y = 60,
       yaxis = "y1",
@@ -160,7 +161,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
                      xanchor = "right",
                      align = "right",
                      # textangle = -90,
-                     font = list(color = '#FF0000', size = myfont)
+                     font = list(color = '#FF0000', size = fontsize)
     ) %>% 
     config( responsive = TRUE,
             displaylogo = FALSE,
@@ -169,7 +170,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
     ) %>% 
     layout(
       font = list(family = "Roboto"),
-      title = list(text=paste0("EoSM - ", main_safety_ansp),
+      title = list(text=paste0("EoSM - ", ansp_name),
                    y = mytitle_y, 
                    x = mytitle_x, 
                    xanchor = mytitle_xanchor, 
@@ -190,7 +191,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
                    # tickcolor = 'rgb(127,127,127)',
                    # ticks = 'outside',
                    zeroline = TRUE,
-                   tickfont = list(size = myfont)
+                   tickfont = list(size = fontsize)
       ),
       yaxis = list(title = "Minimum maturity level",
                    # gridcolor = 'rgb(255,255,255)',
@@ -204,9 +205,9 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
                    tickvals = c(20, 40, 60, 80),
                    ticktext = c("A  ", "B  ", "C  ", "D  "),
                    zerolinecolor = 'rgb(240,240,240)',
-                   titlefont = list(size = myfont), 
+                   titlefont = list(size = fontsize), 
                    # showticklabels = FALSE
-                   tickfont = list(size = myfont, color = 'black')
+                   tickfont = list(size = fontsize, color = 'black')
       ),
       yaxis2 = list(title = "EoSM score",
                    overlaying = "y",
@@ -219,7 +220,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
                    range = list(0,113),
                    zeroline = TRUE,
                    zerolinecolor = 'rgb(255,255,255)',
-                   titlefont = list(size = myfont), tickfont = list(size = myfont)
+                   titlefont = list(size = fontsize), tickfont = list(size = fontsize)
       ),
       # showlegend = FALSE
       legend = list(
@@ -229,19 +230,19 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
         y =-0.1,
         font = list(size = myfont*0.95)
       ),
-      margin = list(t = mymargin/2, r = mymargin)
+      margin = list(t = margin/2, r = margin)
   )
   
 }
 
-if (doclevel == "level1") {
-  myc(NA, 320, 14, 70)
-} else {
-  if (knitr::is_latex_output()) {
-    myc(NA, 290, 12.5, 70)
-    
-    } else {
-    myc(NA, 320, 14, 70)
-  }
+if (knitr::is_latex_output()) {
+  myc(NA, 290, 12.5, 70)
+  
+  } else {
+    chart_params <- saf_ansps %>% 
+      mutate(height = 320)
+
+    mycharts <- pmap(chart_params, myc)
 }
+
 

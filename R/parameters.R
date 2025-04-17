@@ -115,6 +115,15 @@
     pp_version <- state_parameters %>% select(pp_adoption_full) %>% pull()
 
   ## aua entity for capacity  ----
+  saf_ansps <- saf_ansp_table %>% filter(country_name == .env$country) %>% 
+      filter(year >= year_report) %>% 
+      filter(year == min(year)) %>% select(ansp_name, main)
+    
+  no_saf_ansps <- nrow(saf_ansps)
+  main_safety_ansp <- saf_ansps %>% filter(main ==1) %>% select(ansp_name) %>% pull ()
+  saf_ansps <- saf_ansps %>% select(ansp_name)
+    
+  ## aua entity for capacity  ----
   aua_entities <- aua_entities_table %>% filter(state == .env$country) 
     main_ansp_aua <- aua_entities %>%  filter(year == .env$year_report) %>% select(ansp_name) %>% pull()
 

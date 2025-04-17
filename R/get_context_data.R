@@ -22,6 +22,9 @@ context_data_table <- read_mytable("context_data.xlsx", "context", "Table_contex
 
 other_orgs_table <- read_mytable("Lists.xlsx", "Lists", "Table_PP_2023_ANSPs") %>%  clean_names()
 
+saf_ansp_table <- read_mytable("Lists.xlsx", "Lists", "Table_SAF_ANSP") %>% clean_names()
+
+
 ## ceff raw data ----
 # data_raw_t1_ert  <-  read_xlsx(
 #   paste0(data_folder, "CEFF dataset master.xlsx"),
