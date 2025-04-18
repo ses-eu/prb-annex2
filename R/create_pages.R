@@ -473,6 +473,7 @@ if (out_format == 'web') {
                                               
                                               no_saf_ansps = no_saf_ansps,
                                               main_safety_ansp = main_safety_ansp,
+                                              saf_ansps = saf_ansps,
                                               
                                               # yearly_xrates = yearly_xrates,
                                               

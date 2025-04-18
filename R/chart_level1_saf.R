@@ -52,8 +52,6 @@ data_prep_maturity <- data_raw_maturity %>%
      )
   )
 
-ansp_name <- saf_ansps[2,1]
-
 # plot chart ----
 myc <-  function(width = NA, height, fontsize = myfont, margin = 70, ansp_name = main_safety_ansp) {
     plot_ly(
@@ -239,7 +237,8 @@ if (knitr::is_latex_output()) {
   myc(NA, 290, 12.5, 70)
   
   } else {
-    chart_params <- saf_ansps %>% 
+    chart_params <- as_tibble(saf_ansps) %>% 
+      rename(ansp_name = value) %>% 
       mutate(height = 320)
 
     mycharts <- pmap(chart_params, myc)

@@ -121,7 +121,7 @@
     
   no_saf_ansps <- nrow(saf_ansps)
   main_safety_ansp <- saf_ansps %>% filter(main ==1) %>% select(ansp_name) %>% pull ()
-  saf_ansps <- saf_ansps %>% select(ansp_name)
+  saf_ansps <- saf_ansps %>% select(ansp_name) %>% pull()
     
   ## aua entity for capacity  ----
   aua_entities <- aua_entities_table %>% filter(state == .env$country) 

@@ -1,0 +1,112 @@
+```{r saf-level2-text}
+# define ranges and import data
+if (params$country == "SES RP3") {
+  saf_text <- ""
+  
+} else {
+  sheet <- country
+  
+  range <- "A15:G30"
+  saf_all <- read_range(saf_eosm_file, sheet, range) 
+  saf_all <- saf_all |> 
+      rename(a = 1) 
+  
+  # replace NAs by empty strings
+  saf_all[is.na(saf_all)] <- ""
+  
+  #define titles to lookup
+  saf_titles <- c("Observations",
+                  "**Observations**"
+  )
+  
+  saf_heading_positions <- which(saf_all$a %in% saf_titles)
+  
+  saf_text <- saf_all[(saf_heading_positions[1]+1):(saf_heading_positions[1]+1), 1]
+}
+
+```
+::: {.grid .align-items-center}
+:::: {.g-col-9}
+[Safety - {{< var doc.country >}}]{.fakeh1}
+::::
+
+:::: {.g-col-3}
+<span class="no-external-icon">[<i class="fa fa-download"></i> Download Report](`r params$home_address`/download/{{< var doc.year_report >}}/PRB-Annual-Monitoring-Report_{{< var doc.country >}}_{{< var doc.year_report >}}.pdf){.btn .btn-light .text-dark .border .bg-secondary-subtle .rounded}
+</span>
+::::
+:::
+
+
+## PRB monitoring
+```{r concl-saf}
+saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_safety")
+```
+
+`r saf_conc1`
+
+::: {#container-saf-indicators}
+
+`r if_else(params$country == "SES RP3", "## Actual versus planned number of ANSPs achieving the level of the EoSM targets for RP3 ahead of 2024", "## Effectiveness of Safety Management (EoSM) (KPI#1)")`
+
+:::: {layout="[ 20, 60, 20 ]"}
+
+::::: {#empty-div}
+:::::
+
+::::: {.chart-container}  
+`r if (params$country != "SES RP3") "::::: {.content-hidden}"`
+```{r chart-saf-ansp}
+#| file: R/chart_level1_saf_ses.R
+#| out.width: "100%"
+```
+`r if (params$country != "SES RP3") ":::::"`
+
+`r if (params$country == "SES RP3") "::::: {.content-hidden}"`
+```{r chart-saf-eosm}
+#| file: R/chart_level1_saf.R
+#| out.width: "100%"
+```
+`r if (params$country == "SES RP3") ":::::"`
+:::::
+::::
+
+`r if (params$country == "SES RP3") ":::: {.content-hidden}"`
+:::: {.callout-note collapse=true}
+
+#### Focus on EoSM
+
+`r saf_text`
+
+::::
+`r if (params$country == "SES RP3") "::::"`
+
+
+`r if (params$country == "MUAC") ":::: {.content-hidden}"`
+
+## Occurrences - Rate of runway incursions (RIs) (PI#1) & Rate of separation minima infringements (SMIs) (PI#2)
+
+:::: {layout="[ 50, 50 ]"}
+::::: {.chart-container}  
+```{r chart_saf_ri}
+#| file: R/chart_level2_saf_ri.R
+#| out.width: "100%"
+```
+:::::
+
+::::: {.chart-container}  
+```{r chart_saf_smi}
+#| file: R/chart_level2_saf_smi.R
+#| out.width: "100%"
+```
+:::::
+
+::::
+
+`r if (params$country == "MUAC") "::::"`
+
+:::
+
+
+
+
+

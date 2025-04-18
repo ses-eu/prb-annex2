@@ -1058,6 +1058,138 @@ add_line_trace2 <- function(
     )
 }
 
+## better plot horizontal barchart  ----
+myhbarc2 <-  function(df, 
+                      width = mywidth,
+                      height = myheight, 
+
+                      font = myfont,
+                      decimals = mydecimals,
+                      suffix = mysuffix,
+                      
+                      local_factor = NA,
+                      
+                      mybarcolor_pos = 'green',
+                      mybarcolor_neg = 'red',
+                      
+                      textangle = 0,
+                      textposition = "auto", 
+                      textfont_color = mytextfont_color,
+                      textfont_size = mytextfont_size,
+
+                      hovertemplate = myhovertemplate,
+                      showlegend = mytrace_showlegend,
+                      
+                      minsize = myminsize,
+                      family = myfont_family,
+                      
+                      title_text = "Chart title",
+                      title_x = mytitle_x,
+                      title_y = mytitle_y,
+                      title_xanchor = mytitle_xanchor, 
+                      title_yanchor = mytitle_yanchor,
+                      title_font_size = mytitle_font_size,
+                      
+                      bargap = 0.25,
+                      barmode = 'stack',
+                      hovermode = "y",
+
+                      xaxis_title = "",
+                      xaxis_titlefont_size = myfont,
+                      xaxis_showgrid = FALSE,
+                      xaxis_showline = FALSE,
+                      xaxis_fixedrange = TRUE,
+                      xaxis_showticklabels = myxaxis_showticklabels,
+                      xaxis_ticksuffix = "",
+                      xaxis_tickformat = myxaxis_tickformat,
+                      xaxis_zeroline = TRUE, 
+                      xaxis_tickfont_size = myxaxis_tickfont_size,
+                      xaxis_tickangle = NULL,
+                      
+                      yaxis_title = "",
+                      yaxis_gridcolor = myyaxis_gridcolor,
+                      yaxis_showgrid = FALSE,
+                      yaxis_showline = FALSE,
+                      yaxis_showticklabels = TRUE,
+                      yaxis_tickformat = myyaxis_tickformat,
+                      yaxis_zeroline = myyaxis_zeroline,
+                      yaxis_zerolinecolor = myyaxis_zerolinecolor,
+                      yaxis_titlefont_size = myyaxis_titlefont_size, 
+                      yaxis_tickfont_size = myyaxis_tickfont_size, 
+                      yaxis_standoff = NA,
+                      
+                      margin = mymargin) {
+  df %>%
+    plot_ly(
+      width = width,
+      height = height,
+      x = ~ round(mymetric, decimals),
+      y = ~ factor(ylabel, levels = local_factor),
+      yaxis = "y1",
+      marker = list(color = ~ifelse(mymetric>=0, mybarcolor_pos, mybarcolor_neg)),
+      text = ~ mylabel,
+      textangle = textangle,
+      textposition = textposition,
+      cliponaxis = FALSE,
+      orientation = 'h',
+      textfont = list(color = textfont_color, size = textfont_size),
+      type = "bar",
+      hovertemplate = hovertemplate,
+      # hoverinfo = "none",
+      showlegend = showlegend
+    ) %>%
+    config(responsive = TRUE,
+            displaylogo = FALSE,
+            displayModeBar = F
+            # modeBarButtons = list(list("toImage")),
+    ) %>%
+    layout(
+      font = list(family = "Roboto"),
+      title = list(text = title_text,
+                   y = title_x ,
+                   x = title_y,
+                   xanchor = title_xanchor,
+                   yanchor =  title_yanchor,
+                   font = list(size = title_font_size)
+      ),
+      dragmode = FALSE,
+      bargap = bargap,
+      barmode = barmode,
+      hovermode = hovermode,
+      hoverlabel=list(bgcolor="rgba(255,255,255,0.88)"),
+      yaxis = list(title = yaxis_title,
+                   titlefont = list(size = yaxis_titlefont_size), 
+                   gridcolor = yaxis_gridcolor,
+                   showgrid = yaxis_showgrid,
+                   showline = yaxis_showline,
+                   showticklabels = yaxis_showticklabels,
+                   zeroline = yaxis_zeroline,
+                   tickfont = list(size = yaxis_tickfont_size)
+      ),
+      xaxis = list(title = xaxis_title,
+                   # automargin = T,
+                   # gridcolor = 'rgb(255,255,255)',
+                   showgrid = xaxis_showgrid,
+                   showline = xaxis_showline,
+                   # tickprefix = if_else(" ",
+                   ticksuffix = xaxis_ticksuffix,
+                   fixedrange = xaxis_fixedrange,
+                   tickformat = xaxis_tickformat,
+                   showticklabels = xaxis_showticklabels,
+                   # tickcolor = 'rgb(127,127,127)',
+                   # ticks = 'outside',
+                   zeroline = xaxis_zeroline,
+                   zerolinecolor = 'rgb(225,225,225)',
+                   titlefont = list(size = xaxis_titlefont_size), 
+                   tickfont = list(size = xaxis_tickfont_size)
+      ),
+      margin = margin
+      
+    )
+}
+
+
+
 ## plot horizontal barchart  ----
 myhbarc <-  function(mywidth, myheight, myfont, mymargin) {
   data_prep %>%
