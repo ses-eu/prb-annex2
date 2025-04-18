@@ -141,6 +141,31 @@ mycharts[[4]]
 `r if (params$country == "SES RP3" | params$no_saf_ansps != 4) "::::"`
 
 
+`r if (params$country != "SES RP3") ":::: {.content-hidden}"`
+```{r chart_level2_saf_eosm_ses_allstates, eval= params$country == "SES RP3"}
+#| file: R/chart_level2_saf_eosm_ses_allstates.R
+#| out.width: "100%"
+```
+
+::::: {layout="[ 50, 50 ]"}
+
+:::::: {.chart-container}  
+```{r chart_level2_saf_eosm_count_ses, eval= params$country == "SES RP3"}
+#| file: R/chart_level2_saf_eosm_count_ses.R
+#| out.width: "100%"
+```
+:::::: 
+
+:::::: {.chart-container}  
+```{r chart_level2_saf_maturity_count_ses, eval= params$country == "SES RP3"}
+#| file: R/chart_level2_saf_maturity_count_ses.R
+#| out.width: "100%"
+```
+:::::: 
+:::::
+
+`r if (params$country != "SES RP3") "::::"`
+
 
 `r if (params$country == "SES RP3") ":::: {.content-hidden}"`
 :::: {.callout-note collapse=true}
@@ -166,19 +191,32 @@ mycharts[[4]]
 :::::
 
 ::::: {.chart-container}  
-```{r chart_level2_saf_ri_year_report, eval= (params$country != "MUAC") & (params$country != "SES RP3"), options = (safindicator=c("ri"))}
+```{r chart_level2_saf_ri_year_report, eval= (params$country != "MUAC"), options = (safindicator=c("ri"))}
 #| file: R/chart_level2_saf_ri_smi_year_report.R
 #| out.width: "100%"
 ```
 :::::
 ::::
 
+`r if (params$country != "SES RP3") ":::: {.content-hidden}"`
+```{r chart_level2_saf_ri_per_state_ses, eval= (params$country == "SES RP3")}
+#| file: R/chart_level2_saf_ri_per_state_ses.R
+#| out.width: "100%"
+```
+
+```{r table_level2_saf_ri_apt_ses, eval= (params$country == "SES RP3")}
+#| file: R/table_level2_saf_ri_apt_ses.R
+#| out.width: "100%"
+```
+`r if (params$country != "SES RP3") "::::"`
+
+
 :::: {layout="[ 20, 60, 20 ]"}
 ::::: {#emptydiv}  
 :::::
 
 ::::: {.chart-container}  
-```{r table_level2_saf_ri_apt, eval= params$country != "MUAC"}
+```{r table_level2_saf_ri_apt, eval= (params$country != "MUAC") & (params$country != "SES RP3")}
 #| file: R/table_level2_saf_ri_apt.R
 #| out.width: "100%"
 ```
@@ -188,28 +226,33 @@ mycharts[[4]]
 :::::
 ::::
 
+`r if (params$country == "MUAC") "::::"`
+
 ## Rate of separation minima infringements (SMIs) (PI#2)
 
 :::: {layout="[ 40, 60 ]"}
 ::::: {.chart-container}  
-```{r chart_saf_smi, eval= params$country != "MUAC"}
+```{r chart_saf_smi}
 #| file: R/chart_level2_saf_smi.R
 #| out.width: "100%"
 ```
 :::::
 
 ::::: {.chart-container}  
-```{r chart_level2_saf_smi_year_report, eval= (params$country != "MUAC") & (params$country != "SES RP3"), options = (safindicator=c("smi"))}
+```{r chart_level2_saf_smi_year_report, options = (safindicator=c("smi"))}
 #| file: R/chart_level2_saf_ri_smi_year_report.R
 #| out.width: "100%"
 ```
 :::::
 ::::
 
-```{r table_level2_saf_smi_ansp, eval= params$country != "MUAC"}
+```{r table_level2_saf_smi_ansp}
 #| file: R/table_level2_saf_smi_ansp.R
 #| out.width: "100%"
 ```
+
+
+`r if (params$country == "SES RP3") ":::: {.content-hidden}"`
 
 ## Quality of occurences reporting 
 
@@ -218,7 +261,7 @@ mycharts[[4]]
 :::::
 
 ::::: {.chart-container}  
-```{r table_level2_saf_autotools, eval= params$country != "MUAC"}
+```{r table_level2_saf_autotools, eval= (params$country != "MUAC") & (params$country != "SES RP3")}
 #| file: R/table_level2_saf_autotools.R
 #| out.width: "100%"
 ```
@@ -228,8 +271,7 @@ mycharts[[4]]
 :::::
 ::::
 
-
-`r if (params$country == "MUAC") "::::"`
+`r if (params$country == "SES RP3") "::::"`
 
 :::
 

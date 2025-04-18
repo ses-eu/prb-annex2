@@ -1,49 +1,41 @@
-if (exists("country") == FALSE) {country <- "Bulgaria"}
+if (exists("country") == FALSE) {country <- "SES RP3"}
 
 # source("R/parameters.R")
 
 # import data  ----
-data_raw_maturity  <-  read_xlsx(
-  paste0(data_folder, "SAF EoSM.xlsx"),
-  sheet = "A>P",
+data_raw  <-  read_xlsx(
+  paste0(data_folder, "SES file.xlsx"),
+  sheet = "EoSM target #ANSPs",
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
   clean_names() 
 
 # process data  ----
-data_prep <- data_raw_maturity %>% 
+data_prep <- data_raw %>% 
+  filter(year == year_report) %>% 
   select(
-    - c(ms, entity, reference_period, ansp_meeting_targets_yearly)
+    - c(state)
   ) %>% 
-  pivot_longer(-c(entity_name, year), names_to = "type", values_to = "score") %>%  
-  separate_wider_delim(type, delim = "_", names = c("status", "type"),
-                       too_many = "merge") %>% 
-  mutate(type = str_replace_all(type, "_", " "),
-         type = str_to_sentence(type)
-  ) %>% 
-  filter(status == "actual",
-         year == year_report) %>% 
-  group_by(type, score) %>% 
-  summarise(ansp_count = n(), .groups = "drop") %>%
   mutate(
-    score_text = case_when (
-      score == 80 ~ 'D',
-      score == 60 ~ 'C',
-      score == 40 ~ 'B',
-      score == 20 ~ 'A',
-      .default = as.character(score)
+    xlabel = case_when (
+      management_objectives == "Safety culture" ~ "Culture",
+      management_objectives == "Safety policy & objectives" ~ "Policy\n& objectives",
+      management_objectives == "Safety risk management" ~ "Risk\nmanagement",
+      management_objectives == "Safety assurance" ~ "Assurance",
+      management_objectives == "Safety promotion" ~ "Promotion"
     ),
-    type = factor (type, levels = c("Culture",
-                                    "Policy and objectives",
-                                    "Risk management",
-                                    "Assurance",
-                                    "Promotion")
-                   )
+    xlabel = factor (xlabel, levels = c(
+      "Culture",
+      "Policy\n& objectives",
+      "Risk\nmanagement",
+      "Assurance",
+      "Promotion")
+    ),
   ) %>% 
   select(
-    xlabel = type,
-    type = score_text,
-    mymetric = ansp_count
+    xlabel,
+    type = level,
+    mymetric = number_of_ans_ps
   ) 
 
 # chart ----
@@ -97,6 +89,7 @@ myplot <- mybarchart2(data_prep,
                       title_text = "",
                       title_y = 0.99,
                       
+                      xaxis_tickfont_size = myfont ,
                       yaxis_title = "Number of ANSPs",
                       yaxis_ticksuffix = local_suffix,
                       yaxis_tickformat = "",
@@ -111,7 +104,7 @@ myplot <- mybarchart2(data_prep,
     showlegend = TRUE,
     yaxis = list(
       showticklabels = FALSE,
-      range = c (0,20)
+      range = c (0,30)
     )
   ) %>% 
   # to force full legend

@@ -36,14 +36,13 @@ data_prep_maturity <- data_raw_maturity %>%
          year == year_report) %>% 
   mutate(group = if_else(type == "Risk management", "Risk management", "All other components")) %>% 
   group_by(entity_name, group) %>% 
-  summarise(score = mean(score), .groups = "drop") %>%
-### Dario to provide calculation method!!!!
+  summarise(score = min(score, na.rm = TRUE), .groups = "drop") %>%
   mutate(
     score_text = case_when (
-      score >= 75 ~ 'D',
-      score >= 55 ~ 'C',
-      score >= 35 ~ 'B',
-      score >= 15 ~ 'A',
+      score == 80 ~ 'D',
+      score == 60 ~ 'C',
+      score == 40 ~ 'B',
+      score == 20 ~ 'A',
       .default = as.character(score)
      )
   )
@@ -206,7 +205,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
                    # tickcolor = 'rgb(127,127,127)',
                    # ticks = 'outside',
                    zeroline = TRUE,
-                   tickfont = list(size = myfont),
+                   tickfont = list(size = myfont-1),
                    tickangle = -90
       ),
       yaxis = list(
@@ -257,13 +256,13 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
 }
 
 if (doclevel == "level1") {
-  myc(NA, 400, 14, 70)
+  myc(NA, 420, 14, 70)
 } else {
   if (knitr::is_latex_output()) {
     myc(NA, 290, 12.5, 70)
     
     } else {
-    myc(NA, 400, 14, 70)
+    myc(NA, 420, 14, 70)
   }
 }
 

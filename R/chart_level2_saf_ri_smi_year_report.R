@@ -7,74 +7,153 @@ if (!exists("safindicator")) {safindicator <- "smi"}
 
 # import data  ----
 if (safindicator == "ri") {
-  data_raw  <-  read_xlsx(
-    paste0(data_folder, "SAF EoSM.xlsx"),
-    # here("data","hlsr2021_data.xlsx"),
-    sheet = "RI - occurrences",
-    range = cell_limits(c(1, 1), c(NA, NA))) %>%
-    as_tibble() %>% 
-    clean_names() %>% 
-    mutate(
-      main_indicator = number_of_ri,
-      main_indicator_ans = number_of_ri_with_ans_contribution
-    )
+  ## ri ----
+  if (country != "SES RP3"){
+    ## state ----
+    data_raw  <-  read_xlsx(
+      paste0(data_folder, "SAF EoSM.xlsx"),
+      # here("data","hlsr2021_data.xlsx"),
+      sheet = "RI - occurrences",
+      range = cell_limits(c(1, 1), c(NA, NA))) %>%
+      as_tibble() %>% 
+      clean_names() %>% 
+      mutate(
+        main_indicator = number_of_ri,
+        main_indicator_ans = number_of_ri_with_ans_contribution
+      )
+  } else {
+    ## ses ----
+    data_raw  <-  read_xlsx(
+      paste0(data_folder, "SES file.xlsx"),
+      # here("data","hlsr2021_data.xlsx"),
+      sheet = "RI SES variation",
+      range = cell_limits(c(1, 1), c(NA, NA))) %>%
+      as_tibble() %>% 
+      clean_names() %>% 
+      mutate(
+        field = str_remove_all(field, " RI")
+          )
+        
+  }
   
-  } else if (safindicator == "smi") {
-  data_raw  <-  read_xlsx(
-    paste0(data_folder, "SAF EoSM.xlsx"),
-    # here("data","hlsr2021_data.xlsx"),
-    sheet = "SMI - occurrences",
-    range = cell_limits(c(1, 1), c(NA, NA))) %>%
-    as_tibble() %>% 
-    clean_names() %>% 
-    mutate(
-      main_indicator = number_of_smi,
-      main_indicator_ans = number_of_smi_with_ans_contribution
-    )
+} else if (safindicator == "smi") {
+  ## smi ----
+  if (country != "SES RP3"){
+    ## state ----
+      data_raw  <-  read_xlsx(
+        paste0(data_folder, "SAF EoSM.xlsx"),
+        sheet = "SMI - occurrences",
+        range = cell_limits(c(1, 1), c(NA, NA))) %>%
+        as_tibble() %>% 
+        clean_names() %>% 
+        mutate(
+          main_indicator = number_of_smi,
+          main_indicator_ans = number_of_smi_with_ans_contribution
+        )
+  } else {
+    data_raw  <-  read_xlsx(
+      paste0(data_folder, "SES file.xlsx"),
+      # here("data","hlsr2021_data.xlsx"),
+      sheet = "SMI SES variation",
+      range = cell_limits(c(1, 1), c(NA, NA))) %>%
+      as_tibble() %>% 
+      clean_names() %>% 
+      mutate(
+        field = str_remove_all(field, " SMI")
+      )    
+  }
 }
 
 # process data  ----
-data_calc <- data_raw %>% 
-  filter(state == .env$country) %>% 
-  arrange(year) %>% 
-  mutate(
-    variation_perc = if_else(lag(main_indicator, 1) == 0, NA, main_indicator / lag(main_indicator, 1) -1) * 100,
-    rate_variation_perc = if_else(lag(rate_per_100_000, 1) == 0, NA, rate_per_100_000 / lag(rate_per_100_000, 1) -1)* 100,
-    ans_variation_perc = if_else(lag(main_indicator_ans, 1) == 0, NA, main_indicator_ans / lag(main_indicator_ans, 1) -1)* 100,
-    rate_ans_variation_perc = if_else(lag(rate_per_100_000_with_ans_contribution, 1) == 0, NA, rate_per_100_000_with_ans_contribution / lag(rate_per_100_000_with_ans_contribution, 1) -1)* 100,
-  ) %>% 
-  filter(year == year_report)
-
-data_prep1 <- data_calc %>%
-  select(
-    main_indicator,
-    rate_per_100_000, 
-    main_indicator_ans, 
-    rate_per_100_000_with_ans_contribution
-  )  %>% 
-  pivot_longer(cols = everything(), names_to = "ylabel", values_to = "mymetric") %>% 
-  mutate(
-    ylabel = case_when(
-      ylabel == "main_indicator" ~ paste0("Number of ", toupper(safindicator)," in the MS&nbsp;&nbsp;\n(airports included in performance plans)&nbsp;&nbsp;"),
-      ylabel == "rate_per_100_000" ~ paste0("Rate of ", toupper(safindicator),"&nbsp;&nbsp;\n(per 100,000 mvts)&nbsp;&nbsp;"),
-      ylabel == "main_indicator_ans" ~ paste0("Number of ", toupper(safindicator)," with ANS contribution&nbsp;&nbsp;\n(airports included in performance plans)&nbsp;&nbsp;"),
-      ylabel == "rate_per_100_000_with_ans_contribution" ~ paste0("Rate of ", toupper(safindicator)," with ANS contribution&nbsp;&nbsp;\n(per 100,000 mvts)&nbsp;&nbsp;")
-    ),
-    mylabel = as.character(round(mymetric,2 ))
+## state ----
+if (country != "SES RP3"){
+  data_calc <- data_raw %>% 
+    filter(state == .env$country) %>% 
+    arrange(year) %>% 
+    mutate(
+      variation_perc = if_else(lag(main_indicator, 1) == 0, NA, main_indicator / lag(main_indicator, 1) -1) * 100,
+      rate_variation_perc = if_else(lag(rate_per_100_000, 1) == 0, NA, rate_per_100_000 / lag(rate_per_100_000, 1) -1)* 100,
+      ans_variation_perc = if_else(lag(main_indicator_ans, 1) == 0, NA, main_indicator_ans / lag(main_indicator_ans, 1) -1)* 100,
+      rate_ans_variation_perc = if_else(lag(rate_per_100_000_with_ans_contribution, 1) == 0, NA, rate_per_100_000_with_ans_contribution / lag(rate_per_100_000_with_ans_contribution, 1) -1)* 100,
+    ) %>% 
+    filter(year == year_report)
+  
+  data_prep1 <- data_calc %>%
+    select(
+      main_indicator,
+      rate_per_100_000, 
+      main_indicator_ans, 
+      rate_per_100_000_with_ans_contribution
+    )  %>% 
+    pivot_longer(cols = everything(), names_to = "ylabel", values_to = "mymetric") %>% 
+    mutate(
+      ylabel = case_when(
+        ylabel == "main_indicator" ~ paste0("Number of ", toupper(safindicator)," in the MS&nbsp;&nbsp;\n(airports included in performance plans)&nbsp;&nbsp;"),
+        ylabel == "rate_per_100_000" ~ paste0("Rate of ", toupper(safindicator),"&nbsp;&nbsp;\n(per 100,000 mvts)&nbsp;&nbsp;"),
+        ylabel == "main_indicator_ans" ~ paste0("Number of ", toupper(safindicator)," with ANS contribution&nbsp;&nbsp;\n(airports included in performance plans)&nbsp;&nbsp;"),
+        ylabel == "rate_per_100_000_with_ans_contribution" ~ paste0("Rate of ", toupper(safindicator)," with ANS contribution&nbsp;&nbsp;\n(per 100,000 mvts)&nbsp;&nbsp;")
+      ),
+      mylabel = as.character(round(mymetric,2 ))
+    )
+  
+  data_prep2 <- data_calc %>%
+    select(
+      variation_perc,
+      rate_variation_perc, 
+      ans_variation_perc, 
+      rate_ans_variation_perc
+    ) %>% 
+    pivot_longer(cols = everything(), names_to = "ylabel", values_to = "mymetric") %>% 
+    mutate(
+      mylabel = paste0(if_else(mymetric>=0, "+", ""),as.character(round(mymetric,1 )), "%")
+    )
+  
+  mylocal_factor = c(
+    "rate_ans_variation_perc",
+    "ans_variation_perc",
+    "rate_variation_perc",
+    "variation_perc",
+    NULL
   )
-
-data_prep2 <- data_calc %>%
-  select(
-    variation_perc,
-    rate_variation_perc, 
-    ans_variation_perc, 
-    rate_ans_variation_perc
-  ) %>% 
-  pivot_longer(cols = everything(), names_to = "ylabel", values_to = "mymetric") %>% 
-  mutate(
-    mylabel = paste0(if_else(mymetric>=0, "+", ""),as.character(round(mymetric,1 )), "%")
-  )
-
+  
+} else {
+  ## ses ----
+  data_prep1 <- data_raw %>% 
+    filter(year == year_report) %>% 
+    select(field, value) %>% 
+    mutate(
+      ylabel = case_when(
+        field == "Number of in the MS" ~ paste0("Number of ", toupper(safindicator)," in the MS&nbsp;&nbsp;\n(airports included in performance plans)&nbsp;&nbsp;"),
+        field == "Rate of" ~ paste0("Rate of ", toupper(safindicator),"&nbsp;&nbsp;\n(per 100,000 mvts)&nbsp;&nbsp;"),
+        field == "Number of with ANS contribution" ~ paste0("Number of ", toupper(safindicator)," with ANS contribution&nbsp;&nbsp;\n(airports included in performance plans)&nbsp;&nbsp;"),
+        field == "Rate of with ANS contribution" ~ paste0("Rate of ", toupper(safindicator)," with ANS contribution&nbsp;&nbsp;\n(per 100,000 mvts)&nbsp;&nbsp;")
+      ),
+      mylabel = as.character(round(value,2 ))
+      ) %>% 
+    select(
+      ylabel,
+      mylabel,
+      mymetric = value
+    )
+      
+  data_prep2 <- data_raw %>% 
+    filter(year == year_report) %>% 
+    select(field, percent_variation) %>% 
+    mutate(
+      mymetric = percent_variation * 100,
+      ylabel = field,
+      mylabel = paste0(if_else(mymetric>=0, "+", ""),as.character(round(mymetric,1 )), "%")
+    )
+  
+  mylocal_factor = c(
+    "Rate of with ANS contribution",
+    "Number of with ANS contribution",
+    "Rate of",
+    "Number of in the MS",
+    NULL
+  ) 
+}
+  
 
 # plot charts  ----
 
@@ -103,13 +182,7 @@ p1 <- myhbarc2(df = data_prep1,
 
 p2 <- myhbarc2(df = data_prep2,
                suffix = "%",
-               local_factor = c(
-                 "rate_ans_variation_perc",
-                 "ans_variation_perc",
-                 "rate_variation_perc",
-                 "variation_perc",
-                 NULL
-               ),
+               local_factor = mylocal_factor,
                hovertemplate = paste0('%{x:,.1f}%<extra></extra>'),         
                hovermode = "closest",
                mybarcolor_pos = '#FFC000',
