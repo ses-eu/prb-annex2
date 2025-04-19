@@ -1064,7 +1064,7 @@ add_line_trace2 <- function(
     )
 }
 
-## better plot horizontal barchart  ----
+## better  horizontal barchart  ----
 myhbarc2 <-  function(df, 
                       width = mywidth,
                       height = myheight, 
@@ -1181,6 +1181,7 @@ myhbarc2 <-  function(df,
                    ticksuffix = xaxis_ticksuffix,
                    fixedrange = xaxis_fixedrange,
                    tickformat = xaxis_tickformat,
+                   tickangle = xaxis_tickangle,
                    showticklabels = xaxis_showticklabels,
                    # tickcolor = 'rgb(127,127,127)',
                    # ticks = 'outside',
@@ -1433,18 +1434,18 @@ mylatex <- function(gttable, firstcolumn = 2.7) {
 }
 
 ## latex layout 2 figures side by side  ----
-layout_2fig <- function(chart1, chart2) {
+layout_2fig <- function(chart1, chart2, width1 = 0.48, width2 = 0.48) {
   
   layout_string <- paste0('
 ```{=tex}
 \\begin{figure}[H]
 \\centering
-\\begin{minipage}{0.48\\linewidth}
+\\begin{minipage}{', width1, '\\linewidth}
     \\centering
     \\includegraphics[width=1\\linewidth,height=\\textheight,keepaspectratio]{index_files/figure-pdf/', chart1, '-1.pdf}
 \\end{minipage}%
 \\hspace{0.015\\linewidth} % Adds a small empty space (2% of linewidth)
-\\begin{minipage}{0.48\\linewidth}
+\\begin{minipage}{', width2, '\\linewidth}
     \\centering
     \\includegraphics[width=1\\linewidth,height=\\textheight,keepaspectratio]{index_files/figure-pdf/', chart2, '-1.pdf}
 \\end{minipage}%

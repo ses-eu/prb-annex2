@@ -1,4 +1,4 @@
-if (!exists("doclevel")) {doclevel = "level1"}
+if (!exists("saf_ansp_index")) {saf_ansp_index = 1}
 
 # import data  ----
 data_raw_maturity  <-  read_xlsx(
@@ -234,8 +234,10 @@ myc <-  function(width = NA, height, fontsize = myfont, margin = 70, ansp_name =
 }
 
 if (knitr::is_latex_output()) {
-  myc(NA, 290, 12.5, 70)
-  
+  myc(ansp_name = saf_ansps[[saf_ansp_index]], 
+      height = 290,
+      fontsize = 12.5)
+
   } else {
     chart_params <- as_tibble(saf_ansps) %>% 
       rename(ansp_name = value) %>% 

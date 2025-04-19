@@ -65,6 +65,13 @@ if (safindicator == "ri") {
 }
 
 # process data  ----
+mylabels <- c(
+  paste0("Number of ", toupper(safindicator),"&nbsp;&nbsp;\nin the MS&nbsp;&nbsp;"),
+  paste0("Rate of ", toupper(safindicator),"&nbsp;&nbsp;\n(per 100,000 mvts)&nbsp;&nbsp;"),
+  paste0("Number of ", toupper(safindicator),"&nbsp;&nbsp;\nwith ANS contribution&nbsp;&nbsp;"),
+  paste0("Rate of ", toupper(safindicator),"&nbsp;&nbsp;\nwith ANS contribution&nbsp;&nbsp;\n(per 100,000 mvts)&nbsp;&nbsp;")
+)
+
 ## state ----
 if (country != "SES RP3"){
   data_calc <- data_raw %>% 
@@ -88,10 +95,10 @@ if (country != "SES RP3"){
     pivot_longer(cols = everything(), names_to = "ylabel", values_to = "mymetric") %>% 
     mutate(
       ylabel = case_when(
-        ylabel == "main_indicator" ~ paste0("Number of ", toupper(safindicator)," in the MS&nbsp;&nbsp;\n(airports included in performance plans)&nbsp;&nbsp;"),
-        ylabel == "rate_per_100_000" ~ paste0("Rate of ", toupper(safindicator),"&nbsp;&nbsp;\n(per 100,000 mvts)&nbsp;&nbsp;"),
-        ylabel == "main_indicator_ans" ~ paste0("Number of ", toupper(safindicator)," with ANS contribution&nbsp;&nbsp;\n(airports included in performance plans)&nbsp;&nbsp;"),
-        ylabel == "rate_per_100_000_with_ans_contribution" ~ paste0("Rate of ", toupper(safindicator)," with ANS contribution&nbsp;&nbsp;\n(per 100,000 mvts)&nbsp;&nbsp;")
+        ylabel == "main_indicator" ~ mylabels[[1]],
+        ylabel == "rate_per_100_000" ~ mylabels[[2]],
+        ylabel == "main_indicator_ans" ~ mylabels[[3]],
+        ylabel == "rate_per_100_000_with_ans_contribution" ~ mylabels[[4]]
       ),
       mylabel = as.character(round(mymetric,2 ))
     )
@@ -123,10 +130,10 @@ if (country != "SES RP3"){
     select(field, value) %>% 
     mutate(
       ylabel = case_when(
-        field == "Number of in the MS" ~ paste0("Number of ", toupper(safindicator)," in the MS&nbsp;&nbsp;\n(airports included in performance plans)&nbsp;&nbsp;"),
-        field == "Rate of" ~ paste0("Rate of ", toupper(safindicator),"&nbsp;&nbsp;\n(per 100,000 mvts)&nbsp;&nbsp;"),
-        field == "Number of with ANS contribution" ~ paste0("Number of ", toupper(safindicator)," with ANS contribution&nbsp;&nbsp;\n(airports included in performance plans)&nbsp;&nbsp;"),
-        field == "Rate of with ANS contribution" ~ paste0("Rate of ", toupper(safindicator)," with ANS contribution&nbsp;&nbsp;\n(per 100,000 mvts)&nbsp;&nbsp;")
+        field == "Number of in the MS" ~ mylabels[[1]],
+        field == "Rate of" ~ mylabels[[2]],
+        field == "Number of with ANS contribution" ~ mylabels[[3]],
+        field == "Rate of with ANS contribution" ~ mylabels[[4]]
       ),
       mylabel = as.character(round(value,2 ))
       ) %>% 
@@ -156,14 +163,21 @@ if (country != "SES RP3"){
   
 
 # plot charts  ----
+if (knitr::is_latex_output()) {
+  local_xaxis_tickfont_size <- myfont-3  
+  local_textfont_size <- myfont-2  
+} else {
+  local_xaxis_tickfont_size <- myfont-1
+  local_textfont_size <- myfont
+}
 
 p1 <- myhbarc2(df = data_prep1,
          suffix = "",
          local_factor = c(
-           paste0("Rate of ", toupper(safindicator)," with ANS contribution&nbsp;&nbsp;\n(per 100,000 mvts)&nbsp;&nbsp;"),
-           paste0("Number of ", toupper(safindicator)," with ANS contribution&nbsp;&nbsp;\n(airports included in performance plans)&nbsp;&nbsp;"),
-           paste0("Rate of ", toupper(safindicator),"&nbsp;&nbsp;\n(per 100,000 mvts)&nbsp;&nbsp;"),
-           paste0("Number of ", toupper(safindicator)," in the MS&nbsp;&nbsp;\n(airports included in performance plans)&nbsp;&nbsp;"),
+           mylabels[[4]],
+           mylabels[[3]],
+           mylabels[[2]],
+           mylabels[[1]],
            NULL
                           ),
          hovertemplate = paste0('%{x:,.1f}<extra></extra>'),         
@@ -171,9 +185,10 @@ p1 <- myhbarc2(df = data_prep1,
          mybarcolor_neg = 'transparent',
          
          textposition = "outside",
+         textfont_size = local_textfont_size,
          
-         xaxis_tickfont_size =  myfont-1,
-         yaxis_tickfont_size = myfont -1,
+         xaxis_tickfont_size =  local_xaxis_tickfont_size,
+         yaxis_tickfont_size = myfont -2,
          
          title_text = "",
          hovermode = "closest",
@@ -189,9 +204,11 @@ p2 <- myhbarc2(df = data_prep2,
                mybarcolor_neg = '#92D050',
                
                textposition = "outside",
+               textfont_size = local_textfont_size,
                
                xaxis_ticksuffix = "%",
-               xaxis_tickfont_size =  myfont-1,
+               xaxis_tickangle = 0,
+               xaxis_tickfont_size =  local_xaxis_tickfont_size,
                yaxis_showticklabels = FALSE,
                
                title_text = paste0(year_report, " vs ",year_report-1) ,
@@ -200,9 +217,9 @@ p2 <- myhbarc2(df = data_prep2,
                title_xanchor = "center",
                title_yanchor =  "center",
 
-               margin = list(t= 40, r = 50)
+               margin = list(t= 40, r = 50, l = 0)
 )
 
-subplot(p1, p2, nrows = 1, shareY = FALSE, titleX = TRUE, titleY = TRUE, widths = c(0.55, 0.45), margin = 0.10) %>% 
+subplot(p1, p2, nrows = 1, shareY = FALSE, titleX = TRUE, titleY = TRUE, widths = c(0.50, 0.50), margin = 0.10) %>% 
   layout(showlegend = FALSE)
 

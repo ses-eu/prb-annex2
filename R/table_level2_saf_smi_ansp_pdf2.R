@@ -55,12 +55,13 @@ data_prep <- data_calc %>%
   select(
     myentity,
     year,
-    "Flight hours" = flight_hours,
-    "Number of SMIs" = smi,
+    # "Flight hours" = flight_hours,
+    # "Number of SMIs" = smi,
     "Rate of SMI per 100,000 flight hours" = rate_per_100_000,
-    "% variation in rate of SMIs" = variation
+    "% variation in rate of SMIs" = variation,
+    NULL
   ) %>% 
-  pivot_wider(names_from = "year", values_from = c(3:6)) %>% 
+  pivot_wider(names_from = "year", values_from = c(3:4)) %>% 
   mutate(
     myentity = factor(myentity, levels = myentity_order$myentity),
   ) %>% 
@@ -81,20 +82,20 @@ table1 <-mygtable(data_prep, myfont*0.9) %>%
   cols_label(
     myentity = if_else(country =="SES RP3", "State", "ANSP")
   ) %>% 
-  tab_header(
-    title = md("**Rate of SMI with ANS contribution per 100,000 flight hours**")
-  ) %>% 
+  # tab_header(
+    # title = md("**Rate of SMI with ANS contribution per 100,000 flight hours**")
+  # ) %>% 
+  # fmt_number(
+    # columns = c(3:10),  # Specify the columns to format
+    # decimals = 0,  # Number of decimal places
+    # use_seps = TRUE  # Use thousands separator
+  # ) 
   fmt_number(
-    columns = c(3:10),  # Specify the columns to format
-    decimals = 0,  # Number of decimal places
-    use_seps = TRUE  # Use thousands separator
-  ) %>%  
-  fmt_number(
-    columns = c(11:14),  # Specify the columns to format
+    columns = c(3:6),  # Specify the columns to format
     decimals = 2,  # Number of decimal places
-  ) %>%  
+  ) %>%
   fmt(
-    columns = 15:18,
+    columns = 7:10,
     fns = function(x) {
       dplyr::case_when(
         x > 0 ~ paste0("+", scales::percent(x, accuracy = 1)),
@@ -106,9 +107,14 @@ table1 <-mygtable(data_prep, myfont*0.9) %>%
 
 # create latex table
 if (knitr::is_latex_output()) {
-  table_level2_saf_smi_ansp <- table1 %>% 
-    mylatex(NA) 
+  table_level2_saf_smi_ansp_pdf2 <- table1 %>% 
+    mylatex(NA) %>% 
+    gsub("% variation in rate of SMIs", "PLACEHOLDER_PERCENT", ., fixed = TRUE) %>% 
+    gsub("%", fixed("\\\\%"), .) %>% 
+    gsub("PLACEHOLDER_PERCENT", "% variation in rate of SMIs", ., fixed = TRUE)
+    
   
+
 } else {
   table1
 }

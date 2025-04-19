@@ -17,7 +17,7 @@
 
 <!-- ### Safety L1 -->
 
-```{r chart_saf_l1, include=FALSE, , options = (saf_ansp_index = 1)}
+```{r chart_saf_l1, include=FALSE, options = (doclevel=c("level1"))}
 #| file: R/chart_level1_saf.R
 #| out.width: "100%"
 ```
@@ -70,80 +70,18 @@ source(here("R","get_level2_text.R"))
 ```
 
 <!-- ## Safety L2-->
-
-<!-- ### Effectiveness of Safety Management (EoSM) (KPI#1) -->
-```{r chart_level1_saf_1, include=FALSE, options = (saf_ansp_index = 1)}
-#| file: R/chart_level1_saf.R
-#| out.width: "100%"
-```
-
-```{r chart_level1_saf_2, eval = (no_saf_ansps > 1), include=FALSE, options = (saf_ansp_index = 2)}
-#| file: R/chart_level1_saf.R
-#| out.width: "100%"
-```
-
-```{r chart_level1_saf_3, eval = (no_saf_ansps > 2), include=FALSE, options = (saf_ansp_index = 3)}
-#| file: R/chart_level1_saf.R
-#| out.width: "100%"
-```
-
-```{r chart_level1_saf_4, eval = (no_saf_ansps > 3), include=FALSE, options = (saf_ansp_index = 4)}
-#| file: R/chart_level1_saf.R
-#| out.width: "100%"
-```
-
-<!-- ### Rate of runway incursions (RIs) (PI#1) -->
+<!-- ### Occurrences - Rate of runway incursions (RIs) (PI#1) & Rate of separation minima infringements (SMIs) (PI#2) -->
 
 ```{r chart_saf_ri, include=FALSE}
 #| file: R/chart_level2_saf_ri.R
 #| out.width: "100%"
 ```
 
-```{r chart_level2_saf_ri_year_report, eval= (params$country != "MUAC"), options = (safindicator=c("ri")), include=FALSE}
-#| file: R/chart_level2_saf_ri_smi_year_report.R
-#| out.width: "100%"
-```
-
-```{r table_level2_saf_ri_apt, eval= (params$country != "MUAC")}
-mytable <-"table_level2_saf_ri_apt"
-table_string <- source(here("R", paste0(mytable,".R"))) 
-assign(mytable, setup_latex_table(get(mytable))) 
-```
-
-
-<!-- ### Rate of separation minima infringements (SMIs) (PI#2) -->
-
 ```{r chart_saf_smi, include=FALSE}
 #| file: R/chart_level2_saf_smi.R
 #| out.width: "100%"
 ```
-
-```{r chart_level2_saf_smi_year_report, options = (safindicator=c("smi")), include=FALSE}
-#| file: R/chart_level2_saf_ri_smi_year_report.R
-#| out.width: "100%"
-```
-
-```{r table_level2_saf_smi_ansp_pdf1}
-mytable <-"table_level2_saf_smi_ansp_pdf1"
-table_string <- source(here("R", paste0(mytable,".R"))) 
-assign(mytable, setup_latex_table(get(mytable))) 
-```
-
-```{r table_level2_saf_smi_ansp_pdf2}
-mytable <-"table_level2_saf_smi_ansp_pdf2"
-table_string <- source(here("R", paste0(mytable,".R"))) 
-assign(mytable, setup_latex_table(get(mytable))) 
-```
-
-<!-- ### Use of automated safety data recording system (ASDRS) (PI#3) -->
-
-```{r table_level2_saf_autotools}
-mytable <-"table_level2_saf_autotools"
-table_string <- source(here("R", paste0(mytable,".R"))) 
-assign(mytable, setup_latex_table(get(mytable))) 
-```
-
-
+  
 <!-- ## Environment L2 -->
 <!-- ### En route performance -->
 <!-- ##### Horizontal flight efficiency of the actual trajectory (KEA) (KPI#1), of the last filed flight plan (KEP) (PI#1) & shortest constrained route (SCR) (PI#2) -->
@@ -894,40 +832,16 @@ cef_text2 <- cef_text$text2
 
 ## Effectiveness of Safety Management (EoSM) (KPI#1)
 
-`r if (params$no_saf_ansps >1) ":::: {.content-hidden}"`
-```{=latex}
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.52\linewidth,height=\textheight,keepaspectratio]{index_files/figure-pdf/chart_level1_saf_1-1.pdf}
-\end{figure}
+```{r chart_saf_eosm, options = (doclevel=c("level2"))}
+#| file: R/chart_level1_saf.R
+#| out.width: "62%"
+#| fig.align: "center"
+#| fig-pos: "H"
 ```
-`r if (params$no_saf_ansps >1) "::::"`
-
-
-`r if (params$no_saf_ansps == 1) ":::: {.content-hidden}"`
-`r layout_2fig("chart_level1_saf_1", if_else(params$no_saf_ansps == 1, "chart_level1_saf_1", "chart_level1_saf_2"))`
-`r if (params$no_saf_ansps == 1) "::::"`
-
-
-`r if (params$no_saf_ansps != 3) ":::: {.content-hidden}"`
-```{=latex}
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.52\linewidth,height=\textheight,keepaspectratio]{index_files/figure-pdf/chart_level1_saf_3-1.pdf}
-\end{figure}
-```
-
-`r if (params$no_saf_ansps != 3) "::::"`
-
-
-`r if (params$no_saf_ansps != 4) ":::: {.content-hidden}"`
-`r layout_2fig(if_else(params$no_saf_ansps < 3, "chart_level1_saf_1", "chart_level1_saf_3"), if_else(params$no_saf_ansps < 4, "chart_level1_saf_1", "chart_level1_saf_4"))`
-`r if (params$no_saf_ansps != 4) "::::"`
 
 \needspace{3\baselineskip}
 
-
-\biggertext{Focus on EoSM}
+`\biggertext{Focus on EoSM}`{=latex}
 
 `r latex_linebreaks(saf_text)`
 
@@ -936,38 +850,11 @@ cef_text2 <- cef_text$text2
 
 \needspace{2\baselineskip}
 
-## Rate of runway incursions (RIs) (PI#1)
+## Occurrences - Rate of runway incursions (RIs) (PI#1) & Rate of separation minima infringements (SMIs) (PI#2)
 
-`r layout_2fig("chart_saf_ri", "chart_level2_saf_ri_year_report")`
-
-`r layout_summary_table(table_level2_saf_ri_apt, hspace = 0, left_margin = 0, width = 1)`
+`r layout_2fig("chart_saf_ri", "chart_saf_smi")`
 
 `r if (params$country == "MUAC") ":::"`
-
-
-\needspace{2\baselineskip}
-
-## Rate of separation minima infringements (SMIs) (PI#2)
-
-`r layout_2fig("chart_saf_smi", "chart_level2_saf_smi_year_report")`
-
-`r layout_summary_table(table_level2_saf_smi_ansp_pdf1, hspace = 0, left_margin = 0, width = 1)`
-
-`r layout_summary_table(table_level2_saf_smi_ansp_pdf2, hspace = 0, left_margin = 0, width = 1)`
-
-
-\needspace{2\baselineskip}
-
-## Quality of occurences reporting 
-
-placeholder for text
-
-\needspace{2\baselineskip}
-
-## Use of automated safety data recording system (ASDRS) (PI#3)
-
-`r layout_summary_table(table_level2_saf_autotools, left_margin = 4.5, width = 0.5)`
-
 
 \needspace{3\baselineskip}
 

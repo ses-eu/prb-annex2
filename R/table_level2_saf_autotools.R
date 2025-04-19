@@ -31,7 +31,7 @@ data_prep <- data_raw %>%
 
 table1 <- mygtable(data_prep, myfont)|> 
   tab_header(
-    title = html(paste0("<b>", md(year_report), "</b>"))
+    title = md(paste0("**", md(year_report), "**"))
   ) %>% 
   cols_label(
     ri = "For RIs",

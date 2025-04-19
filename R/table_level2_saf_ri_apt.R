@@ -35,7 +35,7 @@ table1 <- mygtable(data_prep, myfont) %>%
     rate_per_100_000 = "Rate RI  per 100,000"
     ) %>% 
   tab_options(column_labels.background.color = "white",
-              column_labels.font.weight = 'bold',
+              # column_labels.font.weight = 'bold',
               container.padding.y = 0) %>% 
   cols_align(columns = 2, align = "left") %>%
   # tab_style(
@@ -55,7 +55,15 @@ table1 <- mygtable(data_prep, myfont) %>%
     decimals = 2,  # Number of decimal places
     use_seps = TRUE  # Use thousands separator
   ) |>   tab_header(
-    title = html(paste0("<b>Rate of RIs per 100,000 airport movements - ", country), "</b>")
+    title = md(paste0("**Rate of RIs per 100,000 airport movements - ", country, "**"))
   )
 
-table1
+# create latex table
+if (knitr::is_latex_output()) {
+  table_level2_saf_ri_apt <- table1 %>% 
+    mylatex(NA) 
+  
+} else {
+  table1
+}
+
