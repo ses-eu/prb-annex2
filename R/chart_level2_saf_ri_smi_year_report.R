@@ -216,7 +216,7 @@ p2 <- myhbarc2(df = data_prep2,
                title_y = 0.83,
                title_xanchor = "center",
                title_yanchor =  "center",
-
+               
                margin = list(t= 40, r = 50, l = 0)
 )
 

@@ -44,16 +44,16 @@ local_hovertemplate <- paste0('%{y:,.', local_decimals, 'f}', local_suffix)
 
 #### legend
 if (knitr::is_latex_output()) {
-  local_legend_y <- mylegend_y
-  local_legend_x <- -0.18
-  local_legend_xanchor <- 'left'
-  local_legend_fontsize <- myfont-1
+  local_legend_y <- 1.35
+  local_legend_x <- 0.5
+  local_legend_xanchor <- 'center'
+  local_fontsize <- myfont-3
   
 } else {
   local_legend_y <- 1.35
   local_legend_x <- 0.5
   local_legend_xanchor <- 'center'
-  local_legend_fontsize <- myfont
+  local_fontsize <- myfont-1
   
 }
 
@@ -74,7 +74,7 @@ myplot <- mybarchart2(data_prep,
                       textangle = 0,
                       textposition = "outside",
                       textfont_color = 'black',
-                      textfont_size = myfont -1,
+                      textfont_size = local_fontsize ,
                       insidetextanchor = 'middle',
                       
                       bargap = 0.4,
@@ -84,16 +84,18 @@ myplot <- mybarchart2(data_prep,
                       title_y = 0.99,
                       
                       xaxis_tickangle =  -90,
+                      xaxis_tickfont_size = local_fontsize,
                       
                       yaxis_title = "Rate of RIs per 100,000 airport movements",
-                      yaxis_titlefont_size = myfont-1,
+                      yaxis_titlefont_size = local_fontsize,
+                      yaxis_tickfont_size = local_fontsize,
                       yaxis_ticksuffix = local_suffix,
                       yaxis_tickformat = ".0f",
-
+                      
                       legend_y = local_legend_y, 
                       legend_x = local_legend_x,
                       legend_xanchor = local_legend_xanchor,
-                      legend_fontsize = local_legend_fontsize) %>%
+                      legend_fontsize = local_fontsize) %>%
   add_trace(
     inherit = FALSE,
     data = data_prep,
@@ -112,6 +114,8 @@ myplot <- mybarchart2(data_prep,
 
 
 myplot 
+
+
 
 
 

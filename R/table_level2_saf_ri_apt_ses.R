@@ -135,5 +135,12 @@ table1 <-mygtable(data_prep, myfont*0.9) %>%
   cols_label(.list = label_list)  %>%
   fmt_markdown(columns = all_of(nowrap_cols))
 
-table1
+# create latex table
+if (knitr::is_latex_output()) {
+  table_level2_saf_ri_apt_ses <- table1 %>% 
+    mylatex(NA) 
+  
+} else {
+  table1
+}
 

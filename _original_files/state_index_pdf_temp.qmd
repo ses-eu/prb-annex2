@@ -953,6 +953,8 @@ cef_text2 <- cef_text$text2
 
 `r layout_summary_table(table_level2_saf_smi_ansp_pdf1, hspace = 0, left_margin = 0, width = 1)`
 
+\vspace*{-0.5cm}
+
 `r layout_summary_table(table_level2_saf_smi_ansp_pdf2, hspace = 0, left_margin = 0, width = 1)`
 
 

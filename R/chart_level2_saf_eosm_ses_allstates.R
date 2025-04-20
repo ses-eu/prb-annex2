@@ -1,4 +1,3 @@
-if (!exists("doclevel")) {doclevel = "level1"}
 
 # import data  ----
 data_raw_maturity  <-  read_xlsx(
@@ -80,7 +79,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
       name = "EoSM score",
       marker = list (color = '#A5A5A5',
                      symbol = "circle",
-                     size = 7),
+                     size = if_else(knitr::is_latex_output(),5,7)),
       hovertemplate = paste0('EoSM score %{y}<extra></extra>'),
       # hovertemplate = paste('%{text}<extra></extra>'),
       # hoverinfo = "none",
@@ -255,14 +254,10 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
   
 }
 
-if (doclevel == "level1") {
+if (knitr::is_latex_output()) {
+  myc(NA, 380, 9, 70)
+  
+  } else {
   myc(NA, 420, 14, 70)
-} else {
-  if (knitr::is_latex_output()) {
-    myc(NA, 290, 12.5, 70)
-    
-    } else {
-    myc(NA, 420, 14, 70)
-  }
 }
 
