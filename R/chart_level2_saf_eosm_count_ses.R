@@ -11,6 +11,14 @@ data_raw  <-  read_xlsx(
   clean_names() 
 
 # process data  ----
+mylabels <- c(
+  "Safety\nculture",
+  "Safety policy\n& objectives",
+  "Safety risk\nmanagement",
+  "Safety\nassurance",
+  "Safety\npromotion"
+  )
+
 data_prep <- data_raw %>% 
   filter(year == year_report) %>% 
   select(
@@ -18,18 +26,13 @@ data_prep <- data_raw %>%
   ) %>% 
   mutate(
     xlabel = case_when (
-      management_objectives == "Safety culture" ~ "Culture",
-      management_objectives == "Safety policy & objectives" ~ "Policy\n& objectives",
-      management_objectives == "Safety risk management" ~ "Risk\nmanagement",
-      management_objectives == "Safety assurance" ~ "Assurance",
-      management_objectives == "Safety promotion" ~ "Promotion"
+      management_objectives == "Safety culture" ~ mylabels[[1]],
+      management_objectives == "Safety policy & objectives" ~ mylabels[[2]],
+      management_objectives == "Safety risk management" ~ mylabels[[3]],
+      management_objectives == "Safety assurance" ~ mylabels[[4]],
+      management_objectives == "Safety promotion" ~ mylabels[[5]]
     ),
-    xlabel = factor (xlabel, levels = c(
-      "Culture",
-      "Policy\n& objectives",
-      "Risk\nmanagement",
-      "Assurance",
-      "Promotion")
+    xlabel = factor (xlabel, levels = mylabels
     ),
   ) %>% 
   select(
@@ -48,12 +51,21 @@ local_hovertemplate <- paste0('%{y:,.', local_decimals, 'f}', local_suffix)
 
 #### legend
 if (knitr::is_latex_output()) {
-  local_legend_y <- mylegend_y
-  local_legend_x <- -0.18
-  local_legend_xanchor <- 'left'
-  local_legend_fontsize <- myfont-1
+  local_height <- myheight-40
+  local_xaxis_tickfont_size <- myfont -4
+  local_yaxis_tickfont_size <- myfont -2
+  local_textfont_size <- myfont -2
+  
+  local_legend_y <- 1.35
+  local_legend_x <- 0.5
+  local_legend_xanchor <- 'center'
+  local_legend_fontsize <- myfont-2
   
 } else {
+  local_height <- myheight
+  local_xaxis_tickfont_size <- myfont
+  local_yaxis_tickfont_size <- myfont
+  local_textfont_size <- myfont-1
   local_legend_y <- 1.35
   local_legend_x <- 0.5
   local_legend_xanchor <- 'center'
@@ -63,7 +75,7 @@ if (knitr::is_latex_output()) {
 
 # plot chart ----
 myplot <- mybarchart2(data_prep, 
-                      height = myheight,
+                      height = local_height,
                       colors = c('#585858',  '#FFC000', '#00B0F0', '#196AB4'),
                       local_factor = c("A",
                                        "B",
@@ -82,6 +94,7 @@ myplot <- mybarchart2(data_prep,
                       textposition = "outside",
                       textfont_color = 'black',
                       insidetextanchor = 'middle',
+                      textfont_size = local_textfont_size,
                       
                       bargap = 0.25,
                       barmode = 'group',
@@ -89,10 +102,11 @@ myplot <- mybarchart2(data_prep,
                       title_text = "",
                       title_y = 0.99,
                       
-                      xaxis_tickfont_size = myfont ,
+                      xaxis_tickfont_size = local_xaxis_tickfont_size,
                       yaxis_title = "Number of ANSPs",
                       yaxis_ticksuffix = local_suffix,
                       yaxis_tickformat = "",
+                      yaxis_tickfont_size = local_yaxis_tickfont_size,
                       
                       trace_showlegend = FALSE,
                       
@@ -110,7 +124,7 @@ myplot <- mybarchart2(data_prep,
   # to force full legend
   add_trace(
     data = data.frame(
-      xlabel = "Promotion",
+      xlabel = mylabels[[1]],
       type = "A",
       mymetric = 100
     ),
@@ -127,7 +141,7 @@ myplot <- mybarchart2(data_prep,
   ) %>% 
   add_trace(
     data = data.frame(
-      xlabel = "Promotion",
+      xlabel = mylabels[[1]],
       type = "B",
       mymetric = 100
     ),
@@ -144,7 +158,7 @@ myplot <- mybarchart2(data_prep,
   ) %>% 
   add_trace(
     data = data.frame(
-      xlabel = "Promotion",
+      xlabel = mylabels[[1]],
       type = "C",
       mymetric = 100
     ),
@@ -161,7 +175,7 @@ myplot <- mybarchart2(data_prep,
   ) %>% 
   add_trace(
     data = data.frame(
-      xlabel = "Promotion",
+      xlabel = mylabels[[1]],
       type = "D",
       mymetric = 100
     ),

@@ -1197,7 +1197,7 @@ myhbarc2 <-  function(df,
 
 
 
-## plot horizontal barchart  ----
+## horizontal barchart  ----
 myhbarc <-  function(mywidth, myheight, myfont, mymargin) {
   data_prep %>%
     plot_ly(

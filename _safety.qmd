@@ -147,7 +147,7 @@ mycharts[[4]]
 #| out.width: "100%"
 ```
 
-::::: {layout="[ 50, 50 ]"}
+::::: {layout="[ 55, 45 ]"}
 
 :::::: {.chart-container}  
 ```{r chart_level2_saf_eosm_count_ses, eval= params$country == "SES RP3"}

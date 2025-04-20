@@ -66,7 +66,7 @@ if (knitr::is_latex_output()) {
 
 # plot chart ----
 myplot <- mybarchart2(data_prep, 
-                      height = myheight+20,
+                      height = local_height,
                       colors = c('#FFC000'),
                       local_factor = c("Rate of RI with safety impact by State",
                                        NULL),

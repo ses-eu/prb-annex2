@@ -388,6 +388,8 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 #| fig-pos: "H"
 ```
 
+`r layout_2fig("chart_level2_saf_eosm_count_ses", "chart_level2_saf_maturity_count_ses", width1 = 0.65, width2 = 0.30)`
+
 
 ## Rate of runway incursions (RIs) (PI#1)
 

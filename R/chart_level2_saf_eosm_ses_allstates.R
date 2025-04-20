@@ -33,7 +33,7 @@ data_prep_maturity <- data_raw_maturity %>%
   ) %>% 
   filter(status == "actual",
          year == year_report) %>% 
-  mutate(group = if_else(type == "Risk management", "Risk management", "All other components")) %>% 
+  mutate(group = if_else(type == "Risk management", "Safety risk management", "All other components")) %>% 
   group_by(entity_name, group) %>% 
   summarise(score = min(score, na.rm = TRUE), .groups = "drop") %>%
   mutate(
@@ -58,7 +58,7 @@ myc <-  function(local_width, local_height, local_font, local_margin) {
       yaxis = "y1",
       cliponaxis = FALSE,
       type = "bar",
-      color = ~ factor(group, levels = c("Risk management",
+      color = ~ factor(group, levels = c("Safety risk management",
                                          "All other components")
       ),
       colors = c('#FFC000', '#196AB4'),
@@ -106,7 +106,7 @@ myc <-  function(local_width, local_height, local_font, local_margin) {
       yaxis = "y1",
       type = 'scatter',
       mode = "line",
-      name = "2024 Target Risk Management",
+      name = "2024 Target safety risk management",
       line = list (color = '#FF0000', width = 2, dash = 'solid'),
       # hovertemplate = paste0('%{x}'),
       hoverinfo = 'none',
@@ -258,6 +258,6 @@ if (knitr::is_latex_output()) {
   myc(NA, 300, 8, 0)
   
 } else {
-  myc(NA, 420, 14, 50)
+  myc(NA, 420, 14, 60)
 }
 
