@@ -48,11 +48,11 @@ data_prep_maturity <- data_raw_maturity %>%
   
 
 # plot chart ----
-myc <-  function(mywidth, myheight, myfont, mymargin) {
+myc <-  function(local_width, local_height, local_font, local_margin) {
     plot_ly(
       data = data_prep_maturity,
-      width = mywidth,
-      height = myheight,
+      width = local_width,
+      height = local_height,
       x = ~ entity_name,
       y = ~ score,
       yaxis = "y1",
@@ -79,7 +79,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
       name = "EoSM score",
       marker = list (color = '#A5A5A5',
                      symbol = "circle",
-                     size = if_else(knitr::is_latex_output(),5,7)),
+                     size = if_else(knitr::is_latex_output(),4,7)),
       hovertemplate = paste0('EoSM score %{y}<extra></extra>'),
       # hovertemplate = paste('%{text}<extra></extra>'),
       # hoverinfo = "none",
@@ -152,7 +152,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
     #                  xanchor = "left",
     #                  align = "left",
     #                  # textangle = -90,
-    #                  font = list(color = '#FF0000', size = myfont-1),
+    #                  font = list(color = '#FF0000', size = local_font-1),
     #                  arrowhead = 2,
     #                  arrowcolor = '#FF0000',
     #                  arrowsize = 3,
@@ -170,7 +170,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
     #                  xanchor = "left",
     #                  align = "left",
     #                  # textangle = -90,
-    #                  font = list(color = '#FF0000', size = myfont-1),
+    #                  font = list(color = '#FF0000', size = local_font-1),
     #                  arrowhead = 2,
     #                  arrowcolor = '#FF0000',
     #                  arrowsize = 3,
@@ -204,7 +204,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
                    # tickcolor = 'rgb(127,127,127)',
                    # ticks = 'outside',
                    zeroline = TRUE,
-                   tickfont = list(size = myfont-1),
+                   tickfont = list(size = local_font-1),
                    tickangle = -90
       ),
       yaxis = list(
@@ -222,9 +222,9 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
         tickvals = c(20, 40, 60, 80, 100),
         ticktext = c("A  ", "B  ", "C  ", "D  ", "  "),
         zerolinecolor = 'rgb(240,240,240)',
-        titlefont = list(size = myfont), 
+        titlefont = list(size = local_font), 
         # showticklabels = FALSE
-        tickfont = list(size = myfont, color = 'black')
+        tickfont = list(size = local_font, color = 'black')
       ),
       yaxis2 = list(title = "EoSM score",
                     overlaying = "y",
@@ -237,7 +237,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
                     range = list(0,110),
                     zeroline = TRUE,
                     zerolinecolor = 'rgb(255,255,255)',
-                    titlefont = list(size = myfont), tickfont = list(size = myfont)
+                    titlefont = list(size = local_font), tickfont = list(size = local_font)
       ),
       # showlegend = FALSE
       legend = list(
@@ -245,9 +245,9 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
         xanchor = "left",
         x = -0.05, 
         y = 1.3,
-        font = list(size = myfont-1)
+        font = list(size = local_font-1)
       ),
-      margin = list(t = mymargin, 
+      margin = list(t = local_margin, 
                     # l=100,
                     r = 40)
     )
@@ -255,7 +255,7 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
 }
 
 if (knitr::is_latex_output()) {
-  myc(NA, 380, 9, 20)
+  myc(NA, 300, 8, 0)
   
 } else {
   myc(NA, 420, 14, 50)

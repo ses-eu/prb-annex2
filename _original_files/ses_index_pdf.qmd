@@ -383,7 +383,7 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 ```{r chart_level2_saf_eosm_ses_allstates}
 #| file: R/chart_level2_saf_eosm_ses_allstates.R
-#| out.width: "105%"
+#| out.width: "100%"
 #| fig.align: "center"
 #| fig-pos: "H"
 ```

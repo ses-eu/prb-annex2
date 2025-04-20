@@ -44,6 +44,7 @@ local_hovertemplate <- paste0('%{y:,.', local_decimals, 'f}', local_suffix)
 
 #### legend
 if (knitr::is_latex_output()) {
+  local_height <- 300
   local_legend_y <- 1.35
   local_legend_x <- 0.5
   local_legend_xanchor <- 'center'
@@ -53,6 +54,7 @@ if (knitr::is_latex_output()) {
   local_textfont_color <- 'grey20'
   
 } else {
+  local_height <- myheight+20
   local_legend_y <- 1.35
   local_legend_x <- 0.5
   local_legend_xanchor <- 'center'
