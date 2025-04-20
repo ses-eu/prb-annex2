@@ -227,9 +227,15 @@ website:
           - text: "<b>EoSM</b>"
             href: safety.html#effectiveness-of-safety-management-eosm-kpi1
 # block muac beginning
-          - text: "<b>Occurrences</b>"
-            href: safety.html#occurrences---rate-of-runway-incursions-ris-pi1-rate-of-separation-minima-infringements-smis-pi2
+          - text: "<b>Runway incursions</b>"
+            href: safety.html#rate-of-runway-incursions-ris-pi1
 # block muac end
+          - text: "<b>Separation infringements</b>"
+            href: safety.html#rate-of-separation-minima-infringements-smis-pi2
+          - text: "<b>Occurrences reporting</b>"
+            href: safety.html#quality-of-occurences-reporting
+          - text: "<b>ASDRS</b>"
+            href: safety.html#use-of-automated-safety-data-recording-system-asdrs-pi3
       - text: "---"
 # environment level2 beginning
       - section: "<b>Environment</b>"
