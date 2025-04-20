@@ -103,16 +103,27 @@ label_list <- set_names(labels, colnames_final)
 
 nowrap_cols <- grep("_mvt$|_rank$", colnames(data_prep), value = TRUE)
 
+rank_cols <- grep("_rank$", colnames(data_prep), value = TRUE)
+mvt_cols <- grep("_mvts$", colnames(data_prep), value = TRUE)
+name_cols <- grep("_name$", colnames(data_prep), value = TRUE)
+ri_cols <- grep("ri$", colnames(data_prep), value = TRUE)
+rate_cols <- grep("rate$", colnames(data_prep), value = TRUE)
+
 # Add nowrap spans
-data_prep <- data_prep %>%
+data_prep_web <- data_prep %>%
   mutate(across(all_of(nowrap_cols), ~ paste0(
     "<span style='white-space:nowrap;'>", 
     format(as.numeric(.), big.mark = ",", scientific = FALSE),
     "</span>"
   )))
 
-# plot table ----
-table1 <-mygtable(data_prep, myfont*0.9) %>% 
+if (knitr::is_latex_output()) {
+  data_for_table <- data_prep} else {
+    data_for_table <- data_prep_web}
+
+# web table ----
+table1 <-mygtable(data_for_table,
+                  myfont*0.9) %>% 
   tab_spanner_delim(
     delim = "_"
   ) %>% 
@@ -132,15 +143,24 @@ table1 <-mygtable(data_prep, myfont*0.9) %>%
     columns = c(5, 10, 15),  # Specify the columns to format
     decimals = 2
   )  %>% 
-  cols_label(.list = label_list)  %>%
-  fmt_markdown(columns = all_of(nowrap_cols))
+  cols_label(.list = label_list)  
+
 
 # create latex table
 if (knitr::is_latex_output()) {
   table_level2_saf_ri_apt_ses <- table1 %>% 
+    cols_width(
+      contains("_rank") ~ pct(0.4),
+      contains("_name") ~ pct(10),
+      contains("_mvt") ~ pct(7),
+      contains("_ri") ~ pct(6),
+      contains("_rate") ~ pct(29.8/3)
+    ) %>% 
     mylatex(NA) 
   
 } else {
-  table1
+  table1 %>%
+    fmt_markdown(columns = all_of(nowrap_cols)) 
+  
 }
 

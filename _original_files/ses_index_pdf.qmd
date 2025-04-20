@@ -73,12 +73,6 @@
 #| out.width: "100%"
 ```
 
-```{r table_level2_saf_ri_apt_ses}
-mytable <-"table_level2_saf_ri_apt_ses"
-table_string <- source(here("R", paste0(mytable,".R"))) 
-assign(mytable, setup_latex_table(get(mytable))) 
-```
-
 <!-- ### Rate of separation minima infringements (SMIs) (PI#2) -->
 ```{r chart_saf_smi, include=FALSE}
 #| file: R/chart_level2_saf_smi.R
@@ -88,18 +82,6 @@ assign(mytable, setup_latex_table(get(mytable)))
 ```{r chart_level2_saf_smi_year_report, options = (safindicator=c("smi")), include=FALSE}
 #| file: R/chart_level2_saf_ri_smi_year_report.R
 #| out.width: "100%"
-```
-
-```{r table_level2_saf_smi_ansp_pdf1}
-mytable <-"table_level2_saf_smi_ansp_pdf1"
-table_string <- source(here("R", paste0(mytable,".R"))) 
-assign(mytable, setup_latex_table(get(mytable))) 
-```
-
-```{r table_level2_saf_smi_ansp_pdf2}
-mytable <-"table_level2_saf_smi_ansp_pdf2"
-table_string <- source(here("R", paste0(mytable,".R"))) 
-assign(mytable, setup_latex_table(get(mytable))) 
 ```
 
 <!-- ### En route performance -->
@@ -418,12 +400,30 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 #| fig-pos: "H"
 ```
 
-`r layout_summary_table(table_level2_saf_ri_apt_ses, hspace = 0, left_margin = 0, width = 1)`
+```{r table_level2_saf_ri_apt_ses}
+mytable <-"table_level2_saf_ri_apt_ses"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(mytable, setup_latex_table(get(mytable))) 
+```
+
+`r layout_summary_table(table_level2_saf_ri_apt_ses, hspace = 0, left_margin = -1, width = 1.1)`
 
 
 ## Rate of separation minima infringements (SMIs) (PI#2)
 
 `r layout_2fig("chart_saf_ri", "chart_level2_saf_smi_year_report")`
+
+```{r table_level2_saf_smi_ansp_pdf1}
+mytable <-"table_level2_saf_smi_ansp_pdf1"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(mytable, setup_latex_table(get(mytable))) 
+```
+
+```{r table_level2_saf_smi_ansp_pdf2}
+mytable <-"table_level2_saf_smi_ansp_pdf2"
+table_string <- source(here("R", paste0(mytable,".R"))) 
+assign(mytable, setup_latex_table(get(mytable))) 
+```
 
 `r layout_summary_table(table_level2_saf_smi_ansp_pdf1, hspace = 0, left_margin = 0, width = 1)`
 

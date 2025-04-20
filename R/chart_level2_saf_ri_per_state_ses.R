@@ -47,23 +47,27 @@ if (knitr::is_latex_output()) {
   local_legend_y <- 1.35
   local_legend_x <- 0.5
   local_legend_xanchor <- 'center'
-  local_fontsize <- myfont-3
+  local_fontsize <- 7
+  local_minsize <- local_fontsize 
+  local_textangle <- -90
+  local_textfont_color <- 'grey20'
   
 } else {
   local_legend_y <- 1.35
   local_legend_x <- 0.5
   local_legend_xanchor <- 'center'
   local_fontsize <- myfont-1
-  
+  local_minsize <- myminsize
+  local_textangle <- 0
+  local_textfont_color <- 'black'
 }
 
 # plot chart ----
 myplot <- mybarchart2(data_prep, 
-                      height = myheight+60,
+                      height = myheight+20,
                       colors = c('#FFC000'),
                       local_factor = c("Rate of RI with safety impact by State",
                                        NULL),
-                      # shape = c("/", "", "/", "", "/", "", "/", "", "/", ""),
                       
                       suffix = local_suffix,
                       decimals = local_decimals,
@@ -71,11 +75,12 @@ myplot <- mybarchart2(data_prep,
                       hovertemplate = local_hovertemplate,
                       hovermode = "x unified",
                       
-                      textangle = 0,
+                      textangle = local_textangle,
                       textposition = "outside",
-                      textfont_color = 'black',
-                      textfont_size = local_fontsize ,
-                      insidetextanchor = 'middle',
+                      textfont_color = local_textfont_color,
+                      textfont_size = local_fontsize-1,
+                      insidetextanchor = NA,
+                      minsize = local_minsize,
                       
                       bargap = 0.4,
                       barmode = 'group',

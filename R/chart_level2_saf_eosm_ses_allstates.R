@@ -59,8 +59,8 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
       cliponaxis = FALSE,
       type = "bar",
       color = ~ factor(group, levels = c("Risk management",
-                                        "All other components")
-                       ),
+                                         "All other components")
+      ),
       colors = c('#FFC000', '#196AB4'),
       text = ~ paste0(group, ': ', score_text),
       textfont = list(color = 'transparent'),
@@ -210,34 +210,34 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
       yaxis = list(
         # title = "",
         title = "Minimum maturity level",
-                   # gridcolor = 'rgb(255,255,255)',
-                   showgrid = TRUE,
-                   showline = FALSE,
-                   # dtick = 20,
-                   # showticklabels = TRUE,
-                   # tickcolor = 'rgb(127,127,127)',
-                   # ticks = 'outside',
-                   zeroline = TRUE,
-                   range= c(0,110),
-                   tickvals = c(20, 40, 60, 80, 100),
-                   ticktext = c("A  ", "B  ", "C  ", "D  ", "  "),
-                   zerolinecolor = 'rgb(240,240,240)',
-                   titlefont = list(size = myfont), 
-                   # showticklabels = FALSE
-                   tickfont = list(size = myfont, color = 'black')
+        # gridcolor = 'rgb(255,255,255)',
+        showgrid = TRUE,
+        showline = FALSE,
+        # dtick = 20,
+        # showticklabels = TRUE,
+        # tickcolor = 'rgb(127,127,127)',
+        # ticks = 'outside',
+        zeroline = TRUE,
+        range= c(0,110),
+        tickvals = c(20, 40, 60, 80, 100),
+        ticktext = c("A  ", "B  ", "C  ", "D  ", "  "),
+        zerolinecolor = 'rgb(240,240,240)',
+        titlefont = list(size = myfont), 
+        # showticklabels = FALSE
+        tickfont = list(size = myfont, color = 'black')
       ),
       yaxis2 = list(title = "EoSM score",
-                   overlaying = "y",
-                   side = "right",
-                   showgrid = FALSE,
-                   showline = FALSE,
-                   ticksuffix = "",
-                   tickformat = ",.0f",
-                   dtick = 20,
-                   range = list(0,110),
-                   zeroline = TRUE,
-                   zerolinecolor = 'rgb(255,255,255)',
-                   titlefont = list(size = myfont), tickfont = list(size = myfont)
+                    overlaying = "y",
+                    side = "right",
+                    showgrid = FALSE,
+                    showline = FALSE,
+                    ticksuffix = "",
+                    tickformat = ",.0f",
+                    dtick = 20,
+                    range = list(0,110),
+                    zeroline = TRUE,
+                    zerolinecolor = 'rgb(255,255,255)',
+                    titlefont = list(size = myfont), tickfont = list(size = myfont)
       ),
       # showlegend = FALSE
       legend = list(
@@ -247,17 +247,17 @@ myc <-  function(mywidth, myheight, myfont, mymargin) {
         y = 1.3,
         font = list(size = myfont-1)
       ),
-      margin = list(t = 50, 
+      margin = list(t = mymargin, 
                     # l=100,
                     r = 40)
-  )
+    )
   
 }
 
 if (knitr::is_latex_output()) {
-  myc(NA, 380, 9, 70)
+  myc(NA, 380, 9, 20)
   
-  } else {
-  myc(NA, 420, 14, 70)
+} else {
+  myc(NA, 420, 14, 50)
 }
 

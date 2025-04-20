@@ -136,13 +136,13 @@ if (country != "SES RP3"){
         field == "Rate of with ANS contribution" ~ mylabels[[4]]
       ),
       mylabel = as.character(round(value,2 ))
-      ) %>% 
+    ) %>% 
     select(
       ylabel,
       mylabel,
       mymetric = value
     )
-      
+  
   data_prep2 <- data_raw %>% 
     filter(year == year_report) %>% 
     select(field, percent_variation) %>% 
@@ -160,7 +160,7 @@ if (country != "SES RP3"){
     NULL
   ) 
 }
-  
+
 
 # plot charts  ----
 if (knitr::is_latex_output()) {
@@ -172,28 +172,28 @@ if (knitr::is_latex_output()) {
 }
 
 p1 <- myhbarc2(df = data_prep1,
-         suffix = "",
-         local_factor = c(
-           mylabels[[4]],
-           mylabels[[3]],
-           mylabels[[2]],
-           mylabels[[1]],
-           NULL
-                          ),
-         hovertemplate = paste0('%{x:,.1f}<extra></extra>'),         
-         mybarcolor_pos = '#196AB5',
-         mybarcolor_neg = 'transparent',
-         
-         textposition = "outside",
-         textfont_size = local_textfont_size,
-         
-         xaxis_tickfont_size =  local_xaxis_tickfont_size,
-         yaxis_tickfont_size = myfont -2,
-         
-         title_text = "",
-         hovermode = "closest",
-         margin = list(t= 40)
-         )
+               suffix = "",
+               local_factor = c(
+                 mylabels[[4]],
+                 mylabels[[3]],
+                 mylabels[[2]],
+                 mylabels[[1]],
+                 NULL
+               ),
+               hovertemplate = paste0('%{x:,.1f}<extra></extra>'),         
+               mybarcolor_pos = '#196AB5',
+               mybarcolor_neg = 'transparent',
+               
+               textposition = "outside",
+               textfont_size = local_textfont_size,
+               
+               xaxis_tickfont_size =  local_xaxis_tickfont_size,
+               yaxis_tickfont_size = myfont -2,
+               
+               title_text = "",
+               hovermode = "closest",
+               margin = list(t= 40)
+)
 
 p2 <- myhbarc2(df = data_prep2,
                suffix = "%",
