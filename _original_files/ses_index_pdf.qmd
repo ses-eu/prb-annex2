@@ -50,6 +50,11 @@
 <!-- Level2 -->
 <!-- ## Safety -->
 <!-- ## Actual versus planned number of ANSPs achieving the level of the EoSM targets for RP3 -->
+```{r chart_level2_saf_eosm_target_ses, include=FALSE}
+#| file: R/chart_level2_saf_eosm_target_ses.R
+#| out.width: "100%"
+```
+
 
 ```{r chart_level2_saf_eosm_count_ses, include=FALSE}
 #| file: R/chart_level2_saf_eosm_count_ses.R
@@ -374,12 +379,8 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 ## Actual versus planned number of ANSPs achieving the level of the EoSM targets for RP3 ahead of 2024
 
-```{r chart_saf_ansp}
-#| file: R/chart_level1_saf_ses.R
-#| out.width: "52%"
-#| fig.align: "center"
-#| fig-pos: "H"
-```
+`r layout_2fig("chart_level1_saf_ses", "chart_level2_saf_eosm_target_ses")`
+
 
 ```{r chart_level2_saf_eosm_ses_allstates}
 #| file: R/chart_level2_saf_eosm_ses_allstates.R

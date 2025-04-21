@@ -79,7 +79,7 @@ myc <-  function(local_width, local_height, local_font, local_margin) {
       name = "EoSM score",
       marker = list (color = '#A5A5A5',
                      symbol = "circle",
-                     size = if_else(knitr::is_latex_output(),4,7)),
+                     size = if_else(knitr::is_latex_output(),5,7)),
       hovertemplate = paste0('EoSM score %{y}<extra></extra>'),
       # hovertemplate = paste('%{text}<extra></extra>'),
       # hoverinfo = "none",
@@ -94,7 +94,10 @@ myc <-  function(local_width, local_height, local_font, local_margin) {
       type = 'scatter',
       mode = "line",
       name = "2024 Target all other components",
-      line = list (color = '#FF0000', width = 2, dash = 'dash'),
+      line = list (color = '#FF0000', 
+                   width = if_else(knitr::is_latex_output(), 1, 2), 
+                   dash = 'dash'
+      ),
       hoverinfo = 'none',
       showlegend = T
     ) %>%
@@ -107,7 +110,10 @@ myc <-  function(local_width, local_height, local_font, local_margin) {
       type = 'scatter',
       mode = "line",
       name = "2024 Target safety risk management",
-      line = list (color = '#FF0000', width = 2, dash = 'solid'),
+      line = list (color = '#FF0000', 
+                   width = if_else(knitr::is_latex_output(), 1, 2), 
+                   dash = 'solid'
+                   ),
       # hovertemplate = paste0('%{x}'),
       hoverinfo = 'none',
       showlegend = T
@@ -242,10 +248,10 @@ myc <-  function(local_width, local_height, local_font, local_margin) {
       # showlegend = FALSE
       legend = list(
         orientation = 'h', 
-        xanchor = "left",
-        x = -0.05, 
-        y = 1.3,
-        font = list(size = local_font-1)
+        xanchor = if_else(knitr::is_latex_output(), "left", "center"),
+        x = if_else(knitr::is_latex_output(), -0.15, 0.5), 
+        y = if_else(knitr::is_latex_output(), 1.5, 1.3),
+        font = list(size = if_else(knitr::is_latex_output(), local_font-3.6, local_font-1) )
       ),
       margin = list(t = local_margin, 
                     # l=100,
@@ -255,7 +261,7 @@ myc <-  function(local_width, local_height, local_font, local_margin) {
 }
 
 if (knitr::is_latex_output()) {
-  myc(NA, 300, 8, 0)
+  myc(NA, 250, 8, 0)
   
 } else {
   myc(NA, 420, 14, 60)

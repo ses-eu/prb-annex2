@@ -56,7 +56,7 @@ saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_
 source("R/chart_level1_saf.R")
 ```
 
-`r if (params$country != "SES RP3" & params$no_saf_ansps >1) ":::: {.content-hidden}"`
+`r if (params$no_saf_ansps >1) ":::: {.content-hidden}"`
 
 ::::: {layout="[ 20, 60, 20 ]"}
 
@@ -64,22 +64,13 @@ source("R/chart_level1_saf.R")
 ::::::
 
 :::::: {.chart-container}  
-`r if (params$country != "SES RP3") ":::::: {.content-hidden}"`
-```{r chart_saf_ansp_ses, eval = params$country == "SES RP3"}
-#| file: R/chart_level1_saf_ses.R
-#| out.width: "100%"
-```
-`r if (params$country != "SES RP3") "::::::"`
-
-`r if (params$country == "SES RP3") ":::::: {.content-hidden}"`
 ```{r, eval = params$country != "SES RP3"}
 #| echo: false
 mycharts[[1]]
 ```
-`r if (params$country == "SES RP3") "::::::"`
 ::::::
 :::::
-`r if (params$country != "SES RP3" & params$no_saf_ansps >1) "::::"`
+`r if (params$no_saf_ansps >1) "::::"`
 
 
 `r if (params$country == "SES RP3" | params$no_saf_ansps == 1) ":::: {.content-hidden}"`
@@ -142,6 +133,22 @@ mycharts[[4]]
 
 
 `r if (params$country != "SES RP3") ":::: {.content-hidden}"`
+::::: {layout="[ 50, 50 ]"}
+:::::: {.chart-container}  
+```{r chart_level2_saf_eosm_target_ses, eval = params$country == "SES RP3"}
+#| file: R/chart_level2_saf_eosm_target_ses.R
+#| out.width: "100%"
+```
+::::::
+
+:::::: {.chart-container}  
+```{r chart_saf_ansp_ses, eval = params$country == "SES RP3"}
+#| file: R/chart_level1_saf_ses.R
+#| out.width: "100%"
+```
+::::::
+:::::
+
 ```{r chart_level2_saf_eosm_ses_allstates, eval= params$country == "SES RP3"}
 #| file: R/chart_level2_saf_eosm_ses_allstates.R
 #| out.width: "100%"
