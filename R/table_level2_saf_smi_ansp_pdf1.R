@@ -49,7 +49,11 @@ data_prep <- data_calc %>%
   group_by(myentity) %>% 
   arrange(year) %>% 
   mutate(
-    variation = if_else(lag(rate_per_100_000, 1) == 0, 0, rate_per_100_000/lag(rate_per_100_000, 1) -1)
+    variation = if_else(lag(rate_per_100_000, 1) == 0, 0, rate_per_100_000/lag(rate_per_100_000, 1) -1),
+    variation = if_else(is.nan(variation), NA, variation),
+    smi = if_else(year>year_report, NA, smi),
+    flight_hours = if_else(year>year_report, NA, flight_hours),
+    rate_per_100_000 = if_else(year>year_report, NA, rate_per_100_000)
   ) %>% 
   ungroup() %>% 
   select(
@@ -86,7 +90,7 @@ table1 <-mygtable(data_prep, myfont*0.9) %>%
     title = md("**Rate of SMI with ANS contribution per 100,000 flight hours**")
   ) %>% 
   fmt_number(
-    columns = c(3:10),  # Specify the columns to format
+    columns = c(3:12),  # Specify the columns to format
     decimals = 0,  # Number of decimal places
     use_seps = TRUE  # Use thousands separator
   ) 

@@ -49,7 +49,11 @@ data_prep <- data_calc %>%
   group_by(myentity) %>% 
   arrange(year) %>% 
   mutate(
-    variation = if_else(lag(rate_per_100_000, 1) == 0, 0, rate_per_100_000/lag(rate_per_100_000, 1) -1)
+    variation = if_else(lag(rate_per_100_000, 1) == 0, 0, rate_per_100_000/lag(rate_per_100_000, 1) -1),
+    variation = if_else(is.nan(variation), NA, variation),
+    smi = if_else(year>year_report, NA, smi),
+    flight_hours = if_else(year>year_report, NA, flight_hours),
+    rate_per_100_000 = if_else(year>year_report, NA, rate_per_100_000)
   ) %>% 
   ungroup() %>% 
   select(
@@ -70,11 +74,20 @@ data_prep <- data_calc %>%
   ) %>% 
   relocate(
     "#", .before = 1
-  )
-    
+  ) 
+
+# %>%
+#   mutate(across(
+#     .cols = matches("^Flight hours_\\d{4}$|^#$"),
+#     .fns = ~ sprintf(
+#       "<span style='white-space:nowrap;'>%s</span>",
+#       format(round(as.numeric(.),0), big.mark = ",", scientific = FALSE)
+#     )
+#   ))
+
 
 # plot table ----
-table1 <-mygtable(data_prep, myfont*0.9) %>% 
+table1 <-mygtable(data_prep, myfont*0.8) %>% 
   tab_spanner_delim(
     delim = "_"
   ) |> 
@@ -84,17 +97,22 @@ table1 <-mygtable(data_prep, myfont*0.9) %>%
   tab_header(
     title = md("**Rate of SMI with ANS contribution per 100,000 flight hours**")
   ) %>% 
+  # tab_style(
+  #   style = cell_text(size = px(myfont*0.8)),  
+  #   locations = cells_body(columns = c(1,3:7))
+  # ) %>% 
+  # fmt_markdown(columns = c(1,3:7)) %>% 
   fmt_number(
-    columns = c(3:10),  # Specify the columns to format
+    columns = c(3:12),  # Specify the columns to format
     decimals = 0,  # Number of decimal places
     use_seps = TRUE  # Use thousands separator
   ) %>%  
   fmt_number(
-    columns = c(11:14),  # Specify the columns to format
-    decimals = 2,  # Number of decimal places
+    columns = c(13:17),  # Specify the columns to format
+    decimals = 1,  # Number of decimal places
   ) %>%  
   fmt(
-    columns = 15:18,
+    columns = 18:22,
     fns = function(x) {
       dplyr::case_when(
         x > 0 ~ paste0("+", scales::percent(x, accuracy = 1)),
@@ -102,6 +120,7 @@ table1 <-mygtable(data_prep, myfont*0.9) %>%
       )
     }
   )
+
   
 
 # create latex table

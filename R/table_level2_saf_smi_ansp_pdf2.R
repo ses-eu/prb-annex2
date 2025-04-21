@@ -49,7 +49,11 @@ data_prep <- data_calc %>%
   group_by(myentity) %>% 
   arrange(year) %>% 
   mutate(
-    variation = if_else(lag(rate_per_100_000, 1) == 0, 0, rate_per_100_000/lag(rate_per_100_000, 1) -1)
+    variation = if_else(lag(rate_per_100_000, 1) == 0, 0, rate_per_100_000/lag(rate_per_100_000, 1) -1),
+    variation = if_else(is.nan(variation), NA, variation),
+    smi = if_else(year>year_report, NA, smi),
+    flight_hours = if_else(year>year_report, NA, flight_hours),
+    rate_per_100_000 = if_else(year>year_report, NA, rate_per_100_000)
   ) %>% 
   ungroup() %>% 
   select(
@@ -91,11 +95,11 @@ table1 <-mygtable(data_prep, myfont*0.9) %>%
     # use_seps = TRUE  # Use thousands separator
   # ) 
   fmt_number(
-    columns = c(3:6),  # Specify the columns to format
-    decimals = 2,  # Number of decimal places
+    columns = c(3:7),  # Specify the columns to format
+    decimals = 1,  # Number of decimal places
   ) %>%
   fmt(
-    columns = 7:10,
+    columns = 8:12,
     fns = function(x) {
       dplyr::case_when(
         x > 0 ~ paste0("+", scales::percent(x, accuracy = 1)),
