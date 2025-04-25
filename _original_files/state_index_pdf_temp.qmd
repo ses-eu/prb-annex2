@@ -1276,7 +1276,7 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 
 \needspace{3\baselineskip}
 
-# COST-EFFIENCY - `r toupper(params$country)`
+# COST-EFFICIENCY - `r toupper(params$country)`
 
 ## PRB monitoring
 
