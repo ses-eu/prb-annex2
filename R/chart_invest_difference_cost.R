@@ -1,4 +1,4 @@
-if (!exists("country")) {country <- "Bulgaria"}
+if (!exists("country")) {country <- "France"}
 if (!exists("cost_type")) {cost_type <- "enroute"}
 
 # source("R/parameters.R")
@@ -76,9 +76,10 @@ data_prep_total <- data_prep_year %>%
 data_prep <- rbind(data_prep_year, data_prep_total) %>%
   pivot_wider( names_from = "type", values_from = "value" ) %>% 
   mutate(
-    value = if_else(a == 0, 0, a/d-1)
+    value = if_else(a == 0, 0, a/d-1),
+    cost_difference = (a-d)/1000
   ) %>% 
-  select(year, value) %>% 
+  select(year, value, cost_difference) %>% 
   mutate(
     split_flag = value > 0.05
     ) %>% 
@@ -97,7 +98,11 @@ data_prep <- rbind(data_prep_year, data_prep_total) %>%
   mutate(
     mymetric = round(value*100,1),
     myothermetric = 5,
-    textlabel = if_else(mymetric == 0, "", paste0(format(mymetric, nsmall = 0), "%"))
+    textlabel = if_else(mymetric == 0, "",
+                        paste0(format(mymetric, nsmall = 0), 
+                               "% (",
+                               format(round(cost_difference,2) , nsmall = 2),
+                               "M€)"))
   ) %>% 
   select(
     xlabel = year,
@@ -147,7 +152,7 @@ myplot <- mybarchart2(data_prep,
                       decimals = local_decimals,
                       
                       text = ~textlabel,
-                      hovertemplate = "<b>%{x}</b><br>%{meta}: %{y:.1f}%<extra></extra>",
+                      hovertemplate = "<b>%{x}</b><br>%{meta}: %{text}<extra></extra>",
                       hovermode = "x",
                       
                       textangle = 0,
