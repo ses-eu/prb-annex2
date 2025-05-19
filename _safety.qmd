@@ -46,7 +46,7 @@ saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_
 
 ::: {#container-saf-indicators}
 
-`r if_else(params$country == "SES RP3", "## Actual versus planned number of ANSPs achieving the level of the EoSM targets for RP3 ahead of 2024", "## Effectiveness of Safety Management (EoSM) (KPI#1)")`
+## Effectiveness of Safety Management (EoSM) (KPI#1)
 
 ```{r, eval = params$country != "SES RP3"}
 #| label: chart_saf_eosm
@@ -233,6 +233,14 @@ mycharts[[4]]
 :::::
 ::::
 
+:::: {.callout-note collapse=true}
+
+#### Focus on runway incursions
+
+Placeholder for text
+
+::::
+
 `r if (params$country == "MUAC") "::::"`
 
 ## Rate of separation minima infringements (SMIs) (PI#2)
@@ -261,13 +269,22 @@ mycharts[[4]]
 
 `r if (params$country == "SES RP3") ":::: {.content-hidden}"`
 
+:::: {.callout-note collapse=true}
+
+#### Focus on separation minima
+
+Placeholder for text
+
+::::
+
+
 ## Quality of occurences reporting 
 
 placeholder for text
 
 ## Use of automated safety data recording system (ASDRS) (PI#3)
 
-:::: {layout="[ 25, 50, 25 ]"}
+:::: {layout="[ 25, 50, 25 ]" .mb-0}
 ::::: {#emptydiv}  
 :::::
 
@@ -280,6 +297,23 @@ placeholder for text
 
 ::::: {#emptydiv}  
 :::::
+::::
+
+
+:::: {layout="[ 25, 50, 25 ]"}
+::::: {#emptydiv}  
+:::::
+
+::::: {.chart-container}  
+Consectetur viverra ornare mollis eget hendrerit dictum rhoncus nisl aliquet primis massa habitasse. Integer viverra ultrices quisque
+imperdiet dictumst volutpat; bibendum tellus penatibus fames bibendum. A natoque imperdiet pharetra natoque curae aenean magnis faucibus
+magna nibh aliquet lobortis. Na lobortis.
+
+:::::
+
+::::: {#emptydiv}  
+:::::
+
 ::::
 
 `r if (params$country == "SES RP3") "::::"`
