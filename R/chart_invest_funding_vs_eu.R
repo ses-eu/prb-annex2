@@ -47,7 +47,7 @@ if (knitr::is_latex_output()) {
 
 # plot chart ----
 mydonutchart(data_prep, 
-             colors = c('#FFF000', '#22A0DD'),
+             colors = c('#22A0E7', '#58595B'),
              shape = c("/", ""), # not supported by plotly on donut charts
              hovertemplate = "%{label}: %{value:.0f}%<extra></extra>",
              title_text = "Share of declared funding in RP3 (M€<sub>2017</sub>)",
