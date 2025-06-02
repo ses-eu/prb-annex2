@@ -65,21 +65,21 @@
 ### Asset value for new investments: ANSP compared to Union-wide
 
 ::: {layout="[ 33, 33, 33 ]"}
-:::: {.chart-container}  
+:::: {.chart-container}
 ```{r chart_invest_av_vs_eu1, eval=(params$country != "SES RP3")}
 #| file: R/chart_invest_av_vs_eu1.R
 #| out.width: "100%"
 ```
 ::::
 
-:::: {.chart-container}  
+:::: {.chart-container}
 ```{r chart_invest_av_vs_eu2, eval=(params$country != "SES RP3")}
 #| file: R/chart_invest_av_vs_eu2.R
 #| out.width: "100%"
 ```
 ::::
 
-:::: {.chart-container}  
+:::: {.chart-container}
 ```{r chart_invest_av_vs_eu3, eval=(params$country != "SES RP3")}
 #| file: R/chart_invest_av_vs_eu3.R
 #| out.width: "100%"
@@ -126,7 +126,7 @@ table3
 <br>
 
 ::: {layout="[ 50, 0, 50 ]"}
-:::: {.chart-container}  
+:::: {.chart-container}
 ```{r chart_invest_cost_total}
 #| file: R/chart_invest_cost_total.R
 #| out.width: "100%"
@@ -136,7 +136,7 @@ table3
 ::::{#empty_div}
 ::::
 
-:::: {.chart-container}  
+:::: {.chart-container}
 ```{r chart_invest_cost_category}
 #| file: R/chart_invest_cost_category.R
 #| out.width: "100%"
@@ -304,7 +304,7 @@ no_investments <- no_investments
 :::: {#empty_div}
 ::::
 
-:::: {.chart-container}  
+:::: {.chart-container}
 ```{r chart_invest_cost_new_major_few, eval=(no_investments <= 6)}
 #| file: R/chart_invest_cost_new_major.R
 #| out.width: "100%"
@@ -320,6 +320,7 @@ no_investments <- no_investments
 
 ## Expected benefit and impact per new major investment `r country` | `r if_else(params$country == "SES RP3", "all ANSPs", main_ansp)`
 
+
 ```{r table_invest_benefits_kpa}
 #| file: R/table_invest_benefits_kpa.R
 #| out.width: "100%"
@@ -333,7 +334,7 @@ no_investments <- no_investments
 <br>
 
 ::: {layout="[ 50, 0, 50 ]"}
-:::: {.chart-container}  
+:::: {.chart-container}
 ```{r chart_invest_benefits_kpa}
 #| file: R/chart_invest_benefits_kpa.R
 #| out.width: "100%"
@@ -343,7 +344,7 @@ no_investments <- no_investments
 ::::{#empty_div}
 ::::
 
-:::: {.chart-container}  
+:::: {.chart-container}
 ```{r chart_invest_benefits}
 #| file: R/chart_invest_benefits.R
 #| out.width: "100%"
@@ -360,7 +361,7 @@ no_investments <- no_investments
 <br>
 
 ::: {layout="[ 50, 0, 50 ]"}
-:::: {.chart-container}  
+:::: {.chart-container}
 ```{r chart_invest_type_eu}
 #| file: R/chart_invest_type_eu.R
 #| out.width: "100%"
@@ -370,7 +371,7 @@ no_investments <- no_investments
 ::::{#empty_div}
 ::::
 
-:::: {.chart-container}  
+:::: {.chart-container}
 ```{r chart_invest_type}
 #| file: R/chart_invest_type.R
 #| out.width: "100%"

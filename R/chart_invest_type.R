@@ -21,6 +21,7 @@ data_prep <- data_impact %>%
   ) %>% 
   pivot_longer(everything(), names_to = "xlabel", values_to = "mymetric") %>% 
   mutate(
+    mymetric = mymetric / 10^6,
     type = if_else(str_detect(xlabel, "det"), "Determined", "Actual"),
     xlabel = str_replace_all(xlabel, "det", ""),
     xlabel = case_when(
