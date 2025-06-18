@@ -206,7 +206,7 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 `r if (params$country == "SES RP3" & cztype == "enroute") "::::::"`
 
 `r if (params$country != "SES RP3" | cztype == "terminal") ":::::: {.content-hidden}"`
-```{r chart_cef_duc_er_ses, options = (cz=c("@@cz_index@@", "@@cz_type@@"))}
+```{r chart_cef_duc_er_ses, options = (cz=c("@@cz_index@@", "@@cz_type@@")), eval=(params$country == "SES RP3")}
 #| file: R/chart_level1_cef_er_ses.R
 #| out.width: "100%"
 ```

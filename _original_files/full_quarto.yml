@@ -152,6 +152,8 @@ website:
         text: About
       - href: home_address/download.html
         text: Download
+      - href: https://www.eurocontrol.int/prudata/dashboard/
+        text: Data Portal {{< fa external-link-alt >}}
       - href: https://eu-single-sky.transport.ec.europa.eu/index_en
         text: Publications {{< fa external-link-alt >}}
         target: "_blank"
@@ -161,6 +163,8 @@ website:
     contents:
       - section: '<b style= "font-size: 1.2rem">Year report</b>'
         contents:
+          - text: "2024"
+            href: 'home_address/2024/country_lower/index.html#main'
           - text: "2023"
             href: 'home_address/2023/country_lower/index.html#main'
           - text: "2022"
