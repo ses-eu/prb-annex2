@@ -936,7 +936,9 @@ cef_text2 <- cef_text$text2
 
 \needspace{2\baselineskip}
 
-## Rate of runway incursions (RIs) (PI#1)
+## Safety occurrences
+
+### Rate of runway incursions (RIs) (PI#1)
 
 `r layout_2fig("chart_saf_ri", "chart_level2_saf_ri_year_report")`
 
@@ -947,7 +949,7 @@ cef_text2 <- cef_text$text2
 
 \needspace{2\baselineskip}
 
-## Rate of separation minima infringements (SMIs) (PI#2)
+### Rate of separation minima infringements (SMIs) (PI#2)
 
 `r layout_2fig("chart_saf_smi", "chart_level2_saf_smi_year_report")`
 
@@ -960,7 +962,7 @@ cef_text2 <- cef_text$text2
 
 \needspace{2\baselineskip}
 
-## Quality of occurences reporting 
+### Quality of occurences reporting 
 
 placeholder for text
 
