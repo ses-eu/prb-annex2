@@ -193,7 +193,7 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 ::: {#container-cef-duc}
 
-### Unit cost (KPI#1)
+### [**Unit cost (KPI#1)**](`r params$home_address`/about.html#cost-efficiency---unit-costs-ducaucu-kpi1)
 
 :::: {layout="[ 50, 50 ]"}
 
@@ -304,7 +304,7 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 ::: {#container-cef-aucu}
 
-### Actual unit cost incurred by the users (AUCU) (PI#1)
+### Actual unit cost incurred by the users ([**AUCU**](`r params$home_address`/about.html#cost-efficiency---actual-unit-cost-incurred-by-the-users-aucu-pi1)) (PI#1)
 
 :::: {layout="[ 50, 50 ]"}
 ::::: {.chart-container}  
@@ -353,7 +353,7 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 ::: {#container-cef-reg-res}
 
-### Regulatory result (RR)
+### Regulatory result ([**RR**](`r params$home_address`/about.html#cost-efficiency---regulatory-result-rr))
 
 :::: {layout="[ 50, 50 ]"}
 ::::: {.chart-container}  

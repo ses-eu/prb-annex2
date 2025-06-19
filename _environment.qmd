@@ -183,7 +183,7 @@ env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Find
 
 ## En route performance
 
-### Horizontal flight efficiency of the actual trajectory (KEA) (KPI#1), of the last filed flight plan (KEP) (PI#1) & shortest constrained route (SCR) (PI#2)
+### Horizontal flight efficiency of the actual trajectory ([**KEA**](`r params$home_address`/about.html#environment---horizontal-flight-efficiency-of-the-actual-trajectory-kea-kpi1-of-the-last-filed-flight-plan-kep-pi1-shortest-constrained-route-scr-pi2)) (KPI#1), of the last filed flight plan ([**KEP**](`r params$home_address`/about.html#environment---horizontal-flight-efficiency-of-the-actual-trajectory-kea-kpi1-of-the-last-filed-flight-plan-kep-pi1-shortest-constrained-route-scr-pi2)) (PI#1) & shortest constrained route ([**SCR**](`r params$home_address`/about.html#environment---horizontal-flight-efficiency-of-the-actual-trajectory-kea-kpi1-of-the-last-filed-flight-plan-kep-pi1-shortest-constrained-route-scr-pi2)) (PI#2)
 
 :::: {layout="[ 50, 50 ]"}
 
@@ -232,7 +232,7 @@ env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Find
 
 ## Terminal performance
 
-### Additional taxi-out time (AXOT) (PI#3) & Arrival Sequencing and Metering Area (ASMA) time (PI#4)
+### Additional taxi-out time ([**AXOT**](`r params$home_address`/about.html#environment---additional-taxi-out-time-axot-pi3-arrival-sequencing-and-metering-area-asma-time-pi4)) (PI#3) & Arrival Sequencing and Metering Area ([**ASMA**](`r params$home_address`/about.html#environment---additional-taxi-out-time-axot-pi3-arrival-sequencing-and-metering-area-asma-time-pi4)) time (PI#4)
 
 :::: {layout="[ 20, 60, 20 ]"}
 
@@ -282,7 +282,7 @@ env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Find
 
 ::: {#container-cdo}
 
-### Share of arrivals applying continuous descent operations (CDOs) (PI#5)
+### Share of arrivals applying continuous descent operations ([**CDOs**](`r params$home_address`/about.html#environment---share-of-arrivals-applying-continuous-descent-operations-cdos-pi5)) (PI#5)
 
 :::: {layout="[ 50, 50 ]"}
 
@@ -329,7 +329,7 @@ env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Find
 `r if (params$country == "Luxembourg") "::: {.content-hidden}"`
 ::: {#container-mil-pi}
 
-## Civil-Military dimension 
+## [**Civil-Military dimension**](`r params$home_address`/about.html#civil-military-dimension)  
 
 :::: {layout="[ 20, 60, 20 ]"}
 

@@ -46,7 +46,7 @@ saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_
 
 ::: {#container-saf-indicators}
 
-## Effectiveness of Safety Management (EoSM) (KPI#1)
+## Effectiveness of Safety Management ([**EoSM**](`r params$home_address`/about.html#safety---effectiveness-of-safety-management-eosm-kpi1)) (KPI#1)
 
 ```{r, eval = params$country != "SES RP3"}
 #| label: chart_saf_eosm
@@ -189,7 +189,7 @@ mycharts[[4]]
 
 ## Safety occurrences
 
-### Rate of runway incursions (RIs) (PI#1)
+### Rate of runway incursions ([**RIs**](`r params$home_address`/about.html#occurrences---rate-of-runway-incursions-ris-pi1-rate-of-separation-minima-infringements-smis-pi2)) (PI#1)
 
 :::: {layout="[ 45, 55 ]"}
 ::::: {.chart-container}  
@@ -245,7 +245,7 @@ Placeholder for text
 
 `r if (params$country == "MUAC") "::::"`
 
-### Rate of separation minima infringements (SMIs) (PI#2)
+### Rate of separation minima infringements ([**SMIs**](`r params$home_address`/about.html#occurrences---rate-of-runway-incursions-ris-pi1-rate-of-separation-minima-infringements-smis-pi2)) (PI#2)
 
 :::: {layout="[ 45, 55 ]"}
 ::::: {.chart-container}  
