@@ -1,6 +1,6 @@
 ::: {.grid .align-items-center}
 :::: {.g-col-9}
-[Annual Monitoring Report {{< var doc.year_report >}} - {{< var doc.country >}}]{.fakeh1}
+[Annual Monitoring Report `r toupper(params$year_folder)` - {{< var doc.country >}}]{.fakeh1}
 ::::
 
 :::: {.g-col-3}
@@ -13,12 +13,26 @@
 cztype = "enroute"
 cz = c("1", "enroute")
 
-data_muac  <-  read_xlsx(
+data_muac_raw  <-  read_xlsx(
   paste0(data_folder, "CEFF dataset master.xlsx"),
   sheet = "Enroute_T1",
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
-  clean_names() |> 
+  clean_names()
+
+if (year_folder == "rp3") {
+  data_muac <- data_muac_raw |> 
+  filter(grepl("MUAC", entity_code), status == "A") |> 
+  mutate(
+    entity_code = str_replace_all(entity_code, "_EB", ""),
+    entity_code = str_replace_all(entity_code, "_EL", "")
+    ) |> 
+  group_by(entity_code) |> 
+  summarise(x5_3_cost_nc2017 = sum(x5_3_cost_nc2017, na.rm = TRUE)) |> 
+  ungroup()
+  
+} else {
+data_muac <- data_muac_raw |> 
   filter(grepl("MUAC", entity_code), status == "A", year == year_report) |> 
   mutate(
     entity_code = str_replace_all(entity_code, "_EB", ""),
@@ -27,6 +41,8 @@ data_muac  <-  read_xlsx(
   group_by(year, entity_code) |> 
   summarise(x5_3_cost_nc2017 = sum(x5_3_cost_nc2017, na.rm = TRUE)) |> 
   ungroup()
+  
+}
 
 total_muac_costs <- sum(data_muac$x5_3_cost_nc2017, na.rm = TRUE)
 

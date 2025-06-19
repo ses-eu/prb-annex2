@@ -4,6 +4,7 @@ params:
   state_list:     $state_list
   country:        $country
   year_report:    $year_report
+  year_folder:    $year_folder
   data_folder:    $data_folder
   forecast_id:    $forecast_id
   forecast:       $forecast
@@ -123,6 +124,7 @@ params:
 home_address <- params$home_address
 data_folder <- params$data_folder
 year_report <- params$year_report
+year_folder <- params$year_folder
 state_list <- params$state_list
 country <- params$country
 forecast <- params$forecast

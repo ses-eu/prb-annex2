@@ -1,6 +1,6 @@
 ::: {.grid .align-items-center}
 :::: {.g-col-9}
-[Annual Monitoring Report {{< var doc.year_report >}} - {{< var doc.country >}}]{.fakeh1}
+[Annual Monitoring Report `r toupper(params$year_folder)` - {{< var doc.country >}}]{.fakeh1}
 ::::
 
 :::: {.g-col-3}
@@ -10,13 +10,45 @@
 
 ## Contextual information
 ```{r fetch-data-ses, eval=TRUE}
-data_context <-read_xlsx(
+data_context_raw <-read_xlsx(
   paste0(data_folder, "SES file.xlsx"),
   sheet = "Context",
   range = cell_limits(c(1, 1), c(NA, NA))) %>%
   as_tibble() %>% 
-  clean_names() %>% 
-  filter(year_report == .env$year_report & year == .env$year_report)
+  clean_names() 
+
+if (year_folder == "rp3") {
+  data_context <- data_context_raw %>% 
+    filter(year_report == .env$year_report) %>% 
+    summarise(
+      number_of_acc = max(number_of_acc, na.rm = TRUE),
+      no_apts_big = min(no_apt_big, na.rm = TRUE),
+      no_apts_small = max(no_apt_small, na.rm = TRUE),
+      
+      ert_cz = max(ert_cz, na.rm = TRUE),
+      trm_cz = max(trm_cz, na.rm = TRUE),
+      
+      main_ans_ps_ert = max(main_ans_ps_ert, na.rm = TRUE),
+      other_ans_ps_ert = max(other_ans_ps_ert, na.rm = TRUE),
+      met_providers = max(met_providers, na.rm = TRUE),
+      
+      en_route_costs = sum(en_route_costs, na.rm = TRUE),
+      terminal_costs = sum(terminal_costs, na.rm = TRUE)
+      
+    ) %>% 
+      mutate(
+        ert_trm_share = paste0(
+          format(round(en_route_costs/(en_route_costs + terminal_costs)*100, 0), nsmall = 0),
+          "% / ",
+                   format(round(terminal_costs/(en_route_costs + terminal_costs)*100, 0), nsmall = 0),
+          "%"
+        )
+      )
+
+} else {
+  data_context <- data_context_raw %>% 
+    filter(year_report == .env$year_report & year == .env$year_report)
+}
 
 acc_no <- data_context %>% select(number_of_acc) %>% pull()
 no_apt_big <- data_context %>% select(no_apts_big) %>% pull()
@@ -51,7 +83,7 @@ met_ansp <- data_context %>% select(met_providers) %>% pull()
 <!-- ******************* 2nd column -->
 :::: {.column width="38%"}
 
-**Share en route / terminal costs `r year_report` ** `r ert_trm_share`
+**Share en route / terminal costs `r toupper(params$year_folder)`  ** `r ert_trm_share`
 
 ::::: columns
 :::::: {.column width="55%"}

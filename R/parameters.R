@@ -4,7 +4,7 @@
                       '//ihx-vdm05/LIVE_var_www_performance$/oscar/prb-monitoring-test/',
                       '//ihx-vdm05/LIVE_var_www_performance$/oscar/prb-monitoring-prod/'
                       )
-  destination_dir <- paste0(root_dir, year_report, '/')
+  destination_dir <- paste0(root_dir, year_folder, '/')
   home_address <- if_else(test_check == TRUE, 
                           'https://www.eurocontrol.int/performance/oscar/prb-monitoring-test',
                           'https://www.sesperformance.eu'
@@ -166,9 +166,71 @@
            year_report == .env$year_report
          ) 
 
+  if (year_folder == "rp3") {
+    context_data_rp3 <- context_data_table %>% 
+      mutate(
+        ts_us = as.numeric(stringr::str_replace_all(ts_us, "-", "0")),
+        ert_costs = as.numeric(stringr::str_replace_all(ert_costs, "-", "0")),
+        trm_costs = as.numeric(stringr::str_replace_all(trm_costs, "-", "0")),
+      ) %>% 
+      group_by(state) %>% 
+      summarise(
+        ts_us = sum(ts_us, na.rm = TRUE),
+        ert_costs = sum(ert_costs, na.rm = TRUE),
+        trm_costs = sum(trm_costs, na.rm = TRUE)
+      )
+    
+    tsu_rp3_country <- context_data_rp3 %>% 
+      filter(state == .env$country) %>% 
+      select(ts_us) %>% 
+      pull()
+      
+    ert_costs_rp3_country <- context_data_rp3 %>% 
+      filter(state == .env$country) %>% 
+      select(ert_costs) %>% 
+      pull()
+    
+    trm_costs_rp3_country <- context_data_rp3 %>% 
+      filter(state == .env$country) %>% 
+      select(trm_costs) %>% 
+      pull()
+    
+    tsu_rp3_ses <- context_data_rp3 %>% 
+      filter(state == "SES RP3") %>% 
+      select(ts_us) %>% 
+      pull()
+    
+    ert_costs_rp3_ses <- context_data_rp3 %>% 
+      filter(state == "SES RP3") %>% 
+      select(ert_costs) %>% 
+      pull()
+    
+    trm_costs_rp3_ses <- context_data_rp3 %>% 
+      filter(state == "SES RP3") %>% 
+      select(trm_costs) %>% 
+      pull()
+    
+    tsu_share <- paste0(format(round(tsu_rp3_country / tsu_rp3_ses *100,1), nsmall=1),
+                              '%')
+
+    ert_cost_share <- paste0(format(round(ert_costs_rp3_country / ert_costs_rp3_ses *100,1), nsmall=1),
+                        '%')
+    trm_cost_share <- paste0(format(round(trm_costs_rp3_country / trm_costs_rp3_ses *100,1), nsmall=1),
+                             '%')
+    
+    ert_trm_share <- paste0(format(round(ert_costs_rp3_country / (ert_costs_rp3_country + trm_costs_rp3_country)*100, 0), nsmall = 0),
+                            "% / ",
+                            format(round(trm_costs_rp3_country / (ert_costs_rp3_country + trm_costs_rp3_country)*100, 0), nsmall = 0),
+                            "%"
+    )
+    
+    # =IFERROR(TEXT([@[ERT_costs]]/([@[TRM_Costs]]+[@[ERT_costs]]),"0%") & " / " & TEXT([@[TRM_Costs]]/([@[TRM_Costs]]+[@[ERT_costs]]),"0%"),"-")
+    
+  } else {
     tsu_share <- paste0(format(round(as.numeric(context_data$tsu_share) *100,1), nsmall=1),'%')
     ert_cost_share <- paste0(format(round(as.numeric(context_data$ert_cost_share) *100,1), nsmall=1),'%')
     ert_trm_share <- context_data$ert_trm_share
+  } 
     
     xrate2017 <- context_data$xrate2017
     

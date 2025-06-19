@@ -11,7 +11,7 @@ xrate_year_report <- if_else(country == "Luxembourg", 1, pull(xrate))
 
 ::: {.grid .align-items-center}
 :::: {.g-col-9}
-[Annual Monitoring Report {{< var doc.year_report >}} - {{< var doc.country >}}]{.fakeh1}
+[Annual Monitoring Report `r toupper(params$year_folder)` - {{< var doc.country >}}]{.fakeh1}
 ::::
 
 :::: {.g-col-3}
@@ -50,10 +50,12 @@ xrate_year_report <- if_else(country == "Luxembourg", 1, pull(xrate))
 <!-- ******************* 2nd column -->
 :::: {.column width="38%"}
 
+`r if (params$year_folder == "rp3") ":::: {.content-hidden}"`
 ::::: columns
 :::::: {.column width="50%"}
 **Exchange rate (1 EUR=) **
 ::::::
+`r if (params$year_folder == "rp3") "::::"`
 
 :::::: {.column width="50%"}
 `r paste0("2017: ", xrate2017, " ", nat_curr)`\
@@ -61,11 +63,11 @@ xrate_year_report <- if_else(country == "Luxembourg", 1, pull(xrate))
 ::::::
 :::::
 
-<p style="margin-bottom: 0.5rem"> **Share of Union-wide traffic (TSUs) `r year_report` **  `r tsu_share` </p>
+<p style="margin-bottom: 0.5rem"> **Share of Union-wide traffic (TSUs) `r toupper(params$year_folder)` **  `r tsu_share` </p>
 
-<p style="margin-bottom: 0.5rem"> **Share of Union-wide en route costs `r year_report` ** `r ert_cost_share` </p>
+<p style="margin-bottom: 0.5rem"> **Share of Union-wide en route costs `r toupper(params$year_folder)` ** `r ert_cost_share` </p>
 
-**Share en route / terminal costs `r year_report` ** `r ert_trm_share`
+**Share en route / terminal costs `r toupper(params$year_folder)` ** `r ert_trm_share`
 
 ::::: columns
 :::::: {.column width="50%"}

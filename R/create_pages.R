@@ -88,7 +88,7 @@ if (investments) {
   
 # generate level 2 .qmd master files ----
 ## set list of level 2 files depending on case
-if (investments | country == "Home" | country == "Network Manager") {
+if (investments | country == "Home" | country == "Network Manager" | year_folder == "rp3") {
   level2_files <- ""
   
 } else if(country == "MUAC") {
@@ -167,8 +167,8 @@ if (out_format == 'web') {
   tx <- str_replace(tx, 'home_address', home_address)
   tx <- str_replace(tx, 'country_lower', country_lower)  
   ## add check box to year report
-  tx <- str_replace(tx, paste0('text: "', year_report, '"'),
-                        paste0('text: "<span style= \'color: #2151bf\'>', year_report, ' &#10003</span>"'))
+  tx <- str_replace(tx, paste0('text: "', toupper(year_folder), '"'),
+                        paste0('text: "<span style= \'color: #2151bf\'>', toupper(year_folder), ' &#10003</span>"'))
     
   if (investments | country == "Home") {
     ## Home page case ----
@@ -235,7 +235,7 @@ if (out_format == 'web') {
     }
     
     ### write new file
-    writeLines(tx, con="_quarto.yml")
+    # writeLines(tx, con="_quarto.yml")
       
   } 
   else if (country == "Network Manager") {
@@ -258,11 +258,7 @@ if (out_format == 'web') {
     }  
   
     tx <- tx[-c(block_l2_beg:block_l2_end)]
-       
-            
-    ### write new file ----
-    writeLines(tx, con="_quarto.yml")
-    
+
   } 
   else {
     ## level 1 ----
@@ -431,10 +427,23 @@ if (out_format == 'web') {
 
       }
   
-    ## write new file ----
-    writeLines(tx, con="_quarto.yml")
 
-   }
+  }
+  
+  ## year = rp3 case ----
+  if (year_folder == "rp3") {
+    ### level 2
+    ### find beginning and end of level 2 block to remove
+    for (i in 1:length(tx)) {
+      if (tx[i] %like% 'block level2 beginning') {block_l2_beg = i}
+      if (tx[i] %like% 'block level2 end') {block_l2_end = i}
+    }  
+    
+    tx <- tx[-c(block_l2_beg:block_l2_end)]
+  }
+    
+  ## write new file ----
+  writeLines(tx, con="_quarto.yml")
 }
     
 # render site ----
@@ -443,6 +452,7 @@ if (out_format == 'web') {
                                               state_list = state_list, 
                                               country = country, 
                                               year_report = year_report,
+                                              year_folder = year_folder,
                                               data_folder = data_folder,
                                               forecast = forecast,
                                               forecast_id = forecast_id,

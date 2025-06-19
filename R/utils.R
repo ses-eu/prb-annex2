@@ -1363,11 +1363,11 @@ get_prb_conclusions <- function(filename, kpi, table) {
   
   if (country == 'Network Manager') {
     conc <- read_mytable(filename, kpi, table) %>%
-      filter(Year_Report == year_report) %>%
+      filter(as.character(Year_Report) == as.character(year_folder)) %>%
       select(Conclusion)
   } else {
     conc <- read_mytable(filename, kpi, table) %>%
-      filter(Year_Report == year_report, State == country) %>%
+      filter(as.character(Year_Report) == as.character(year_folder), State == country) %>%
       select(Conclusion)
   }
   
