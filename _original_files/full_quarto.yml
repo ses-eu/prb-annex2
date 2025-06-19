@@ -232,10 +232,10 @@ website:
             href: safety.html#prb-monitoring
           - text: "<b>EoSM</b>"
             href: safety.html#effectiveness-of-safety-management-eosm-kpi1
-# block muac beginning
           - text: "<b>Safety occurrences</b>"
             href: safety.html#safety-occurrences
             contents: #safety-occurrences
+# block muac beginning
             - text: "Runway incursions"
               href: safety.html#rate-of-runway-incursions-ris-pi1
 # block muac end
