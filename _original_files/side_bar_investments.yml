@@ -34,7 +34,4 @@
       - text: "---"
       - text: "<b>Public funding</b>"
         href: index.html#public-funding-granted-for-total-capex-ceften-t #tag
-        contents:
-          - text: "New and existing investments"
-            href: index.html#actual-funding-declaration-vs-payments
       - text: "---"
