@@ -67,7 +67,7 @@ if (knitr::is_latex_output()) {
 myplot <- mybarchart2(data_prep, 
                       height = myheight - 50,
                       colors = c('#044598', '#22A0DD'),
-                      local_factor = c("Other new investments", "New major investments"),
+                      local_factor = c("New major investments", "Other new investments"),
                       
                       suffix = local_suffix,
                       decimals = local_mydecimals,
