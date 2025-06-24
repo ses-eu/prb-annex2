@@ -78,10 +78,23 @@ if (country != "SES RP3"){
     filter(state == .env$country) %>% 
     arrange(year) %>% 
     mutate(
-      variation_perc = if_else(lag(main_indicator, 1) == 0, NA, main_indicator / lag(main_indicator, 1) -1) * 100,
-      rate_variation_perc = if_else(lag(rate_per_100_000, 1) == 0, NA, rate_per_100_000 / lag(rate_per_100_000, 1) -1)* 100,
-      ans_variation_perc = if_else(lag(main_indicator_ans, 1) == 0, NA, main_indicator_ans / lag(main_indicator_ans, 1) -1)* 100,
-      rate_ans_variation_perc = if_else(lag(rate_per_100_000_with_ans_contribution, 1) == 0, NA, rate_per_100_000_with_ans_contribution / lag(rate_per_100_000_with_ans_contribution, 1) -1)* 100,
+      main_indicator = if_else(is.na(main_indicator), 0, main_indicator),
+      rate_per_100_000 = if_else(is.na(rate_per_100_000), 0, rate_per_100_000),
+      main_indicator_ans = if_else(is.na(main_indicator_ans), 0, main_indicator_ans),
+      rate_per_100_000_with_ans_contribution = if_else(is.na(rate_per_100_000_with_ans_contribution), 0, rate_per_100_000_with_ans_contribution),
+      
+      variation_perc = if_else(lag(main_indicator, 1) == 0, 
+                               10^6, # to identify the NAs, we'll change them back later
+                               main_indicator / lag(main_indicator, 1) -1) * 100,
+      rate_variation_perc = if_else(lag(rate_per_100_000, 1) == 0, 
+                                    10^6,
+                                    rate_per_100_000 / lag(rate_per_100_000, 1) -1)* 100,
+      ans_variation_perc = if_else(lag(main_indicator_ans, 1) == 0, 
+                                   10^6, 
+                                   main_indicator_ans / lag(main_indicator_ans, 1) -1)* 100,
+      rate_ans_variation_perc = if_else(lag(rate_per_100_000_with_ans_contribution, 1) == 0, 
+                                        10^6, 
+                                        rate_per_100_000_with_ans_contribution / lag(rate_per_100_000_with_ans_contribution, 1) -1)* 100,
     ) %>% 
     filter(year == year_report)
   
@@ -112,7 +125,10 @@ if (country != "SES RP3"){
     ) %>% 
     pivot_longer(cols = everything(), names_to = "ylabel", values_to = "mymetric") %>% 
     mutate(
-      mylabel = paste0(if_else(mymetric>=0, "+", ""),as.character(round(mymetric,1 )), "%")
+      mylabel = if_else(mymetric == 10^8, "-",
+          paste0(if_else(mymetric>=0, "+", ""),as.character(round(mymetric,1 )), "%")
+          ),
+      mymetric = if_else(mymetric == 10^8, 0, mymetric)
     )
   
   mylocal_factor = c(
