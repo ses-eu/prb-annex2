@@ -35,10 +35,10 @@ data_prep <- data_raw %>%
   pivot_longer(-c(year), names_to = "type", values_to = "mymetric") |> 
   mutate(xlabel = year,
          type = if_else(type == "rate_per_100_000",
-                        "RI",
+                        "Rate of RI",
                         "EU Wide Average"),
          mytextposition = "top center",
-         linedash = if_else(type == "RI",
+         linedash = if_else(type == "Rate of RI",
                             "solid",
                             if_else(country == "SES RP3",
                                     "solid",
@@ -57,7 +57,7 @@ mydecimals <- 2
 ### trace parameters
 mycolors = c('#00B0F0', '#00B0F0' )
 ###set up order of traces
-myfactor <- c("RI", "EU Wide Average")
+myfactor <- c("Rate of RI", "EU Wide Average")
 
 myhovertemplate <- paste0('%{y:,.', mydecimals, 'f}', mysuffix)
 
@@ -86,7 +86,7 @@ mylocalmargin <- mymargin
 # plot chart ----
 ##I had to do it this way because when there are NA values the dash doesn't work
 data_prep_s1 <- data_prep |> filter(type == "EU Wide Average")
-data_prep_s2 <- data_prep |> filter(type == "RI") |> 
+data_prep_s2 <- data_prep |> filter(type == "Rate of RI") |> 
   mutate(myothermetric = round(mymetric, mydecimals))
 
 
@@ -95,7 +95,7 @@ p1 <- mylinechart(data_prep_s1, mywidth, myheight, myfont, mylocalmargin, mydeci
          xaxis = list(range = c(2019.5, 2024.5)))
 
 ## additional target trace
-myat_name <- "RI"
+myat_name <- "Rate of RI"
 myat_mode <- "line+markers"
 myat_yaxis <- "y1"
 myat_symbol <- NA
