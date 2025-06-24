@@ -269,7 +269,7 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 ::: {#container-cap-er}
 ## En route performance
 
-### [**En route ATFM delay (KPI#1)**](`r params$home_address`/about.html#capacity---average-en-route-atfm-delay-per-flight-kpi1) 
+### [**En route ATFM delay**](`r params$home_address`/about.html#capacity---average-en-route-atfm-delay-per-flight-kpi1) (KPI#1)
 
 :::: {layout="[ 50, 50 ]"}
 ::::: {.chart-container}  
@@ -439,7 +439,7 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 :::: {#container-cap-trm}
 ## Terminal performance
 
-### Arrival ATFM delay (KPI#2)
+### [**Arrival ATFM delay**](`r params$home_address`/about.html#capacity---average-en-route-atfm-delay-per-flight-kpi1) (KPI#2)
 
 ::::: {layout="[ 50, 50 ]"}
 
@@ -503,7 +503,7 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 
 :::: {#container-cap-other}
 
-### [**Other terminal performance indicators (PI#1-3)**](`r params$home_address`/about.html#capacity---other-terminal-performance-indicators-pi1-3)
+### [**Other terminal performance indicators**](`r params$home_address`/about.html#capacity---other-terminal-performance-indicators-pi1-3) (PI#1-3)
 
 ::::: {layout="[ 20, 60, 20 ]"}
 
