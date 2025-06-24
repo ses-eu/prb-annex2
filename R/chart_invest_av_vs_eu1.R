@@ -34,8 +34,8 @@ data_prep_ansp <- data_capex %>%
          ) %>% 
   select(xlabel, type, mymetric)
 
-data_prep <- rbind(data_prep_uw, data_prep_ansp) %>% 
-  mutate(xlabel = factor(xlabel, levels = c("Union-wide median", "ANSP")))
+data_prep <- rbind(data_prep_ansp, data_prep_uw) %>% 
+  mutate(xlabel = factor(xlabel, levels = c("ANSP", "Union-wide median")))
 
 
 # chart ----
@@ -66,7 +66,7 @@ myplot <- mybarchart2(data_prep,
                       height = myheight + 20,
                       colors = c('#FFF000', '#22A0E7' ),
                       local_factor = c("Other new investments", "New major investments"),
-                      shape = c("/", "", "/", ""),
+                      shape = c("", "/", "", "/"),
                       
                       suffix = local_suffix,
                       decimals = local_decimals,

@@ -30,7 +30,7 @@ data_prep_ansp <- data_impact %>%
   select(type, SAF, ENV, CAP, CEF) %>% 
   pivot_longer(-c(type), names_to = "xlabel", values_to = "mymetric")
 
-data_prep <- rbind(data_prep_uw, data_prep_ansp) %>% 
+data_prep <- rbind(data_prep_ansp, data_prep_uw) %>% 
   mutate(xlabel = factor(xlabel, levels = c("SAF", "ENV", "CAP", "CEF")))
 
 # chart ----
@@ -59,11 +59,11 @@ if (knitr::is_latex_output()) {
 # plot chart ----
 myplot <- mybarchart2(data_prep, 
                       height = myheight,
-                      colors = c('#58595B', '#FFC000'),
-                      local_factor = c("Union-wide median",
-                                       "ANSP",
+                      colors = c('#FFC000', '#58595B'),
+                      local_factor = c("ANSP",
+                                       "Union-wide median",
                                         NULL),
-                      shape = c("/", "/", "/", "/", "", "", "", ""),
+                      shape = c( "", "", "", "", "/", "/", "/", "/"),
                       
                       suffix = local_suffix,
                       decimals = local_decimals,

@@ -57,8 +57,8 @@ data_prep_ansp <- data_category %>%
   )  %>% 
   select(xlabel, type, mymetric)   
 
-data_prep <- rbind(data_prep_uw, data_prep_ansp) %>% 
-  mutate(xlabel = factor(xlabel, levels = c("Union-wide median", "ANSP")))
+data_prep <- rbind(data_prep_ansp, data_prep_uw) %>% 
+  mutate(xlabel = factor(xlabel, levels = c("ANSP", "Union-wide median")))
 
 
 # chart ----
@@ -93,7 +93,7 @@ myplot <- mybarchart2(data_prep,
                                        "Infrastructure",
                                        "Other",
                                        "Unknown"),
-                      shape = c("/", "", "/", "", "/", "", "/", "", "/", ""),
+                      shape = c("", "/", "", "/", "", "/", "", "/","", "/"),
                       
                       suffix = local_suffix,
                       decimals = local_decimals,
