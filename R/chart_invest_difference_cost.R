@@ -1,5 +1,5 @@
-if (!exists("country")) {country <- "France"}
-if (!exists("cost_type")) {cost_type <- "enroute"}
+if (!exists("country")) {country <- "Spain"}
+if (!exists("cost_type")) {cost_type <- "en route"}
 
 # source("R/parameters.R")
 
@@ -91,7 +91,12 @@ data_prep <- rbind(data_prep_year, data_prep_total) %>%
            row_number() == 1 & value >0 ~ "Overspending < 5%",
            row_number() > 1 & value > 0 ~ "Overspending > 5%",
            value < 0 ~ "Underspending"
-         )
+         ),
+         data_label = case_when(
+             (row_number() == 1 & value <0.05) | (value < 0)  ~ cost_difference,
+             row_number() == 1 & value >= 0.05 ~ cost_difference  * value / (value + lead(value,1)),
+             row_number() > 1 ~ cost_difference  * value / (value + lag(value,1)),
+         ),
   ) %>%
   ungroup() %>%
   select(-split_flag) %>% 
@@ -101,8 +106,9 @@ data_prep <- rbind(data_prep_year, data_prep_total) %>%
     textlabel = if_else(mymetric == 0, "",
                         paste0(format(mymetric, nsmall = 0), 
                                "% (",
-                               format(round(cost_difference,2) , nsmall = 2),
-                               "M€)"))
+                               format(round(data_label,2) , nsmall = 2),
+                               "M€)")),
+    # type = if_else(is.na(type), NA, paste0(type, ": "))
   ) %>% 
   select(
     xlabel = year,
@@ -151,8 +157,9 @@ myplot <- mybarchart2(data_prep,
                       suffix = local_suffix,
                       decimals = local_decimals,
                       
-                      text = ~textlabel,
-                      hovertemplate = "<b>%{x}</b><br>%{meta}: %{text}<extra></extra>",
+                      meta = ~paste0(type, ": ", textlabel),
+                      # text = ~textlabel,
+                      hovertemplate = "<b>%{x}</b><br>%{meta}<extra></extra>",
                       hovermode = "x",
                       
                       textangle = 0,
