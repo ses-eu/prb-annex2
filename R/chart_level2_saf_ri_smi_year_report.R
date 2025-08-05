@@ -67,9 +67,19 @@ if (safindicator == "ri") {
 # process data  ----
 mylabels <- c(
   paste0("Number of ", toupper(safindicator),"&nbsp;&nbsp;\nin the MS&nbsp;&nbsp;"),
-  paste0("Rate of ", toupper(safindicator),"&nbsp;&nbsp;\n(per 100,000 mvts)&nbsp;&nbsp;"),
+  paste0(
+    "Rate of ", 
+    toupper(safindicator),
+    if_else(safindicator == 'ri', 
+            "&nbsp;&nbsp;\n(per 100,000 mvts",
+            "&nbsp;&nbsp;\n(per 100,000 flight hours"),
+    ")&nbsp;&nbsp;"
+    ),
   paste0("Number of ", toupper(safindicator),"&nbsp;&nbsp;\nwith ANS contribution&nbsp;&nbsp;"),
-  paste0("Rate of ", toupper(safindicator),"&nbsp;&nbsp;\nwith ANS contribution&nbsp;&nbsp;\n(per 100,000 mvts)&nbsp;&nbsp;")
+  paste0("Rate of ", toupper(safindicator),
+         "&nbsp;&nbsp;\nwith ANS contribution&nbsp;&nbsp;\n(per 100,000 ",
+         if_else(safindicator == 'ri', "mvts", "flight hours"),
+         ")&nbsp;&nbsp;")
 )
 
 ## state ----

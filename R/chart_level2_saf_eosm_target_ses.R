@@ -71,7 +71,7 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
       # colors = mycolors[[1]],
       # opacity = 1,
       text = ~ number_of_ansps,
-      textposition = ,
+      textposition = ~ mytextpos,
       textfont = list(color = 'black', size = myfont),
       hovertemplate = paste0('%{xother} %{y:.0f}'),
       showlegend = T
