@@ -19,9 +19,9 @@ if (params$country == "SES RP3") {
   for (i in 1:nrow(saf_eosm_text_df)) {
     saf_eosm_text <- paste0(saf_eosm_text,
                             saf_eosm_text_df$title[i],
-                            "<br>",
+                            "<br><br>",
                             saf_eosm_text_df$text[i],
-                            "<br>"
+                            "<br><br>"
     )
   }
   
