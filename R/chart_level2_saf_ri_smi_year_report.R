@@ -246,6 +246,9 @@ p2 <- myhbarc2(df = data_prep2,
                margin = list(t= 40, r = 50, l = 0)
 )
 
-subplot(p1, p2, nrows = 1, shareY = FALSE, titleX = TRUE, titleY = TRUE, widths = c(0.50, 0.50), margin = 0.10) %>% 
-  layout(showlegend = FALSE)
-
+if (year_report == 2020) {
+  p1
+} else {
+  subplot(p1, p2, nrows = 1, shareY = FALSE, titleX = TRUE, titleY = TRUE, widths = c(0.50, 0.50), margin = 0.10) %>% 
+    layout(showlegend = FALSE)
+}
