@@ -167,18 +167,30 @@ mylocalmargin = list(t = 60, b = 80, l = 40, r = 60)
 
 # setup ranges to ensure zero line at same height
 # https://stackoverflow.com/questions/76289470/plotly-barplot-with-two-y-axis-aligned-at-zero
+# 1. Ensure y1 includes zero
 y1_max <- max(max(data_prep$mymetric, na.rm = TRUE), 0)
 y1_min <- min(min(data_prep$mymetric, na.rm = TRUE), 0)
+
+# 2. Ensure y2 includes zero
 y2_max <- max(max(data_prep$share, na.rm = TRUE), 0)
 y2_min <- min(min(data_prep$share, na.rm = TRUE), 0)
 
-# calculate standard plotly padding
-y1_padding = (y1_max - y1_min)/16
-y1_range = c(y1_min - y1_padding, y1_max + y1_padding)
-y1_relative_zero = (0 - y1_range[1]) / (y1_range[2] - y1_range[1])
+# 3. Compute y1 range with standard plotly padding
+y1_padding <- (y1_max - y1_min) / 16
+y1_range <- c(y1_min - y1_padding, y1_max + y1_padding)
 
-y2_padding = (y1_relative_zero * (y2_max - y2_min) + y2_min) / (1 - 2*y1_relative_zero)
-y2_range = c(y2_min - y2_padding, y2_max + y2_padding)
+# 4. Find the relative position of 0 in y1 range
+y1_relative_zero <- (0 - y1_range[1]) / (y1_range[2] - y1_range[1])
+
+# 5. Calculate the total range for y2 to mirror zero position
+y2_total_range <- (y2_max - y2_min) / (1 - 1.5 * y1_relative_zero)
+
+# 6. Calculate padding needed on both ends
+y2_padding_lower <- y1_relative_zero * y2_total_range
+y2_padding_upper <- (1 - y1_relative_zero) * y2_total_range
+
+# 7. Final y2 range
+y2_range <- c(0 - y2_padding_lower, 0 + y2_padding_upper)
 
 # plot chart  ----
 myplot<- mybarchart(data_prep, mywidth, myheight + 30, myfont, mylocalmargin, mydecimals) %>%  
