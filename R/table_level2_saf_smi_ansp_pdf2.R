@@ -51,6 +51,7 @@ data_prep <- data_calc %>%
   mutate(
     variation = if_else(lag(rate_per_100_000, 1) == 0, 0, rate_per_100_000/lag(rate_per_100_000, 1) -1),
     variation = if_else(is.nan(variation), NA, variation),
+    variation = if_else(year>year_report, NA, variation),
     smi = if_else(year>year_report, NA, smi),
     flight_hours = if_else(year>year_report, NA, flight_hours),
     rate_per_100_000 = if_else(year>year_report, NA, rate_per_100_000)
