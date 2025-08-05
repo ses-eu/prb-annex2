@@ -15,6 +15,9 @@ data_prep <- data_raw %>%
   group_by(year, status) %>% 
   summarise(number_of_ansps = min(number_of_ans_ps, na.rm = TRUE)) %>%
   mutate(
+    number_of_ansps = if_else(status == "Actual" & year > .env$year_report,
+                              NA,
+                              number_of_ansps),
     mytextpos = case_when(
       # status == 'Planned' ~ "bottom center",
       TRUE ~ 'right'
@@ -36,24 +39,44 @@ myc <- function (mywidth, myheight, myfont, mylinewidth, mymargin) {
   plot_ly(
     width = mywidth,
     height = myheight,
-    data = data_prep,
+    data = filter(data_prep, status == "No of ANSPs on or above targets (planned)"),
     x = ~ year,
     y = ~ number_of_ansps,
     yaxis = "y1",
     cliponaxis = FALSE,
     yaxis = "y1",
     type = 'scatter',  mode = 'line',
-    line = list(width = mylinewidth, dash = ~ dash),
-    marker = list(size = mylinewidth * 3),
-    color = ~ status,
-    colors = mycolors,
+    line = list(width = mylinewidth, dash = ~ dash, color = mycolors[[2]]),
+    marker = list(size = mylinewidth * 3, color = mycolors[[2]]),
+    # color = ~ status,
+    # colors = mycolors[[1]],
     # opacity = 1,
     text = ~ number_of_ansps,
     textposition = ~ mytextpos,
     textfont = list(color = 'black', size = myfont),
     hovertemplate = paste0('%{xother} %{y:.0f}'),
     showlegend = T
-  ) %>% 
+  ) %>%
+    add_trace(
+      data = filter(data_prep, status == "No of ANSPs on or above targets (actual)"),
+      x = ~ year,
+      y = ~ number_of_ansps,
+      yaxis = "y1",
+      cliponaxis = FALSE,
+      yaxis = "y1",
+      type = 'scatter',  mode = 'line',
+      line = list(width = mylinewidth, dash = ~ dash, color = mycolors[[1]]),
+      marker = list(size = mylinewidth * 3, color = mycolors[[1]]),
+      # color = ~ status,
+      # colors = mycolors[[1]],
+      # opacity = 1,
+      text = ~ number_of_ansps,
+      textposition = ,
+      textfont = list(color = 'black', size = myfont),
+      hovertemplate = paste0('%{xother} %{y:.0f}'),
+      showlegend = T
+      
+    ) %>% 
     config( responsive = TRUE,
                     displaylogo = FALSE,
                     displayModeBar = F
