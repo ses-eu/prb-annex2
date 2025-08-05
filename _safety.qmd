@@ -1,7 +1,29 @@
 ```{r saf-level2-text}
 # define ranges and import data
 if (params$country == "SES RP3") {
-  saf_text <- ""
+  saf_text_ses <- read_xlsx(
+    path = here::here(data_folder, "SAF_input_text.xlsx"),
+    sheet = "SAF_text",
+    range = cell_limits(c(1, 1), c(NA, NA))
+  ) %>%
+    as_tibble() %>%
+    janitor::clean_names()
+  
+  saf_eosm_text_df <- saf_text_ses %>% 
+    filter(topic == "EoSM" & year == year_report) %>% 
+    arrange(numbering) %>% 
+    select(title, text)
+    
+  saf_eosm_text <- '' 
+  
+  for (i in 1:nrow(saf_eosm_text_df)) {
+    saf_eosm_text <- paste0(saf_eosm_text,
+                            saf_eosm_text_df$title[i],
+                            "<br>",
+                            saf_eosm_text_df$text[i],
+                            "<br>"
+    )
+  }
   
 } else {
   sheet <- country
@@ -21,7 +43,7 @@ if (params$country == "SES RP3") {
   
   saf_heading_positions <- which(saf_all$a %in% saf_titles)
   
-  saf_text <- saf_all[(saf_heading_positions[1]+1):(saf_heading_positions[1]+1), 1]
+  saf_eosm_text <- saf_all[(saf_heading_positions[1]+1):(saf_heading_positions[1]+1), 1]
 }
 
 ```
@@ -174,15 +196,13 @@ mycharts[[4]]
 `r if (params$country != "SES RP3") "::::"`
 
 
-`r if (params$country == "SES RP3") ":::: {.content-hidden}"`
 :::: {.callout-note collapse=true}
 
 #### Focus on EoSM
 
-`r saf_text`
+`r saf_eosm_text`
 
 ::::
-`r if (params$country == "SES RP3") "::::"`
 
 
 `r if (params$country == "MUAC") ":::: {.content-hidden}"`
@@ -269,15 +289,11 @@ Placeholder for text
 ```
 
 
-`r if (params$country == "SES RP3") ":::: {.content-hidden}"`
-
 :::: {.callout-note collapse=true}
 
 #### Focus on separation minima
 
 Placeholder for text
-
-::::
 
 
 ### Quality of occurences reporting 
