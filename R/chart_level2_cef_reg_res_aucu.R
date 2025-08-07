@@ -103,7 +103,7 @@ if (country == "SES RP3") {
       type == 'aucu_excluding_or'  ~ 'AUCU (before other revenues)'
       ),
       xlabel = year_text,
-      myothermetric = abs(round(rr_as_perc_aucu, 2))
+      myothermetric = round(rr_as_perc_aucu, 2)
     ) 
 }
 
@@ -125,7 +125,7 @@ mytextfont_color <- 'transparent'
 
 ### layout parameters
 mybargap <- 0.25
-mybarmode <- 'stack'
+mybarmode <- 'group'
 
 #### title
 mytitle_text <- paste0("Share of RR in AUCU")
@@ -161,19 +161,74 @@ myat_textposition <- 'top'
 myat_textfont_color <- 'transparent'
 myat_textfont_size <- myfont
 
+
+# setup ranges to ensure zero line at same height
+# https://stackoverflow.com/questions/76289470/plotly-barplot-with-two-y-axis-aligned-at-zero
+# === Step 1: y1 setup ===
+y1_max <- max(max(data_prep$mymetric, na.rm = TRUE), 0)
+y1_min <- min(min(data_prep$mymetric, na.rm = TRUE), 0)
+y1_padding <- (y1_max - y1_min) / 16
+y1_range <- c(y1_min - y1_padding, y1_max + y1_padding)
+
+# === Step 2: relative zero ===
+y1_relative_zero <- (0 - y1_range[1]) / (y1_range[2] - y1_range[1])
+
+# === Step 3: y2 data range ===
+y2_data_min <- min(data_prep$myothermetric, na.rm = TRUE)
+y2_data_max <- max(data_prep$myothermetric, na.rm = TRUE)
+y2_data_range <- y2_data_max - y2_data_min
+
+# === Step 4: Compute y2 total range to match y1 zero alignment ===
+y2_total_range <- y2_data_range / (1 - 2 * y1_relative_zero)
+
+# === Step 5: Apply padding symmetrically around 0 ===
+y2_padding_lower <- y1_relative_zero * y2_total_range
+y2_padding_upper <- (1 - y1_relative_zero) * y2_total_range
+y2_range_candidate <- c(0 - y2_padding_lower, 0 + y2_padding_upper)
+
+# === Step 6: Ensure all y2 data is visible ===
+# (Adjust range only outward to include all points)
+y2_range <- c(
+  min(y2_range_candidate[1], y2_data_min),
+  max(y2_range_candidate[2], y2_data_max)
+)
+
+# === Step 7: RECOMPUTE y2 range to force aligned zero ===
+# In case we had to expand for visibility
+y2_total_range <- y2_range[2] - y2_range[1]
+
+y2_range <- c(
+  floor(y2_range[1] / 5) * 5,
+  ceiling(y2_range[2] / 5) * 5
+)
+
+# Recompute new y2 total range and zero position
+y2_total_range <- y2_range[2] - y2_range[1]
+y2_relative_zero <- (0 - y2_range[1]) / y2_total_range
+
+# Realign y1 range to this updated relative zero
+y1_total_range <- y1_range[2] - y1_range[1]
+y1_range <- c(
+  0 - y2_relative_zero * y1_total_range,
+  0 + (1 - y2_relative_zero) * y1_total_range
+)
+
 # plot chart  ----
 mybarchart(data_prep, mywidth, myheight+30, myfont, mylocalmargin, mydecimals) %>% 
   add_line_trace(., filter(data_prep, type == 'Regulatory result per SU'))  %>% 
   add_empty_trace(., data_prep) %>% 
   layout(
-    yaxis = list(rangemode = "nonnegative"),   # to force the zeros to coincide
+    yaxis = list(
+      range = y1_range
+    ),   # to force the zeros to coincide
     yaxis2 = list(
-    title = 'RR as % of AUCU',
-    zerolinecolor = '#E8E8E8',
-    rangemode = "nonnegative",
-    overlaying = "y",
-    ticksuffix = '%',
-    side = 'right',
-    showgrid = FALSE
+      title = 'RR as % of AUCU',
+      zerolinecolor = '#E8E8E8',
+      range = y2_range,
+      # rangemode = "nonnegative",
+      overlaying = "y",
+      ticksuffix = '%',
+      side = 'right',
+      showgrid = FALSE
   ))
   
