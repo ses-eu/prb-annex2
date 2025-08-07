@@ -254,7 +254,7 @@ if (params$country == "Luxembourg") {
 
 `r cap_er_conc1`
 
-`r if (params$no_tcz == 0 | params$year_report != 2023) ":::: {.content-hidden}"`
+`r if (params$no_tcz == 0) ":::: {.content-hidden}"`
 
 ```{r cap-trm-prb}
 cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table_Findings_TRM_capacity")
@@ -262,7 +262,7 @@ cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table
 
 `r cap_trm_conc1`
 
-`r if (params$no_tcz == 0 | params$year_report != 2023) "::::"`
+`r if (params$no_tcz == 0) "::::"`
 
 
 `r if (params$country == "Luxembourg") "::: {.content-hidden}"`
