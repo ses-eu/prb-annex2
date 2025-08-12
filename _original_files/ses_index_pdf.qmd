@@ -434,6 +434,14 @@ assign(mytable, setup_latex_table(get(mytable)))
 
 `r layout_2fig("chart_saf_ri", "chart_level2_saf_smi_year_report")`
 
+```{r chart_level2_saf_smi_per_state_ses}
+#| file: R/chart_level2_saf_smi_per_state_ses.R
+#| out.width: "100%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+
 ```{r table_level2_saf_smi_ansp_pdf1}
 mytable <-"table_level2_saf_smi_ansp_pdf1"
 table_string <- source(here("R", paste0(mytable,".R"))) 
