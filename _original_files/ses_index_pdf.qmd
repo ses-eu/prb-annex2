@@ -391,6 +391,15 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 `r layout_2fig("chart_level2_saf_eosm_count_ses", "chart_level2_saf_maturity_count_ses", width1 = 0.65, width2 = 0.30)`
 
+\needspace{3\baselineskip}
+
+
+\biggertext{Focus on EoSM}
+
+`r latex_linebreaks(saf_eosm_text)`
+
+\needspace{2\baselineskip}
+
 
 ## Rate of runway incursions (RIs) (PI#1)
 
@@ -410,6 +419,15 @@ assign(mytable, setup_latex_table(get(mytable)))
 ```
 
 `r layout_summary_table(table_level2_saf_ri_apt_ses, hspace = 0, left_margin = -1, width = 1.1)`
+
+\needspace{3\baselineskip}
+
+
+\biggertext{Focus on runway incursions}
+
+`r latex_linebreaks(saf_ri_text)`
+
+\needspace{2\baselineskip}
 
 
 ## Rate of separation minima infringements (SMIs) (PI#2)
@@ -436,6 +454,19 @@ assign(mytable, setup_latex_table(get(mytable)))
 
 
 \needspace{3\baselineskip}
+
+
+\biggertext{Focus on separation minima}
+
+`r latex_linebreaks(saf_smi_text)`
+
+\needspace{2\baselineskip}
+
+## Quality of occurences reporting 
+
+`r latex_linebreaks(saf_qr_text)`
+
+\needspace{2\baselineskip}
 
 # ENVIRONMENT - SES RP3
 

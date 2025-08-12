@@ -271,9 +271,9 @@ At both the SES and the State level, the investment page is structured into the 
 1. Value of the assets for new investments included in the performance plan: this section presents the total RP3 determined capital expenditure (CAPEX) as included in the adopted performance plans. The data is broken down by investment size (major vs. other, based on the 5 million EUR threshold), en route/terminal allocation, and investment type (ATM, CNS, Infrastructure, Other). At the individual State level, this section also includes a comparison with the Union-wide median.
 
 2. Costs related to investments included in the performance plan: This section compares the determined and actual costs of investments over the RP3 period. The comparison is presented across several dimensions:
-*	New major, other new and existing investments.
-*	Depreciation cost of capital and leasing costs, for en route and terminal services.
-*	For each new major investment as reported in the RP3 performance plan.
+    - New major, other new and existing investments.
+    - Depreciation cost of capital and leasing costs, for en route and terminal services.
+    - For each new major investment as reported in the RP3 performance plan.
 
 3. Expected benefit and impact per new major investment: This section assesses the expected benefits across the four KPAs and the anticipated impact on performance at both network and local levels, resulting from the implementation of specific investments. It also indicates whether each investment aligns with the priorities outlined in the SESAR Master Plan. 
 
