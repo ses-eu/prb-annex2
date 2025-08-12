@@ -1339,8 +1339,11 @@ replace_links <- function(filename) {
   # Escape home address for regex
   escaped_home <- gsub("\\.", "\\\\.", home_address)
   
+  # Normalize country to URL slug
+  country_slug <- tolower(gsub("\\s+", "-", country))  # "Czech Republic" -> "czech-republic"
+  
   # ✅ Capture entire match, NOT just the prefix — group only the part you want to keep
-  pattern2 <- paste0("(", escaped_home, "/rp3/", tolower(country), "/)", "[^\\s\"'>]*")
+  pattern2 <- paste0("(", escaped_home, "/rp3/", country_slug, "/)", "[^\\s\"'>]*")
   
   # ✅ Use correct backreference
   replacement_link2 <- "\\1"
