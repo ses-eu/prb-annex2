@@ -1320,7 +1320,7 @@ replace_links <- function(filename) {
   # Define the pattern to match
   ## The regular expression pattern now includes - to match dashes in country names. [A-Za-z-]+ matches one or more alphabetic characters or dashes. the double \\ escapes the .
   
-  pattern1 <- paste0("(", str_replace_all(home_address, ".", "\\."), "/", year_report, "/[A-Za-z-]+/)")  
+  pattern1 <- paste0("(", str_replace_all(home_address, ".", "\\."), "/", year_folder, "/[A-Za-z-]+/)")  
 
   # Replace the pattern with the same string plus "#section"
   ## \\1 refers to the entire matched string, 
@@ -1334,6 +1334,21 @@ replace_links <- function(filename) {
                    paste0("\\1", replacement_link),
                    tmp_text)
 
+  # simplify links to rp3 summary page
+
+  # Escape home address for regex
+  escaped_home <- gsub("\\.", "\\\\.", home_address)
+  
+  # ✅ Capture entire match, NOT just the prefix — group only the part you want to keep
+  pattern2 <- paste0("(", escaped_home, "/rp3/", tolower(country), "/)", "[^\\s\"'>]*")
+  
+  # ✅ Use correct backreference
+  replacement_link2 <- "\\1"
+  
+  # ✅ Apply gsub
+  tmp_text <- gsub(pattern2, replacement_link2, tmp_text, perl = TRUE, ignore.case = TRUE)
+  
+  
   #replace year report links & fix side effect from previous replacement
   tmp_text <- str_replace_all(tmp_text, paste0(replacement_link,"index.html#main"), replacement_link)  
   tmp_text <- str_replace_all(tmp_text, "index.html#main", replacement_link)  
