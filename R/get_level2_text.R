@@ -3,29 +3,82 @@ if (exists("cztype") == FALSE) {cztype = "terminal"}
 
 # safety ----
 # define ranges and import data
-if (country == "SES RP3") {
-  # saf_text_ses <- read_xlsx(
-  #   path = here::here(data_folder, "SAF_input_text.xlsx"),
-  #   sheet = "SAF_text",
-  #   range = cell_limits(c(1, 1), c(NA, NA))
-  # ) %>%
-  #   as_tibble() %>%
-  #   janitor::clean_names()
-  # 
-  # saf_eosm_text_df <- saf_text_ses %>% 
-  #   filter(topic == "EoSM" & year == year_report) %>% 
-  #   arrange(numbering) %>% 
-  #   select(title, text)
-  #   
-  # saf_eosm_text <- '' 
-  # 
-  # for (i in nrow(saf_eosm_text_df)) {
-  #   saf_eosm_text <- paste0(saf_eosm_text_df$title[i],
-  #                           "<br>",
-  #                           saf_eosm_text_df$text[i],
-  #                           "<br>"
-  #   )
-  # }
+if (params$country == "SES RP3") {
+  saf_text_ses <- read_xlsx(
+    path = here::here(data_folder, "SAF_input_text.xlsx"),
+    sheet = "SAF_text",
+    range = cell_limits(c(1, 1), c(NA, NA))
+  ) %>%
+    as_tibble() %>%
+    janitor::clean_names()
+  
+  ## eosm
+  saf_eosm_text_df <- saf_text_ses %>% 
+    filter(topic == "EoSM" & year == year_report) %>% 
+    arrange(numbering) %>% 
+    select(title, text)
+  
+  saf_eosm_text <- '' 
+  
+  for (i in 1:nrow(saf_eosm_text_df)) {
+    saf_eosm_text <- paste0(saf_eosm_text,
+                            saf_eosm_text_df$title[i],
+                            "<br><br>",
+                            saf_eosm_text_df$text[i],
+                            "<br><br>"
+    )
+  }
+  
+  ## ri
+  saf_ri_text_df <- saf_text_ses %>% 
+    filter(topic == "RI" & year == year_report) %>% 
+    arrange(numbering) %>% 
+    select(title, text)
+  
+  saf_ri_text <- '' 
+  
+  for (i in 1:nrow(saf_ri_text_df)) {
+    saf_ri_text <- paste0(saf_ri_text,
+                          saf_ri_text_df$title[i],
+                          "<br><br>",
+                          saf_ri_text_df$text[i],
+                          "<br><br>"
+    )
+  }
+  
+  ## smi
+  saf_smi_text_df <- saf_text_ses %>% 
+    filter(topic == "SMI" & year == year_report) %>% 
+    arrange(numbering) %>% 
+    select(title, text)
+  
+  saf_smi_text <- '' 
+  
+  for (i in 1:nrow(saf_smi_text_df)) {
+    saf_smi_text <- paste0(saf_smi_text,
+                           saf_smi_text_df$title[i],
+                           "<br><br>",
+                           saf_smi_text_df$text[i],
+                           "<br><br>"
+    )
+  }
+  
+  ## Quality reporting
+  saf_qr_text_df <- saf_text_ses %>% 
+    filter(topic == "Quality reporting" & year == year_report) %>% 
+    arrange(numbering) %>% 
+    select(title, text)
+  
+  saf_qr_text <- '' 
+  
+  for (i in 1:nrow(saf_qr_text_df)) {
+    saf_qr_text <- paste0(saf_qr_text,
+                          saf_qr_text_df$title[i],
+                          "<br><br>",
+                          saf_qr_text_df$text[i],
+                          "<br><br>"
+    )
+  }
   
 } else {
   sheet <- country
@@ -46,7 +99,14 @@ if (country == "SES RP3") {
   saf_heading_positions <- which(saf_all$a %in% saf_titles)
   
   saf_eosm_text <- saf_all[(saf_heading_positions[1]+1):(saf_heading_positions[1]+1), 1]
+  
+  saf_ri_text <- ''
+  saf_smi_text <- ''
+  saf_qr_text <- ''
+  
+  
 }
+
 
 
 # environment ----
