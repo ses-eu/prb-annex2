@@ -263,9 +263,9 @@ mycharts[[4]]
 ::::
 
 
-`r if (params$country == "MUAC") ":::: {.content-hidden}"`
-
 ## Safety occurrences
+
+`r if (params$country == "MUAC") ":::: {.content-hidden}"`
 
 ### Rate of runway incursions ([**RIs**](`r params$home_address`/about.html#occurrences---rate-of-runway-incursions-ris-pi1-rate-of-separation-minima-infringements-smis-pi2)) (PI#1)
 
