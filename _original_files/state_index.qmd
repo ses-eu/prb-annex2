@@ -269,16 +269,18 @@ env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Find
 
 :::: {#concl-cap}
 ```{r concl-cap}
-if (params$country == "Luxembourg") {
-  cap_er_conc1 <- if_else(params$year == 2023, 
-                    get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table_Findings_TRM_capacity"),
-                    "")
-  } else {
-  cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity")
-}
+cap_er_conc1 <-  if_else(country == "Luxembourg", "", get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity"))
+
+cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table_Findings_TRM_capacity")
+
+cap_trm_conc1 <- if_else(cap_trm_conc1 == "NA", "", cap_trm_conc1)
+
 ```
 
 `r cap_er_conc1`
+
+`r cap_trm_conc1`
+
 ::::
 :::
 
