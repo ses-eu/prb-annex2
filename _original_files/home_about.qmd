@@ -21,6 +21,11 @@ Under Commission Implementing Regulation (EU) 2019/317, monitoring is one of the
 
 All the values and comments included in this dashboard reflect the information published in the PRB annual monitoring. The actual values for each year of the reference period are updated each year with the latest information provided by the Member States. Therefore, in case of ex-post corrections of data, the values displayed in the graphs may slightly differ with the comments provided in the bullet points.
 
+The monitoring analysis is completed by an RP3 page, providing an overview of the various KPIs and their evolution though the entire RP3 period. This analysis aims to offer additional insights into the overall results achieved over the past 5 years, both at the aggregate SES level and by individual States, including a summary of the main factors driving performance. 
+
+Finally, each page of this digital report can be downloaded in Portable Document Format (PDF) either though the specific “Download Report” button at the top-right corner of each page or though the Download page accessible from the menu bar at the top of the screen. 
+
+
 ## Traffic
 
 Air traffic is presented, for the SES reference area and for the individual Member States, in terms of:
@@ -65,6 +70,10 @@ Two additional performance indicators are defined by Implementing Regulation (EU
 The rate of runway incursions at airports located in a Member State, calculated as the total number of runway incursions with a safety impact that occurred at those airports divided by the total number of IFR and VFR movements at those airports.’ The RIs included in the indicator are those that occur at the airports included by the Member States in their performance plans, where the airports to be considered are specified by Article 1(3) of Commission Implementing Regulation (EU) 2019/317.
 
 The rate of separation minima infringements within the airspace of all controlling air traffic services units in a Member State, calculated as the total number of separation minima infringements with a safety impact that occurred in that airspace divided by the total number of controlled flight hours within that airspace. This indicator captures all SMIs that occur within the geographical boundary of a Member State, irrespective of which ANSP is providing the ATC service.
+
+## Use of automated safety data recording system (ASDRS) (PI#3)
+
+Finally, the use of automated safety data recording systems (ASDRS) performance indicator captures extent to which air navigation service providers (ANSPs) employ these systems to detect, record, analyse, or report—at a minimum—separation minima infringements and runway incursions. This indicator is considered an integral part of an ANSP’s safety risk management framework.
 
 ## Environment - Horizontal flight efficiency of the actual trajectory (KEA) (KPI#1), of the last filed flight plan (KEP) (PI#1) & shortest constrained route (SCR) (PI#2)
 
@@ -242,3 +251,35 @@ c)	the outcome of the financial incentive mechanism for capacity and environment
 The monitoring of the RR is carried out in EURO nominal terms.
 
 This analysis is repeated for all the en route and terminal charging zones within the scope of Implementing Regulation 2019/317. 
+
+## Investments 
+
+As provided in Article 3(j) of the Commission Implementing Regulation (EU) 2019/317, investments and capital expenditures are an integral part of the PRB annual performance monitoring tasks.
+
+The Investment page of this dashboard presents information relating to the en route and terminal investments, and the associated costs, at Union-wide level and at the level of the individual service providers.
+
+The purpose of this page is to: 
+
+i) Present the new major, other new, and existing investments implemented in the SES areas during RP3,
+ii) Monitor the evolution of the actual costs related to these investments to identify potential under- or overspending against the determined costs included in the performance plans; 
+iii) Disclose data relating to the funding of investments resulting from the SES air traffic management (ATM) research and development (SESAR) framework. 
+
+The analysis is presented at aggregated Union-wide level, encompassing all ANSPs reporting relevant capital-related costs, as well at State level (where the analysis is limited to data reported by the main air traffic service providers). The main data sources of this page are the “2024 monitoring reports”, the June 2025 “reporting tables” submitted by Member States, and the data on funding provided by the SESAR Deployment Manager (SDM).
+
+At both the SES and the State level, the investment page is structured into the following sections: 
+
+1. Value of the assets for new investments included in the performance plan: this section presents the total RP3 determined capital expenditure (CAPEX) as included in the adopted performance plans. The data is broken down by investment size (major vs. other, based on the 5 million EUR threshold), en route/terminal allocation, and investment type (ATM, CNS, Infrastructure, Other). At the individual State level, this section also includes a comparison with the Union-wide median.
+
+2. Costs related to investments included in the performance plan: This section compares the determined and actual costs of investments over the RP3 period. The comparison is presented across several dimensions:
+*	New major, other new and existing investments.
+*	Depreciation cost of capital and leasing costs, for en route and terminal services.
+*	For each new major investment as reported in the RP3 performance plan.
+
+3. Expected benefit and impact per new major investment: This section assesses the expected benefits across the four KPAs and the anticipated impact on performance at both network and local levels, resulting from the implementation of specific investments. It also indicates whether each investment aligns with the priorities outlined in the SESAR Master Plan. 
+
+For State-level analysis, a comparison with the Union-wide median is also provided.
+
+4. Public funding granted for total CAPEX (CEF/TEN-T): This section provides an overview of European funding received by each service provider for the implementation of projects linked to the CP1 regulation (Commission Implementing Regulation (EU) 2021/116 on the establishment of the Common Project One), as reported by the entities themselves and by the SDM.
+
+5. Unlike the other sections of this dashboard, the investment analysis covers the entire reference period 2020–2024.
+
