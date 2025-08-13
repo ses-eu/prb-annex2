@@ -196,6 +196,7 @@ website:
             href: index.html#cost-efficiency-en-routeterminal-charging-zones #tag
       - text: "---"
 # block level1 state end
+# rp3 marker beg 
 # block level1 ses beginning
           - text: "Contextual information"
             href: index.html#contextual-information
@@ -294,6 +295,7 @@ website:
 # include ECZ2 block              
 # include TCZ block              
 # block level2 end
+# rp3 marker end 
 # 
   # site-url: "https://eurocontrol.int/"
 

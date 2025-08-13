@@ -111,11 +111,19 @@ Netherlands
 
 ## Safety
 
-::: {#container-saf1}
-:::: {#chart-eosm class="mychart"}
-```{r chart-eosm}
-#| file: R/chart_level1_saf.R
+```{r chart-saf-code}
+#| label: chart_saf_eosm
 #| out.width: "100%"
+#| echo: false
+
+source("R/chart_level1_saf.R")
+```
+
+::: {#container-saf1}
+:::: {#chart-saf class="mychart"}
+```{r chart-saf}
+#| echo: false
+mycharts[[1]]
 ```
 ::::
 

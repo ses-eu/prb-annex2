@@ -434,10 +434,10 @@ if (out_format == 'web') {
   if (year_folder == "rp3") {
     ### level 2
     ### find beginning and end of level 2 block to remove
-    for (i in 1:length(tx)) {
-      if (tx[i] %like% 'block level2 beginning') {block_l2_beg = i}
-      if (tx[i] %like% 'block level2 end') {block_l2_end = i}
-    }  
+      for (i in 1:length(tx)) {
+        if (tx[i] %like% 'rp3 marker beg') {block_l2_beg = i}
+        if (tx[i] %like% 'rp3 marker end') {block_l2_end = i}
+      }  
     
     tx <- tx[-c(block_l2_beg:block_l2_end)]
   }
