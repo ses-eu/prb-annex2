@@ -9,25 +9,17 @@ if (!exists("data_cost_inv")) {
 
 
 # process data  ----
-data_prep1 <- data_capex %>% 
-  filter(member_state != "SES RP3") %>% 
-  select(
-    member_state,
-    new_major_investments_as_per_pp,
-    other_new_investments_as_per_pp,
-    additional_new_major_investments
-  ) %>% 
-  pivot_longer(-member_state, names_to = "type", values_to = "value") %>% 
+data_prep1 <- data_investments_type_state %>% 
+  pivot_longer(-state, names_to = "type", values_to = "value") %>% 
   mutate(
     mymetric = value/10^6,
     type = case_when(
-      type == "new_major_investments_as_per_pp" ~ "New major investments",
-      type == "other_new_investments_as_per_pp" ~ "Other new investments",
-      type == "additional_new_major_investments" ~ "Additional new major investments"
+      type == "new_major_investment_including_additional" ~ "New and additional major investments",
+      type == "other_new_investments" ~ "Other new investments"
     )
   ) %>% 
   select(
-    xlabel = member_state,
+    xlabel = state,
     type,
     mymetric
   ) 
@@ -67,9 +59,8 @@ if (knitr::is_latex_output()) {
 # plot chart ----
 myplot <- mybarchart2(data_prep, 
                       height = myheight+40,
-                      colors = c('#5B9BD5','#044598', '#FFC000'),
-                      local_factor = c("New major investments",
-                                       "Additional new major investments",
+                      colors = c('#5B9BD5','#FFC000'),
+                      local_factor = c("New and additional major investments",
                                        "Other new investments",
                                        NULL),
                       # shape = c("/", "", "/", "", "/", "", "/", "", "/", ""),

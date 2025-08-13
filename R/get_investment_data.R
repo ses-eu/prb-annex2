@@ -47,6 +47,14 @@ data_union_wide <-  read_xlsx(
   as_tibble() %>% 
   clean_names() 
 
+data_investments_type_state <-  read_xlsx(
+  paste0(data_folder, "INVESTMNENTS DATA_master.xlsx"),
+  # here("data","hlsr2021_data.xlsx"),
+  sheet = "Union-wide chart",
+  range = cell_limits(c(1, 30), c(NA, 32))) %>%
+  as_tibble() %>% 
+  clean_names() 
+
 data_cost_inv <-  read_xlsx(
   paste0(data_folder, "INVESTMNENTS DATA_master.xlsx"),
   # here("data","hlsr2021_data.xlsx"),
