@@ -61,7 +61,7 @@ if (knitr::is_latex_output()) {
 # plot chart ----
 mydonutchart(data_prep, 
              height = myheight  - 70,
-             colors = c( '#044598', '#22A0DD', '#58595B', '#FFF000', '#7030A0'),
+             colors = c( '#044598', '#22A0DD', '#58595B', '#7030A0', '#FFF000'),
              hovertemplate = "%{label}: %{value}%<extra></extra>",
              title_text = "Asset value by type of investment",
              minsize = 13,
