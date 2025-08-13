@@ -1,25 +1,25 @@
 
 # replace index, quarto yaml and css files ----
-  ## quarto yaml
-  if (out_format == 'pdf') {
-    file.copy('_original_files/full_quarto_pdf.yml', '_quarto.yml', overwrite = TRUE, copy.mode = TRUE)
-  } else {
-    file.copy('_original_files/full_quarto.yml', '_quarto.yml', overwrite = TRUE, copy.mode = TRUE)
-  }
-  
-  ## styles css
-  file.copy('_original_files/full_styles.css', 'styles.css', overwrite = TRUE, copy.mode = TRUE)
+## quarto yaml
+if (out_format == 'pdf') {
+  file.copy('_original_files/full_quarto_pdf.yml', '_quarto.yml', overwrite = TRUE, copy.mode = TRUE)
+} else {
+  file.copy('_original_files/full_quarto.yml', '_quarto.yml', overwrite = TRUE, copy.mode = TRUE)
+}
+
+## styles css
+file.copy('_original_files/full_styles.css', 'styles.css', overwrite = TRUE, copy.mode = TRUE)
   
 # remove .qmd files ----
-  ## get file list 
-  root_files <- list.files()
+## get file list 
+root_files <- list.files()
   
-  ## remove all non '_' qmd files 
-  for (i in 1:length(root_files)) {
-    if (grepl('.qmd', root_files[i], fixed = TRUE) == TRUE & substr(root_files[i], 1, 1) != '_') {
-      file.remove(root_files[i])
-    }
+## remove all non '_' qmd files 
+for (i in 1:length(root_files)) {
+  if (grepl('.qmd', root_files[i], fixed = TRUE) == TRUE & substr(root_files[i], 1, 1) != '_') {
+    file.remove(root_files[i])
   }
+}
     
 # create index pages ----
 if (investments) {
@@ -344,10 +344,11 @@ if (out_format == 'web') {
       
       tx <- tx[-c(block_l2_cef_beg:block_l2_cef_end)]
       
-      ### add specific muac ceff
-      tx_cef_muac <- readLines("_original_files/level2_cef_muac.yml")
-      tx <- append(tx, tx_cef_muac, block_l2_cef_beg)
-      
+      ### add specific muac ceff except for year rp3
+      if (year_folder != 'rp3') {
+        tx_cef_muac <- readLines("_original_files/level2_cef_muac.yml")
+        tx <- append(tx, tx_cef_muac, block_l2_cef_beg)
+      }
     }
     
     if (state_type != 0) {
