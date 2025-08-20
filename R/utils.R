@@ -345,206 +345,228 @@ aucu <- function(cztype, mycz) {
   
 ## regulatory result calculations ----
   
-  regulatory_result <- function(cztype, mycz) {
-    ## import data  ----
-    data_raw_t1  <-  read_xlsx(
-      paste0(data_folder, "CEFF dataset master.xlsx"),
-      # here("data","hlsr2021_data.xlsx"),
-      sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
-      range = cell_limits(c(1, 1), c(NA, NA))) %>%
-      as_tibble() %>% 
-      clean_names() 
-    
-    data_raw_t2  <-  read_xlsx(
-      paste0(data_folder, "CEFF dataset master.xlsx"),
-      # here("data","hlsr2021_data.xlsx"),
-      sheet = if_else(cztype == "terminal", "Terminal_T2", "Enroute_T2"),
-      range = cell_limits(c(1, 1), c(NA, NA))) %>%
-      as_tibble() %>% 
-      clean_names() 
-    
-    ## prepare data ----
-    data_filtered_t1 <- data_raw_t1 %>% 
-      filter(
-        #we filter on the cz_code instead of entity_code to get all entities
-        charging_zone_code == mycz,    
-        #we keep only ANSPs
-        entity_type %in% c('ANSP', 'MET', 'MUAC'),    
-        #the fields we need are on a per/year basis - there are no values for 20-21 combined
-        year != 20202021
-      ) 
-    
-    #subtable for the ex post roe calc
-    data_prep_t1_1 <- data_filtered_t1 %>% 
-      select(year,
-             status,
-             entity_type,
-             charging_zone_code,
-             entity_type_id,
-             entity_name,
-             entity_code,
-             x3_4_total_assets,
-             x3_8_share_of_equity_perc,
-             x3_6_return_on_equity_perc) %>% 
-      mutate(
-        roe = x3_4_total_assets * x3_8_share_of_equity_perc * x3_6_return_on_equity_perc,
-      ) %>% 
-      select(-c(x3_4_total_assets, x3_8_share_of_equity_perc, x3_6_return_on_equity_perc)) %>% 
-      pivot_wider(names_from = 'status',
-                  values_from = 'roe') %>% 
-      rename(ex_ante_roe_nc = D,
-             ex_post_roe_nc = A)
-    
-    #subtable for the calc of Difference in costs: gain (+)/Loss (-) retained/borne by the ATSP
-    data_prep_t1_2 <- data_filtered_t1 %>% 
-      select(year,
-             entity_code,
-             status,
-             x4_2_cost_excl_vfr
-      ) %>% 
-      mutate(x4_2_cost_excl_vfr = case_when(
+regulatory_result <- function(cztype, mycz) {
+  ## import data  ----
+  data_raw_t1  <-  read_xlsx(
+    paste0(data_folder, "CEFF dataset master.xlsx"),
+    # here("data","hlsr2021_data.xlsx"),
+    sheet = if_else(cztype == "terminal", "Terminal_T1", "Enroute_T1"),
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+  
+  data_raw_t2  <-  read_xlsx(
+    paste0(data_folder, "CEFF dataset master.xlsx"),
+    # here("data","hlsr2021_data.xlsx"),
+    sheet = if_else(cztype == "terminal", "Terminal_T2", "Enroute_T2"),
+    range = cell_limits(c(1, 1), c(NA, NA))) %>%
+    as_tibble() %>% 
+    clean_names() 
+  
+  ## prepare data ----
+  data_filtered_t1 <- data_raw_t1 %>% 
+    filter(
+      #we filter on the cz_code instead of entity_code to get all entities
+      charging_zone_code == mycz,    
+      #we keep only ANSPs
+      entity_type %in% c('ANSP', 'MET', 'MUAC'),    
+      #the fields we need are on a per/year basis - there are no values for 20-21 combined
+      year != 20202021
+    ) 
+  
+  #subtable for the ex post roe calc
+  data_prep_t1_1 <- data_filtered_t1 %>% 
+    select(year,
+           status,
+           entity_type,
+           charging_zone_code,
+           entity_type_id,
+           entity_name,
+           entity_code,
+           x3_4_total_assets,
+           x3_8_share_of_equity_perc,
+           x3_6_return_on_equity_perc) %>% 
+    mutate(
+      roe = x3_4_total_assets * x3_8_share_of_equity_perc * x3_6_return_on_equity_perc,
+    ) %>% 
+    select(-c(x3_4_total_assets, x3_8_share_of_equity_perc, x3_6_return_on_equity_perc)) %>% 
+    pivot_wider(names_from = 'status',
+                values_from = 'roe') %>% 
+    rename(ex_ante_roe_nc = D,
+           ex_post_roe_nc = A)
+  
+  #subtable for the calc of Difference in costs: gain (+)/Loss (-) retained/borne by the ATSP
+  data_prep_t1_2 <- data_filtered_t1 %>% 
+    select(year,
+           entity_code,
+           status,
+           x4_2_cost_excl_vfr
+    ) %>% 
+    mutate(
+      dif_cost_gain_loss = case_when(
         # we are calculating D-A costs for years<= year_report
         status == 'A' ~ (-1)*x4_2_cost_excl_vfr,
-        .default = x4_2_cost_excl_vfr)
-      ) %>% 
-      group_by(year, entity_code) %>% 
-      summarise(dif_cost_gain_loss = sum(x4_2_cost_excl_vfr))
-    # %>% 
-    #   mutate(dif_cost_gain_loss = case_when(
-    #     year > min(2021, year_report) ~ 0,
-    #     .default = dif_cost_gain_loss)
-    #   )
-    
-    #subtable for the calc actual revenues
-    data_prep_t1_3 <- data_filtered_t1 %>% 
-      filter(status == 'A') %>% 
-      select(year,
-             entity_code,
-             status,
-             x4_2_cost_excl_vfr
-             )
-    
-    # join the t1 subtables
-    data_prep_t1 <- data_prep_t1_1 %>% 
-      left_join(data_prep_t1_2, by = c("year", "entity_code")) %>% 
-      left_join(data_prep_t1_3, by = c("year", "entity_code"))
-    
-    # extract data from t2
-    data_prep_t2 <- data_raw_t2 %>% 
-      filter(
-        #we filter on the cz_code instead of entity_code to get all entities
-        charging_zone_code == mycz,    
-        #we keep only ANSPs
-        entity_type %in% c('ANSP', 'MET', 'MUAC'),    
-        #we need actuals
-        status == 'A',
-      ) %>% 
-      # the values for the combined year are 2021
-      mutate(
-        year = if_else(year == 20202021, 2021, year),
-        trs = (x4_7_total_su / x4_6_total_su_forecast -1) * x4_1_det_cost_traffic_risk + x4_9_adjust_traffic_risk_art_27_2
-        ) %>% 
-      select(year,
-             entity_code,
-             x2_5_adjust_inflation,
-             x3_8_diff_det_cost_actual_cost,
-             trs,
-             x6_4_financial_incentive)
-    
-    # join t1 and t2 for joint calculations
-    data_prep_years_split <- data_prep_t1 %>% 
-      left_join(data_prep_t2, by = c("year", "entity_code")) %>% 
-      rowwise() %>% 
-      mutate(
-        atsp_gain_loss_cost_sharing = sum(dif_cost_gain_loss, x2_5_adjust_inflation, x3_8_diff_det_cost_actual_cost, na.rm = TRUE),
-        total_net_gain_loss = sum(atsp_gain_loss_cost_sharing, trs, x6_4_financial_incentive, na.rm = TRUE),
-        regulatory_result_nc = sum(total_net_gain_loss, ex_post_roe_nc, na.rm = TRUE),
-        actual_revenues_nc = sum(x4_2_cost_excl_vfr, total_net_gain_loss, na.rm = TRUE)
-      ) %>% 
-      select(-entity_type, -charging_zone_code, -entity_name, -entity_code) %>% 
-      mutate(type = case_when(
-        entity_type_id == 'ANSP1'  ~ 'Main ANSP',
-        entity_type_id %like% 'MET'  ~ 'MET',
-        .default = 'Other ANSP'
-      )) %>% 
-      group_by(year, type) %>% 
-      # the plot function already divides by 1000
-      summarise(
-        atsp_gain_loss_cost_sharing_nc = sum(atsp_gain_loss_cost_sharing)/10^3,
-        trs_nc = sum(trs) /10^3,
-        financial_incentive_nc = sum(x6_4_financial_incentive)/10^3,
-        regulatory_result_nc = sum(regulatory_result_nc)/10^3,
-        ex_ante_roe_nc = sum(ex_ante_roe_nc)/10^3,
-        ex_post_roe_nc = sum(ex_post_roe_nc)/10^3,
-        actual_revenues_nc = sum(actual_revenues_nc)/10^3
-                ) %>%
-      ungroup() %>% 
-      mutate(year_text = as.character(year)
-      ) %>% 
-      select(year_text, type, regulatory_result_nc, ex_ante_roe_nc, ex_post_roe_nc, actual_revenues_nc,
-             atsp_gain_loss_cost_sharing_nc,
-             trs_nc,
-             financial_incentive_nc)
-    
-    # get exchange rates
-    yearly_xrates <- get_xrates(cztype, mycz)
-    
-    data_prep_xrates <- yearly_xrates %>% 
-      select(-entity_code) %>% 
-      # filter(year > 2020) %>% 
-      mutate(year_text = as.character(year)
-             # , year_text = if_else(year_text == '2021', '2020-2021', year_text)
-      ) %>% select(-year)
-    
-    # get tsus 
-    tsus <- data_raw_t1 %>% 
-      filter(entity_code == if_else(cztype == "enroute", ecz_list$ecz_id[ez], tcz_list$tcz_id[ez]),
-             status == 'A',
-             year > 2021) %>% 
-      select(year, x5_4_total_su)  |> 
-      mutate(year_text = as.character(year)
-             , year_text = if_else(year_text == '20202021', '2020-2021', year_text)
-      ) %>% select(-year)
+        .default = x4_2_cost_excl_vfr),
+      
+      x4_2_cost_excl_vfr_d = case_when(
+        # we are calculating D-A costs for years<= year_report
+        status == 'D' ~ x4_2_cost_excl_vfr,
+        .default = 0)
+    ) %>% 
+    group_by(year, entity_code) %>% 
+    summarise(
+      dif_cost_gain_loss = sum(dif_cost_gain_loss),
+      x4_2_cost_excl_vfr_d = sum(x4_2_cost_excl_vfr_d)
+    )
 
-    regulatory_result_euro_split <- data_prep_years_split %>% 
-      left_join(data_prep_xrates, by = "year_text") %>% 
-      mutate(regulatory_result = regulatory_result_nc / pp_exchangerate,
-             ex_ante_roe = ex_ante_roe_nc / pp_exchangerate,
-             ex_post_roe = ex_post_roe_nc / pp_exchangerate,
-             actual_revenues = actual_revenues_nc / pp_exchangerate,
-             
-             atsp_gain_loss_cost_sharing = atsp_gain_loss_cost_sharing_nc / pp_exchangerate,
-             trs = trs_nc / pp_exchangerate,
-             financial_incentive = financial_incentive_nc / pp_exchangerate
-             
+  
+  #subtable for the calc actual revenues
+  data_prep_t1_3 <- data_filtered_t1 %>% 
+    filter(status == 'A') %>% 
+    select(year,
+           entity_code,
+           status,
+           x4_2_cost_excl_vfr
+           )
+  
+  # join the t1 subtables
+  data_prep_t1 <- data_prep_t1_1 %>% 
+    left_join(data_prep_t1_2, by = c("year", "entity_code")) %>% 
+    left_join(data_prep_t1_3, by = c("year", "entity_code"))
+  
+  # extract data from t2
+  data_prep_t2 <- data_raw_t2 %>% 
+    filter(
+      #we filter on the cz_code instead of entity_code to get all entities
+      charging_zone_code == mycz,    
+      #we keep only ANSPs
+      entity_type %in% c('ANSP', 'MET', 'MUAC'),    
+      #we need actuals
+      status == 'A',
+    ) %>% 
+    # the values for the combined year are 2021
+    mutate(
+      year = if_else(year == 20202021, 2021, year),
+      trs = (x4_7_total_su / x4_6_total_su_forecast -1) * x4_1_det_cost_traffic_risk + x4_9_adjust_traffic_risk_art_27_2
       ) %>% 
-      select(-pp_exchangerate, -regulatory_result_nc, -ex_ante_roe_nc, -ex_post_roe_nc, -actual_revenues_nc,
-             -atsp_gain_loss_cost_sharing_nc, -trs_nc, -financial_incentive_nc) 
-        
-    ## sum 2020-2021 together
-    regulatory_result_euro_202021 <- regulatory_result_euro_split %>% 
-      filter(year_text == '2020' | year_text == '2021') |> 
-      group_by(type) %>% 
-      summarise(regulatory_result = sum(regulatory_result, na.rm = TRUE),
-                ex_ante_roe = sum(ex_ante_roe, na.rm = TRUE),
-                ex_post_roe = sum(ex_post_roe, na.rm = TRUE),
-                actual_revenues = sum(actual_revenues, na.rm = TRUE),
-                
-                atsp_gain_loss_cost_sharing = sum(atsp_gain_loss_cost_sharing, na.rm = TRUE),
-                trs = sum(trs, na.rm = TRUE),
-                financial_incentive = sum(financial_incentive, na.rm = TRUE)
-                ) %>% 
-      mutate(year_text = '2020-2021') %>% 
-      relocate(year_text, .before = type)
-    
-    regulatory_result <- regulatory_result_euro_202021 %>% 
-      rbind(regulatory_result_euro_split) %>% 
-      filter(year_text != '2020' & year_text != '2021') %>% 
-      left_join(tsus, by = "year_text") 
-    
+    select(year,
+           entity_code,
+           x2_5_adjust_inflation,
+           x3_8_diff_det_cost_actual_cost,
+           trs,
+           x6_4_financial_incentive)
+  
+  # join t1 and t2 for joint calculations
+  data_prep_years_split <- data_prep_t1 %>% 
+    left_join(data_prep_t2, by = c("year", "entity_code")) %>% 
+    rowwise() %>% 
+    mutate(
+      atsp_gain_loss_cost_sharing = sum(dif_cost_gain_loss, x2_5_adjust_inflation, x3_8_diff_det_cost_actual_cost, na.rm = TRUE),
+      total_net_gain_loss = sum(atsp_gain_loss_cost_sharing, trs, x6_4_financial_incentive, na.rm = TRUE),
+      regulatory_result_nc = sum(total_net_gain_loss, ex_post_roe_nc, na.rm = TRUE),
+      actual_revenues_nc = sum(x4_2_cost_excl_vfr, total_net_gain_loss, na.rm = TRUE)
+    ) %>% 
+    select(-entity_type, -charging_zone_code, -entity_name, -entity_code) %>% 
+    mutate(type = case_when(
+      entity_type_id == 'ANSP1'  ~ 'Main ANSP',
+      entity_type_id %like% 'MET'  ~ 'MET',
+      .default = 'Other ANSP'
+    )) %>% 
+    group_by(year, type) %>% 
+    # the plot function already divides by 1000
+    summarise(
+      atsp_gain_loss_cost_sharing_nc = sum(atsp_gain_loss_cost_sharing)/10^3,
+      trs_nc = sum(trs) /10^3,
+      financial_incentive_nc = sum(x6_4_financial_incentive)/10^3,
+      regulatory_result_nc = sum(regulatory_result_nc)/10^3,
+      ex_ante_roe_nc = sum(ex_ante_roe_nc)/10^3,
+      ex_post_roe_nc = sum(ex_post_roe_nc)/10^3,
+      actual_revenues_nc = sum(actual_revenues_nc)/10^3,
+      x4_2_cost_excl_vfr_d_nc = sum(x4_2_cost_excl_vfr_d)/10^3
+              ) %>%
+    ungroup() %>% 
+    mutate(year_text = as.character(year)
+    ) %>% 
+    select(year_text,
+           type, 
+           regulatory_result_nc, 
+           ex_ante_roe_nc, 
+           ex_post_roe_nc,
+           actual_revenues_nc,
+           atsp_gain_loss_cost_sharing_nc,
+           trs_nc,
+           financial_incentive_nc,
+           x4_2_cost_excl_vfr_d_nc
+           )
+  
+  # get exchange rates
+  yearly_xrates <- get_xrates(cztype, mycz)
+  
+  data_prep_xrates <- yearly_xrates %>% 
+    select(-entity_code) %>% 
+    # filter(year > 2020) %>% 
+    mutate(year_text = as.character(year)
+           # , year_text = if_else(year_text == '2021', '2020-2021', year_text)
+    ) %>% select(-year)
+  
+  # get tsus 
+  tsus <- data_raw_t1 %>% 
+    filter(entity_code == if_else(cztype == "enroute", ecz_list$ecz_id[ez], tcz_list$tcz_id[ez]),
+           status == 'A',
+           year > 2021) %>% 
+    select(year, x5_4_total_su)  |> 
+    mutate(year_text = as.character(year)
+           , year_text = if_else(year_text == '20202021', '2020-2021', year_text)
+    ) %>% select(-year)
 
-    return(regulatory_result)
-  }
+  regulatory_result_euro_split <- data_prep_years_split %>% 
+    left_join(data_prep_xrates, by = "year_text") %>% 
+    mutate(regulatory_result = regulatory_result_nc / pp_exchangerate,
+           ex_ante_roe = ex_ante_roe_nc / pp_exchangerate,
+           ex_post_roe = ex_post_roe_nc / pp_exchangerate,
+           actual_revenues = actual_revenues_nc / pp_exchangerate,
+           
+           atsp_gain_loss_cost_sharing = atsp_gain_loss_cost_sharing_nc / pp_exchangerate,
+           trs = trs_nc / pp_exchangerate,
+           financial_incentive = financial_incentive_nc / pp_exchangerate,
+           x4_2_cost_excl_vfr_d = x4_2_cost_excl_vfr_d_nc / pp_exchangerate
+           
+    ) %>% 
+    select(-pp_exchangerate, 
+           -regulatory_result_nc, 
+           -ex_ante_roe_nc, 
+           -ex_post_roe_nc, 
+           -actual_revenues_nc,
+           -atsp_gain_loss_cost_sharing_nc, 
+           -trs_nc, 
+           -financial_incentive_nc,
+           -x4_2_cost_excl_vfr_d_nc) 
+      
+  ## sum 2020-2021 together
+  regulatory_result_euro_202021 <- regulatory_result_euro_split %>% 
+    filter(year_text == '2020' | year_text == '2021') |> 
+    group_by(type) %>% 
+    summarise(regulatory_result = sum(regulatory_result, na.rm = TRUE),
+              ex_ante_roe = sum(ex_ante_roe, na.rm = TRUE),
+              ex_post_roe = sum(ex_post_roe, na.rm = TRUE),
+              actual_revenues = sum(actual_revenues, na.rm = TRUE),
+              
+              atsp_gain_loss_cost_sharing = sum(atsp_gain_loss_cost_sharing, na.rm = TRUE),
+              trs = sum(trs, na.rm = TRUE),
+              financial_incentive = sum(financial_incentive, na.rm = TRUE),
+              x4_2_cost_excl_vfr_d = sum(x4_2_cost_excl_vfr_d, na.rm = TRUE)
+              ) %>% 
+    mutate(year_text = '2020-2021') %>% 
+    relocate(year_text, .before = type)
+  
+  regulatory_result <- regulatory_result_euro_202021 %>% 
+    rbind(regulatory_result_euro_split) %>% 
+    filter(year_text != '2020' & year_text != '2021') %>% 
+    left_join(tsus, by = "year_text") 
+  
+
+  return(regulatory_result)
+}
     
   
 ## export figure function ----
