@@ -34,7 +34,7 @@ data_prep <- data_raw %>%
 ## legend
 if (knitr::is_latex_output()) {
   local_height <- myheight
-  local_title_text <- "Number of ANSPs\nper maturity level"
+  local_title_text <- "Interdependencies –\nNumber of ANSPs per maturity level"
   local_title_font_size <- mytitle_font_size*1.1
   local_title_y <- 0.94
   local_legend_x <- 0.5
@@ -44,7 +44,7 @@ if (knitr::is_latex_output()) {
   local_margin <- list(t = 80)
 } else {
   local_height <- myheight
-  local_title_text <- "Number of ANSPs per maturity level"
+  local_title_text <- "Interdependencies – Number of ANSPs per maturity level"
   local_title_font_size <- mytitle_font_size
   local_title_y <- mytitle_y
   local_legend_x <- 0.5

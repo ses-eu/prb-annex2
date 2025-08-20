@@ -90,7 +90,7 @@ if (country == "SES RP3") {
     filter(type == 'Main ANSP') %>% 
     mutate(
       share_rr_act_rev_expost = regulatory_result/actual_revenues * 100,
-      share_rr_act_rev_exante = ex_ante_roe/actual_revenues * 100
+      share_rr_act_rev_exante = ex_ante_roe/x4_2_cost_excl_vfr_d * 100
       ) %>% 
     select(year_text,regulatory_result, ex_ante_roe, share_rr_act_rev_expost, share_rr_act_rev_exante)
 }

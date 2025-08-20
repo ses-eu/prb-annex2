@@ -22,7 +22,7 @@ if (country == "SES RP3" | country == "MUAC") {
   
   # define ranges and import data
   sheet <- country
-  # sheet <- "Czech Republic"
+  # sheet <- "Spain"
   
   # find headings to define ranges
   range <- "A3:O81"
@@ -128,7 +128,11 @@ if (country == "SES RP3" | country == "MUAC") {
     ### remove leading and trailing line breaks
     mytext_inc <- sub("^<br>|<br>$", "", mytext_inc)
     
-    cap_er_nsa_incentive <- paste0(mytext, mytext_inc)
+    if(length(mytext_inc) == 0) {
+      cap_er_nsa_incentive <- mytext
+    } else {
+      cap_er_nsa_incentive <- paste0(mytext, mytext_inc[[1]])
+    }
   
   # ACC text --------------
     ### find observations positions

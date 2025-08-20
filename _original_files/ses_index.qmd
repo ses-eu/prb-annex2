@@ -142,7 +142,7 @@ met_ansp <- data_context %>% select(met_providers) %>% pull()
 :::
 
 
-## Main PRB findings - `r year_folder`
+## Main PRB findings - `r toupper(year_folder)`
 
 ```{r main-concl}
 main_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "main", "Table_Findings_main")
