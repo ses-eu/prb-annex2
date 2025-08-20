@@ -47,6 +47,11 @@
 #| out.width: "100%"
 ```
 
+<!-- Level2 text -->
+```{r level_2_text}
+source(here("R","get_level2_text.R"))
+```
+
 <!-- Level2 -->
 <!-- ## Safety -->
 <!-- ## Actual versus planned number of ANSPs achieving the level of the EoSM targets for RP3 -->
@@ -393,7 +398,6 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 \needspace{3\baselineskip}
 
-
 \biggertext{Focus on EoSM}
 
 `r latex_linebreaks(saf_eosm_text)`
@@ -425,7 +429,7 @@ assign(mytable, setup_latex_table(get(mytable)))
 
 \biggertext{Focus on runway incursions}
 
-`r latex_linebreaks(saf_ri_text)`
+`r saf_ri_text`
 
 \needspace{2\baselineskip}
 
@@ -466,13 +470,13 @@ assign(mytable, setup_latex_table(get(mytable)))
 
 \biggertext{Focus on separation minima}
 
-`r latex_linebreaks(saf_smi_text)`
+`r saf_smi_text`
 
 \needspace{2\baselineskip}
 
 ## Quality of occurences reporting 
 
-`r latex_linebreaks(saf_qr_text)`
+`r saf_qr_text`
 
 \needspace{2\baselineskip}
 

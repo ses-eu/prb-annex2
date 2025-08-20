@@ -3,7 +3,7 @@ if (exists("cztype") == FALSE) {cztype = "terminal"}
 
 # safety ----
 # define ranges and import data
-if (params$country == "SES RP3") {
+if (country == "SES RP3") {
   saf_text_ses <- read_xlsx(
     path = here::here(data_folder, "SAF_input_text.xlsx"),
     sheet = "SAF_text",
@@ -22,10 +22,11 @@ if (params$country == "SES RP3") {
   
   for (i in 1:nrow(saf_eosm_text_df)) {
     saf_eosm_text <- paste0(saf_eosm_text,
+                            if_else(i!=1, "\n\n", ""),
                             saf_eosm_text_df$title[i],
-                            "<br><br>",
+                            "\n\n",
                             saf_eosm_text_df$text[i],
-                            "<br><br>"
+                            "\n\n"
     )
   }
   
@@ -39,10 +40,11 @@ if (params$country == "SES RP3") {
   
   for (i in 1:nrow(saf_ri_text_df)) {
     saf_ri_text <- paste0(saf_ri_text,
+                          if_else(i!=1, "\n\n", ""),
                           saf_ri_text_df$title[i],
-                          "<br><br>",
+                          "\n\n",
                           saf_ri_text_df$text[i],
-                          "<br><br>"
+                          "\n\n"
     )
   }
   
@@ -56,10 +58,11 @@ if (params$country == "SES RP3") {
   
   for (i in 1:nrow(saf_smi_text_df)) {
     saf_smi_text <- paste0(saf_smi_text,
+                           if_else(i!=1, "\n\n", ""),
                            saf_smi_text_df$title[i],
-                           "<br><br>",
+                           "\n\n",
                            saf_smi_text_df$text[i],
-                           "<br><br>"
+                           "\n\n"
     )
   }
   
@@ -73,10 +76,11 @@ if (params$country == "SES RP3") {
   
   for (i in 1:nrow(saf_qr_text_df)) {
     saf_qr_text <- paste0(saf_qr_text,
+                          if_else(i!=1, "\n\n", ""),
                           saf_qr_text_df$title[i],
-                          "<br><br>",
+                          "\n\n",
                           saf_qr_text_df$text[i],
-                          "<br><br>"
+                          "\n\n"
     )
   }
   
