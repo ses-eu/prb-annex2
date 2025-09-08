@@ -1,7 +1,8 @@
-for (i in 2023) {  # set your year(s) report here
+for (i in 2024) {  # set your year(s) report here
 ###NOTES ----
 # for the pdf output you need to install TinyTex in your machine
-## 1. run install.packages("tinitex") in your console
+## 0. you can follow the instructions @ https://github.com/euctrl-pru/howto/wiki/Tools-Installation-and-Setup-%28For-R%29#the-tinytex-and-texlatex
+## 1. or follow these steps, run install.packages("tinitex") in your console
 ## 2. This will install it in the wrong folder C:\Users\[username]\AppData\Roaming
 ## 3. Cut it from there and paste it in C:\Users\[username]\dev\
 ## 4. Add  C:\Users\[username]\dev\TinyTeX\bin\windows to your path
@@ -22,9 +23,10 @@ for (i in 2023) {  # set your year(s) report here
 
 # clean environment and set main parameters ----
   rm(list = setdiff(ls(), "i"))
-  # i<- 2023
+  # i<- 2024
   # rm(list = ls())
-  year_report <- i 
+  if (i == 'rp3') {year_report <- 2024} else {year_report <- i}
+  year_folder <- i 
   out_format <- 'web' # set your output format here: 'pdf' or 'web'
   data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/data_for_web/'
   data_folder_a2 <- paste0(data_folder, "monitoring_files/", year_report, "/")
@@ -48,12 +50,12 @@ for (i in 2023) {  # set your year(s) report here
   ## modify state list as required
   state_list_prod <- state_list
   # state_list_prod <- c(state_list, "Home")  #add home to list
-  # state_list_prod <- setdiff(state_list_prod, "Belgium")  #remove state
-  # states_from <- c(13:32) # 1st number is the index of 1st state from which you want to generate
+  # state_list_prod <- setdiff(state_list_prod, "MUAC")  #remove state
+  # states_from <- c(12:32) # 1st number is the index of 1st state from which you want to generate
   # state_list_prod <- state_list_prod[states_from]
   
-  if (all_states == FALSE) {
-    state_list_prod <- 'France' # set your one country/stakeholder here (Home for home page)
+  if (!all_states) {
+    state_list_prod <- 'MUAC' # set your one country/stakeholder here (Home for home page)
   } 
   
 # build state pages ----
@@ -67,12 +69,6 @@ for (i in 2023) {  # set your year(s) report here
   ## copy site to network folder ----
   if (out_format == 'web') {
     if (investments & country != "Home") {
-      # ### find list of html files
-      # hmtl_files <- list.files(site_dir, pattern = "\\.html$", full.names = FALSE)
-      # 
-      # ### replace links to countries by links to country/section
-      # purrr::map(hmtl_files, replace_links)
-      
       ### delete previous version
       unlink(paste0(destination_dir_investments, country_lower), recursive = TRUE) 
       
@@ -89,6 +85,8 @@ for (i in 2023) {  # set your year(s) report here
       files_to_be_deleted <- list.files(root_dir) 
       files_to_be_deleted <- files_to_be_deleted[files_to_be_deleted %like% c("202") == FALSE]
       files_to_be_deleted <- files_to_be_deleted[(files_to_be_deleted == "download") == FALSE]
+      files_to_be_deleted <- files_to_be_deleted[(files_to_be_deleted == "rp3") == FALSE]
+      files_to_be_deleted <- files_to_be_deleted[(files_to_be_deleted == "investments") == FALSE]
       
       ## otherwise it deletes everything
       if (length(files_to_be_deleted) != 0) { 
@@ -115,7 +113,7 @@ for (i in 2023) {  # set your year(s) report here
       ### find list of html files
       hmtl_files <- list.files(site_dir, pattern = "\\.html$", full.names = FALSE)
       
-      ### replace links to countries by links to country/section
+      ### replace links to countries by links to country/section ----
       purrr::map(hmtl_files, replace_links)
 
       ### delete previous version
@@ -130,7 +128,7 @@ for (i in 2023) {  # set your year(s) report here
     }
   } else if (out_format == 'pdf') {
     
-    pdf_download_dir <- here(root_dir, "download", year_report)
+    pdf_download_dir <- here(root_dir, "download", year_folder)
     pdf_folders <- list("pdf_docs", pdf_download_dir) 
 
     if (!dir.exists(pdf_download_dir)) {
@@ -141,13 +139,14 @@ for (i in 2023) {  # set your year(s) report here
                                             here(.x, paste0("PRB-Annual-Monitoring-Report_",
                                                                     country,
                                                                     "_",
-                                                                    year_report,
+                                                            year_folder,
                                                                     ".pdf")),
                                             overwrite = TRUE,
                                             copy.mode = TRUE)
     )
     
   }
+    print(paste(country, year_folder))
   }
 
 }
