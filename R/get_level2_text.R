@@ -84,6 +84,9 @@ if (country == "SES RP3") {
     )
   }
   
+  saf_asdr_text <- ''
+  
+  
 } else {
   sheet <- country
   

@@ -76,6 +76,8 @@ if (params$country == "SES RP3") {
                             "<br><br>"
     )
   }
+  
+  saf_asdr_text <- ''
     
 } else {
   sheet <- country
