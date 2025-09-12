@@ -275,11 +275,9 @@ At both the SES and the State level, the investment page is structured into the 
     - Depreciation cost of capital and leasing costs, for en route and terminal services.
     - For each new major investment as reported in the RP3 performance plan.
 
-3. Expected benefit and impact per new major investment: This section assesses the expected benefits across the four KPAs and the anticipated impact on performance at both network and local levels, resulting from the implementation of specific investments. It also indicates whether each investment aligns with the priorities outlined in the SESAR Master Plan. 
-
-For State-level analysis, a comparison with the Union-wide median is also provided.
+3. Expected benefit and impact per new major investment: This section assesses the expected benefits across the four KPAs and the anticipated impact on performance at both network and local levels, resulting from the implementation of specific investments. It also indicates whether each investment aligns with the priorities outlined in the SESAR Master Plan. For State-level analysis, a comparison with the Union-wide median is also provided.
 
 4. Public funding granted for total CAPEX (CEF/TEN-T): This section provides an overview of European funding received by each service provider for the implementation of projects linked to the CP1 regulation (Commission Implementing Regulation (EU) 2021/116 on the establishment of the Common Project One), as reported by the entities themselves and by the SDM.
 
-5. Unlike the other sections of this dashboard, the investment analysis covers the entire reference period 2020–2024.
+Unlike the other sections of this dashboard, the investment analysis covers the entire reference period 2020–2024.
 

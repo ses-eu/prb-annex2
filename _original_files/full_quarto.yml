@@ -213,7 +213,6 @@ website:
             href: index.html#cost-efficiency-ses-rp3-area
       - text: "---"
 # block level1 ses end
-# rp3 marker beg 
 # block level1 nm beginning
           - text: "Safety"
             href: index.html#safety-network-manager---ses-rp3-area
@@ -225,6 +224,7 @@ website:
             href: index.html#cost-efficiency-network-manager---ses-rp3-area
       - text: "---"
 # block level1 nm end
+# rp3 marker beg 
 # block level2 beginning
       - section: "<b>Safety</b>"
         href: safety.html
