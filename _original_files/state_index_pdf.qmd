@@ -984,6 +984,20 @@ cef_text2 <- cef_text$text2
 
 `r layout_summary_table(table_level2_saf_autotools, left_margin = 4.5, width = 0.5)`
 
+<!-- test if this below works-->
+:::: {layout="[ 25, 50, 25 ]"}
+::::: {#emptydiv}  
+:::::
+
+::::: {.chart-container}  
+
+`r latex_linebreaks(saf_asdr_text)`
+
+:::::
+
+::::: {#emptydiv}  
+:::::
+::::
 
 \needspace{3\baselineskip}
 

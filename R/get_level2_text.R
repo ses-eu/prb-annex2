@@ -104,9 +104,90 @@ if (country == "SES RP3") {
   
   saf_eosm_text <- saf_all[(saf_heading_positions[1]+1):(saf_heading_positions[1]+1), 1]
   
-  saf_ri_text <- ''
-  saf_smi_text <- ''
-  saf_qr_text <- ''
+  #additional saf text fro excel file
+  saf_text_country <- read_xlsx(
+    path = here::here(data_folder, "SAF_input_text.xlsx"),
+    sheet = "SAF_STATE_text",
+    range = cell_limits(c(1, 1), c(NA, NA))
+  ) %>%
+    as_tibble() %>%
+    janitor::clean_names() %>% 
+    filter(state == country)
+  
+  ## eosm
+  saf_eosm_text_df <- saf_text_country %>% 
+    filter(tolower(topic) == "eosm" & year == year_report) %>% 
+    arrange(numbering) %>% 
+    select(text)
+  
+  
+  for (i in 1:nrow(saf_eosm_text_df)) {
+    saf_eosm_text <- paste0(saf_eosm_text,
+                            "\n",
+                            saf_eosm_text_df$text[i],
+                            if_else(i== nrow(saf_eosm_text_df), "","")
+    )
+  }
+  
+  ## ri
+  saf_ri_text_df <- saf_text_country %>% 
+    filter(tolower(topic) == "ri" & year == year_report) %>% 
+    arrange(numbering) %>% 
+    select(text)
+  
+  saf_ri_text <- '' 
+  
+  for (i in 1:nrow(saf_ri_text_df)) {
+    saf_ri_text <- paste0(saf_ri_text,
+                          saf_ri_text_df$text[i],
+                          if_else(i== nrow(saf_ri_text_df), "","")
+    )
+  }
+  
+  ## smi
+  saf_smi_text_df <- saf_text_country %>% 
+    filter(tolower(topic) == "smis" & year == year_report) %>% 
+    arrange(numbering) %>% 
+    select(text)
+  
+  saf_smi_text <- '' 
+  
+  for (i in 1:nrow(saf_smi_text_df)) {
+    saf_smi_text <- paste0(saf_smi_text,
+                           saf_smi_text_df$text[i],
+                           if_else(i== nrow(saf_smi_text_df), "","")
+    )
+  }
+  
+  ## Quality reporting
+  saf_qr_text_df <- saf_text_country %>% 
+    filter(tolower(topic) == "quality reporting" & year == year_report) %>% 
+    arrange(numbering) %>% 
+    select(text)
+  
+  saf_qr_text <- '' 
+  
+  for (i in 1:nrow(saf_qr_text_df)) {
+    saf_qr_text <- paste0(saf_qr_text,
+                          saf_qr_text_df$text[i],
+                          if_else(i== nrow(saf_qr_text_df), "","")
+    )
+  }
+  
+  ## asdr
+  saf_asdr_text_df <- saf_text_country %>% 
+    filter(tolower(topic) == "asdr" & year == year_report) %>% 
+    arrange(numbering) %>% 
+    select(text)
+  
+  saf_asdr_text <- '' 
+  
+  for (i in 1:nrow(saf_asdr_text_df)) {
+    saf_asdr_text <- paste0(saf_asdr_text,
+                            saf_asdr_text_df$text[i],
+                            if_else(i== nrow(saf_asdr_text_df), "","")
+    )
+  }
   
   
 }
