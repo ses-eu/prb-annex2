@@ -1,7 +1,12 @@
 [Investments - {{< var doc.country >}}]{.fakeh1}
 
 ## PRB monitoring
-[Placeholder for text]												
+
+```{r}
+inv_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "investments", "Table_Findings_investments")
+```
+
+`r inv_conc1`
 
 ## Value of the assets for New Investments included in the Performance Plan `r country` | `r if_else(params$country == "SES RP3", "all ANSPs", main_ansp)`
 
