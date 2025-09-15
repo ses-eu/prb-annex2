@@ -126,9 +126,9 @@ if (country == "SES RP3") {
   
   for (i in 1:nrow(saf_eosm_text_df)) {
     saf_eosm_text <- paste0(saf_eosm_text,
-                            "\n",
+                            if_else(i== 1, "\n\n",""),
                             saf_eosm_text_df$text[i],
-                            if_else(i== nrow(saf_eosm_text_df), "","")
+                            if_else(i== nrow(saf_eosm_text_df), "","\n\n")
     )
   }
   
@@ -143,7 +143,7 @@ if (country == "SES RP3") {
   for (i in 1:nrow(saf_ri_text_df)) {
     saf_ri_text <- paste0(saf_ri_text,
                           saf_ri_text_df$text[i],
-                          if_else(i== nrow(saf_ri_text_df), "","")
+                          if_else(i== nrow(saf_ri_text_df), "","\n\n")
     )
   }
   
@@ -158,7 +158,7 @@ if (country == "SES RP3") {
   for (i in 1:nrow(saf_smi_text_df)) {
     saf_smi_text <- paste0(saf_smi_text,
                            saf_smi_text_df$text[i],
-                           if_else(i== nrow(saf_smi_text_df), "","")
+                           if_else(i== nrow(saf_smi_text_df), "","\n\n")
     )
   }
   
@@ -173,7 +173,7 @@ if (country == "SES RP3") {
   for (i in 1:nrow(saf_qr_text_df)) {
     saf_qr_text <- paste0(saf_qr_text,
                           saf_qr_text_df$text[i],
-                          if_else(i== nrow(saf_qr_text_df), "","")
+                          if_else(i== nrow(saf_qr_text_df), "","\n\n")
     )
   }
   
@@ -188,7 +188,7 @@ if (country == "SES RP3") {
   for (i in 1:nrow(saf_asdr_text_df)) {
     saf_asdr_text <- paste0(saf_asdr_text,
                             saf_asdr_text_df$text[i],
-                            if_else(i== nrow(saf_asdr_text_df), "","")
+                            if_else(i== nrow(saf_asdr_text_df), "","\n\n")
     )
   }
   
