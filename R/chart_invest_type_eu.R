@@ -1,4 +1,4 @@
-if (exists("country") == FALSE) {country <- "Bulgaria"}
+if (exists("country") == FALSE) {country <- "Belgium"}
 
 # source("R/parameters.R")
 
@@ -22,9 +22,9 @@ data_prep_ansp <- data_impact %>%
   filter(state != "SES RP3") %>% 
   mutate(
     type = "ANSP",
-    "SES mandated" = if_else(nmajor_rp3 == 0, 0, nw_rp3/nmajor_rp3)*100,
-    "Partnership" = if_else(nmajor_rp3 == 0, 0, local_rp3/nmajor_rp3)*100,
-    "CP/MP investment" = if_else(nmajor_rp3 == 0, 0, np_rp3/nmajor_rp3)*100
+    "SES mandated" = if_else(nmajor_rp3 == 0, 0, ses_rp3/nmajor_rp3)*100,
+    "Partnership" = if_else(nmajor_rp3 == 0, 0, par_rp3/nmajor_rp3)*100,
+    "CP/MP investment" = if_else(nmajor_rp3 == 0, 0, cpmp_rp3/nmajor_rp3)*100
     ) %>% 
   select(type, "SES mandated", "Partnership", "CP/MP investment") %>% 
   pivot_longer(-c(type), names_to = "xlabel", values_to = "mymetric")
