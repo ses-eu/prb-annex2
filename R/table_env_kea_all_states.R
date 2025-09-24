@@ -36,10 +36,10 @@ data_prep_target <- data_raw_target %>%
   
 data_prep_actual <- data_raw_actual %>% 
   filter(year == year_report) %>% 
-  mutate (actual = hfe_kpi_percent) %>% 
+  # mutate (actual = hfe_kpi_percent) %>% 
   select(
     State = entity_name,
-    Actual = hfe_all
+    Actual = hfe_kpi_percent
   ) 
 
 data_prep <- state_table |> 
