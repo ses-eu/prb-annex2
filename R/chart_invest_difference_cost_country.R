@@ -10,28 +10,27 @@ if (!exists("data_cost_inv")) {
 
 # process data  ----
 if (cost_type == "en route") {
-  data_filtered <- data_cost_inv_rt %>% 
-    select(member_state,
-           d_total_rp3 = d_enr_total_rp3,
-           a_total_rp3 = a_enr_total_rp3
-    )
+  data_filtered <- data_cost_ses %>% 
+    select(
+      member_state = state,
+      dif = difference_a_d_value_en_route,
+      dif_perc = difference_a_d_percent_en_route
+    ) %>% 
+    filter(member_state != "Luxembourg")
 } else {
-  data_filtered <- data_cost_inv_rt %>% 
-    select(member_state,
-           d_total_rp3 = d_ter_total_rp3,
-           a_total_rp3 = a_ter_total_rp3
-    )
+  data_filtered <- data_cost_ses %>% 
+    select(
+      member_state = state,
+      dif = difference_a_d_value_terminal,
+      dif_perc = difference_a_d_percent_terminal
+    ) %>% 
+    filter(!(is.na(dif)))
 }
 
 data_calc <- data_filtered %>% 
-  group_by(member_state) %>% 
-  summarise(
-    d_total_rp3 = sum(d_total_rp3, na.rm = TRUE),
-    a_total_rp3 = sum(a_total_rp3, na.rm = TRUE)
-  ) %>% 
   mutate(
-    dif = (a_total_rp3 - d_total_rp3) / 10^3,
-    dif_perc = if_else(a_total_rp3 == 0, 0, a_total_rp3/d_total_rp3 - 1) * 100
+    dif = dif / 10^6,
+    dif_perc = dif_perc  * 100
   ) %>% 
   select(
     member_state,

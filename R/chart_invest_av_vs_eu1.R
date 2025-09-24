@@ -10,7 +10,9 @@ if (!exists("data_capex") | !exists("data_union_wide")) {
 # process data  ----
 data_prep_uw <- data_union_wide %>% 
   filter(variable == "New major investments" | variable == "Other new investments") %>% 
-  mutate(mymetric = round(percent*100, 0)) %>% 
+  mutate(
+    mymetric = round(percent*100, 0)
+  ) %>% 
   select(
     xlabel = union_wide_median,
     type = variable,
@@ -44,7 +46,7 @@ local_suffix <- "%"
 local_decimals <- 0
 
 ###set up order of traces
-local_hovertemplate <- paste0('%{y:,.', local_mydecimals, 'f}', local_suffix)
+local_hovertemplate <- paste0('%{y:,.', local_decimals, 'f}', local_suffix)
 
 #### legend
 if (knitr::is_latex_output()) {

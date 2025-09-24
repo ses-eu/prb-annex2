@@ -128,3 +128,20 @@ data_funding_sdm <-  read_xlsx(
 data_funding <- rbind(data_funding_self, data_funding_sdm) %>% 
   mutate(year = if_else(year == "total_rp3_to_date", "RP3", year))
   
+## SES case ----
+data_cost_ses <-  read_xlsx(
+  paste0(data_folder, "INVESTMNENTS DATA_master.xlsx"),
+  # here("data","hlsr2021_data.xlsx"),
+  sheet = "Union-wide chart",
+  range = cell_limits(c(1, 30), c(NA, 40))) %>%
+  as_tibble() %>% 
+  clean_names() 
+
+data_benefit_ses <-  read_xlsx(
+  paste0(data_folder, "INVESTMNENTS DATA_master.xlsx"),
+  # here("data","hlsr2021_data.xlsx"),
+  sheet = "Union-wide chart",
+  range = cell_limits(c(1, 19), c(NA, 23))) %>%
+  as_tibble() %>% 
+  clean_names() 
+

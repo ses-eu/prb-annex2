@@ -325,16 +325,34 @@ no_investments <- no_investments
 
 ## Expected benefit and impact per new major investment `r country` | `r if_else(params$country == "SES RP3", "all ANSPs", main_ansp)`
 
+`r if (params$country == "SES RP3") "::: {.content-hidden}"`
 
-```{r table_invest_benefits_kpa}
+```{r table_invest_benefits_kpa, eval=!(params$country == "SES RP3")}
 #| file: R/table_invest_benefits_kpa.R
 #| out.width: "100%"
 ```
 
-```{r table_invest_benefits}
+```{r table_invest_benefits, eval=!(params$country == "SES RP3")}
 #| file: R/table_invest_benefits.R
 #| out.width: "100%"
 ```
+
+`r if (params$country == "SES RP3") ":::"`
+
+`r if (params$country != "SES RP3") "::: {.content-hidden}"`
+
+```{r table_invest_benefits_kpa_ses, eval=(params$country == "SES RP3")}
+#| file: R/table_invest_benefits_kpa_ses.R
+#| out.width: "100%"
+```
+
+```{r table_invest_impact_ses, eval=(params$country == "SES RP3")}
+#| file: R/table_invest_impact_ses.R
+#| out.width: "100%"
+```
+
+`r if (params$country != "SES RP3") ":::"`
+
 
 <br>
 
@@ -357,11 +375,34 @@ no_investments <- no_investments
 ::::
 :::
 
+`r if (params$country == "SES RP3") "::: {.content-hidden}"`
 
-```{r table_invest_type}
+```{r table_invest_type, eval=!(params$country == "SES RP3")}
 #| file: R/table_invest_type.R
 #| out.width: "100%"
 ```
+
+`r if (params$country == "SES RP3") ":::"`
+
+
+`r if (params$country != "SES RP3") "::: {.content-hidden}"`
+
+```{r, eval=(params$country == "SES RP3")}
+#| label: table_invest_benefit_type_ses
+#| out.width: "100%"
+#| echo: false
+
+source("R/table_invest_benefit_type_ses.R")
+table1
+```
+
+```{r}
+#| echo: false
+table2
+```
+
+`r if (params$country != "SES RP3") ":::"`
+
 
 <br>
 

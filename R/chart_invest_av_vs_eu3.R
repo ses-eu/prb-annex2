@@ -15,7 +15,10 @@ data_prep_uw <- data_union_wide %>%
            variable == "Other" |
            variable == "Unknown"
   ) %>% 
-  mutate(mymetric = round(percent*100, 0)) %>% 
+  mutate(
+    mymetric = round(percent*100, 0),
+    union_wide_median = "Union-wide"
+    ) %>% 
   select(
     xlabel = union_wide_median,
     type = variable,
@@ -58,7 +61,7 @@ data_prep_ansp <- data_category %>%
   select(xlabel, type, mymetric)   
 
 data_prep <- rbind(data_prep_ansp, data_prep_uw) %>% 
-  mutate(xlabel = factor(xlabel, levels = c("ANSP", "Union-wide median")))
+  mutate(xlabel = factor(xlabel, levels = c("ANSP", "Union-wide")))
 
 
 # chart ----

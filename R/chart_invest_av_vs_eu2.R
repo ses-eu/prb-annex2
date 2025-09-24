@@ -15,10 +15,10 @@ data_prep <- data_capex %>%
   mutate(
     type = case_when(
       member_state == .env$country ~ "ANSP",
-      member_state == "SES RP3" ~ "Union-wide median"),
+      member_state == "SES RP3" ~ "Union-wide"),
     mymetric = total / lead(total, 1)*100,
     mymetric = case_when(
-      type == "Union-wide median" ~ 100-lag(mymetric,1),
+      type == "Union-wide" ~ 100-lag(mymetric,1),
       .default = mymetric
       ),
     textposition = if_else(mymetric == 0 | mymetric > 2, "inside", "outside"),
