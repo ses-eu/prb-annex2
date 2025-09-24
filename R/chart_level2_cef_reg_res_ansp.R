@@ -26,7 +26,7 @@ if (country == "SES RP3") {
   
   ## pre-prep data ----
   data_pre_prep <- data_raw |> 
-    mutate(regulatory_result = ro_e_ansp1 + net_result_ansp) |> 
+    mutate(regulatory_result = ro_e_ansp1 + net_result_ansp1) |> 
     select(
       year,
       status,
