@@ -9,38 +9,27 @@ if (!exists("data_cost_inv")) {
 
 
 # process data  ----
-data_prep_state <- data_cost_inv %>% 
+data_prep <- data_cost_ses %>% 
   mutate(
-    Determined = nm_d_total_rp3 + on_d_total_rp3 + e_d_total_rp3,
-    Actual = nm_a_total_rp3 + on_a_total_rp3 + e_a_total_rp3,
+    Determined = determined_costs_of_investments/total_determined_costs * 100,
+    Actual = actual_costs_of_investments/total_actual_costs *100,
   ) %>% 
   select(
-    member_state, Determined, Actual
+    state, Determined, Actual
   ) %>% 
   pivot_longer(
-    -member_state, names_to = "type", values_to = "value"
-  )
-
-data_prep_ses <- data_prep_state %>% filter(member_state == "SES RP3") %>% 
-  select(type,
-         value_ses = value)
-
-data_prep1 <- data_prep_state %>% 
-  left_join(data_prep_ses, by = "type") %>% 
-  mutate(
-    mymetric = value/value_ses * 100
+    -state, names_to = "type", values_to = "mymetric"
   ) %>% 
   select(
-    xlabel = member_state,
+    xlabel = state,
     type, 
     mymetric
   ) %>% 
-  arrange(desc(mymetric)) %>% 
-  filter(xlabel != "SES RP3") 
+  arrange(desc(mymetric)) 
 
-states_factor <- unique(data_prep1$xlabel)
+states_factor <- unique(data_prep$xlabel)
 
-data_prep <- data_prep1 %>% 
+data_prep <- data_prep %>% 
     mutate(xlabel = factor(xlabel, levels = states_factor ))
 
 # chart ----
