@@ -2,7 +2,7 @@
 
 ::: {#container-su style="clear: both"}
 :::: {#summary-kpi-table class="equal-column"}
-### 2023 PERFORMANCE IN A NUTSHELL{style="margin-top: 0rem; margin-bottom: 1rem;"} 
+### 2024 PERFORMANCE IN A NUTSHELL{style="margin-top: 0rem; margin-bottom: 1rem;"} 
 ::::: grid
 :::::: {.g-col-12}
 
@@ -13,7 +13,7 @@
 
 :::::::: {.g-col-9  style="border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; padding-left: 1rem; padding-top: 1.5rem;"}
 [**TRAFFIC**]{style="color: #0F9ED5; line-height: 1.5; font-size: 1.1rem;"}\
-9.2 million flights controlled in the SES airspace
+9.6 million flights controlled in the SES airspace
 ::::::::
 :::::::
 
@@ -24,7 +24,7 @@
 
 :::::::: {.g-col-9  style="border-bottom: 1px solid black; border-right: 1px solid black; padding-left: 1rem; padding-top: 0.9rem;"}
 [**SAFETY**]{style="color: #0F9ED5; line-height: 1.5; font-size: 1.1rem;"}\
-Safety performance by service providers continued to improve from already high levels
+Most of the service providers achieved the highest level of safety performance
 ::::::::
 :::::::
 
@@ -46,7 +46,7 @@ Average air route +20% longer than the targeted distance
 
 :::::::: {.g-col-9  style="border-bottom: 1px solid black; border-right: 1px solid black; padding-left: 1rem; padding-top: 1.5rem;"}
 [**CAPACITY**]{style="color: #0F9ED5; line-height: 1.5; font-size: 1.1rem;"}\
-Average delay of 1.84 minutes per flight 
+Average delay of 2.19 minutes per flight 
 ::::::::
 :::::::
 
@@ -57,7 +57,7 @@ Average delay of 1.84 minutes per flight
 
 :::::::: {.g-col-9  style="border-bottom: 1px solid black; border-right: 1px solid black; padding-left: 1rem; padding-top: 0.9rem;"}
 [**COST-EFFICIENCY**]{style="color: #0F9ED5; line-height: 1.5; font-size: 1.1rem;"}\
-The unitary cost of providing air navigation services amounts to 50.11€ 
+The unitary cost of providing air navigation services amounts to 46.62€ 
 ::::::::
 :::::::
 
