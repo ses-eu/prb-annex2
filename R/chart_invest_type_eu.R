@@ -27,7 +27,8 @@ if (country == "SES RP3") {
     mutate(mymetric =percent *100) %>% 
     select(type = union_wide_median,
            xlabel = variable,
-           mymetric)
+           mymetric)%>% 
+    filter(type == "Union-wide median")
       
   data_prep_ansp <- data_impact %>% 
     filter(state == .env$country) %>% 
