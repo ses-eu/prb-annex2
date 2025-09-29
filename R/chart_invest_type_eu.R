@@ -9,28 +9,41 @@ if (!exists("data_cost_inv")) {
 
 
 # process data  ----
-data_prep_uw <- data_union_wide %>% 
-  filter(variable == "SES mandated" | variable == "Partnership" |
-           variable == "CP/MP investment") %>% 
-  mutate(mymetric =percent *100) %>% 
-  select(type = union_wide_median,
-         xlabel = variable,
-         mymetric)
-    
-data_prep_ansp <- data_impact %>% 
-  filter(state == .env$country) %>% 
-  filter(state != "SES RP3") %>% 
-  mutate(
-    type = "ANSP",
-    "SES mandated" = if_else(nmajor_rp3 == 0, 0, ses_rp3/nmajor_rp3)*100,
-    "Partnership" = if_else(nmajor_rp3 == 0, 0, par_rp3/nmajor_rp3)*100,
-    "CP/MP investment" = if_else(nmajor_rp3 == 0, 0, cpmp_rp3/nmajor_rp3)*100
-    ) %>% 
-  select(type, "SES mandated", "Partnership", "CP/MP investment") %>% 
-  pivot_longer(-c(type), names_to = "xlabel", values_to = "mymetric")
-
-data_prep <- rbind(data_prep_uw, data_prep_ansp) %>% 
-  mutate(xlabel = factor(xlabel, levels = c("SES mandated", "Partnership", "CP/MP investment")))
+if (country == "SES RP3") {
+  data_prep <- data_benefit_ses_forchart %>% 
+    filter(union_wide_median == 'Union-wide ave') %>% 
+    filter(variable %in% c('SES mandated', 'Partnership', 'CP/MP investment')) %>% 
+    mutate(
+      type = "Union-wide average",
+      xlabel = factor(variable, levels = c('SES mandated', 'Partnership', 'CP/MP investment')),
+      mymetric = percent * 100
+    )
+  
+} else {
+  
+  data_prep_uw <- data_union_wide %>% 
+    filter(variable == "SES mandated" | variable == "Partnership" |
+             variable == "CP/MP investment") %>% 
+    mutate(mymetric =percent *100) %>% 
+    select(type = union_wide_median,
+           xlabel = variable,
+           mymetric)
+      
+  data_prep_ansp <- data_impact %>% 
+    filter(state == .env$country) %>% 
+    filter(state != "SES RP3") %>% 
+    mutate(
+      type = "ANSP",
+      "SES mandated" = if_else(nmajor_rp3 == 0, 0, ses_rp3/nmajor_rp3)*100,
+      "Partnership" = if_else(nmajor_rp3 == 0, 0, par_rp3/nmajor_rp3)*100,
+      "CP/MP investment" = if_else(nmajor_rp3 == 0, 0, cpmp_rp3/nmajor_rp3)*100
+      ) %>% 
+    select(type, "SES mandated", "Partnership", "CP/MP investment") %>% 
+    pivot_longer(-c(type), names_to = "xlabel", values_to = "mymetric")
+  
+  data_prep <- rbind(data_prep_uw, data_prep_ansp) %>% 
+    mutate(xlabel = factor(xlabel, levels = c("SES mandated", "Partnership", "CP/MP investment")))
+}
 
 # chart ----
 ## chart parameters ----
@@ -55,13 +68,15 @@ if (knitr::is_latex_output()) {
   
 }
 
+mylocalfactor <- if (country == 'SES RP3') c("Union-wide average") else c("ANSP", "Union-wide median", NULL)
+mylocalcolors <- if (country == 'SES RP3') c('#58595B')else c('#FFC000', '#58595B')
+
+
 # plot chart ----
 myplot <- mybarchart2(data_prep, 
                       height = myheight,
-                      colors = c('#FFC000', '#58595B'),
-                      local_factor = c("ANSP",
-                                       "Union-wide median",
-                                       NULL),
+                      colors = mylocalcolors,
+                      local_factor = mylocalfactor,
                       shape = c("", "", "", "/", "/", "/"),
                       
                       suffix = local_suffix,

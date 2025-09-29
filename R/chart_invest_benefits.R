@@ -9,28 +9,40 @@ if (!exists("data_cost_inv")) {
 
 
 # process data  ----
-data_prep_uw <- data_union_wide %>% 
-  filter(variable == "Network" | variable == "Local" |
-           variable == "Non-performance") %>% 
-  mutate(mymetric =percent *100) %>% 
-  select(type = union_wide_median,
-         xlabel = variable,
-         mymetric)
-    
-data_prep_ansp <- data_impact %>% 
-  filter(state == .env$country) %>% 
-  filter(state != "SES RP3") %>% 
-  mutate(
-    type = "ANSP",
-    Network = if_else(nmajor_rp3 == 0, 0, nw_rp3/nmajor_rp3)*100,
-    Local = if_else(nmajor_rp3 == 0, 0, local_rp3/nmajor_rp3)*100,
-    "Non-performance" = if_else(nmajor_rp3 == 0, 0, np_rp3/nmajor_rp3)*100
-    ) %>% 
-  select(type, Network, Local, "Non-performance") %>% 
-  pivot_longer(-c(type), names_to = "xlabel", values_to = "mymetric")
-
-data_prep <- rbind(data_prep_uw, data_prep_ansp) %>% 
-  mutate(xlabel = factor(xlabel, levels = c("Network", "Local", "Non-performance")))
+if (country == "SES RP3") {
+  data_prep <- data_benefit_ses_forchart %>% 
+    filter(union_wide_median == 'Union-wide ave') %>% 
+    filter(variable %in% c('Network', 'Local', 'Non-performance')) %>% 
+    mutate(
+      type = "Union-wide average",
+      xlabel = factor(variable, levels = c('Network', 'Local', 'Non-performance')),
+      mymetric = percent * 100
+    )
+  
+} else {
+  data_prep_uw <- data_union_wide %>% 
+    filter(variable == "Network" | variable == "Local" |
+             variable == "Non-performance") %>% 
+    mutate(mymetric =percent *100) %>% 
+    select(type = union_wide_median,
+           xlabel = variable,
+           mymetric)
+      
+  data_prep_ansp <- data_impact %>% 
+    filter(state == .env$country) %>% 
+    filter(state != "SES RP3") %>% 
+    mutate(
+      type = "ANSP",
+      Network = if_else(nmajor_rp3 == 0, 0, nw_rp3/nmajor_rp3)*100,
+      Local = if_else(nmajor_rp3 == 0, 0, local_rp3/nmajor_rp3)*100,
+      "Non-performance" = if_else(nmajor_rp3 == 0, 0, np_rp3/nmajor_rp3)*100
+      ) %>% 
+    select(type, Network, Local, "Non-performance") %>% 
+    pivot_longer(-c(type), names_to = "xlabel", values_to = "mymetric")
+  
+  data_prep <- rbind(data_prep_uw, data_prep_ansp) %>% 
+    mutate(xlabel = factor(xlabel, levels = c("Network", "Local", "Non-performance")))
+}
 
 # chart ----
 ## chart parameters ----
@@ -55,13 +67,15 @@ if (knitr::is_latex_output()) {
   
 }
 
+mylocalfactor <- if (country == 'SES RP3') c("Union-wide average") else c("ANSP", "Union-wide median", NULL)
+mylocalcolors <- if (country == 'SES RP3') c('#58595B')else c('#FFC000', '#58595B')
+
+
 # plot chart ----
 myplot <- mybarchart2(data_prep, 
                       height = myheight,
-                      colors = c( '#FFC000', '#58595B'),
-                      local_factor = c("ANSP",
-                                       "Union-wide median",
-                                        NULL),
+                      colors = mylocalcolors,
+                      local_factor = mylocalfactor,
                       shape = c( "", "", "", "/", "/", "/"),
                       
                       suffix = local_suffix,

@@ -145,3 +145,11 @@ data_benefit_ses <-  read_xlsx(
   as_tibble() %>% 
   clean_names() 
 
+data_benefit_ses_forchart <-  read_xlsx(
+  paste0(data_folder, "INVESTMNENTS DATA_master.xlsx"),
+  # here("data","hlsr2021_data.xlsx"),
+  sheet = "Union-wide median",
+  range = cell_limits(c(1, 1), c(NA, NA))) %>%
+  as_tibble() %>% 
+  clean_names() 
+
