@@ -27,7 +27,9 @@ data_prep_target <- data_raw_target %>%
   select(
     State = state,
     Target = x332_state_arr_delay_target
-  ) 
+  ) %>% 
+  filter(!is.na(Target))
+  
   
 data_prep_actual <- data_raw_actual %>% 
   filter(year == .env$year_report) %>% 
@@ -37,8 +39,8 @@ data_prep_actual <- data_raw_actual %>%
     Actual = average_delay
   ) 
 
-data_prep <- state_table |> 
-  left_join(data_prep_target, by = "State") |> 
+data_prep <- data_prep_target %>% 
+  # left_join(data_prep_target, by = "State") |> 
   left_join(data_prep_actual, by = "State") |> 
   mutate(Actual = case_when(
     is.na(Target) == TRUE ~ "",
