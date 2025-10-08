@@ -26,15 +26,18 @@ if (country == "SES RP3") {
   
   ## pre-prep data ----
   data_pre_prep <- data_raw |> 
-    mutate(regulatory_result = ro_e_ansp1 + net_result_ansp1) |> 
+    mutate(
+      regulatory_result = ro_e_ansp1 + net_result_ansp1,
+      revenues_ansp = revenues_ansp1 + net_result_ansp1
+      ) |> 
     select(
       year,
       status,
       regulatory_result,
       revenues_ansp
     ) |> 
-    pivot_wider( names_sep = "_", names_from = "status", values_from = c(3:4)) |> 
-    select(-revenues_ansp_D) 
+    pivot_wider( names_sep = "_", names_from = "status", values_from = c(3:4))  
+    # select(-revenues_ansp_D) 
   
   data_for_chart_wide <- data_pre_prep |> 
     mutate(
@@ -50,8 +53,12 @@ if (country == "SES RP3") {
         year == 2021 ~ revenues_ansp_A + pull(select(filter(data_pre_prep, year == 2020), revenues_ansp_A)),
         .default = revenues_ansp_A),
       
+      determined_revenues = case_when(
+        year == 2021 ~ revenues_ansp_D + pull(select(filter(data_pre_prep, year == 2020), revenues_ansp_D)),
+        .default = revenues_ansp_D),
+
       share_rr_act_rev_expost = regulatory_result/actual_revenues * 100,
-      share_rr_act_rev_exante = ex_ante_roe/actual_revenues * 100,
+      share_rr_act_rev_exante = ex_ante_roe/determined_revenues * 100,
       
       year_text = if_else(year == 2021, "2020-2021", as.character(year))
     ) |>  
