@@ -17,7 +17,7 @@ data_prep <- data_cost_inv %>%
 
          nm_a_2020, nm_a_2021, nm_a_2022, nm_a_2023, nm_a_2024,
          on_a_2020, on_a_2021, on_a_2022, on_a_2023, on_a_2024,
-         e_a_2020, e_a_2021, e_a_2022, e_a_2023, e_d_2024,
+         e_a_2020, e_a_2021, e_a_2022, e_a_2023, e_a_2024,
          ) %>% 
   pivot_longer(
     cols = everything(),  # Pivot all columns
