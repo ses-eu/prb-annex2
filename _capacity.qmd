@@ -263,7 +263,7 @@ if (params$country == "Luxembourg") {
 ```{r cap-trm-prb}
 cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table_Findings_TRM_capacity")
 
-cap_trm_conc1 <- if_else(cap_trm_conc1 == "NA", "", cap_trm_conc1)
+cap_trm_conc1 <- if_else(cap_trm_conc1 == "NA" | stringr::str_detect(cap_trm_conc1, "character"), "", cap_trm_conc1)
 ```
 
 `r cap_trm_conc1`

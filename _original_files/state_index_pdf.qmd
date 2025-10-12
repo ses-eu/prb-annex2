@@ -848,7 +848,7 @@ env_text2 <- env_text$text2
 cap_er_conc1 <-  get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity")
 cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table_Findings_TRM_capacity")
 
-cap_conc1 <- paste0(if_else(cap_er_conc1 == "character(0\n", "", paste0(cap_er_conc1, "\n\n")), if_else(cap_trm_conc1 == "NA", "", cap_trm_conc1))
+cap_conc1 <- paste0(if_else(cap_er_conc1 == "character(0\n", "", paste0(cap_er_conc1, "\n\n")), if_else(cap_trm_conc1 == "NA" | stringr::str_detect(cap_trm_conc1, "character"), "", cap_trm_conc1))
 
 cap_text <- break_l1_text(cap_conc1) 
 cap_text1 <- cap_text$text1
@@ -984,20 +984,8 @@ cef_text2 <- cef_text$text2
 
 `r layout_summary_table(table_level2_saf_autotools, left_margin = 4.5, width = 0.5)`
 
-<!-- test if this below works-->
-:::: {layout="[ 25, 50, 25 ]"}
-::::: {#emptydiv}  
-:::::
-
-::::: {.chart-container}  
 
 `r latex_linebreaks(saf_asdr_text)`
-
-:::::
-
-::::: {#emptydiv}  
-:::::
-::::
 
 \needspace{3\baselineskip}
 
@@ -1147,15 +1135,17 @@ if (params$country == "Luxembourg") {
 
 `r cap_er_conc1`
 
-`r if (params$no_tcz == 0 | params$year_report != 2023) "::: {.content-hidden}"`
+`r if (params$no_tcz == 0 | params$year_report <= 2023) "::: {.content-hidden}"`
 
 ```{r cap-trm-prb}
 cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table_Findings_TRM_capacity")
+
+cap_trm_conc1 <- if_else(cap_trm_conc1 == "NA" | stringr::str_detect(cap_trm_conc1, "character"), "", cap_trm_conc1)
 ```
 
 `r cap_trm_conc1`
 
-`r if (params$no_tcz == 0 | params$year_report != 2023) ":::"`
+`r if (params$no_tcz == 0 | params$year_report <= 2023) ":::"`
 
 
 
