@@ -168,7 +168,9 @@ myc <-  function(width = NA, height, fontsize = myfont, margin = 70, ansp_name =
     ) %>% 
     layout(
       font = list(family = "Roboto"),
-      title = list(text=paste0("EoSM - ", ansp_name),
+      title = list(text=paste0("EoSM - ", if_else(ansp_name == 'Airnav Ireland' & year_report <2023, 
+                                                  'IAA',
+                                                  ansp_name)),
                    y = mytitle_y, 
                    x = mytitle_x, 
                    xanchor = mytitle_xanchor, 
@@ -234,14 +236,19 @@ myc <-  function(width = NA, height, fontsize = myfont, margin = 70, ansp_name =
 }
 
 if (knitr::is_latex_output()) {
-  myc(ansp_name = saf_ansps[[saf_ansp_index]], 
+  myc(ansp_name = if_else(saf_ansps[[saf_ansp_index]] == 'IAA',
+                          'Airnav Ireland',
+                          saf_ansps[[saf_ansp_index]]), 
       height = 290,
       fontsize = 12.5)
 
   } else {
     chart_params <- as_tibble(saf_ansps) %>% 
       rename(ansp_name = value) %>% 
-      mutate(height = 320)
+      mutate(height = 320,
+             ansp_name = if_else(ansp_name == 'IAA',
+                                 'Airnav Ireland',
+                                 ansp_name))
 
     mycharts <- pmap(chart_params, myc)
 }

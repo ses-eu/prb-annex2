@@ -68,6 +68,7 @@ data_prep <- data_calc %>%
   pivot_wider(names_from = "year", values_from = c(3:6)) %>% 
   mutate(
     myentity = factor(myentity, levels = myentity_order$myentity),
+    myentity = if_else(country == 'Ireland' & year_report < 2023, 'IAA', myentity),
   ) %>% 
   arrange(myentity) %>% 
   mutate(
