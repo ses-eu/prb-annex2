@@ -152,8 +152,10 @@ website:
         text: About
       - href: home_address/download.html
         text: Download
-      - href: https://www.eurocontrol.int/prudata/dashboard/
-        text: Data Portal {{< fa external-link-alt >}}
+      - href: home_address/dataportal/
+        text: Data Portal 
+      # - href: https://www.eurocontrol.int/prudata/dashboard/
+      #   text: Data Portal {{< fa external-link-alt >}}
       - href: https://eu-single-sky.transport.ec.europa.eu/index_en
         text: Publications {{< fa external-link-alt >}}
         target: "_blank"
