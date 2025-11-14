@@ -36,7 +36,7 @@
 
   mytextangle <- 0
   mytextposition <- "outside"
-  myinsidetextanchor <- NA
+  myinsidetextanchor <- NULL
   mytextfont_color <- 'black'
   mytextfont_size <- myfont
   

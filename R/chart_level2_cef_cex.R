@@ -117,7 +117,7 @@ myhovertemplate <- paste0('%{y:,.', mydecimals, 'f}', mysuffix)
 
 mytextangle <- 0
 mytextposition <- "auto"
-myinsidetextanchor <- NA
+myinsidetextanchor <- NULL
 mytextfont_color <- 'black'
 
 ### layout parameters
