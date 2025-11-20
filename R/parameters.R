@@ -157,8 +157,13 @@
   no_tcz <- nrow(tcz_list)
   
   # to avoid annoing if_else errors
-  if(no_tcz == 0) {tcz_list <- tcz_list <- tcz_list_table %>% 
-    filter (state == "Spain") %>% mutate_all(~NA)}
+  if(no_tcz == 0) {tcz_list <- tcz_list_table %>% 
+    filter (state == "Spain") %>% 
+    mutate(
+      across(where(is.character), ~ ""),
+      across(where(is.numeric),   ~ 0)
+    )
+    }
 
   ## context data ----
   context_data <- context_data_table %>% 
