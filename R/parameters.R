@@ -110,9 +110,14 @@
 
   state_parameters <- params_table %>% filter(state == .env$country) 
     main_ansp <- state_parameters %>% select(main_ansp) %>% pull()
+    # due to new quarto version not handling NAs
+    if(is.na(main_ansp)){main_ansp <- ""}
     nat_curr <- state_parameters %>% select(currency) %>% pull()
+    if(is.na(nat_curr)){nat_curr <- ""}
     state_type <- state_parameters %>% select(dashboard_case) %>% pull()
+    if(is.na(state_type)){state_type <- ""}
     pp_version <- state_parameters %>% select(pp_adoption_full) %>% pull()
+    if(is.na(pp_version)){pp_version <- ""}
 
   ## aua entity for capacity  ----
   saf_ansps <- saf_ansp_table %>% filter(country_name == .env$country) %>% 
@@ -137,7 +142,11 @@
     acc5 <- if_else(acc_no <5, '', acc_list$acc_full_name[5])
 
   ## ecz list and forecast ----
-  ecz_list <- ecz_list_table %>% filter(state == .env$country) 
+  ecz_list <- ecz_list_table %>% filter(state == .env$country) %>% 
+      mutate(
+        across(where(is.character), ~ replace_na(.x, "")),
+        across(where(is.numeric),   ~ replace_na(.x, 0))
+      )
   no_ecz <- nrow(ecz_list)
     
     ### for spain we present only one  traffic zone
@@ -153,7 +162,12 @@
   forecast_id <- ecz_list %>% select(forecast_id) %>% pull() %>%  unique()
 
   ## tcz list ----
-  tcz_list <- tcz_list_table %>% filter(state == .env$country) 
+  tcz_list <- tcz_list_table %>% filter(state == .env$country) %>% 
+    mutate(
+      across(where(is.character), ~ replace_na(.x, "")),
+      across(where(is.numeric),   ~ replace_na(.x, 0))
+    )
+  
   no_tcz <- nrow(tcz_list)
   
   # to avoid annoing if_else errors
@@ -273,7 +287,7 @@ if (country != "Network Manager" & country != "SES RP3" & country != "Home") {
   ## get ceff file ----
   if (country != "MUAC") {
     ceff_files <- list.files(paste0(data_folder_a2, 'ceff/'))
-    ceff_file_canarias <- NA
+    ceff_file_canarias <- ""
     
     for (i in 1:length(ceff_files)) {
       if (grepl(country, ceff_files[i], fixed = TRUE) == TRUE) {
@@ -292,8 +306,8 @@ if (country != "Network Manager" & country != "SES RP3" & country != "Home") {
     ceff_file_canarias <-  paste0(data_folder_a2, "ceff/", ceff_file_canarias)
   }
   else {
-    ceff_file <- NA
-    ceff_file_canarias <- NA
+    ceff_file <- ""
+    ceff_file_canarias <- ""
   }
   
   # get er cap file ----
