@@ -10,12 +10,15 @@ execute:
 
 format:
   pdf: 
+    documentclass: scrreprt
+    pdf-engine: xelatex
     fig-crop: true
     fig-pos: 'H'
     keep-tex: true
     toc: true
     toc-depth: 2 
     lof: false
+    fontsize: 12pt
     # fig-format: "pdf"
     geometry:
       - a4paper
@@ -27,10 +30,10 @@ format:
       - left=2.5cm
       - right=2.2cm
       - footskip=0.7cm
-    mainfont: "Calibri"
+#    mainfont: "Cambria"
     
-    template-partials:
-      - toc.tex
+    # template-partials:
+    #   - toc.tex
     
     include-in-header:
       - text: |
@@ -51,141 +54,15 @@ format:
           % \usepackage{hyperref}  % Enables hyperlinks
           % \hypersetup{colorlinks=true, urlcolor=blue} % Set hyperlinks to be blue and underlined
           
-          
-          \newcommand\CoverImage{images/background_cover_page.png} % Background image path
-    
-          % Add background to the first page
-          \AddToShipoutPictureBG*{%
-            \AtPageLowerLeft{\includegraphics[width=\paperwidth,height=\paperheight]{\CoverImage}}
-          }
-    
-          \usepackage{titling}   % Allows title repositioning
-          \usepackage{fontspec}  % Custom fonts
-          \newfontfamily\calibriLight{Calibri Light} % Define font for title
-
-           % Apply color and keep the existing formatting
-          \pretitle{\vspace*{-2cm} % Moves title
-                    \begin{flushleft} % Align title left
-                    \color{PRBBlue} % Apply color
-                    \calibriLight\fontsize{26pt}{31pt}\selectfont} % Custom font size
-          \posttitle{\\[2mm] % Add small space after title
-                    \calibriLight\fontsize{26pt}{31pt}\selectfont Monitoring Report % Hardcoded subtitle
-                    \end{flushleft}}
-    
-          % Apply color to the author (keeps spacing and format)
-          \preauthor{\vspace*{6mm} % Extra spacing between title and author
-                     \begin{flushleft} % Align left
-                     \color{PRBBlue} % Apply color
-                     \calibriLight\fontsize{22pt}{26pt}\selectfont} % Set font size for author
-          \postauthor{\end{flushleft}}
-    
-          % Apply color to the date
-          \predate{\vspace*{5mm} \begin{flushleft}\color{PRBBlue}\small} % Moves date down slightly
-          \postdate{\end{flushleft}}
-
-          % --------------------- DISCLAIMER BOX ---------------------
-          
-          \AddToShipoutPictureBG*{%
-            \ifnum\value{page}=1
-              \AtPageLowerLeft{\hspace{24mm}\raisebox{40mm}{ % Adjust position
-                \fontsize{9pt}{11pt}\selectfont % Font size
-                \calibriLight % Apply Calibri Light font
-                \fbox{% Draw a border around the entire box
-                  \begin{minipage}{0.83\linewidth} % Full-width container
-                    \begin{minipage}[t]{0.20\linewidth} % Left column (Adjust width)
-                      \textbf{COPYRIGHT NOTICE} \\[2pt] % Bold title
-                      \textbf{AND DISCLAIMER} 
-                    \end{minipage}%
-                    \begin{minipage}{0.02\linewidth} % Small space between columns
-                      \hfill
-                    \end{minipage}%
-                    \begin{minipage}[t]{0.78\linewidth} % Right column (Text content)
-                      {\textcopyright\ European Union, 2025} \\[4pt]
-                      This report has been prepared for the European Commission by the Performance Review Body of the Single European Sky (PRB). \\[4pt]
-                      Reproduction is authorised provided the source is acknowledged. However, neither the European Commission, nor any person acting on its behalf, may be held responsible for the use which may be made of the information contained in this publication, or for any errors which may appear, despite careful preparation and checking.
-                    \end{minipage}
-                  \end{minipage}
-                }
-              }}
-            \fi
-          }
-
-      
-          % Add text "This report is automatically generated from: sesperformance.eu"
-          % Position it lower on the cover page
-          \AddToShipoutPictureBG*{%
-            \AtPageLowerLeft{%
-              \hspace{24mm} % Move right slightly
-              \raisebox{80mm}{ % Move up from bottom of page
-                {\calibriLight\fontsize{11pt}{13pt}\selectfont % Set font size
-                \textcolor{black}{This report is automatically generated from: } 
-                \href{https://sesperformance.eu}{sesperformance.eu} % Default hyperlink (blue, underlined)
-                }
-              }
-            }
-          }
-
-          % Add disclaimer in the footer of the first page only (full-width)
-          \AddToShipoutPictureBG*{%
-            \ifnum\value{page}=1
-              \AtPageLowerLeft{\hspace{24mm}\raisebox{10mm}{ % Move  
-                \fontsize{7pt}{9pt}\selectfont % Set font size to 6pt with 8pt line spacing
-                \parbox{\linewidth}{ % Full width of the text area
-                  \raggedright % Left-align text
-                  Performance Review Body of the Single European Sky \textbar\ Rue de la Fusée 96, Office 50.659, 1130 Brussels \\[2pt]
-                  Office Telephone: +32 (0)2 234 7824 \textbar\ cathy.mannion@prb.eusinglesky.eu \textbar\ prb-office@prb.eusinglesky.eu \textbar\ eu-single-sky.transport.ec.europa.eu
-                }
-              }}
-            \fi
-          }
-          
-          % --------------------- HEADER ---------------------
-
-          \usepackage{scrlayer-scrpage} % For customizing headers/footers
-          \clearpairofpagestyles
-    
-          % Ensure the last page reference is available
-          \usepackage{lastpage}
-    
-          % Add the logo in the center of the header
-          \chead*{\raisebox{10mm}{\includegraphics[height=0.18cm]{images/header_top.png}}}
-    
-          % Move page numbering to the right-hand side of the header with new font style
-          \ohead*{\makebox[0pt][r]{\raisebox{-10mm}{\textcolor{black}{\calibriLight\normalfont\fontsize{8pt}{10pt}\selectfont \thepage/\pageref*{LastPage}}}}}
-          
-          
           % --------------------- BODY ---------------------
-
-          \usepackage[section]{placeins} % Prevent floats from crossing section boundaries
-      
           \usepackage{array} % Add advanced table formatting
-          \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}} % Left-aligned column without word breaking          
+          % \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}} % Left-aligned column without word breaking          
           
           \usepackage{float} % Allows [H] placement option
-          \makeatletter
-          \setlength{\@fptop}{0pt} % Place floats at the top of the page
-          \setlength{\@fpsep}{\textheight} % Avoid stacking other floats below
-          \makeatother
 
-          \usepackage{array} % Add advanced table formatting
-          \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}} % Left-aligned column without word breaking          
-          
-          \usepackage{float} % Allows [H] placement option
-          \makeatletter
-          \setlength{\@fptop}{0pt} % Place floats at the top of the page
-          \setlength{\@fpsep}{\textheight} % Avoid stacking other floats below
-          \makeatother
-
-          \usepackage[table, dvipsnames]{xcolor}
-
-          \usepackage{ragged2e} % for justifying text in multiple column layout
-          \usepackage{wrapfig}
-          \usepackage{subfig}
-       
-          \usepackage[utf8]{inputenc} % Ensure UTF-8 support for character encoding
           \usepackage{textcomp}       % Additional text symbols
           \usepackage{amssymb}        % Enable ✓ and ✘ symbols
-          \setmainfont{Calibri}        % Set Calibri as the main font  
+          \setmainfont{Cambria}        % Set Cambria as the main font  
           \newfontfamily{\symbolfont}{Segoe UI Symbol} % Set fallback for symbols
           \DeclareTextFontCommand{\textsymbol}{\symbolfont} % Define fallback symbol command          
 
@@ -195,94 +72,61 @@ format:
 
           
           % Load titlesec package for section formatting
-          \usepackage{titlesec}
+          % \usepackage{titlesec}
           \usepackage{needspace} % to avoid orphan titles
           
 
           % --------------------- CHAPTER STYLING ---------------------
+          % --- Heading fonts/colors (KOMA-Script; no titlesec) ---
+          \definecolor{CHAPBLUE}{HTML}{0050A0}
+          \definecolor{SECBLUE}{HTML}{2C5EBD}
+          \definecolor{SUBSECBLUE}{HTML}{7D9FE0}
           
-          \titleformat{\chapter}[block] % Chapter formatting without forced page break
-            {\normalfont\bfseries\color{PRBBlue}\fontsize{12pt}{14pt}\selectfont\fontspec{Calibri Bold}} % Style
-            {\thechapter} % Chapter number
-            {1em} % Space between number and text
-            {} % No extra formatting
+          % Point fontspec at your per-user fonts folder
+          \newfontfamily\aptos{Aptos}[
+            Path = C:/Users/oaolive/AppData/Local/Microsoft/Windows/Fonts/,
+            Extension = .ttf,
+            UprightFont = Aptos,
+            BoldFont = Aptos-Bold,
+            ItalicFont = Aptos-Italic,
+            BoldItalicFont = Aptos-Bold-Italic
+          ]
           
-          % CONDITIONAL SPACING: Remove top space only if the chapter starts on a new page
-          \makeatletter
-          \newcommand{\customchapterskip}{%
-            \ifnum\value{page}=1 % First page always removes extra space
-              \vspace*{-20pt}%
-            \else
-              \if@openright % If the chapter starts on a new page
-                \vspace*{-20pt}%
-              \else
-                \vspace*{6pt}%
-              \fi
-            \fi
-          }
-          \makeatother
+          \newfontfamily\aptosDisplay{Aptos Display}[
+            Path = C:/Users/oaolive/AppData/Local/Microsoft/Windows/Fonts/,
+            Extension = .ttf,
+            UprightFont = Aptos-Display,
+            BoldFont = Aptos-Display-Bold,
+            ItalicFont = Aptos-Display-Italic,
+            BoldItalicFont = Aptos-Display-Bold-Italic
+          ]   
           
-          \titlespacing*{\chapter}
-            {0pt}    % Left margin
-            {0pt}    % Space before chapter (no forced extra space)
-            {12pt}   % Space after chapter title
+          % Chapter: Aptos, 16pt, uppercase, color, spacing, new page
           
-          % ENSURE FIRST CHAPTER STARTS ON A NEW PAGE, OTHERS DO NOT
-          \makeatletter
-          \newif\iffirstchapter
-          \firstchaptertrue % Mark that the first chapter is coming
+          \RedeclareSectionCommand[
+            beforeskip=18pt,
+            afterskip=2pt
+          ]{chapter}
+          \setkomafont{chapter}{\aptos\bfseries\fontsize{16pt}{18pt}\selectfont\color{CHAPBLUE}\MakeUppercase}
+          \renewcommand*\chapterpagestyle{plain} % optional; keep page style consistent
+          % KOMA chapters already start new page in scrreprt/scrbook.
           
-          \renewcommand{\chapter}{%
-            \iffirstchapter
-              \firstchapterfalse % First chapter: Start on new page
-              \clearpage
-            \fi
-            \customchapterskip % Apply conditional spacing based on page position
-            \secdef\@chapter\@schapter}
-          \makeatother
+          % Section: Aptos, 14pt, spacing, color
+          \RedeclareSectionCommand[
+            beforeskip=4pt,
+            afterskip=6pt
+          ]{section}
+          \setkomafont{section}{\aptos\mdseries\fontsize{14pt}{16pt}\selectfont\color{SECBLUE}}
+          
+          % Subsection: Aptos, 12pt, spacing, color
+          \RedeclareSectionCommand[
+            beforeskip=10pt,
+            afterskip=6pt
+          ]{subsection}
+          \setkomafont{subsection}{\aptos\mdseries\fontsize{12pt}{14pt}\selectfont\color{SUBSECBLUE}}
 
-          
-          % --------------------- SECTION STYLING ---------------------
-          
-          \titleformat{\section} % Section title format
-            {\normalfont\color{PRBBlue}\fontsize{12pt}{14pt}\selectfont} % Style
-            {\thesection} % Section number
-            {1em} % Spacing between number and text
-            {} % Additional formatting
-          
-          \titlespacing*{\section} % Adjust section spacing
-            {0pt} % Left margin
-            {12pt} % Space before section
-            {6pt} % Space after section
-          
-          % --------------------- SUBSECTION STYLING ---------------------
-          
-          \titleformat{\subsection} % Subsection title format
-            {\normalfont\color{PRBBlue}\fontsize{12pt}{14pt}\selectfont} % Style
-            {\thesubsection} % Subsection number
-            {1em} % Spacing between number and text
-            {} % Additional formatting
-          
-          \titlespacing*{\subsection} % Adjust subsection spacing
-            {0pt} % Left margin
-            {6pt} % Space before subsection
-            {6pt} % Space after subsection
-          
-          % --------------------- SUB-SUBSECTION STYLING ---------------------
-          
-          \titleformat{\subsubsection} % Sub-subsection title format
-            {\normalfont\itshape\color{PRBBlue}\fontsize{12pt}{14pt}\selectfont} % Style
-            {\thesubsubsection} % Sub-subsection number
-            {1em} % Spacing between number and text
-            {} % Additional formatting
-          
-          \titlespacing*{\subsubsection} % Adjust sub-subsection spacing
-            {0pt} % Left margin
-            {6pt} % Space before sub-subsection
-            {6pt} % Space after sub-subsection
-          
           % --------------------- BIGGER TEXT COMMAND ---------------------
-          \newcommand{\biggertext}[1]{{\bfseries\fontsize{12pt}{14pt}\selectfont #1}}
+          \newcommand{\biggertext}[1]{{\bfseries\fontsize{13pt}{15pt}\selectfont #1}}
           
           \usepackage{makecell} % Enables multiline table headers
           

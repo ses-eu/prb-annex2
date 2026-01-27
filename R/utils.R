@@ -1418,7 +1418,7 @@ get_prb_conclusions <- function(filename, kpi, table) {
   
   if (knitr::is_latex_output()) {
     prb_conc <- prb_conc %>%
-      str_replace_all(c('▪' = '•', '%' = '\\\\%'))  # Escape `%` for LaTeX
+      str_replace_all(c('▪' = '\\\\textbullet\\\\quad ', '%' = '\\\\%'))  # Escape `%` for LaTeX
   }
   
   return(prb_conc)

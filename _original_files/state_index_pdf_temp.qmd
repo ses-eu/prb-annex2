@@ -845,15 +845,12 @@ env_text2 <- env_text$text2
 ## Capacity (Member State)
 
 ```{r concl_cap}
-if (params$country == "Luxembourg") {
-  cap_er_conc1 <- if_else(params$year == 2023, 
-                    get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table_Findings_TRM_capacity"),
-                    "")
-  } else {
-  cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity")
-  }
+cap_er_conc1 <-  get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity")
+cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table_Findings_TRM_capacity")
 
-cap_text <- break_l1_text(cap_er_conc1) 
+cap_conc1 <- paste0(if_else(cap_er_conc1 == "character(0\n", "", paste0(cap_er_conc1, "\n\n")), if_else(cap_trm_conc1 == "NA" | stringr::str_detect(cap_trm_conc1, "character"), "", cap_trm_conc1))
+
+cap_text <- break_l1_text(cap_conc1) 
 cap_text1 <- cap_text$text1
 cap_text2 <- cap_text$text2
 ```
@@ -929,14 +926,16 @@ cef_text2 <- cef_text$text2
 
 \biggertext{Focus on EoSM}
 
-`r latex_linebreaks(saf_text)`
+`r latex_linebreaks(saf_eosm_text)`
 
 
 `r if (params$country == "MUAC") "::: {.content-hidden}"`
 
 \needspace{2\baselineskip}
 
-## Rate of runway incursions (RIs) (PI#1)
+## Safety occurrences
+
+### Rate of runway incursions (RIs) (PI#1)
 
 `r layout_2fig("chart_saf_ri", "chart_level2_saf_ri_year_report")`
 
@@ -944,10 +943,17 @@ cef_text2 <- cef_text$text2
 
 `r if (params$country == "MUAC") ":::"`
 
+\needspace{3\baselineskip}
+
+
+\biggertext{Focus on runway incursions}
+
+`r latex_linebreaks(saf_ri_text)`
+
 
 \needspace{2\baselineskip}
 
-## Rate of separation minima infringements (SMIs) (PI#2)
+### Rate of separation minima infringements (SMIs) (PI#2)
 
 `r layout_2fig("chart_saf_smi", "chart_level2_saf_smi_year_report")`
 
@@ -957,12 +963,20 @@ cef_text2 <- cef_text$text2
 
 `r layout_summary_table(table_level2_saf_smi_ansp_pdf2, hspace = 0, left_margin = 0, width = 1)`
 
+\needspace{3\baselineskip}
+
+
+\biggertext{Focus on separation minima}
+
+`r latex_linebreaks(saf_smi_text)`
+
+
 
 \needspace{2\baselineskip}
 
-## Quality of occurences reporting 
+### Quality of occurences reporting 
 
-placeholder for text
+`r latex_linebreaks(saf_qr_text)`
 
 \needspace{2\baselineskip}
 
@@ -970,6 +984,8 @@ placeholder for text
 
 `r layout_summary_table(table_level2_saf_autotools, left_margin = 4.5, width = 0.5)`
 
+
+`r latex_linebreaks(saf_asdr_text)`
 
 \needspace{3\baselineskip}
 
@@ -1119,15 +1135,17 @@ if (params$country == "Luxembourg") {
 
 `r cap_er_conc1`
 
-`r if (params$no_tcz == 0 | params$year_report != 2023) "::: {.content-hidden}"`
+`r if (params$no_tcz == 0 | params$year_report <= 2023) "::: {.content-hidden}"`
 
 ```{r cap-trm-prb}
 cap_trm_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "TRM_capacity", "Table_Findings_TRM_capacity")
+
+cap_trm_conc1 <- if_else(cap_trm_conc1 == "NA" | stringr::str_detect(cap_trm_conc1, "character"), "", cap_trm_conc1)
 ```
 
 `r cap_trm_conc1`
 
-`r if (params$no_tcz == 0 | params$year_report != 2023) ":::"`
+`r if (params$no_tcz == 0 | params$year_report <= 2023) ":::"`
 
 
 
