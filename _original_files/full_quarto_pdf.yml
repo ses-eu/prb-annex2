@@ -26,10 +26,11 @@ format:
       # - inner=3cm
       # - outer=4cm
       - top=2cm
-      - bottom=1cm
+      - bottom=1.5cm
       - left=2.5cm
       - right=2.2cm
-      - footskip=0.7cm
+      - footskip=1.3cm
+      - includefoot           # <-- important
 #    mainfont: "Cambria"
     
     # template-partials:
@@ -46,6 +47,27 @@ format:
 
           % custom toc moved to toc.tex
           
+          % --------------------- FONTS ---------------------
+
+          % Point fontspec at your per-user fonts folder
+          \newfontfamily\aptos{Aptos}[
+            Path = fonts/,
+            Extension = .ttf,
+            UprightFont = Aptos,
+            BoldFont = Aptos-Bold,
+            ItalicFont = Aptos-Italic,
+            BoldItalicFont = Aptos-Bold-Italic
+          ]
+          
+          \newfontfamily\aptosDisplay{Aptos Display}[
+            Path = fonts/,
+            Extension = .ttf,
+            UprightFont = Aptos-Display,
+            BoldFont = Aptos-Display-Bold,
+            ItalicFont = Aptos-Display-Italic,
+            BoldItalicFont = Aptos-Display-Bold-Italic
+          ]   
+
           % --------------------- COVER PAGE ---------------------
 
           \usepackage{graphicx}  % Allows inserting images
@@ -54,6 +76,116 @@ format:
           % \usepackage{hyperref}  % Enables hyperlinks
           % \hypersetup{colorlinks=true, urlcolor=blue} % Set hyperlinks to be blue and underlined
           
+          % --- Heading fonts/colors (KOMA-Script; no titlesec) ---
+          \definecolor{CHAPBLUE}{HTML}{0050A0}
+          \definecolor{SECBLUE}{HTML}{2C5EBD}
+          \definecolor{SUBSECBLUE}{HTML}{7D9FE0}          
+          
+          % Cover images
+          \newcommand\CoverImage{images/background_cover_page.png}
+
+          % Cover background image 
+          \AddToShipoutPictureBG*{%
+            \ifnum\value{page}=1\relax
+              \AtPageLowerLeft{%
+                \hspace*{0cm}%
+                \raisebox{\dimexpr\paperheight-8.87cm-16.34cm\relax}{%
+                  \includegraphics[width=17.79cm,height=16.34cm]{\CoverImage}%
+                }%
+              }%
+            \fi
+          }
+
+          \newcommand\CoverLogo{images/logo_cover.png}
+          
+          % Cover logo: x=2.29cm from left, y=2.74cm from top
+          % Size: 5.82cm × 1.44cm
+          \AddToShipoutPictureBG*{%
+            \ifnum\value{page}=1\relax
+              \AtPageLowerLeft{%
+                \hspace*{2.29cm}%
+                \raisebox{\dimexpr\paperheight-2.74cm-1.44cm\relax}{%
+                  \includegraphics[width=5.82cm,height=1.44cm]{\CoverLogo}%
+                }%
+              }%
+            \fi
+          }
+
+          % --- Cover footer text (page 1 only) ---
+          \AddToShipoutPictureFG{%
+            \ifnum\value{page}=1\relax
+              \AtPageLowerLeft{%
+                \hspace*{2.29cm}%
+                \raisebox{2.5cm}{%
+                  {\aptos\upshape\mdseries\fontsize{7pt}{9pt}\selectfont\color{black}%
+                    \parbox[t]{0.9\paperwidth}{%
+                      Performance Review Board of the Single European Sky \textbar\ Rue de Mot 28, 1040 Etterbeek\par
+                      MOVE-PRB-SECRETARIAT@ec.europa.eu \textbar\ eu-single-sky.transport.ec.europa.eu%
+                    }%
+                  }%
+                }%
+              }%
+            \fi
+          }%
+          
+          % --- TITLE
+          \makeatletter
+          \providecommand{\@subtitle}{} % safety: if subtitle isn't defined, treat as empty
+          
+          \renewcommand{\maketitle}{%
+            \begin{titlepage}
+              \thispagestyle{empty}%
+              \AddToShipoutPictureFG*{%
+                \AtPageLowerLeft{%
+                  \hspace*{2.5cm}% left alignment (match your left margin)
+                  \raisebox{\dimexpr\paperheight-6.5cm\relax}{%
+                    \parbox[t]{0.85\paperwidth}{%
+                      \aptosDisplay\upshape\bfseries\fontsize{24pt}{28pt}\selectfont\color{CHAPBLUE}%
+                      \raggedright
+                      \@title\\[6pt]
+                      \ifx\@subtitle\@empty\else\@subtitle\\[6pt]\fi
+                      \ifx\@author\@empty\else\@author\fi
+                    }%
+                  }%
+                }%
+              }%
+              \null\vfill
+            \end{titlepage}%
+          }
+          \makeatother
+
+          
+
+          % --------------------- HEADER & FOOTER---------------------
+
+          \usepackage{scrlayer-scrpage} % For customizing headers/footers
+          \setlength{\headheight}{13mm} % increase if needed (e.g. 20mm)
+          \setlength{\headsep}{8mm}     % distance from header to text body
+          \setlength{\footskip}{1.3cm}
+          \clearpairofpagestyles
+    
+          % Ensure the last page reference is available
+          \usepackage{lastpage}
+    
+          % Add image in the center of the header
+          \chead*{\raisebox{16mm}{\includegraphics[width=2.8cm,height=0.17cm]{images/header_top.png}}}
+    
+          % Move page numbering to the right-hand side of the header with new font style
+          \ohead*{\makebox[0pt][r]{\raisebox{-10mm}{\textcolor{black}{\aptos\upshape\mdseries\fontsize{13pt}{15pt}\selectfont \thepage/\pageref*{LastPage}}}}}
+          
+          % logo image in footer
+          \newcommand{\FooterLogo}{images/logo_footer.png}
+          
+          \AtBeginDocument{%
+            \AddToShipoutPictureFG{%
+              \ifnum\value{page}>1\relax
+                \AtPageLowerLeft{%
+                  \hspace*{\dimexpr\paperwidth-1.41cm-6mm\relax}%
+                  \raisebox{5mm}{\includegraphics[width=1.41cm,height=1.05cm]{\FooterLogo}}%
+                }%
+              \fi
+            }%
+          }          
           % --------------------- BODY ---------------------
           \usepackage{array} % Add advanced table formatting
           % \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}} % Left-aligned column without word breaking          
@@ -77,34 +209,8 @@ format:
           
 
           % --------------------- CHAPTER STYLING ---------------------
-          % --- Heading fonts/colors (KOMA-Script; no titlesec) ---
-          \definecolor{CHAPBLUE}{HTML}{0050A0}
-          \definecolor{SECBLUE}{HTML}{2C5EBD}
-          \definecolor{SUBSECBLUE}{HTML}{7D9FE0}
-          
-          % Point fontspec at your per-user fonts folder
-          \newfontfamily\aptos{Aptos}[
-            Path = C:/Users/oaolive/AppData/Local/Microsoft/Windows/Fonts/,
-            Extension = .ttf,
-            UprightFont = Aptos,
-            BoldFont = Aptos-Bold,
-            ItalicFont = Aptos-Italic,
-            BoldItalicFont = Aptos-Bold-Italic
-          ]
-          
-          \newfontfamily\aptosDisplay{Aptos Display}[
-            Path = C:/Users/oaolive/AppData/Local/Microsoft/Windows/Fonts/,
-            Extension = .ttf,
-            UprightFont = Aptos-Display,
-            BoldFont = Aptos-Display-Bold,
-            ItalicFont = Aptos-Display-Italic,
-            BoldItalicFont = Aptos-Display-Bold-Italic
-          ]   
-          
-          % Chapter: Aptos, 16pt, uppercase, color, spacing, new page
-          
           \RedeclareSectionCommand[
-            beforeskip=18pt,
+            beforeskip=0pt,
             afterskip=2pt
           ]{chapter}
           \setkomafont{chapter}{\aptos\bfseries\fontsize{16pt}{18pt}\selectfont\color{CHAPBLUE}\MakeUppercase}
