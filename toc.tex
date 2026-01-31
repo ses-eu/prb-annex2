@@ -1,58 +1,65 @@
-$if(toc)$
-$if(toc-title)$
-\renewcommand*\contentsname{$toc-title$}
-$endif$
+% toc.tex (minimal: TOC entry font/style + black links + denser dots + page=1)
 
-$if(beamer)$
-\begin{frame}[allowframebreaks]
-$if(toc-title)$
-  \frametitle{$toc-title$}
-$endif$
-  \setcounter{tocdepth}{$toc-depth$}
-  \tableofcontents
-\end{frame}
-$else$
-{
-$if(colorlinks)$
-\hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$$endif$}
-$endif$
-\setcounter{tocdepth}{$toc-depth$}
+\renewcommand{\contentsname}{Contents}
 
-% Load tocloft package for TOC customization
+\cleardoublepage
+\pagenumbering{arabic}
+\setcounter{page}{1}
 
+\begingroup
 \makeatletter
 
-% Define a new font for normal Calibri
-\newfontfamily\calibriRegular{Calibri} 
+% Make TOC title sit like your chapter titles (less vertical space)
+\setlength{\cftbeforetoctitleskip}{0pt}
+\setlength{\cftaftertoctitleskip}{2pt}
 
-% Define TOC title format 
-\renewcommand{\cfttoctitlefont}{\calibriLight\color{PRBBlue}\fontsize{16pt}{12pt}\selectfont\bfseries\MakeUppercase}
-\setlength{\cftbeforetoctitleskip}{0pt}  % Ensure no extra space before title
-\setlength{\cftaftertoctitleskip}{12pt}  % Add 12pt space after title
+% Keep TOC links black
+\@ifpackageloaded{hyperref}{\hypersetup{linkcolor=black}}{}
 
-% Define Chapter level (Normal Calibri, bold, PRBBlue)
-\renewcommand{\cftchapfont}{\calibriRegular\bfseries\fontsize{12pt}{14pt}\selectfont\color{PRBBlue}}
-\renewcommand{\cftchappagefont}{\color{PRBBlue}}
-\setlength{\cftbeforechapskip}{0pt}  % Space before chapter entries
+% Denser dot leaders
+\renewcommand*\@dotsep{1}
 
-% Define Level 1 sections in TOC (fontsize 12pt, PRBBlue, bold)
-\renewcommand{\cftsecfont}{\calibriLight\itshape\fontsize{11pt}{13pt}\selectfont\color{PRBBlue}}
-\renewcommand{\cftsecpagefont}{\color{PRBBlue}}
-\setlength{\cftbeforesecskip}{0pt}   % Adjust space after section entries if needed
+% Chapter entries: Aptos 11, black, bold, upright
+\let\TOCold@l@chapter\l@chapter
+\renewcommand*\l@chapter[2]{%
+  \TOCold@l@chapter{%
+    \aptos\bfseries\upshape\fontsize{11pt}{13pt}\selectfont\color{black}#1%
+  }{%
+    \aptos\bfseries\upshape\fontsize{11pt}{13pt}\selectfont\color{black}#2%
+  }%
+}
 
-\renewcommand{\cftdot}{\textcolor{PRBBlue}{\ensuremath{\cdot}}} % Change the dot color to PRBBlue
+% Section entries: Aptos 11, black, italic, not bold
+\let\TOCold@l@section\l@section
+\renewcommand*\l@section[2]{%
+  \TOCold@l@section{%
+    \aptos\mdseries\itshape\fontsize{11pt}{13pt}\selectfont\color{black}#1%
+  }{%
+    \aptos\mdseries\upshape\fontsize{11pt}{13pt}\selectfont\color{black}#2%
+  }%
+}
 
-\makeatother
+% Subsection entries: Aptos 11, black, NOT italic, not bold
+\let\TOCold@l@subsection\l@subsection
+\renewcommand*\l@subsection[2]{%
+  \TOCold@l@subsection{%
+    \aptos\mdseries\upshape\fontsize{11pt}{13pt}\selectfont\color{black}#1%
+  }{%
+    \aptos\mdseries\upshape\fontsize{11pt}{13pt}\selectfont\color{black}#2%
+  }%
+}
+
+% Footer logo on TOC page (same position/size as the rest of the document)
+\AddToShipoutPictureFG*{%
+  \AtPageLowerLeft{%
+    \hspace*{\dimexpr\paperwidth-1.41cm-6mm\relax}%
+    \raisebox{5mm}{\includegraphics[width=1.41cm,height=1.05cm]{images/logo_footer.png}}%
+  }%
+}%
 
 \tableofcontents
-}
-$endif$
-$endif$
-$if(lof)$
-\listoffigures
-$endif$
-$if(lot)$
-\listoftables
-$endif$
 
+\makeatother
+\endgroup
 
+\cleardoublepage
