@@ -144,17 +144,26 @@ if (country == "SES RP3") {
 }
   
 
+# pdf table ----
+data_prep_pdf <- data_prep %>% 
+  mutate(
+    across(2, ~if_else(type == 'AUCU vs. DUC',
+              paste0(if_else(.x >=0, "+", ""),
+                format(round(.x*100,1), nsmall =1, big.mark = ","),
+                "%"
+                ),
+             format(round(.x,2), nsmall =2, big.mark = ","))
+    )
+  )
+
 # plot table  ----
-table1 <- mygtable(data_prep, myfont*0.95) %>% 
+table1 <- mygtable(data_prep_pdf, myfont*0.95) %>% 
   cols_label(type = paste0("Components of the AUCU in ", 
                            if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))), 
              value = "€/SU") %>% 
   tab_options(column_labels.background.color = "#F2F2F2",
               column_labels.font.weight = 'bold',
               container.padding.y = 0) %>% 
-  fmt_number(
-    decimals = 2,
-  ) %>% 
   tab_style(
     style = list(
       cell_text(weight = "bold")
@@ -163,15 +172,11 @@ table1 <- mygtable(data_prep, myfont*0.95) %>%
       rows = c(1,12, 13)
     )
   ) %>% 
-  fmt_percent(rows = 13, decimals = 1, force_sign = TRUE) |> 
   tab_header(
     title = md(paste0("**AUCU components (€/SU) – ",
                       if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report)), "**"))
   )
   
-# create latex table
-if (knitr::is_latex_output()) {
-  table_level2_cef_aucu <- mylatex(table1, NA) 
-} else {
-  table1
+if (!knitr::is_latex_output()) {
+ table1
 }

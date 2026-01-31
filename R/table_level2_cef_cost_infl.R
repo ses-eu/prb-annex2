@@ -81,7 +81,7 @@ if (country != "SES RP3") {
     pivot_wider(values_from = 'mymetric', names_from = 'year')
   
   data_prep <- data_prep1 %>% rbind(data_prep2) %>% 
-    mutate('2020-2021' = NA)  %>% 
+    mutate('2020-2021' = 'NA')  %>% 
     mutate_at(c(1), ~ factor(.,
                                             levels = c('Determined inflation rate',
                                               'Determined inflation index',
@@ -93,7 +93,7 @@ if (country != "SES RP3") {
     rename('Inflation assumptions' = ia)
     
   
-  
+
   table1 <- mygtable(data_prep, myfont) %>% 
     tab_options(column_labels.background.color = "#F2F2F2",
                 column_labels.font.weight = 'bold',
@@ -108,10 +108,7 @@ if (country != "SES RP3") {
       ))
 }    
 
-# create latex table
-if (knitr::is_latex_output()) {
-  table_level2_cef_cost_infl <- mylatex(table1)
-  
-} else {
+
+if (!knitr::is_latex_output()) {
   table1
 }

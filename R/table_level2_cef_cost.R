@@ -107,8 +107,15 @@ if (knitr::is_latex_output()) {
   mytitletablefontsize <- NULL
 }
 
+# pdf table
+data_prep_pdf <- data_prep %>% 
+  mutate(
+    across(c(2:5), ~format(round(.x,0), nsmall =0, big.mark = ","))
+  )
+  
+
 # plot table ----
-table1 <- mygtable(data_prep, myfont) %>% 
+table1 <- mygtable(data_prep_pdf, myfont) %>% 
   cols_label(name = html("Total costs - nominal (M€)")) %>% 
   tab_options(column_labels.background.color = "#F2F2F2",
               column_labels.font.weight = 'bold',
@@ -121,11 +128,7 @@ table1 <- mygtable(data_prep, myfont) %>%
       cells_column_labels()         # Apply to column labels
     )
   )|> 
-  fmt_number(
-    columns = c(2:5),  # Specify the columns to format
-    decimals = 0,  # Number of decimal places
-    use_seps = TRUE  # Use thousands separator
-  ) |> 
+
   tab_header(
     title = md(paste0("**Actual and determined data**"))
   )|> 
@@ -137,10 +140,6 @@ table1 <- mygtable(data_prep, myfont) %>%
   ) 
 
 
-# create latex table
-if (knitr::is_latex_output()) {
-  table_level2_cef_cost <- mylatex(table1)
-
-} else {
+if (!knitr::is_latex_output()) {
   table1
-  }
+}

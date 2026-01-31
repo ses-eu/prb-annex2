@@ -142,9 +142,20 @@ if (country == "SES RP3") {
            myothermetric = mymetric*1000/x4_7_total_su) %>% 
     select(xlabel, mymetric, myothermetric)
 }      
-  
+
+local_decimals <- if_else(country == "SES RP3", 0, 1)
+
+# pdf table ----
+data_prep_pdf <- data_prep %>% 
+  mutate(
+    across(2, ~format(round(.x,local_decimals), nsmall =local_decimals, big.mark = ",")),
+    across(3, ~format(round(.x,2), nsmall =2, big.mark = ","))
+  )
+
+
+
 # plot table ----
-table1 <- mygtable(data_prep, myfont) %>% 
+table1 <- mygtable(data_prep_pdf, myfont) %>% 
   cols_label(xlabel = paste0("Cost exempt from cost sharing by item - ", 
                              if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))),
              mymetric = "€'000",
@@ -153,14 +164,6 @@ table1 <- mygtable(data_prep, myfont) %>%
               column_labels.font.weight = 'bold',
               container.padding.y = 0) |> 
   # cols_align(columns = 1, align = "left") %>%
-  fmt_number(
-    columns = mymetric,
-    decimals = if_else(country == "SES RP3", 0, 1)
-  ) |> 
-  fmt_number(
-    columns = myothermetric,
-    decimals = 2
-  ) |> 
   tab_style(
     style = list(
       cell_text(weight = "bold")
@@ -170,12 +173,8 @@ table1 <- mygtable(data_prep, myfont) %>%
     ))
 
 
-# create latex table
-if (knitr::is_latex_output()) {
-  table_level2_cef_cex <- mylatex(table1, 4.5) 
-  
-} else {
-  table_level2_cef_cex <- mylatex(table1, 4.5) 
+if (!knitr::is_latex_output()) {
   table1
 }
+
 

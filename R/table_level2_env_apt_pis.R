@@ -76,8 +76,12 @@ data_prep <- data_prep_axot %>%
                                                    "Share of arrivals applying CDO (PI#5)")
               # , names_glue = "{year}_{.value}" #suffix to prefix
   ) %>%
-  rename("Airport Name" = apt_name)
-  
+  rename("Airport" = apt_name)
+
+data_prep_pdf <- data_prep %>%
+  mutate(
+    across(c(2:11), ~if_else(is.na(.x), 'NA', .x))
+  ) 
 
 
 # plot table ----
@@ -93,10 +97,6 @@ table1 <-mygtable(data_prep, myfont*0.9) %>%
 }  
 
 
-# create latex table
-if (knitr::is_latex_output()) {
-  table_level2_env_apt_pis <- mylatex(table1)
-  
-} else {
+if (!knitr::is_latex_output()) {
   table1
 }
