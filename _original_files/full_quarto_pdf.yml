@@ -39,8 +39,35 @@ format:
     include-in-header:
       - text: |
       
-          \usepackage{xcolor}    % Enables text color customization
-          \definecolor{PRBBlue}{HTML}{2F5496} % Define PRB blue color
+          \usepackage[table]{xcolor}  % <-- provides \arrayrulecolor via colortbl
+
+          % --- Heading fonts/colors (KOMA-Script; no titlesec) ---
+          \definecolor{CHAPBLUE}{HTML}{0050A0}
+          \definecolor{SECBLUE}{HTML}{2C5EBD}
+          \definecolor{SUBSECBLUE}{HTML}{7D9FE0}
+          \definecolor{HeaderShade}{HTML}{DDE6F7}
+          \definecolor{DataShade}{HTML}{FFFFFF}
+          
+          % ---- for latex tables
+          \usepackage{caption}
+          \usepackage{multirow}
+          \usepackage{hhline}
+          \usepackage{siunitx}
+          
+          % helper: shaded caption text
+          % Full-width shaded caption line (fills \linewidth)
+          \newcommand{\captionbar}[1]{%
+            \noindent
+            \setlength{\fboxrule}{\arrayrulewidth}% match table border thickness
+            \setlength{\fboxsep}{3pt}% inner padding (tune)
+            \fcolorbox{CHAPBLUE}{CHAPBLUE}{%
+              \parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{%
+                \textcolor{white}{\strut\ #1\ }%
+              }%
+            }%
+          }
+          
+          \newcommand{\thickhline}{\noalign{\hrule height 0.85pt}}
 
           % Load tocloft package for TOC customization
           \usepackage{tocloft}
@@ -75,12 +102,8 @@ format:
           \usepackage{everypage} % Alternative package for first-page modifications
           % \usepackage{hyperref}  % Enables hyperlinks
           % \hypersetup{colorlinks=true, urlcolor=blue} % Set hyperlinks to be blue and underlined
-          
-          % --- Heading fonts/colors (KOMA-Script; no titlesec) ---
-          \definecolor{CHAPBLUE}{HTML}{0050A0}
-          \definecolor{SECBLUE}{HTML}{2C5EBD}
-          \definecolor{SUBSECBLUE}{HTML}{7D9FE0}          
-          
+        
+      
           % Cover images
           \newcommand\CoverImage{images/background_cover_page.png}
 
