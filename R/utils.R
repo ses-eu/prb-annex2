@@ -1716,8 +1716,8 @@ make_quarto_latex_table <- function(
     placement = "H",
     chapblue_name = "CHAPBLUE",
     header_shade_name = "HeaderShade",
-    data_shade_name = "DataShade",   # NEW
-    shade_data_rows = TRUE,          # NEW
+    data_shade_name = "DataShade",
+    shade_data_rows = TRUE,
     caption_fontsize = c(11, 11),
     body_fontsize = c(8, 9.6),
     arrayrulewidth_pt = 0.75,        # ~1px
@@ -1728,7 +1728,7 @@ make_quarto_latex_table <- function(
     wrap_raw_block = TRUE,
     checkmarks = FALSE,
     col_align = NA,                  # REQUIRED, e.g. "cc" or "clrrr"
-    cell_pad_em = 0.6,               # ~ one character
+    cell_pad_em = 0.6,               # per-side padding
     col_widths = NULL,               # NULL => equal widths; else numeric pct vector summing to 100
     row_extrarowheight_pt = 2        # adds vertical padding to header+body rows
 ) {
@@ -1772,7 +1772,7 @@ make_quarto_latex_table <- function(
     if (!is.numeric(col_widths)) stop("col_widths must be numeric (percentages).")
     if (length(col_widths) != n) stop(sprintf("col_widths must have length %d (ncol(df)).", n))
     if (any(!is.finite(col_widths)) || any(col_widths <= 0)) stop("col_widths must be finite and > 0.")
-    if (abs(sum(col_widths) - 100) > 1e-6) stop("col_widths must sum to 100 (e.g. c(5,40,20,20,15)).")
+    if (abs(sum(col_widths) - 100) > 1e-6) stop("col_widths must sum to 100 (e.g. c(50,25,25)).")
     col_widths <- as.integer(round(col_widths))
     if (sum(col_widths) != 100) {
       col_widths[length(col_widths)] <- col_widths[length(col_widths)] + (100 - sum(col_widths))
@@ -1799,20 +1799,31 @@ make_quarto_latex_table <- function(
     })
   }
   
-  pad_tex <- function(x) {
-    paste0("\\hspace*{", cell_pad_em, "em}", x, "\\hspace*{", cell_pad_em, "em}")
-  }
-  
   fmt_cell <- function(x) {
     x_chr <- as.character(x)
     x_chr[is.na(x_chr)] <- ""
     if (checkmarks && is_zero_one(x_chr)) {
       nx <- suppressWarnings(as.numeric(x_chr))
-      return(pad_tex(if (nx == 1) "\\tick" else "\\cross"))
+      return(if (nx == 1) "\\tick" else "\\cross")
     }
-    pad_tex(fmt(x_chr))
+    fmt(x_chr)
   }
   
+  # helper: Excel-like column names A, B, ..., Z, AA, AB, ...
+  excel_col_name <- function(i) {
+    name <- ""
+    while (i > 0) {
+      r <- (i - 1) %% 26
+      name <- paste0(intToUtf8(65 + r), name)
+      i <- (i - 1) %/% 26
+    }
+    name
+  }
+  col_len_names <- vapply(seq_len(n), function(i) paste0("colw", excel_col_name(i)), character(1))
+  
+  # Width definitions:
+  # - equal widths: \colw = (\linewidth - (n+1)\arrayrulewidth)/n
+  # - custom widths: define \tableW, \tableWunit = \tableW/100, then per-column \colwX = \tableWunit; multiply by pct
   width_defs <- if (is.null(col_widths)) {
     paste0(
       "\\makeatletter\n",
@@ -1821,38 +1832,76 @@ make_quarto_latex_table <- function(
       "\\setlength{\\colw}{\\dimexpr(\\linewidth-", (n + 1), "\\arrayrulewidth)/", n, "\\relax}\n"
     )
   } else {
+    newlength_lines <- paste0(
+      vapply(col_len_names, function(nm) {
+        paste0("\\@ifundefined{", nm, "}{\\newlength{\\", nm, "}}{}\n")
+      }, character(1)),
+      collapse = ""
+    )
+    setlength_lines <- paste0(
+      vapply(seq_len(n), function(i) {
+        nm <- col_len_names[i]
+        pct <- col_widths[i]
+        paste0(
+          "\\setlength{\\", nm, "}{\\tableWunit}\n",
+          "\\multiply\\", nm, " by ", pct, "\n"
+        )
+      }, character(1)),
+      collapse = ""
+    )
+    
     paste0(
       "\\makeatletter\n",
       "\\@ifundefined{tableW}{\\newlength{\\tableW}}{}\n",
+      "\\@ifundefined{tableWunit}{\\newlength{\\tableWunit}}{}\n",
+      newlength_lines,
       "\\makeatother\n",
-      "\\setlength{\\tableW}{\\dimexpr\\linewidth-", (n + 1), "\\arrayrulewidth\\relax}\n"
+      "\\setlength{\\tableW}{\\dimexpr\\linewidth-", (n + 1), "\\arrayrulewidth\\relax}\n",
+      "\\setlength{\\tableWunit}{\\dimexpr\\tableW/100\\relax}\n",
+      setlength_lines
     )
   }
   
   width_token <- function(i) {
-    if (is.null(col_widths)) {
-      "\\colw"
-    } else {
-      paste0("\\dimexpr", col_widths[i], "\\tableW/100\\relax")
+    if (is.null(col_widths)) "\\colw" else paste0("\\", col_len_names[i])
+  }
+  
+  pad_dim <- paste0(format(cell_pad_em, trim = TRUE, scientific = FALSE), "em")
+  
+  # Wrap-safe padding + alignment inside p{...}
+  align_preamble <- function(ch) {
+    base <- "\\setlength{\\parindent}{0pt}\\setlength{\\parfillskip}{0pt}"
+    if (ch == "l") {
+      return(paste0(
+        base,
+        "\\setlength{\\leftskip}{", pad_dim, "}",
+        "\\setlength{\\rightskip}{", pad_dim, " plus 1fil}",
+        "\\arraybackslash"
+      ))
     }
+    if (ch == "r") {
+      return(paste0(
+        base,
+        "\\setlength{\\leftskip}{", pad_dim, " plus 1fil}",
+        "\\setlength{\\rightskip}{", pad_dim, "}",
+        "\\arraybackslash"
+      ))
+    }
+    paste0(
+      base,
+      "\\setlength{\\leftskip}{", pad_dim, " plus 1fil}",
+      "\\setlength{\\rightskip}{", pad_dim, " plus 1fil}",
+      "\\arraybackslash"
+    )
   }
   
   align_chars <- strsplit(col_align, "", fixed = TRUE)[[1]]
-  spec_for <- function(ch, wtok) {
-    pre <- switch(
-      ch,
-      c = ">{\\centering\\arraybackslash}",
-      l = ">{\\raggedright\\arraybackslash}",
-      r = ">{\\raggedleft\\arraybackslash}",
-      stop("Invalid col_align character (must be c/l/r).")
-    )
-    paste0(pre, "p{", wtok, "}")
-  }
+  spec_for <- function(ch, wtok) paste0(">{", align_preamble(ch), "}p{", wtok, "}")
   
   colspec_parts <- mapply(spec_for, align_chars, vapply(seq_len(n), width_token, character(1)))
   colspec <- paste(colspec_parts, collapse = "|")
   
-  header_cells <- pad_tex(paste0("\\bfseries ", fmt(col_labels)))
+  header_cells <- paste0("\\bfseries ", fmt(col_labels))
   header_row <- paste0(
     "\\rowcolor{", header_shade_name, "}",
     paste(header_cells, collapse = " & "),
@@ -1930,8 +1979,8 @@ make_quarto_latex_table_2level <- function(
     col_align = NA,             # REQUIRED: e.g. "cc" or "clrrr"
     col_widths_pct = NULL,      # OPTIONAL: integer vector, sums to 100
     cell_pad_em = 0.6,
-    header_row_height_ex = 2.4,
-    row_extrarowheight_pt = 2   # adds vertical breathing room (supports decimals)
+    header_row_height_ex = 3.2,
+    row_extrarowheight_pt = 2 
 ) {
   stopifnot(is.data.frame(df))
   if (ncol(df) < 1) stop("df must have at least 1 column.")
@@ -1954,6 +2003,10 @@ make_quarto_latex_table_2level <- function(
   }
   if (!is.logical(shade_data_rows) || length(shade_data_rows) != 1 || is.na(shade_data_rows)) {
     stop("shade_data_rows must be TRUE/FALSE.")
+  }
+  
+  if (!is.numeric(cell_pad_em) || length(cell_pad_em) != 1 || is.na(cell_pad_em) || cell_pad_em < 0) {
+    stop("cell_pad_em must be a single non-negative number (e.g., 0.6).")
   }
   
   n <- ncol(df)
@@ -2021,8 +2074,6 @@ make_quarto_latex_table_2level <- function(
   lvl1 <- vapply(parts, `[[`, character(1), "group")
   lvl2 <- vapply(parts, `[[`, character(1), "sub")
   
-  pad <- function(x) paste0("\\hspace*{", cell_pad_em, "em}", x, "\\hspace*{", cell_pad_em, "em}")
-  
   # --- width expressions (safe: no "*" in dimexpr) ---
   width_exprs <- if (is.null(col_widths_pct)) {
     rep(
@@ -2043,10 +2094,37 @@ make_quarto_latex_table_2level <- function(
     }, character(1))
   }
   
+  # --- IMPORTANT: padding that applies to ALL wrapped lines ---
+  # Uses leftskip/rightskip; keeps alignment with "plus 1fil" on the opposite side.
+  pad_dim <- paste0(format(cell_pad_em, trim = TRUE, scientific = FALSE), "em")
+  
   align_prefix <- function(ch) {
-    if (ch == "c") return(">{\\centering\\arraybackslash}")
-    if (ch == "l") return(">{\\raggedright\\arraybackslash}")
-    ">{\\raggedleft\\arraybackslash}"
+    base <- paste0("\\setlength{\\parindent}{0pt}\\setlength{\\parfillskip}{0pt}")
+    if (ch == "l") {
+      # left aligned with L/R padding
+      return(paste0(
+        ">{", base,
+        "\\setlength{\\leftskip}{", pad_dim, "}",
+        "\\setlength{\\rightskip}{", pad_dim, " plus 1fil}",
+        "\\arraybackslash}"
+      ))
+    }
+    if (ch == "r") {
+      # right aligned with L/R padding
+      return(paste0(
+        ">{", base,
+        "\\setlength{\\leftskip}{", pad_dim, " plus 1fil}",
+        "\\setlength{\\rightskip}{", pad_dim, "}",
+        "\\arraybackslash}"
+      ))
+    }
+    # centered with L/R padding
+    paste0(
+      ">{", base,
+      "\\setlength{\\leftskip}{", pad_dim, " plus 1fil}",
+      "\\setlength{\\rightskip}{", pad_dim, " plus 1fil}",
+      "\\arraybackslash}"
+    )
   }
   
   colspec_parts <- vapply(seq_len(n), function(i) {
@@ -2054,7 +2132,7 @@ make_quarto_latex_table_2level <- function(
   }, character(1))
   colspec <- paste(colspec_parts, collapse = "|")
   
-  # --- header row 1 (RIGHT-rule ownership at group boundaries) ---
+  # --- header row 1 (group titles) ---
   rr <- rle(lvl1)
   spans <- rr$lengths
   groups <- rr$values
@@ -2065,7 +2143,7 @@ make_quarto_latex_table_2level <- function(
     mc_spec <- if (i == 1) "|c|" else "c|"
     
     content <- if (nzchar(g)) {
-      paste0("\\bfseries ", pad(g))
+      paste0("\\bfseries ", g)
     } else {
       paste0("\\rule{0pt}{", header_row_height_ex, "ex}")
     }
@@ -2084,7 +2162,7 @@ make_quarto_latex_table_2level <- function(
     paste0(
       "\\cellcolor{", header_shade_name, "}",
       "\\rule{0pt}{", header_row_height_ex, "ex}",
-      "\\bfseries ", pad(fmt(lvl2[i]))
+      "\\bfseries ", fmt(lvl2[i])
     )
   }, character(1))
   header_row_2 <- paste0(paste(header2_cells, collapse = " & "), " \\\\\n")
@@ -2098,8 +2176,7 @@ make_quarto_latex_table_2level <- function(
   } else {
     paste(
       apply(df_chr, 1, function(row) {
-        cells <- vapply(row, pad, character(1))
-        paste0(row_prefix, paste(cells, collapse = " & "))
+        paste0(row_prefix, paste(row, collapse = " & "))
       }),
       collapse = " \\\\\n\\hline\n"
     )

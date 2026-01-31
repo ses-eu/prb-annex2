@@ -16,7 +16,7 @@ format:
     fig-pos: 'H'
     keep-tex: true
     toc: true
-    toc-depth: 2 
+    toc-depth: 3 
     lof: false
     fontsize: 12pt
     # fig-format: "pdf"
@@ -31,10 +31,9 @@ format:
       - right=2.2cm
       - footskip=1.3cm
       - includefoot           # <-- important
-#    mainfont: "Cambria"
-    
-    # template-partials:
-    #   - toc.tex
+
+    template-partials:
+      - toc.tex
     
     include-in-header:
       - text: |
@@ -96,20 +95,23 @@ format:
           ]   
 
           % --------------------- COVER PAGE ---------------------
-
+          
           \usepackage{graphicx}  % Allows inserting images
           \usepackage{eso-pic}   % Enables full-page backgrounds
           \usepackage{everypage} % Alternative package for first-page modifications
           % \usepackage{hyperref}  % Enables hyperlinks
           % \hypersetup{colorlinks=true, urlcolor=blue} % Set hyperlinks to be blue and underlined
-        
-      
+          
+          % Cover-only flag (do not tie cover decorations to page numbers)
+          \newif\ifCCcoverpage
+          \CCcoverpagefalse
+          
           % Cover images
           \newcommand\CoverImage{images/background_cover_page.png}
-
-          % Cover background image 
+          
+          % Cover background image (cover only)
           \AddToShipoutPictureBG*{%
-            \ifnum\value{page}=1\relax
+            \ifCCcoverpage
               \AtPageLowerLeft{%
                 \hspace*{0cm}%
                 \raisebox{\dimexpr\paperheight-8.87cm-16.34cm\relax}{%
@@ -118,13 +120,12 @@ format:
               }%
             \fi
           }
-
+          
           \newcommand\CoverLogo{images/logo_cover.png}
           
-          % Cover logo: x=2.29cm from left, y=2.74cm from top
-          % Size: 5.82cm × 1.44cm
+          % Cover logo (cover only): x=2.29cm from left, y=2.74cm from top, size 5.82cm x 1.44cm
           \AddToShipoutPictureBG*{%
-            \ifnum\value{page}=1\relax
+            \ifCCcoverpage
               \AtPageLowerLeft{%
                 \hspace*{2.29cm}%
                 \raisebox{\dimexpr\paperheight-2.74cm-1.44cm\relax}{%
@@ -133,10 +134,10 @@ format:
               }%
             \fi
           }
-
-          % --- Cover footer text (page 1 only) ---
+          
+          % --- Cover footer text (cover only) ---
           \AddToShipoutPictureFG{%
-            \ifnum\value{page}=1\relax
+            \ifCCcoverpage
               \AtPageLowerLeft{%
                 \hspace*{2.29cm}%
                 \raisebox{2.5cm}{%
@@ -156,6 +157,7 @@ format:
           \providecommand{\@subtitle}{} % safety: if subtitle isn't defined, treat as empty
           
           \renewcommand{\maketitle}{%
+            \global\CCcoverpagetrue
             \begin{titlepage}
               \thispagestyle{empty}%
               \AddToShipoutPictureFG*{%
@@ -174,10 +176,60 @@ format:
               }%
               \null\vfill
             \end{titlepage}%
+            \global\CCcoverpagefalse
           }
           \makeatother
 
+          % --------------------- BACK COVER PAGE (page after cover) ---------------------
+          \usepackage{array}
+          \usepackage{tabularx}
           
+          \newcommand{\BackCoverTextBox}{%
+            \fbox{%
+              \begin{minipage}{0.86\textwidth}
+                {\aptos\fontsize{10pt}{12pt}\selectfont
+                \setlength{\tabcolsep}{8pt}%
+                \renewcommand{\arraystretch}{1.15}%
+                \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.25\linewidth}|X}
+                  \MakeUppercase{Copyright Notice\par and Disclaimer} &
+                  © European Union, 2025\par\vspace{4pt}%
+                  This document has been prepared for the European Commission by the Performance Review Board of the Single European Sky (PRB).\par\vspace{6pt}%
+                  Reproduction is authorised provided the source is acknowledged. However, neither the European Commission, nor any person acting on its behalf, may be held responsible for the use which may be made of the information contained in this publication, or for any errors which may appear, despite careful preparation and checking.%
+                  \\
+                \end{tabularx}
+                }%
+              \end{minipage}%
+            }%
+          }
+          
+          % Wrap the existing \maketitle and append the back cover page
+          \makeatletter
+          \let\CC@orig@maketitle\maketitle
+          \renewcommand{\maketitle}{%
+            \CC@orig@maketitle
+            \clearpage
+            \thispagestyle{empty}%
+            \setcounter{page}{0}% avoids cover footer (page=1) and footer logo (>1)
+          
+            % Back cover image (top centered, slightly below top edge)
+            \AddToShipoutPictureFG*{%
+              \AtPageUpperLeft{%
+                \hspace*{0.5\paperwidth}%
+                \raisebox{-1mm}{% increase (e.g. -6mm) to move down; decrease (e.g. -2mm) to move up
+                  \makebox[0pt][c]{\includegraphics[width=2.8cm,height=0.17cm]{images/header_top.png}}%
+                }%
+              }%
+            }%
+          
+            \null
+            \vspace*{0.6\paperheight}%
+            \begin{center}
+              \BackCoverTextBox
+            \end{center}
+            \clearpage
+          }
+          \makeatother
+
 
           % --------------------- HEADER & FOOTER---------------------
 
