@@ -802,7 +802,7 @@ cat(make_quarto_latex_table_2level(
 #| results: asis
 cat(make_quarto_latex_table(
   title = paste0("Use of automated safety data recording system - ",  year_report),
-  df = data_prep,
+  df = data_prep_pdf,
   col_labels = c("For RIs", "For SMIs"),
   col_align = "cc",
   checkmarks = TRUE
