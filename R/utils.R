@@ -1724,6 +1724,7 @@ make_quarto_latex_table <- function(
     tabcolsep_pt = 0,
     caption_skip_pt = 0,
     caption_vspace_pt = 0,
+    caption_after_vspace_pt = -1,     # NEW: applied after caption block (use negative to reduce gap)
     escape_latex = TRUE,
     wrap_raw_block = TRUE,
     checkmarks = FALSE,
@@ -1741,6 +1742,11 @@ make_quarto_latex_table <- function(
     if (!is.character(title) || length(title) != 1) {
       stop("title must be a single character string, or NA to omit the caption.")
     }
+  }
+  
+  if (!is.numeric(caption_after_vspace_pt) || length(caption_after_vspace_pt) != 1 ||
+      is.na(caption_after_vspace_pt)) {
+    stop("caption_after_vspace_pt must be a single numeric value (e.g., -4, 0, 2).")
   }
   
   if (!is.numeric(row_extrarowheight_pt) || length(row_extrarowheight_pt) != 1 ||
@@ -1809,7 +1815,6 @@ make_quarto_latex_table <- function(
     fmt(x_chr)
   }
   
-  # helper: Excel-like column names A, B, ..., Z, AA, AB, ...
   excel_col_name <- function(i) {
     name <- ""
     while (i > 0) {
@@ -1821,9 +1826,6 @@ make_quarto_latex_table <- function(
   }
   col_len_names <- vapply(seq_len(n), function(i) paste0("colw", excel_col_name(i)), character(1))
   
-  # Width definitions:
-  # - equal widths: \colw = (\linewidth - (n+1)\arrayrulewidth)/n
-  # - custom widths: define \tableW, \tableWunit = \tableW/100, then per-column \colwX = \tableWunit; multiply by pct
   width_defs <- if (is.null(col_widths)) {
     paste0(
       "\\makeatletter\n",
@@ -1862,13 +1864,10 @@ make_quarto_latex_table <- function(
     )
   }
   
-  width_token <- function(i) {
-    if (is.null(col_widths)) "\\colw" else paste0("\\", col_len_names[i])
-  }
+  width_token <- function(i) if (is.null(col_widths)) "\\colw" else paste0("\\", col_len_names[i])
   
   pad_dim <- paste0(format(cell_pad_em, trim = TRUE, scientific = FALSE), "em")
   
-  # Wrap-safe padding + alignment inside p{...}
   align_preamble <- function(ch) {
     base <- "\\setlength{\\parindent}{0pt}\\setlength{\\parfillskip}{0pt}"
     if (ch == "l") {
@@ -1933,9 +1932,16 @@ make_quarto_latex_table <- function(
     ""
   }
   
+  after_caption_fix <- if (has_caption && caption_after_vspace_pt != 0) {
+    paste0("\\vspace*{", format(caption_after_vspace_pt, trim = TRUE, scientific = FALSE), "pt}\n")
+  } else {
+    ""
+  }
+  
   tex <- paste0(
     "\\begin{table}[", placement, "]\n",
     caption_block,
+    after_caption_fix,
     "\\fontsize{", body_fontsize[1], "pt}{", body_fontsize[2], "pt}\\selectfont\n",
     "\\arrayrulecolor{", chapblue_name, "}\n",
     "\\setlength{\\arrayrulewidth}{", arrayrulewidth_pt, "pt}\n",
@@ -1973,6 +1979,7 @@ make_quarto_latex_table_2level <- function(
     tabcolsep_pt = 0,
     caption_skip_pt = 0,
     caption_vspace_pt = 0,
+    caption_after_vspace_pt = -1,     # NEW: applied after caption block (use negative to reduce gap)
     escape_latex = TRUE,
     wrap_raw_block = TRUE,
     checkmarks = FALSE,
@@ -1980,7 +1987,7 @@ make_quarto_latex_table_2level <- function(
     col_widths_pct = NULL,      # OPTIONAL: integer vector, sums to 100
     cell_pad_em = 0.6,
     header_row_height_ex = 3.2,
-    row_extrarowheight_pt = 2 
+    row_extrarowheight_pt = 2
 ) {
   stopifnot(is.data.frame(df))
   if (ncol(df) < 1) stop("df must have at least 1 column.")
@@ -1991,6 +1998,11 @@ make_quarto_latex_table_2level <- function(
     if (!is.character(title) || length(title) != 1) {
       stop("title must be a single character string, or NA to omit the caption.")
     }
+  }
+  
+  if (!is.numeric(caption_after_vspace_pt) || length(caption_after_vspace_pt) != 1 ||
+      is.na(caption_after_vspace_pt)) {
+    stop("caption_after_vspace_pt must be a single numeric value (e.g., -4, 0, 2).")
   }
   
   if (!is.numeric(row_extrarowheight_pt) || length(row_extrarowheight_pt) != 1 ||
@@ -2094,14 +2106,12 @@ make_quarto_latex_table_2level <- function(
     }, character(1))
   }
   
-  # --- IMPORTANT: padding that applies to ALL wrapped lines ---
-  # Uses leftskip/rightskip; keeps alignment with "plus 1fil" on the opposite side.
+  # --- padding that applies to ALL wrapped lines (leftskip/rightskip) ---
   pad_dim <- paste0(format(cell_pad_em, trim = TRUE, scientific = FALSE), "em")
   
   align_prefix <- function(ch) {
-    base <- paste0("\\setlength{\\parindent}{0pt}\\setlength{\\parfillskip}{0pt}")
+    base <- "\\setlength{\\parindent}{0pt}\\setlength{\\parfillskip}{0pt}"
     if (ch == "l") {
-      # left aligned with L/R padding
       return(paste0(
         ">{", base,
         "\\setlength{\\leftskip}{", pad_dim, "}",
@@ -2110,7 +2120,6 @@ make_quarto_latex_table_2level <- function(
       ))
     }
     if (ch == "r") {
-      # right aligned with L/R padding
       return(paste0(
         ">{", base,
         "\\setlength{\\leftskip}{", pad_dim, " plus 1fil}",
@@ -2118,7 +2127,6 @@ make_quarto_latex_table_2level <- function(
         "\\arraybackslash}"
       ))
     }
-    # centered with L/R padding
     paste0(
       ">{", base,
       "\\setlength{\\leftskip}{", pad_dim, " plus 1fil}",
@@ -2175,9 +2183,7 @@ make_quarto_latex_table_2level <- function(
     ""
   } else {
     paste(
-      apply(df_chr, 1, function(row) {
-        paste0(row_prefix, paste(row, collapse = " & "))
-      }),
+      apply(df_chr, 1, function(row) paste0(row_prefix, paste(row, collapse = " & "))),
       collapse = " \\\\\n\\hline\n"
     )
   }
@@ -2205,9 +2211,16 @@ make_quarto_latex_table_2level <- function(
     ""
   }
   
+  after_caption_fix <- if (has_caption && caption_after_vspace_pt != 0) {
+    paste0("\\vspace*{", format(caption_after_vspace_pt, trim = TRUE, scientific = FALSE), "pt}\n")
+  } else {
+    ""
+  }
+  
   tex <- paste0(
     "\\begin{table}[", placement, "]\n",
     caption_block,
+    after_caption_fix,
     "\\fontsize{", body_fontsize[1], "pt}{", body_fontsize[2], "pt}\\selectfont\n",
     "\\arrayrulecolor{", chapblue_name, "}\n",
     "\\setlength{\\arrayrulewidth}{", arrayrulewidth_pt, "pt}\n",

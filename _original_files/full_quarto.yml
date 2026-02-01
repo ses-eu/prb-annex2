@@ -6,12 +6,12 @@ website:
   title: "PRB Annual Monitoring Report"
   google-analytics: "G-YYRL9J8JZ1"
   search: false 
-  # favicon: "images/prb_logo_smaller.png"
+  favicon: "images/prb_logo_smaller.png"
   page-navigation: false
   navbar:
     title: false
     background: "#f8f9fa"
-    # logo: "images/prb_logo.png"
+    logo: "images/prb_logo.png"
     left: 
       - href: 'home_address'
         text: Home

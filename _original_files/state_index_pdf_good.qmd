@@ -1061,6 +1061,7 @@ cap_trm_conc1 <- if_else(cap_trm_conc1 == "NA" | stringr::str_detect(cap_trm_con
 #| fig-pos: "H"
 ```
 
+\needspace{3\baselineskip}
 
 `\biggertext{Focus on ATCOs in operations}`{=latex}
 
