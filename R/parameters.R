@@ -107,7 +107,14 @@
 
   ## main state parameters  ----
   country_lower <- country %>% str_to_lower() %>% str_replace_all(., " ","-")
-
+  
+  if (country_lower == 'home') {
+    main_ansp <- ""
+    nat_curr <- ""
+    state_type <- ""
+    pp_version <- ""
+  } else {
+  
   state_parameters <- params_table %>% filter(state == .env$country) 
     main_ansp <- state_parameters %>% select(main_ansp) %>% pull()
     # due to new quarto version not handling NAs
@@ -118,7 +125,7 @@
     if(is.na(state_type)){state_type <- ""}
     pp_version <- state_parameters %>% select(pp_adoption_full) %>% pull()
     if(is.na(pp_version)){pp_version <- ""}
-
+  }
   ## aua entity for capacity  ----
   saf_ansps <- saf_ansp_table %>% filter(country_name == .env$country) %>% 
       filter(year >= year_report) %>% 

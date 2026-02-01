@@ -1318,7 +1318,8 @@ cat(make_quarto_latex_table(
              "€/SU"
              ),
   col_align = "lr",
-  col_widths = c(80, 20)
+  col_widths = c(80, 20),
+  bold_data_rows = c(1,12,13)
 ))
 ```
 
@@ -1349,7 +1350,8 @@ cat(make_quarto_latex_table(
                         "€/SU"
   ),
   col_align = "lrr",
-  col_widths = c(60, 20, 20)
+  col_widths = c(60, 20, 20),
+  bold_data_rows = c(7)
 ))
 ```
 
@@ -1527,7 +1529,8 @@ cat(make_quarto_latex_table(
              "€/SU"
              ),
   col_align = "lr",
-  col_widths = c(80, 20)
+  col_widths = c(80, 20),
+  bold_data_rows = c(1,12,13)
 ))
 ```
 
@@ -1558,7 +1561,8 @@ cat(make_quarto_latex_table(
                         "€/SU"
   ),
   col_align = "lrr",
-  col_widths = c(60, 20, 20)
+  col_widths = c(60, 20, 20),
+  bold_data_rows = c(7)
 ))
 ```
 
@@ -1739,7 +1743,8 @@ cat(make_quarto_latex_table(
              "€/SU"
              ),
   col_align = "lr",
-  col_widths = c(80, 20)
+  col_widths = c(80, 20),
+  bold_data_rows = c(1,12,13)
 ))
 ```
 
@@ -1770,7 +1775,8 @@ cat(make_quarto_latex_table(
                         "€/SU"
   ),
   col_align = "lrr",
-  col_widths = c(60, 20, 20)
+  col_widths = c(60, 20, 20),
+  bold_data_rows = c(7)
 ))
 ```
 
@@ -1950,7 +1956,8 @@ cat(make_quarto_latex_table(
              "€/SU"
              ),
   col_align = "lr",
-  col_widths = c(80, 20)
+  col_widths = c(80, 20),
+  bold_data_rows = c(1,12,13)
 ))
 ```
 
@@ -1981,7 +1988,8 @@ cat(make_quarto_latex_table(
                         "€/SU"
   ),
   col_align = "lrr",
-  col_widths = c(60, 20, 20)
+  col_widths = c(60, 20, 20),
+  bold_data_rows = c(7)
 ))
 ```
 

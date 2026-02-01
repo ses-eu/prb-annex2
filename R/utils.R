@@ -1709,6 +1709,7 @@ wrap_label <- function(label, width = 30) {
 
 ## latex tables -----
 # R/make_quarto_latex_table.R
+# R/make_quarto_latex_table.R
 make_quarto_latex_table <- function(
     title,
     df,
@@ -1718,20 +1719,21 @@ make_quarto_latex_table <- function(
     header_shade_name = "HeaderShade",
     data_shade_name = "DataShade",
     shade_data_rows = TRUE,
-    caption_fontsize = c(11, 11),
+    caption_fontsize = c(11, 12),
     body_fontsize = c(8, 9.6),
     arrayrulewidth_pt = 0.75,        # ~1px
     tabcolsep_pt = 0,
     caption_skip_pt = 0,
     caption_vspace_pt = 0,
-    caption_after_vspace_pt = -1,     # NEW: applied after caption block (use negative to reduce gap)
+    caption_after_vspace_pt = -1,     # optional: negative reduces gap between caption and header row
     escape_latex = TRUE,
     wrap_raw_block = TRUE,
     checkmarks = FALSE,
     col_align = NA,                  # REQUIRED, e.g. "cc" or "clrrr"
     cell_pad_em = 0.6,               # per-side padding
     col_widths = NULL,               # NULL => equal widths; else numeric pct vector summing to 100
-    row_extrarowheight_pt = 2        # adds vertical padding to header+body rows
+    row_extrarowheight_pt = 2,       # adds vertical padding to header+body rows
+    bold_data_rows = integer(0)      # NEW: 1-based indices of data rows to make bold, e.g. c(1,2)
 ) {
   stopifnot(is.data.frame(df))
   if (ncol(df) < 1) stop("df must have at least 1 column.")
@@ -1783,6 +1785,14 @@ make_quarto_latex_table <- function(
     if (sum(col_widths) != 100) {
       col_widths[length(col_widths)] <- col_widths[length(col_widths)] + (100 - sum(col_widths))
     }
+  }
+  
+  if (is.null(bold_data_rows)) bold_data_rows <- integer(0)
+  if (!is.numeric(bold_data_rows)) stop("bold_data_rows must be numeric/integer indices like c(1,2).")
+  bold_data_rows <- unique(as.integer(bold_data_rows[is.finite(bold_data_rows)]))
+  if (any(bold_data_rows <= 0)) stop("bold_data_rows must contain positive (1-based) indices only.")
+  if (length(bold_data_rows) > 0 && nrow(df) > 0 && any(bold_data_rows > nrow(df))) {
+    stop(sprintf("bold_data_rows contains indices > nrow(df) (%d).", nrow(df)))
   }
   
   escape_tex <- function(x) {
@@ -1914,7 +1924,13 @@ make_quarto_latex_table <- function(
   } else {
     row_prefix <- if (shade_data_rows) paste0("\\rowcolor{", data_shade_name, "}") else ""
     paste(
-      apply(df_chr, 1, function(row) paste0(row_prefix, paste(row, collapse = " & "))),
+      vapply(seq_len(nrow(df_chr)), function(i) {
+        row <- df_chr[i, , drop = TRUE]
+        if (i %in% bold_data_rows) {
+          row <- vapply(row, function(v) paste0("{\\bfseries ", v, "}"), character(1))
+        }
+        paste0(row_prefix, paste(row, collapse = " & "))
+      }, character(1)),
       collapse = " \\\\\n\\hline\n"
     )
   }
