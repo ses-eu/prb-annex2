@@ -1720,7 +1720,8 @@ make_quarto_latex_table <- function(
     data_shade_name = "DataShade",
     shade_data_rows = TRUE,
     caption_fontsize = c(11, 12),
-    body_fontsize = c(8, 9.6),
+    # body_fontsize = c(8, 9.6),
+    body_fontsize = c(10, 12),
     arrayrulewidth_pt = 0.75,        # ~1px
     tabcolsep_pt = 0,
     caption_skip_pt = 0,
@@ -1990,7 +1991,8 @@ make_quarto_latex_table_2level <- function(
     data_shade_name = "DataShade",
     shade_data_rows = TRUE,
     caption_fontsize = c(11, 11),
-    body_fontsize = c(8, 9.6),
+    # body_fontsize = c(8, 9.6),
+    body_fontsize = c(10, 12),
     arrayrulewidth_pt = 0.75,  # ~1px
     tabcolsep_pt = 0,
     caption_skip_pt = 0,

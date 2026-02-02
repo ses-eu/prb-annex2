@@ -700,6 +700,8 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 ### Rate of runway incursions (RIs) (PI#1)
 
+`r layout_2fig("chart_saf_ri", "chart_level2_saf_ri_year_report")`
+
 ```{r table_level2_saf_ri_apt, eval= (params$country != "MUAC")}
 #| file: R/table_level2_saf_ri_apt.R
 #| include: false
@@ -730,6 +732,9 @@ cat(make_quarto_latex_table(
 \needspace{2\baselineskip}
 
 ### Rate of separation minima infringements (SMIs) (PI#2)
+
+`r layout_2fig("chart_saf_smi", "chart_level2_saf_smi_year_report")`
+
 
 ```{r table_level2_saf_smi_ansp_pdf1}
 #| file: R/table_level2_saf_smi_ansp_pdf1.R

@@ -49,7 +49,17 @@ data_prep <- state_table |>
                         )
          
          )
-  
+
+data_prep_pdf <- state_table |> 
+  left_join(data_prep_target, by = "State") |> 
+  left_join(data_prep_actual, by = "State") |> 
+  mutate(
+    Actual = format(round(Actual, 2), nsmall = 2),
+    Target = format(round(Target, 2), nsmall = 2),
+         "_" = if_else(Actual <= Target,1,0)
+  )
+
+ 
 # plot table ----
 
 table1 <- mygtable(data_prep, myfont)|> 
@@ -58,11 +68,8 @@ table1 <- mygtable(data_prep, myfont)|>
   ) |> 
   fmt_markdown(columns = Actual) 
 
-# create latex table
-if (knitr::is_latex_output()) {
-  table_cap_erdelay_all_states <- table1 %>% 
-    mylatex(NA) 
-  
-} else {
+
+
+if (!knitr::is_latex_output()) {
   table1
 }
