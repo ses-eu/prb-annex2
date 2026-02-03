@@ -810,7 +810,7 @@ cat(make_quarto_latex_table(
   df = data_prep_pdf,
   col_labels = c("For RIs", "For SMIs"),
   col_align = "cc",
-  checkmarks = TRUE
+  checkmarks = c(1,2)
 
 ))
 ```

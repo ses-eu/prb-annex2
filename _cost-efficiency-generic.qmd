@@ -158,8 +158,10 @@ if (country == "SES RP3" | country == "MUAC") {
   }
   
   if (year_report == 2024) {
-    cef_txt_1_13 <- cef_txt_1_13 %>% 
-      mutate_all(., ~ str_replace_all(., fixed("RP3 summary"),"**RP3 summary**"))
+    cef_txt_1_13 <- cef_txt_1_13 
+    # %>% 
+    #   mutate_all(., ~ str_replace_all(., fixed("**RP3 summary**"),"**RP3 summary**"))
+
   }
 
 }

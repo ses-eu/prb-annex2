@@ -1709,7 +1709,6 @@ wrap_label <- function(label, width = 30) {
 
 ## latex tables -----
 # R/make_quarto_latex_table.R
-# R/make_quarto_latex_table.R
 make_quarto_latex_table <- function(
     title,
     df,
@@ -1726,15 +1725,15 @@ make_quarto_latex_table <- function(
     tabcolsep_pt = 0,
     caption_skip_pt = 0,
     caption_vspace_pt = 0,
-    caption_after_vspace_pt = -1,     # optional: negative reduces gap between caption and header row
+    caption_after_vspace_pt = -1,
     escape_latex = TRUE,
     wrap_raw_block = TRUE,
-    checkmarks = FALSE,
+    checkmarks = FALSE,              # UPDATED: FALSE/TRUE or integer column indices (e.g. c(2,3))
     col_align = NA,                  # REQUIRED, e.g. "cc" or "clrrr"
     cell_pad_em = 0.6,               # per-side padding
     col_widths = NULL,               # NULL => equal widths; else numeric pct vector summing to 100
     row_extrarowheight_pt = 2,       # adds vertical padding to header+body rows
-    bold_data_rows = integer(0)      # NEW: 1-based indices of data rows to make bold, e.g. c(1,2)
+    bold_data_rows = integer(0)      # 1-based indices of data rows to make bold, e.g. c(1,2)
 ) {
   stopifnot(is.data.frame(df))
   if (ncol(df) < 1) stop("df must have at least 1 column.")
@@ -1796,6 +1795,21 @@ make_quarto_latex_table <- function(
     stop(sprintf("bold_data_rows contains indices > nrow(df) (%d).", nrow(df)))
   }
   
+  # --- NEW: checkmarks columns selection (supports legacy TRUE/FALSE) ---
+  check_cols <- rep(FALSE, n)
+  if (is.null(checkmarks) || (is.logical(checkmarks) && length(checkmarks) == 1 && !isTRUE(checkmarks))) {
+    check_cols <- rep(FALSE, n)
+  } else if (is.logical(checkmarks) && length(checkmarks) == 1 && isTRUE(checkmarks)) {
+    check_cols <- rep(TRUE, n)
+  } else if (is.numeric(checkmarks)) {
+    idx <- unique(as.integer(checkmarks[is.finite(checkmarks)]))
+    if (any(idx <= 0)) stop("checkmarks column indices must be positive (1-based).")
+    if (any(idx > n)) stop(sprintf("checkmarks contains indices > ncol(df) (%d).", n))
+    check_cols[idx] <- TRUE
+  } else {
+    stop("checkmarks must be FALSE/TRUE or a numeric vector of column indices (e.g., c(2,3)).")
+  }
+  
   escape_tex <- function(x) {
     x <- as.character(x)
     x[is.na(x)] <- ""
@@ -1816,10 +1830,10 @@ make_quarto_latex_table <- function(
     })
   }
   
-  fmt_cell <- function(x) {
+  fmt_cell_for_col <- function(x, col_i) {
     x_chr <- as.character(x)
     x_chr[is.na(x_chr)] <- ""
-    if (checkmarks && is_zero_one(x_chr)) {
+    if (check_cols[col_i] && is_zero_one(x_chr)) {
       nx <- suppressWarnings(as.numeric(x_chr))
       return(if (nx == 1) "\\tick" else "\\cross")
     }
@@ -1918,7 +1932,12 @@ make_quarto_latex_table <- function(
     " \\\\\n"
   )
   
-  df_chr <- as.data.frame(lapply(df, fmt_cell), stringsAsFactors = FALSE)
+  # --- Apply formatting per column (so checkmarks can be column-specific) ---
+  df_chr <- as.data.frame(
+    lapply(seq_len(n), function(j) vapply(df[[j]], fmt_cell_for_col, character(1), col_i = j)),
+    stringsAsFactors = FALSE
+  )
+  names(df_chr) <- names(df)
   
   body_rows <- if (nrow(df_chr) == 0) {
     ""

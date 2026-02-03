@@ -61,7 +61,7 @@ data_prep_pdf <- state_table |>
   mutate(
     Actual = format(round(Actual, 2), nsmall = 2),
     Target = format(round(Target, 2), nsmall = 2),
-    "_" = if_else(Actual <= Target,0,1)
+    Assessment = if_else(Actual <= Target,0,1)
   )
   
 

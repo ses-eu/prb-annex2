@@ -319,12 +319,16 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 ```{r chart_level1_cef_er_ses}
 #| file: R/chart_level1_cef_er_ses.R
-#| out.width: "100%"
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
 ```
 
 ```{r chart_cef_trm_1, options = (cz=c("1", "terminal", "level1"))}
 #| file: R/chart_level1_cef.R
-#| out.width: "100%"
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
 ```
 
 `r cef_conc1`
@@ -370,13 +374,29 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 #| fig-pos: "H"
 ```
 
-<!-- # ```{r table_level2_saf_ri_apt_ses} -->
-<!-- # mytable <-"table_level2_saf_ri_apt_ses" -->
-<!-- # table_string <- source(here("R", paste0(mytable,".R")))  -->
-<!-- # assign(mytable, setup_latex_table(get(mytable)))  -->
-<!-- # ``` -->
+```{r table_level2_saf_ri_apt_ses}
+#| file: R/table_level2_saf_ri_apt_ses.R
+#| include: false
+```
 
-<!-- `r layout_summary_table(table_level2_saf_ri_apt_ses, hspace = 0, left_margin = -1, width = 1.1)` -->
+
+``` {r table_level2_saf_ri_apt_ses_p}
+#| echo: false
+#| results: asis
+ 
+cat(make_quarto_latex_table_2level(
+  title = paste0("Rate of RI per 100,000 airport movements"),
+  df = data_prep_pdf,
+  # col_labels = rep(c("#", "Mvts.", "Airport", "Total RI", "RI per 1000 mvts."),3),
+  body_fontsize = c(8, 9.6),
+  col_align = "llrrrllrrrllrrr",
+  col_widths_pct = c(3,10,8,5,8, 3,10,8,5,8, 3,10,6,5,8),
+  cell_pad_em = 0.4,       
+  wrap_raw_block = FALSE,
+  header_row_height_ex = 2.4,
+  row_extrarowheight_pt = 2 
+))
+```
 
 \needspace{3\baselineskip}
 
@@ -405,13 +425,14 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 ```
 
 
-``` {r}
+``` {r table_level2_saf_smi_ansp_pdf1_p}
 #| echo: false
 #| results: asis
  
 cat(make_quarto_latex_table_2level(
   title = paste0("Rate of SMI with ANS contribution per 100,000 flight hours"),
   df = data_prep,
+  body_fontsize = c(8, 9.6),
   col_align = "llrrrrrrrrrr",
   col_widths = c(3,17,rep(8,10)),
   wrap_raw_block = FALSE,
@@ -427,13 +448,14 @@ cat(make_quarto_latex_table_2level(
 #| include: false
 ```
 
-``` {r}
+``` {r table_level2_saf_smi_ansp_pdf2_p}
 #| echo: false
 #| results: asis
  
 cat(make_quarto_latex_table_2level(
   title = NA,
   df = data_prep,
+  body_fontsize = c(8, 9.6),
   col_align = "llrrrrrrrrrr",
   col_widths = c(3,17,rep(8,10)),
   wrap_raw_block = FALSE,
@@ -462,9 +484,6 @@ cat(make_quarto_latex_table_2level(
 # ENVIRONMENT - SES RP3
 
 ## PRB monitoring
-```{r}
-env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Findings_environment")
-```
 
 `r env_conc1`
 
@@ -485,16 +504,16 @@ env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Find
 #| include: false
 ```
 
-``` {r}
+``` {r table_kea_summary_p}
 #| echo: false
 #| results: asis
 cat(make_quarto_latex_table(
   title = "KEA (%)",
   df = data_prep_pdf,
-  col_labels = c("State", "Target", "Actual", ""),
-  col_align = "lrrl",
+  col_labels = c("State", "Target", "Actual", " "),
+  col_align = "lrrc",
   col_widths = c(35, 30, 30,5),
-  checkmarks = TRUE
+  checkmarks = c(4)
 
 ))
 ```
@@ -534,16 +553,16 @@ cat(make_quarto_latex_table(
 ```
 
 
-``` {r}
+``` {r table_cap_erdelay_summary_p}
 #| echo: false
 #| results: asis
 cat(make_quarto_latex_table(
   title = "En route delay (min/flight)",
   df = data_prep_pdf,
   col_labels = c("State", "Target", "Actual", ""),
-  col_align = "lrrl",
+  col_align = "lrrc",
   col_widths = c(35, 30, 30,5),
-  checkmarks = TRUE
+  checkmarks = c(4)
 
 ))
 ```
@@ -569,16 +588,16 @@ cat(make_quarto_latex_table(
 ```
 
 
-``` {r}
+``` {r table_cap_arrdelay_summary_p}
 #| echo: false
 #| results: asis
 cat(make_quarto_latex_table(
   title = "Arrival delay (min/flight)",
   df = data_prep_pdf,
   col_labels = c("State", "Target", "Actual", ""),
-  col_align = "lrrl",
+  col_align = "lrrc",
   col_widths = c(35, 30, 30,5),
-  checkmarks = TRUE
+  checkmarks = c(4)
 
 ))
 ```
@@ -624,9 +643,10 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 #| include: false
 ```
 
-``` {r}
+``` {r table_cef_cost_p}
 #| echo: false
 #| results: asis
+cat(make_quarto_latex_table(
   title = paste0("Actual and determined data"),
   col_labels = c("Total costs - nominal (M€)", "2020‑2021", '2022', '2023', '2024'),
   df = data_prep_pdf,
@@ -660,7 +680,7 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 #| include: false
 ```
 
-``` {r, eval = (no_cz >= czindex)}
+``` {r table_level2_cef_aucu_enroute_p}
 #| echo: false
 #| results: asis
  
@@ -692,7 +712,7 @@ cat(make_quarto_latex_table(
 #| include: false
 ```
 
-``` {r}
+``` {r table_level2_cef_cex_enroute_p}
 #| echo: false
 #| results: asis
  
