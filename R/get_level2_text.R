@@ -470,7 +470,11 @@ if (country == "SES RP3" | country == "MUAC") {
   ### remove leading and trailing line breaks
   mytext_inc <- sub("^<br>|<br>$", "", mytext_inc)
   
-  cap_er_nsa_incentive <- paste0(mytext, mytext_inc)
+  if(length(mytext_inc) >1) {
+    cap_er_nsa_incentive <- paste0(mytext, mytext_inc[[1]])
+  } else {
+    cap_er_nsa_incentive <- paste0(mytext, mytext_inc)
+  }
   
   ## ACC text --------------
   ### find observations positions
@@ -733,6 +737,12 @@ get_cef_level2_text <- function(cz_index, cz_type) {
     if (year_report >= 2023) {
       cef_txt_1_13 <- cef_txt_1_13 %>% 
         mutate_all(., ~ str_replace_all(., fixed("**"),""))
+    }
+    
+    if (year_report == 2024) {
+      cef_txt_1_13 <- cef_txt_1_13 %>%
+        mutate_all(., ~ str_replace_all(., fixed("RP3 summary"), fixed("**RP3 summary**")))
+      
     }
   }
   

@@ -38,6 +38,7 @@ format:
     include-in-header:
       - text: |
       
+          \usepackage{xurl}      % better URL/word breaking
           \usepackage[table]{xcolor}  % <-- provides \arrayrulecolor via colortbl
 
           % --- Heading fonts/colors (KOMA-Script; no titlesec) ---

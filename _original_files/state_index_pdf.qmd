@@ -1,3 +1,23 @@
+```{r chart_cef_er_1, options = (cz=c("1", "enroute", "level1")), include = FALSE}
+#| file: R/chart_level1_cef.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_er_2, options = (cz=c("2", "enroute", "level1")), eval = (params$no_ecz == 2), include = FALSE}
+#| file: R/chart_level1_cef.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_trm_1, options = (cz=c("1", "terminal", "level1")), eval = (params$no_tcz != 0), include = FALSE}
+#| file: R/chart_level1_cef.R
+#| out.width: "100%"
+```
+
+```{r chart_cef_trm_2, options = (cz=c("2", "terminal", "level1")), eval = (params$no_tcz == 2), include = FALSE}
+#| file: R/chart_level1_cef.R
+#| out.width: "100%"
+```
+
 <!-- ## Safety L2-->
 
 <!-- ### Effectiveness of Safety Management (EoSM) (KPI#1) -->
@@ -614,33 +634,41 @@ cap_conc1 <- paste0(if_else(cap_er_conc1 == "character(0\n", "", paste0(cap_er_c
 cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF")
 ```
 
-```{r chart_cef_er_1, options = (cz=c("1", "enroute", "level1"))}
-#| file: R/chart_level1_cef.R
-#| out.width: "52%"
-#| fig.align: "center"
-#| fig-pos: "H"
+`r if ((params$no_ecz + params$no_tcz) >1) ":::: {.content-hidden}"`
+```{=latex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.52\linewidth,height=\textheight,keepaspectratio]{index_files/figure-pdf/chart_cef_er_1-1.pdf}
+\end{figure}
+```
+`r if ((params$no_ecz + params$no_tcz) >1) "::::"`
+
+
+`r if ((params$no_ecz + params$no_tcz) == 1) ":::: {.content-hidden}"`
+`r layout_2fig("chart_cef_er_1", if_else(params$no_ecz == 1, "chart_cef_trm_1", "chart_cef_er_2"))`
+`r if ((params$no_ecz + params$no_tcz) == 1) "::::"`
+
+
+`r if ((params$no_ecz + params$no_tcz) != 3 | params$no_ecz == 1) ":::: {.content-hidden}"`
+```{=latex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.52\linewidth,height=\textheight,keepaspectratio]{index_files/figure-pdf/chart_cef_trm_1-1.pdf}
+\end{figure}
 ```
 
-```{r chart_cef_er_2, options = (cz=c("2", "enroute", "level1")), eval = (params$no_ecz == 2)}
-#| file: R/chart_level1_cef.R
-#| out.width: "52%"
-#| fig.align: "center"
-#| fig-pos: "H"
+`r if ((params$no_ecz + params$no_tcz) != 3 | params$no_ecz == 1) "::::"`
+
+
+`r if ((params$no_ecz + params$no_tcz) != 3 | params$no_ecz == 2) ":::: {.content-hidden}"`
+```{=latex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.52\linewidth,height=\textheight,keepaspectratio]{index_files/figure-pdf/chart_cef_trm_2-1.pdf}
+\end{figure}
 ```
 
-```{r chart_cef_trm_1, options = (cz=c("1", "terminal", "level1")), eval = (params$no_tcz != 0)}
-#| file: R/chart_level1_cef.R
-#| out.width: "52%"
-#| fig.align: "center"
-#| fig-pos: "H"
-```
-
-```{r chart_cef_trm_2, options = (cz=c("2", "terminal", "level1")), eval = (params$no_tcz == 2)}
-#| file: R/chart_level1_cef.R
-#| out.width: "52%"
-#| fig.align: "center"
-#| fig-pos: "H"
-```
+`r if ((params$no_ecz + params$no_tcz != 3) | params$no_ecz == 2) "::::"`
 
 `r cef_conc1`
 
@@ -689,8 +717,9 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 \biggertext{Focus on EoSM}
 
-`r latex_linebreaks(saf_eosm_text)`
-
+```{r results = "asis"}
+cat(quarto_paragraph_breaks(saf_eosm_text))
+```
 
 `r if (params$country == "MUAC") "::: {.content-hidden}"`
 
@@ -715,7 +744,7 @@ cat(make_quarto_latex_table(
   title = paste0("Rate of RIs per 100,000 airport movements - ",  country),
   df = data_prep,
   col_align = "clrrr",
-  col_widths = c(3, 27, 70/3, 70/3, 70/3)
+  col_widths = c(6, 27, 67/3, 67/3, 67/3)
 ))
 ```
 
@@ -726,8 +755,10 @@ cat(make_quarto_latex_table(
 
 \biggertext{Focus on runway incursions}
 
-`r latex_linebreaks(saf_ri_text)`
+```{r results = "asis"}
+cat(quarto_paragraph_breaks(saf_ri_text))
 
+```
 
 \needspace{2\baselineskip}
 
@@ -750,7 +781,9 @@ cat(make_quarto_latex_table_2level(
   title = paste0("Rate of SMI with ANS contribution per 100,000 flight hours"),
   df = data_prep,
   col_align = "llrrrrrrrrrr",
-  col_widths = c(3,17,rep(8,10)),
+  col_widths = c(3,12,rep(8.5,10)),
+  body_fontsize = c(8, 10),
+  cell_pad_em = 0.3,
   wrap_raw_block = FALSE,
   header_row_height_ex = 2.4,
   row_extrarowheight_pt = 2 
@@ -772,7 +805,9 @@ cat(make_quarto_latex_table_2level(
   title = NA,
   df = data_prep,
   col_align = "llrrrrrrrrrr",
-  col_widths = c(3,17,rep(8,10)),
+  col_widths = c(3,12,rep(8.5,10)),
+  body_fontsize = c(8, 10),
+  cell_pad_em = 0.3,
   wrap_raw_block = FALSE,
   header_row_height_ex = 2.4,
   row_extrarowheight_pt = 2 
@@ -784,13 +819,19 @@ cat(make_quarto_latex_table_2level(
 
 \biggertext{Focus on separation minima}
 
-`r latex_linebreaks(saf_smi_text)`
+```{r results = "asis"}
+cat(quarto_paragraph_breaks(saf_smi_text))
+
+```
 
 \needspace{2\baselineskip}
 
 ### Quality of occurences reporting 
 
-`r latex_linebreaks(saf_qr_text)`
+```{r results = "asis"}
+cat(quarto_paragraph_breaks(saf_qr_text))
+
+```
 
 \needspace{2\baselineskip}
 
@@ -859,13 +900,17 @@ cat(make_quarto_latex_table(
 
 **AXOT**
 
-`r if (exists("env_apt_2") == FALSE) {''} else {latex_linebreaks(env_apt_2)}`
+```{r results = "asis"}
+if (exists("env_apt_2") == FALSE) {''} else {cat(quarto_paragraph_breaks(env_apt_2))}
+```
 
 \needspace{2\baselineskip}
 
 **ASMA**
 
-`r if (exists("env_apt_3") == FALSE) {''} else {latex_linebreaks(env_apt_3)}`
+```{r results = "asis"}
+if (exists("env_apt_3") == FALSE) {''} else {cat(quarto_paragraph_breaks(env_apt_3))}
+```
 
 ### Share of arrivals applying continuous descent operations (CDOs) (PI#5)
 
@@ -876,8 +921,9 @@ cat(make_quarto_latex_table(
 
 `\biggertext{Focus CDOs}`{=latex}
 
-`r if (exists("env_apt_4") == FALSE) {''} else {latex_linebreaks(env_apt_4)}`
-
+```{r results = "asis"}
+if (exists("env_apt_4") == FALSE) {''} else {cat(quarto_paragraph_breaks(env_apt_4))}
+```
 
 ```{r table_level2_env_apt_pis, eval=(params$no_tcz != 0)}
 #| file: R/table_level2_env_apt_pis.R
@@ -893,7 +939,7 @@ cat(make_quarto_latex_table_2level(
   title = paste0("Airport level"),
   df = data_prep_pdf,    
   caption_fontsize = c(10, 10),
-  body_fontsize = c(7, 8.4),
+  body_fontsize = c(8, 9.6),
   col_align = "lrrrrrrrrrrrrrrr",
   col_widths = c(10,rep(90/15,15)),
   wrap_raw_block = FALSE,
@@ -924,8 +970,9 @@ cat(make_quarto_latex_table_2level(
 
 **Update on Military dimension of the plan**
 
-`r latex_linebreaks(env_mil_1)`
-
+```{r env_mil_1, results = "asis"}
+cat(ifelse(env_mil_1 == '', 'n/a', quarto_paragraph_breaks(env_mil_1)))
+```
 
 `r if (params$year_report != 2020) ":::: {.content-hidden}"`
 
@@ -943,25 +990,33 @@ cat(make_quarto_latex_table_2level(
 
 `r if (params$year_report == 2020) "::::"`
 
-`r latex_linebreaks(env_mil_2)`
+```{r env_mil_2, results = "asis"}
+cat(ifelse(env_mil_2 == '', 'n/a', quarto_paragraph_breaks(env_mil_2)))
+```
 
 \needspace{2\baselineskip}
 
 **Initiatives implemented or planned to improve PI#6**
 
-`r latex_linebreaks(env_mil_4)`
+```{r env_mil_4, results = "asis"}
+cat(ifelse(env_mil_4 == '', 'n/a', quarto_paragraph_breaks(env_mil_4)))
+```
 
 \needspace{2\baselineskip}
 
 **Initiatives implemented or planned to improve PI#7**
 
-`r latex_linebreaks(env_mil_6)`
+```{r env_mil_6, results = "asis"}
+cat(ifelse(env_mil_6 == '', 'n/a', quarto_paragraph_breaks(env_mil_6)))
+```
 
 \needspace{2\baselineskip}
 
 **Initiatives implemented or planned to improve PI#8**
 
-`r latex_linebreaks(env_mil_8)`
+```{r env_mil_8, results = "asis"}
+cat(ifelse(env_mil_8 == '', 'n/a', quarto_paragraph_breaks(env_mil_8)))
+```
 
 `r if (params$country == "Luxembourg") ":::"`
 
@@ -1012,37 +1067,50 @@ cap_trm_conc1 <- if_else(cap_trm_conc1 == "NA" | stringr::str_detect(cap_trm_con
 
 \needspace{3\baselineskip}
 
-`\biggertext{Focus on en route ATFM delay}`{=latex}
+\biggertext{Focus on en route ATFM delay}
 
 **Summary of capacity performance**
 
-`r if_else(length(cap_heading_ukraine) == 0, latex_linebreaks(cap_er_nsa_7), latex_linebreaks(cap_er_nsa_8))`
+```{r cap_er_nsa_7, results = "asis"}
+cat(if_else(length(cap_heading_ukraine) == 0, quarto_paragraph_breaks(cap_er_nsa_7), quarto_paragraph_breaks(cap_er_nsa_8)))
+```
 
 \needspace{2\baselineskip}
 
 **NSA's assessment of capacity performance**
 
-`r latex_linebreaks(cap_er_nsa_2)`
+```{r cap_er_nsa_2, results = "asis"}
+cat(quarto_paragraph_breaks(cap_er_nsa_2))
+```
 
 \needspace{2\baselineskip}
 
 **Monitoring process for capacity performance**
 
-`r latex_linebreaks(cap_er_nsa_3)`
+```{r cap_er_nsa_3, results = "asis"}
+cat(quarto_paragraph_breaks(cap_er_nsa_3))
+```
 
 \needspace{2\baselineskip}
 
 **Capacity planning**
 
-`r latex_linebreaks(cap_er_nsa_4)`
+```{r cap_er_nsa_4, results = "asis"}
+cat(quarto_paragraph_breaks(cap_er_nsa_4))
+```
 
 \needspace{2\baselineskip}
 
 **Application of Corrective Measures for Capacity (if applicable)**
 
-`r latex_linebreaks(cap_er_nsa_6)`
+```{r cap_er_nsa_6, results = "asis"}
+cat(quarto_paragraph_breaks(cap_er_nsa_6))
+```
 
-`r if_else(length(cap_heading_ukraine) == 0, "", paste0("**Additional Information Related to Russia's War of Aggression Against Ukraine**<br><br>", latex_linebreaks(cap_er_nsa_7)))`
+
+```{r cap_heading_ukraine, results = "asis"}
+cat(if_else(length(cap_heading_ukraine) == 0, "", paste0("**Additional Information Related to Russia's War of Aggression Against Ukraine**\n\n", quarto_paragraph_breaks(cap_er_nsa_7))))
+```
 
 `r if (params$year_report <= 2022) "::::: {.content-hidden}"`
 
@@ -1050,7 +1118,9 @@ cap_trm_conc1 <- if_else(cap_trm_conc1 == "NA" | stringr::str_detect(cap_trm_con
 
 **En route Capacity Incentive Scheme**														
 
-`r latex_linebreaks(cap_er_nsa_incentive)`
+```{r cap_er_nsa_incentive, results = "asis"}
+cat(quarto_paragraph_breaks(cap_er_nsa_incentive))
+```
 
 `r if (params$year_report <= 2022) ":::::"`
 
@@ -1070,8 +1140,9 @@ cap_trm_conc1 <- if_else(cap_trm_conc1 == "NA" | stringr::str_detect(cap_trm_con
 
 `\biggertext{Focus on ATCOs in operations}`{=latex}
 
-`r latex_linebreaks(cap_er_nsa_5)`
-
+```{r cap_er_nsa_5, results = "asis"}
+cat(ifelse(cap_er_nsa_5 == '', 'n/a', quarto_paragraph_breaks(cap_er_nsa_5)))
+```
 
 `r if (params$country == "Luxembourg") ":::"`
 
@@ -1091,12 +1162,17 @@ cap_trm_conc1 <- if_else(cap_trm_conc1 == "NA" | stringr::str_detect(cap_trm_con
 
 `\biggertext{Focus on arrival ATFM delay}`{=latex}
 
-`r if (exists("cap_trm_nsa_1") == FALSE) {''} else {latex_linebreaks(cap_trm_nsa_1)}`
+```{r cap_trm_nsa_1, results = "asis"}
+if (exists("cap_trm_nsa_1") == FALSE) {''} else {cat(quarto_paragraph_breaks(cap_trm_nsa_1))}
+```
 
-`r if (exists("cap_trm_nsa_2") == FALSE) {''} else {latex_linebreaks(cap_trm_nsa_2)}`
+```{r cap_trm_nsa_2, results = "asis"}
+if (exists("cap_trm_nsa_2") == FALSE) {''} else {cat(quarto_paragraph_breaks(cap_trm_nsa_2))}
+```
 
-`r if (exists("cap_trm_nsa_3") == FALSE) {''} else {latex_linebreaks(cap_trm_nsa_3)}`
-
+```{r cap_trm_nsa_3, results = "asis"}
+if (exists("cap_trm_nsa_3") == FALSE) {''} else {cat(quarto_paragraph_breaks(cap_trm_nsa_3))}
+```
 
 ### Other terminal performance indicators (PI#1-3)
 
@@ -1120,6 +1196,7 @@ cap_trm_conc1 <- if_else(cap_trm_conc1 == "NA" | stringr::str_detect(cap_trm_con
 cat(make_quarto_latex_table_2level(
   title = paste0("Airport level"),
   df = data_prep,
+  body_fontsize = c(9, 11),
   col_align = "lrrrrrrrrrr",
   col_widths = c(20,rep(8,10)),
   wrap_raw_block = FALSE,
@@ -1144,6 +1221,7 @@ cat(make_quarto_latex_table_2level(
   title = NA,
   df = data_prep,
   col_align = "lrrrrrrrrrr",
+  body_fontsize = c(9, 11),
   col_widths = c(20,rep(8,10)),
   wrap_raw_block = FALSE,
   header_row_height_ex = 2.4,
@@ -1158,20 +1236,25 @@ cat(make_quarto_latex_table_2level(
 
 **ATFM slot adherence**
 
-`r if (exists("cap_trm_nsa_4") == FALSE) {''} else {latex_linebreaks(cap_trm_nsa_4)}`
-
+```{r cap_trm_nsa_4, results = "asis"}
+if (!exists("cap_trm_nsa_4")) {''} else {cat(quarto_paragraph_breaks(cap_trm_nsa_4))}
+```
 
 \needspace{2\baselineskip}
 
 **ATC pre-departure delay**
 
-`r if (exists("cap_trm_nsa_5") == FALSE) {''} else {latex_linebreaks(cap_trm_nsa_5)}`
+```{r cap_trm_nsa_5, results = "asis"}
+if (!exists("cap_trm_nsa_5")) {''} else {cat(quarto_paragraph_breaks(cap_trm_nsa_5))}
+```
 
 \needspace{2\baselineskip}
 
 **All causes pre-departure delay**
 
-`r if (exists("cap_trm_nsa_6") == FALSE) {''} else {latex_linebreaks(cap_trm_nsa_6)}`
+```{r cap_trm_nsa_6, results = "asis"}
+if (!exists("cap_trm_nsa_6")) {''} else {cat(quarto_paragraph_breaks(cap_trm_nsa_6))}
+```
 
 `r if (params$no_tcz == 0) ":::"`
 
@@ -1281,19 +1364,21 @@ cat(make_quarto_latex_table(
 
 **`r cztype_proper` service units**
 
-`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]) == TRUE, cef_level2_text$cef_txt_1_4_su, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]))`
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]), cef_level2_text$cef_txt_1_4_su, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]))`
 
 \needspace{2\baselineskip}
 
 **`r cztype_proper` costs by entity**
 
-`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]) == TRUE, cef_level2_text$cef_txt_1_4_cost_all, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]))`
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]), cef_level2_text$cef_txt_1_4_cost_all, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]))`
 
 \needspace{2\baselineskip}
 
 **`r cztype_proper` costs for the main ANSP at charging zone level**
 
-`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]) == TRUE, latex_linebreaks(cef_level2_text$cef_txt_1_4_cost_main), latex_linebreaks(pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1])))`
+```{r cef_txt_1_4_er1, results = "asis"}
+cat(if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]), quarto_paragraph_breaks(cef_level2_text$cef_txt_1_4_cost_main), quarto_paragraph_breaks(pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]))))
+```
 
 ### Actual unit cost incurred by the users (AUCU) (PI#1)
 
@@ -1347,7 +1432,8 @@ cat(make_quarto_latex_table(
 #| results: asis
  
 cat(make_quarto_latex_table(
-  title = NA,
+  title = paste0("Cost exempt from cost sharing – ",
+                      if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))),
   df = data_prep_pdf,
   col_labels = c(paste0("Cost exempt from cost sharing by item - ", 
                              if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))),
@@ -1366,6 +1452,7 @@ cat(make_quarto_latex_table(
 
 `r layout_2fig(paste0("chart_cef_reg_res_ansp_", cztype, czindex), paste0("chart_cef_net_res_main_ansp_", cztype, czindex))`
 
+\needspace{3\baselineskip}
 
 `\biggertext{Focus on regulatory result}`{=latex}
 
@@ -1381,17 +1468,25 @@ cat(make_quarto_latex_table(
 
 **`r cef_level2_text$cef_txt_1_13[3,1]`**
 
-`r cef_level2_text$cef_txt_1_13[4,1]`
+```{r cef_txt_1_13_4_er1, results = "asis"}
+cat(quarto_paragraph_breaks(cef_level2_text$cef_txt_1_13[4,1]))
+```
 
-`r cef_level2_text$cef_txt_1_10_txt`
+```{r cef_txt_1_10_er1, results = "asis"}
+cat(quarto_paragraph_breaks(cef_level2_text$cef_txt_1_10_txt))
+```
 
 `r if (params$year_report < 2022) ":::"`
 
 `r if (params$year_report >= 2022) "::: {.content-hidden}"`
 
-`r latex_linebreaks(cef_level2_text$cef_txt_1_13[1,1])`
+```{r cef_txt_1_13_er1, results = "asis"}
+cat(quarto_paragraph_breaks(cef_level2_text$cef_txt_1_13[1,1]))
+```
 
-`r latex_linebreaks(cef_level2_text$cef_txt_1_10_txt)`
+```{r cef_txt_1_10_txt_22_er1, results = "asis"}
+cat(quarto_paragraph_breaks(cef_level2_text$cef_txt_1_10_txt))
+```
 
 `r if (params$year_report >= 2022) ":::"`
 
@@ -1492,19 +1587,23 @@ cat(make_quarto_latex_table(
 
 **`r cztype_proper` service units**
 
-`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]) == TRUE, cef_level2_text$cef_txt_1_4_su, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]))`
+`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]), cef_level2_text$cef_txt_1_4_su, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_su,1]))`
 
 \needspace{2\baselineskip}
 
 **`r cztype_proper` costs by entity**
 
-`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]) == TRUE, cef_level2_text$cef_txt_1_4_cost_all, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]))`
+```{r cef_txt_1_4_cost_all_er2, results = "asis"}
+cat(if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]), quarto_paragraph_breaks(cef_level2_text$cef_txt_1_4_cost_all), quarto_paragraph_breaks(pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]))))
+```
 
 \needspace{2\baselineskip}
 
 **`r cztype_proper` costs for the main ANSP at charging zone level**
 
-`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]) == TRUE, latex_linebreaks(cef_level2_text$cef_txt_1_4_cost_main), latex_linebreaks(pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1])))`
+```{r cef_txt_1_4_cost_main_er2, results = "asis"}
+cat(if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]), quarto_paragraph_breaks(cef_level2_text$cef_txt_1_4_cost_main), quarto_paragraph_breaks(pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]))))
+```
 
 ### Actual unit cost incurred by the users (AUCU) (PI#1)
 
@@ -1558,7 +1657,8 @@ cat(make_quarto_latex_table(
 #| results: asis
  
 cat(make_quarto_latex_table(
-  title = NA,
+  title = paste0("Cost exempt from cost sharing – ",
+                      if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))),
   df = data_prep_pdf,
   col_labels = c(paste0("Cost exempt from cost sharing by item - ", 
                              if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))),
@@ -1577,6 +1677,7 @@ cat(make_quarto_latex_table(
 
 `r layout_2fig(paste0("chart_cef_reg_res_ansp_", cztype, czindex), paste0("chart_cef_net_res_main_ansp_", cztype, czindex))`
 
+\needspace{3\baselineskip}
 
 `\biggertext{Focus on regulatory result}`{=latex}
 
@@ -1592,17 +1693,25 @@ cat(make_quarto_latex_table(
 
 **`r cef_level2_text$cef_txt_1_13[3,1]`**
 
-`r cef_level2_text$cef_txt_1_13[4,1]`
+```{r cef_txt_1_13_4_er2, results = "asis"}
+cat(quarto_paragraph_breaks(cef_level2_text$cef_txt_1_13[4,1]))
+```
 
-`r cef_level2_text$cef_txt_1_10_txt`
+```{r cef_txt_1_10_er2, results = "asis"}
+cat(quarto_paragraph_breaks(cef_level2_text$cef_txt_1_10_txt))
+```
 
 `r if (params$year_report < 2022) ":::"`
 
 `r if (params$year_report >= 2022) "::: {.content-hidden}"`
 
-`r latex_linebreaks(cef_level2_text$cef_txt_1_13[1,1])`
+```{r cef_txt_1_13_er2, results = "asis"}
+cat(quarto_paragraph_breaks(cef_level2_text$cef_txt_1_13[1,1]))
+```
 
-`r latex_linebreaks(cef_level2_text$cef_txt_1_10_txt)`
+```{r cef_txt_1_10_txt_22_er2, results = "asis"}
+cat(quarto_paragraph_breaks(cef_level2_text$cef_txt_1_10_txt))
+```
 
 `r if (params$year_report >= 2022) ":::"`
 
@@ -1712,13 +1821,20 @@ cat(make_quarto_latex_table(
 
 **`r cztype_proper` costs by entity**
 
-`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]) == TRUE, cef_level2_text$cef_txt_1_4_cost_all, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]))`
+```{r cef_txt_1_4_cost_all_tz1, results = "asis"}
+cat(if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]),
+        quarto_paragraph_breaks(cef_level2_text$cef_txt_1_4_cost_all),
+        quarto_paragraph_breaks(pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]))))
+```
 
 \needspace{2\baselineskip}
 
 **`r cztype_proper` costs for the main ANSP at charging zone level**
 
-`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]) == TRUE, latex_linebreaks(cef_level2_text$cef_txt_1_4_cost_main), latex_linebreaks(pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1])))`
+```{r cef_txt_1_4_cost_main_tz1, results = "asis"}
+cat(if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]), quarto_paragraph_breaks(cef_level2_text$cef_txt_1_4_cost_main), quarto_paragraph_breaks(pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]))))
+```
+
 
 ### Actual unit cost incurred by the users (AUCU) (PI#1)
 
@@ -1770,9 +1886,9 @@ cat(make_quarto_latex_table(
 ``` {r, eval = (no_cz >= czindex), include = (no_cz >= czindex)}
 #| echo: false
 #| results: asis
- 
 cat(make_quarto_latex_table(
-  title = NA,
+  title = paste0("Cost exempt from cost sharing – ",
+                      if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))),
   df = data_prep_pdf,
   col_labels = c(paste0("Cost exempt from cost sharing by item - ", 
                              if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))),
@@ -1791,6 +1907,7 @@ cat(make_quarto_latex_table(
 
 `r layout_2fig(paste0("chart_cef_reg_res_ansp_", cztype, czindex), paste0("chart_cef_net_res_main_ansp_", cztype, czindex))`
 
+\needspace{3\baselineskip}
 
 `\biggertext{Focus on regulatory result}`{=latex}
 
@@ -1806,17 +1923,25 @@ cat(make_quarto_latex_table(
 
 **`r cef_level2_text$cef_txt_1_13[3,1]`**
 
-`r cef_level2_text$cef_txt_1_13[4,1]`
+```{r cef_txt_1_13_4_tz1, results = "asis"}
+cat(quarto_paragraph_breaks(cef_level2_text$cef_txt_1_13[4,1]))
+```
 
-`r cef_level2_text$cef_txt_1_10_txt`
+```{r cef_txt_1_10_tz1, results = "asis"}
+cat(quarto_paragraph_breaks(cef_level2_text$cef_txt_1_10_txt))
+```
 
 `r if (params$year_report < 2022) ":::"`
 
 `r if (params$year_report >= 2022) "::: {.content-hidden}"`
 
-`r latex_linebreaks(cef_level2_text$cef_txt_1_13[1,1])`
+```{r cef_txt_1_13_tz1, results = "asis"}
+cat(quarto_paragraph_breaks(cef_level2_text$cef_txt_1_13[1,1]))
+```
 
-`r latex_linebreaks(cef_level2_text$cef_txt_1_10_txt)`
+```{r cef_txt_1_10_txt_22_tz1, results = "asis"}
+cat(quarto_paragraph_breaks(cef_level2_text$cef_txt_1_10_txt))
+```
 
 `r if (params$year_report >= 2022) ":::"`
 
@@ -1925,13 +2050,19 @@ cat(make_quarto_latex_table(
 
 **`r cztype_proper` costs by entity**
 
-`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]) == TRUE, cef_level2_text$cef_txt_1_4_cost_all, pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]))`
+```{r cef_txt_1_4_cost_all_tz2, results = "asis"}
+cat(if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]), quarto_paragraph_breaks(cef_level2_text$cef_txt_1_4_cost_all), 
+quarto_paragraph_breaks(pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_by_ent,1]))))
+```
 
 \needspace{2\baselineskip}
 
 **`r cztype_proper` costs for the main ANSP at charging zone level**
 
-`r if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]) == TRUE, latex_linebreaks(cef_level2_text$cef_txt_1_4_cost_main), latex_linebreaks(pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1])))`
+```{r cef_txt_1_4_cost_main_tz2, results = "asis"}
+cat(if_else(is.na(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]), quarto_paragraph_breaks(cef_level2_text$cef_txt_1_4_cost_main), quarto_paragraph_breaks(pull(cef_level2_text$cef_txt_1_4[cef_level2_text$my_index_cost_main,1]))))
+```
+
 
 ### Actual unit cost incurred by the users (AUCU) (PI#1)
 
@@ -1985,7 +2116,8 @@ cat(make_quarto_latex_table(
 #| results: asis
  
 cat(make_quarto_latex_table(
-  title = NA,
+  title = paste0("Cost exempt from cost sharing – ",
+                      if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))),
   df = data_prep_pdf,
   col_labels = c(paste0("Cost exempt from cost sharing by item - ", 
                              if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))),
@@ -2004,6 +2136,7 @@ cat(make_quarto_latex_table(
 
 `r layout_2fig(paste0("chart_cef_reg_res_ansp_", cztype, czindex), paste0("chart_cef_net_res_main_ansp_", cztype, czindex))`
 
+\needspace{3\baselineskip}
 
 `\biggertext{Focus on regulatory result}`{=latex}
 
@@ -2019,17 +2152,25 @@ cat(make_quarto_latex_table(
 
 **`r cef_level2_text$cef_txt_1_13[3,1]`**
 
-`r cef_level2_text$cef_txt_1_13[4,1]`
+```{r cef_txt_1_13_4_tz2, results = "asis"}
+cat(quarto_paragraph_breaks(cef_level2_text$cef_txt_1_13[4,1]))
+```
 
-`r cef_level2_text$cef_txt_1_10_txt`
+```{r cef_txt_1_10_tz2, results = "asis"}
+cat(quarto_paragraph_breaks(cef_level2_text$cef_txt_1_10_txt))
+```
 
 `r if (params$year_report < 2022) ":::"`
 
 `r if (params$year_report >= 2022) "::: {.content-hidden}"`
 
-`r latex_linebreaks(cef_level2_text$cef_txt_1_13[1,1])`
+```{r cef_txt_1_13_tz2, results = "asis"}
+cat(quarto_paragraph_breaks(cef_level2_text$cef_txt_1_13[1,1]))
+```
 
-`r latex_linebreaks(cef_level2_text$cef_txt_1_10_txt)`
+```{r cef_txt_1_10_txt_22_tz2, results = "asis"}
+cat(quarto_paragraph_breaks(cef_level2_text$cef_txt_1_10_txt))
+```
 
 `r if (params$year_report >= 2022) ":::"`
 

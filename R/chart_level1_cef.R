@@ -96,23 +96,35 @@ myminsize <- myfont*0.95
 
 #### title
 if (knitr::is_latex_output()) {
-  mylevel1_title <- " determined/actual\nunit costs (DUC/AUC)"
+  if ((cztype == "terminal" & no_tcz > 1) | (cztype == "enroute" & no_ecz > 1))  {
+    mylevel1_title <- paste0(" determined/actual unit\ncosts (DUC/AUC) - ",
+                             mycz_name)
+  } else{
+    mylevel1_title <- paste0(" determined/actual unit\ncosts (DUC/AUC)")
+
+  }
   mytitle_y <- 0.95
   mylocalmargin <- list(t = 50)
   
 } else {
-  mylevel1_title <- " determined/actual unit costs (DUC/AUC)"
-  mytitle_y <- 0.99
+  if ((cztype == "terminal" & no_tcz > 1) | (cztype == "enroute" & no_ecz > 1))  {
+    mylevel1_title <- paste0(" determined/actual unit costs (DUC/AUC)\n",
+                             mycz_name)
+    mytitle_y <- 0.95
+  } else{
+    mylevel1_title <- paste0(" determined/actual unit costs (DUC/AUC)")
+    mytitle_y <- 0.99
+    
+  }
   mylocalmargin <- mymargin
   
 }
 
 mytitle_text <- if_else(doclevel == "level1",
-                        paste0("DUC/AUC - " ,
-                               if_else(cztype == "terminal", "Terminal", "En route"),
+                        paste0(if_else(cztype == "terminal", "Terminal", "En route"),
                                mylevel1_title),
                         "DUC/AUC")
-                        
+
 
 #### xaxis
 

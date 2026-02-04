@@ -1620,6 +1620,99 @@ layout_wrap_figure <- function(chart1, chart2 = NULL, text, vspace, chart3 = NUL
   return(layout_string)
 }
 
+## setup quarto line breaks ----
+# R/quarto_paragraph_breaks.R
+quarto_paragraph_breaks <- function(x) {
+  fix_italics_across_paragraphs <- function(s) {
+    s <- gsub("\r\n", "\n", s, fixed = TRUE)
+    
+    n <- nchar(s)
+    if (n == 0) return("")
+    
+    out <- character(0)
+    italics_open <- FALSE
+    i <- 1L
+    
+    char_at <- function(idx) {
+      if (idx < 1L || idx > n) return("")
+      substr(s, idx, idx)
+    }
+    
+    is_escaped_asterisk <- function(idx) {
+      idx > 1L && char_at(idx - 1L) == "\\"
+    }
+    
+    is_double_asterisk <- function(idx) {
+      char_at(idx) == "*" && char_at(idx + 1L) == "*"
+    }
+    
+    is_list_marker <- function(idx) {
+      if (char_at(idx) != "*") return(FALSE)
+      if (char_at(idx + 1L) != " ") return(FALSE)
+      idx == 1L || char_at(idx - 1L) == "\n"
+    }
+    
+    is_toggle_asterisk <- function(idx) {
+      char_at(idx) == "*" &&
+        !is_escaped_asterisk(idx) &&
+        !is_double_asterisk(idx) &&
+        !is_list_marker(idx)
+    }
+    
+    while (i <= n) {
+      # Paragraph break handling
+      if (char_at(i) == "\n" && char_at(i + 1L) == "\n") {
+        if (italics_open) {
+          # close before + reopen after paragraph break
+          out <- c(out, "*", "\n\n", "*")
+        } else {
+          out <- c(out, "\n\n")
+        }
+        i <- i + 2L
+        next
+      }
+      
+      # Italics toggle on valid single '*'
+      if (is_toggle_asterisk(i)) {
+        italics_open <- !italics_open
+        out <- c(out, "*")
+        i <- i + 1L
+        next
+      }
+      
+      # default: copy char
+      out <- c(out, char_at(i))
+      i <- i + 1L
+    }
+    
+    paste0(out, collapse = "")
+  }
+  
+  tryCatch({
+    if (is.null(x) || length(x) == 0) return("")
+    if (length(x) > 1) x <- paste(x, collapse = "")
+    if (is.na(x)) return("")
+    
+    s <- trimws(as.character(x))
+    
+    # Remove leading whitespace before common list markers (-, *, +)
+    s <- gsub("(?m)^\\s+([-*+]\\s+)", "\\1", s, perl = TRUE)
+    
+    # Split on <br>, <br/>, <br />
+    parts <- stringr::str_split(s, "<br\\s*/?>")[[1]]
+    parts <- parts[trimws(parts) != ""]
+    if (length(parts) == 0) return("")
+    
+    # Join into Quarto paragraphs
+    s_out <- paste(parts, collapse = "\n\n")
+    
+    # Fix italics spans that would cross paragraph breaks
+    fix_italics_across_paragraphs(s_out)
+  }, error = function(e) "")
+}
+
+
+
 ## setup latex line breaks ----
 latex_linebreaks <- function(mystring) {
 
@@ -1709,6 +1802,7 @@ wrap_label <- function(label, width = 30) {
 
 ## latex tables -----
 # R/make_quarto_latex_table.R
+# R/make_quarto_latex_table.R
 make_quarto_latex_table <- function(
     title,
     df,
@@ -1719,7 +1813,6 @@ make_quarto_latex_table <- function(
     data_shade_name = "DataShade",
     shade_data_rows = TRUE,
     caption_fontsize = c(11, 12),
-    # body_fontsize = c(8, 9.6),
     body_fontsize = c(10, 12),
     arrayrulewidth_pt = 0.75,        # ~1px
     tabcolsep_pt = 0,
@@ -1728,12 +1821,15 @@ make_quarto_latex_table <- function(
     caption_after_vspace_pt = -1,
     escape_latex = TRUE,
     wrap_raw_block = TRUE,
-    checkmarks = FALSE,              # UPDATED: FALSE/TRUE or integer column indices (e.g. c(2,3))
+    checkmarks = FALSE,              # FALSE/TRUE or integer column indices (e.g. c(2,3))
     col_align = NA,                  # REQUIRED, e.g. "cc" or "clrrr"
     cell_pad_em = 0.6,               # per-side padding
     col_widths = NULL,               # NULL => equal widths; else numeric pct vector summing to 100
     row_extrarowheight_pt = 2,       # adds vertical padding to header+body rows
-    bold_data_rows = integer(0)      # 1-based indices of data rows to make bold, e.g. c(1,2)
+    bold_data_rows = integer(0),     # 1-based indices of data rows to make bold, e.g. c(1,2)
+    wrap_long_tokens = TRUE,         # NEW: allow wrapping of long tokens (no spaces)
+    wrap_long_min_chars = 20,        # NEW: only modify tokens longer than this
+    wrap_long_every = 10             # NEW: insert break opportunity every N chars for long no-space tokens
 ) {
   stopifnot(is.data.frame(df))
   if (ncol(df) < 1) stop("df must have at least 1 column.")
@@ -1761,6 +1857,18 @@ make_quarto_latex_table <- function(
   }
   if (!is.logical(shade_data_rows) || length(shade_data_rows) != 1 || is.na(shade_data_rows)) {
     stop("shade_data_rows must be TRUE/FALSE.")
+  }
+  
+  if (!is.logical(wrap_long_tokens) || length(wrap_long_tokens) != 1 || is.na(wrap_long_tokens)) {
+    stop("wrap_long_tokens must be TRUE/FALSE.")
+  }
+  if (!is.numeric(wrap_long_min_chars) || length(wrap_long_min_chars) != 1 ||
+      is.na(wrap_long_min_chars) || wrap_long_min_chars < 1) {
+    stop("wrap_long_min_chars must be a single positive number (e.g., 20).")
+  }
+  if (!is.numeric(wrap_long_every) || length(wrap_long_every) != 1 ||
+      is.na(wrap_long_every) || wrap_long_every < 2) {
+    stop("wrap_long_every must be a single number >= 2 (e.g., 10).")
   }
   
   n <- ncol(df)
@@ -1795,7 +1903,7 @@ make_quarto_latex_table <- function(
     stop(sprintf("bold_data_rows contains indices > nrow(df) (%d).", nrow(df)))
   }
   
-  # --- NEW: checkmarks columns selection (supports legacy TRUE/FALSE) ---
+  # --- checkmarks columns selection (supports legacy TRUE/FALSE) ---
   check_cols <- rep(FALSE, n)
   if (is.null(checkmarks) || (is.logical(checkmarks) && length(checkmarks) == 1 && !isTRUE(checkmarks))) {
     check_cols <- rep(FALSE, n)
@@ -1830,14 +1938,45 @@ make_quarto_latex_table <- function(
     })
   }
   
-  fmt_cell_for_col <- function(x, col_i) {
+  # --- robust LaTeX injection for allowbreak ---
+  latex_allowbreak <- paste0(intToUtf8(92), "allowbreak{}")
+  marker <- "\u0001AB\u0001"
+  
+  add_allowbreaks_scalar <- function(s) {
+    s <- as.character(s)
+    if (is.na(s)) return("")
+    if (!wrap_long_tokens) return(s)
+    
+    # allow breaks after common separators
+    s2 <- gsub("([/_\\-\\.:])", paste0("\\1", marker), s, perl = TRUE)
+    
+    # if still no spaces, add breaks every N chars (only for long tokens)
+    if (!grepl("\\s", s2, perl = TRUE)) {
+      raw_len <- nchar(gsub(marker, "", s2, fixed = TRUE))
+      if (raw_len >= wrap_long_min_chars) {
+        s2 <- gsub(
+          sprintf("(.{%d})", as.integer(wrap_long_every)),
+          paste0("\\1", marker),
+          s2,
+          perl = TRUE
+        )
+      }
+    }
+    s2
+  }
+  
+  fmt_cell_scalar_for_col <- function(x, col_i) {
     x_chr <- as.character(x)
-    x_chr[is.na(x_chr)] <- ""
+    if (is.na(x_chr)) x_chr <- ""
+    
     if (check_cols[col_i] && is_zero_one(x_chr)) {
       nx <- suppressWarnings(as.numeric(x_chr))
       return(if (nx == 1) "\\tick" else "\\cross")
     }
-    fmt(x_chr)
+    
+    x_chr <- add_allowbreaks_scalar(x_chr)
+    x_chr <- fmt(x_chr)
+    gsub(marker, latex_allowbreak, x_chr, fixed = TRUE)
   }
   
   excel_col_name <- function(i) {
@@ -1932,9 +2071,9 @@ make_quarto_latex_table <- function(
     " \\\\\n"
   )
   
-  # --- Apply formatting per column (so checkmarks can be column-specific) ---
+  # Apply formatting per cell per column (vector-safe)
   df_chr <- as.data.frame(
-    lapply(seq_len(n), function(j) vapply(df[[j]], fmt_cell_for_col, character(1), col_i = j)),
+    lapply(seq_len(n), function(j) vapply(df[[j]], fmt_cell_scalar_for_col, character(1), col_i = j)),
     stringsAsFactors = FALSE
   )
   names(df_chr) <- names(df)
@@ -2010,21 +2149,23 @@ make_quarto_latex_table_2level <- function(
     data_shade_name = "DataShade",
     shade_data_rows = TRUE,
     caption_fontsize = c(11, 11),
-    # body_fontsize = c(8, 9.6),
     body_fontsize = c(10, 12),
     arrayrulewidth_pt = 0.75,  # ~1px
     tabcolsep_pt = 0,
     caption_skip_pt = 0,
     caption_vspace_pt = 0,
-    caption_after_vspace_pt = -1,     # NEW: applied after caption block (use negative to reduce gap)
+    caption_after_vspace_pt = -1,
     escape_latex = TRUE,
     wrap_raw_block = TRUE,
     checkmarks = FALSE,
     col_align = NA,             # REQUIRED: e.g. "cc" or "clrrr"
-    col_widths_pct = NULL,      # OPTIONAL: integer vector, sums to 100
+    col_widths_pct = NULL,      # OPTIONAL: numeric vector, sums to 100
     cell_pad_em = 0.6,
     header_row_height_ex = 3.2,
-    row_extrarowheight_pt = 2
+    row_extrarowheight_pt = 2,
+    wrap_long_tokens = TRUE,
+    wrap_long_min_chars = 20,
+    wrap_long_every = 10
 ) {
   stopifnot(is.data.frame(df))
   if (ncol(df) < 1) stop("df must have at least 1 column.")
@@ -2037,8 +2178,7 @@ make_quarto_latex_table_2level <- function(
     }
   }
   
-  if (!is.numeric(caption_after_vspace_pt) || length(caption_after_vspace_pt) != 1 ||
-      is.na(caption_after_vspace_pt)) {
+  if (!is.numeric(caption_after_vspace_pt) || length(caption_after_vspace_pt) != 1 || is.na(caption_after_vspace_pt)) {
     stop("caption_after_vspace_pt must be a single numeric value (e.g., -4, 0, 2).")
   }
   
@@ -2058,6 +2198,18 @@ make_quarto_latex_table_2level <- function(
     stop("cell_pad_em must be a single non-negative number (e.g., 0.6).")
   }
   
+  if (!is.logical(wrap_long_tokens) || length(wrap_long_tokens) != 1 || is.na(wrap_long_tokens)) {
+    stop("wrap_long_tokens must be TRUE/FALSE.")
+  }
+  if (!is.numeric(wrap_long_min_chars) || length(wrap_long_min_chars) != 1 ||
+      is.na(wrap_long_min_chars) || wrap_long_min_chars < 1) {
+    stop("wrap_long_min_chars must be a single positive number (e.g., 20).")
+  }
+  if (!is.numeric(wrap_long_every) || length(wrap_long_every) != 1 ||
+      is.na(wrap_long_every) || wrap_long_every < 2) {
+    stop("wrap_long_every must be a single number >= 2 (e.g., 10).")
+  }
+  
   n <- ncol(df)
   rules_count <- n + 1
   
@@ -2071,12 +2223,13 @@ make_quarto_latex_table_2level <- function(
     stop("col_align must contain only 'l', 'c', 'r'.")
   }
   
+  fmt_num <- function(x) format(x, trim = TRUE, scientific = FALSE, digits = 15)
+  
   if (!is.null(col_widths_pct)) {
     if (length(col_widths_pct) != n) stop("col_widths_pct must have length ncol(df).")
     if (any(!is.finite(col_widths_pct)) || any(col_widths_pct <= 0)) stop("col_widths_pct must be positive numbers.")
-    if (abs(sum(col_widths_pct) - 100) > 1e-9) stop("col_widths_pct must sum to 100.")
-    if (any(abs(col_widths_pct - round(col_widths_pct)) > 1e-9)) stop("col_widths_pct must be integers.")
-    col_widths_pct <- as.integer(round(col_widths_pct))
+    if (abs(sum(col_widths_pct) - 100) > 1e-6) stop("col_widths_pct must sum to 100.")
+    col_widths_pct <- as.numeric(col_widths_pct)
   }
   
   escape_tex <- function(x) {
@@ -2098,32 +2251,60 @@ make_quarto_latex_table_2level <- function(
     })
   }
   
-  fmt_cell <- function(x) {
+  # --- robust LaTeX injection: literal "\" (ASCII 92) ---
+  latex_allowbreak <- paste0(intToUtf8(92), "allowbreak{}")
+  marker <- "\u0001AB\u0001"  # sentinel unlikely to appear in text
+  
+  add_allowbreaks_scalar <- function(s) {
+    s <- as.character(s)
+    if (is.na(s)) return("")
+    if (!wrap_long_tokens) return(s)
+    
+    # add breakpoints after common separators
+    s2 <- gsub("([/_\\-\\.:])", paste0("\\1", marker), s, perl = TRUE)
+    
+    # if still no spaces, add breakpoints every N chars (only for long tokens)
+    if (!grepl("\\s", s2, perl = TRUE)) {
+      raw_len <- nchar(gsub(marker, "", s2, fixed = TRUE))
+      if (raw_len >= wrap_long_min_chars) {
+        s2 <- gsub(
+          sprintf("(.{%d})", as.integer(wrap_long_every)),
+          paste0("\\1", marker),
+          s2,
+          perl = TRUE
+        )
+      }
+    }
+    s2
+  }
+  
+  fmt_cell_scalar <- function(x) {
     x_chr <- as.character(x)
-    x_chr[is.na(x_chr)] <- ""
+    if (is.na(x_chr)) x_chr <- ""
+    
     if (checkmarks && is_zero_one(x_chr)) {
       nx <- suppressWarnings(as.numeric(x_chr))
       return(if (nx == 1) "\\tick" else "\\cross")
     }
-    fmt(x_chr)
+    
+    x_chr <- add_allowbreaks_scalar(x_chr)
+    x_chr <- fmt(x_chr)
+    gsub(marker, latex_allowbreak, x_chr, fixed = TRUE)
   }
+  
+  fmt_cell <- function(x) vapply(x, fmt_cell_scalar, character(1))
   
   split_two_levels <- function(lbl) {
     lbl <- as.character(lbl)
     m <- regexec("^(.*)_(.*)$", lbl)
     r <- regmatches(lbl, m)[[1]]
-    if (length(r) == 3) {
-      list(group = r[2], sub = r[3])
-    } else {
-      list(group = "", sub = lbl)
-    }
+    if (length(r) == 3) list(group = r[2], sub = r[3]) else list(group = "", sub = lbl)
   }
   
   parts <- lapply(col_labels, split_two_levels)
   lvl1 <- vapply(parts, `[[`, character(1), "group")
   lvl2 <- vapply(parts, `[[`, character(1), "sub")
   
-  # --- width expressions (safe: no "*" in dimexpr) ---
   width_exprs <- if (is.null(col_widths_pct)) {
     rep(
       paste0(
@@ -2137,13 +2318,12 @@ make_quarto_latex_table_2level <- function(
     vapply(col_widths_pct, function(p) {
       pk <- p * rules_count
       paste0(
-        "\\dimexpr", p, "\\linewidth/100-",
-        pk, "\\arrayrulewidth/100\\relax"
+        "\\dimexpr", fmt_num(p), "\\linewidth/100-",
+        fmt_num(pk), "\\arrayrulewidth/100\\relax"
       )
     }, character(1))
   }
   
-  # --- padding that applies to ALL wrapped lines (leftskip/rightskip) ---
   pad_dim <- paste0(format(cell_pad_em, trim = TRUE, scientific = FALSE), "em")
   
   align_prefix <- function(ch) {
@@ -2177,7 +2357,6 @@ make_quarto_latex_table_2level <- function(
   }, character(1))
   colspec <- paste(colspec_parts, collapse = "|")
   
-  # --- header row 1 (group titles) ---
   rr <- rle(lvl1)
   spans <- rr$lengths
   groups <- rr$values
@@ -2187,11 +2366,7 @@ make_quarto_latex_table_2level <- function(
     span <- spans[i]
     mc_spec <- if (i == 1) "|c|" else "c|"
     
-    content <- if (nzchar(g)) {
-      paste0("\\bfseries ", g)
-    } else {
-      paste0("\\rule{0pt}{", header_row_height_ex, "ex}")
-    }
+    content <- if (nzchar(g)) paste0("\\bfseries ", g) else paste0("\\rule{0pt}{", header_row_height_ex, "ex}")
     
     paste0(
       "\\multicolumn{", span, "}{", mc_spec, "}{",
@@ -2202,7 +2377,6 @@ make_quarto_latex_table_2level <- function(
   }, character(1))
   header_row_1 <- paste0(paste(header1_cells, collapse = " & "), " \\\\\n")
   
-  # --- header row 2 ---
   header2_cells <- vapply(seq_len(n), function(i) {
     paste0(
       "\\cellcolor{", header_shade_name, "}",
@@ -2212,7 +2386,6 @@ make_quarto_latex_table_2level <- function(
   }, character(1))
   header_row_2 <- paste0(paste(header2_cells, collapse = " & "), " \\\\\n")
   
-  # --- body rows (shaded) ---
   df_chr <- as.data.frame(lapply(df, fmt_cell), stringsAsFactors = FALSE)
   row_prefix <- if (shade_data_rows) paste0("\\rowcolor{", data_shade_name, "}") else ""
   
