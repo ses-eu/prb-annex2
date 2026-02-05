@@ -1,3 +1,14 @@
+```{r chart_cap_er, include=FALSE}
+#| file: R/chart_level1_cap_er_nm.R
+#| out.width: "100%"
+```
+
+```{r chart_cap_trm, include=FALSE}
+#| file: R/chart_level1_cap_trm_nm.R
+#| out.width: "100%"
+```
+
+
 ```{=tex}
 \setlength{\fboxrule}{0pt} % Set the border width to 0pt (no border)
 \setlength{\fboxsep}{0pt} % Remove padding
@@ -59,19 +70,7 @@ env_conc1 <- get_prb_conclusions("NM findings.xlsx", "NM_findings_KEP", "NM_find
 
 ## Capacity (Network Manager - SES RP3 area)
 
-```{r chart_cap_er}
-#| file: R/chart_level1_cap_er_nm.R
-#| out.width: "52%"
-#| fig.align: "center"
-#| fig-pos: "H"
-```
-
-```{r chart_cap_trm}
-#| file: R/chart_level1_cap_trm_nm.R
-#| out.width: "52%"
-#| fig.align: "center"
-#| fig-pos: "H"
-```
+`r layout_2fig("chart_cap_er", "chart_cap_trm")`
 
 ```{r chart_cap_15m}
 #| file: R/chart_level1_cap_15m_nm.R

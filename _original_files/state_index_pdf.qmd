@@ -1198,7 +1198,7 @@ cat(make_quarto_latex_table_2level(
   df = data_prep,
   body_fontsize = c(9, 11),
   col_align = "lrrrrrrrrrr",
-  col_widths = c(20,rep(8,10)),
+  col_widths = c(20,rep(7,5), rep(9,5)),
   wrap_raw_block = FALSE,
   header_row_height_ex = 2.4,
   row_extrarowheight_pt = 2 
@@ -1457,8 +1457,6 @@ cat(make_quarto_latex_table(
 `\biggertext{Focus on regulatory result}`{=latex}
 
 `r if (params$year_report < 2022) "::: {.content-hidden}"`
-
-\needspace{2\baselineskip}
 
 **`r cef_level2_text$cef_txt_1_13[1,1]`**
 

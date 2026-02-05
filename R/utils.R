@@ -1814,7 +1814,7 @@ make_quarto_latex_table <- function(
     shade_data_rows = TRUE,
     caption_fontsize = c(11, 12),
     body_fontsize = c(10, 12),
-    arrayrulewidth_pt = 0.75,        # ~1px
+    arrayrulewidth_pt = 0.75,
     tabcolsep_pt = 0,
     caption_skip_pt = 0,
     caption_vspace_pt = 0,
@@ -1822,24 +1822,22 @@ make_quarto_latex_table <- function(
     escape_latex = TRUE,
     wrap_raw_block = TRUE,
     checkmarks = FALSE,              # FALSE/TRUE or integer column indices (e.g. c(2,3))
-    col_align = NA,                  # REQUIRED, e.g. "cc" or "clrrr"
-    cell_pad_em = 0.6,               # per-side padding
+    col_align = NA,                  # REQUIRED
+    cell_pad_em = 0.6,
     col_widths = NULL,               # NULL => equal widths; else numeric pct vector summing to 100
-    row_extrarowheight_pt = 2,       # adds vertical padding to header+body rows
-    bold_data_rows = integer(0),     # 1-based indices of data rows to make bold, e.g. c(1,2)
-    wrap_long_tokens = TRUE,         # NEW: allow wrapping of long tokens (no spaces)
-    wrap_long_min_chars = 20,        # NEW: only modify tokens longer than this
-    wrap_long_every = 10             # NEW: insert break opportunity every N chars for long no-space tokens
+    row_extrarowheight_pt = 2,
+    bold_data_rows = integer(0),
+    sloppy_table = TRUE,
+    emergencystretch_em = 2,
+    paginate = FALSE                 # NEW: TRUE => longtable with page breaks
 ) {
   stopifnot(is.data.frame(df))
   if (ncol(df) < 1) stop("df must have at least 1 column.")
   if (length(col_labels) != ncol(df)) stop("col_labels must have length ncol(df).")
   
   has_caption <- !(is.null(title) || (length(title) == 1 && isTRUE(is.na(title))))
-  if (has_caption) {
-    if (!is.character(title) || length(title) != 1) {
-      stop("title must be a single character string, or NA to omit the caption.")
-    }
+  if (has_caption && (!is.character(title) || length(title) != 1)) {
+    stop("title must be a single character string, or NA to omit the caption.")
   }
   
   if (!is.numeric(caption_after_vspace_pt) || length(caption_after_vspace_pt) != 1 ||
@@ -1859,22 +1857,10 @@ make_quarto_latex_table <- function(
     stop("shade_data_rows must be TRUE/FALSE.")
   }
   
-  if (!is.logical(wrap_long_tokens) || length(wrap_long_tokens) != 1 || is.na(wrap_long_tokens)) {
-    stop("wrap_long_tokens must be TRUE/FALSE.")
-  }
-  if (!is.numeric(wrap_long_min_chars) || length(wrap_long_min_chars) != 1 ||
-      is.na(wrap_long_min_chars) || wrap_long_min_chars < 1) {
-    stop("wrap_long_min_chars must be a single positive number (e.g., 20).")
-  }
-  if (!is.numeric(wrap_long_every) || length(wrap_long_every) != 1 ||
-      is.na(wrap_long_every) || wrap_long_every < 2) {
-    stop("wrap_long_every must be a single number >= 2 (e.g., 10).")
-  }
-  
   n <- ncol(df)
   
   if (length(col_align) != 1 || is.na(col_align)) {
-    stop("col_align is required. Example: 'cc' for 2 centered cols, or 'clrrr' for 5 cols.")
+    stop("col_align is required. Example: 'cc' or 'clrrr'.")
   }
   if (!is.character(col_align)) stop("col_align must be a single character string like 'clrrr'.")
   if (nchar(col_align) != n) stop(sprintf("col_align must have length %d (ncol(df)).", n))
@@ -1882,6 +1868,17 @@ make_quarto_latex_table <- function(
   
   if (!is.numeric(cell_pad_em) || length(cell_pad_em) != 1 || is.na(cell_pad_em) || cell_pad_em < 0) {
     stop("cell_pad_em must be a single non-negative number (e.g., 0.6).")
+  }
+  
+  if (!is.logical(sloppy_table) || length(sloppy_table) != 1 || is.na(sloppy_table)) {
+    stop("sloppy_table must be TRUE/FALSE.")
+  }
+  if (!is.numeric(emergencystretch_em) || length(emergencystretch_em) != 1 ||
+      is.na(emergencystretch_em) || emergencystretch_em < 0) {
+    stop("emergencystretch_em must be a single non-negative number (e.g., 2).")
+  }
+  if (!is.logical(paginate) || length(paginate) != 1 || is.na(paginate)) {
+    stop("paginate must be TRUE/FALSE.")
   }
   
   if (!is.null(col_widths)) {
@@ -1896,14 +1893,13 @@ make_quarto_latex_table <- function(
   }
   
   if (is.null(bold_data_rows)) bold_data_rows <- integer(0)
-  if (!is.numeric(bold_data_rows)) stop("bold_data_rows must be numeric/integer indices like c(1,2).")
+  if (!is.numeric(bold_data_rows)) stop("bold_data_rows must be numeric indices like c(1,2).")
   bold_data_rows <- unique(as.integer(bold_data_rows[is.finite(bold_data_rows)]))
   if (any(bold_data_rows <= 0)) stop("bold_data_rows must contain positive (1-based) indices only.")
   if (length(bold_data_rows) > 0 && nrow(df) > 0 && any(bold_data_rows > nrow(df))) {
     stop(sprintf("bold_data_rows contains indices > nrow(df) (%d).", nrow(df)))
   }
   
-  # --- checkmarks columns selection (supports legacy TRUE/FALSE) ---
   check_cols <- rep(FALSE, n)
   if (is.null(checkmarks) || (is.logical(checkmarks) && length(checkmarks) == 1 && !isTRUE(checkmarks))) {
     check_cols <- rep(FALSE, n)
@@ -1915,7 +1911,7 @@ make_quarto_latex_table <- function(
     if (any(idx > n)) stop(sprintf("checkmarks contains indices > ncol(df) (%d).", n))
     check_cols[idx] <- TRUE
   } else {
-    stop("checkmarks must be FALSE/TRUE or a numeric vector of column indices (e.g., c(2,3)).")
+    stop("checkmarks must be FALSE/TRUE or numeric column indices (e.g., c(2,3)).")
   }
   
   escape_tex <- function(x) {
@@ -1927,7 +1923,6 @@ make_quarto_latex_table <- function(
     x <- gsub("\\^", "\\\\textasciicircum{}", x, perl = TRUE)
     x
   }
-  
   fmt <- function(x) if (escape_latex) escape_tex(x) else as.character(x)
   
   is_zero_one <- function(x) {
@@ -1938,45 +1933,14 @@ make_quarto_latex_table <- function(
     })
   }
   
-  # --- robust LaTeX injection for allowbreak ---
-  latex_allowbreak <- paste0(intToUtf8(92), "allowbreak{}")
-  marker <- "\u0001AB\u0001"
-  
-  add_allowbreaks_scalar <- function(s) {
-    s <- as.character(s)
-    if (is.na(s)) return("")
-    if (!wrap_long_tokens) return(s)
-    
-    # allow breaks after common separators
-    s2 <- gsub("([/_\\-\\.:])", paste0("\\1", marker), s, perl = TRUE)
-    
-    # if still no spaces, add breaks every N chars (only for long tokens)
-    if (!grepl("\\s", s2, perl = TRUE)) {
-      raw_len <- nchar(gsub(marker, "", s2, fixed = TRUE))
-      if (raw_len >= wrap_long_min_chars) {
-        s2 <- gsub(
-          sprintf("(.{%d})", as.integer(wrap_long_every)),
-          paste0("\\1", marker),
-          s2,
-          perl = TRUE
-        )
-      }
-    }
-    s2
-  }
-  
   fmt_cell_scalar_for_col <- function(x, col_i) {
     x_chr <- as.character(x)
     if (is.na(x_chr)) x_chr <- ""
-    
     if (check_cols[col_i] && is_zero_one(x_chr)) {
       nx <- suppressWarnings(as.numeric(x_chr))
       return(if (nx == 1) "\\tick" else "\\cross")
     }
-    
-    x_chr <- add_allowbreaks_scalar(x_chr)
-    x_chr <- fmt(x_chr)
-    gsub(marker, latex_allowbreak, x_chr, fixed = TRUE)
+    fmt(x_chr)
   }
   
   excel_col_name <- function(i) {
@@ -2015,7 +1979,6 @@ make_quarto_latex_table <- function(
       }, character(1)),
       collapse = ""
     )
-    
     paste0(
       "\\makeatletter\n",
       "\\@ifundefined{tableW}{\\newlength{\\tableW}}{}\n",
@@ -2065,13 +2028,8 @@ make_quarto_latex_table <- function(
   colspec <- paste(colspec_parts, collapse = "|")
   
   header_cells <- paste0("\\bfseries ", fmt(col_labels))
-  header_row <- paste0(
-    "\\rowcolor{", header_shade_name, "}",
-    paste(header_cells, collapse = " & "),
-    " \\\\\n"
-  )
+  header_row <- paste0("\\rowcolor{", header_shade_name, "}", paste(header_cells, collapse = " & "), " \\\\\n")
   
-  # Apply formatting per cell per column (vector-safe)
   df_chr <- as.data.frame(
     lapply(seq_len(n), function(j) vapply(df[[j]], fmt_cell_scalar_for_col, character(1), col_i = j)),
     stringsAsFactors = FALSE
@@ -2085,9 +2043,7 @@ make_quarto_latex_table <- function(
     paste(
       vapply(seq_len(nrow(df_chr)), function(i) {
         row <- df_chr[i, , drop = TRUE]
-        if (i %in% bold_data_rows) {
-          row <- vapply(row, function(v) paste0("{\\bfseries ", v, "}"), character(1))
-        }
+        if (i %in% bold_data_rows) row <- vapply(row, function(v) paste0("{\\bfseries ", v, "}"), character(1))
         paste0(row_prefix, paste(row, collapse = " & "))
       }, character(1)),
       collapse = " \\\\\n\\hline\n"
@@ -2101,37 +2057,80 @@ make_quarto_latex_table <- function(
       "\\caption*{\\captionbar{{\\fontsize{", caption_fontsize[1], "}{", caption_fontsize[2],
       "}\\selectfont\\textbf{", fmt(title), "}}}",
       if (caption_vspace_pt != 0) paste0("\\vspace{", caption_vspace_pt, "pt}") else "",
-      "}\n\n"
+      "}\n"
     )
-  } else {
-    ""
-  }
+  } else ""
   
   after_caption_fix <- if (has_caption && caption_after_vspace_pt != 0) {
     paste0("\\vspace*{", format(caption_after_vspace_pt, trim = TRUE, scientific = FALSE), "pt}\n")
-  } else {
-    ""
-  }
+  } else ""
   
-  tex <- paste0(
-    "\\begin{table}[", placement, "]\n",
-    caption_block,
-    after_caption_fix,
-    "\\fontsize{", body_fontsize[1], "pt}{", body_fontsize[2], "pt}\\selectfont\n",
-    "\\arrayrulecolor{", chapblue_name, "}\n",
-    "\\setlength{\\arrayrulewidth}{", arrayrulewidth_pt, "pt}\n",
-    "\\setlength{\\tabcolsep}{", tabcolsep_pt, "pt}\n",
-    "\\setlength{\\extrarowheight}{", row_extrarowheight_pt, "pt}\n\n",
-    width_defs,
-    "\\begin{tabular}{@{}|", colspec, "|@{}}\n",
-    "\\hline\n",
-    header_row,
-    "\\hline\n",
-    body_rows,
-    "\\hline\n",
-    "\\end{tabular}\n",
-    "\\end{table}\n"
+  wrap_cmds <- paste0(
+    if (sloppy_table) "\\sloppy\n" else "",
+    "\\emergencystretch=", format(emergencystretch_em, trim = TRUE, scientific = FALSE), "em\n"
   )
+  
+  if (!paginate) {
+    tex <- paste0(
+      "\\begin{table}[", placement, "]\n",
+      caption_block,
+      after_caption_fix,
+      "\\fontsize{", body_fontsize[1], "pt}{", body_fontsize[2], "pt}\\selectfont\n",
+      "\\arrayrulecolor{", chapblue_name, "}\n",
+      "\\setlength{\\arrayrulewidth}{", arrayrulewidth_pt, "pt}\n",
+      "\\setlength{\\tabcolsep}{", tabcolsep_pt, "pt}\n",
+      "\\setlength{\\extrarowheight}{", row_extrarowheight_pt, "pt}\n",
+      wrap_cmds, "\n",
+      width_defs,
+      "\\begin{tabular}{@{}|", colspec, "|@{}}\n",
+      "\\hline\n",
+      header_row,
+      "\\hline\n",
+      body_rows,
+      "\\hline\n",
+      "\\end{tabular}\n",
+      "\\end{table}\n"
+    )
+  } else {
+    caption_line <- if (has_caption) paste0(
+      "\\captionsetup{skip=", caption_skip_pt, "pt}\n",
+      "\\caption*{\\captionbar{{\\fontsize{", caption_fontsize[1], "}{", caption_fontsize[2],
+      "}\\selectfont\\textbf{", fmt(title), "}}}",
+      if (caption_vspace_pt != 0) paste0("\\vspace{", caption_vspace_pt, "pt}") else "",
+      "}"
+    ) else ""
+    
+    caption_break <- if (has_caption) {
+      if (caption_after_vspace_pt != 0) {
+        paste0("\\\\[", format(caption_after_vspace_pt, trim = TRUE, scientific = FALSE), "pt]\n")
+      } else {
+        "\\\\\n"
+      }
+    } else ""
+    
+    tex <- paste0(
+      "\\fontsize{", body_fontsize[1], "pt}{", body_fontsize[2], "pt}\\selectfont\n",
+      "\\arrayrulecolor{", chapblue_name, "}\n",
+      "\\setlength{\\arrayrulewidth}{", arrayrulewidth_pt, "pt}\n",
+      "\\setlength{\\tabcolsep}{", tabcolsep_pt, "pt}\n",
+      "\\setlength{\\extrarowheight}{", row_extrarowheight_pt, "pt}\n",
+      wrap_cmds, "\n",
+      width_defs,
+      "\\begin{longtable}{@{}|", colspec, "|@{}}\n",
+      if (has_caption) paste0(caption_line, caption_break) else "",
+      "\\hline\n",
+      header_row,
+      "\\hline\n",
+      "\\endfirsthead\n",
+      "\\hline\n",
+      header_row,
+      "\\hline\n",
+      "\\endhead\n",
+      body_rows,
+      "\\hline\n",
+      "\\end{longtable}\n"
+    )
+  }
   
   if (!wrap_raw_block) return(tex)
   paste0("```{=latex}\n", tex, "```\n")
@@ -2150,7 +2149,7 @@ make_quarto_latex_table_2level <- function(
     shade_data_rows = TRUE,
     caption_fontsize = c(11, 11),
     body_fontsize = c(10, 12),
-    arrayrulewidth_pt = 0.75,  # ~1px
+    arrayrulewidth_pt = 0.75,
     tabcolsep_pt = 0,
     caption_skip_pt = 0,
     caption_vspace_pt = 0,
@@ -2158,24 +2157,22 @@ make_quarto_latex_table_2level <- function(
     escape_latex = TRUE,
     wrap_raw_block = TRUE,
     checkmarks = FALSE,
-    col_align = NA,             # REQUIRED: e.g. "cc" or "clrrr"
-    col_widths_pct = NULL,      # OPTIONAL: numeric vector, sums to 100
+    col_align = NA,
+    col_widths_pct = NULL,
     cell_pad_em = 0.6,
     header_row_height_ex = 3.2,
     row_extrarowheight_pt = 2,
-    wrap_long_tokens = TRUE,
-    wrap_long_min_chars = 20,
-    wrap_long_every = 10
+    sloppy_table = TRUE,
+    emergencystretch_em = 2,
+    paginate = FALSE              # NEW
 ) {
   stopifnot(is.data.frame(df))
   if (ncol(df) < 1) stop("df must have at least 1 column.")
   if (length(col_labels) != ncol(df)) stop("col_labels must have length ncol(df).")
   
   has_caption <- !(is.null(title) || (length(title) == 1 && isTRUE(is.na(title))))
-  if (has_caption) {
-    if (!is.character(title) || length(title) != 1) {
-      stop("title must be a single character string, or NA to omit the caption.")
-    }
+  if (has_caption && (!is.character(title) || length(title) != 1)) {
+    stop("title must be a single character string, or NA to omit the caption.")
   }
   
   if (!is.numeric(caption_after_vspace_pt) || length(caption_after_vspace_pt) != 1 || is.na(caption_after_vspace_pt)) {
@@ -2198,16 +2195,14 @@ make_quarto_latex_table_2level <- function(
     stop("cell_pad_em must be a single non-negative number (e.g., 0.6).")
   }
   
-  if (!is.logical(wrap_long_tokens) || length(wrap_long_tokens) != 1 || is.na(wrap_long_tokens)) {
-    stop("wrap_long_tokens must be TRUE/FALSE.")
+  if (!is.logical(sloppy_table) || length(sloppy_table) != 1 || is.na(sloppy_table)) {
+    stop("sloppy_table must be TRUE/FALSE.")
   }
-  if (!is.numeric(wrap_long_min_chars) || length(wrap_long_min_chars) != 1 ||
-      is.na(wrap_long_min_chars) || wrap_long_min_chars < 1) {
-    stop("wrap_long_min_chars must be a single positive number (e.g., 20).")
+  if (!is.numeric(emergencystretch_em) || length(emergencystretch_em) != 1 || is.na(emergencystretch_em) || emergencystretch_em < 0) {
+    stop("emergencystretch_em must be a single non-negative number (e.g., 2).")
   }
-  if (!is.numeric(wrap_long_every) || length(wrap_long_every) != 1 ||
-      is.na(wrap_long_every) || wrap_long_every < 2) {
-    stop("wrap_long_every must be a single number >= 2 (e.g., 10).")
+  if (!is.logical(paginate) || length(paginate) != 1 || is.na(paginate)) {
+    stop("paginate must be TRUE/FALSE.")
   }
   
   n <- ncol(df)
@@ -2216,16 +2211,12 @@ make_quarto_latex_table_2level <- function(
   if (is.na(col_align) || !nzchar(col_align)) {
     stop("col_align is required (e.g. 'cc' or 'clrrr') and must have length ncol(df).")
   }
-  if (nchar(col_align) != n) {
-    stop(sprintf("col_align must have %d characters (one per column).", n))
-  }
-  if (!grepl(sprintf("^[lcr]{%d}$", n), col_align)) {
-    stop("col_align must contain only 'l', 'c', 'r'.")
-  }
+  if (nchar(col_align) != n) stop(sprintf("col_align must have %d characters.", n))
+  if (!grepl(sprintf("^[lcr]{%d}$", n), col_align)) stop("col_align must contain only 'l', 'c', 'r'.")
   
   fmt_num <- function(x) format(x, trim = TRUE, scientific = FALSE, digits = 15)
   
-  if (!is.null(col_widths_pct)) {
+  if (!is.null(col_widths_pct) ) {
     if (length(col_widths_pct) != n) stop("col_widths_pct must have length ncol(df).")
     if (any(!is.finite(col_widths_pct)) || any(col_widths_pct <= 0)) stop("col_widths_pct must be positive numbers.")
     if (abs(sum(col_widths_pct) - 100) > 1e-6) stop("col_widths_pct must sum to 100.")
@@ -2251,48 +2242,15 @@ make_quarto_latex_table_2level <- function(
     })
   }
   
-  # --- robust LaTeX injection: literal "\" (ASCII 92) ---
-  latex_allowbreak <- paste0(intToUtf8(92), "allowbreak{}")
-  marker <- "\u0001AB\u0001"  # sentinel unlikely to appear in text
-  
-  add_allowbreaks_scalar <- function(s) {
-    s <- as.character(s)
-    if (is.na(s)) return("")
-    if (!wrap_long_tokens) return(s)
-    
-    # add breakpoints after common separators
-    s2 <- gsub("([/_\\-\\.:])", paste0("\\1", marker), s, perl = TRUE)
-    
-    # if still no spaces, add breakpoints every N chars (only for long tokens)
-    if (!grepl("\\s", s2, perl = TRUE)) {
-      raw_len <- nchar(gsub(marker, "", s2, fixed = TRUE))
-      if (raw_len >= wrap_long_min_chars) {
-        s2 <- gsub(
-          sprintf("(.{%d})", as.integer(wrap_long_every)),
-          paste0("\\1", marker),
-          s2,
-          perl = TRUE
-        )
-      }
-    }
-    s2
-  }
-  
-  fmt_cell_scalar <- function(x) {
+  fmt_cell <- function(x) {
     x_chr <- as.character(x)
-    if (is.na(x_chr)) x_chr <- ""
-    
+    x_chr[is.na(x_chr)] <- ""
     if (checkmarks && is_zero_one(x_chr)) {
       nx <- suppressWarnings(as.numeric(x_chr))
       return(if (nx == 1) "\\tick" else "\\cross")
     }
-    
-    x_chr <- add_allowbreaks_scalar(x_chr)
-    x_chr <- fmt(x_chr)
-    gsub(marker, latex_allowbreak, x_chr, fixed = TRUE)
+    fmt(x_chr)
   }
-  
-  fmt_cell <- function(x) vapply(x, fmt_cell_scalar, character(1))
   
   split_two_levels <- function(lbl) {
     lbl <- as.character(lbl)
@@ -2306,21 +2264,11 @@ make_quarto_latex_table_2level <- function(
   lvl2 <- vapply(parts, `[[`, character(1), "sub")
   
   width_exprs <- if (is.null(col_widths_pct)) {
-    rep(
-      paste0(
-        "\\dimexpr\\linewidth/", n,
-        "-", rules_count, "\\arrayrulewidth/", n,
-        "\\relax"
-      ),
-      n
-    )
+    rep(paste0("\\dimexpr\\linewidth/", n, "-", rules_count, "\\arrayrulewidth/", n, "\\relax"), n)
   } else {
     vapply(col_widths_pct, function(p) {
       pk <- p * rules_count
-      paste0(
-        "\\dimexpr", fmt_num(p), "\\linewidth/100-",
-        fmt_num(pk), "\\arrayrulewidth/100\\relax"
-      )
+      paste0("\\dimexpr", fmt_num(p), "\\linewidth/100-", fmt_num(pk), "\\arrayrulewidth/100\\relax")
     }, character(1))
   }
   
@@ -2329,27 +2277,15 @@ make_quarto_latex_table_2level <- function(
   align_prefix <- function(ch) {
     base <- "\\setlength{\\parindent}{0pt}\\setlength{\\parfillskip}{0pt}"
     if (ch == "l") {
-      return(paste0(
-        ">{", base,
-        "\\setlength{\\leftskip}{", pad_dim, "}",
-        "\\setlength{\\rightskip}{", pad_dim, " plus 1fil}",
-        "\\arraybackslash}"
-      ))
+      return(paste0(">{", base, "\\setlength{\\leftskip}{", pad_dim, "}",
+                    "\\setlength{\\rightskip}{", pad_dim, " plus 1fil}", "\\arraybackslash}"))
     }
     if (ch == "r") {
-      return(paste0(
-        ">{", base,
-        "\\setlength{\\leftskip}{", pad_dim, " plus 1fil}",
-        "\\setlength{\\rightskip}{", pad_dim, "}",
-        "\\arraybackslash}"
-      ))
+      return(paste0(">{", base, "\\setlength{\\leftskip}{", pad_dim, " plus 1fil}",
+                    "\\setlength{\\rightskip}{", pad_dim, "}", "\\arraybackslash}"))
     }
-    paste0(
-      ">{", base,
-      "\\setlength{\\leftskip}{", pad_dim, " plus 1fil}",
-      "\\setlength{\\rightskip}{", pad_dim, " plus 1fil}",
-      "\\arraybackslash}"
-    )
+    paste0(">{", base, "\\setlength{\\leftskip}{", pad_dim, " plus 1fil}",
+           "\\setlength{\\rightskip}{", pad_dim, " plus 1fil}", "\\arraybackslash}")
   }
   
   colspec_parts <- vapply(seq_len(n), function(i) {
@@ -2365,49 +2301,30 @@ make_quarto_latex_table_2level <- function(
     g <- fmt(groups[i])
     span <- spans[i]
     mc_spec <- if (i == 1) "|c|" else "c|"
-    
     content <- if (nzchar(g)) paste0("\\bfseries ", g) else paste0("\\rule{0pt}{", header_row_height_ex, "ex}")
-    
-    paste0(
-      "\\multicolumn{", span, "}{", mc_spec, "}{",
-      "\\cellcolor{", header_shade_name, "}",
-      content,
-      "}"
-    )
+    paste0("\\multicolumn{", span, "}{", mc_spec, "}{\\cellcolor{", header_shade_name, "}", content, "}")
   }, character(1))
   header_row_1 <- paste0(paste(header1_cells, collapse = " & "), " \\\\\n")
   
   header2_cells <- vapply(seq_len(n), function(i) {
-    paste0(
-      "\\cellcolor{", header_shade_name, "}",
-      "\\rule{0pt}{", header_row_height_ex, "ex}",
-      "\\bfseries ", fmt(lvl2[i])
-    )
+    paste0("\\cellcolor{", header_shade_name, "}",
+           "\\rule{0pt}{", header_row_height_ex, "ex}",
+           "\\bfseries ", fmt(lvl2[i]))
   }, character(1))
   header_row_2 <- paste0(paste(header2_cells, collapse = " & "), " \\\\\n")
   
   df_chr <- as.data.frame(lapply(df, fmt_cell), stringsAsFactors = FALSE)
   row_prefix <- if (shade_data_rows) paste0("\\rowcolor{", data_shade_name, "}") else ""
   
-  body_rows <- if (nrow(df_chr) == 0) {
-    ""
-  } else {
-    paste(
-      apply(df_chr, 1, function(row) paste0(row_prefix, paste(row, collapse = " & "))),
-      collapse = " \\\\\n\\hline\n"
-    )
-  }
+  body_rows <- if (nrow(df_chr) == 0) "" else paste(
+    apply(df_chr, 1, function(row) paste0(row_prefix, paste(row, collapse = " & "))),
+    collapse = " \\\\\n\\hline\n"
+  )
   if (nzchar(body_rows)) body_rows <- paste0(body_rows, " \\\\\n")
   
   extra_rowheight_cmd <- if (row_extrarowheight_pt > 0) {
-    paste0(
-      "\\setlength{\\extrarowheight}{",
-      format(row_extrarowheight_pt, trim = TRUE, scientific = FALSE),
-      "pt}\n"
-    )
-  } else {
-    ""
-  }
+    paste0("\\setlength{\\extrarowheight}{", format(row_extrarowheight_pt, trim = TRUE, scientific = FALSE), "pt}\n")
+  } else ""
   
   caption_block <- if (has_caption) {
     paste0(
@@ -2415,38 +2332,84 @@ make_quarto_latex_table_2level <- function(
       "\\caption*{\\captionbar{{\\fontsize{", caption_fontsize[1], "}{", caption_fontsize[2],
       "}\\selectfont\\textbf{", fmt(title), "}}}",
       if (caption_vspace_pt != 0) paste0("\\vspace{", caption_vspace_pt, "pt}") else "",
-      "}\n\n"
+      "}\n"
     )
-  } else {
-    ""
-  }
+  } else ""
   
   after_caption_fix <- if (has_caption && caption_after_vspace_pt != 0) {
     paste0("\\vspace*{", format(caption_after_vspace_pt, trim = TRUE, scientific = FALSE), "pt}\n")
-  } else {
-    ""
-  }
+  } else ""
   
-  tex <- paste0(
-    "\\begin{table}[", placement, "]\n",
-    caption_block,
-    after_caption_fix,
-    "\\fontsize{", body_fontsize[1], "pt}{", body_fontsize[2], "pt}\\selectfont\n",
-    "\\arrayrulecolor{", chapblue_name, "}\n",
-    "\\setlength{\\arrayrulewidth}{", arrayrulewidth_pt, "pt}\n",
-    "\\setlength{\\tabcolsep}{", tabcolsep_pt, "pt}\n",
-    extra_rowheight_cmd, "\n",
-    "\\begin{tabular}{@{}|", colspec, "|@{}}\n",
-    "\\hline\n",
-    header_row_1,
-    "\\hline\n",
-    header_row_2,
-    "\\hline\n",
-    body_rows,
-    "\\hline\n",
-    "\\end{tabular}\n",
-    "\\end{table}\n"
+  wrap_cmds <- paste0(
+    if (sloppy_table) "\\sloppy\n" else "",
+    "\\emergencystretch=", format(emergencystretch_em, trim = TRUE, scientific = FALSE), "em\n"
   )
+  
+  if (!paginate) {
+    tex <- paste0(
+      "\\begin{table}[", placement, "]\n",
+      caption_block,
+      after_caption_fix,
+      "\\fontsize{", body_fontsize[1], "pt}{", body_fontsize[2], "pt}\\selectfont\n",
+      "\\arrayrulecolor{", chapblue_name, "}\n",
+      "\\setlength{\\arrayrulewidth}{", arrayrulewidth_pt, "pt}\n",
+      "\\setlength{\\tabcolsep}{", tabcolsep_pt, "pt}\n",
+      extra_rowheight_cmd,
+      wrap_cmds, "\n",
+      "\\begin{tabular}{@{}|", colspec, "|@{}}\n",
+      "\\hline\n",
+      header_row_1,
+      "\\hline\n",
+      header_row_2,
+      "\\hline\n",
+      body_rows,
+      "\\hline\n",
+      "\\end{tabular}\n",
+      "\\end{table}\n"
+    )
+  } else {
+    caption_line <- if (has_caption) paste0(
+      "\\captionsetup{skip=", caption_skip_pt, "pt}\n",
+      "\\caption*{\\captionbar{{\\fontsize{", caption_fontsize[1], "}{", caption_fontsize[2],
+      "}\\selectfont\\textbf{", fmt(title), "}}}",
+      if (caption_vspace_pt != 0) paste0("\\vspace{", caption_vspace_pt, "pt}") else "",
+      "}"
+    ) else ""
+    
+    caption_break <- if (has_caption) {
+      if (caption_after_vspace_pt != 0) {
+        paste0("\\\\[", format(caption_after_vspace_pt, trim = TRUE, scientific = FALSE), "pt]\n")
+      } else {
+        "\\\\\n"
+      }
+    } else ""
+    
+    tex <- paste0(
+      "\\fontsize{", body_fontsize[1], "pt}{", body_fontsize[2], "pt}\\selectfont\n",
+      "\\arrayrulecolor{", chapblue_name, "}\n",
+      "\\setlength{\\arrayrulewidth}{", arrayrulewidth_pt, "pt}\n",
+      "\\setlength{\\tabcolsep}{", tabcolsep_pt, "pt}\n",
+      extra_rowheight_cmd,
+      wrap_cmds, "\n",
+      "\\begin{longtable}{@{}|", colspec, "|@{}}\n",
+      if (has_caption) paste0(caption_line, caption_break) else "",
+      "\\hline\n",
+      header_row_1,
+      "\\hline\n",
+      header_row_2,
+      "\\hline\n",
+      "\\endfirsthead\n",
+      "\\hline\n",
+      header_row_1,
+      "\\hline\n",
+      header_row_2,
+      "\\hline\n",
+      "\\endhead\n",
+      body_rows,
+      "\\hline\n",
+      "\\end{longtable}\n"
+    )
+  }
   
   if (!wrap_raw_block) return(tex)
   paste0("```{=latex}\n", tex, "```\n")

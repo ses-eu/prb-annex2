@@ -66,6 +66,18 @@ if (country == "SES RP3") {
     )
   }
   
+  if (year_report == 2024) {
+    pagebreak <- "\n\n```{=tex}\n\\newpage\n```\n\n"
+    needle <- "**SMI 2023-2025**"
+    
+    saf_smi_text <- gsub(
+      needle,
+      paste0(pagebreak, needle),
+      saf_smi_text,
+      fixed = TRUE
+    )
+  }
+  
   ## Quality reporting
   saf_qr_text_df <- saf_text_ses %>% 
     filter(topic == "Quality reporting" & year == year_report) %>% 

@@ -432,9 +432,10 @@ cat(make_quarto_latex_table_2level(
 cat(make_quarto_latex_table_2level(
   title = paste0("Rate of SMI with ANS contribution per 100,000 flight hours"),
   df = data_prep,
-  body_fontsize = c(8, 9.6),
   col_align = "llrrrrrrrrrr",
-  col_widths = c(3,17,rep(8,10)),
+  col_widths = c(4,11,rep(8.5,10)),
+  body_fontsize = c(8, 10),
+  cell_pad_em = 0.3,
   wrap_raw_block = FALSE,
   header_row_height_ex = 2.4,
   row_extrarowheight_pt = 2 
@@ -455,9 +456,10 @@ cat(make_quarto_latex_table_2level(
 cat(make_quarto_latex_table_2level(
   title = NA,
   df = data_prep,
-  body_fontsize = c(8, 9.6),
   col_align = "llrrrrrrrrrr",
-  col_widths = c(3,17,rep(8,10)),
+  col_widths = c(4,11,rep(8.5,10)),
+  body_fontsize = c(8, 10),
+  cell_pad_em = 0.3,
   wrap_raw_block = FALSE,
   header_row_height_ex = 2.4,
   row_extrarowheight_pt = 2 

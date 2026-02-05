@@ -221,6 +221,8 @@ cat(make_quarto_latex_table_2level(
   df = data_prep,
   col_align = "llrrrrrrrrrr",
   col_widths = c(3,12,rep(8.5,10)),
+  body_fontsize = c(8, 10),
+  cell_pad_em = 0.3,
   wrap_raw_block = FALSE,
   header_row_height_ex = 2.4,
   row_extrarowheight_pt = 2 
@@ -243,6 +245,8 @@ cat(make_quarto_latex_table_2level(
   df = data_prep,
   col_align = "llrrrrrrrrrr",
   col_widths = c(3,12,rep(8.5,10)),
+  body_fontsize = c(8, 10),
+  cell_pad_em = 0.3,
   wrap_raw_block = FALSE,
   header_row_height_ex = 2.4,
   row_extrarowheight_pt = 2 
