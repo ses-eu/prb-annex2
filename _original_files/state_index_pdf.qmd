@@ -744,7 +744,8 @@ cat(make_quarto_latex_table(
   title = paste0("Rate of RIs per 100,000 airport movements - ",  country),
   df = data_prep,
   col_align = "clrrr",
-  col_widths = c(6, 27, 67/3, 67/3, 67/3)
+  col_widths = c(6, 27, 67/3, 67/3, 67/3),
+  paginate = (country == "France")
 ))
 ```
 
@@ -811,6 +812,7 @@ cat(make_quarto_latex_table_2level(
   wrap_raw_block = FALSE,
   header_row_height_ex = 2.4,
   row_extrarowheight_pt = 2 
+  
 ))
 ```
 
@@ -944,7 +946,8 @@ cat(make_quarto_latex_table_2level(
   col_widths = c(10,rep(90/15,15)),
   wrap_raw_block = FALSE,
   header_row_height_ex = 2.4,
-  row_extrarowheight_pt = 2 
+  row_extrarowheight_pt = 2,
+  paginate = (country == "France") 
 ))
 ```
 
@@ -1201,7 +1204,8 @@ cat(make_quarto_latex_table_2level(
   col_widths = c(20,rep(7,5), rep(9,5)),
   wrap_raw_block = FALSE,
   header_row_height_ex = 2.4,
-  row_extrarowheight_pt = 2 
+  row_extrarowheight_pt = 2,
+  paginate = (country == "France") 
 ))
 ```
 
@@ -1225,7 +1229,8 @@ cat(make_quarto_latex_table_2level(
   col_widths = c(20,rep(8,10)),
   wrap_raw_block = FALSE,
   header_row_height_ex = 2.4,
-  row_extrarowheight_pt = 2 
+  row_extrarowheight_pt = 2,
+  paginate = (country == "France") 
 ))
 ```
 
