@@ -16,7 +16,7 @@ format:
     fig-pos: 'H'
     keep-tex: true
     toc: true
-    toc-depth: 3 
+    toc-depth: 2 
     lof: false
     fontsize: 12pt
     # fig-format: "pdf"
@@ -40,6 +40,8 @@ format:
       
           \usepackage{xurl}      % better URL/word breaking
           \usepackage[table]{xcolor}  % <-- provides \arrayrulecolor via colortbl
+          
+          \setcounter{tocdepth}{1} % (LaTeX: chapters+sections only)
 
           % --- Heading fonts/colors (KOMA-Script; no titlesec) ---
           \definecolor{CHAPBLUE}{HTML}{0050A0}
@@ -47,6 +49,11 @@ format:
           \definecolor{SUBSECBLUE}{HTML}{7D9FE0}
           \definecolor{HeaderShade}{HTML}{DDE6F7}
           \definecolor{DataShade}{HTML}{FFFFFF}
+          
+          % ---- for bulleted lists, remove indent
+          \usepackage{enumitem}
+          \setlist[itemize,1]{leftmargin=\parindent,labelsep=0.5em}
+          \setlist[itemize,1]{leftmargin=\dimexpr\parindent+0.89em\relax,labelsep=0.5em}    
           
           % ---- for latex tables
           \usepackage{caption}
@@ -314,9 +321,9 @@ format:
           
  
 book:
-  title: "Performance Review Body"
+  title: "Performance Review Board"
   subtitle: "Monitoring Report" 
-  author: "{{< var doc.country >}} - {{< var doc.year_report >}}"
+  author: "{{< var doc.country >}} - {{< var doc.year_folder >}}"
   chapters:
     - index.qmd
 

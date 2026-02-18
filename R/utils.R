@@ -1398,7 +1398,21 @@ replace_links <- function(filename) {
 
 }
 
+
 ## get PRB conclusions  ----
+as_markdown_bullets <- function(x) {
+  # Split on 2+ newlines (blank-line separated paragraphs)
+  items <- strsplit(x, "\\n{2,}", perl = TRUE)[[1]]
+  items <- trimws(items)
+  items <- items[nzchar(items)]
+  
+  # Remove leading unicode bullet if present
+  items <- sub("^\\s*[▪•·]\\s*", "", items)
+  
+  # Emit Markdown bullets with a blank line between items
+  paste0("- ", items, collapse = "\n\n")
+}
+
 get_prb_conclusions <- function(filename, kpi, table) {
   
   if (country == 'Network Manager') {
@@ -1418,7 +1432,8 @@ get_prb_conclusions <- function(filename, kpi, table) {
   
   if (knitr::is_latex_output()) {
     prb_conc <- prb_conc %>%
-      str_replace_all(c('▪' = '\\\\textbullet\\\\quad ', '%' = '\\\\%'))  # Escape `%` for LaTeX
+      # str_replace_all(c('▪' = '\\\\textbullet\\\\quad ', '%' = '\\\\%'))  # Escape `%` for LaTeX
+      as_markdown_bullets
   }
   
   return(prb_conc)

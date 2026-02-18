@@ -175,6 +175,8 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 \needspace{3\baselineskip}
 
+`r if (year_folder == 'rp3') "::: {.content-hidden}"`
+
 # SAFETY - `r toupper(params$country)`
 
 ## PRB monitoring
@@ -185,7 +187,7 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 ## Effectiveness of Safety Management (EoSM) (KPI#1)
 
-```{r chart_saf_eosm, options = (doclevel=c("level2"))}
+```{r chart_saf_eosm, options = (doclevel=c("level2")), eval=(year_folder != 'rp3')}
 #| file: R/chart_level1_saf.R
 #| out.width: "62%"
 #| fig.align: "center"
@@ -206,13 +208,13 @@ cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_
 
 `r layout_2fig("chart_saf_smi", "chart_level2_saf_smi_year_report")`
 
-```{r table_level2_saf_smi_ansp_pdf1}
+```{r table_level2_saf_smi_ansp_pdf1, eval=(year_folder != 'rp3')}
 #| file: R/table_level2_saf_smi_ansp_pdf1.R
 #| include: false
 ```
 
 
-``` {r}
+``` {r, eval=(year_folder != 'rp3')}
 #| echo: false
 #| results: asis
  
@@ -231,12 +233,12 @@ cat(make_quarto_latex_table_2level(
 
 \vspace{-20pt}
 
-```{r table_level2_saf_smi_ansp_pdf2}
+```{r table_level2_saf_smi_ansp_pdf2, eval=(year_folder != 'rp3')}
 #| file: R/table_level2_saf_smi_ansp_pdf2.R
 #| include: false
 ```
 
-``` {r}
+``` {r, eval=(year_folder != 'rp3')}
 #| echo: false
 #| results: asis
  
@@ -290,7 +292,7 @@ cat(make_quarto_latex_table_2level(
 
 `r layout_2fig("chart_cap_atco", "chart_cap_atco_acc")`
 
-```{r chart_cap_sector_opening}
+```{r chart_cap_sector_opening, eval=(year_folder != 'rp3')}
 #| file: R/chart_level2_cap_sector_opening.R
 #| out.width: "52%"
 #| fig.align: "center"
@@ -310,19 +312,19 @@ cat(make_quarto_latex_table_2level(
 ## Total costs
 
 
-```{r chart_cef_cost_muac, options = (cz=c("1", "enroute"))}
+```{r chart_cef_cost_muac, options = (cz=c("1", "enroute")), eval=(year_folder != 'rp3')}
 #| file: R/chart_level2_cef_cost.R
 #| out.width: "52%"
 #| fig.align: "center"
 #| fig-pos: "H"
 ```
 
-```{r table_cef_cost_muac, options = (cz=c("1", "enroute"))}
+```{r table_cef_cost_muac, options = (cz=c("1", "enroute")), eval=(year_folder != 'rp3')}
 #| file: R/table_level2_cef_cost.R
 #| include: false
 ```
 
-``` {r}
+``` {r, eval=(year_folder != 'rp3')}
 #| echo: false
 #| results: asis
  
@@ -335,3 +337,4 @@ cat(make_quarto_latex_table(
 ))
 ```
 
+`r if (year_folder == 'rp3') ":::"`
