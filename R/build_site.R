@@ -19,7 +19,7 @@ for (i in 2024) {  # set your year(s) report here
   # rm(list = ls())
   if (i == 'rp3') {year_report <- 2024} else {year_report <- i}
   year_folder <- i 
-  out_format <- 'html' # set your output format here: 'pdf' or 'web'
+  out_format <- 'web' # set your output format here: 'pdf' or 'web'
   data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/data_for_web/'
   data_folder_a2 <- paste0(data_folder, "monitoring_files/", year_report, "/")
  
