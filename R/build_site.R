@@ -19,7 +19,7 @@ for (i in 2024) {  # set your year(s) report here
   # rm(list = ls())
   if (i == 'rp3') {year_report <- 2024} else {year_report <- i}
   year_folder <- i 
-  out_format <- 'pdf' # set your output format here: 'pdf' or 'web'
+  out_format <- 'html' # set your output format here: 'pdf' or 'web'
   data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/data_for_web/'
   data_folder_a2 <- paste0(data_folder, "monitoring_files/", year_report, "/")
  
@@ -28,7 +28,7 @@ for (i in 2024) {  # set your year(s) report here
     
   # set test_check to TRUE to create test pages with hyperlinks functional within the test site (defined in parameters script)
   # set test_check to FALSE to create production-ready pages with hyperlinks functional within the sesperformance.eu site
-  test_check <- TRUE       
+  test_check <- FALSE       
   
   ## set all_states to FALSE to build only one state site, TRUE for all
   all_states <- FALSE
@@ -43,7 +43,7 @@ for (i in 2024) {  # set your year(s) report here
   state_list_prod <- state_list
   # state_list_prod <- c(state_list, "Home")  #add home to list
   # state_list_prod <- setdiff(state_list_prod, "Network Manager")  #remove state
-  # states_from <- c(11:32) # 1st number is the index of 1st state from which you want to generate
+  # states_from <- c(1:10) # 1st number is the index of 1st state from which you want to generate
   # state_list_prod <- state_list_prod[states_from]
   # state_list_prod <- list('Bulgaria',
   #                         'Croatia',
@@ -55,7 +55,7 @@ for (i in 2024) {  # set your year(s) report here
   #                         'Network Manager')
   
   if (!all_states) {
-    state_list_prod <- 'SES RP3' # set your one country/stakeholder here (Home for home page)
+    state_list_prod <- 'Home' # set your one country/stakeholder here (Home for home page)
   } 
   
 # build state pages ----
@@ -136,7 +136,7 @@ for (i in 2024) {  # set your year(s) report here
       dir.create(pdf_download_dir, recursive = TRUE)  
     }
     
-    purrr::walk(pdf_folders, ~ file.copy(here("_book", "Performance-Review-Body.pdf"),
+    purrr::walk(pdf_folders, ~ file.copy(here("_book", "Performance-Review-Board.pdf"),
                                             here(.x, paste0("PRB-Annual-Monitoring-Report_",
                                                                     country,
                                                                     "_",

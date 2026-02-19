@@ -48,6 +48,15 @@ if (country == "SES RP3") {
     )
   }
   
+  # exception for 2024 ses report
+  if(country == 'SES RP3' & year_folder == 2024){
+    saf_ri_text <- saf_ri_text %>% 
+      str_replace_all(fixed('**RI with Safety Impact by Airport**'),
+                      fixed('\\newpage\\\
+                            **RI with Safety Impact by Airport**'))
+      
+  }
+  
   ## smi
   saf_smi_text_df <- saf_text_ses %>% 
     filter(topic == "SMI" & year == year_report) %>% 
