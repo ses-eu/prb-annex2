@@ -20,7 +20,7 @@ for (i in 2024) {  # set your year(s) report here
   if (i == 'rp3') {year_report <- 2024} else {year_report <- i}
   year_folder <- i 
   out_format <- 'web' # set your output format here: 'pdf' or 'web'
-  data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/data_for_web/'
+  data_folder <- 'G:/HQ/dgof-pru/Data/SES Monitoring Dashboard/data_for_web/RP3/'
   data_folder_a2 <- paste0(data_folder, "monitoring_files/", year_report, "/")
  
   # set to true for generating the investments page - do only if last year of rp (i.e. 2024 for rp3)
