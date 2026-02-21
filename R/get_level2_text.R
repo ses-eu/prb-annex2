@@ -48,6 +48,15 @@ if (country == "SES RP3") {
     )
   }
   
+  # exception for 2024 ses report
+  if(country == 'SES RP3' & year_folder == 2024){
+    saf_ri_text <- saf_ri_text %>% 
+      str_replace_all(fixed('**RI with Safety Impact by Airport**'),
+                      fixed('\\newpage\\\
+                            **RI with Safety Impact by Airport**'))
+      
+  }
+  
   ## smi
   saf_smi_text_df <- saf_text_ses %>% 
     filter(topic == "SMI" & year == year_report) %>% 
@@ -63,6 +72,18 @@ if (country == "SES RP3") {
                            "\n\n",
                            saf_smi_text_df$text[i],
                            "\n\n"
+    )
+  }
+  
+  if (year_report == 2024) {
+    pagebreak <- "\n\n```{=tex}\n\\newpage\n```\n\n"
+    needle <- "**SMI 2023-2025**"
+    
+    saf_smi_text <- gsub(
+      needle,
+      paste0(pagebreak, needle),
+      saf_smi_text,
+      fixed = TRUE
     )
   }
   
@@ -470,7 +491,11 @@ if (country == "SES RP3" | country == "MUAC") {
   ### remove leading and trailing line breaks
   mytext_inc <- sub("^<br>|<br>$", "", mytext_inc)
   
-  cap_er_nsa_incentive <- paste0(mytext, mytext_inc)
+  if(length(mytext_inc) >1) {
+    cap_er_nsa_incentive <- paste0(mytext, mytext_inc[[1]])
+  } else {
+    cap_er_nsa_incentive <- paste0(mytext, mytext_inc)
+  }
   
   ## ACC text --------------
   ### find observations positions
@@ -733,6 +758,12 @@ get_cef_level2_text <- function(cz_index, cz_type) {
     if (year_report >= 2023) {
       cef_txt_1_13 <- cef_txt_1_13 %>% 
         mutate_all(., ~ str_replace_all(., fixed("**"),""))
+    }
+    
+    if (year_report == 2024) {
+      cef_txt_1_13 <- cef_txt_1_13 %>%
+        mutate_all(., ~ str_replace_all(., fixed("RP3 summary"), fixed("**RP3 summary**")))
+      
     }
   }
   

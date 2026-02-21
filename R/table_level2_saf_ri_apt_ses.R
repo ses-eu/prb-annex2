@@ -101,6 +101,27 @@ labels <- label_map[suffixes]
 # Create the named vector for cols_label()
 label_list <- set_names(labels, colnames_final)
 
+label_list_pdf <- c(
+  "TOP 10 APTs in terms of movements_#",
+  "TOP 10 APTs in terms of movements_Airport",
+  "TOP 10 APTs in terms of movements_Mvts.",
+  "TOP 10 APTs in terms of movements_Total RI",
+  "TOP 10 APTs in terms of movements_RI per 100,000 mvts.",
+  
+  "TOP 10 APTs in terms of total RIs_#",
+  "TOP 10 APTs in terms of total RIs_Airport",
+  "TOP 10 APTs in terms of total RIs_Mvts.",
+  "TOP 10 APTs in terms of total RIs_Total RI",
+  "TOP 10 APTs in terms of total RIs_RI per 100,000 mvts.",
+  
+  "TOP 10 APTs in terms of rate of RIs_#",
+  "TOP 10 APTs in terms of rate of RIs_Airport",
+  "TOP 10 APTs in terms of rate of RIs_Mvts.",
+  "TOP 10 APTs in terms of rate of RIs_Total RI",
+  "TOP 10 APTs in terms of rate of RIs_RI per 100,000 mvts."
+  )
+
+
 nowrap_cols <- grep("_mvt$|_rank$", colnames(data_prep), value = TRUE)
 
 rank_cols <- grep("_rank$", colnames(data_prep), value = TRUE)
@@ -117,12 +138,18 @@ data_prep_web <- data_prep %>%
     "</span>"
   )))
 
-if (knitr::is_latex_output()) {
-  data_for_table <- data_prep} else {
-    data_for_table <- data_prep_web}
+data_prep_pdf <- data_prep %>% 
+  mutate(
+    across(c(3,4,8,9,13,14), ~format(round(.x,0), nsmall =0, big.mark = ","))
+  ) %>% 
+  mutate(
+    across(c(5,10,15), ~format(round(.x,2), nsmall =2, big.mark = ","))
+  )
+
+colnames(data_prep_pdf) <- label_list_pdf
 
 # web table ----
-table1 <-mygtable(data_for_table,
+table1 <-mygtable(data_prep_web,
                   myfont*0.9) %>% 
   tab_spanner_delim(
     delim = "_"
@@ -143,24 +170,12 @@ table1 <-mygtable(data_for_table,
     columns = c(5, 10, 15),  # Specify the columns to format
     decimals = 2
   )  %>% 
-  cols_label(.list = label_list)  
+  cols_label(.list = label_list)  %>%
+  fmt_markdown(columns = all_of(nowrap_cols)) 
 
 
-# create latex table
-if (knitr::is_latex_output()) {
-  table_level2_saf_ri_apt_ses <- table1 %>% 
-    cols_width(
-      contains("_rank") ~ pct(0.4),
-      contains("_name") ~ pct(10),
-      contains("_mvt") ~ pct(7),
-      contains("_ri") ~ pct(6),
-      contains("_rate") ~ pct(29.8/3)
-    ) %>% 
-    mylatex(NA) 
-  
-} else {
-  table1 %>%
-    fmt_markdown(columns = all_of(nowrap_cols)) 
+if (!knitr::is_latex_output()) {
+  table1 
   
 }
 

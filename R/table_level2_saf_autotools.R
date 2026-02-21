@@ -13,25 +13,27 @@ data_raw  <-  read_xlsx(
   clean_names() 
 
 # prepare data ----
-data_prep <- data_raw %>% 
+data_prep_pdf <- data_raw %>% 
   filter(state == country & year == year_report) %>% 
+  select(ri, smi)
+
+data_prep <- data_prep_pdf %>% 
   mutate(
     smi = if_else(smi == 1,
                   "<span style='color:green; font-weight:bold; font-size:0.8rem;'>&nbsp;&nbsp;&#10003;</span>",
                   "<span style='color:red; font-size:0.8rem;'>&nbsp;&nbsp;&#10008;</span>"),
-    
+  
     ri = if_else(ri == 1,
                   "<span style='color:green; font-weight:bold; font-size:0.8rem;'>&nbsp;&nbsp;&#10003;</span>",
                   "<span style='color:red; font-size:0.8rem;'>&nbsp;&nbsp;&#10008;</span>")
-  ) %>% 
-  select(ri, smi)
+  )
 
 
 # plot table ----
 
 table1 <- mygtable(data_prep, myfont)|> 
   tab_header(
-    title = md(paste0("**", md(year_report), "**"))
+    title = md(paste0("**Use of automated safety data recording system - ", md(year_report), "**"))
   ) %>% 
   cols_label(
     ri = "For RIs",
@@ -43,12 +45,20 @@ table1 <- mygtable(data_prep, myfont)|>
     columns = c(ri, smi)
   )
 
-# create latex table
-if (knitr::is_latex_output()) {
-  table_level2_saf_autotools <- table1 %>% 
-    mylatex(NA) 
-  
-} else {
+
+prbcolor <- '#0050A0' 
+prbshading <- '#DDE6F7'
+
+b <- cell_borders(
+  sides  = "all",
+  color  = prbcolor,
+  weight = '1px',
+  style  = "solid"
+)
+
+
+if (!knitr::is_latex_output()) {
   table1
 }
+
 

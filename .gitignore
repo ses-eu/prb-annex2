@@ -9,6 +9,7 @@
 /_site/
 /_book/
 /pdf_docs/
+/index_files/
 
 _quarto.yml
 _variables.yml
@@ -25,3 +26,11 @@ _cost-efficiency-er1-1.qmd
 _cost-efficiency-er2-1.qmd
 _cost-efficiency-tz1-1.qmd
 _cost-efficiency-tz2-1.qmd
+about.qmd
+disclaimer.qmd
+download.qmd
+
+format_annex2_files.xlsm
+Performance-Review*.tex
+
+*.log

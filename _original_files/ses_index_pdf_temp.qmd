@@ -1,52 +1,3 @@
-<!-- ### Traffic (SES RP3 area) L1 -->
-
-```{r chart_level1_traffic_mvt, include=FALSE}
-#| file: R/chart_level1_traffic_mvt.R
-#| out.width: "100%"
-```
-
-```{r chart_level1_traffic_su, include=FALSE}
-#| file: R/chart_level1_traffic_su.R
-#| out.width: "100%"
-```
-
-<!-- ### Safety (SES RP3 area) L1 -->
-
-```{r chart_level1_saf_ses, include=FALSE}
-#| file: R/chart_level1_saf_ses.R
-#| out.width: "100%"
-```
-
-<!-- ### Environment (SES RP3 area) L1 -->
-
-```{r chart_env_kea, options = (doclevel=c("level1")), include=FALSE}
-#| file: R/chart_level1_kea.R
-#| out.width: "100%"
-```
-<!-- ### Capacity (SES RP3 area) L1 -->
-
-```{r chart_cap_er, options = (cztype=c("enroute")), include=FALSE}
-#| file: R/chart_level1_cap.R
-#| out.width: "100%"
-```
-
-```{r chart_cap_trm, options = (cztype=c("terminal")), include=FALSE}
-#| file: R/chart_level1_cap.R
-#| out.width: "100%"
-```
-
-<!-- ### Cost-efficiency (SES RP3 area) L1-->
-
-```{r chart_level1_cef_er_ses, include=FALSE}
-#| file: R/chart_level1_cef_er_ses.R
-#| out.width: "100%"
-```
-
-```{r chart_cef_trm_1, options = (cz=c("1", "terminal", "level1")), include=FALSE}
-#| file: R/chart_level1_cef.R
-#| out.width: "100%"
-```
-
 <!-- Level2 text -->
 ```{r level_2_text}
 source(here("R","get_level2_text.R"))
@@ -163,39 +114,7 @@ source(here("R","get_level2_text.R"))
 #| out.width: "100%"
 ```
 
-```{r chart_cef_cost, options = (cz=c("1", "enroute")), include=FALSE}
-#| file: R/chart_level2_cef_cost.R
-#| out.width: "100%"
-```
-
-```{r table_cef_cost, options = (cz=c("1", "enroute"))}
-mytable <-"table_level2_cef_cost"
-table_string <- source(here("R", paste0(mytable,".R"))) 
-assign(mytable, setup_latex_table(get(mytable))) 
-```
-
 <!-- AUCU -->
-```{r chart_cef_aucu, options = (cz=c("1", "enroute")), include=FALSE}
-#| file: R/chart_level2_cef_aucu.R
-#| out.width: "100%"
-```
-
-```{r table_cef_aucu, options = (cz=c("1", "enroute"))}
-mytable <-"table_level2_cef_aucu"
-table_string <- source(here("R", paste0(mytable,".R"))) 
-assign(mytable, setup_latex_table(get(mytable))) 
-```
-
-```{r chart_cef_cex, R.options = (cz=c("1", "enroute")), include=FALSE}
-#| file: R/chart_level2_cef_cex.R
-#| out.width: "100%"
-```
-
-```{r table_cef_cex, R.options = (cz=c("1", "enroute"))}
-mytable <-"table_level2_cef_cex"
-table_string <- source(here("R", paste0(mytable,".R"))) 
-assign(mytable, setup_latex_table(get(mytable))) 
-```
 
 <!-- regulatory result -->
 ```{r chart_cef_reg_res, options = (cz=c("1", "enroute")), include=FALSE}
@@ -219,26 +138,212 @@ assign(mytable, setup_latex_table(get(mytable)))
 ```
 
 
+# OVERVIEW
+
+## Contextual information
+```{r fetch-data-ses, eval=TRUE}
+data_context <-read_xlsx(
+  paste0(data_folder, "SES file.xlsx"),
+  sheet = "Context",
+  range = cell_limits(c(1, 1), c(NA, NA))) %>%
+  as_tibble() %>% 
+  clean_names() %>% 
+  filter(year_report == .env$year_report & year == .env$year_report)
+
+acc_no_context <- data_context %>% select(number_of_acc) %>% pull()
+no_apt_big_context <- data_context %>% select(no_apts_big) %>% pull()
+no_apt_small_context <- data_context %>% select(no_apts_small) %>% pull()
+
+ert_trm_share_context <- data_context %>% select(ert_trm_share) %>% pull()
+ert_cz_context <- data_context %>% select(ert_cz) %>% pull()
+trm_cz_context <- data_context %>% select(trm_cz) %>% pull()
+
+main_ansp_context <- data_context %>% select(main_ans_ps_ert) %>% pull()
+other_ansp_context <- data_context %>% select(other_ans_ps_ert) %>% pull()
+met_ansp_context <- data_context %>% select(met_providers) %>% pull()
+```
+
+::: {layout="[ 34, 38, 28 ]"}
+
+::::{#1st-column}
+**No of ACCs   ** `r acc_no_context`  
+```{=tex}
+\par\vspace{1em}
+```
+
+**No of airports in the scope**
+```{=tex}
+```
+**of the performance plan:**
+
+- **≥80'K     ** `r no_apt_big_context`
+- **<80'K     ** `r no_apt_small_context`
+
+::::
+
+::::{#2nd-column}
+```{=tex}
+\vspace*{-\baselineskip} % Adjust vertical alignment to the top
+```
+**Share en route / terminal**
+```{=tex}
+```
+**costs `r year_report`                 ** `r ert_trm_share_context`
+```{=tex}
+\par\vspace{1em}
+```
+**En route charging zone(s)     ** `r ert_cz_context`
+```{=tex}
+\par\vspace{1em}
+```
+**Terminal charging zone(s)    ** `r trm_cz_context`
+::::
+
+::::{#3rd-column}
+```{=tex}
+\vspace*{-\baselineskip} % Adjust vertical alignment to the top
+\vspace{-1.5em}
+```
+**No of main ANSPs     ** `r main_ansp_context`
+```{=tex}
+\par\vspace{1em}
+```
+**No of other ANSPs    ** `r other_ansp_context`
+```{=tex}
+\par\vspace{1em}
+```
+**No of MET Providers ** `r met_ansp_context`
+::::
+
+:::
+
+
+## Main PRB findings - `r year_folder`
+
+```{r main-concl}
+main_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "main", "Table_Findings_main")
+```
+
+`r main_conc1`
+
+
+## Traffic (SES RP3 area)
+```{=tex}
+\setlength{\fboxrule}{0pt} % Set the border width to 0pt (no border)
+\setlength{\fboxsep}{0pt} % Remove padding
+```
+
+```{r mvt_conc1}
+mvt_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "traffic_IFR", "Table_Findings_traffic_IFR")
+```
+
+```{r chart_level1_traffic_mvt}
+#| file: R/chart_level1_traffic_mvt.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+`r mvt_conc1`
+
+```{r su_conc1}
+tsu_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "traffic_SUs", "Table_Findings_traffic_TSU")
+```
+
+```{r chart_level1_traffic_su}
+#| file: R/chart_level1_traffic_su.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+`r tsu_conc1`
+
+## Safety (SES RP3 area)
+
 ```{r saf_conc1}
 saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_safety")
-saf_text_conc <- break_l1_text(saf_conc1) 
-saf_text1 <- saf_text_conc$text1
-saf_text2 <- saf_text_conc$text2
 ```
+
+```{r chart_level1_saf_ses}
+#| file: R/chart_level1_saf_ses.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+`r saf_conc1`
+
+## Environment (SES RP3 area)
+
+```{r env_conc1}
+env_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "environment", "Table_Findings_environment")
+```
+
+```{r chart_env_kea, options = (doclevel=c("level1"))}
+#| file: R/chart_level1_kea.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+`r env_conc1`
+
+## Capacity (SES RP3 area)
+
+```{r chart_cap_er, options = (cztype=c("enroute"))}
+#| file: R/chart_level1_cap.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+```{r chart_cap_trm, options = (cztype=c("terminal"))}
+#| file: R/chart_level1_cap.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+```{r cap_er_conc1}
+cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity")
+```
+
+`r cap_er_conc1`
+
+## Cost-efficiency (SES RP3 area)
+
+```{r cef_conc_l1}
+cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF")
+```
+
+```{r chart_level1_cef_er_ses}
+#| file: R/chart_level1_cef_er_ses.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+```{r chart_cef_trm_1, options = (cz=c("1", "terminal", "level1"))}
+#| file: R/chart_level1_cef.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+`r cef_conc1`
+
+\needspace{3\baselineskip}
 
 # SAFETY - SES RP3
 
 ## PRB monitoring
-```{r}
-# saf_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "safety", "Table_Findings_safety")
-```
 
 `r saf_conc1`
 
 ## Actual versus planned number of ANSPs achieving the level of the EoSM targets for RP3 ahead of 2024
 
 `r layout_2fig("chart_level1_saf_ses", "chart_level2_saf_eosm_target_ses")`
-
 
 ```{r chart_level2_saf_eosm_ses_allstates}
 #| file: R/chart_level2_saf_eosm_ses_allstates.R
@@ -270,12 +375,28 @@ saf_text2 <- saf_text_conc$text2
 ```
 
 ```{r table_level2_saf_ri_apt_ses}
-mytable <-"table_level2_saf_ri_apt_ses"
-table_string <- source(here("R", paste0(mytable,".R"))) 
-assign(mytable, setup_latex_table(get(mytable))) 
+#| file: R/table_level2_saf_ri_apt_ses.R
+#| include: false
 ```
 
-`r layout_summary_table(table_level2_saf_ri_apt_ses, hspace = 0, left_margin = -1, width = 1.1)`
+
+``` {r table_level2_saf_ri_apt_ses_p}
+#| echo: false
+#| results: asis
+ 
+cat(make_quarto_latex_table_2level(
+  title = paste0("Rate of RI per 100,000 airport movements"),
+  df = data_prep_pdf,
+  # col_labels = rep(c("#", "Mvts.", "Airport", "Total RI", "RI per 1000 mvts."),3),
+  body_fontsize = c(8, 9.6),
+  col_align = "llrrrllrrrllrrr",
+  col_widths_pct = c(3,10,8,5,8, 3,10,8,5,8, 3,10,6,5,8),
+  cell_pad_em = 0.4,       
+  wrap_raw_block = FALSE,
+  header_row_height_ex = 2.4,
+  row_extrarowheight_pt = 2 
+))
+```
 
 \needspace{3\baselineskip}
 
@@ -298,24 +419,51 @@ assign(mytable, setup_latex_table(get(mytable)))
 #| fig-pos: "H"
 ```
 
-
 ```{r table_level2_saf_smi_ansp_pdf1}
-mytable <-"table_level2_saf_smi_ansp_pdf1"
-table_string <- source(here("R", paste0(mytable,".R"))) 
-assign(mytable, setup_latex_table(get(mytable))) 
+#| file: R/table_level2_saf_smi_ansp_pdf1.R
+#| include: false
 ```
+
+
+``` {r table_level2_saf_smi_ansp_pdf1_p}
+#| echo: false
+#| results: asis
+ 
+cat(make_quarto_latex_table_2level(
+  title = paste0("Rate of SMI with ANS contribution per 100,000 flight hours"),
+  df = data_prep,
+  body_fontsize = c(8, 9.6),
+  col_align = "llrrrrrrrrrr",
+  col_widths = c(3,17,rep(8,10)),
+  wrap_raw_block = FALSE,
+  header_row_height_ex = 2.4,
+  row_extrarowheight_pt = 2 
+))
+```
+
+\vspace{-20pt}
 
 ```{r table_level2_saf_smi_ansp_pdf2}
-mytable <-"table_level2_saf_smi_ansp_pdf2"
-table_string <- source(here("R", paste0(mytable,".R"))) 
-assign(mytable, setup_latex_table(get(mytable))) 
+#| file: R/table_level2_saf_smi_ansp_pdf2.R
+#| include: false
 ```
 
-`r layout_summary_table(table_level2_saf_smi_ansp_pdf1, hspace = 0, left_margin = 0, width = 1)`
+``` {r table_level2_saf_smi_ansp_pdf2_p}
+#| echo: false
+#| results: asis
+ 
+cat(make_quarto_latex_table_2level(
+  title = NA,
+  df = data_prep,
+  body_fontsize = c(8, 9.6),
+  col_align = "llrrrrrrrrrr",
+  col_widths = c(3,17,rep(8,10)),
+  wrap_raw_block = FALSE,
+  header_row_height_ex = 2.4,
+  row_extrarowheight_pt = 2 
+))
+```
 
-\vspace*{-0.5cm}
-
-`r layout_summary_table(table_level2_saf_smi_ansp_pdf2, hspace = 0, left_margin = 0, width = 1)`
 
 
 \needspace{3\baselineskip}
@@ -332,4 +480,259 @@ assign(mytable, setup_latex_table(get(mytable)))
 `r saf_qr_text`
 
 \needspace{2\baselineskip}
+
+# ENVIRONMENT - SES RP3
+
+## PRB monitoring
+
+`r env_conc1`
+
+\needspace{3\baselineskip}
+
+## En route performance
+
+### Horizontal flight efficiency of the actual trajectory (KEA) (KPI#1), of the last filed flight plan (KEP) (PI#1) & shortest constrained route (SCR) (PI#2)
+
+`r layout_2fig("chart_env_kea_l2", "chart_env_kea_month")`
+
+`r layout_2fig("chart_env_kep_scr", "chart_env_kep_scr_month")`
+
+### Summary of performance at local level
+
+```{r table_kea_summary}
+#| file: R/table_env_kea_all_states.R
+#| include: false
+```
+
+``` {r table_kea_summary_p}
+#| echo: false
+#| results: asis
+cat(make_quarto_latex_table(
+  title = "KEA (%)",
+  df = data_prep_pdf,
+  col_labels = c("State", "Target", "Actual", " "),
+  col_align = "lrrc",
+  col_widths = c(35, 30, 30,5),
+  checkmarks = c(4)
+
+))
+```
+
+\needspace{3\baselineskip}
+
+# CAPACITY - SES RP3
+
+## PRB monitoring
+
+```{r cap_prb}
+  cap_er_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "ER_capacity", "Table_Findings_ER_capacity")
+```
+
+`r cap_er_conc1`
+
+\needspace{3\baselineskip}
+
+## En route performance
+
+### En route ATFM delay (KPI#1)
+
+`r layout_2fig("chart_cap_er_l2", "chart_cap_er_month")`
+
+```{r chart_cap_delay_bin}
+#| file: R/chart_level2_cap_delay_bin.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+### Summary of performance at local level
+
+```{r table_cap_erdelay_summary}
+#| file: R/table_cap_erdelay_all_states.R
+#| include: false
+```
+
+
+``` {r table_cap_erdelay_summary_p}
+#| echo: false
+#| results: asis
+cat(make_quarto_latex_table(
+  title = "En route delay (min/flight)",
+  df = data_prep_pdf,
+  col_labels = c("State", "Target", "Actual", ""),
+  col_align = "lrrc",
+  col_widths = c(35, 30, 30,5),
+  checkmarks = c(4)
+
+))
+```
+
+### Other indicators
+
+`r layout_2fig("chart_cap_atco", "chart_cap_sector_opening_ses")`
+
+
+\needspace{3\baselineskip}
+
+## Terminal performance
+
+### Arrival ATFM delay (KPI#2)
+
+`r layout_2fig("chart_cap_trm_l2", "chart_cap_trm_month")`
+
+### Summary of performance at local level
+
+```{r table_cap_arrdelay_summary}
+#| file: R/table_cap_arrdelay_all_states.R
+#| include: false
+```
+
+
+``` {r table_cap_arrdelay_summary_p}
+#| echo: false
+#| results: asis
+cat(make_quarto_latex_table(
+  title = "Arrival delay (min/flight)",
+  df = data_prep_pdf,
+  col_labels = c("State", "Target", "Actual", ""),
+  col_align = "lrrc",
+  col_widths = c(35, 30, 30,5),
+  checkmarks = c(4)
+
+))
+```
+
+### Other terminal performance indicators (PI#1-3)
+
+```{r chart_cap_all_causes_delay_ses}
+#| file: R/chart_level2_cap_all_causes_delay.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+\needspace{3\baselineskip}
+
+# COST-EFFICIENCY - SES RP3
+
+## PRB monitoring
+
+:::: {#concl-cef-duc}
+```{r concl_cef_duc}
+cef_conc1 <- get_prb_conclusions("PRB_findings.xlsx", "cost-efficiency", "Table_Findings_CEFF")
+```
+::::
+
+`r cef_conc1`
+
+
+## En route charging zone
+
+`r layout_2fig("chart_cef_duc_er_ses", "chart_cef_su")`
+
+```{r chart_cef_cost, options = (cz=c("1", "enroute"))}
+#| file: R/chart_level2_cef_cost.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```
+
+
+```{r table_cef_cost, options = (cz=c("1", "enroute"))}
+#| file: R/table_level2_cef_cost.R
+#| include: false
+```
+
+``` {r table_cef_cost_p}
+#| echo: false
+#| results: asis
+cat(make_quarto_latex_table(
+  title = paste0("Actual and determined data"),
+  col_labels = c("Total costs - nominal (M€)", "2020‑2021", '2022', '2023', '2024'),
+  df = data_prep_pdf,
+  col_align = "lrrrr",
+  col_widths = c(35, rep(65/4, 4))
+))
+```
+
+
+### Summary of performance at local level
+
+:::: {#table-cef-summary}
+```{r table_cef_summary, options = (cztype="enroute")}
+#| file: R/table_cef_summary.R
+#| out.width: "100%"
+#| fig-asp: 1
+```
+::::
+
+### Actual unit cost incurred by the users (AUCU) (PI#1)
+
+```{r chart_cef_aucu_enroute, options = (cz=c("1", "enroute"))}
+#| file: R/chart_level2_cef_aucu.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```  
+
+```{r table_level2_cef_aucu_enroute, options = (cz=c("1", "enroute"))}
+#| file: R/table_level2_cef_aucu.R
+#| include: false
+```
+
+``` {r table_level2_cef_aucu_enroute_p}
+#| echo: false
+#| results: asis
+ 
+cat(make_quarto_latex_table(
+  title = paste0("AUCU components (€/SU) – ",
+                      if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))),
+  df = data_prep_pdf,
+  col_labels = c(paste0("Components of the AUCU in ", 
+                           if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))), 
+             "€/SU"
+             ),
+  col_align = "lr",
+  col_widths = c(80, 20),
+  bold_data_rows = c(1,12,13)
+))
+```
+
+
+```{r chart_cef_cex_enroute, R.options = (cz=c("1", "enroute"))}
+#| file: R/chart_level2_cef_cex.R
+#| out.width: "52%"
+#| fig.align: "center"
+#| fig-pos: "H"
+```  
+
+
+```{r table_level2_cef_cex_enroute, R.options = (cz=c("1", "enroute"))}
+#| file: R/table_level2_cef_cex.R
+#| include: false
+```
+
+``` {r table_level2_cef_cex_enroute_p}
+#| echo: false
+#| results: asis
+ 
+cat(make_quarto_latex_table(
+  title = NA,
+  df = data_prep_pdf,
+  col_labels = c(paste0("Cost exempt from cost sharing by item - ", 
+                             if_else(year_report == 2021 | year_report == 2020, "2020-2021", as.character(year_report))),
+                         "€'000",
+                        "€/SU"
+  ),
+  col_align = "lrr",
+  col_widths = c(60, 20, 20),
+  bold_data_rows = c(7)
+))
+```
+
+### Regulatory result (RR)
+
+`r layout_2fig("chart_cef_reg_res", "chart_cef_reg_res_aucu")`
+
+`r layout_2fig("chart_cef_reg_res_ansp", "chart_cef_net_res_main_ansp")`
 

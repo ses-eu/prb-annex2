@@ -145,6 +145,7 @@ for (i in 1:length(level2_files)) {
   file.remove('_variables.yml')
   newvariables <- paste0("doc:
     year_report: ", year_report, "
+    year_folder: ", toupper(as.character(year_folder)), "
     country: '", country, "'
     country_lower: '", country_lower, "'
     ecz1: '", ecz_list$ecz_name[1], "'

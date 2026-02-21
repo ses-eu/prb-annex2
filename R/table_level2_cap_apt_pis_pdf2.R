@@ -40,21 +40,7 @@ if (country != "SES RP3") {
       )
                 # , names_glue = "{year}_{.value}" #suffix to prefix
                 ) 
-    ## order columns alphabetically 
-    # select(order(colnames(.))) %>% 
-    # select("Airport Name", everything())
-  
-  
-  ## plot table
-  
-  table1 <- mygtable(data_prep, myfont*0.9) %>% 
-    tab_spanner_delim(
-      delim = "_"
-    )
+
 }    
   
-  
-# create latex table
-table_level2_cap_apt_pis_pdf2 <- mylatex(table1)  
-  
- 
+
